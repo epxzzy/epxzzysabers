@@ -1,5 +1,6 @@
-package com.epxzzy.createsaburs.mixin.entity;
+package com.epxzzy.CreateSaburs.mixin.entity;
 
+import com.epxzzy.CreateSaburs.CreateSaburs;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -13,19 +14,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin{
-    @Shadow public abstract void disableShield(boolean pBecauseOfAxe);
 
-    @Shadow public abstract boolean addItem(ItemStack pStack);
 
     @Inject(
             method = "blockUsingShield",
             at = @At(value = "HEAD")
     )
-    private void createsaburs$blockUsingShield(LivingEntity pttEntity, CallbackInfo ci) {
+    private void CreateSaburs$blockUsingShield(LivingEntity pttEntity, CallbackInfo ci) {
         if(pttEntity.getMainHandItem().canPerformAction(ToolActions.SHIELD_BLOCK)){
-            System.out.print("wut the fluccc?");
-            this.disableShield(true);
-            this.addItem(Items.BRAIN_CORAL_BLOCK.getDefaultInstance());
+            CreateSaburs.LOGGER.info("wut the fluccc?");
+            //pttEntity..disableShield(true);
+            //this.addItem(Items.BRAIN_CORAL_BLOCK.getDefaultInstance());
         }
     }
+
+
 }

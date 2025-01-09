@@ -1,4 +1,4 @@
-package com.epxzzy.createsaburs.item;
+package com.epxzzy.CreateSaburs.item;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.*;

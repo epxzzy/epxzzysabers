@@ -230,6 +230,13 @@ jar {
     }
 }
 
+mixin {
+    add sourceSets.main, 'mixins.CreateSaburs.refmap.json'
+    config 'mixins.CreateSaburs.json'
+
+    debug.verbose = true
+    debug.export = true
+}
 // Example configuration to allow publishing using the maven-publish plugin
 // This is the preferred method to reobfuscate your jar file
 jar.finalizedBy('reobfJar')

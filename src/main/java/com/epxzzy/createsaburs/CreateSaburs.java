@@ -1,6 +1,6 @@
-package com.epxzzy.createsaburs;
+package com.epxzzy.CreateSaburs;
 
-import com.epxzzy.createsaburs.item.ModItems;
+import com.epxzzy.CreateSaburs.item.ModItems;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -15,12 +15,12 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(createsaburs.MOD_ID)
-public class createsaburs {
-    public static final String MOD_ID = "createsaburs";
+@Mod(CreateSaburs.MOD_ID)
+public class CreateSaburs {
+    public static final String MOD_ID = "CreateSaburs";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public createsaburs() {
+    public CreateSaburs() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modEventBus.addListener(this::commonSetup);
