@@ -1,8 +1,6 @@
 {
   "values": [
-    "createsaburs:lightsaber",
-    "createsabers:lightstaff",
-    "createsabers:inquisitor_lightstaff",
-    "createsabers:protosabur"
+    "createsaburs:protosabur",
+    "createsaburs:protwosabur"
   ]
 }
