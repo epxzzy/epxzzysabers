@@ -1,0 +1,26 @@
+package com.epxzzy.createsaburs.utils;
+
+import com.epxzzy.createsaburs.createsaburs;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+
+public class ModTags {
+    public static class Blocks {
+
+        private static TagKey<Block> tag(String name){
+            return BlockTags.create(new ResourceLocation(createsaburs.MOD_ID, name));
+        }
+    }
+    public static class Items {
+        public static final TagKey<Item> CREATE_LIGHTSABER = tag("create_lightsaber");
+
+        private static TagKey<Item> tag(String name){
+            return ItemTags.create(new ResourceLocation(createsaburs.MOD_ID, name));
+        }
+
+    }
+}
