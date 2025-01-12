@@ -1,25 +1,28 @@
 package com.epxzzy.createsaburs.sound;
 
 import com.epxzzy.createsaburs.createsaburs;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
-import net.minecraftforge.client.event.sound.SoundEvent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ModSounds {
-/**        public static final SoundEvent CLARITY_MUSIC = registerSoundEvent("clarity_music");
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
+            DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, createsaburs.MOD_ID);
 
+    public static final RegistryObject<SoundEvent> ACTIVATION = registerSoundEvents("activation");
+    public static final RegistryObject<SoundEvent> DEACTIVATION = registerSoundEvents("deactivation");
+    public static final RegistryObject<SoundEvent> CLASH = registerSoundEvents("clash");
 
+    private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
+        createsaburs.LOGGER.info("sounding the sound of "+ name);
+        return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(createsaburs.MOD_ID, name)));
 
+    }
 
-
-
-        private static SoundEvent registerSoundEvent(String name) {
-            Identifier id = new Identifier(createsaburs.MOD_ID, name);
-            return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
-        }
-
-        public static void registerSounds() {
-           createsaburs.LOGGER.info("Registering Sounds for " + Holyhell.MOD_ID);
-        }
-**/
+    public static void register(IEventBus eventBus) {
+        SOUND_EVENTS.register(eventBus);
+    }
 }

@@ -1,6 +1,8 @@
 package com.epxzzy.createsaburs.mixin.entity;
 
+import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,8 +27,14 @@ public abstract class PlayerMixin {
             Player that = ((Player) (Object) this);
             that.getCooldowns().addCooldown(that.getUseItem().getItem(), 5);
             that.stopUsingItem();
-            that.level().broadcastEntityEvent(that, (byte) 30);
+            that.level().playLocalSound(that.getX(), that.getY(), that.getZ(),
+                    ModSounds.CLASH.get(), SoundSource.PLAYERS, 1f, 1f, false
+            );
+
+            //that.level().broadcastEntityEvent(that, (byte) 30);
+            that.playSound(ModSounds.CLASH.get(), 0.8F, 0.8F + that.level().random.nextFloat() * 0.4F);
             //that.level().
+
         }
 
     }

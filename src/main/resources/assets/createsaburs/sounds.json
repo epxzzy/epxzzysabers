@@ -1,0 +1,27 @@
+{
+  "activation": {
+    "subtitles": "sounds.createsaburs.activation",
+    "sounds": [
+      "createsaburs:activation",
+      "createsaburs:activation1",
+      "createsaburs:activation2"
+
+    ]
+  },
+  "deactivation": {
+    "subtitle": "sounds.createsaburs.deactivation",
+    "sounds": [
+      "createsaburs:deactivation",
+      "createsaburs:deactivation1",
+      "createsaburs:deactivation2"
+    ]
+  },
+  "clash": {
+    "subtitle": "sounds.createsaburs.clash",
+    "sounds": [
+      "createsaburs:clash",
+      "createsaburs:clash1",
+      "createsaburs:clash2"
+    ]
+  }
+}

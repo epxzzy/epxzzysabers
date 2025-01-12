@@ -1,12 +1,14 @@
 package com.epxzzy.createsaburs.item;
 
 import com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer;
+import com.epxzzy.createsaburs.sound.ModSounds;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +24,7 @@ import java.util.function.Consumer;
 
 public class protosaber extends ShieldItem {
     private boolean isActive = false;
+
     public protosaber(Properties pProperties) {
         super(pProperties);
     }
@@ -29,22 +32,24 @@ public class protosaber extends ShieldItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
-
         if (pLevel.isClientSide) {
             long winhandl = Minecraft.getInstance().getWindow().getWindow();
             boolean ctrl = InputConstants.isKeyDown(winhandl, InputConstants.KEY_LCONTROL) || InputConstants.isKeyDown(winhandl, InputConstants.KEY_RCONTROL);
-            if(ctrl && pHand == InteractionHand.MAIN_HAND) {
+            if (ctrl && pHand == InteractionHand.MAIN_HAND) {
                 isActive = !isActive;
-                pPlayer.sendSystemMessage(Component.literal("Magnet is now " + (isActive ? "Active" : "Inactive")));
+                pLevel.playSeededSound(pPlayer, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(),
+                        (isActive ? ModSounds.ACTIVATION.get() : ModSounds.DEACTIVATION.get()), SoundSource.BLOCKS, 1f, 1f, 0
+                );
                 return InteractionResultHolder.success(pPlayer.getItemInHand(pHand));
             }
         }
-        if(isActive) {
+        if (isActive) {
             pPlayer.startUsingItem(pHand);
             return InteractionResultHolder.consume(itemstack);
         }
         return InteractionResultHolder.fail(itemstack);
     }
+
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);

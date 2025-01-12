@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs;
 
 import com.epxzzy.createsaburs.item.ModCreativeModTabs;
 import com.epxzzy.createsaburs.item.ModItems;
+import com.epxzzy.createsaburs.sound.ModSounds;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -28,8 +29,13 @@ public class createsaburs {
         modEventBus.addListener(this::commonSetup);
 
         ModItems.register(modEventBus);
+
+        ModSounds.register(modEventBus);
+
         ModCreativeModTabs.register(modEventBus);
+
         MinecraftForge.EVENT_BUS.register(this);
+
         modEventBus.addListener(this::addCreative);
     }
 
