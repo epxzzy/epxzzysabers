@@ -14,9 +14,9 @@ public class ModCreativeModTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, createsaburs.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> TUTORIAL_TAB = CREATIVE_MODE_TABS.register("tutorial_tab",
+    public static final RegistryObject<CreativeModeTab> TUTORIAL_TAB = CREATIVE_MODE_TABS.register("moditums",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.protosabur.get()))
-                    .title(Component.translatable("creativetab.tutorial_tab"))
+                    .title(Component.translatable("createsaburs.moditemsiglol"))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.protosabur.get());
                         pOutput.accept(ModItems.protosabur2.get());

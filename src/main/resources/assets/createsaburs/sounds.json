@@ -4,7 +4,10 @@
     "sounds": [
       "createsaburs:activation",
       "createsaburs:activation1",
-      "createsaburs:activation2"
+      "createsaburs:activation2",
+      "createsaburs:activation3",
+      "createsaburs:activation4",
+      "createsaburs:activation5"
 
     ]
   },
@@ -13,7 +16,10 @@
     "sounds": [
       "createsaburs:deactivation",
       "createsaburs:deactivation1",
-      "createsaburs:deactivation2"
+      "createsaburs:deactivation2",
+      "createsaburs:deactivation3",
+      "createsaburs:deactivation4",
+      "createsaburs:deactivation5"
     ]
   },
   "clash": {
@@ -21,7 +27,19 @@
     "sounds": [
       "createsaburs:clash",
       "createsaburs:clash1",
-      "createsaburs:clash2"
+      "createsaburs:clash2",
+      "createsaburs:clash3",
+      "createsaburs:clash4",
+      "createsaburs:clash5"
+    ]
+  },
+  "swing": {
+    "subtitle": "sounds.createsaburs.swing",
+    "sounds": [
+      "createsaburs:swing",
+      "createsaburs:swing1",
+      "createsaburs:swing2",
+      "createsaburs:swing3"
     ]
   }
 }
