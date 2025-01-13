@@ -26,17 +26,26 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
     @Override
     protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
                           PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+
         renderer.render(model.getOriginalModel(), light);
 
         //float xOffset = -1 / 16f;
+
         //ms.translate(-xOffset, 0, 0);
+
+        if (saber_activation_state) {
+            ms.pushPose();
+
+            renderer.renderGlowing(GLOWLY_BIT.get(),  LightTexture.FULL_BRIGHT);
+            ms.popPose();
+        }
+
         ms.mulPose(Axis.YP.rotationDegrees(ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks())));
         //ms.translate(xOffset, 0, 0);
 
+
         renderer.render(GEAR.get(), light);
-        if (saber_activation_state) {
-            renderer.renderGlowing(GLOWLY_BIT.get(),  LightTexture.FULL_BRIGHT);
-        }
+
     }
 
 }
