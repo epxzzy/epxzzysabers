@@ -7,6 +7,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -22,6 +23,7 @@ import org.slf4j.Logger;
 public class createsaburs {
     public static final String MOD_ID = "createsaburs";
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static ToolAction SABER_SWING = null;
 
     public createsaburs() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -35,6 +37,8 @@ public class createsaburs {
         ModCreativeModTabs.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
+
+        SABER_SWING = ToolAction.get("saber_swing");
 
         modEventBus.addListener(this::addCreative);
     }

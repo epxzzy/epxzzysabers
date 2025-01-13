@@ -20,7 +20,7 @@ public class ModItems {
             });
    public static final Rarity RARITY_SPARK = Rarity.create("createsaburs:spark",
             style -> style.withColor(Color.HSBtoRGB( (float)(0.25f + 0.15f *  Math.sin(System.currentTimeMillis() / 100)), 1f, 1f)));
-    public static final RegistryObject<Item> protosabur = items.register("protosabur", () -> new protosaber(new ShieldItem.Properties().rarity(RARITY_FIRE)));
+    public static final RegistryObject<Item> protosabur = items.register("protosabur", () -> new protosaber(new ShieldItem.Properties().rarity(RARITY_FIRE).stacksTo(1)));
     public static final RegistryObject<Item> protosabur2 = items.register("protwosabur", () -> new ShieldItem(new ShieldItem.Properties().rarity(RARITY_SPARK)));
 
     public static final RegistryObject<Item> mognet = items.register("mognet", () -> new MagnetItem(new Item.Properties()));
