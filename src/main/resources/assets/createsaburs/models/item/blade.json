@@ -68,13 +68,5 @@
 				}
 			]
 		}
-	],
-	"overrides": [
-		{
-			"predicate": {
-				"blocking": 1
-			},
-			"model": "item/protosabur_block"
-		}
 	]
 }
