@@ -15,16 +15,13 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
-    protected boolean saber_activation_state = false;
+
     protected static final PartialModel GEAR_BIT = new PartialModel(createsaburs.asResource("item/geur"));
     protected static final PartialModel GLOWLY_BIT = new PartialModel(createsaburs.asResource("item/blade"));
 
     protected static final PartialModel BLOCING_BIT = new PartialModel(createsaburs.asResource("item/protosabur"));
 
 
-    public void SetSaberCoreState(boolean state) {
-        this.saber_activation_state = state;
-    }
 
     @Override
     protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
@@ -41,6 +38,7 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
 
 
         if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
+            //GO TEST IT RN WHAT ARE YOU LOOKING AT
             ms.pushPose();
 
             renderer.renderGlowing(GLOWLY_BIT.get(),  LightTexture.FULL_BRIGHT);

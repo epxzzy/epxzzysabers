@@ -21,10 +21,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -53,29 +50,47 @@ public class protosaber extends Item {
         this.defaultModifiers = builder.build();
     }
 
+    public boolean readtag(ItemStack pStack) {
+        CompoundTag temp = pStack.getOrCreateTag();
+        boolean temp2 = temp.getBoolean("ActiveBoiii");
+        //createsaburs.LOGGER.info("read nbt as " + temp2);
+        return temp2;
+    }
+
+    public void writetag(ItemStack pStack, boolean bool) {
+        CompoundTag ea = new CompoundTag();
+        ea.putBoolean("ActiveBoiii", bool);
+        pStack.setTag(ea);
+        createsaburs.LOGGER.info("wrote nbt as" + bool);
+    }
+
+
     public void ToggleSaberCore(Level pLevel, Player pPlayer, ItemStack pStack) {
-        Active = !Active;
         CompoundTag nbeetea = pStack.getOrCreateTag();
-        if (Active) {
-            createsaburs.LOGGER.info("ADDING DAMAGE");
-            //pStack.addAttributeModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double) 10, AttributeModifier.Operation.ADDITION),EquipmentSlot.MAINHAND);
-            nbeetea.putInt("CustomModelData", 1);
-            nbeetea.putBoolean("ActiveBoiii", true);
-        } else {
-            createsaburs.LOGGER.info("REMOVING THEY DAMAGE");
-            //createsaburs.LOGGER.info(nbeetea.);
-            pStack.getAttributeModifiers(EquipmentSlot.MAINHAND);
-            //Attributes.ATTACK_DAMAGE,new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double) 0.05, AttributeModifier.Operation.),EquipmentSlot.MAINHAND);
-            //nbeetea.putBoolean("BlockBoiii", false);
-            nbeetea.putBoolean("ActiveBoiii", false);
+        if(!pLevel.isClientSide) {
+            if (!readtag(pStack)) {
+                createsaburs.LOGGER.info("HARD");
+                //pStack.addAttributeModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double) 10, AttributeModifier.Operation.ADDITION),EquipmentSlot.MAINHAND);
+                //nbeetea.putInt("CustomModelData", 1);
+                nbeetea.putBoolean("ActiveBoiii", true);
+                //writetag(pStack, true);
+                Active = true;
+            } else {
+                createsaburs.LOGGER.info("NO LONGER HARD");
+                //createsaburs.LOGGER.info(nbeetea.);
+                //pStack.getAttributeModifiers(EquipmentSlot.MAINHAND);
+                //Attributes.ATTACK_DAMAGE,new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double) 0.05, AttributeModifier.Operation.),EquipmentSlot.MAINHAND);
+                //nbeetea.putBoolean("BlockBoiii", false);
+                //nbeetea.remove("ActiveBoiii");
+                writetag(pStack, false);
+                Active = false;
+
+            }
+
+            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(),
+                    (Active ? ModSounds.ACTIVATION.get() : ModSounds.DEACTIVATION.get()), SoundSource.NEUTRAL, 0.5f, 1f
+            );
         }
-
-        THE_RENDURR.SetSaberCoreState(Active);
-        pLevel.playSound(pPlayer, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(),
-                (Active ? ModSounds.ACTIVATION.get() : ModSounds.DEACTIVATION.get()), SoundSource.BLOCKS, 1f, 1f
-        );
-
-
     }
 
 
@@ -84,39 +99,44 @@ public class protosaber extends Item {
 
     }
 
+    public boolean isPlayerPressing(int pInputConstraint, Level pLevel) {
+        if (pLevel.isClientSide) {
+            long winhandl = Minecraft.getInstance().getWindow().getWindow();
+            return InputConstants.isKeyDown(winhandl, pInputConstraint) || InputConstants.isKeyDown(winhandl, pInputConstraint);
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, @NotNull InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        if (Active && !pLevel.isClientSide) {
+        if (readtag(pPlayer.getItemInHand(pHand)) && !pLevel.isClientSide) {
             CompoundTag nbeetea = itemstack.getOrCreateTag();
-            nbeetea.putBoolean("BlockBoiii", true);
+            //nbeetea.putBoolean("BlockBoiii", true);
             pPlayer.startUsingItem(pHand);
-            return InteractionResultHolder.fail(itemstack);
+            //return ItemUtils.startUsingInstantly(pLevel, pPlayer, pHand);
         }
-        if (pLevel.isClientSide) {
-            long winhandl = Minecraft.getInstance().getWindow().getWindow();
-            boolean ctrl = InputConstants.isKeyDown(winhandl, InputConstants.KEY_LCONTROL) || InputConstants.isKeyDown(winhandl, InputConstants.KEY_RCONTROL);
-            if (ctrl && pHand == InteractionHand.MAIN_HAND) {
+        if (pPlayer.isShiftKeyDown() && pHand == InteractionHand.MAIN_HAND) {
                 ToggleSaberCore(pLevel, pPlayer, itemstack);
                 return InteractionResultHolder.fail(pPlayer.getItemInHand(pHand));
-            }
         }
         return InteractionResultHolder.fail(itemstack);
     }
 
     @Override
     public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged) {
-        createsaburs.LOGGER.info("stopped blocking, changing custom model data");
-        CompoundTag nbeetea = pStack.getOrCreateTag();
+        //createsaburs.LOGGER.info("stopped blocking, changing custom model data");
+        //CompoundTag nbeetea = pStack.getOrCreateTag();
         //nbeetea.putBoolean("BlockBoiii", false);
     }
 
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
-        CompoundTag nbeetea = stack.getOrCreateTag();
-        MutableComponent ActiveDetail = Component.literal(nbeetea.getBoolean("ActiveBoiii") ? "On" : "Off")
-                .withStyle(nbeetea.getBoolean("ActiveBoiii") ? ChatFormatting.WHITE : ChatFormatting.GRAY);
+
+        MutableComponent ActiveDetail = Component.literal(readtag(stack) ? "On" : "Off")
+                .withStyle(readtag(stack) ? ChatFormatting.WHITE : ChatFormatting.GRAY);
         tooltip.add(ActiveDetail);
     }
 
@@ -133,7 +153,7 @@ public class protosaber extends Item {
 
 
     public @NotNull UseAnim getUseAnimation(@NotNull ItemStack pStack) {
-        if (isActive()) return UseAnim.BLOCK;
+        if (readtag(pStack)) return UseAnim.BLOCK;
         else return UseAnim.NONE;
     }
 
@@ -141,7 +161,8 @@ public class protosaber extends Item {
         return 72000;
     }
 
-    public boolean isActive() {
+    public boolean isActive(CompoundTag tagg) {
+        if (tagg != null) return tagg.getBoolean("ActiveBoiii");
         return Active;
     }
 
