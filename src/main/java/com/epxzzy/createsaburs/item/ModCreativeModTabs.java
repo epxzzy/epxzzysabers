@@ -1,5 +1,6 @@
 package com.epxzzy.createsaburs.item;
 
+import com.epxzzy.createsaburs.block.ModBlocks;
 import com.epxzzy.createsaburs.createsaburs;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -20,7 +21,8 @@ public class ModCreativeModTabs {
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.protosabur.get());
                         pOutput.accept(ModItems.protosabur2.get());
-                        pOutput.accept(ModItems.mognet.get());
+                        pOutput.accept(ModBlocks.KYBERSTATION.get());
+                        //pOutput.accept(ModItems.mognet.get());
 
                         pOutput.accept(Items.DIAMOND);
 

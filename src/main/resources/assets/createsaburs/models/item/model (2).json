@@ -2,23 +2,23 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "createsaburs:item/protosabur",
-		"layer0": "createsaburs:item/protosabur"
+		"1": "protosabur",
+		"particle": "protosabur"
 	},
 	"elements": [
 		{
 			"from": [7, -16, 7],
 			"to": [9, 32, 9],
+			"light_emission": 15,
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {
-				"north": {"uv": [0, 0, 0.5, 12], "texture": "#layer0", "tintindex": 0},
-				"east": {"uv": [0.5, 0, 1, 12], "texture": "#layer0", "tintindex": 0},
-				"south": {"uv": [1, 0, 1.5, 12], "texture": "#layer0", "tintindex": 0},
-				"west": {"uv": [1.5, 0, 2, 12], "texture": "#layer0", "tintindex": 0},
-				"up": {"uv": [4, 2, 3.5, 1.5], "texture": "#layer0", "tintindex": 0},
-				"down": {"uv": [4, 2, 3.5, 2.5], "texture": "#layer0", "tintindex": 0}
-			},
-			"light_emission": 15
+				"north": {"uv": [0, 0, 0.5, 12], "texture": "#1", "tintindex": 0},
+				"east": {"uv": [0.5, 0, 1, 12], "texture": "#1", "tintindex": 0},
+				"south": {"uv": [1, 0, 1.5, 12], "texture": "#1", "tintindex": 0},
+				"west": {"uv": [1.5, 0, 2, 12], "texture": "#1", "tintindex": 0},
+				"up": {"uv": [4, 2, 3.5, 1.5], "texture": "#1", "tintindex": 0},
+				"down": {"uv": [4, 2, 3.5, 2.5], "texture": "#1", "tintindex": 0}
+			}
 		}
 	],
 	"display": {
@@ -60,7 +60,6 @@
 			"origin": [8, 8, 8],
 			"color": 0,
 			"children": [
-				0,
 				{
 					"name": "active",
 					"origin": [8, 8, 8],

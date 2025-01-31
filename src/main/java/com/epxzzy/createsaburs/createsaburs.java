@@ -1,9 +1,15 @@
 package com.epxzzy.createsaburs;
 
+import com.epxzzy.createsaburs.block.ModBlockEntities;
+import com.epxzzy.createsaburs.block.ModBlocks;
 import com.epxzzy.createsaburs.item.ModCreativeModTabs;
 import com.epxzzy.createsaburs.item.ModItems;
+import com.epxzzy.createsaburs.networking.ModMessages;
+import com.epxzzy.createsaburs.screen.KyberStationScreen;
+import com.epxzzy.createsaburs.screen.ModMenuTypes;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -12,6 +18,7 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -27,11 +34,13 @@ public class createsaburs {
 
     public createsaburs() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> createsabursClient::init);
         modEventBus.addListener(this::commonSetup);
 
         ModItems.register(modEventBus);
-
+        ModBlocks.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModSounds.register(modEventBus);
 
         ModCreativeModTabs.register(modEventBus);
@@ -44,6 +53,10 @@ public class createsaburs {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(()->{
+            ModMessages.register();
+            //
+        });
 
     }
 
@@ -65,6 +78,7 @@ public class createsaburs {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+            MenuScreens.register(ModMenuTypes.SKREEN.get(), KyberStationScreen::new);
 
         }
     }

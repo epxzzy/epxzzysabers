@@ -3,7 +3,6 @@ package com.epxzzy.createsaburs.mixin.entity;
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -20,23 +19,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerMixin {
     @Inject(
             method = "blockUsingShield",
-            at = @At(value = "HEAD")
-    )
+            at = @At(value = "HEAD"),
+            cancellable = true)
     private void createsaburs$customblockUsingShield(LivingEntity pttEntity, CallbackInfo ci) {
+        createsaburs.LOGGER.info(" event can be cancelled: "+ ci.isCancellable() );
         pttEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 15));
         boolean has_saber = pttEntity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER)
                 || pttEntity.getOffhandItem().is(ModTags.Items.CREATE_LIGHTSABER);
-        if (has_saber) {
-            //pttEntity.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 100, 5));
-            //((Player) (Object) this).disableShield(true);
+        boolean is_active = pttEntity.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii")
+                || pttEntity.getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
+
+        if (has_saber && is_active) {
+            //ci.cancel();
             Player that = ((Player) (Object) this);
             that.getCooldowns().addCooldown(that.getUseItem().getItem(), 5);
             that.stopUsingItem();
-            that.level().playLocalSound(that.getX(), that.getY(), that.getZ(),
-                    ModSounds.CLASH.get(), SoundSource.PLAYERS, 1f, 1f, false
-            );
             //that.level().broadcastEntityEvent(that, (byte) 30);
-            that.playSound(ModSounds.CLASH.get(), 0.8F, 1);
+            that.playSound(ModSounds.CLASH.get(), 0.2F, 1);
             //that.level().
 
         }
@@ -45,8 +44,9 @@ public abstract class PlayerMixin {
 
     @Inject(
             method = "hurt",
-            at = @At(value = "HEAD")
-    )
+            at = @At(value = "HEAD"),
+            cancellable = true)
+
     private void createsaburs$customPlayerhurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
         Player that = ((Player) (Object) this);
         LivingEntity notThat = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
@@ -56,7 +56,8 @@ public abstract class PlayerMixin {
             boolean attacking_with_sabur = notThat.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
 
             if (blocking_with_sabur && attacking_with_sabur) {
-                that.playSound(ModSounds.CLASH.get(), 1.0F, 0.8F + that.level().random.nextFloat() * 0.4F);
+                //cir.cancel();
+                that.playSound(ModSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
                 return;
             }
         }
@@ -70,13 +71,8 @@ public abstract class PlayerMixin {
     )
     private void createsaburs$customattacknoise(Entity pTarget, CallbackInfo ci) {
         Player that = ((Player) (Object) this);
-        if (that.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER) && that.getMainHandItem().canPerformAction(createsaburs.SABER_SWING)) {
-            that.level().playSound((Player) null, that.getX(),
-                    that.getY(), that.getZ(),
-                    ModSounds.SWING.get(),
-                    that.getSoundSource(),
-                    1.0F, 1.0F
-            );
+        if (that.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER) && that.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii")) {
+            //that.level().playSound((Player) null, that.getX(), that.getY(), that.getZ(), ModSounds.SWING.get(), that.getSoundSource(), 1.0F, 1.0F);
         }
 
     }

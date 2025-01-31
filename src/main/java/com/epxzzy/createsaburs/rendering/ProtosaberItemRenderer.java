@@ -19,29 +19,35 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
     protected static final PartialModel GEAR_BIT = new PartialModel(createsaburs.asResource("item/geur"));
     protected static final PartialModel GLOWLY_BIT = new PartialModel(createsaburs.asResource("item/blade"));
 
-    protected static final PartialModel BLOCING_BIT = new PartialModel(createsaburs.asResource("item/protosabur"));
-
-
-
     @Override
     protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
                           PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
 
+        boolean leftHand = transformType == ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
         /*if(stack.getOrCreateTag().getBoolean("BlockBoiii")){
             renderer.render(BLOCING_BIT.get(), light);
         }
         else {
 
          */
+
+
+        if(transformType.firstPerson() && stack.getOrCreateTag().getBoolean("BlockBoiii")){
+            int modifier = leftHand ? -1 : 1;
+            //
+            ms.mulPose(Axis.ZP.rotationDegrees(modifier * 60));
+            ms.pushPose();
+            ms.popPose();
+        }
         renderer.render(model.getOriginalModel(), light);
+
         //}
 
 
         if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
-            //GO TEST IT RN WHAT ARE YOU LOOKING AT
             ms.pushPose();
-
             renderer.renderGlowing(GLOWLY_BIT.get(),  LightTexture.FULL_BRIGHT);
+
             ms.popPose();
         }
 
@@ -55,6 +61,7 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
         else {
         */
         ms.mulPose(Axis.YP.rotationDegrees(ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (stack.getOrCreateTag().getBoolean("ActiveBoiii")? 30 : 4)));
+
        //
         //ms.translate(xOffset, 0, 0);
 

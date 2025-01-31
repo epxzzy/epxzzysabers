@@ -15,15 +15,12 @@ public class ModItems {
     public static final DeferredRegister<Item> items = DeferredRegister.create(ForgeRegistries.ITEMS, createsaburs.MOD_ID);
     public static final Rarity RARITY_FIRE = Rarity.create("createsaburs:fire",
             style -> {
-                float hue = 17f + (float)(0.05 * Math.sin(System.currentTimeMillis() / 300.0));
+                float hue = 0.5f + (float)(0.1 * Math.sin(System.currentTimeMillis() / 300.0));
                 return style.withColor(Color.HSBtoRGB(hue, 1f, 1f));
             });
-   public static final Rarity RARITY_SPARK = Rarity.create("createsaburs:spark",
-            style -> style.withColor(Color.HSBtoRGB( (float)(0.25f + 0.15f *  Math.sin(System.currentTimeMillis() / 100)), 1f, 1f)));
     public static final RegistryObject<Item> protosabur = items.register("protosabur", () -> new protosaber(new ShieldItem.Properties().rarity(RARITY_FIRE).stacksTo(1)));
-    public static final RegistryObject<Item> protosabur2 = items.register("protwosabur", () -> new ShieldItem(new ShieldItem.Properties().rarity(RARITY_SPARK)));
+    public static final RegistryObject<Item> protosabur2 = items.register("protwosabur", () -> new protosaber(new ShieldItem.Properties().rarity(RARITY_FIRE)));
 
-    public static final RegistryObject<Item> mognet = items.register("mognet", () -> new MagnetItem(new Item.Properties()));
 
 
 

@@ -1,3 +1,5 @@
 {
-  "item.createsaburs.protosabur"; "proto sabur",
+  "item.createsaburs.protosabur": "prototype sabur",
+  "sounds": "",
+  "block.createsaburs.kyber_station": "Kyber Station"
 }
