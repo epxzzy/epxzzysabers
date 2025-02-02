@@ -174,7 +174,7 @@ public class protosaber extends Item {
     public static int getColor(ItemStack pStack) {
         CompoundTag compoundtag = pStack.getTagElement("display");
         if(compoundtag == null){
-            setColor(pStack, 894731 );
+            setColor(pStack, 43008);
             return Objects.requireNonNull(pStack.getTagElement("display")).getInt("color");
         }
         return Objects.requireNonNull(pStack.getTagElement("display")).getInt("color");
@@ -200,15 +200,16 @@ public class protosaber extends Item {
                 .withStyle(readtag(stack) ? ChatFormatting.WHITE : ChatFormatting.GRAY);
         tooltip.add(ActiveDetail);
         if(Screen.hasControlDown()){
-            tooltip.add(Component.literal("1asdf"));
+            tooltip.add(Component.literal(" hidden text displayed only when ctrl key is being held down"));
         }
     }
 
     @Override
     public boolean canPerformAction(ItemStack stack, net.minecraftforge.common.ToolAction toolAction) {
         if (toolAction == createsaburs.SABER_SWING) return true;
-        return net.minecraftforge.common.ToolActions.DEFAULT_SHIELD_ACTIONS.contains(toolAction);
-        // return false;
+        return toolAction == createsaburs.SABER_BLOCK;
+
+        //return net.minecraftforge.common.ToolActions.DEFAULT_SHIELD_ACTIONS.contains(toolAction);
     }
 
     public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(@NotNull EquipmentSlot pEquipmentSlot) {

@@ -45,6 +45,7 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
 
 
         if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
+            //stack.getUseAnimation()
             ms.pushPose();
             renderer.renderGlowing(GLOWLY_BIT.get(),  LightTexture.FULL_BRIGHT);
 

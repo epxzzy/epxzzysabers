@@ -1,11 +1,8 @@
 package com.epxzzy.createsaburs.mixin.entity;
 
 import com.epxzzy.createsaburs.createsaburs;
-import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -17,6 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin {
+
+
+    /*
     @Inject(
             method = "blockUsingShield",
             at = @At(value = "HEAD"),
@@ -42,22 +42,26 @@ public abstract class PlayerMixin {
 
     }
 
+     */
+
+
     @Inject(
             method = "hurt",
             at = @At(value = "HEAD"),
             cancellable = true)
 
     private void createsaburs$customPlayerhurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
+        createsaburs.LOGGER.warn("player hurt");
         Player that = ((Player) (Object) this);
         LivingEntity notThat = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
 
         if (notThat != null) {
-            boolean blocking_with_sabur = that.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER) && that.isBlocking();
+            boolean blocking_with_sabur = that.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER) && that.getUseItem().canPerformAction(createsaburs.SABER_BLOCK);
             boolean attacking_with_sabur = notThat.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
 
             if (blocking_with_sabur && attacking_with_sabur) {
                 //cir.cancel();
-                that.playSound(ModSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
+                //that.playSound(ModSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
                 return;
             }
         }

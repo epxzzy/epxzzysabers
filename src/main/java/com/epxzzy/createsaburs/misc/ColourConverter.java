@@ -1,20 +1,18 @@
 package com.epxzzy.createsaburs.misc;
 
-import com.epxzzy.createsaburs.createsaburs;
-
 public class ColourConverter {
 
     // Convert decimal color to RGB
-    public static int[] decimalToRGB(int decimalColor) {
-        int red = (decimalColor >> 16) & 0xFF;  // Extract red
-        int green = (decimalColor >> 8) & 0xFF; // Extract green
-        int blue = decimalColor & 0xFF;         // Extract blue
+    public static int[] PortedDecimaltoRGB(int decimalColor) {
+        int red = (decimalColor >> 16) & 0xFF;
+        int green = (decimalColor >> 8) & 0xFF;
+        int blue = decimalColor & 0xFF;
         return new int[]{red, green, blue};
     }
 
-    public static int portedRGBtoDecimal(int reg, int breen, int glue) {
-        int aa = (reg << 16) | (breen << 8) | glue;
-        createsaburs.LOGGER.warn("converted(RGB2DEC) colour:" + aa);
+    public static int portedRGBtoDecimal(int[] reg) {
+        int aa = (reg[0] << 16) | (reg[1] << 8) | reg[2];
+        //createsaburs.LOGGER.warn("converted(RGB2DEC) colour:" + aa);
         return aa;
     }
 

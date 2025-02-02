@@ -127,6 +127,8 @@ public class KyberStationMenu extends AbstractContainerMenu {
          */
     }
 
+
+
     /*
     public int getScaledProgress() {
         int progress = this.data.get(0);
@@ -236,7 +238,7 @@ public class KyberStationMenu extends AbstractContainerMenu {
             //return;
         //}
         //else {
-        int    colour = ColourConverter.portedRGBtoDecimal(r,g,b);
+        int    colour = ColourConverter.portedRGBtoDecimal(new int[]{r,g,b});
         //    this.CachedColour = colour;
         //    this.isColourCached = true;
         //}
@@ -257,6 +259,9 @@ public class KyberStationMenu extends AbstractContainerMenu {
         //    lastCachedItemStacc = base;
         //}
         this.resultSlot.set(base);
+    }
+    public int[] getInputColour(){
+        return ColourConverter.PortedDecimaltoRGB(this.saber_slot.getItem().getOrCreateTag().getCompound("display").getInt("color"));
     }
     public boolean stillValid(@NotNull Player pPlayer) {
         return stillValid(this.access, pPlayer, ModBlocks.KYBERSTATION.get());

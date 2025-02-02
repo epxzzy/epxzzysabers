@@ -1,89 +1,247 @@
 package com.epxzzy.createsaburs.misc;
 
-import com.epxzzy.createsaburs.createsaburs;
-import net.minecraft.client.gui.ComponentPath;
+import com.simibubi.create.AllSoundEvents;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.util.Mth;
+import org.lwjgl.glfw.GLFW;
 
-public class SliderWidget extends AbstractSliderButton {
-    private final int minValue;
-    private final int maxValue;
-    private int currentValue;
+import java.text.DecimalFormat;
 
-    public SliderWidget(int x, int y, int width, int height, int minValue, int maxValue, int initialValue) {
-        super(x, y, width, height, Component.literal(""), 256);
+public class SliderWidget extends AbstractSliderButton
+{
+    protected Component prefix;
+    protected Component suffix;
+
+    protected double minValue;
+    protected double maxValue;
+
+    /** Allows input of discontinuous values with a certain step */
+    protected double stepSize;
+
+    protected boolean drawString;
+
+    private final DecimalFormat format;
+
+    /**
+     * @param x x position of upper left corner
+     * @param y y position of upper left corner
+     * @param width Width of the widget
+     * @param height Height of the widget
+     * @param prefix {@link Component} displayed before the value string
+     * @param suffix {@link Component} displayed after the value string
+     * @param minValue Minimum (left) value of slider
+     * @param maxValue Maximum (right) value of slider
+     * @param currentValue Starting value when widget is first displayed
+     * @param stepSize Size of step used. Precision will automatically be calculated based on this value if this value is not 0.
+     * @param precision Only used when {@code stepSize} is 0. Limited to a maximum of 4 (inclusive).
+     * @param drawString Should text be displayed on the widget
+     */
+    public SliderWidget(int x, int y, int width, int height, Component prefix, Component suffix, double minValue, double maxValue, double currentValue, double stepSize, int precision, boolean drawString)
+    {
+        super(x, y, width, height, Component.empty(), 0D);
+        this.prefix = prefix;
+        this.suffix = suffix;
         this.minValue = minValue;
         this.maxValue = maxValue;
-        this.currentValue = initialValue;
+        this.stepSize = Math.abs(stepSize);
+        this.value = this.snapToNearest((currentValue - minValue) / (maxValue - minValue));
+        this.drawString = drawString;
+
+        if (stepSize == 0D)
+        {
+            precision = Math.min(precision, 4);
+
+            StringBuilder builder = new StringBuilder("0");
+
+            if (precision > 0)
+                builder.append('.');
+
+            while (precision-- > 0)
+                builder.append('0');
+
+            this.format = new DecimalFormat(builder.toString());
+        }
+        else if (Mth.equal(this.stepSize, Math.floor(this.stepSize)))
+        {
+            this.format = new DecimalFormat("0");
+        }
+        else
+        {
+            this.format = new DecimalFormat(Double.toString(this.stepSize).replaceAll("\\d", "0"));
+        }
+
         this.updateMessage();
     }
 
-
-    @Override
-    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        guiGraphics.fill(this.getX(), this.getY(), this.getX() + this.width, this.getY() + this.height, 0xFFAAAAAA);
-        int sliderPosition = this.getX() + (int) ((this.currentValue - this.minValue) / (float) (this.maxValue - this.minValue) * this.width);
-        guiGraphics.fill(sliderPosition - 2, this.getY(), sliderPosition + 2, this.getY() + this.height, 0xFF0000FF);
+    /**
+     * Overload with {@code stepSize} set to 1, useful for sliders with whole number values.
+     */
+    public SliderWidget(int x, int y, int width, int height, Component prefix, Component suffix, double minValue, double maxValue, double currentValue, boolean drawString)
+    {
+        this(x, y, width, height, prefix, suffix, minValue, maxValue, currentValue, 1D, 0, drawString);
     }
 
-    @Override
-    protected void onDrag(double mouseX, double mouseY, double dragX, double dragY) {
-        this.currentValue = this.minValue + (int) ((mouseX - this.getX()) / this.width * (this.maxValue - this.minValue));
-        this.currentValue = Math.min(Math.max(this.currentValue, this.minValue), this.maxValue);
+    /**
+     * @return Current slider value as a double
+     */
+    public double getValue()
+    {
+        return this.value * (maxValue - minValue) + minValue;
+    }
+
+    /**
+     * @return Current slider value as an long
+     */
+    public long getValueLong()
+    {
+        return Math.round(this.getValue());
+    }
+
+    /**
+     * @return Current slider value as an int
+     */
+    public int getValueInt()
+    {
+        return (int) this.getValueLong();
+    }
+
+    /**
+     * @param value The new slider value
+     */
+    public void setValue(double value)
+    {
+        this.value = this.snapToNearest((value - this.minValue) / (this.maxValue - this.minValue));
+
+        float pitch = (float) Math.max(this.getValue() / (float) maxValue, 1.5);
+        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(AllSoundEvents.SCROLL_VALUE.getMainEvent(), pitch, 0.25f));
+
         this.updateMessage();
-        createsaburs.LOGGER.info("slider mooved to "+ this.currentValue);
+    }
 
+    public String getValueString()
+    {
+        return this.format.format(this.getValue());
     }
 
     @Override
-    public void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
-
-    }
-
-    public void updateMessage() {
-        this.setMessage(Component.literal(String.valueOf(this.currentValue)));
+    public void onClick(double mouseX, double mouseY)
+    {
+        this.setValueFromMouse(mouseX);
     }
 
     @Override
-    protected void applyValue() {
-
-    }
-
-    public int getValue() {
-        return this.currentValue;
-    }
-
-    @Override
-    public void mouseMoved(double pMouseX, double pMouseY) {
-        super.mouseMoved(pMouseX, pMouseY);
+    protected void onDrag(double mouseX, double mouseY, double dragX, double dragY)
+    {
+        super.onDrag(mouseX, mouseY, dragX, dragY);
+        this.setValueFromMouse(mouseX);
     }
 
     @Override
     public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
+        if(pDelta > 0){
+            this.setValue(this.getValue()+1);
+        }
+        else {
+            this.setValue(this.getValue()-1);
+        }
+        //createsaburs.LOGGER.warn("scroll has scrolled as scroll {}", pDelta);
         return super.mouseScrolled(pMouseX, pMouseY, pDelta);
     }
 
     @Override
-    public boolean keyReleased(int pKeyCode, int pScanCode, int pModifiers) {
-        return super.keyReleased(pKeyCode, pScanCode, pModifiers);
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
+    {
+        boolean flag = keyCode == GLFW.GLFW_KEY_LEFT;
+        if (flag || keyCode == GLFW.GLFW_KEY_RIGHT)
+        {
+            if (this.minValue > this.maxValue)
+                flag = !flag;
+            float f = flag ? -1F : 1F;
+            if (stepSize <= 0D)
+                this.setSliderValue(this.value + (f / (this.width - 8)));
+            else
+                this.setValue(this.getValue() + f * this.stepSize);
+        }
+
+        return false;
+    }
+
+
+    private void setValueFromMouse(double mouseX)
+    {
+        this.setSliderValue((mouseX - (this.getX() + 4)) / (this.width - 8));
+    }
+
+    /**
+     * @param value Percentage of slider range
+     */
+    private void setSliderValue(double value)
+    {
+        double oldValue = this.value;
+        this.value = this.snapToNearest(value);
+        if (!Mth.equal(oldValue, this.value)){
+            this.applyValue();
+            float pitch = (float) (this.getValue() / (float) maxValue);
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(AllSoundEvents.SCROLL_VALUE.getMainEvent(), pitch, 0.25f));
+        }
+
+
+        this.updateMessage();
+    }
+
+    /**
+     * Snaps the value, so that the displayed value is the nearest multiple of {@code stepSize}.
+     * If {@code stepSize} is 0, no snapping occurs.
+     */
+    private double snapToNearest(double value)
+    {
+        if(stepSize <= 0D)
+            return Mth.clamp(value, 0D, 1D);
+
+        value = Mth.lerp(Mth.clamp(value, 0D, 1D), this.minValue, this.maxValue);
+
+        value = (stepSize * Math.round(value / stepSize));
+
+        if (this.minValue > this.maxValue)
+        {
+            value = Mth.clamp(value, this.maxValue, this.minValue);
+        }
+        else
+        {
+            value = Mth.clamp(value, this.minValue, this.maxValue);
+        }
+
+        return Mth.map(value, this.minValue, this.maxValue, 0D, 1D);
     }
 
     @Override
-    public boolean charTyped(char pCodePoint, int pModifiers) {
-        return super.charTyped(pCodePoint, pModifiers);
+    protected void updateMessage()
+    {
+        if (this.drawString)
+        {
+            this.setMessage(Component.literal("").append(prefix).append(this.getValueString()).append(suffix));
+        }
+        else
+        {
+            this.setMessage(Component.empty());
+        }
     }
 
-    @Nullable
     @Override
-    public ComponentPath getCurrentFocusPath() {
-        return super.getCurrentFocusPath();
-    }
+    protected void applyValue() {}
 
     @Override
-    public void setPosition(int pX, int pY) {
-        super.setPosition(pX, pY);
+    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    {
+        final Minecraft mc = Minecraft.getInstance();
+        guiGraphics.blitWithBorder(SLIDER_LOCATION, this.getX(), this.getY(), 0, getTextureY(), this.width, this.height, 200, 20, 2, 3, 2, 2);
+
+        guiGraphics.blitWithBorder(SLIDER_LOCATION, this.getX() + (int)(this.value * (double)(this.width - 8)), this.getY(), 0, getHandleTextureY(), 8, this.height, 200, 20 , 2, 3, 2, 2);
+
+        renderScrollingString(guiGraphics, mc.font, 2, getFGColor() | Mth.ceil(this.alpha * 255.0F) << 24);
     }
 }

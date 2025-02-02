@@ -2,7 +2,6 @@ package com.epxzzy.createsaburs.networking.packet;
 
 import com.epxzzy.createsaburs.screen.KyberStationMenu;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -45,7 +44,7 @@ public class ServerboundRecolourItemPacket {
             }
 
 
-            contextt.getSender().sendSystemMessage(Component.literal("blow me sucka"+COLOURS[0]+""+COLOURS[1]+""+COLOURS[2]+""));
+            //contextt.getSender().sendSystemMessage(Component.literal("blow me sucka"+COLOURS[0]+""+COLOURS[1]+""+COLOURS[2]+""));
 
 
         });

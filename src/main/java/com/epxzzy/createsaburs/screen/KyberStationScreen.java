@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs.screen;
 
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.misc.SliderWidget;
 import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
 import com.epxzzy.createsaburs.utils.ModTags;
@@ -14,16 +15,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
-import net.minecraftforge.client.gui.widget.ForgeSlider;
 import org.jetbrains.annotations.NotNull;
 
 public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu> {
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(createsaburs.MOD_ID, "textures/gui/gem_polishing_station_gui.png");
 
-    private ForgeSlider HUE_SLIDER;
-    private ForgeSlider SAT_SLIDER;
-    private ForgeSlider LIT_SLIDER;
+    private SliderWidget HUE_SLIDER;
+    private SliderWidget SAT_SLIDER;
+    private SliderWidget LIT_SLIDER;
 
     private boolean HSL_toggle = false;
 
@@ -34,7 +34,18 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
     }
 
     private void containerChanged() {
+        //UpdateServerRecipe();
+        int[] inputColour = menu.getInputColour();
+
+        if(this.HUE_SLIDER.getValueInt() == 0 && this.SAT_SLIDER.getValueInt() == 0 && this.LIT_SLIDER.getValueInt() == 0){
+            this.HUE_SLIDER.setValue(inputColour[0]);
+            this.SAT_SLIDER.setValue(inputColour[1]);
+            this.LIT_SLIDER.setValue(inputColour[2]);
+        }
+
         //menu.craftSabur(HUE_SLIDER.getValueInt(), SAT_SLIDER.getValueInt(),LIT_SLIDER.getValueInt());
+        //createsaburs.LOGGER.info("client kyber station change");
+
         return;
     }
 
@@ -46,9 +57,10 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         this.inventoryLabelY = 10000;
         this.titleLabelY = 10000;
 
-        this.HUE_SLIDER = getSliderForColour(0, 255, "red ", 1);
-        this.SAT_SLIDER = getSliderForColour(0, 255, "green ", 2);
-        this.LIT_SLIDER = getSliderForColour(0, 255, "blue ", 3);
+        this.HUE_SLIDER = getSliderForColour(0, 255, "hue ", 1);
+        this.SAT_SLIDER = getSliderForColour(0, 255, "sat ", 2);
+        this.LIT_SLIDER = getSliderForColour(0, 255, "light ", 3);
+
 
         this.addWidget(this.HUE_SLIDER);
         this.addWidget(this.SAT_SLIDER);
@@ -71,23 +83,39 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
     }
 
+    public void UpdateServerRecipe(){
 
-    @Override
-    public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
         int[] newColour = new int[]{HUE_SLIDER.getValueInt(), SAT_SLIDER.getValueInt(), LIT_SLIDER.getValueInt()};
 
         Slot slot = this.menu.getSlot(0);
         if (slot.getItem().is(ModTags.Items.CREATE_LIGHTSABER)) {
             if (this.menu.setItemColour(newColour)) {
                 //this.minecraft.player.connection.send(new HonkPacket.Serverbound)
+                //Color.HSBtoRGB(this.menu.getInputColour())
                 ModMessages.sendToServer(new ServerboundRecolourItemPacket(newColour));
 
             }
 
         }
 
+    }
 
+    @Override
+    public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
+        UpdateServerRecipe();
         return super.getFocused() != null && super.isDragging() && pButton == 0 && this.getFocused().mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
+    }
+
+    @Override
+    public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
+        UpdateServerRecipe();
+        return super.keyPressed(pKeyCode, pScanCode, pModifiers);
+    }
+
+    @Override
+    public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
+        UpdateServerRecipe();
+        return super.mouseScrolled(pMouseX, pMouseY, pDelta);
     }
 
     @Override
@@ -95,11 +123,13 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         HUE_SLIDER.setFocused(false);
         SAT_SLIDER.setFocused(false);
         LIT_SLIDER.setFocused(false);
+
+        UpdateServerRecipe();
         return super.mouseReleased(pMouseX, pMouseY, pButton);
     }
 
-    public ForgeSlider getSliderForColour(int pValue, int pMaxValue, String pString, int pPositionMultiplier) {
-        return new ForgeSlider(
+    public SliderWidget getSliderForColour(int pValue, int pMaxValue, String pString, int pPositionMultiplier) {
+        return new SliderWidget(
                 this.leftPos + 12,
                 this.topPos + (12 * pPositionMultiplier),
                 113,
@@ -110,7 +140,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
                 pMaxValue,
                 pValue,
                 1,
-                1,
+                0,
                 true);
     }
 
