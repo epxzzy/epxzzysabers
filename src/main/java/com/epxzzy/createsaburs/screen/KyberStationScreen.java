@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs.screen;
 
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.misc.ColourConverter;
 import com.epxzzy.createsaburs.misc.SliderWidget;
 import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
@@ -27,26 +28,31 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
     private boolean HSL_toggle = false;
 
+    public void slotChanged(){
+
+    }
 
     public KyberStationScreen(KyberStationMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
         pMenu.registerUpdateListener(this::containerChanged);
+        pMenu.registerInputUpdateListener(this::TakeInput);
+
     }
 
     private void containerChanged() {
         //UpdateServerRecipe();
-        int[] inputColour = menu.getInputColour();
 
-        if(this.HUE_SLIDER.getValueInt() == 0 && this.SAT_SLIDER.getValueInt() == 0 && this.LIT_SLIDER.getValueInt() == 0){
-            this.HUE_SLIDER.setValue(inputColour[0]);
-            this.SAT_SLIDER.setValue(inputColour[1]);
-            this.LIT_SLIDER.setValue(inputColour[2]);
-        }
 
         //menu.craftSabur(HUE_SLIDER.getValueInt(), SAT_SLIDER.getValueInt(),LIT_SLIDER.getValueInt());
         //createsaburs.LOGGER.info("client kyber station change");
 
         return;
+    }
+    public void TakeInput(){
+        int[] inputColour = menu.getInputColour();
+        this.HUE_SLIDER.setValue(inputColour[0]);
+        this.SAT_SLIDER.setValue(inputColour[1]);
+        this.LIT_SLIDER.setValue(inputColour[2]);
     }
 
     @Override
@@ -57,10 +63,13 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         this.inventoryLabelY = 10000;
         this.titleLabelY = 10000;
 
-        this.HUE_SLIDER = getSliderForColour(0, 255, "hue ", 1);
-        this.SAT_SLIDER = getSliderForColour(0, 255, "sat ", 2);
-        this.LIT_SLIDER = getSliderForColour(0, 255, "light ", 3);
+        //this.HUE_SLIDER = getSliderForColour(0, 255, "hue ", 1);
+        //this.SAT_SLIDER = getSliderForColour(0, 255, "sat ", 2);
+        //this.LIT_SLIDER = getSliderForColour(0, 255, "light ", 3);
 
+        this.HUE_SLIDER = getSliderForColour(0, 360, "hue ", 1);
+        this.SAT_SLIDER = getSliderForColour(0, 100, "sat ", 2);
+        this.LIT_SLIDER = getSliderForColour(0, 100, "light ", 3);
 
         this.addWidget(this.HUE_SLIDER);
         this.addWidget(this.SAT_SLIDER);
@@ -83,21 +92,25 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
     }
 
-    public void UpdateServerRecipe(){
+    public void UpdateServerRecipe() {
+        int[] regbee =
+                ColourConverter.HSLtoRGB(
+                        HUE_SLIDER.getValueInt(),
+                        SAT_SLIDER.getValueInt(),
+                        LIT_SLIDER.getValueInt()
 
-        int[] newColour = new int[]{HUE_SLIDER.getValueInt(), SAT_SLIDER.getValueInt(), LIT_SLIDER.getValueInt()};
+                );
+
+
 
         Slot slot = this.menu.getSlot(0);
         if (slot.getItem().is(ModTags.Items.CREATE_LIGHTSABER)) {
-            if (this.menu.setItemColour(newColour)) {
+            if (this.menu.setItemColour(regbee)) {
                 //this.minecraft.player.connection.send(new HonkPacket.Serverbound)
                 //Color.HSBtoRGB(this.menu.getInputColour())
-                ModMessages.sendToServer(new ServerboundRecolourItemPacket(newColour));
-
+                ModMessages.sendToServer(new ServerboundRecolourItemPacket(regbee));
             }
-
         }
-
     }
 
     @Override
@@ -199,6 +212,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
             );*/
 
 
+            /*
             guiGraphics.fill(
                     this.leftPos + 137,
                     this.topPos + 10,
@@ -212,6 +226,36 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
                     )
             );
 
+             */
+
+            int[] regbee =
+                    ColourConverter.HSLtoRGB(
+                            HUE_SLIDER.getValueInt(),
+                            SAT_SLIDER.getValueInt(),
+                            LIT_SLIDER.getValueInt()
+
+                    );
+
+            guiGraphics.fill(
+                    this.leftPos + 137,
+                    this.topPos + 10,
+                    this.leftPos + 166,
+                    this.topPos + 40,
+                    FastColor.ARGB32.color(255,
+                            regbee[0],
+                            regbee[1],
+                            regbee[2])
+            );
+
+
+        } else {
+            this.HUE_SLIDER.active = true;
+            this.SAT_SLIDER.active = true;
+            this.LIT_SLIDER.active = true;
+
+            this.HUE_SLIDER.visible = true;
+            this.SAT_SLIDER.visible = true;
+            this.LIT_SLIDER.visible = true;
         }
 
         //LIST.render(guiGraphics, mouseX, mouseY, delta);

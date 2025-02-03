@@ -16,27 +16,62 @@ public class ColourConverter {
         return aa;
     }
 
-    public static int[] portedHslToRgb(int h, int s, int l) {
-        int r, g, b;
-
-        if (s == 0) {
-            r = g = b = l; // achromatic
-        } else {
-            int q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-            int p = 2 * l - q;
-            r = hueToRgb(p, q, h + 1 / 3);
-            g = hueToRgb(p, q, h);
-            b = hueToRgb(p, q, h - 1 / 3);
+    public static int[] HSLtoRGB(float h, float s, float l) {
+        if (s == 100) {
+            s-=1;
         }
-        return new int[]{Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)};
+
+        if (l == 100) {
+            l-=1;
+        }
+        if (h == 360){
+            h-=1;
+        }
+
+
+        //  Formula needs all values between 0 - 1.
+
+        h = h % 360.0f;
+        h /= 360f;
+        s /= 100f;
+        l /= 100f;
+
+        float q = 0;
+
+        if (l < 0.5)
+            q = l * (1 + s);
+        else
+            q = (l + s) - (s * l);
+
+        float p = 2 * l - q;
+
+        int r = Math.round(Math.max(0, HueToRGB(p, q, h + (1.0f / 3.0f)) * 256));
+        int g = Math.round(Math.max(0, HueToRGB(p, q, h) * 256));
+        int b = Math.round(Math.max(0, HueToRGB(p, q, h - (1.0f / 3.0f)) * 256));
+
+        int[] array = { r, g, b };
+        return array;
     }
 
-    public static int hueToRgb(int p, int q, int t) {
-        if (t < 0) t += 1;
-        if (t > 1) t -= 1;
-        if (t < 1 / 6) return p + (q - p) * 6 * t;
-        if (t < 1 / 2) return q;
-        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+    private static float HueToRGB(float p, float q, float h) {
+        if (h < 0)
+            h += 1;
+
+        if (h > 1)
+            h -= 1;
+
+        if (6 * h < 1) {
+            return p + ((q - p) * 6 * h);
+        }
+
+        if (2 * h < 1) {
+            return q;
+        }
+
+        if (3 * h < 2) {
+            return p + ((q - p) * 6 * ((2.0f / 3.0f) - h));
+        }
+
         return p;
     }
 

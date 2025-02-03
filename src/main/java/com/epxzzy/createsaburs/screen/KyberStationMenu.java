@@ -35,6 +35,9 @@ public class KyberStationMenu extends AbstractContainerMenu {
     };
     Runnable slotUpdateListener = () -> {
     };
+    Runnable inputUpdateListener = () -> {
+    };
+
     private final Container inputContainer = new SimpleContainer(2) {
         /**
          * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think
@@ -44,6 +47,7 @@ public class KyberStationMenu extends AbstractContainerMenu {
             super.setChanged();
             KyberStationMenu.this.slotsChanged(this);
             KyberStationMenu.this.slotUpdateListener.run();
+            KyberStationMenu.this.inputUpdateListener.run();
         }
     };
     private final Container outputContainer = new SimpleContainer(1) {
@@ -284,4 +288,8 @@ public class KyberStationMenu extends AbstractContainerMenu {
     public void registerUpdateListener(Runnable pListener) {
         this.slotUpdateListener = pListener;
     }
+    public void registerInputUpdateListener(Runnable pListener) {
+        this.inputUpdateListener= pListener;
+    }
+
 }
