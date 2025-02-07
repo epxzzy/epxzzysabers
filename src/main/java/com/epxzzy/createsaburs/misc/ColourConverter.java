@@ -15,65 +15,75 @@ public class ColourConverter {
         //createsaburs.LOGGER.warn("converted(RGB2DEC) colour:" + aa);
         return aa;
     }
+    public static int[] RGBtoHSL(int r, int g, int b) {
+        float rPercent = r / 255f;
+        float gPercent = g / 255f;
+        float bPercent = b / 255f;
 
-    public static int[] HSLtoRGB(float h, float s, float l) {
-        if (s == 100) {
-            s-=1;
+        float max = Math.max(rPercent, Math.max(gPercent, bPercent));
+        float min = Math.min(rPercent, Math.min(gPercent, bPercent));
+        float delta = max - min;
+
+        float h = 0;
+        if (delta != 0) {
+            if (max == rPercent) {
+                h = (gPercent - bPercent) / delta + (gPercent < bPercent ? 6 : 0);
+            } else if (max == gPercent) {
+                h = (bPercent - rPercent) / delta + 2;
+            } else {
+                h = (rPercent - gPercent) / delta + 4;
+            }
+            h *= 60;
         }
 
-        if (l == 100) {
-            l-=1;
-        }
-        if (h == 360){
-            h-=1;
-        }
+        float l = (max + min) / 2;
+        float s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
 
-
-        //  Formula needs all values between 0 - 1.
-
-        h = h % 360.0f;
-        h /= 360f;
-        s /= 100f;
-        l /= 100f;
-
-        float q = 0;
-
-        if (l < 0.5)
-            q = l * (1 + s);
-        else
-            q = (l + s) - (s * l);
-
-        float p = 2 * l - q;
-
-        int r = Math.round(Math.max(0, HueToRGB(p, q, h + (1.0f / 3.0f)) * 256));
-        int g = Math.round(Math.max(0, HueToRGB(p, q, h) * 256));
-        int b = Math.round(Math.max(0, HueToRGB(p, q, h - (1.0f / 3.0f)) * 256));
-
-        int[] array = { r, g, b };
-        return array;
+        return new int[]{Math.round(h), Math.round(s * 100), Math.round(l * 100)};
     }
 
-    private static float HueToRGB(float p, float q, float h) {
-        if (h < 0)
-            h += 1;
+    public static int[] HSLtoRGB(int h, int s, int l) {
+        float sPercent = s / 100f;
+        float lPercent = l / 100f;
 
-        if (h > 1)
-            h -= 1;
+        float c = (1 - Math.abs(2 * lPercent - 1)) * sPercent;
+        float x = c * (1 - Math.abs((h / 60f) % 2 - 1));
+        float m = lPercent - c / 2;
 
-        if (6 * h < 1) {
-            return p + ((q - p) * 6 * h);
+        float rPrime = 0, gPrime = 0, bPrime = 0;
+
+        if(h == 360){
+            //rollback cause the decimal convertor seems to get fucky with it
+            h = 0;
         }
 
-        if (2 * h < 1) {
-            return q;
+        if (h >= 0 && h < 60) {
+            rPrime = c;
+            gPrime = x;
+        } else if (h >= 60 && h < 120) {
+            rPrime = x;
+            gPrime = c;
+        } else if (h >= 120 && h < 180) {
+            gPrime = c;
+            bPrime = x;
+        } else if (h >= 180 && h < 240) {
+            gPrime = x;
+            bPrime = c;
+        } else if (h >= 240 && h < 300) {
+            rPrime = x;
+            bPrime = c;
+        } else if (h >= 300 && h < 360) {
+            rPrime = c;
+            bPrime = x;
         }
 
-        if (3 * h < 2) {
-            return p + ((q - p) * 6 * ((2.0f / 3.0f) - h));
-        }
+        int r = (int) Math.floor((rPrime + m) * 255);
+        int g = (int) Math.floor((gPrime + m) * 255);
+        int b = (int) Math.floor((bPrime + m) * 255);
 
-        return p;
+        return new int[]{r, g, b};
     }
+
 
 
     public static void main(String[] args) {

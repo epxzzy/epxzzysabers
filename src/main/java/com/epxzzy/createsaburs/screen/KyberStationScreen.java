@@ -9,6 +9,7 @@ import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -28,7 +29,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
     private boolean HSL_toggle = false;
 
-    public void slotChanged(){
+    public void slotChanged() {
 
     }
 
@@ -48,8 +49,11 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
         return;
     }
-    public void TakeInput(){
-        int[] inputColour = menu.getInputColour();
+
+    public void TakeInput() {
+        int[] gur = menu.getInputColour();
+        int[] inputColour = ColourConverter.RGBtoHSL(gur[0], gur[1], gur[2]);
+
         this.HUE_SLIDER.setValue(inputColour[0]);
         this.SAT_SLIDER.setValue(inputColour[1]);
         this.LIT_SLIDER.setValue(inputColour[2]);
@@ -100,11 +104,40 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
                         LIT_SLIDER.getValueInt()
 
                 );
+        int regbeedecimal = ColourConverter.portedRGBtoDecimal(regbee);
+
+        //Color.HSBtoRGB((float) HUE_SLIDER.getValueInt() / 60, (float) SAT_SLIDER.getValueInt() /100, (float) LIT_SLIDER.getValueInt() /100);
+
+        // String asd = Integer.toString("")
+
+        this.HUE_SLIDER.setTooltip(
+                Tooltip.create(
+                        Component.literal(
+                                String.format("#%06X", regbeedecimal & 0xFFFFFF)
+                        )
+                )
+        );
+        this.SAT_SLIDER.setTooltip(
+                Tooltip.create(
+                        Component.literal(
+                                String.format("#%06X", regbeedecimal & 0xFFFFFF)
+                        )
+                )
+        );
+        this.LIT_SLIDER.setTooltip(
+                Tooltip.create(
+                        Component.literal(
+                                String.format("#%06X", regbeedecimal & 0xFFFFFF)
+                        )
+                )
+        );
+
 
 
 
         Slot slot = this.menu.getSlot(0);
         if (slot.getItem().is(ModTags.Items.CREATE_LIGHTSABER)) {
+
             if (this.menu.setItemColour(regbee)) {
                 //this.minecraft.player.connection.send(new HonkPacket.Serverbound)
                 //Color.HSBtoRGB(this.menu.getInputColour())
@@ -112,6 +145,8 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
             }
         }
     }
+
+
 
     @Override
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
@@ -154,7 +189,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
                 pValue,
                 1,
                 0,
-                true);
+                false);
     }
 
     @Override

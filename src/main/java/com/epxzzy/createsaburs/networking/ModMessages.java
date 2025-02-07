@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs.networking;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
+import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacketButBetter;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -34,6 +35,11 @@ public class ModMessages {
                 .decoder(ServerboundRecolourItemPacket::new)
                 .encoder(ServerboundRecolourItemPacket::toBytes)
                 .consumerMainThread(ServerboundRecolourItemPacket::handle)
+                .add();
+        net.messageBuilder(ServerboundRecolourItemPacketButBetter.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(ServerboundRecolourItemPacketButBetter::new)
+                .encoder(ServerboundRecolourItemPacketButBetter::toBytes)
+                .consumerMainThread(ServerboundRecolourItemPacketButBetter::handle)
                 .add();
 
 

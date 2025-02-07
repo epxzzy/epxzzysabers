@@ -6,8 +6,10 @@ import com.epxzzy.createsaburs.utils.ModTags;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,6 +17,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Objects;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -27,50 +31,55 @@ public abstract class LivingEntityMixin {
     private void createsaburs$customhurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
 
         LivingEntity that = ((LivingEntity) (Object) this);
-        LivingEntity notThat = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
+        Entity notThat = pSource.getEntity();
 
         if (notThat != null) {
 
-            boolean blocking_with_sabur = that.getUseItem().canPerformAction(createsaburs.SABER_BLOCK); ;
+            boolean blocking_with_sabur = that.getUseItem().canPerformAction(createsaburs.SABER_BLOCK);
 
-            boolean attacking_with_sabur = notThat.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
+            boolean attacking_with_sabur = LivingEntity.class.isAssignableFrom(notThat.getClass()) ? ((LivingEntity) notThat).getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER) : false;
 
             createsaburs.LOGGER.info("living entity custom hurt can be cancelled: " + cir.isCancellable());
             createsaburs.LOGGER.warn("living entity hurt in mixin");
 
             if (blocking_with_sabur && attacking_with_sabur) {
-
-
-
-                    Vec3 vec32 = notThat.position();
-                        Vec3 vec3 = that.getViewVector(1.0F);
-                        Vec3 vec31 = vec32.vectorTo(that.position()).normalize();
-                        vec31 = new Vec3(vec31.x, 0.0D, vec31.z);
-                        if (vec31.dot(vec3) < 0.0D) {
-                            createsaburs.LOGGER.warn("attack was blocked via a lightsaber");
-                            if(that instanceof Player){
-                                createsaburs.LOGGER.warn("adding kewldown to the blocking player");
-                                cir.cancel();
-
-                                ((Player) that).getCooldowns().addCooldown(that.getUseItem().getItem(), 10);
-                                that.stopUsingItem();
-                                //that.level().broadcastEntityEvent(that, (byte) 30);
-                                //that.playSound(ModSounds.CLASH.get(), 0.2F, 1);
-
-                                that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);
-                            }
-//                            return true;
-                        }
-
-//                 */
-
-
-
+                Vec3 vec32 = notThat.position();
+                Vec3 vec3 = that.getViewVector(1.0F);
+                Vec3 vec31 = vec32.vectorTo(that.position()).normalize();
+                vec31 = new Vec3(vec31.x, 0.0D, vec31.z);
+                if (vec31.dot(vec3) < 0.0D) {
+                    createsaburs.LOGGER.warn("attack was blocked via a lightsaber");
+                    if (that instanceof Player) {
+                        createsaburs.LOGGER.warn("adding kewldown to the blocking player");
+                        cir.cancel();
+                        ((Player) that).getCooldowns().addCooldown(that.getUseItem().getItem(), 10);
+                        that.stopUsingItem();
+                        //that.level().broadcastEntityEvent(that, (byte) 30);
+                        //that.playSound(ModSounds.CLASH.get(), 0.2F, 1);
+                        that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);
+                    }
+                    // return true;
+                }
                 //cir.cancel();
-
                 //cir.setReturnValue(false);
+            }
+            if(blocking_with_sabur && !attacking_with_sabur){
+                cir.cancel();
+                that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);
                 return;
             }
+
+            if (blocking_with_sabur && Projectile.class.isAssignableFrom(Objects.requireNonNull(pSource.getDirectEntity()).getClass())) {
+                cir.cancel();
+                that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);
+                return;
+            }
+
+            else {
+                return;
+            }
+
+
             //cir.setReturnValue(true);
 
         }

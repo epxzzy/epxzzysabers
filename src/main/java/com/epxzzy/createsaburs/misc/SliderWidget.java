@@ -4,9 +4,11 @@ import com.simibubi.create.AllSoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 
 import java.text.DecimalFormat;
@@ -70,6 +72,12 @@ public class SliderWidget extends AbstractSliderButton {
         }
 
         this.updateMessage();
+    }
+
+    @Nullable
+    @Override
+    public Tooltip getTooltip() {
+        return super.getTooltip();
     }
 
     /**

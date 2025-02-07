@@ -130,6 +130,17 @@ public class KyberStationMenu extends AbstractContainerMenu {
         }
          */
     }
+    public boolean setItemColourButBetter(int colour){
+            //this.ColourValueIndexes[0].set(a);
+            //this.ColourValueIndexes[1].set(b);
+            //this.ColourValueIndexes[2].set(c);
+            //this.broadcastChanges();
+            //createsaburs.LOGGER.warn("colours have been set as: "+colour[0]+" "+colour[1]+" "+colour[2]);
+            this.setupResultSlotButBetter(colour);
+            return true;
+
+
+    }
 
 
 
@@ -264,6 +275,22 @@ public class KyberStationMenu extends AbstractContainerMenu {
         //}
         this.resultSlot.set(base);
     }
+    public void setupResultSlotButBetter(int colooorrr) {
+        int[] baseInput = this.getInputColour();
+        if(!(ColourConverter.portedRGBtoDecimal(baseInput) == colooorrr)){
+            ItemStack base = this.saber_slot.getItem().copy();
+            CompoundTag taggussy = base.getOrCreateTag();
+            taggussy.getCompound("display").putInt(
+                    "color",
+                    colooorrr
+            );
+            base.setTag(taggussy);
+
+            this.broadcastChanges();
+            this.resultSlot.set(base);
+        }
+    }
+
     public int[] getInputColour(){
         return ColourConverter.PortedDecimaltoRGB(this.saber_slot.getItem().getOrCreateTag().getCompound("display").getInt("color"));
     }
