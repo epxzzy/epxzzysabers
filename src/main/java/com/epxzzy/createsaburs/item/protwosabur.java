@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 
 public class protwosabur extends protosaber{
     public protwosabur(Properties pProperties) {
-        super(pProperties);
+        super(pProperties, 1,1,1);
     }
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {

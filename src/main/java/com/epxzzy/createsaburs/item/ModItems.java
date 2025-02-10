@@ -18,8 +18,8 @@ public class ModItems {
                 float hue = 0.5f + (float)(0.1 * Math.sin(System.currentTimeMillis() / 300.0));
                 return style.withColor(Color.HSBtoRGB(hue, 1f, 1f));
             });
-    public static final RegistryObject<Item> protosabur = items.register("protosabur", () -> new protosaber(new ShieldItem.Properties().rarity(RARITY_FIRE).stacksTo(1)));
-    public static final RegistryObject<Item> protosabur2 = items.register("protwosabur", () -> new protosaber(new ShieldItem.Properties().rarity(RARITY_FIRE)));
+    public static final RegistryObject<Item> protosabur = items.register("protosabur", () -> new protosaber(new Item.Properties().rarity(RARITY_FIRE), 4, 18, 1));
+    public static final RegistryObject<Item> protosabur2 = items.register("protwosabur", () -> new protosaber(new ShieldItem.Properties().rarity(RARITY_FIRE), 4, 18, 1));
 
 
 
