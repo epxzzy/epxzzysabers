@@ -6,6 +6,7 @@ import com.epxzzy.createsaburs.sound.ModSounds;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.mojang.blaze3d.platform.InputConstants;
+import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -49,7 +50,7 @@ public class protosaber extends Item {
     private final int PARRY_RANGE;
     private final int ATTACK_DAMAGE;
     private final int ATTACK_SPEED;
-    public static ProtosaberItemRenderer THE_RENDURR;
+    public static CustomRenderedItemModelRenderer THE_RENDURR;
     public static int BASE_COLOUR = 65280;
     public boolean isActive;
 
@@ -275,15 +276,14 @@ public class protosaber extends Item {
             @Override
             public boolean test(Entity entity) {
                 if(entity instanceof Player){
-                    createsaburs.LOGGER.warn("PLAYUR???? NAHHHHH!!");
+                    //createsaburs.LOGGER.warn("PLAYUR???? NAHHHHH!!");
                     return true;
                 }
                 return false;
             }
         });
 
-        if (!notThat.isEmpty()) {
-
+        if (!notThat.isEmpty() && stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
             for(Entity entity1 : notThat){
                 Vec3 vec32 = entity1.position();
                 Vec3 speee = entity1.getDeltaMovement();
@@ -325,6 +325,9 @@ public class protosaber extends Item {
                 }
             }
             //createsaburs.LOGGER.warn("wait was that all of them? dam thats sad");
+        } else if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
+            entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.SWING.get(),SoundSource.PLAYERS, 0.1F, 0.8F + entity.level().random.nextFloat() * 0.4F);
+
         }
         return false;
     }

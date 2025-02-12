@@ -1,7 +1,7 @@
 package com.epxzzy.createsaburs.block.custom;
 
 
-import com.epxzzy.createsaburs.block.entity.KyberStationBlockEntity;
+//import com.epxzzy.createsaburs.block.entity.KyberStationBlockEntity;
 import com.epxzzy.createsaburs.screen.KyberStationMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -42,9 +42,9 @@ public class KyberStationBlock extends Block {
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (pState.getBlock() != pNewState.getBlock()) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof KyberStationBlockEntity) {
-                ((KyberStationBlockEntity) blockEntity).drops();
-            }
+            //if (blockEntity instanceof KyberStationBlockEntity) {
+            //    ((KyberStationBlockEntity) blockEntity).drops();
+            //}
         }
 
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);

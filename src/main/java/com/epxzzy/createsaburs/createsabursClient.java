@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs;
 
 import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.item.protosaber;
+import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -32,7 +33,9 @@ public class createsabursClient {
 
         public static void itemTints(RegisterColorHandlersEvent.Item event) {
             event.register((stack, tint) -> tint > 0 ? -1 : protosaber.getColor(stack), protosabur.get());
-            event.register((stack, tint) -> tint > 0 ? -1 : protosaber.getColor(stack), ModItems.protosabur2.get());
+            //event.register((stack, tint) -> tint > 0 ? -1 : protosaber.getColor(stack), ModItems.protosabur2.get());
+            event.register((stack, tint) -> tint > 0 ? -1 : SingleBladed.getColor(stack), ModItems.single_bladed.get());
+
 
         }
 

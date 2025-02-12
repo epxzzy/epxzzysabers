@@ -215,7 +215,7 @@ public class SliderWidget extends AbstractSliderButton {
     @Override
     protected void updateMessage() {
         if (this.drawString) {
-            this.setMessage(Component.literal("").append(prefix).append(this.getValueString()).append(suffix));
+            this.setMessage(Component.literal("").append(prefix));
         } else {
             this.setMessage(Component.empty());
         }

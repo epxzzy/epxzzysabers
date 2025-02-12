@@ -189,7 +189,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
                 pValue,
                 1,
                 0,
-                false);
+                true);
     }
 
     @Override
