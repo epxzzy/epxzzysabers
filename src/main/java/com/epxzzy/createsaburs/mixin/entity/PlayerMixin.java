@@ -51,7 +51,7 @@ public abstract class PlayerMixin {
             cancellable = true)
 
     private void createsaburs$customPlayerhurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
-        createsaburs.LOGGER.warn("player hurt");
+        //createsaburs.LOGGER.warn("player hurt");
         Player that = ((Player) (Object) this);
         LivingEntity notThat = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
 

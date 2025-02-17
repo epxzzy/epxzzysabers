@@ -4,11 +4,13 @@ import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -82,7 +84,19 @@ public abstract class LivingEntityMixin {
 
 
     }
-
+    @Inject(
+            method = "swing(Lnet/minecraft/world/InteractionHand;)V",
+            at = @At(value = "HEAD")
+    )
+    private void createsaburs$customSwing(InteractionHand pHand, CallbackInfo ci) {
+        LivingEntity that = ((LivingEntity) (Object) this);
+        ItemStack stacc = that.getMainHandItem();
+        if (stacc.is(ModTags.Items.CREATE_LIGHTSABER) && stacc.getOrCreateTag().getBoolean("ActiveBoiii")) {
+            //ci.cancel();
+            that.playSound(ModSounds.SWING.get(), 0.1F, 0.8F + that.level().random.nextFloat() * 0.4F);
+            return;
+        }
+    }
 
     @Inject(
             method = "handleEntityEvent",
