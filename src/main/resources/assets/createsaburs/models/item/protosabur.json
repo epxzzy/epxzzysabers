@@ -27,9 +27,9 @@
 			"translation": [0, -2, 0]
 		},
 		"firstperson_righthand": {
-			"rotation": [-93, 1, -10],
+			"rotation": [-34, 1, -7],
 			"translation": [0.75, 0, 1.5],
-			"scale": [0.6, 1.24, 0.6]
+			"scale": [0.6, 0.6, 0.6]
 		},
 		"firstperson_lefthand": {
 			"rotation": [-93, 1, -10],

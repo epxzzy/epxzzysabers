@@ -1,8 +1,8 @@
 package com.epxzzy.createsaburs.rendering;
 
 import com.epxzzy.createsaburs.createsaburs;
-import com.jozufozu.flywheel.core.PartialModel;
-import com.jozufozu.flywheel.util.AnimationTickHolder;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+import net.createmod.catnip.animation.AnimationTickHolder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueHandler;
@@ -16,8 +16,8 @@ import net.minecraft.world.item.ItemStack;
 
 public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
 
-    protected static final PartialModel GEAR_BIT = new PartialModel(createsaburs.asResource("item/geur"));
-    protected static final PartialModel GLOWLY_BIT = new PartialModel(createsaburs.asResource("item/blade"));
+    protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/geur"));
+    protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/blade"));
 
     @Override
     protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
