@@ -1,7 +1,9 @@
 package com.epxzzy.createsaburs.mixin.entity;
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.item.protosaber;
 import com.epxzzy.createsaburs.utils.ModTags;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -69,6 +71,20 @@ public abstract class PlayerMixin {
 
     }
 
+
+    @Inject(
+            method = "isInvulnerableTo",
+            at = @At(value = "HEAD"),
+            cancellable = true
+    )
+
+    private void createsaburs$customIsInvulnerableTo(DamageSource pSource, CallbackInfoReturnable<Boolean> cir){
+        Player that = ((Player) (Object) this);
+        if(pSource.is(DamageTypeTags.IS_PROJECTILE)){
+           cir.setReturnValue(protosaber.checkForSaberBlock(that));
+           cir.cancel();
+        }
+    }
     @Inject(
             method = "attack",
             at = @At(value = "HEAD")

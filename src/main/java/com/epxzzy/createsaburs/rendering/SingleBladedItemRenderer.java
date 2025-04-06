@@ -43,7 +43,6 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
 
         //}
 
-
         if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
             //stack.getUseAnimation()
             ms.pushPose();
