@@ -1,19 +1,25 @@
 package com.epxzzy.createsaburs.rendering;
 
 import com.epxzzy.createsaburs.createsaburs;
-
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
-import net.createmod.catnip.animation.AnimationTickHolder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueHandler;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+import net.createmod.catnip.animation.AnimationTickHolder;
+import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
+
+import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.getEntitiesHoldingItem;
 
 public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
     protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/geur"));
@@ -31,14 +37,30 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
 
          */
 
-
-        if(transformType.firstPerson() && stack.getOrCreateTag().getBoolean("BlockBoiii")){
-            int modifier = leftHand ? -1 : 1;
-            //
-            ms.mulPose(Axis.ZP.rotationDegrees(modifier * 60));
-            ms.pushPose();
-            ms.popPose();
+        List<LivingEntity> allEntities = getEntitiesHoldingItem(stack);
+        for (LivingEntity entity : allEntities) {
+            if(transformType.firstPerson() && entity.isUsingItem()){
+                int modifier = leftHand ? -1 : 1;
+                ms.mulPose(Axis.ZP.rotationDegrees(modifier * 60));
+                ms.pushPose();
+                ms.popPose();
+            }
         }
+        float time = AnimationTickHolder.getTicks(false);
+        float movement = Mth.sin(((float) ((time+10) * 5f /Math.PI)));
+        for (LivingEntity entity : allEntities) {
+            if (entity.swingTime >0 || entity.swinging){
+                ms.mulPose(Axis.XP.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (20))));
+                //ms.mulPose(Axis.YP.rotation(AngleHelper.rad(movement * 5)));
+                ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(movement * 40)));
+
+                //ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(30)));
+                ms.pushPose();
+                ms.popPose();
+                //System.out.print("I... AM STEEVE\n");
+            }
+        }
+
         renderer.render(model.getOriginalModel(), light);
 
         //}

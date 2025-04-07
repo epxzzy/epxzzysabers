@@ -1,7 +1,7 @@
 package com.epxzzy.createsaburs.misc;
 
 import com.epxzzy.createsaburs.item.protosaber;
-import com.epxzzy.createsaburs.utils.ModTags;
+import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.client.Minecraft;
@@ -11,17 +11,15 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 public class PlayerSaberSwingRenderer {
 
-    private static final Set<UUID> hangingPlayers = new HashSet<>();
-
     public static void beforeSetupAnim(Player player, HumanoidModel<?> model) {
-        if (player.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER) && player.swingTime > 0 && player.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii")){
+        if (protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0){
             model.leftArm.resetPose();
+            model.rightArm.resetPose();
+        }
+
+        if (SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0 ){
             model.rightArm.resetPose();
         }
     }
@@ -34,7 +32,10 @@ public class PlayerSaberSwingRenderer {
                 && protosaber.checkForSaberEquipment(player, true)
                 && player.swingTime > 0
         ){
-            setDualSaberPose( player.getMainArm() == HumanoidArm.LEFT, true, model);
+            setDualSaberPose( player.getMainArm() != HumanoidArm.LEFT, true, model);
+        }
+        if(SingleBladed.checkForSaberEquipment(player, true) && player.swingTime >0){
+            setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, false, model);
         }
     }
 
@@ -66,12 +67,12 @@ public class PlayerSaberSwingRenderer {
         float armPivotX = offsetX * Mth.cos(bodySwing) - offsetY * Mth.sin(bodySwing) + 4.5f;
         float armPivotY = offsetX * Mth.sin(bodySwing) + offsetY * Mth.cos(bodySwing) + 2;
 
-        hangingArm.xRot = -AngleHelper.rad(bodySwing*5);
+        hangingArm.xRot = -AngleHelper.rad(bodySwing+150);
         hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
 
         if(both) {
-            hangingArm.xRot = -AngleHelper.rad(150);
-            hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
+            otherArm.xRot = -AngleHelper.rad(bodySwing+150);
+            otherArm.zRot = (Lefty? 1 : -1) * AngleHelper.rad(15);
         }
 
         if(!both) {
@@ -89,5 +90,32 @@ public class PlayerSaberSwingRenderer {
         //model.head.y -= armPivotY;
         //otherArm.y -= armPivotY;
     }
+    private static void setSingleBladedSaberPose(boolean Lefty,boolean both, HumanoidModel<?> model) {
+        if (Minecraft.getInstance().isPaused())
+            return;
 
+        model.rightArm.resetPose();
+
+        float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
+        float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
+        float limbCycle = Mth.sin(((float) (time * 0.3f / Math.PI)));
+        float bodySwing = AngleHelper.rad(15 + (mainCycle * 10));
+        float limbSwing = AngleHelper.rad(limbCycle * 15);
+        if(Lefty) bodySwing = -bodySwing;
+
+        ModelPart hangingArm = Lefty ? model.leftArm : model.rightArm;
+        ModelPart otherArm = Lefty ? model.rightArm : model.leftArm;
+        //hangingArm.y -= 3;
+        model.rightArm.xRot = Mth.cos(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
+
+        //hangingArm.xRot = -AngleHelper.rad(bodySwing+150);
+        //hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
+        if(both) {
+            otherArm.xRot = -AngleHelper.rad(bodySwing+150);
+            otherArm.zRot = (Lefty? 1 : -1) * AngleHelper.rad(15);
+        }
+        if(!both) {
+            //otherArm.zRot = (Lefty ? -1 : 1) * (-AngleHelper.rad(20)) + 0.5f * bodySwing + limbSwing;
+        }
+    }
 }

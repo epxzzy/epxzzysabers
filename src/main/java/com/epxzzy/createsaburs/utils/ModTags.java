@@ -17,6 +17,8 @@ public class ModTags {
     }
     public static class Items {
         public static final TagKey<Item> CREATE_LIGHTSABER = tag("create_lightsaber");
+        public static final TagKey<Item> CREATE_SINGLE_BLADED = tag("create_single_bladed");
+        public static final TagKey<Item> CREATE_DUAL_BLADED = tag("create_dual_bladed");
 
         private static TagKey<Item> tag(String name){
             return ItemTags.create(new ResourceLocation(createsaburs.MOD_ID, name));

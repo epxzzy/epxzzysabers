@@ -37,11 +37,11 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
         else {
         */
 
-        List<LivingEntity> allEntities = this.getEntitiesHoldingItem(stack);
+        List<LivingEntity> allEntities = getEntitiesHoldingItem(stack);
         for (LivingEntity entity : allEntities) {
             if(transformType.firstPerson() && entity.isUsingItem()){
                 int modifier = leftHand ? -1 : 1;
-                ms.mulPose(Axis.ZP.rotationDegrees(modifier * 60));
+                ms.mulPose(Axis.ZP.rotationDegrees(modifier * 30));
                 ms.pushPose();
                 ms.popPose();
             }
@@ -83,7 +83,7 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
     }
 
 
-    private List<LivingEntity> getEntitiesHoldingItem(ItemStack stack) {
+    public static List<LivingEntity> getEntitiesHoldingItem(ItemStack stack) {
         List<LivingEntity> result = new ArrayList<>();
         Minecraft mc = Minecraft.getInstance();
 
@@ -114,7 +114,7 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
      * This is not an exact science - we're trying to determine if the stack
      * we're rendering is the one being held by this entity.
      */
-    private boolean isHoldingItem(LivingEntity entity, ItemStack stack) {
+    public static boolean isHoldingItem(LivingEntity entity, ItemStack stack) {
         return ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack)|| ItemStack.isSameItemSameTags(entity.getOffhandItem(), stack);
         //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
     }
