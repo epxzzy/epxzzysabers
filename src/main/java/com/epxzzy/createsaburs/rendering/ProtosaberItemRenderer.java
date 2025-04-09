@@ -115,7 +115,7 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
      * we're rendering is the one being held by this entity.
      */
     public static boolean isHoldingItem(LivingEntity entity, ItemStack stack) {
-        return ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack)|| ItemStack.isSameItemSameTags(entity.getOffhandItem(), stack);
+        return (ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack) && ItemStack.isSameItemSameTags(entity.getOffhandItem(), stack)) || ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack);
         //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
     }
 }

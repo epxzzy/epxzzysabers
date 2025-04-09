@@ -67,7 +67,7 @@ public class protosaber extends Item {
         this.ATTACK_SPEED = pSpeed;
     }
 
-    public boolean readtag(ItemStack pStack) {
+    public boolean readActivetag(ItemStack pStack) {
         CompoundTag temp = pStack.getOrCreateTag();
         boolean temp2 = temp.getBoolean("ActiveBoiii");
         //createsaburs.LOGGER.info("read nbt as " + temp2);
@@ -119,7 +119,7 @@ public class protosaber extends Item {
         CompoundTag nbeetea = pStack.getOrCreateTag();
         if (!pLevel.isClientSide) {
 
-            if (!readtag(pStack)) {
+            if (!readActivetag(pStack)) {
 
                 createsaburs.LOGGER.info("Saber is now Going Active");
                 //nbeetea.putInt("CustomModelData", 1);
@@ -136,11 +136,28 @@ public class protosaber extends Item {
             }
 
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(),
-                    (readtag(pStack)? ModSounds.ACTIVATION.get() : ModSounds.DEACTIVATION.get()), SoundSource.NEUTRAL, 0.5f, 1f
+                    (readActivetag(pStack)? ModSounds.ACTIVATION.get() : ModSounds.DEACTIVATION.get()), SoundSource.NEUTRAL, 0.5f, 1f
             );
         }
     }
+    public void addFlourishTag(LivingEntity pPlayer, ItemStack pStack){
+        if(!pPlayer.level().isClientSide()){
+            int flourish = (int) ((Math.random()*3)+1);
 
+            pStack.getOrCreateTag().getCompound("display").putInt("flourish", flourish);
+            //CompoundTag tagsToApply = new CompoundTag();
+            //CompoundTag displayTag = new CompoundTag();
+
+            //displayTag.putInt("flourish", flourish);
+
+            //tagsToApply.put("display", displayTag);
+
+            //pStack.setTag(tagsToApply);
+
+            createsaburs.LOGGER.info("Flourish =" + flourish);
+            createsaburs.LOGGER.info(pStack.getOrCreateTag().getAllKeys().toString());
+        }
+    }
 
 
 
@@ -163,10 +180,7 @@ public class protosaber extends Item {
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, @NotNull InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        if (readtag(pPlayer.getItemInHand(pHand)) && !pLevel.isClientSide) {
-            CompoundTag nbeetea = itemstack.getOrCreateTag();
-            nbeetea.putBoolean("BlockBoiii", true);
-            itemstack.setTag(nbeetea);
+        if (readActivetag(pPlayer.getItemInHand(pHand)) && !pLevel.isClientSide) {
             pPlayer.startUsingItem(pHand);
             //return ItemUtils.startUsingInstantly(pLevel, pPlayer, pHand);
         }
@@ -227,8 +241,8 @@ public class protosaber extends Item {
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
 
-        MutableComponent ActiveDetail = Component.literal(readtag(stack) ? "On" : "Off")
-                .withStyle(readtag(stack) ? ChatFormatting.WHITE : ChatFormatting.GRAY);
+        MutableComponent ActiveDetail = Component.literal(readActivetag(stack) ? "On" : "Off")
+                .withStyle(readActivetag(stack) ? ChatFormatting.WHITE : ChatFormatting.GRAY);
         tooltip.add(ActiveDetail);
         if(Screen.hasControlDown()){
             tooltip.add(Component.literal(" hidden text displayed only when ctrl key is being held down"));
@@ -251,8 +265,9 @@ public class protosaber extends Item {
 
 
     public @NotNull UseAnim getUseAnimation(@NotNull ItemStack pStack) {
-        if (readtag(pStack)) return UseAnim.BLOCK;
-        else return UseAnim.NONE;
+        //if (readActivetag(pStack)) return UseAnim.BLOCK;
+        //else
+        return UseAnim.NONE;
     }
 
     public int getUseDuration(@NotNull ItemStack pStack) {
@@ -266,6 +281,10 @@ public class protosaber extends Item {
 
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+        addFlourishTag(entity, stack);
+
+
+
             Vec3 asdf = entity.blockPosition().getCenter();
             List<Entity> notThat = entity.level().getEntities(null, new AABB(
                     asdf.x - PARRY_RANGE,
@@ -349,7 +368,7 @@ public class protosaber extends Item {
 
     @Override
     public boolean onDroppedByPlayer(ItemStack item, Player player) {
-        if(readtag(item)){
+        if(readActivetag(item)){
             writeActiveTag(item, false);
             isActive = false;
 
@@ -359,11 +378,6 @@ public class protosaber extends Item {
         }
 
         return super.onDroppedByPlayer(item, player);
-    }
-
-    public boolean isActive(CompoundTag tagg) {
-        if (tagg != null) return tagg.getBoolean("ActiveBoiii");
-        return isActive;
     }
 
     public boolean isValidRepairItem(@NotNull ItemStack pToRepair, @NotNull ItemStack pRepair) {

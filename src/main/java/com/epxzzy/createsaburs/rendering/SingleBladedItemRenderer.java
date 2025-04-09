@@ -39,28 +39,44 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
 
         List<LivingEntity> allEntities = getEntitiesHoldingItem(stack);
         for (LivingEntity entity : allEntities) {
-            if(transformType.firstPerson() && entity.isUsingItem()){
+            if (transformType.firstPerson() && entity.isUsingItem()) {
                 int modifier = leftHand ? -1 : 1;
                 ms.mulPose(Axis.ZP.rotationDegrees(modifier * 60));
                 ms.pushPose();
                 ms.popPose();
             }
         }
-        float time = AnimationTickHolder.getTicks(false);
-        float movement = Mth.sin(((float) ((time+10) * 5f /Math.PI)));
-        for (LivingEntity entity : allEntities) {
-            if (entity.swingTime >0 || entity.swinging){
-                ms.mulPose(Axis.XP.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (20))));
-                //ms.mulPose(Axis.YP.rotation(AngleHelper.rad(movement * 5)));
-                ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(movement * 40)));
+        if (transformType != ItemDisplayContext.GUI) {
+            float time = AnimationTickHolder.getTicks(false);
 
-                //ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(30)));
-                ms.pushPose();
-                ms.popPose();
-                //System.out.print("I... AM STEEVE\n");
+            for (LivingEntity entity : allEntities) {
+                if (entity.swingTime > 0 || entity.swinging) {
+                    if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 2) {
+                        float movement = Mth.sin(((float) ((time+10) * 5f /Math.PI)));
+
+                        ms.mulPose(Axis.XP.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (5))));
+                        //ms.mulPose(Axis.YP.rotation(AngleHelper.rad(movement * 5)));
+                        ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(movement)));
+
+                        //ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(30)));
+                        ms.pushPose();
+                        ms.popPose();
+                    }
+
+                    if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 1) {
+                        float movement = Mth.sin(((float) ((time) * 3/ Math.PI)));
+                        //ItemStack.isSameItemSameTags(entity.getOffhandItem())
+                        ms.mulPose(Axis.XN.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * 5)));
+                        ms.mulPose(Axis.YN.rotation(AngleHelper.rad(30)));
+                        ms.mulPose(Axis.ZP.rotation(AngleHelper.rad(movement * 40)));
+
+                        //ms.mulPose(Axis.XP.rotation(-AngleHelper.rad(movement * 60)));
+                        //System.out.print("I... AM STEEVE\n");
+                    }
+
+                }
             }
         }
-
         renderer.render(model.getOriginalModel(), light);
 
         //}
@@ -68,7 +84,7 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
         if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
             //stack.getUseAnimation()
             ms.pushPose();
-            renderer.renderGlowing(GLOWLY_BIT.get(),  LightTexture.FULL_BRIGHT);
+            renderer.renderGlowing(GLOWLY_BIT.get(), LightTexture.FULL_BRIGHT);
 
             ms.popPose();
         }
@@ -82,7 +98,7 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
         }
         else {
         */
-        ms.mulPose(Axis.YP.rotationDegrees(ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (stack.getOrCreateTag().getBoolean("ActiveBoiii")? 30 : 4)));
+        ms.mulPose(Axis.YP.rotationDegrees(ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (stack.getOrCreateTag().getBoolean("ActiveBoiii") ? 30 : 4)));
 
         //
         //ms.translate(xOffset, 0, 0);

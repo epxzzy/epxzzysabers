@@ -21,22 +21,25 @@ public class PlayerSaberSwingRenderer {
 
         if (SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0 ){
             model.rightArm.resetPose();
+            model.rightArm.resetPose();
         }
     }
 
     public static void afterSetupAnim(Player player, HumanoidModel<?> model) {
+        int flourish = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("flourish");
         if (protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
             setDualSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model);
         }
-        if(protosaber.checkForSaberEquipment(player, false)
-                && protosaber.checkForSaberEquipment(player, true)
-                && player.swingTime > 0
-        ){
+        if(protosaber.checkForSaberEquipment(player, false) && protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0){
             setDualSaberPose( player.getMainArm() != HumanoidArm.LEFT, true, model);
         }
         if(SingleBladed.checkForSaberEquipment(player, true) && player.swingTime >0){
-            setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, false, model);
+            setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, false, model, flourish);
         }
+        if(SingleBladed.checkForSaberEquipment(player, false) && SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0){
+            setSingleBladedSaberPose( player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
+        }
+
     }
 
     private static void setDualSaberPose(boolean Lefty,boolean both, HumanoidModel<?> model) {
@@ -90,32 +93,57 @@ public class PlayerSaberSwingRenderer {
         //model.head.y -= armPivotY;
         //otherArm.y -= armPivotY;
     }
-    private static void setSingleBladedSaberPose(boolean Lefty,boolean both, HumanoidModel<?> model) {
+    private static void setSingleBladedSaberPose(boolean Lefty,boolean both, HumanoidModel<?> model, int flourish) {
         if (Minecraft.getInstance().isPaused())
             return;
 
-        model.rightArm.resetPose();
+        if(flourish == 2){
+           model.rightArm.resetPose();
 
-        float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
-        float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
-        float limbCycle = Mth.sin(((float) (time * 0.3f / Math.PI)));
-        float bodySwing = AngleHelper.rad(15 + (mainCycle * 10));
-        float limbSwing = AngleHelper.rad(limbCycle * 15);
-        if(Lefty) bodySwing = -bodySwing;
+           float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
+           float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
+           float bodySwing = AngleHelper.rad(15 + (mainCycle * 10));
+           if(Lefty) bodySwing = -bodySwing;
 
-        ModelPart hangingArm = Lefty ? model.leftArm : model.rightArm;
-        ModelPart otherArm = Lefty ? model.rightArm : model.leftArm;
-        //hangingArm.y -= 3;
-        model.rightArm.xRot = Mth.cos(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
-
-        //hangingArm.xRot = -AngleHelper.rad(bodySwing+150);
-        //hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
-        if(both) {
-            otherArm.xRot = -AngleHelper.rad(bodySwing+150);
-            otherArm.zRot = (Lefty? 1 : -1) * AngleHelper.rad(15);
+           ModelPart otherArm = Lefty ? model.leftArm : model.rightArm;
+           ModelPart mainArm = Lefty ? model.rightArm : model.leftArm;
+           //hangingArm.y -= 3;
+           mainArm.xRot = Mth.cos(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
+           mainArm.yRot = AngleHelper.rad(40);
+           //hangingArm.xRot = -AngleHelper.rad(bodySwing+150);
+           //hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
+           if(both) {
+               otherArm.resetPose();
+               otherArm.xRot = -AngleHelper.rad(bodySwing+150);
+               otherArm.zRot = (Lefty? 1 : -1) * AngleHelper.rad(15);
+           }
+           if(!both) {
+               //otherArm.zRot = (Lefty ? -1 : 1) * (-AngleHelper.rad(20)) + 0.5f * bodySwing + limbSwing;
+           }
         }
-        if(!both) {
-            //otherArm.zRot = (Lefty ? -1 : 1) * (-AngleHelper.rad(20)) + 0.5f * bodySwing + limbSwing;
+
+        if(flourish == 1) {
+            float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
+            float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
+            float bodySwing = AngleHelper.rad(15 + (mainCycle * 10));
+            if (Lefty) bodySwing = -bodySwing;
+
+            ModelPart MainArm= Lefty ? model.rightArm: model.leftArm;
+            ModelPart otherArm = Lefty ? model.leftArm: model.rightArm;
+            MainArm.resetPose();
+
+            //hangingArm.y -= 3;
+            MainArm.xRot = Mth.clamp(model.head.xRot, -1.2F, 1.2F) - 1.4835298F;
+            MainArm.yRot = AngleHelper.rad(-30);
+            //hangingArm.xRot = -AngleHelper.rad(bodySwing+150);
+            //hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
+            if (both) {
+                otherArm.resetPose();
+                //otherArm.xRot = -AngleHelper.rad(bodySwing + 150);
+                otherArm.xRot = Mth.clamp(model.head.xRot, -1.2F, 1.2F) - 1.4835298F;
+                MainArm.yRot = AngleHelper.rad(0);
+                //otherArm.zRot = (Lefty ? 1 : -1) * AngleHelper.rad(15);
+            }
         }
     }
 }
