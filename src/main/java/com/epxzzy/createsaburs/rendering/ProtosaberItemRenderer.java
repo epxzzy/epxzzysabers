@@ -88,7 +88,7 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
         Minecraft mc = Minecraft.getInstance();
 
         Player player = mc.player;
-        if (player != null && isHoldingItem(player, stack)) {
+        if (player != null && isHoldingItemAnyHand(player, stack)) {
             result.add(player);
         }
 
@@ -99,7 +99,7 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
                     // skippity
                     if (livingEntity == player) continue;
 
-                    if (isHoldingItem(livingEntity, stack)) {
+                    if (isHoldingItemAnyHand(livingEntity, stack)) {
                         result.add(livingEntity);
                     }
                 }
@@ -114,8 +114,18 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
      * This is not an exact science - we're trying to determine if the stack
      * we're rendering is the one being held by this entity.
      */
-    public static boolean isHoldingItem(LivingEntity entity, ItemStack stack) {
+    public static boolean isHoldingItemAnyHand(LivingEntity entity, ItemStack stack) {
         return (ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack) && ItemStack.isSameItemSameTags(entity.getOffhandItem(), stack)) || ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack);
         //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
     }
+    public static boolean isHoldingItemOffHand(LivingEntity entity, ItemStack stack) {
+        return ItemStack.isSameItemSameTags(entity.getOffhandItem(), stack);
+        //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
+    }
+    public static boolean isHoldingItemMainHand(LivingEntity entity, ItemStack stack) {
+        return ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack);
+        //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.epxzzy.createsaburs.misc;
 
+import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.protosaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import net.createmod.catnip.animation.AnimationTickHolder;
@@ -97,32 +98,10 @@ public class PlayerSaberSwingRenderer {
         if (Minecraft.getInstance().isPaused())
             return;
 
-        if(flourish == 2){
-           model.rightArm.resetPose();
-
-           float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
-           float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
-           float bodySwing = AngleHelper.rad(15 + (mainCycle * 10));
-           if(Lefty) bodySwing = -bodySwing;
-
-           ModelPart otherArm = Lefty ? model.leftArm : model.rightArm;
-           ModelPart mainArm = Lefty ? model.rightArm : model.leftArm;
-           //hangingArm.y -= 3;
-           mainArm.xRot = Mth.cos(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
-           mainArm.yRot = AngleHelper.rad(40);
-           //hangingArm.xRot = -AngleHelper.rad(bodySwing+150);
-           //hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
-           if(both) {
-               otherArm.resetPose();
-               otherArm.xRot = -AngleHelper.rad(bodySwing+150);
-               otherArm.zRot = (Lefty? 1 : -1) * AngleHelper.rad(15);
-           }
-           if(!both) {
-               //otherArm.zRot = (Lefty ? -1 : 1) * (-AngleHelper.rad(20)) + 0.5f * bodySwing + limbSwing;
-           }
-        }
 
         if(flourish == 1) {
+            createsaburs.LOGGER.info("the xcross");
+            //the x-cross
             float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
             float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
             float bodySwing = AngleHelper.rad(15 + (mainCycle * 10));
@@ -132,8 +111,7 @@ public class PlayerSaberSwingRenderer {
             ModelPart otherArm = Lefty ? model.leftArm: model.rightArm;
             MainArm.resetPose();
 
-            //hangingArm.y -= 3;
-            MainArm.xRot = Mth.clamp(model.head.xRot, -1.2F, 1.2F) - 1.4835298F;
+            MainArm.xRot = Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F;
             MainArm.yRot = AngleHelper.rad(-30);
             //hangingArm.xRot = -AngleHelper.rad(bodySwing+150);
             //hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
@@ -144,6 +122,37 @@ public class PlayerSaberSwingRenderer {
                 MainArm.yRot = AngleHelper.rad(0);
                 //otherArm.zRot = (Lefty ? 1 : -1) * AngleHelper.rad(15);
             }
+
         }
+
+
+        if(flourish == 2){
+            createsaburs.LOGGER.info("the circular");
+            //the circular
+            float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
+            float movement = Mth.sin(((float) ((time) * 3.3 / Math.PI)));
+            float movement2 = Mth.sin(((float) ((time) * 4 / Math.PI)));
+
+            ModelPart otherArm = Lefty ? model.leftArm : model.rightArm;
+            ModelPart mainArm = Lefty ? model.rightArm : model.leftArm;
+            mainArm.resetPose();
+            //hangingArm.y -= 3;
+            mainArm.xRot = AngleHelper.rad(-45.04*movement-10);
+            mainArm.zRot = AngleHelper.rad(movement2*-30);
+
+
+            //hangingArm.xRot = -AngleHelper.rad(bodySwing+150);
+            //hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
+            if(both) {
+                otherArm.resetPose();
+                otherArm.xRot = Mth.cos(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
+                otherArm.zRot = -AngleHelper.rad(20);
+            }
+            if(!both) {
+                //otherArm.zRot = (Lefty ? -1 : 1) * (-AngleHelper.rad(20)) + 0.5f * bodySwing + limbSwing;
+            }
+
+        }
+
     }
 }

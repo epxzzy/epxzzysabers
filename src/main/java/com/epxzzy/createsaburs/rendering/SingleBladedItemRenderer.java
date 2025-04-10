@@ -20,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.getEntitiesHoldingItem;
+import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.isHoldingItemOffHand;
 
 public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
     protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/geur"));
@@ -52,11 +53,12 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
             for (LivingEntity entity : allEntities) {
                 if (entity.swingTime > 0 || entity.swinging) {
                     if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 2) {
-                        float movement = Mth.sin(((float) ((time+10) * 5f /Math.PI)));
+                        //float movement = Mth.sin(((float) ((time+10) * 5f /Math.PI)));
+                        float movement = Mth.sin(((float) ((time) * 5/ Math.PI)));
 
-                        ms.mulPose(Axis.XP.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (5))));
-                        //ms.mulPose(Axis.YP.rotation(AngleHelper.rad(movement * 5)));
-                        ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(movement)));
+                        ms.mulPose(Axis.XP.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (5))-(45*movement)));
+                        ms.mulPose(Axis.ZP.rotationDegrees(movement * 50));
+                        //ms.mulPose(Axis.YP.rotationDegrees(movement*10-10));
 
                         //ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(30)));
                         ms.pushPose();
@@ -64,10 +66,12 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
                     }
 
                     if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 1) {
-                        float movement = Mth.sin(((float) ((time) * 3/ Math.PI)));
+                        int multiplier = isHoldingItemOffHand(entity, stack)?-1:1;
+                        createsaburs.LOGGER.info("nbt offhand: " + stack.getOrCreateTag().getCompound("display").getBoolean("offhand") + " and thought to be: " + (isHoldingItemOffHand(entity, stack) ? "offhand" : "mainhand") + " and multiplier " + multiplier );
+                        float movement = Mth.sin(((float) ((time) * 5/ Math.PI)));
                         //ItemStack.isSameItemSameTags(entity.getOffhandItem())
-                        ms.mulPose(Axis.XN.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * 5)));
-                        ms.mulPose(Axis.YN.rotation(AngleHelper.rad(30)));
+                        ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
+                        //ms.mulPose(Axis.YN.rotation(AngleHelper.rad(30)));
                         ms.mulPose(Axis.ZP.rotation(AngleHelper.rad(movement * 40)));
 
                         //ms.mulPose(Axis.XP.rotation(-AngleHelper.rad(movement * 60)));

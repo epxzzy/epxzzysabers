@@ -55,7 +55,7 @@ public class protosaber extends Item {
     public static int BASE_COLOUR = 65280;
     public boolean isActive;
 
-    public protosaber(Properties pProperties, int pRANGE,int pDamage, int pSpeed) {
+    public protosaber(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
         super(pProperties);
         float attackDamage = (float) 5f;
         ArrayListMultimap<Attribute, AttributeModifier> builder = ArrayListMultimap.create();
@@ -83,11 +83,10 @@ public class protosaber extends Item {
             tag.remove("AttributeModifiers");
         }
 
-        if(tag.getCompound("display").getInt("color") != 0){
+        if (tag.getCompound("display").getInt("color") != 0) {
             displayTag.putInt("color", tag.getCompound("display").getInt("color"));
 
-        }
-        else {
+        } else {
             displayTag.putInt("color", BASE_COLOUR);
         }
 
@@ -97,8 +96,8 @@ public class protosaber extends Item {
 
         ListTag listtag = tagsToApply.getList("AttributeModifiers", 10);
 
-        CompoundTag baseAttackAttribute= (new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (bool?ATTACK_DAMAGE:1), AttributeModifier.Operation.ADDITION)).save();
-        CompoundTag baseSpeedAttribute= (new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", (bool?ATTACK_SPEED:2), AttributeModifier.Operation.ADDITION)).save();
+        CompoundTag baseAttackAttribute = (new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (bool ? ATTACK_DAMAGE : 1), AttributeModifier.Operation.ADDITION)).save();
+        CompoundTag baseSpeedAttribute = (new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", (bool ? ATTACK_SPEED : 2), AttributeModifier.Operation.ADDITION)).save();
 
         baseAttackAttribute.putString("AttributeName", BuiltInRegistries.ATTRIBUTE.getKey(Attributes.ATTACK_DAMAGE).toString());
         baseAttackAttribute.putString("Slot", EquipmentSlot.MAINHAND.getName());
@@ -117,7 +116,7 @@ public class protosaber extends Item {
 
     public void ToggleSaberCore(Level pLevel, Player pPlayer, ItemStack pStack) {
         CompoundTag nbeetea = pStack.getOrCreateTag();
-        if (!pLevel.isClientSide) {
+        //if (!pLevel.isClientSide) {
 
             if (!readActivetag(pStack)) {
 
@@ -136,13 +135,14 @@ public class protosaber extends Item {
             }
 
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(),
-                    (readActivetag(pStack)? ModSounds.ACTIVATION.get() : ModSounds.DEACTIVATION.get()), SoundSource.NEUTRAL, 0.5f, 1f
+                    (readActivetag(pStack) ? ModSounds.ACTIVATION.get() : ModSounds.DEACTIVATION.get()), SoundSource.NEUTRAL, 0.5f, 1f
             );
-        }
+        //}
     }
-    public void addFlourishTag(LivingEntity pPlayer, ItemStack pStack){
-        if(!pPlayer.level().isClientSide()){
-            int flourish = (int) ((Math.random()*3)+1);
+
+    public void addFlourishTag(LivingEntity pPlayer, ItemStack pStack) {
+        if (!pPlayer.level().isClientSide()) {
+            int flourish = (int) ((Math.random() * 3) + 1);
 
             pStack.getOrCreateTag().getCompound("display").putInt("flourish", flourish);
             //CompoundTag tagsToApply = new CompoundTag();
@@ -160,11 +160,24 @@ public class protosaber extends Item {
     }
 
 
-
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         CompoundTag tag = pStack.getOrCreateTag();
-        tag.putInt("equiper",pEntity.getId());
+        tag.putInt("equiper", pEntity.getId());
+        tag.putBoolean("offhand", false);
+        if(pEntity instanceof LivingEntity pLiving && !(pLevel.isClientSide())){
+        //    createsaburs.LOGGER.info("curr slott "+ pSlotId);
+            //pEntity.
+            if(pLiving instanceof Player pPlayer) {
+                if (ItemStack.isSameItemSameTags(pPlayer.getInventory().offhand.get(0), pStack)) {
+                    tag.putBoolean("offhand",true);
+                    //createsaburs.LOGGER.info("offhanddd biatch");
+                }
+                else {
+                    tag.putBoolean("offhand", false);
+                }
+            }
+        }
     }
 
 
@@ -215,7 +228,7 @@ public class protosaber extends Item {
 
     public static int getColor(ItemStack pStack) {
         CompoundTag compoundtag = pStack.getOrCreateTagElement("display");
-        if(compoundtag.getInt("color") == 0){
+        if (compoundtag.getInt("color") == 0) {
             //setColor(pStack, 65280);
             return 65280;
         }
@@ -244,7 +257,7 @@ public class protosaber extends Item {
         MutableComponent ActiveDetail = Component.literal(readActivetag(stack) ? "On" : "Off")
                 .withStyle(readActivetag(stack) ? ChatFormatting.WHITE : ChatFormatting.GRAY);
         tooltip.add(ActiveDetail);
-        if(Screen.hasControlDown()){
+        if (Screen.hasControlDown()) {
             tooltip.add(Component.literal(" hidden text displayed only when ctrl key is being held down"));
         }
     }
@@ -258,15 +271,14 @@ public class protosaber extends Item {
     }
 
     public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(@NotNull EquipmentSlot pEquipmentSlot) {
-        return pEquipmentSlot == EquipmentSlot.MAINHAND? this.defaultModifiers:super.getDefaultAttributeModifiers(pEquipmentSlot);
+        return pEquipmentSlot == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(pEquipmentSlot);
         //return pEquipmentSlot == EquipmentSlot.MAINHAND ? this.defaultModifiers :
         //n super.getDefaultAttributeModifiers(pEquipmentSlot);
     }
 
 
     public @NotNull UseAnim getUseAnimation(@NotNull ItemStack pStack) {
-        //if (readActivetag(pStack)) return UseAnim.BLOCK;
-        //else
+        if (readActivetag(pStack)) return UseAnim.BLOCK;
         return UseAnim.NONE;
     }
 
@@ -281,79 +293,77 @@ public class protosaber extends Item {
 
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-        addFlourishTag(entity, stack);
+        //addFlourishTag(entity, stack);
 
-
-
-            Vec3 asdf = entity.blockPosition().getCenter();
-            List<Entity> notThat = entity.level().getEntities(null, new AABB(
-                    asdf.x - PARRY_RANGE,
-                    asdf.y - PARRY_RANGE,
-                    asdf.z - PARRY_RANGE,
-                    asdf.x + PARRY_RANGE,
-                    asdf.y + PARRY_RANGE,
-                    asdf.z + PARRY_RANGE)
-            );
-            notThat.removeIf(new Predicate<Entity>() {
-                @Override
-                public boolean test(Entity entity) {
-                    if (entity instanceof Player) {
-                        //createsaburs.LOGGER.warn("PLAYUR???? NAHHHHH!!");
-                        return true;
-                    }
-                    return false;
+        Vec3 asdf = entity.blockPosition().getCenter();
+        List<Entity> notThat = entity.level().getEntities(null, new AABB(
+                asdf.x - PARRY_RANGE,
+                asdf.y - PARRY_RANGE,
+                asdf.z - PARRY_RANGE,
+                asdf.x + PARRY_RANGE,
+                asdf.y + PARRY_RANGE,
+                asdf.z + PARRY_RANGE)
+        );
+        notThat.removeIf(new Predicate<Entity>() {
+            @Override
+            public boolean test(Entity entity) {
+                if (entity instanceof Player) {
+                    //createsaburs.LOGGER.warn("PLAYUR???? NAHHHHH!!");
+                    return true;
                 }
-            });
-        //if (!entity.level().isClientSide()) {
-            if (!notThat.isEmpty() && stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
-                for (Entity entity1 : notThat) {
-                    Vec3 vec32 = entity1.position();
-                    Vec3 speee = entity1.getDeltaMovement();
-                    Vec3 vec3 = entity.getViewVector(1.0F);
-                    Vec3 vec31 = vec32.vectorTo(entity.position()).normalize();
-                    vec31 = new Vec3(vec31.x, vec31.y, vec31.z);
-                    double v = ((speee.x + speee.z) / 2) * 10;
-                    if (vec31.dot(vec3) < 0.4D && v > -2.0D) {
-                        createsaburs.LOGGER.warn("oh look what do we have here?");
-                        createsaburs.LOGGER.warn("is on ground: " + entity1.onGround() + " and is decending? " + entity1.isDescending());
-                        createsaburs.LOGGER.warn("avrg speed is " + 1 * (v));
-
-                        if (Projectile.class.isAssignableFrom(entity1.getClass())) {
-                            createsaburs.LOGGER.warn("its a projectile???");
-
-                            Vec3 pos = entity.getLookAngle();
-                            entity1.setDeltaMovement(pos);
-                            entity1.setDeltaMovement(vec3);
-                            if (AbstractHurtingProjectile.class.isAssignableFrom(entity1.getClass())) {
-                                ((AbstractHurtingProjectile) entity1).xPower = vec3.x * 0.1D;
-                                ((AbstractHurtingProjectile) entity1).yPower = vec3.y * 0.1D;
-                                ((AbstractHurtingProjectile) entity1).zPower = vec3.z * 0.1D;
-                                ((AbstractHurtingProjectile) entity1).setOwner(entity);
-                            }
-
-                            if (AbstractArrow.class.isAssignableFrom(entity1.getClass())) {
-                                ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 3.0F, 1.0F);
-                            }
-
-                            //entity1.setDeltaMovement(entity1.getDeltaMovement().scale(-10));
-                            //entity1.setDeltaMovement(entity1.getDeltaMovement().reverse());
-                            //entity1.moveTo(entity1.getDeltaMovement());
-                            //entity1.setXRot(entity.getXRot());
-                            //entity1.setYRot(entity.getYRot());
-                            createsaburs.LOGGER.warn("GET DEFELECTED IDIOT");
-
-                            entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
-                        }
-                    }
-                }
-                //createsaburs.LOGGER.warn("wait was that all of them? dam thats sad");
-            } else if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
-                entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.SWING.get(), SoundSource.PLAYERS, 0.1F, 0.8F + entity.level().random.nextFloat() * 0.4F);
-
+                return false;
             }
-            return false;
+        });
+        //if (!entity.level().isClientSide()) {
+        if (!notThat.isEmpty() && stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
+            for (Entity entity1 : notThat) {
+                Vec3 vec32 = entity1.position();
+                Vec3 speee = entity1.getDeltaMovement();
+                Vec3 vec3 = entity.getViewVector(1.0F);
+                Vec3 vec31 = vec32.vectorTo(entity.position()).normalize();
+                vec31 = new Vec3(vec31.x, vec31.y, vec31.z);
+                double v = ((speee.x + speee.z) / 2) * 10;
+                if (vec31.dot(vec3) < 0.4D && v > -2.0D) {
+                    createsaburs.LOGGER.warn("oh look what do we have here?");
+                    createsaburs.LOGGER.warn("is on ground: " + entity1.onGround() + " and is decending? " + entity1.isDescending());
+                    createsaburs.LOGGER.warn("avrg speed is " + 1 * (v));
+
+                    if (Projectile.class.isAssignableFrom(entity1.getClass())) {
+                        createsaburs.LOGGER.warn("its a projectile???");
+
+                        Vec3 pos = entity.getLookAngle();
+                        entity1.setDeltaMovement(pos);
+                        entity1.setDeltaMovement(vec3);
+                        if (AbstractHurtingProjectile.class.isAssignableFrom(entity1.getClass())) {
+                            ((AbstractHurtingProjectile) entity1).xPower = vec3.x * 0.1D;
+                            ((AbstractHurtingProjectile) entity1).yPower = vec3.y * 0.1D;
+                            ((AbstractHurtingProjectile) entity1).zPower = vec3.z * 0.1D;
+                            ((AbstractHurtingProjectile) entity1).setOwner(entity);
+                        }
+
+                        if (AbstractArrow.class.isAssignableFrom(entity1.getClass())) {
+                            ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 3.0F, 1.0F);
+                        }
+
+                        //entity1.setDeltaMovement(entity1.getDeltaMovement().scale(-10));
+                        //entity1.setDeltaMovement(entity1.getDeltaMovement().reverse());
+                        //entity1.moveTo(entity1.getDeltaMovement());
+                        //entity1.setXRot(entity.getXRot());
+                        //entity1.setYRot(entity.getYRot());
+                        createsaburs.LOGGER.warn("GET DEFELECTED IDIOT");
+
+                        entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
+                    }
+                }
+            }
+            //createsaburs.LOGGER.warn("wait was that all of them? dam thats sad");
+        } else if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
+            entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.SWING.get(), SoundSource.PLAYERS, 0.1F, 0.8F + entity.level().random.nextFloat() * 0.4F);
+
         }
-        //else return false;
+        return false;
+    }
+    //else return false;
     //}
 
     @Override
@@ -368,7 +378,7 @@ public class protosaber extends Item {
 
     @Override
     public boolean onDroppedByPlayer(ItemStack item, Player player) {
-        if(readActivetag(item)){
+        if (readActivetag(item)) {
             writeActiveTag(item, false);
             isActive = false;
 
@@ -383,15 +393,17 @@ public class protosaber extends Item {
     public boolean isValidRepairItem(@NotNull ItemStack pToRepair, @NotNull ItemStack pRepair) {
         return false;
     }
-    public static boolean checkForSaberBlock(Entity Entityy){
-        if(Entityy instanceof LivingEntity)
-            return ((LivingEntity)Entityy).getMainHandItem().is(ModTags.Items.CREATE_DUAL_BLADED) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity)Entityy).isUsingItem();
+
+    public static boolean checkForSaberBlock(Entity Entityy) {
+        if (Entityy instanceof LivingEntity)
+            return ((LivingEntity) Entityy).getMainHandItem().is(ModTags.Items.CREATE_DUAL_BLADED) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity) Entityy).isUsingItem();
         return false;
     }
 
-    public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand){
-        if(Entityy instanceof LivingEntity) {
-            if(Mainhand) return ((LivingEntity) Entityy).getMainHandItem().is(ModTags.Items.CREATE_DUAL_BLADED) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
+    public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand) {
+        if (Entityy instanceof LivingEntity) {
+            if (Mainhand)
+                return ((LivingEntity) Entityy).getMainHandItem().is(ModTags.Items.CREATE_DUAL_BLADED) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
             return ((LivingEntity) Entityy).getOffhandItem().is(ModTags.Items.CREATE_DUAL_BLADED) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
         }
         return false;
