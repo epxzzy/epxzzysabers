@@ -112,7 +112,7 @@ public class PlayerSaberSwingRenderer {
             MainArm.resetPose();
 
             MainArm.xRot = Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F;
-            MainArm.yRot = AngleHelper.rad(-30);
+            //MainArm.yRot = AngleHelper.rad(-30);
             //hangingArm.xRot = -AngleHelper.rad(bodySwing+150);
             //hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
             if (both) {
