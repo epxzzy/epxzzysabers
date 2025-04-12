@@ -47,7 +47,7 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
                 ms.popPose();
             }
         }
-        if (transformType != ItemDisplayContext.GUI) {
+        if (transformType != ItemDisplayContext.GUI && transformType != ItemDisplayContext.FIXED) {
             float time = AnimationTickHolder.getTicks(false);
 
             for (LivingEntity entity : allEntities) {
@@ -68,12 +68,12 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
                     if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 1) {
                         int multiplier = isHoldingItemOffHand(entity, stack)?-1:1;
                         createsaburs.LOGGER.info("nbt offhand: " + stack.getOrCreateTag().getCompound("display").getBoolean("offhand") + " and thought to be: " + (isHoldingItemOffHand(entity, stack) ? "offhand" : "mainhand") + " and multiplier " + multiplier );
-                        float movement = Mth.sin(((float) ((time) * 5/ Math.PI)));
+                        float movement = Mth.sin(((float) ((time) * 6/ Math.PI)));
                         //ItemStack.isSameItemSameTags(entity.getOffhandItem())
 
                         //ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
                         ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
-                        ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(movement*30)));
+                        ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(movement*25)));
 
                         //ms.mulPose(Axis.YP.rotation(AngleHelper.rad(30)));
                         //ms.mulPose(Axis.ZP.rotation(AngleHelper.rad(movement * 20)));

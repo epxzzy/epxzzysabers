@@ -12,6 +12,7 @@ import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -47,15 +48,44 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
             }
         }
 
-        for (LivingEntity entity : allEntities) {
-            if (entity.swingTime >0 || entity.swinging){
-                ms.mulPose(Axis.XP.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (45 * (Math.random() * -1)))));
-                ms.pushPose();
-                ms.popPose();
-                //System.out.print("I... AM STEEVE\n");
+        if (transformType != ItemDisplayContext.GUI && transformType != ItemDisplayContext.FIXED) {
+            float time = AnimationTickHolder.getTicks(false);
+
+            for (LivingEntity entity : allEntities) {
+                if (entity.swingTime > 0 || entity.swinging) {
+                    if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 2) {
+                        //float movement = Mth.sin(((float) ((time+10) * 5f /Math.PI)));
+                        float movement = Mth.sin(((float) ((time) * 5 / Math.PI)));
+
+                        ms.mulPose(Axis.XP.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (10)) - (45 * movement)));
+                        ms.mulPose(Axis.ZP.rotationDegrees(movement * 50));
+                        //ms.mulPose(Axis.YP.rotationDegrees(movement*10-10));
+
+                        //ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(30)));
+                        ms.pushPose();
+                        ms.popPose();
+                    }
+
+                    if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 1) {
+                        float movement = Mth.sin(((float) ((time) * 2 / Math.PI)));
+                        float movement2 = Mth.sin(((float) ((time) * 4/ Math.PI)));
+                        //ItemStack.isSameItemSameTags(entity.getOffhandItem())
+
+                        //ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
+                        ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 2))));
+                        ms.mulPose(Axis.XN.rotationDegrees(-10));
+                        //ms.
+                        ms.translate(-0.2,0.2,0);
+                        //ms.translate(-0.5,0,0);
+                        //ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(movement * 25)));
+
+
+                        //ms.mulPose(Axis.XP.rotation(-AngleHelper.rad(movement * 60)));
+                        //System.out.print("I... AM STEEVE\n");
+                    }
+                }
             }
         }
-
         renderer.render(model.getOriginalModel(), light);
         //}
 
