@@ -55,24 +55,49 @@ public class PlayerSaberSwingRenderer {
         //otherArm.y -= armPivotY;
         if(flourish == 1){
             //skip catch
-            model.leftArm.resetPose();
-            model.rightArm.resetPose();
+            model.body.resetPose();
+            MainArm.resetPose();
+            otherArm.resetPose();
+
 
             float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));
 
-            MainArm.xRot = (float) (Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +AngleHelper.rad(movement));
-            MainArm.yRot = AngleHelper.rad(-30);
-            otherArm.xRot = (float)(Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +AngleHelper.rad(-movement));
-            otherArm.yRot = AngleHelper.rad(30);
+            MainArm.xRot = (float) (Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +AngleHelper.rad(movement*3));
+            MainArm.yRot = AngleHelper.rad(-27);
+            otherArm.xRot = (float)(Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +AngleHelper.rad(-movement*3));
+            otherArm.yRot = AngleHelper.rad(27);
 
 
 
         }
+        if (flourish == 2) {
+            MainArm.resetPose();
+            otherArm.resetPose();
+            //spin behind the back
+            float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
+            float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));
+
+            float movement2 = Mth.sin(((float) ((time) * 3.3 / Math.PI)));
+            float movement3 = Mth.sin(((float) ((time+Mth.PI/-2) * 3.3 / Math.PI)));
+
+
+            MainArm.xRot = AngleHelper.rad(-45.04 * movement2);
+            otherArm.xRot = AngleHelper.rad(-45.04 * movement3);
+
+            MainArm.zRot = AngleHelper.rad(movement2 * -30);
+            otherArm.zRot = AngleHelper.rad(movement3 * 30);
+
+
+
+            //MainArm.yRot = AngleHelper.rad(-27);
+            //otherArm.xRot = (float)(Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +AngleHelper.rad(-movement*3));
+            //otherArm.yRot = AngleHelper.rad(27);
+
+        }
         if(flourish == 3){
             //heli behind the back
-
-            model.leftArm.resetPose();
-            model.rightArm.resetPose();
+            MainArm.resetPose();
+            otherArm.resetPose();
 
             float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*2/Math.PI));
 
@@ -82,52 +107,6 @@ public class PlayerSaberSwingRenderer {
             otherArm.yRot = AngleHelper.rad(30);
 
         }
-        if (flourish == 2) {
-            //spin behind the back
-            model.leftArm.resetPose();
-            model.rightArm.resetPose();
-
-            float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
-            float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
-            float limbCycle = Mth.sin(((float) (time * 0.3f / Math.PI)));
-            float bodySwing = AngleHelper.rad(15 + (mainCycle * 10));
-            float limbSwing = AngleHelper.rad(limbCycle * 15);
-            if (Lefty) bodySwing = -bodySwing;
-            //model.body.zRot = bodySwing;
-            //model.head.zRot = bodySwing;
-            //model.hat.zRot = bodySwing;
-
-            MainArm.y -= 3;
-
-            float offsetX = model.rightArm.x;
-            float offsetY = model.rightArm.y;
-//		model.rightArm.x = offsetX * Mth.cos(bodySwing) - offsetY * Mth.sin(bodySwing);
-//		model.rightArm.y = offsetX * Mth.sin(bodySwing) + offsetY * Mth.cos(bodySwing);
-            float armPivotX = offsetX * Mth.cos(bodySwing) - offsetY * Mth.sin(bodySwing) + 4.5f;
-            float armPivotY = offsetX * Mth.sin(bodySwing) + offsetY * Mth.cos(bodySwing) + 2;
-
-            MainArm.xRot = -AngleHelper.rad(bodySwing + 150);
-            MainArm.zRot = (Lefty ? -1 : 1) * AngleHelper.rad(15);
-
-            if (both) {
-                otherArm.xRot = -AngleHelper.rad(bodySwing + 150);
-                otherArm.zRot = (Lefty ? 1 : -1) * AngleHelper.rad(15);
-            }
-
-            if (!both) {
-                offsetX = otherArm.x;
-                offsetY = otherArm.y;
-                otherArm.x = offsetX * Mth.cos(bodySwing) - offsetY * Mth.sin(bodySwing);
-                //otherArm.y = offsetX * Mth.sin(bodySwing) + offsetY * Mth.cos(bodySwing);
-                otherArm.zRot = (Lefty ? -1 : 1) * (-AngleHelper.rad(20)) + 0.5f * bodySwing + limbSwing;
-
-                //model.hat.x -= armPivotX;
-                //model.head.x -= armPivotX;
-                otherArm.x -= armPivotX;
-            }
-        }
-
-
     }
 
     private static void setSingleBladedSaberPose(boolean Lefty, boolean both, HumanoidModel<?> model, int flourish) {
@@ -142,8 +121,6 @@ public class PlayerSaberSwingRenderer {
             //the x-cross
             float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
             float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
-            float bodySwing = AngleHelper.rad(15 + (mainCycle * 10));
-            if (Lefty) bodySwing = -bodySwing;
 
             MainArm.resetPose();
 

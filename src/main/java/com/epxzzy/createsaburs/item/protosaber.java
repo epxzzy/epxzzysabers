@@ -84,7 +84,9 @@ public class protosaber extends Item {
         }
 
         if (tag.getCompound("display").getInt("color") != 0) {
+            int flourishID = tag.getCompound("display").getInt("flourish");
             displayTag.putInt("color", tag.getCompound("display").getInt("color"));
+            displayTag.putInt("flourish", flourishID);
 
         } else {
             displayTag.putInt("color", BASE_COLOUR);

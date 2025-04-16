@@ -69,11 +69,12 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
                         int multiplier = isHoldingItemOffHand(entity, stack)?-1:1;
                         createsaburs.LOGGER.info("nbt offhand: " + stack.getOrCreateTag().getCompound("display").getBoolean("offhand") + " and thought to be: " + (isHoldingItemOffHand(entity, stack) ? "offhand" : "mainhand") + " and multiplier " + multiplier );
                         float movement = Mth.sin(((float) ((time) * 6/ Math.PI)));
+                        float squaremovement = (Mth.sin(time) >= 0)? 1:-1;
                         //ItemStack.isSameItemSameTags(entity.getOffhandItem())
 
                         //ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
                         ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
-                        ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(movement*25)));
+                        ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(squaremovement*25)));
 
                         //ms.mulPose(Axis.YP.rotation(AngleHelper.rad(30)));
                         //ms.mulPose(Axis.ZP.rotation(AngleHelper.rad(movement * 20)));
