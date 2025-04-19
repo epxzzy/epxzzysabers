@@ -64,7 +64,8 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
             this.HUE_SLIDER.setValue(inputColour[0]);
             this.SAT_SLIDER.setValue(inputColour[1]);
             this.LIT_SLIDER.setValue(inputColour[2]);
-        } else {
+        }
+        if (RGB_MODE) {
             this.RED_SLIDER.setValue(gur[0]);
             this.GREEN_SLIDER.setValue(gur[1]);
             this.BLUE_SLIDER.setValue(gur[2]);
@@ -114,6 +115,29 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
                     BLUE_SLIDER.visible = false;
 
                 }
+                int[] gur = RGB_MODE ? new int[]{
+                        RED_SLIDER.getValueInt(),
+                        GREEN_SLIDER.getValueInt(),
+                        BLUE_SLIDER.getValueInt()
+                } : new int[]{
+                        HUE_SLIDER.getValueInt(),
+                        SAT_SLIDER.getValueInt(),
+                        LIT_SLIDER.getValueInt()
+                };
+
+                if (!RGB_MODE) {
+                    int[] inputColour = ColourConverter.RGBtoHSL(gur[0], gur[1], gur[2]);
+
+                    HUE_SLIDER.setValue(inputColour[0]);
+                    SAT_SLIDER.setValue(inputColour[1]);
+                    LIT_SLIDER.setValue(inputColour[2]);
+                }
+                if (RGB_MODE) {
+                    RED_SLIDER.setValue(gur[0]);
+                    GREEN_SLIDER.setValue(gur[1]);
+                    BLUE_SLIDER.setValue(gur[2]);
+                }
+
                 createsaburs.LOGGER.info("RGB MODE NOW " + RGB_MODE);
                 UpdateServerRecipe();
             }
@@ -188,7 +212,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
         // String asd = Integer.toString("")
 
-        if (this.RGB_MODE) {
+        if (!this.RGB_MODE) {
             this.HUE_SLIDER.setTooltip(
                     Tooltip.create(
                             Component.literal(
@@ -210,7 +234,8 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
                             )
                     )
             );
-        } else {
+        }
+        if (this.RGB_MODE) {
             this.RED_SLIDER.setTooltip(
                     Tooltip.create(
                             Component.literal(
