@@ -115,22 +115,21 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
                     BLUE_SLIDER.visible = false;
 
                 }
-                int[] gur = RGB_MODE ? new int[]{
+                int[] gur = !RGB_MODE ? ColourConverter.RGBtoHSL(
                         RED_SLIDER.getValueInt(),
                         GREEN_SLIDER.getValueInt(),
                         BLUE_SLIDER.getValueInt()
-                } : new int[]{
+                ) : ColourConverter.HSLtoRGB(
                         HUE_SLIDER.getValueInt(),
                         SAT_SLIDER.getValueInt(),
                         LIT_SLIDER.getValueInt()
-                };
+                );
 
                 if (!RGB_MODE) {
-                    int[] inputColour = ColourConverter.RGBtoHSL(gur[0], gur[1], gur[2]);
 
-                    HUE_SLIDER.setValue(inputColour[0]);
-                    SAT_SLIDER.setValue(inputColour[1]);
-                    LIT_SLIDER.setValue(inputColour[2]);
+                    HUE_SLIDER.setValue(gur[0]);
+                    SAT_SLIDER.setValue(gur[1]);
+                    LIT_SLIDER.setValue(gur[2]);
                 }
                 if (RGB_MODE) {
                     RED_SLIDER.setValue(gur[0]);

@@ -126,8 +126,6 @@ public class PlayerSaberSwingRenderer {
 
             MainArm.xRot = Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F;
             MainArm.yRot = AngleHelper.rad(-20);
-            //hangingArm.xRot = -AngleHelper.rad(bodySwing+150);
-            //hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
             if (both) {
                 otherArm.resetPose();
                 //otherArm.xRot = -AngleHelper.rad(bodySwing + 150);
@@ -147,13 +145,10 @@ public class PlayerSaberSwingRenderer {
             float movement2 = Mth.sin(((float) ((time) * 4 / Math.PI)));
 
             MainArm.resetPose();
-            //hangingArm.y -= 3;
             MainArm.xRot = AngleHelper.rad(-45.04 * movement - 10);
             MainArm.zRot = AngleHelper.rad(movement2 * -30);
 
 
-            //hangingArm.xRot = -AngleHelper.rad(bodySwing+150);
-            //hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
             if (both) {
                 otherArm.resetPose();
                 otherArm.xRot = Mth.cos(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
