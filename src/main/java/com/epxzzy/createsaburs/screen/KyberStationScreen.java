@@ -8,6 +8,7 @@ import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.Tooltip;
@@ -24,6 +25,12 @@ import org.jetbrains.annotations.NotNull;
 public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu> {
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(createsaburs.MOD_ID, "textures/gui/gem_polishing_station_gui.png");
+
+    private static final ResourceLocation OFF_TOGGLE=
+            new ResourceLocation(createsaburs.MOD_ID, "textures/gui/toggle_off.png");
+    private static final ResourceLocation ON_TOGGLE =
+            new ResourceLocation(createsaburs.MOD_ID, "textures/gui/toggle_on.png");
+
 
     private SliderWidget HUE_SLIDER;
     private SliderWidget SAT_SLIDER;
@@ -81,7 +88,14 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         this.titleLabelY = 10000;
         this.RGB_TOGGLE = new AbstractButton(topPos + 20, leftPos - 50, 20, 10, Component.literal("Toggle")) {
             @Override
-            protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+            public void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+            }
+
+            @Override
+            public void renderString(GuiGraphics pGuiGraphics, Font pFont, int pColor) {
+                super.renderString(pGuiGraphics, pFont, pColor);
+                //this.renderTexture(pGuiGraphics, RGB_MODE?ON_TOGGLE:OFF_TOGGLE, this.getX()-11, this.getY(), 0, 0, this.getX(), 20, 10, 20, 10);
+
             }
 
             @Override
@@ -346,6 +360,9 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, delta);
         this.RGB_TOGGLE.render(guiGraphics, mouseX, mouseY, delta);
+
+        guiGraphics.blit(RGB_MODE?ON_TOGGLE:OFF_TOGGLE,this.leftPos-30, this.topPos+40, (float)0, (float)0, 20, 10, 20, 10);
+
         if (menu.canCraft()) {
             if (!this.RGB_MODE) {
                 this.HUE_SLIDER.active = true;
