@@ -13,6 +13,14 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 
 public class PlayerSaberRenderer {
+    public static boolean IsPlayerStationary(Player player){
+
+        //createsaburs.LOGGER.info("getdeltamovementplayer "+ player.getDeltaMovement().length());
+        return !(player.getDeltaMovement().length() > 0.08);
+
+        //return x+y+z;
+        //return true;
+    }
 
     public static void beforeSetupAnim(Player player, HumanoidModel<?> model) {
         if (protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
@@ -24,7 +32,7 @@ public class PlayerSaberRenderer {
             model.rightArm.resetPose();
             model.rightArm.resetPose();
         }
-        if(protosaber.checkForSaberBlock(player) && player.isShiftKeyDown()){
+        if(protosaber.checkForSaberBlock(player)&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
             model.rightArm.resetPose();
             model.leftArm.resetPose();
             model.head.resetPose();
@@ -48,7 +56,7 @@ public class PlayerSaberRenderer {
         if (SingleBladed.checkForSaberEquipment(player, false) && SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0) {
             setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
         }
-        if(protosaber.checkForSaberBlock(player) && player.isShiftKeyDown()){
+        if(protosaber.checkForSaberBlock(player)&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
             setDualBladedAttackStance(model);
         }
 
