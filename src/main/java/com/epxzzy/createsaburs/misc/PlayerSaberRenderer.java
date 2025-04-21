@@ -196,12 +196,12 @@ public class PlayerSaberRenderer {
 
         //model.rightLeg.setPos((float) -1.5,0, (float) -3.5);
         model.rightLeg.x = (float) -1.5;
-        model.rightLeg.y = 10;
+        model.rightLeg.y = 11;
         model.rightLeg.z = (float) -3.5;
         model.rightLeg.setRotation(AngleHelper.rad(-10), AngleHelper.rad(5),0);
 
         model.leftLeg.z = 3;
-        model.leftLeg.y = 10;
+        model.leftLeg.y = 11;
         model.leftLeg.setRotation(AngleHelper.rad(-2), (float) AngleHelper.rad(-67.5),AngleHelper.rad(-10));
     }
 }

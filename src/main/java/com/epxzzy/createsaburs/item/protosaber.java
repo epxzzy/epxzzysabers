@@ -320,15 +320,14 @@ public class protosaber extends Item {
         if (!notThat.isEmpty() && stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
             for (Entity entity1 : notThat) {
                 Vec3 vec32 = entity1.position();
-                Vec3 speee = entity1.getDeltaMovement();
+                double speee = entity1.getDeltaMovement().length();
                 Vec3 vec3 = entity.getViewVector(1.0F);
                 Vec3 vec31 = vec32.vectorTo(entity.position()).normalize();
                 vec31 = new Vec3(vec31.x, vec31.y, vec31.z);
-                double v = ((speee.x + speee.z) / 2) * 10;
-                if (vec31.dot(vec3) < 0.4D && v > -2.0D) {
+                if (vec31.dot(vec3) < 0.4D && speee > -2.0D) {
                     createsaburs.LOGGER.warn("oh look what do we have here?");
                     createsaburs.LOGGER.warn("is on ground: " + entity1.onGround() + " and is decending? " + entity1.isDescending());
-                    createsaburs.LOGGER.warn("avrg speed is " + 1 * (v));
+                    createsaburs.LOGGER.warn("avrg speed is " + (speee));
 
                     if (Projectile.class.isAssignableFrom(entity1.getClass())) {
                         createsaburs.LOGGER.warn("its a projectile???");
