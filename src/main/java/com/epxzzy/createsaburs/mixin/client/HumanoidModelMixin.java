@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.epxzzy.createsaburs.misc.PlayerSaberSwingRenderer;
+import com.epxzzy.createsaburs.misc.PlayerSaberRenderer;
 
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -25,7 +25,7 @@ public class HumanoidModelMixin<T extends LivingEntity> {
         if (!(pEntity instanceof AbstractClientPlayer player))
             return;
 
-        PlayerSaberSwingRenderer.afterSetupAnim(player, (HumanoidModel<?>) (Object) this);
+        PlayerSaberRenderer.afterSetupAnim(player, (HumanoidModel<?>) (Object) this);
     }
 
     @Inject(method = "setupAnim*", at = @At("HEAD"))
@@ -33,6 +33,6 @@ public class HumanoidModelMixin<T extends LivingEntity> {
         if (!(pEntity instanceof AbstractClientPlayer player))
             return;
 
-        PlayerSaberSwingRenderer.beforeSetupAnim(player, (HumanoidModel<?>) (Object) this);
+        PlayerSaberRenderer.beforeSetupAnim(player, (HumanoidModel<?>) (Object) this);
     }
 }

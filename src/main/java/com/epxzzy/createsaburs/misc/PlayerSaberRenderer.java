@@ -12,7 +12,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 
-public class PlayerSaberSwingRenderer {
+public class PlayerSaberRenderer {
 
     public static void beforeSetupAnim(Player player, HumanoidModel<?> model) {
         if (protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
@@ -24,6 +24,14 @@ public class PlayerSaberSwingRenderer {
             model.rightArm.resetPose();
             model.rightArm.resetPose();
         }
+        if(protosaber.checkForSaberBlock(player) && player.isShiftKeyDown()){
+            model.rightArm.resetPose();
+            model.leftArm.resetPose();
+            model.head.resetPose();
+            model.body.resetPose();
+            model.leftLeg.resetPose();
+            model.rightLeg.resetPose();
+        };
     }
 
     public static void afterSetupAnim(Player player, HumanoidModel<?> model) {
@@ -39,6 +47,9 @@ public class PlayerSaberSwingRenderer {
         }
         if (SingleBladed.checkForSaberEquipment(player, false) && SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0) {
             setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
+        }
+        if(protosaber.checkForSaberBlock(player) && player.isShiftKeyDown()){
+            setDualBladedAttackStance(model);
         }
 
     }
@@ -160,5 +171,29 @@ public class PlayerSaberSwingRenderer {
 
         }
 
+    }
+    private static void setDualBladedAttackStance(HumanoidModel<?> model){
+        //model.head.setPos(1,-1,0);
+        model.head.x = 1;
+        model.head.y = 0;
+
+        model.body.setPos(0,-1,0);
+        model.body.setRotation(AngleHelper.rad( 5), AngleHelper.rad( -57.6),0);
+
+        model.rightArm.setPos(-2.5f,1, -6.5f);
+        model.rightArm.setRotation(AngleHelper.rad(-90),0, AngleHelper.rad(90));
+
+        model.leftArm.setPos(4.5f,3,6);
+        model.leftArm.setRotation(AngleHelper.rad(-72.5), AngleHelper.rad(-10), 0);
+
+        //model.rightLeg.setPos((float) -1.5,0, (float) -3.5);
+        model.rightLeg.x = (float) -1.5;
+        model.rightLeg.y = 10;
+        model.rightLeg.z = (float) -3.5;
+        model.rightLeg.setRotation(AngleHelper.rad(-10), AngleHelper.rad(5),0);
+
+        model.leftLeg.z = 3;
+        model.leftLeg.y = 10;
+        model.leftLeg.setRotation(AngleHelper.rad(-2), (float) AngleHelper.rad(-67.5),AngleHelper.rad(-10));
     }
 }
