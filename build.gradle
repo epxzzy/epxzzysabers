@@ -101,20 +101,6 @@ minecraft {
                 }
             }
         }
-        clientwo {
-            workingDirectory project.file('run')
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', mod_id
-            args '--username=epxzyy'
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
         server {
             workingDirectory project.file('run')
 

@@ -331,6 +331,9 @@ public class protosaber extends Item {
 
                     if (Projectile.class.isAssignableFrom(entity1.getClass())) {
                         createsaburs.LOGGER.warn("its a projectile???");
+                        if(AbstractArrow.class.isAssignableFrom(entity1.getClass())){
+                         //   ((AbstractArrow)entity1).inGround;
+                        }
 
                         Vec3 pos = entity.getLookAngle();
                         entity1.setDeltaMovement(pos);

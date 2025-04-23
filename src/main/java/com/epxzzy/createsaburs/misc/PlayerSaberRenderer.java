@@ -39,6 +39,7 @@ public class PlayerSaberRenderer {
             model.body.resetPose();
             model.leftLeg.resetPose();
             model.rightLeg.resetPose();
+            
         };
     }
 
