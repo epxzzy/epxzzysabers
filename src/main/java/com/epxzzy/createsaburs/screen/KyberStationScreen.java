@@ -3,6 +3,8 @@ package com.epxzzy.createsaburs.screen;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.misc.ColourConverter;
+import com.epxzzy.createsaburs.misc.KyberModes;
+import com.epxzzy.createsaburs.misc.KyberTabButton;
 import com.epxzzy.createsaburs.misc.SliderWidget;
 import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
@@ -20,12 +22,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
+import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu> {
-    private static final ResourceLocation TEXTURE =
+    private static final ResourceLocation RECOLOUR_TEXTURE =
             new ResourceLocation(createsaburs.MOD_ID, "textures/gui/kyber_recolour.png");
 
+    private static final ResourceLocation STANCE_TEXTURE =
+            new ResourceLocation(createsaburs.MOD_ID, "textures/gui/kyber_stance.png");
 
 
     private static final ResourceLocation OFF_TOGGLE=
@@ -33,6 +40,8 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
     private static final ResourceLocation ON_TOGGLE =
             new ResourceLocation(createsaburs.MOD_ID, "textures/gui/toggle_on.png");
 
+    private final List<KyberTabButton> tabButtons = Lists.newArrayList();
+    private KyberTabButton selectedTab;
 
     private SliderWidget HUE_SLIDER;
     private SliderWidget SAT_SLIDER;
@@ -43,6 +52,10 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
     private SliderWidget BLUE_SLIDER;
 
     private boolean RGB_MODE = false;
+    private boolean widthTooNarrow = this.width < 379;
+    private int TABLE_MODE = 0;
+    //0 = recolour
+    //1 = stance
 
     public void slotChanged() {
 
@@ -88,6 +101,9 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         //this.addWidget(this.LIST);
         this.inventoryLabelY = 10000;
         this.titleLabelY = 10000;
+
+        this.tabButtons.clear();
+
         this.RGB_TOGGLE = new AbstractButton(topPos + 20, leftPos - 50, 20, 10, Component.literal("Toggle")) {
             @Override
             public void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
@@ -205,6 +221,23 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
         //this.addRenderableWidget(
         //this.addRenderableWidget(new SliderWidget(this.leftPos + 10, this.topPos + 10, 150, 20, 0, 100, 50));
+
+        for(KyberModes kebur: KyberModes.getCategories()){
+            this.tabButtons.add(new KyberTabButton(kebur));
+        }
+
+        if (this.selectedTab != null) {
+            this.selectedTab = this.tabButtons.stream().filter((p_100329_) -> {
+                return p_100329_.getCategory().equals(this.selectedTab.getCategory());
+            }).findFirst().orElse((KyberTabButton) null);
+        }
+
+        if (this.selectedTab == null) {
+            this.selectedTab = this.tabButtons.get(0);
+        }
+
+        this.selectedTab.setStateTriggered(true);
+        this.updateTabs();
 
     }
 
@@ -340,28 +373,32 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
+        if(TABLE_MODE == 0) {
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.setShaderTexture(0, RECOLOUR_TEXTURE);
+            int x = (width - imageWidth) / 2;
+            int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
+            guiGraphics.blit(RECOLOUR_TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
+        }
+        if(TABLE_MODE == 1) {
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.setShaderTexture(0, STANCE_TEXTURE);
+            int x = (width - imageWidth) / 2;
+            int y = (height - imageHeight) / 2;
 
-        //renderProgressArrow(guiGraphics, x, y);
+            guiGraphics.blit(STANCE_TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
+        }
+
     }
-
-    // private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
-    //if (menu.canCraft()) {
-    //guiGraphics.blit(TEXTURE, x + 85, y + 30, 176, 0, 8, menu.getScaledProgress());
-    //}
-    //}
 
     @Override
     public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, delta);
-        this.RGB_TOGGLE.render(guiGraphics, mouseX, mouseY, delta);
+        if (this.RGB_TOGGLE != null) this.RGB_TOGGLE.render(guiGraphics, mouseX, mouseY, delta);
 
         guiGraphics.blit(RGB_MODE?ON_TOGGLE:OFF_TOGGLE,this.leftPos-30, this.topPos+40, (float)0, (float)0, 20, 10, 20, 10);
 
@@ -470,5 +507,28 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
         //LIST.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
+
+
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().translate(0.0F, 0.0F, 100.0F);
+
+            for(KyberTabButton recipebooktabbutton : this.tabButtons) {
+                recipebooktabbutton.render(guiGraphics, mouseX, mouseY, delta);
+            }
+            guiGraphics.pose().popPose();
+
+    }
+
+ void updateTabs() {
+        int i = (this.width - 147) / 2 - (this.widthTooNarrow ? 0:86) - 30;
+        int j = (this.height - 166) / 2 + 3;
+        int k = 27;
+        int l = 0;
+
+        for(KyberTabButton recipebooktabbutton : this.tabButtons) {
+            KyberModes recipebookcategories = recipebooktabbutton.getCategory();
+                recipebooktabbutton.visible = false;
+                recipebooktabbutton.setPosition(i, j + 27 * l++);
+        }
     }
 }
