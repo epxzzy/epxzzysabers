@@ -266,8 +266,8 @@ public class protosaber extends Item {
 
     @Override
     public boolean canPerformAction(ItemStack stack, net.minecraftforge.common.ToolAction toolAction) {
-        if (toolAction == createsaburs.SABER_SWING) return true;
-        return toolAction == createsaburs.SABER_BLOCK;
+        if (toolAction == createsaburs.SABER_BLOCK&&this.readActivetag(stack)) return true;
+        return toolAction == createsaburs.SABER_SWING;
 
         //return net.minecraftforge.common.ToolActions.DEFAULT_SHIELD_ACTIONS.contains(toolAction);
     }

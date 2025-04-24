@@ -6,7 +6,6 @@
   "mixins": [
     "entity.LivingEntityMixin",
     "entity.PlayerMixin",
-    "entity.ProjectileMixin",
     "entity.ThrownTridentMixin"
   ],
   "injectors": {
