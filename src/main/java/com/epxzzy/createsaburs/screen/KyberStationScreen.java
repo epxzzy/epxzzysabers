@@ -24,7 +24,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(createsaburs.MOD_ID, "textures/gui/gem_polishing_station_gui.png");
+            new ResourceLocation(createsaburs.MOD_ID, "textures/gui/kyber_recolour.png");
+
+
 
     private static final ResourceLocation OFF_TOGGLE=
             new ResourceLocation(createsaburs.MOD_ID, "textures/gui/toggle_off.png");
