@@ -380,7 +380,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
             int x = (width - imageWidth) / 2;
             int y = (height - imageHeight) / 2;
 
-            guiGraphics.blit(RECOLOUR_TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
+            guiGraphics.blit(RECOLOUR_TEXTURE, x - 15, y, 0, 0, 215, imageHeight);
         }
         if(TABLE_MODE == 1) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -389,7 +389,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
             int x = (width - imageWidth) / 2;
             int y = (height - imageHeight) / 2;
 
-            guiGraphics.blit(STANCE_TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
+            guiGraphics.blit(STANCE_TEXTURE, x - 15, y, 0, 0, 215, imageHeight);
         }
 
     }
