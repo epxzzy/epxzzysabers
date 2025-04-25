@@ -19,6 +19,7 @@ public class SliderWidget extends AbstractSliderButton {
 
     protected double minValue;
     protected double maxValue;
+    public boolean kys;
 
     /**
      * Allows input of discontinuous values with a certain step
@@ -130,17 +131,19 @@ public class SliderWidget extends AbstractSliderButton {
 
     @Override
     public void onClick(double mouseX, double mouseY) {
-        this.setValueFromMouse(mouseX);
+        if(!kys) this.setValueFromMouse(mouseX);
     }
 
     @Override
     protected void onDrag(double mouseX, double mouseY, double dragX, double dragY) {
+        if(kys) return;
         super.onDrag(mouseX, mouseY, dragX, dragY);
         this.setValueFromMouse(mouseX);
     }
 
     @Override
     public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
+        if(kys) return false;
         if (pDelta > 0) {
             this.setValue(this.getValue() + 1);
         } else {
@@ -152,6 +155,7 @@ public class SliderWidget extends AbstractSliderButton {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if(kys) return false;
         boolean flag = keyCode == GLFW.GLFW_KEY_LEFT;
         if (flag || keyCode == GLFW.GLFW_KEY_RIGHT) {
             if (this.minValue > this.maxValue)

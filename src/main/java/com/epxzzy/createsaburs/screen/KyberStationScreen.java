@@ -104,7 +104,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
         this.tabButtons.clear();
 
-        this.RGB_TOGGLE = new AbstractButton(topPos + 20, leftPos - 50, 20, 10, Component.literal("Toggle")) {
+        this.RGB_TOGGLE = new AbstractButton(topPos + 50, leftPos - 50, 20, 10, Component.literal("Toggle")) {
             @Override
             public void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
             }
@@ -174,56 +174,10 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
             }
         };
         this.addWidget(this.RGB_TOGGLE);
-        //this.HUE_SLIDER = getSliderForColour(0, 255, "hue ", 1);
-        //this.SAT_SLIDER = getSliderForColour(0, 255, "sat ", 2);
-        //this.LIT_SLIDER = getSliderForColour(0, 255, "light ", 3);
-
-
-        this.HUE_SLIDER = getSliderForColour(0, 360, "hue ", 1);
-        this.SAT_SLIDER = getSliderForColour(0, 100, "sat ", 2);
-        this.LIT_SLIDER = getSliderForColour(0, 100, "light ", 3);
-
-        this.RED_SLIDER = getSliderForColour(0, 255, "red ", 1);
-        this.GREEN_SLIDER = getSliderForColour(0, 255, "green ", 2);
-        this.BLUE_SLIDER = getSliderForColour(0, 255, "blue ", 3);
-
-
-        this.addWidget(this.HUE_SLIDER);
-        this.addWidget(this.SAT_SLIDER);
-        this.addWidget(this.LIT_SLIDER);
-
-        this.addWidget(this.RED_SLIDER);
-        this.addWidget(this.GREEN_SLIDER);
-        this.addWidget(this.BLUE_SLIDER);
-
-
-        this.HUE_SLIDER.active = false;
-        this.SAT_SLIDER.active = false;
-        this.LIT_SLIDER.active = false;
-
-        this.HUE_SLIDER.visible = false;
-        this.SAT_SLIDER.visible = false;
-        this.LIT_SLIDER.visible = false;
-
-
-        this.RED_SLIDER.active = false;
-        this.GREEN_SLIDER.active = false;
-        this.BLUE_SLIDER.active = false;
-
-        this.RED_SLIDER.visible = false;
-        this.GREEN_SLIDER.visible = false;
-        this.BLUE_SLIDER.visible = false;
-
-
-        //this.HUE_SLIDER.setResponder(this::)
-
-        //this.addWidget(sloider);
-
-        //this.addRenderableWidget(
-        //this.addRenderableWidget(new SliderWidget(this.leftPos + 10, this.topPos + 10, 150, 20, 0, 100, 50));
+        initSliderStuff();
 
         for(KyberModes kebur: KyberModes.getCategories()){
-            this.tabButtons.add(new KyberTabButton(kebur));
+            this.tabButtons.add(new KyberTabButton(kebur, this.leftPos));
         }
 
         if (this.selectedTab != null) {
@@ -322,6 +276,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
     @Override
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
+        if(!this.menu.canCraft()) return false;
         UpdateServerRecipe();
         return super.getFocused() != null && super.isDragging() && pButton == 0 && this.getFocused().mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
     }
@@ -330,6 +285,25 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
         UpdateServerRecipe();
         return super.keyPressed(pKeyCode, pScanCode, pModifiers);
+    }
+
+    @Override
+    public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
+        if(tabButtons.contains(super.getFocused())){};
+        for(KyberTabButton recipebooktabbutton : this.tabButtons) {
+            if (recipebooktabbutton.mouseClicked(pMouseX, pMouseY, pButton)) {
+                if (this.selectedTab != recipebooktabbutton) {
+                    if (this.selectedTab != null) {
+                        this.selectedTab.setStateTriggered(false);
+                    }
+                    recipebooktabbutton.setStateTriggered(true);
+                    this.selectedTab = recipebooktabbutton;
+                }
+                //return true;
+            }
+        }
+
+        return super.mouseClicked(pMouseX, pMouseY, pButton);
     }
 
     @Override
@@ -399,8 +373,9 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, delta);
         if (this.RGB_TOGGLE != null) this.RGB_TOGGLE.render(guiGraphics, mouseX, mouseY, delta);
+        manShutYourBitchAssUp(!this.menu.canCraft());
 
-        guiGraphics.blit(RGB_MODE?ON_TOGGLE:OFF_TOGGLE,this.leftPos-30, this.topPos+40, (float)0, (float)0, 20, 10, 20, 10);
+        guiGraphics.blit(RGB_MODE?ON_TOGGLE:OFF_TOGGLE,this.leftPos-30, this.topPos+90, (float)0, (float)0, 20, 10, 20, 10);
 
         if (menu.canCraft()) {
             if (!this.RGB_MODE) {
@@ -429,43 +404,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
                 this.GREEN_SLIDER.render(guiGraphics, mouseX, mouseY, delta);
                 this.BLUE_SLIDER.render(guiGraphics, mouseX, mouseY, delta);
             }
-
-            /*
-            int[] colouur = ColourConverter.hslToRgb(
-                    HUE_SLIDER.getValueInt(),
-                    SAT_SLIDER.getValueInt(),
-                    LIT_SLIDER.getValueInt()
-            );
-            guiGraphics.fill(
-                    this.leftPos + 137,
-                    this.topPos + 10,
-                    this.leftPos + 166,
-                    this.topPos + 40,
-                    FastColor.ARGB32.color(
-                            255,
-                            colouur[0],
-                            colouur[1],
-                            colouur[2]
-                    )
-            );*/
-
-
-            /*
-            guiGraphics.fill(
-                    this.leftPos + 137,
-                    this.topPos + 10,
-                    this.leftPos + 166,
-                    this.topPos + 40,
-                    FastColor.ARGB32.color(
-                            255,
-                            HUE_SLIDER.getValueInt(),
-                            SAT_SLIDER.getValueInt(),
-                            LIT_SLIDER.getValueInt()
-                    )
-            );
-
-             */
-
+            // ^ slider shit
             int[] regbee = this.RGB_MODE ? new int[]{RED_SLIDER.getValueInt(), GREEN_SLIDER.getValueInt(), BLUE_SLIDER.getValueInt()} :
                     ColourConverter.HSLtoRGB(
                             HUE_SLIDER.getValueInt(),
@@ -494,7 +433,8 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
                 this.HUE_SLIDER.visible = true;
                 this.SAT_SLIDER.visible = true;
                 this.LIT_SLIDER.visible = true;
-            } else {
+            }
+            else {
                 this.RED_SLIDER.active = true;
                 this.GREEN_SLIDER.active = true;
                 this.BLUE_SLIDER.active = true;
@@ -503,20 +443,20 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
                 this.GREEN_SLIDER.visible = true;
                 this.BLUE_SLIDER.visible = true;
             }
+            //^ slider shit
         }
 
         //LIST.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 
 
-            guiGraphics.pose().pushPose();
-            guiGraphics.pose().translate(0.0F, 0.0F, 100.0F);
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0.0F, 0.0F, 100.0F);
 
-            for(KyberTabButton recipebooktabbutton : this.tabButtons) {
-                recipebooktabbutton.render(guiGraphics, mouseX, mouseY, delta);
-            }
-            guiGraphics.pose().popPose();
-
+        for(KyberTabButton recipebooktabbutton : this.tabButtons) {
+                recipebooktabbutton.renderWidget(guiGraphics, mouseX, mouseY, delta);
+        }
+        guiGraphics.pose().popPose();
     }
 
  void updateTabs() {
@@ -531,4 +471,69 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
                 recipebooktabbutton.setPosition(i, j + 27 * l++);
         }
     }
+   void initSliderStuff(){
+       this.HUE_SLIDER = getSliderForColour(0, 360, "hue ", 1);
+       this.SAT_SLIDER = getSliderForColour(0, 100, "sat ", 2);
+       this.LIT_SLIDER = getSliderForColour(0, 100, "light ", 3);
+
+       this.RED_SLIDER = getSliderForColour(0, 255, "red ", 1);
+       this.GREEN_SLIDER = getSliderForColour(0, 255, "green ", 2);
+       this.BLUE_SLIDER = getSliderForColour(0, 255, "blue ", 3);
+
+
+       this.addWidget(this.HUE_SLIDER);
+       this.addWidget(this.SAT_SLIDER);
+       this.addWidget(this.LIT_SLIDER);
+
+       this.addWidget(this.RED_SLIDER);
+       this.addWidget(this.GREEN_SLIDER);
+       this.addWidget(this.BLUE_SLIDER);
+
+
+       this.HUE_SLIDER.active = false;
+       this.SAT_SLIDER.active = false;
+       this.LIT_SLIDER.active = false;
+
+       this.HUE_SLIDER.visible = false;
+       this.SAT_SLIDER.visible = false;
+       this.LIT_SLIDER.visible = false;
+
+
+       this.RED_SLIDER.active = false;
+       this.GREEN_SLIDER.active = false;
+       this.BLUE_SLIDER.active = false;
+
+       this.RED_SLIDER.visible = false;
+       this.GREEN_SLIDER.visible = false;
+       this.BLUE_SLIDER.visible = false;
+
+   }
+   void manShutYourBitchAssUp(boolean yesnt){
+       this.HUE_SLIDER.kys = yesnt;
+       this.SAT_SLIDER.kys = yesnt;
+       this.LIT_SLIDER.kys = yesnt;
+
+       this.RED_SLIDER.kys = yesnt;
+       this.GREEN_SLIDER.kys = yesnt;
+       this.BLUE_SLIDER.kys = yesnt;
+        if(yesnt) {
+            this.HUE_SLIDER.setPosition(0, -99999);
+            this.SAT_SLIDER.setPosition(0, -99999);
+            this.LIT_SLIDER.setPosition(0, -99999);
+
+            this.RED_SLIDER.setPosition(0, -99999);
+            this.GREEN_SLIDER.setPosition(0, -99999);
+            this.BLUE_SLIDER.setPosition(0, -99999);
+        }
+       if(!yesnt) {
+           this.HUE_SLIDER.setPosition(this.leftPos+12, this.topPos+ 12);
+           this.SAT_SLIDER.setPosition(this.leftPos+12, this.topPos+ 12*2);
+           this.LIT_SLIDER.setPosition(this.leftPos+12, this.topPos+ 12*3);
+
+           this.RED_SLIDER.setPosition(this.leftPos+12, this.topPos+ 12);
+           this.GREEN_SLIDER.setPosition(this.leftPos+12, this.topPos+ 12*2);
+           this.BLUE_SLIDER.setPosition(this.leftPos+12, this.topPos+ 12*3);
+       }
+
+   }
 }
