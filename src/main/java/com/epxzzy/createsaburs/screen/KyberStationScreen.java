@@ -176,23 +176,23 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         this.addWidget(this.RGB_TOGGLE);
         initSliderStuff();
 
-        for(KyberModes kebur: KyberModes.getCategories()){
-            this.tabButtons.add(new KyberTabButton(kebur, this.leftPos));
-        }
+        for(int i=0;i<1;i++){
+            List<KyberModes> kebur = KyberModes.getCategories();
+            int finalI = i;
+            this.tabButtons.add(new KyberTabButton(kebur.get(finalI), i,this.topPos+2+(35*(i+1)), this.leftPos));
+            /*
+            {
+                @Override
+                public void onPress() {
+                    SelectTab(tabID);
+                    super.onPress();
+                }
+            });
 
-        if (this.selectedTab != null) {
-            this.selectedTab = this.tabButtons.stream().filter((p_100329_) -> {
-                return p_100329_.getCategory().equals(this.selectedTab.getCategory());
-            }).findFirst().orElse((KyberTabButton) null);
+             */
         }
-
-        if (this.selectedTab == null) {
-            this.selectedTab = this.tabButtons.get(0);
-        }
-
-        this.selectedTab.setStateTriggered(true);
+        this.SelectTab();
         this.updateTabs();
-
     }
 
     public void UpdateServerRecipe() {
@@ -289,20 +289,6 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
-        if(tabButtons.contains(super.getFocused())){};
-        for(KyberTabButton recipebooktabbutton : this.tabButtons) {
-            if (recipebooktabbutton.mouseClicked(pMouseX, pMouseY, pButton)) {
-                if (this.selectedTab != recipebooktabbutton) {
-                    if (this.selectedTab != null) {
-                        this.selectedTab.setStateTriggered(false);
-                    }
-                    recipebooktabbutton.setStateTriggered(true);
-                    this.selectedTab = recipebooktabbutton;
-                }
-                //return true;
-            }
-        }
-
         return super.mouseClicked(pMouseX, pMouseY, pButton);
     }
 
@@ -454,8 +440,15 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         guiGraphics.pose().translate(0.0F, 0.0F, 100.0F);
 
         for(KyberTabButton recipebooktabbutton : this.tabButtons) {
-                recipebooktabbutton.renderWidget(guiGraphics, mouseX, mouseY, delta);
+            if(recipebooktabbutton.tabID==0){
+                //recipebooktabbutton.setPosition(this.leftPos,this.topPos-(35)+5);
+            }
+            if(recipebooktabbutton.tabID==1){
+                //recipebooktabbutton.setPosition(this.leftPos,this.topPos-(2*35)+5);
+            }
+            recipebooktabbutton.renderWidget(guiGraphics, mouseX, mouseY, delta);
         }
+
         guiGraphics.pose().popPose();
     }
 
@@ -536,4 +529,24 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
        }
 
    }
+   void SelectTab(){
+       if (this.selectedTab != null) {
+           this.selectedTab = this.tabButtons.get(0);
+           this.selectedTab.setStateTriggered(true);
+
+       }
+   }
+    void SelectTab(int index){
+        this.selectedTab = this.tabButtons.get(index);
+        for (KyberTabButton tabButton : this.tabButtons) {
+            if(!tabButton.equals(tabButtons.get(index))){
+               continue;
+            }
+            tabButton.setStateTriggered(false);
+        }
+
+        this.selectedTab.setStateTriggered(true);
+
+    }
+
 }
