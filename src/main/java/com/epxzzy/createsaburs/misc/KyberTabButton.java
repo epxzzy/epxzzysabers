@@ -69,7 +69,7 @@ public class KyberTabButton extends AbstractButton {
         RenderSystem.disableDepthTest();
         int i = this.xTexStart;
         int j = this.yTexStart;
-        /*
+
         if (this.isStateTriggered) {
             i += this.xDiffTex;
         }
@@ -77,13 +77,13 @@ public class KyberTabButton extends AbstractButton {
         if (this.isHoveredOrFocused()) {
             j += this.yDiffTex;
         }
+        int k = this.getX();
 
         if (this.isStateTriggered) {
             k -= 2;
         }
 
-         */
-        int k = this.getX();
+
 
         pGuiGraphics.blit(this.resourceLocation, k, this.getY(), i, j, this.width, this.height);
         RenderSystem.enableDepthTest();

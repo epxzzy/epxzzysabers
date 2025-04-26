@@ -192,14 +192,14 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         this.addWidget(this.RGB_TOGGLE);
         initSliderStuff();
 
-        RECOLOUR_TAB_BUTTON = new KyberTabButton(KyberModes.RECOLOUR, 0,this.topPos, this.leftPos){
+        RECOLOUR_TAB_BUTTON = new KyberTabButton(KyberModes.RECOLOUR, 0,this.topPos+15, this.leftPos-50){
             @Override
             public void onPress() {
                 SelectTab(tabID);
                 super.onPress();
             }
         };
-        STANCE_TAB_BUTTON= new KyberTabButton(KyberModes.STANCE, 1,this.topPos+40, this.leftPos){
+        STANCE_TAB_BUTTON= new KyberTabButton(KyberModes.STANCE, 1,this.topPos+40, this.leftPos-50){
                     @Override
                     public void onPress(){
                         SelectTab(tabID);
