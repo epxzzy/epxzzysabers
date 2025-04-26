@@ -30,7 +30,7 @@ public class KyberTabButton extends AbstractButton {
 
     public KyberTabButton(KyberModes pCategory,int tabID,int toppos,int leftpos) {
         //super(0, 0, 35, 27, false);
-        super(toppos,leftpos, 35, 27, Component.literal(""));
+        super(leftpos,toppos, 35, 27, Component.literal(""));
         //this.x=x-45;
         this.tabID = tabID;
         this.category = pCategory;
@@ -54,6 +54,7 @@ public class KyberTabButton extends AbstractButton {
         if(this.isMouseOver(pMouseX,pMouseY)) {
             createsaburs.LOGGER.info("being rendered properly");
         }
+        /*
         if (this.animationTime > 0.0F) {
             float f = 1.0F + 0.1F * (float) Math.sin((double) (this.animationTime / 15.0F * (float) Math.PI));
             pGuiGraphics.pose().pushPose();
@@ -62,10 +63,13 @@ public class KyberTabButton extends AbstractButton {
             pGuiGraphics.pose().translate((float) (-(this.getX() + 8)), (float) (-(this.getY() + 12)), 0.0F);
         }
 
+         */
+
         Minecraft minecraft = Minecraft.getInstance();
         RenderSystem.disableDepthTest();
         int i = this.xTexStart;
         int j = this.yTexStart;
+        /*
         if (this.isStateTriggered) {
             i += this.xDiffTex;
         }
@@ -74,18 +78,24 @@ public class KyberTabButton extends AbstractButton {
             j += this.yDiffTex;
         }
 
-        int k = this.getX();
         if (this.isStateTriggered) {
             k -= 2;
         }
 
-        pGuiGraphics.blit(this.resourceLocation, k, super.getY(), i, j, this.width, this.height);
+         */
+        int k = this.getX();
+
+        pGuiGraphics.blit(this.resourceLocation, k, this.getY(), i, j, this.width, this.height);
         RenderSystem.enableDepthTest();
         this.renderIcon(pGuiGraphics, minecraft.getItemRenderer());
+        pGuiGraphics.renderOutline(this.getX(),this.getY(),this.width, this.height,ColourConverter.portedRGBtoDecimal(new int[]{255,0,0}));
+        /*
         if (this.animationTime > 0.0F) {
             pGuiGraphics.pose().popPose();
             this.animationTime -= pPartialTick;
         }
+
+         */
 
     }
 
@@ -94,15 +104,15 @@ public class KyberTabButton extends AbstractButton {
         List<ItemStack> list = this.category.getIconItems();
         int i = this.isStateTriggered ? -2 : 0;
         if (list.size() == 1) {
-            pGuiGraphics.renderFakeItem(list.get(0),super.getX() + 9 + i, super.getY() + 5);
+            pGuiGraphics.renderFakeItem(list.get(0),this.getX() + 9 + i, this.getY() + 5);
         } else if (list.size() == 2) {
-            pGuiGraphics.renderFakeItem(list.get(0), super.getX() + -3 + i, super.getY() + 5);
-            pGuiGraphics.renderFakeItem(list.get(1), super.getX() + 10 + i, super.getY() + 5);
+            pGuiGraphics.renderFakeItem(list.get(0), this.getX() + -3 + i, this.getY() + 5);
+            pGuiGraphics.renderFakeItem(list.get(1), this.getX() + 10 + i, this.getY() + 5);
 
         } else if (list.size() == 3) {
-            pGuiGraphics.renderFakeItem(list.get(0), super.getX() + i, super.getY());
-            pGuiGraphics.renderFakeItem(list.get(1), super.getX() + i + 5, super.getY() + 5);
-            pGuiGraphics.renderFakeItem(list.get(2), super.getX() + 10 + i, super.getY() + 10);
+            pGuiGraphics.renderFakeItem(list.get(0), this.getX() + i, this.getY());
+            pGuiGraphics.renderFakeItem(list.get(1), this.getX() + i + 5, this.getY() + 5);
+            pGuiGraphics.renderFakeItem(list.get(2), this.getX() + 10 + i, this.getY() + 10);
 
         }
     }
