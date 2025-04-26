@@ -52,7 +52,7 @@ public class KyberTabButton extends AbstractButton {
 
     public void renderWidget(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
         if(this.isMouseOver(pMouseX,pMouseY)) {
-            createsaburs.LOGGER.info("being rendered properly");
+            //createsaburs.LOGGER.info("being rendered properly");
         }
         /*
         if (this.animationTime > 0.0F) {
@@ -70,7 +70,7 @@ public class KyberTabButton extends AbstractButton {
         int i = this.xTexStart;
         int j = this.yTexStart;
 
-        if (this.isStateTriggered) {
+        if (this.isStateTriggered||this.isMouseOver(pMouseX,pMouseY)) {
             i += this.xDiffTex;
         }
 

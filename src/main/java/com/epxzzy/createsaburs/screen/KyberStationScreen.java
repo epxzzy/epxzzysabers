@@ -120,7 +120,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         this.titleLabelY = 10000;
 
 
-        this.RGB_TOGGLE = new AbstractButton(topPos + 50, leftPos - 50, 20, 10, Component.literal("Toggle")) {
+        this.RGB_TOGGLE = new AbstractButton(topPos, leftPos - 140, 20, 10, Component.literal("Toggle")) {
             @Override
             public void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
             }
@@ -192,14 +192,14 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         this.addWidget(this.RGB_TOGGLE);
         initSliderStuff();
 
-        RECOLOUR_TAB_BUTTON = new KyberTabButton(KyberModes.RECOLOUR, 0,this.topPos+15, this.leftPos-50){
+        RECOLOUR_TAB_BUTTON = new KyberTabButton(KyberModes.RECOLOUR, 0,this.topPos+10, this.leftPos-45){
             @Override
             public void onPress() {
                 SelectTab(tabID);
                 super.onPress();
             }
         };
-        STANCE_TAB_BUTTON= new KyberTabButton(KyberModes.STANCE, 1,this.topPos+40, this.leftPos-50){
+        STANCE_TAB_BUTTON= new KyberTabButton(KyberModes.STANCE, 1,this.topPos+40, this.leftPos-45){
                     @Override
                     public void onPress(){
                         SelectTab(tabID);
