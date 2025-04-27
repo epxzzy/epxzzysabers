@@ -47,7 +47,7 @@ public class KyberTabButton extends AbstractButton {
     }
     @Override
     public void onPress() {
-        createsaburs.LOGGER.info("whatss sup biatches");
+        createsaburs.LOGGER.info("whatss sup biatches "+this.isStateTriggered);
     }
 
     public void renderWidget(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
@@ -70,11 +70,11 @@ public class KyberTabButton extends AbstractButton {
         int i = this.xTexStart;
         int j = this.yTexStart;
 
-        if (this.isStateTriggered||this.isMouseOver(pMouseX,pMouseY)) {
+        if (this.isStateTriggered()) {
             i += this.xDiffTex;
         }
 
-        if (this.isHoveredOrFocused()) {
+        if (this.isHoveredOrFocused()||this.isMouseOver(pMouseX,pMouseY)) {
             j += this.yDiffTex;
         }
         int k = this.getX();
@@ -110,9 +110,9 @@ public class KyberTabButton extends AbstractButton {
             pGuiGraphics.renderFakeItem(list.get(1), this.getX() + 10 + i, this.getY() + 5);
 
         } else if (list.size() == 3) {
-            pGuiGraphics.renderFakeItem(list.get(0), this.getX() + i, this.getY());
-            pGuiGraphics.renderFakeItem(list.get(1), this.getX() + i + 5, this.getY() + 5);
-            pGuiGraphics.renderFakeItem(list.get(2), this.getX() + 10 + i, this.getY() + 10);
+            pGuiGraphics.renderFakeItem(list.get(2), this.getX() + 13 + i, this.getY() + 10);
+            pGuiGraphics.renderFakeItem(list.get(1), this.getX() + i + 8, this.getY() + 5);
+            pGuiGraphics.renderFakeItem(list.get(0), this.getX() + i + 3, this.getY());
 
         }
     }

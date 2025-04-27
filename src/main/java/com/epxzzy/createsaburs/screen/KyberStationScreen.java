@@ -29,7 +29,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
             new ResourceLocation(createsaburs.MOD_ID, "textures/gui/kyber_recolour.png");
 
     private static final ResourceLocation STANCE_TEXTURE =
-            new ResourceLocation(createsaburs.MOD_ID, "textures/gui/kyber_stance.png");
+            new ResourceLocation(createsaburs.MOD_ID, "textures/gui/kyber_stanced.png");
 
 
     private static final ResourceLocation OFF_TOGGLE=
@@ -58,7 +58,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
              */
 
-    private KyberTabButton selectedTab = RECOLOUR_TAB_BUTTON;
+    private int selectedTab = 0;
 
     private SliderWidget HUE_SLIDER;
     private SliderWidget SAT_SLIDER;
@@ -364,7 +364,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
-        if(TABLE_MODE == 0) {
+        if(selectedTab== 0) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             RenderSystem.setShaderTexture(0, RECOLOUR_TEXTURE);
@@ -373,7 +373,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
             guiGraphics.blit(RECOLOUR_TEXTURE, x - 15, y, 0, 0, 215, imageHeight);
         }
-        if(TABLE_MODE == 1) {
+        if(selectedTab== 1) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             RenderSystem.setShaderTexture(0, STANCE_TEXTURE);
@@ -394,7 +394,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
         guiGraphics.blit(RGB_MODE?ON_TOGGLE:OFF_TOGGLE,this.leftPos-30, this.topPos+90, (float)0, (float)0, 20, 10, 20, 10);
 
-        if (menu.canCraft()) {
+        if (menu.canCraft()&&selectedTab==0) {
             if (!this.RGB_MODE) {
                 this.HUE_SLIDER.active = true;
                 this.SAT_SLIDER.active = true;
@@ -573,21 +573,14 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
    }
    void SelectTab(){
-       if (this.selectedTab != null) {
-           this.selectedTab = RECOLOUR_TAB_BUTTON;
-           this.selectedTab.setStateTriggered(true);
-
-       }
+           this.selectedTab = 0;
+           this.RECOLOUR_TAB_BUTTON.setStateTriggered(true);
    }
     void SelectTab(int index){
-        if(this.selectedTab != null){
-            this.selectedTab.setStateTriggered(false);
+        (this.selectedTab==0?RECOLOUR_TAB_BUTTON:STANCE_TAB_BUTTON).setStateTriggered(false);
+        this.selectedTab = index;
+        (this.selectedTab==0?RECOLOUR_TAB_BUTTON:STANCE_TAB_BUTTON).setStateTriggered(true);
 
-            this.selectedTab = index==0?RECOLOUR_TAB_BUTTON:STANCE_TAB_BUTTON;
-
-            this.selectedTab.setStateTriggered(true);
-
-        }
 
     }
 
