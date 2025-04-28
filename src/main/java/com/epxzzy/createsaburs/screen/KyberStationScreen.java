@@ -434,6 +434,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         RECOLOUR_TAB_BUTTON.renderWidget(guiGraphics,mouseX,mouseY,delta);
         STANCE_TAB_BUTTON.renderWidget(guiGraphics,mouseX,mouseY,delta);
 
+
         guiGraphics.pose().popPose();
     }
 
@@ -590,6 +591,12 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         this.selectedTab = index;
         (this.selectedTab==0?RECOLOUR_TAB_BUTTON:STANCE_TAB_BUTTON).setStateTriggered(true);
 
+        if(selectedTab==0){
+            this.menu.resetSlotPose();
+        }
+        if(selectedTab==1){
+            this.menu.stanceSlotPose();
+        }
 
     }
 

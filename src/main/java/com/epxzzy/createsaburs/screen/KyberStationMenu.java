@@ -4,6 +4,7 @@ package com.epxzzy.createsaburs.screen;
 import com.epxzzy.createsaburs.block.ModBlocks;
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.misc.ColourConverter;
+import com.epxzzy.createsaburs.misc.MoveableSlot;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
 import net.minecraft.nbt.CompoundTag;
@@ -22,9 +23,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class KyberStationMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
-    private final Slot saber_slot;
-    private final Slot krystal_slot;
-    private final Slot resultSlot;
+    private final MoveableSlot saber_slot;
+    private final MoveableSlot krystal_slot;
+    private final MoveableSlot resultSlot;
     public ItemStack lastCachedItemStacc = null;
     public int CachedColour = 0;
     public boolean isColourCached = false;
@@ -67,13 +68,14 @@ public class KyberStationMenu extends AbstractContainerMenu {
         playerinv.player.level();
         this.access = pAccess;
 
-        this.saber_slot = this.addSlot(new Slot(this.inputContainer, 0, 8, 59){
+        this.saber_slot = (MoveableSlot) this.addSlot(new MoveableSlot(this.inputContainer, 0, 8, 59){
             @Override
             public boolean mayPlace(ItemStack pStack) {
                 return pStack.is(ModTags.Items.CREATE_DYEABLE_LIGHTSABER);
             }
         });
-        this.krystal_slot = this.addSlot(new Slot(this.inputContainer, 1, 44, 59){
+
+        this.krystal_slot = (MoveableSlot) this.addSlot(new MoveableSlot(this.inputContainer, 1, 44, 59){
             @Override
             public boolean mayPlace(ItemStack pStack) {
                 return pStack.is(ModTags.Items.CREATE_KYBER_CRYSTAL);
@@ -81,7 +83,7 @@ public class KyberStationMenu extends AbstractContainerMenu {
 
         });
 
-        this.resultSlot = this.addSlot(new Slot(this.outputContainer, 0, 152, 59) {
+        this.resultSlot = (MoveableSlot) this.addSlot(new MoveableSlot(this.outputContainer, 0, 152, 59) {
             public boolean mayPlace(@NotNull ItemStack stacc) {
                 return false;
             }
@@ -108,6 +110,16 @@ public class KyberStationMenu extends AbstractContainerMenu {
 
     public boolean canCraft() {
         return !this.inputContainer.getItem(0).isEmpty() ^ !this.inputContainer.getItem(1).isEmpty();
+    }
+    public void resetSlotPose(){
+        this.saber_slot.setPos(8,59);
+        this.krystal_slot.setPos(44,59);
+        this.resultSlot.setPos(152,59);
+    }
+    public void stanceSlotPose(){
+        this.saber_slot.setPos(6,0);
+        this.krystal_slot.setPos(6,20);
+        this.resultSlot.setPos(154,0);
     }
 
     public boolean setItemColour(int[] colour) {
