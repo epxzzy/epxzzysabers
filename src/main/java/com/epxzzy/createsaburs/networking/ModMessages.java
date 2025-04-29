@@ -1,6 +1,7 @@
 package com.epxzzy.createsaburs.networking;
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.networking.packet.ServerboundKyberMenuSlotPosToggle;
 import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
 import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacketButBetter;
 import net.minecraft.resources.ResourceLocation;
@@ -40,6 +41,11 @@ public class ModMessages {
                 .decoder(ServerboundRecolourItemPacketButBetter::new)
                 .encoder(ServerboundRecolourItemPacketButBetter::toBytes)
                 .consumerMainThread(ServerboundRecolourItemPacketButBetter::handle)
+                .add();
+        net.messageBuilder(ServerboundKyberMenuSlotPosToggle.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(ServerboundKyberMenuSlotPosToggle::new)
+                .encoder(ServerboundKyberMenuSlotPosToggle::toBytes)
+                .consumerMainThread(ServerboundKyberMenuSlotPosToggle::handle)
                 .add();
 
 
