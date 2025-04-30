@@ -111,26 +111,27 @@ public class KyberStationMenu extends AbstractContainerMenu {
         return !this.inputContainer.getItem(0).isEmpty() ^ !this.inputContainer.getItem(1).isEmpty();
     }
     public void resetSlotPose(){
-        ItemStack inpoo = this.input_slot.getItem();
-        this.input_slot = this.addSlot(new Slot(this.inputContainer, 0, 8, 59){
+        int InputIndex = this.slots.indexOf(this.input_slot);
+        int CostIndex = this.slots.indexOf(this.krystal_slot);
+        int resutlIndex = this.slots.indexOf(this.resultSlot);
+
+        ItemStack InputItem = this.input_slot.getItem();
+        ItemStack CostItem = this.krystal_slot.getItem();
+
+        this.input_slot = new Slot(this.inputContainer, 0, 8, 59){
             @Override
             public boolean mayPlace(ItemStack pStack) {
                 return pStack.is(ModTags.Items.CREATE_DYEABLE_LIGHTSABER);
             }
-        });
-        this.input_slot.set(inpoo);
-        ItemStack cooost = this.krystal_slot.getItem();
-
-        this.krystal_slot =  this.addSlot(new Slot(this.inputContainer, 1, 44, 59){
+        } ;
+        this.krystal_slot = new Slot(this.inputContainer, 1, 44, 59){
             @Override
             public boolean mayPlace(ItemStack pStack) {
                 return pStack.is(ModTags.Items.CREATE_KYBER_CRYSTAL);
             }
 
-        });
-        this.krystal_slot.set(cooost);
-
-        this.resultSlot = this.addSlot(new Slot(this.outputContainer, 0, 152, 59) {
+        };
+        this.resultSlot = new Slot(this.outputContainer, 0, 152, 59) {
             public boolean mayPlace(@NotNull ItemStack stacc) {
                 return false;
             }
@@ -144,30 +145,39 @@ public class KyberStationMenu extends AbstractContainerMenu {
                 createsaburs.LOGGER.warn("taken??");
                 super.onTake(pPlayer, stacc);
             }
-        });
+        };
+
+        this.slots.set(InputIndex, this.input_slot);
+        this.slots.set(CostIndex, this.krystal_slot);
+
+        this.slots.get(InputIndex).set(InputItem);
+        this.slots.get(CostIndex).set(CostItem);
+
+        this.slots.set(resutlIndex, this.resultSlot );
+
     }
     public void stanceSlotPose(){
+        int InputIndex = this.slots.indexOf(this.input_slot);
+        int CostIndex = this.slots.indexOf(this.krystal_slot);
+        int resutlIndex = this.slots.indexOf(this.resultSlot);
 
-        ItemStack inpoo = this.input_slot.getItem();
-        this.input_slot = this.addSlot(new Slot(this.inputContainer, 0, 6, 0){
+        ItemStack InputItem = this.input_slot.getItem();
+        ItemStack CostItem = this.krystal_slot.getItem();
+
+        this.input_slot = new Slot(this.inputContainer, 0, 7, 8){
             @Override
             public boolean mayPlace(ItemStack pStack) {
                 return pStack.is(ModTags.Items.CREATE_DYEABLE_LIGHTSABER);
             }
-        });
-        this.input_slot.set(inpoo);
-        ItemStack cooost = this.krystal_slot.getItem();
-
-        this.krystal_slot =  this.addSlot(new Slot(this.inputContainer, 1, 6, 20){
+        };
+        this.krystal_slot = new Slot(this.inputContainer, 1, 7, 28){
             @Override
             public boolean mayPlace(ItemStack pStack) {
                 return pStack.is(ModTags.Items.CREATE_KYBER_CRYSTAL);
             }
 
-        });
-        this.krystal_slot.set(cooost);
-
-        this.resultSlot = this.addSlot(new Slot(this.outputContainer, 0, 154, 0) {
+        };
+        this.resultSlot = new Slot(this.outputContainer, 0, 153, 8) {
             public boolean mayPlace(@NotNull ItemStack stacc) {
                 return false;
             }
@@ -181,10 +191,20 @@ public class KyberStationMenu extends AbstractContainerMenu {
                 createsaburs.LOGGER.warn("taken??");
                 super.onTake(pPlayer, stacc);
             }
-        });
+        };
 
+        this.slots.set(InputIndex, this.input_slot);
+        this.slots.set(CostIndex, this.krystal_slot);
+
+        this.slots.get(InputIndex).set(InputItem);
+        this.slots.get(CostIndex).set(CostItem);
+
+        this.slots.set(resutlIndex, this.resultSlot);
     }
-
+    public Slot slotsHelper(int indexprob, Slot pSlot){
+        this.slots.add(indexprob, pSlot);
+        return pSlot;
+    };
 
 
     public boolean setItemColour(int[] colour) {

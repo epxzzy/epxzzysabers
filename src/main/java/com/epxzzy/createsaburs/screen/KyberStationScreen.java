@@ -7,7 +7,6 @@ import com.epxzzy.createsaburs.misc.KyberModes;
 import com.epxzzy.createsaburs.misc.KyberTabButton;
 import com.epxzzy.createsaburs.misc.SliderWidget;
 import com.epxzzy.createsaburs.networking.ModMessages;
-import com.epxzzy.createsaburs.networking.packet.ServerboundKyberMenuSlotPosToggle;
 import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.mojang.blaze3d.platform.Lighting;
@@ -593,13 +592,14 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
         (this.selectedTab==0?RECOLOUR_TAB_BUTTON:STANCE_TAB_BUTTON).setStateTriggered(true);
 
         if(selectedTab==0){
-            //ModMessages.sendToServer(new ServerboundKyberMenuSlotPosToggle(false));
+            //ModMessages.sendToServer(new ServerboundKyberMenuSlotPosToggle(true));
             this.menu.resetSlotPose();
         }
         if(selectedTab==1){
-            ModMessages.sendToServer(new ServerboundKyberMenuSlotPosToggle(false));
+            //ModMessages.sendToServer(new ServerboundKyberMenuSlotPosToggle(false));
 
-            //this.menu.stanceSlotPose();
+            this.menu.stanceSlotPose();
+
         }
 
     }

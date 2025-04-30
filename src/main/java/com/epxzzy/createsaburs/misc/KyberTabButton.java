@@ -1,6 +1,5 @@
 package com.epxzzy.createsaburs.misc;
 
-import com.epxzzy.createsaburs.createsaburs;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -47,7 +46,7 @@ public class KyberTabButton extends AbstractButton {
     }
     @Override
     public void onPress() {
-        createsaburs.LOGGER.info("whatss sup biatches "+this.isStateTriggered);
+        //createsaburs.LOGGER.info("whatss sup biatches "+this.isStateTriggered);
     }
 
     public void renderWidget(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
