@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs.item;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer;
+import com.epxzzy.createsaburs.rendering.posehandlers.BladeStance;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.google.common.collect.ArrayListMultimap;
@@ -403,6 +404,26 @@ public class protosaber extends Item {
             return ((LivingEntity) Entityy).getMainHandItem().is(ModTags.Items.CREATE_DUAL_BLADED) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity) Entityy).isUsingItem();
         return false;
     }
+    public static BladeStance getStance(Entity Entityy) {
+        int tagid = 1;
+        if (Entityy instanceof LivingEntity){
+            tagid = ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getCompound("display").getInt("stance");
+        }
+        BladeStance returnee;
+        switch (tagid) {
+            case 2 -> returnee = BladeStance.FORM2;
+            case 3 -> returnee = BladeStance.FORM3;
+            case 4 -> returnee = BladeStance.FORM4;
+            case 5 -> returnee = BladeStance.FORM5;
+            case 6 -> returnee = BladeStance.FORM6;
+            case 7 -> returnee = BladeStance.FORM7;
+
+
+            default -> returnee = BladeStance.FORM1;
+        }
+        return returnee;
+    }
+
 
     public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand) {
         if (Entityy instanceof LivingEntity) {

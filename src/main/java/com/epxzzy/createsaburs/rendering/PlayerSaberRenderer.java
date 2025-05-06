@@ -1,8 +1,9 @@
-package com.epxzzy.createsaburs.misc;
+package com.epxzzy.createsaburs.rendering;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.protosaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
+import com.epxzzy.createsaburs.rendering.posehandlers.DualBladedSaberPoseHandler;
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.client.Minecraft;
@@ -58,9 +59,8 @@ public class PlayerSaberRenderer {
             setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
         }
         if(protosaber.checkForSaberBlock(player)&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
-            setDualBladedAttackStance(model);
+            setBladedStance(player, model);
         }
-
     }
 
     private static void setDualSaberPose(boolean Lefty, boolean both, HumanoidModel<?> model, int flourish) {
@@ -181,28 +181,7 @@ public class PlayerSaberRenderer {
         }
 
     }
-    private static void setDualBladedAttackStance(HumanoidModel<?> model){
-        //model.head.setPos(1,-1,0);
-        model.head.x = 1;
-        model.head.y = 0;
-
-        model.body.setPos(0,-1,0);
-        model.body.setRotation(AngleHelper.rad( 5), AngleHelper.rad( -57.6),0);
-
-        model.rightArm.setPos(-2.5f,1, -6.5f);
-        model.rightArm.setRotation(AngleHelper.rad(-90),0, AngleHelper.rad(90));
-
-        model.leftArm.setPos(4.5f,3,6);
-        model.leftArm.setRotation(AngleHelper.rad(-72.5), AngleHelper.rad(-10), 0);
-
-        //model.rightLeg.setPos((float) -1.5,0, (float) -3.5);
-        model.rightLeg.x = (float) -1.5;
-        model.rightLeg.y = 11;
-        model.rightLeg.z = (float) -3.5;
-        model.rightLeg.setRotation(AngleHelper.rad(-10), AngleHelper.rad(5),0);
-
-        model.leftLeg.z = 3;
-        model.leftLeg.y = 11;
-        model.leftLeg.setRotation(AngleHelper.rad(-2), (float) AngleHelper.rad(-67.5),AngleHelper.rad(-10));
+    private static void setBladedStance(Player player,HumanoidModel<?> model){
+        DualBladedSaberPoseHandler.setPose(protosaber.getStance(player),false, model);
     }
 }

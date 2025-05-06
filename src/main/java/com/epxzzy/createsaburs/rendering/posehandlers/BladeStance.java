@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 
-public enum SingleBladedStance implements net.minecraftforge.common.IExtensibleEnum {
+public enum BladeStance {
     FORM1("shii-cho"),
     // kit fisto, luke?
     FORM2("makashi"),
@@ -21,12 +21,12 @@ public enum SingleBladedStance implements net.minecraftforge.common.IExtensibleE
     // sidious, windu
 
     List<String> flourishes;
-    private SingleBladedStance(String... str) {
+    private BladeStance(String... str) {
         this.flourishes = ImmutableList.copyOf(str);
     }
 
 
-    public static List<SingleBladedStance> getStances() {
+    public static List<BladeStance> getStances() {
         List list;
         list = ImmutableList.of(FORM1,FORM2,FORM3,FORM4,FORM5,FORM6,FORM7);
 
