@@ -3,7 +3,7 @@ package com.epxzzy.createsaburs.rendering;
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.protosaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
-import com.epxzzy.createsaburs.rendering.posehandlers.DualBladedSaberPoseHandler;
+import com.epxzzy.createsaburs.rendering.posehandlers.SaberPoseHandler;
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.client.Minecraft;
@@ -33,7 +33,7 @@ public class PlayerSaberRenderer {
             model.rightArm.resetPose();
             model.rightArm.resetPose();
         }
-        if(protosaber.checkForSaberBlock(player)&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
+        if((protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player))&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
             model.rightArm.resetPose();
             model.leftArm.resetPose();
             model.head.resetPose();
@@ -58,7 +58,7 @@ public class PlayerSaberRenderer {
         if (SingleBladed.checkForSaberEquipment(player, false) && SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0) {
             setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
         }
-        if(protosaber.checkForSaberBlock(player)&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
+        if((protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player))&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
             setBladedStance(player, model);
         }
     }
@@ -182,6 +182,6 @@ public class PlayerSaberRenderer {
 
     }
     private static void setBladedStance(Player player,HumanoidModel<?> model){
-        DualBladedSaberPoseHandler.setPose(protosaber.getStance(player),false, model);
+        SaberPoseHandler.setPose(protosaber.getStance(player),false, model);
     }
 }
