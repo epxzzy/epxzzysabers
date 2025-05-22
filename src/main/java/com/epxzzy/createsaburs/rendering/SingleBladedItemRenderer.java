@@ -23,7 +23,7 @@ import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.getEntiti
 import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.isHoldingItemOffHand;
 
 public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
-    protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/geur"));
+    protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/gear"));
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/blade_single"));
 
     @Override

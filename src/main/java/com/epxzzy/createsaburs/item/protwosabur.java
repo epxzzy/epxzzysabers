@@ -7,7 +7,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.function.Consumer;
 
-public class protwosabur extends protosaber{
+public class protwosabur extends Protosaber{
     public protwosabur(Properties pProperties) {
         super(pProperties, 1,1,1);
     }

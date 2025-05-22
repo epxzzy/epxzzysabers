@@ -2,7 +2,7 @@ package com.epxzzy.createsaburs.mixin.entity;
 
 
 import com.epxzzy.createsaburs.createsaburs;
-import com.epxzzy.createsaburs.item.protosaber;
+import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -23,7 +23,7 @@ public class ThrownTridentMixin {
     )
     private void CustomOnHitEntity(EntityHitResult pResult, CallbackInfo ci){
         ThrownTrident that = ((ThrownTrident) (Object) this);
-        if(protosaber.checkForSaberBlock(pResult.getEntity())|| SingleBladed.checkForSaberBlock(pResult.getEntity())){
+        if(Protosaber.checkForSaberBlock(pResult.getEntity())|| SingleBladed.checkForSaberBlock(pResult.getEntity())){
             that.setDeltaMovement(that.getDeltaMovement().multiply(-0.01D, -0.1D, -0.01D));
             createsaburs.LOGGER.info("trident understands player is blocking");
             float f1 = 1.0F;

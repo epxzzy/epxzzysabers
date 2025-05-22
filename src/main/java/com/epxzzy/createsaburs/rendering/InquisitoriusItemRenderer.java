@@ -23,9 +23,8 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
+public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
-    protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/gear"));
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/blade"));
 
     @Override
@@ -158,10 +157,8 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
         }
         else {
         */
-        ms.mulPose(Axis.YP.rotationDegrees(ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (stack.getOrCreateTag().getBoolean("ActiveBoiii")? -30 : 4)));
         //
         //ms.translate(xOffset, 0, 0);
-        renderer.render(GEAR_BIT.get(), light);
     }
 
 

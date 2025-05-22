@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.item.saburtypes;
 
-import com.epxzzy.createsaburs.item.protosaber;
+import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.rendering.SingleBladedItemRenderer;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
@@ -10,7 +10,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.function.Consumer;
 
-public class SingleBladed extends protosaber {
+public class SingleBladed extends Protosaber {
 
     public SingleBladed(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
         super(pProperties, 3 , 14, 2);

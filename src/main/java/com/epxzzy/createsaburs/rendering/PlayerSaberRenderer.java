@@ -1,7 +1,7 @@
 package com.epxzzy.createsaburs.rendering;
 
 import com.epxzzy.createsaburs.createsaburs;
-import com.epxzzy.createsaburs.item.protosaber;
+import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import com.epxzzy.createsaburs.rendering.posehandlers.SaberPoseHandler;
 import net.createmod.catnip.animation.AnimationTickHolder;
@@ -24,7 +24,7 @@ public class PlayerSaberRenderer {
     }
 
     public static void beforeSetupAnim(Player player, HumanoidModel<?> model) {
-        if (protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
+        if (Protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
             model.leftArm.resetPose();
             model.rightArm.resetPose();
         }
@@ -33,7 +33,7 @@ public class PlayerSaberRenderer {
             model.rightArm.resetPose();
             model.rightArm.resetPose();
         }
-        if((protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player))&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
+        if((Protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player))&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
             model.rightArm.resetPose();
             model.leftArm.resetPose();
             model.head.resetPose();
@@ -46,10 +46,10 @@ public class PlayerSaberRenderer {
 
     public static void afterSetupAnim(Player player, HumanoidModel<?> model) {
         int flourish = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("flourish");
-        if (protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
+        if (Protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
             setDualSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model, flourish);
         }
-        if (protosaber.checkForSaberEquipment(player, false) && protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
+        if (Protosaber.checkForSaberEquipment(player, false) && Protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
             setDualSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
         }
         if (SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0) {
@@ -58,7 +58,7 @@ public class PlayerSaberRenderer {
         if (SingleBladed.checkForSaberEquipment(player, false) && SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0) {
             setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
         }
-        if((protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player))&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
+        if((Protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player))&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
             setBladedStance(player, model);
         }
     }
@@ -182,6 +182,6 @@ public class PlayerSaberRenderer {
 
     }
     private static void setBladedStance(Player player,HumanoidModel<?> model){
-        SaberPoseHandler.setPose(protosaber.getStance(player),false, model);
+        SaberPoseHandler.setPose(Protosaber.getStance(player),false, model);
     }
 }

@@ -1,7 +1,8 @@
 package com.epxzzy.createsaburs;
 
 import com.epxzzy.createsaburs.item.ModItems;
-import com.epxzzy.createsaburs.item.protosaber;
+import com.epxzzy.createsaburs.item.Protosaber;
+import com.epxzzy.createsaburs.item.saburtypes.Inquisitorius;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
@@ -11,12 +12,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import static com.epxzzy.createsaburs.item.ModItems.protosabur;
-
 public class createsabursClient {
-        public static boolean INSIDE_SOUL_GLASS = false;
-        public static boolean INSIDE_MAGMA_CREAM_BLOCK = false;
-        public static boolean INSIDE_ECTOPLASM = false;
 
         public static void init() {
             IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -32,9 +28,10 @@ public class createsabursClient {
         }
 
         public static void itemTints(RegisterColorHandlersEvent.Item event) {
-            event.register((stack, tint) -> tint > 0 ? -1 : protosaber.getColor(stack), protosabur.get());
+            event.register((stack, tint) -> tint > 0 ? -1 : Protosaber.getColor(stack), ModItems.Protosaber.get());
             //event.register((stack, tint) -> tint > 0 ? -1 : protosaber.getColor(stack), ModItems.protosabur2.get());
-            event.register((stack, tint) -> tint > 0 ? -1 : SingleBladed.getColor(stack), ModItems.single_bladed.get());
+            event.register((stack, tint) -> tint > 0 ? -1 : SingleBladed.getColor(stack), ModItems.SINGLE_BLADED_SABER.get());
+            event.register((stack, tint) -> tint > 0 ? -1 : Inquisitorius.getColor(stack), ModItems.DUAL_BLADED_SABER.get());
 
 
         }

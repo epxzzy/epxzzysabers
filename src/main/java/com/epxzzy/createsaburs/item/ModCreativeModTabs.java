@@ -15,17 +15,20 @@ public class ModCreativeModTabs {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, createsaburs.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> TUTORIAL_TAB = CREATIVE_MODE_TABS.register("moditums",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.protosabur.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.Protosaber.get()))
                     .title(Component.translatable("createsaburs.moditemsiglol"))
                     .displayItems((pParameters, pOutput) -> {
-                        pOutput.accept(ModItems.protosabur.get());
-                        pOutput.accept(ModItems.protosabur2.get());
-                        pOutput.accept(ModBlocks.KYBERSTATION.get());
-                        pOutput.accept(ModItems.single_bladed.get());
+                        pOutput.accept(ModItems.Protosaber.get());
+                        pOutput.accept(ModItems.SINGLE_BLADED_SABER.get());
+                        pOutput.accept(ModItems.DUAL_BLADED_SABER.get());
+                        pOutput.accept(ModItems.INQUISITORIUS_SABER.get());
+
                         //pOutput.accept(ModItems.mognet.get());
 
                         //pOutput.accept(Items.DIAMOND);
 
+                        pOutput.accept(ModBlocks.KYBERSTATION.get());
+                        pOutput.accept(ModItems.protosabur2.get());
 
                     })
                     .build());

@@ -47,7 +47,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class protosaber extends Item {
+public class Protosaber extends Item {
     private ArrayListMultimap<Attribute, AttributeModifier> defaultModifiers;
     private final int PARRY_RANGE;
     private final int ATTACK_DAMAGE;
@@ -56,7 +56,7 @@ public class protosaber extends Item {
     public static int BASE_COLOUR = 65280;
     public boolean isActive;
 
-    public protosaber(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
+    public Protosaber(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
         super(pProperties);
         float attackDamage = (float) 5f;
         ArrayListMultimap<Attribute, AttributeModifier> builder = ArrayListMultimap.create();

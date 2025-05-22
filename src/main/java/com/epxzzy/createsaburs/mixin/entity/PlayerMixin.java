@@ -1,7 +1,7 @@
 package com.epxzzy.createsaburs.mixin.entity;
 
 import com.epxzzy.createsaburs.createsaburs;
-import com.epxzzy.createsaburs.item.protosaber;
+import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import com.epxzzy.createsaburs.utils.ModTags;
 import net.minecraft.tags.DamageTypeTags;
@@ -82,7 +82,7 @@ public abstract class PlayerMixin {
     private void createsaburs$customIsInvulnerableTo(DamageSource pSource, CallbackInfoReturnable<Boolean> cir){
         Player that = ((Player) (Object) this);
         if(pSource.is(DamageTypeTags.IS_PROJECTILE)){
-           cir.setReturnValue(protosaber.checkForSaberBlock(that)||SingleBladed.checkForSaberBlock(that));
+           cir.setReturnValue(Protosaber.checkForSaberBlock(that)||SingleBladed.checkForSaberBlock(that));
            cir.cancel();
         }
     }
