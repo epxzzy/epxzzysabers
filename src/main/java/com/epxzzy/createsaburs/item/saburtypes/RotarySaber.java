@@ -105,10 +105,13 @@ public class RotarySaber extends Protosaber {
         return false;
     }
     public static boolean checkForSaberBlock(Player Entityy){
+        /*
         createsaburs.LOGGER.info("first:" +Entityy.getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER));
         createsaburs.LOGGER.info("second:" +Entityy.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") );
         createsaburs.LOGGER.info("third:" +Entityy.isUsingItem());
 
+         */
+        //Entityy.getMainHandItem().is(RotarySaber)
         return Entityy.getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER) &&  Entityy.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && Entityy.isUsingItem();
     }
     public static boolean checkForSaberFly(Entity Entityy){

@@ -43,7 +43,7 @@ public class PlayerSaberRenderer {
             model.rightLeg.resetPose();
             
         };
-        if(RotarySaber.checkForSaberBlock(player)){
+        if(RotarySaber.checkForSaberFly(player)){
             model.head.resetPose();
             model.hat.resetPose();
             model.body.resetPose();
@@ -71,7 +71,7 @@ public class PlayerSaberRenderer {
         if((Protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player))&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
             setBladedStance(player, model);
         }
-        else if (RotarySaber.checkForSaberBlock(player)){
+        else if (RotarySaber.checkForSaberFly(player)){
             setSaberFlyPose(player, model);
         }
     }
