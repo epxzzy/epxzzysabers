@@ -21,7 +21,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.Protosaber.get());
                         pOutput.accept(ModItems.SINGLE_BLADED_SABER.get());
                         pOutput.accept(ModItems.DUAL_BLADED_SABER.get());
-                        pOutput.accept(ModItems.INQUISITORIUS_SABER.get());
+                        pOutput.accept(ModItems.ROTARY_SABER.get());
 
                         //pOutput.accept(ModItems.mognet.get());
 

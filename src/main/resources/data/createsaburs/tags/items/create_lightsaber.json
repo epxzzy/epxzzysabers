@@ -2,6 +2,8 @@
   "values": [
     "createsaburs:protosabur",
     "createsaburs:protwosabur",
-    "createsaburs:single_bladed_saber"
+    "createsaburs:single_bladed_saber",
+    "createsaburs:dual_bladed_saber",
+    "createsaburs:rotary_saber"
   ]
 }

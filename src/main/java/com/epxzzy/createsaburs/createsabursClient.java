@@ -2,7 +2,7 @@ package com.epxzzy.createsaburs;
 
 import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.item.Protosaber;
-import com.epxzzy.createsaburs.item.saburtypes.Inquisitorius;
+import com.epxzzy.createsaburs.item.saburtypes.RotarySaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
@@ -31,7 +31,8 @@ public class createsabursClient {
             event.register((stack, tint) -> tint > 0 ? -1 : Protosaber.getColor(stack), ModItems.Protosaber.get());
             //event.register((stack, tint) -> tint > 0 ? -1 : protosaber.getColor(stack), ModItems.protosabur2.get());
             event.register((stack, tint) -> tint > 0 ? -1 : SingleBladed.getColor(stack), ModItems.SINGLE_BLADED_SABER.get());
-            event.register((stack, tint) -> tint > 0 ? -1 : Inquisitorius.getColor(stack), ModItems.DUAL_BLADED_SABER.get());
+            event.register((stack, tint) -> tint > 0 ? -1 : Protosaber.getColor(stack), ModItems.DUAL_BLADED_SABER.get());
+            event.register((stack, tint) -> tint > 0 ? -1 : RotarySaber.getColor(stack), ModItems.DUAL_BLADED_SABER.get());
 
 
         }

@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs.rendering;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
+import com.epxzzy.createsaburs.item.saburtypes.RotarySaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import com.epxzzy.createsaburs.rendering.posehandlers.SaberPoseHandler;
 import net.createmod.catnip.animation.AnimationTickHolder;
@@ -42,6 +43,15 @@ public class PlayerSaberRenderer {
             model.rightLeg.resetPose();
             
         };
+        if(RotarySaber.checkForSaberBlock(player)){
+            model.head.resetPose();
+            model.hat.resetPose();
+            model.body.resetPose();
+            model.leftArm.resetPose();
+            model.rightArm.resetPose();
+            model.leftLeg.resetPose();
+            model.rightLeg.resetPose();
+        }
     }
 
     public static void afterSetupAnim(Player player, HumanoidModel<?> model) {
@@ -60,6 +70,9 @@ public class PlayerSaberRenderer {
         }
         if((Protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player))&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
             setBladedStance(player, model);
+        }
+        else if (RotarySaber.checkForSaberBlock(player)){
+            setSaberFlyPose(player, model);
         }
     }
 
@@ -184,4 +197,75 @@ public class PlayerSaberRenderer {
     private static void setBladedStance(Player player,HumanoidModel<?> model){
         SaberPoseHandler.setPose(Protosaber.getStance(player),false, model);
     }
+
+    private static void setSaberFlyPose(Player player,HumanoidModel<?> model){
+        model.head.x = 0;
+        model.hat.x = 0;
+        model.body.resetPose();
+        model.leftArm.resetPose();
+        model.rightArm.resetPose();
+        model.leftLeg.resetPose();
+        model.rightLeg.resetPose();
+        boolean isLeftArmMain = player.getMainArm() == HumanoidArm.LEFT;
+
+        float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
+        float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
+        float limbCycle = Mth.sin(((float) (time * 0.3f / Math.PI)));
+        float bodySwing = AngleHelper.rad(15 + (mainCycle * 10));
+        float limbSwing = AngleHelper.rad(limbCycle * 15);
+        if (isLeftArmMain) bodySwing = -bodySwing;
+        model.body.zRot = bodySwing;
+        model.head.zRot = bodySwing;
+        model.hat.zRot = bodySwing;
+
+        ModelPart hangingArm = isLeftArmMain ? model.leftArm : model.rightArm;
+        ModelPart otherArm = isLeftArmMain ? model.rightArm : model.leftArm;
+        hangingArm.y -= 3;
+
+        float offsetX = hangingArm.x;
+        float offsetY = hangingArm.y;
+//		model.rightArm.x = offsetX * Mth.cos(bodySwing) - offsetY * Mth.sin(bodySwing);
+//		model.rightArm.y = offsetX * Mth.sin(bodySwing) + offsetY * Mth.cos(bodySwing);
+        float armPivotX = offsetX * Mth.cos(bodySwing) - offsetY * Mth.sin(bodySwing) + (isLeftArmMain ? -1 : 1) * 4.5f;
+        float armPivotY = offsetX * Mth.sin(bodySwing) + offsetY * Mth.cos(bodySwing) + 2;
+        hangingArm.xRot = -AngleHelper.rad(180);
+
+        offsetX = otherArm.x;
+        offsetY = otherArm.y;
+        otherArm.x = offsetX * Mth.cos(bodySwing) - offsetY * Mth.sin(bodySwing);
+        otherArm.y = offsetX * Mth.sin(bodySwing) + offsetY * Mth.cos(bodySwing);
+        otherArm.zRot = (isLeftArmMain ? -1 : 1) * (-AngleHelper.rad(20)) + 0.5f * bodySwing + limbSwing;
+
+        ModelPart leadingLeg = isLeftArmMain ? model.leftLeg : model.rightLeg;
+        ModelPart trailingLeg = isLeftArmMain ? model.rightLeg : model.leftLeg;
+
+        leadingLeg.y -= 0.2f;
+        offsetX = leadingLeg.x;
+        offsetY = leadingLeg.y;
+        leadingLeg.x = offsetX * Mth.cos(bodySwing) - offsetY * Mth.sin(bodySwing);
+        leadingLeg.y = offsetX * Mth.sin(bodySwing) + offsetY * Mth.cos(bodySwing);
+        leadingLeg.xRot = -AngleHelper.rad(25);
+        leadingLeg.zRot = (isLeftArmMain ? -1 : 1) * (AngleHelper.rad(10)) + 0.5f * bodySwing + limbSwing;
+        trailingLeg.y -= 0.8f;
+        offsetX = trailingLeg.x;
+        offsetY = trailingLeg.y;
+        trailingLeg.x = offsetX * Mth.cos(bodySwing) - offsetY * Mth.sin(bodySwing);
+        trailingLeg.y = offsetX * Mth.sin(bodySwing) + offsetY * Mth.cos(bodySwing);
+        trailingLeg.xRot = AngleHelper.rad(10);
+        trailingLeg.zRot = (isLeftArmMain ? -1 : 1) * (-AngleHelper.rad(10)) + 0.5f * bodySwing + limbSwing;
+        model.hat.x -= armPivotX;
+        model.head.x -= armPivotX;
+        model.body.x -= armPivotX;
+        otherArm.x -= armPivotX;
+        trailingLeg.x -= armPivotX;
+        leadingLeg.x -= armPivotX;
+
+        model.hat.y -= armPivotY;
+        model.head.y -= armPivotY;
+        model.body.y -= armPivotY;
+        otherArm.y -= armPivotY;
+        trailingLeg.y -= armPivotY;
+        leadingLeg.y -= armPivotY;
+    }
+
 }

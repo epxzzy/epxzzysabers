@@ -48,11 +48,26 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
             }
         }
 
+
+
         if (transformType != ItemDisplayContext.GUI && transformType != ItemDisplayContext.FIXED) {
             float time = AnimationTickHolder.getTicks(false);
 
             for (LivingEntity entity : allEntities) {
+                if (((Player) entity).getAbilities().flying) {
+                    //stack.getUseAnimation()
+
+                    //ms.mulPose(Axis.YP.rotationDegrees(-27));
+                    //ms.mulPose(Axis.XP.rotationDegrees(90));
+                    ms.translate(-0.1,0,0);
+                    ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * -3))));
+
+                    ms.pushPose();
+                    ms.popPose();
+                }
+
                 if (entity.swingTime > 0 || entity.swinging) {
+
                     if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 3) {
                         //float movement = Mth.sin(((float) ((time+10) * 5f /Math.PI)));
                         float movement = Mth.cos(((float) ((time) * 3.3 / Math.PI)));

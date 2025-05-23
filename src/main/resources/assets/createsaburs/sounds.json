@@ -1,5 +1,5 @@
 {
-  "activation": {
+  "saber_activation": {
     "subtitles": "sounds.createsaburs.activation",
     "sounds": [
       "createsaburs:activation",
@@ -11,7 +11,7 @@
 
     ]
   },
-  "deactivation": {
+  "saber_deactivation": {
     "subtitle": "sounds.createsaburs.deactivation",
     "sounds": [
       "createsaburs:deactivation",

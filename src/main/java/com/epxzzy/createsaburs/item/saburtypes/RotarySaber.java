@@ -1,5 +1,6 @@
 package com.epxzzy.createsaburs.item.saburtypes;
 
+import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.rendering.InquisitoriusItemRenderer;
 import com.epxzzy.createsaburs.utils.ModTags;
@@ -18,9 +19,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-public class Inquisitorius extends Protosaber {
+public class RotarySaber extends Protosaber {
 
-    public Inquisitorius(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
+    public RotarySaber(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
         super(pProperties, 3 , 14, 2);
     }
     @Override
@@ -38,21 +39,23 @@ public class Inquisitorius extends Protosaber {
         return Objects.requireNonNull(pStack.getTagElement("display")).getInt("color");
     }
 
-    public static boolean checkForSaberBlock(Entity Entityy){
-        if(Entityy instanceof LivingEntity)
-            return ((LivingEntity)Entityy).getMainHandItem().is(ModTags.Items.CREATE_SINGLE_BLADED) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity)Entityy).isUsingItem();
-        return false;
-    }
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, @NotNull InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
+
         if (readActivetag(pPlayer.getItemInHand(pHand)) && !pLevel.isClientSide) {
+            if(pPlayer.xRotO < -35 || pLevel.getBlockState(pPlayer.blockPosition().below(3)).isAir()){
+               pPlayer.getAbilities().flying = true;
+               pPlayer.onUpdateAbilities();
+                createsaburs.LOGGER.info("i can flyyaaa");
+
+
+            }
             pPlayer.startUsingItem(pHand);
-            //return ItemUtils.startUsingInstantly(pLevel, pPlayer, pHand);
         }
         if (pPlayer.isShiftKeyDown() && pHand == InteractionHand.MAIN_HAND) {
-            ToggleSaberCore(pLevel, pPlayer, itemstack);
+            super.ToggleSaberCore(pLevel, pPlayer, itemstack);
             pPlayer.stopUsingItem();
             return InteractionResultHolder.fail(pPlayer.getItemInHand(pHand));
         }
@@ -66,8 +69,13 @@ public class Inquisitorius extends Protosaber {
         if(pLevel.getBlockState(pLivingEntity.blockPosition().below()).isAir()){
             nbeetea.putBoolean("blockboiii", false);
         }
-        if(!(pLevel.getBlockState(pLivingEntity.blockPosition().below()).isAir())){
-            nbeetea.putBoolean("flyboiii", false);
+
+        nbeetea.putBoolean("FlyBoiii", false);
+        if (pLivingEntity instanceof Player){
+            ((Player) pLivingEntity).getAbilities().flying = false;
+            ((Player) pLivingEntity).onUpdateAbilities();
+            //}
+
         }
 
         pStack.setTag(nbeetea);
@@ -77,16 +85,37 @@ public class Inquisitorius extends Protosaber {
     public void onStopUsing(ItemStack pStack, LivingEntity entity, int count) {
         CompoundTag nbeetea = pStack.getOrCreateTag();
         nbeetea.putBoolean("BlockBoiii", false);
+
+        nbeetea.putBoolean("FlyBoiii", false);
+        if (entity instanceof Player){
+            ((Player) entity).getAbilities().flying = false;
+            ((Player) entity).onUpdateAbilities();
+
+        }
+
         pStack.setTag(nbeetea);
         super.onStopUsing(pStack, entity, count);
     }
 
     public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand){
         if(Entityy instanceof LivingEntity) {
-            if(Mainhand) return ((LivingEntity) Entityy).getMainHandItem().is(ModTags.Items.CREATE_SINGLE_BLADED) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-            return ((LivingEntity) Entityy).getOffhandItem().is(ModTags.Items.CREATE_SINGLE_BLADED) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
+            if(Mainhand) return ((LivingEntity) Entityy).getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
+            return ((LivingEntity) Entityy).getOffhandItem().is(ModTags.Items.CREATE_ROTARY_SABER) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
         }
         return false;
     }
+    public static boolean checkForSaberBlock(Player Entityy){
+        createsaburs.LOGGER.info("first:" +Entityy.getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER));
+        createsaburs.LOGGER.info("second:" +Entityy.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") );
+        createsaburs.LOGGER.info("third:" +Entityy.isUsingItem());
+
+        return Entityy.getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER) &&  Entityy.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && Entityy.isUsingItem();
+    }
+    public static boolean checkForSaberFly(Entity Entityy){
+        if(Entityy instanceof Player)
+            return ((Player)Entityy).getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER) && ((Player) Entityy).getAbilities().flying ;
+        return false;
+    }
+
 
 }
