@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 public class RotarySaber extends Protosaber {
     public int flyCooldown = 40;
     //160 == cant fly, 0 == can fly
-    public int flightDuration = 80;
+    public int flightDuration = 200;
     //0 == no more fly, 300 == flyyy
 
     public RotarySaber(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
@@ -73,7 +73,7 @@ public class RotarySaber extends Protosaber {
                 if(this.flyCooldown >= 1){
                     --this.flyCooldown;
                     if(this.flyCooldown == 0) {
-                        this.flightDuration = 80;
+                        this.flightDuration = 200;
                         createsaburs.LOGGER.info("you can now fly");
                     }
                 }
