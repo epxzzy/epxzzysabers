@@ -20,9 +20,13 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class RotarySaber extends Protosaber {
+    public int flyCooldown = 40;
+    //300 == cant fly, 0 == can fly
+    //public int flightDuration = 40;
+    //0 == no more fly, 300 == flyyy
 
     public RotarySaber(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
-        super(pProperties, 3 , 14, 2);
+        super(pProperties, pRANGE , pDamage, pSpeed);
     }
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -39,18 +43,47 @@ public class RotarySaber extends Protosaber {
         return Objects.requireNonNull(pStack.getTagElement("display")).getInt("color");
     }
 
+    @Override
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+        if(pEntity instanceof LivingEntity pLiving && !(pLevel.isClientSide())){
+/*
+            if(pLiving instanceof Player pPlayer && pPlayer.getAbilities().flying){
+                --this.flightDuration;
+                if(this.flightDuration >= 0){
+                    pPlayer.stopUsingItem();
+                    createsaburs.LOGGER.info("you can no longer fly");
+                    this.flightDuration = 40;
+                }
+            }
+
+ */
+            if(pLiving instanceof Player pPlayer && !(pPlayer.getAbilities().flying)){
+                if(this.flyCooldown >= 1){
+                    --this.flyCooldown;
+
+                    if(this.flyCooldown == 0) createsaburs.LOGGER.info("you can now fly");
+                }
+            }
+
+        }
+    }
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, @NotNull InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
 
         if (readActivetag(pPlayer.getItemInHand(pHand)) && !pLevel.isClientSide) {
-            if(pPlayer.xRotO < -35 || pLevel.getBlockState(pPlayer.blockPosition().below(3)).isAir()){
+            if((pPlayer.xRotO < -35 || pLevel.getBlockState(pPlayer.blockPosition().below(3)).isAir())&&this.flyCooldown == 0){
                pPlayer.getAbilities().flying = true;
                pPlayer.onUpdateAbilities();
-                createsaburs.LOGGER.info("i can flyyaaa");
+               //this.flyCooldown = 40;
+               createsaburs.LOGGER.info("flying activated");
 
 
+            }
+            if(this.flyCooldown >= 1){
+               createsaburs.LOGGER.info("you cant seem to fly, flightcooldown: "+this.flyCooldown+ " and flightduration: " +"plugged out");
             }
             pPlayer.startUsingItem(pHand);
         }
@@ -63,25 +96,6 @@ public class RotarySaber extends Protosaber {
     }
 
     @Override
-    public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged) {
-        //createsaburs.LOGGER.info("stopped blocking, changing custom model data");
-        CompoundTag nbeetea = pStack.getOrCreateTag();
-        if(pLevel.getBlockState(pLivingEntity.blockPosition().below()).isAir()){
-            nbeetea.putBoolean("blockboiii", false);
-        }
-
-        nbeetea.putBoolean("FlyBoiii", false);
-        if (pLivingEntity instanceof Player){
-            ((Player) pLivingEntity).getAbilities().flying = false;
-            ((Player) pLivingEntity).onUpdateAbilities();
-            //}
-
-        }
-
-        pStack.setTag(nbeetea);
-    }
-
-    @Override
     public void onStopUsing(ItemStack pStack, LivingEntity entity, int count) {
         CompoundTag nbeetea = pStack.getOrCreateTag();
         nbeetea.putBoolean("BlockBoiii", false);
@@ -90,7 +104,8 @@ public class RotarySaber extends Protosaber {
         if (entity instanceof Player){
             ((Player) entity).getAbilities().flying = false;
             ((Player) entity).onUpdateAbilities();
-
+            createsaburs.LOGGER.info("flying deactivated");
+            this.flyCooldown = 40;
         }
 
         pStack.setTag(nbeetea);
@@ -104,6 +119,7 @@ public class RotarySaber extends Protosaber {
         }
         return false;
     }
+
     public static boolean checkForSaberBlock(Player Entityy){
         /*
         createsaburs.LOGGER.info("first:" +Entityy.getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER));
