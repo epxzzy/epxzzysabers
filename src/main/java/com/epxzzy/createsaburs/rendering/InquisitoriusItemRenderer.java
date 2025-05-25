@@ -61,7 +61,7 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
                     //ms.mulPose(Axis.YP.rotationDegrees(-27));
                     //ms.mulPose(Axis.XP.rotationDegrees(90));
-                    //ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * -3))));
+                    ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * -3))));
 
                     ms.pushPose();
                     ms.popPose();
@@ -179,8 +179,8 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
                 //ms.mulPose(Axis.YP.rotationDegrees(-27));
                 //ms.mulPose(Axis.XP.rotationDegrees(90));
-                ms.translate(0,0,0);
-                //ms.mulPose(Axis.ZN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * -3))));
+                ms.translate(0,-0.178,0);
+                ms.mulPose(Axis.ZN.rotation(ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * -3))));
             }
         }
         renderer.render(HANDLE.get(), light);
