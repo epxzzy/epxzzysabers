@@ -219,7 +219,7 @@ public class PlayerSaberRenderer {
         model.head.zRot = bodySwing;
         model.hat.zRot = bodySwing;
 
-        createsaburs.LOGGER.info("offhand is "+offhand+" isLeftArm is " + isLeftArmMain);
+        //createsaburs.LOGGER.info("offhand is "+offhand+" isLeftArm is " + isLeftArmMain);
 
         ModelPart hangingArm = (isLeftArmMain ? model.leftArm : model.rightArm);
         ModelPart otherArm = (isLeftArmMain ? model.rightArm : model.leftArm);

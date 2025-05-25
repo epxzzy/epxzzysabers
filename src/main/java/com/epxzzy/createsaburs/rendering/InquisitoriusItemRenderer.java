@@ -27,6 +27,8 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/blade"));
 
+    protected static final PartialModel HANDLE = PartialModel.of(createsaburs.asResource("item/rotary_handle"));
+
     @Override
     protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
                           PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
@@ -54,6 +56,16 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
             float time = AnimationTickHolder.getTicks(false);
 
             for (LivingEntity entity : allEntities) {
+                if (((Player) entity).getAbilities().flying) {
+                    //stack.getUseAnimation()
+
+                    //ms.mulPose(Axis.YP.rotationDegrees(-27));
+                    //ms.mulPose(Axis.XP.rotationDegrees(90));
+                    //ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * -3))));
+
+                    ms.pushPose();
+                    ms.popPose();
+                }
                 if (entity.swingTime > 0 || entity.swinging) {
 
                     if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 3) {
@@ -140,7 +152,6 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
         renderer.render(model.getOriginalModel(), light);
         //}
 
-
         if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
             //stack.getUseAnimation()
             ms.pushPose();
@@ -168,13 +179,11 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
                 //ms.mulPose(Axis.YP.rotationDegrees(-27));
                 //ms.mulPose(Axis.XP.rotationDegrees(90));
-                ms.translate(-0.1,0,0);
-                ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * -3))));
-
-                ms.pushPose();
-                ms.popPose();
+                ms.translate(0,0,0);
+                //ms.mulPose(Axis.ZN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * -3))));
             }
         }
+        renderer.render(HANDLE.get(), light);
 
     }
 

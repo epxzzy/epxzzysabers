@@ -159,7 +159,7 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
         else {
         */
         ms.mulPose(Axis.YP.rotationDegrees(ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (stack.getOrCreateTag().getBoolean("ActiveBoiii")? -30 : 4)));
-        //
+//
         //ms.translate(xOffset, 0, 0);
         renderer.render(GEAR_BIT.get(), light);
     }
