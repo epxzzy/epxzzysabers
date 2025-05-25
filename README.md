@@ -14,12 +14,12 @@ ideas n stuff:
  - Saber gauntlet (high attack speed, low attack damage, low parry range)
 
 # Items: 
- - Proton bombs
+ - Proton bombs (spherical superpowered tnt)
  - Kyber crystals
- - Thermal detonators
+ - Thermal detonators (a grenade pretty much)
  - Laser Blaster (w/ variations)
  - Beskar alloy
- - Beskar armour
+ - Beskar armour (armour that is resistant to saber attacks)
  - (Ark pulse generator)[https://starwars.fandom.com/wiki/Arc_Pulse_Generator]
 
 # Mechanics:
@@ -27,3 +27,9 @@ ideas n stuff:
  - Crystal bleeding
  - Crystal purification
  - Parry 
+ - Saber flight
+
+
+
+
+ 
