@@ -54,18 +54,6 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
             float time = AnimationTickHolder.getTicks(false);
 
             for (LivingEntity entity : allEntities) {
-                if (((Player) entity).getAbilities().flying) {
-                    //stack.getUseAnimation()
-
-                    //ms.mulPose(Axis.YP.rotationDegrees(-27));
-                    //ms.mulPose(Axis.XP.rotationDegrees(90));
-                    ms.translate(-0.1,0,0);
-                    ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * -3))));
-
-                    ms.pushPose();
-                    ms.popPose();
-                }
-
                 if (entity.swingTime > 0 || entity.swinging) {
 
                     if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 3) {
@@ -73,8 +61,6 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
                         float movement = Mth.cos(((float) ((time) * 3.3 / Math.PI)));
                         float movementARM = Mth.sin(((float) ((time) * 3.3 / Math.PI)));
                         float movementZARM = Mth.sin(((float) ((time+Mth.PI/2) * 3.3 / Math.PI)));
-
-
                         float movement3 = Mth.sin(((float) ((time) * 4 / Math.PI)));
 
 
@@ -102,7 +88,6 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
                         float armXmovement = Mth.sin(((float) ((time) * 3.3 / Math.PI)));
                         float armZmovement = Mth.sin(((float) ((time+Mth.PI/2) * 3.3 / Math.PI)));
-
 
                         float movement3 = Mth.sin(((float) ((time) * 4 / Math.PI)));
 
@@ -174,6 +159,23 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
         */
         //
         //ms.translate(xOffset, 0, 0);
+
+
+
+        for (LivingEntity entity : allEntities) {
+            if (((Player) entity).getAbilities().flying) {
+                //stack.getUseAnimation()
+
+                //ms.mulPose(Axis.YP.rotationDegrees(-27));
+                //ms.mulPose(Axis.XP.rotationDegrees(90));
+                ms.translate(-0.1,0,0);
+                ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * -3))));
+
+                ms.pushPose();
+                ms.popPose();
+            }
+        }
+
     }
 
 

@@ -43,7 +43,7 @@ public class PlayerSaberRenderer {
             model.rightLeg.resetPose();
             
         };
-        if(RotarySaber.checkForSaberFly(player)){
+        if(RotarySaber.checkForSaberFly(player)[0]){
             model.head.resetPose();
             model.hat.resetPose();
             model.body.resetPose();
@@ -71,8 +71,8 @@ public class PlayerSaberRenderer {
         if((Protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player))&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
             setBladedStance(player, model);
         }
-        else if (RotarySaber.checkForSaberFly(player)){
-            setSaberFlyPose(player, model);
+        else if (RotarySaber.checkForSaberFly(player)[0]){
+            setSaberFlyPose(player, model, RotarySaber.checkForSaberFly(player)[1]);
         }
     }
 
@@ -198,7 +198,7 @@ public class PlayerSaberRenderer {
         SaberPoseHandler.setPose(Protosaber.getStance(player),false, model);
     }
 
-    private static void setSaberFlyPose(Player player,HumanoidModel<?> model){
+    private static void setSaberFlyPose(Player player,HumanoidModel<?> model, boolean offhand){
         model.head.x = 0;
         model.hat.x = 0;
         model.body.resetPose();
@@ -206,7 +206,8 @@ public class PlayerSaberRenderer {
         model.rightArm.resetPose();
         model.leftLeg.resetPose();
         model.rightLeg.resetPose();
-        boolean isLeftArmMain = player.getMainArm() == HumanoidArm.LEFT;
+        boolean isLeftArmMain = (player.getMainArm() == HumanoidArm.LEFT);
+        isLeftArmMain = offhand?!isLeftArmMain: isLeftArmMain;
 
         float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
         float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
@@ -218,8 +219,10 @@ public class PlayerSaberRenderer {
         model.head.zRot = bodySwing;
         model.hat.zRot = bodySwing;
 
-        ModelPart hangingArm = isLeftArmMain ? model.leftArm : model.rightArm;
-        ModelPart otherArm = isLeftArmMain ? model.rightArm : model.leftArm;
+        createsaburs.LOGGER.info("offhand is "+offhand+" isLeftArm is " + isLeftArmMain);
+
+        ModelPart hangingArm = (isLeftArmMain ? model.leftArm : model.rightArm);
+        ModelPart otherArm = (isLeftArmMain ? model.rightArm : model.leftArm);
         hangingArm.y -= 3;
 
         float offsetX = hangingArm.x;
