@@ -1,7 +1,7 @@
 create saburs
 create 6.0.3-71
 
-
+//TODO: make rotary saber put on as an chest item if rightclicked turned off
 
 ideas n stuff:
 
