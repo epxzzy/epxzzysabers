@@ -25,7 +25,7 @@ import java.util.List;
 
 public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
-    protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/blade"));
+    protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/rotary_blade"));
 
     protected static final PartialModel HANDLE = PartialModel.of(createsaburs.asResource("item/rotary_handle"));
 
@@ -181,6 +181,10 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
                 //ms.mulPose(Axis.XP.rotationDegrees(90));
                 ms.translate(0,-0.178,0);
                 ms.mulPose(Axis.ZN.rotation(ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * -3))));
+            }
+            else {
+                ms.translate(0,-0.178,0);
+
             }
         }
         renderer.render(HANDLE.get(), light);
