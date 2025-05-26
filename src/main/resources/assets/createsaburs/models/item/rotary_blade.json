@@ -6,7 +6,7 @@
 	},
 	"elements": [
 		{
-			"from": [7, 11, 7],
+			"from": [7, 12, 7],
 			"to": [9, 32, 9],
 			"light_emission": 15,
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
@@ -21,7 +21,7 @@
 		},
 		{
 			"from": [7, -16, 7],
-			"to": [9, 5, 9],
+			"to": [9, 4, 9],
 			"light_emission": 15,
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {

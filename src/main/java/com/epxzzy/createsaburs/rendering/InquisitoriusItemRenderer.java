@@ -179,7 +179,7 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
                 //ms.mulPose(Axis.YP.rotationDegrees(-27));
                 //ms.mulPose(Axis.XP.rotationDegrees(90));
-                ms.translate(0,-0.178,0);
+                ms.translate(0,-0.179,0);
                 ms.mulPose(Axis.ZN.rotation(ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * -3))));
             }
             else {
