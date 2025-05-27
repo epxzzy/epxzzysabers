@@ -77,8 +77,8 @@ public class Protosaber extends Item {
 
     public void writeActiveTag(ItemStack pStack, boolean bool) {
         CompoundTag tag = pStack.getOrCreateTag();
-        CompoundTag tagsToApply = new CompoundTag();
-        CompoundTag displayTag = new CompoundTag();
+        CompoundTag tagsToApply = pStack.getOrCreateTag().copy();
+        CompoundTag displayTag = pStack.getOrCreateTag().getCompound("display").copy();
 
         if (tag.contains("AttributeModifiers", 9)) {
             tag.remove("AttributeModifiers");
@@ -106,7 +106,6 @@ public class Protosaber extends Item {
         baseAttackAttribute.putString("Slot", EquipmentSlot.MAINHAND.getName());
         baseSpeedAttribute.putString("AttributeName", BuiltInRegistries.ATTRIBUTE.getKey(Attributes.ATTACK_SPEED).toString());
         baseSpeedAttribute.putString("Slot", EquipmentSlot.MAINHAND.getName());
-
 
         listtag.add(baseAttackAttribute);
         listtag.add(baseSpeedAttribute);
