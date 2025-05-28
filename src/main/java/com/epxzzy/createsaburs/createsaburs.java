@@ -3,6 +3,7 @@ package com.epxzzy.createsaburs;
 import com.epxzzy.createsaburs.block.ModBlockEntities;
 import com.epxzzy.createsaburs.block.ModBlocks;
 import com.epxzzy.createsaburs.entity.ModEntities;
+import com.epxzzy.createsaburs.entity.client.ThrownRotarySaberRenderer;
 import com.epxzzy.createsaburs.item.ModCreativeModTabs;
 import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.networking.ModMessages;
@@ -11,6 +12,7 @@ import com.epxzzy.createsaburs.screen.ModMenuTypes;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -86,6 +88,9 @@ public class createsaburs {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.SKREEN.get(), KyberStationScreen::new);
+
+
+            EntityRenderers.register(ModEntities.ROTARY_SABER_ENTITY.get(), ThrownRotarySaberRenderer::new);
 
         }
     }
