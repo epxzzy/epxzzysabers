@@ -28,6 +28,7 @@ ideas n stuff:
  - Crystal purification
  - Parry 
  - Saber flight
+ - Saber Throw
 
 
 

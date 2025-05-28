@@ -1,13 +1,8 @@
 package com.epxzzy.createsaburs.event;
 
-/*
-@Mod.EventBusSubscriber(modid= createsaburs.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ModEvents {
+import com.epxzzy.createsaburs.createsaburs;
+import net.minecraftforge.fml.common.Mod;
 
-    @SubscribeEvent
-    public static void onEmptyLeftClick(Player player)
-    {
-        MinecraftForge.EVENT_BUS.post(new PlayerInteractEvent.LeftClickEmpty(player));
-    }
+@Mod.EventBusSubscriber(modid = createsaburs.MOD_ID)
+public class ModEvents {
 }
-*/

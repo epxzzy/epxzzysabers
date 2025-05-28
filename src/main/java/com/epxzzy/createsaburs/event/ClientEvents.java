@@ -1,51 +1,32 @@
 package com.epxzzy.createsaburs.event;
 
-import com.epxzzy.createsaburs.event.events.EventPosePlayerHand;
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.LivingEntity;
+import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.misc.KeyBinding;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 public class ClientEvents {
-    @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
-    public void onPoseHand(EventPosePlayerHand event) {
-        LivingEntity player = (LivingEntity) event.getEntityIn();
-        float f = Minecraft.getInstance().getFrameTime();
-        float rightHandRaygunUseProgress = 0.0F;
-        float leftHandRaygunUseProgress = 0.0F;
-
-        /*
-        if (player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof RaygunItem) {
-            if (player.getMainArm() == HumanoidArm.RIGHT) {
-                rightHandRaygunUseProgress = Math.max(rightHandRaygunUseProgress, RaygunItem.getLerpedUseTime(player.getItemInHand(InteractionHand.MAIN_HAND), f));
-            } else {
-                leftHandRaygunUseProgress = Math.max(leftHandRaygunUseProgress, RaygunItem.getLerpedUseTime(player.getItemInHand(InteractionHand.MAIN_HAND), f));
+    @Mod.EventBusSubscriber(modid = createsaburs.MOD_ID, value = Dist.CLIENT)
+    public static class ClientForgeEvents {
+        @SubscribeEvent
+        public static void onKeyInput(InputEvent.Key event) {
+            if(KeyBinding.SABER_ABILITY_KEY.consumeClick()) {
+                //throw the saber the actually
+                //TODO: network packet to actually have the itemstack turn into an entity
+                //Minecraft.getInstance().player.sendSystemMessage(Component.literal("Pressed a Key!"));
             }
         }
-        if (player.getItemInHand(InteractionHand.OFF_HAND).getItem() instanceof RaygunItem) {
-            if (player.getMainArm() == HumanoidArm.RIGHT) {
-                leftHandRaygunUseProgress = Math.max(leftHandRaygunUseProgress, RaygunItem.getLerpedUseTime(player.getItemInHand(InteractionHand.OFF_HAND), f));
-            } else {
-                rightHandRaygunUseProgress = Math.max(rightHandRaygunUseProgress, RaygunItem.getLerpedUseTime(player.getItemInHand(InteractionHand.OFF_HAND), f));
-            }
-        }
-        if (leftHandRaygunUseProgress > 0.0F) {
-            float useProgress = Math.min(5F, leftHandRaygunUseProgress) / 5F;
-            event.getModel().leftArm.xRot = (event.getModel().head.xRot - (float) Math.toRadians(80F)) * useProgress;
-            event.getModel().leftArm.yRot = event.getModel().head.yRot * useProgress;
-            event.getModel().leftArm.zRot = 0;
-            event.setResult(Event.Result.ALLOW);
-        }
-        if (rightHandRaygunUseProgress > 0.0F) {
-            float useProgress = Math.min(5F, rightHandRaygunUseProgress) / 5F;
-            event.getModel().rightArm.xRot = (event.getModel().head.xRot - (float) Math.toRadians(80F)) * useProgress;
-            event.getModel().rightArm.yRot = event.getModel().head.yRot * useProgress;
-            event.getModel().rightArm.zRot = 0;
-            event.setResult(Event.Result.ALLOW);
-        }
+    }
 
-         */
+    @Mod.EventBusSubscriber(modid = createsaburs.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ClientModBusEvents {
+        @SubscribeEvent
+        public static void onKeyRegister(RegisterKeyMappingsEvent event) {
+            event.register(KeyBinding.SABER_ABILITY_KEY);
+        }
     }
 }
+
