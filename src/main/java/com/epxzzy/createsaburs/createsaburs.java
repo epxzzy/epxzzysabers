@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs;
 
 import com.epxzzy.createsaburs.block.ModBlockEntities;
 import com.epxzzy.createsaburs.block.ModBlocks;
+import com.epxzzy.createsaburs.entity.ModEntities;
 import com.epxzzy.createsaburs.item.ModCreativeModTabs;
 import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.networking.ModMessages;
@@ -44,6 +45,8 @@ public class createsaburs {
         ModMenuTypes.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModSounds.register(modEventBus);
+        ModEntities.register(modEventBus);
+
 
         ModCreativeModTabs.register(modEventBus);
 
