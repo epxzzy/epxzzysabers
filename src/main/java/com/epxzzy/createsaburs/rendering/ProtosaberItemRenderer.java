@@ -25,8 +25,8 @@ import java.util.List;
 
 public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
 
-    protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/gear"));
-    protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/blade"));
+    protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/gear"));
+    protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/blade"));
 
     @Override
     protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
@@ -53,7 +53,7 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
             float time = AnimationTickHolder.getTicks(false);
 
             for (LivingEntity entity : allEntities) {
-                if (entity.swingTime > 0 || entity.swinging) {
+                if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
                     if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 3) {
                         //float movement = Mth.sin(((float) ((time+10) * 5f /Math.PI)));
                         float movement = Mth.cos(((float) ((time) * 3.3 / Math.PI)));

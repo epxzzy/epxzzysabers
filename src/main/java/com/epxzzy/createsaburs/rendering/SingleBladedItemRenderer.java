@@ -23,8 +23,8 @@ import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.getEntiti
 import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.isHoldingItemOffHand;
 
 public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
-    protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/gear"));
-    protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/blade_single"));
+    protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/gear"));
+    protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/blade_single"));
 
     @Override
     protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
@@ -51,7 +51,7 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
             float time = AnimationTickHolder.getTicks(false);
 
             for (LivingEntity entity : allEntities) {
-                if (entity.swingTime > 0 || entity.swinging) {
+                if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")){
                     if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 2) {
                         //float movement = Mth.sin(((float) ((time+10) * 5f /Math.PI)));
                         float movement = Mth.sin(((float) ((time) * 5/ Math.PI)));

@@ -25,9 +25,9 @@ import java.util.List;
 
 public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
-    protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/rotary_blade"));
+    protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/rotary_blade"));
 
-    protected static final PartialModel HANDLE = PartialModel.of(createsaburs.asResource("item/rotary_handle"));
+    protected static final PartialModel HANDLE = PartialModel.of(createsaburs.asResource("item/additive/rotary_handle"));
 
     @Override
     protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
@@ -66,7 +66,7 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
                     ms.pushPose();
                     ms.popPose();
                 }
-                if (entity.swingTime > 0 || entity.swinging) {
+                if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
 
                     if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 3) {
                         //float movement = Mth.sin(((float) ((time+10) * 5f /Math.PI)));
