@@ -2,6 +2,8 @@ package com.epxzzy.createsaburs.event;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.misc.KeyBinding;
+import com.epxzzy.createsaburs.networking.ModMessages;
+import com.epxzzy.createsaburs.networking.packet.ServerboundRotarySaberAbilityPacket;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -16,7 +18,8 @@ public class ClientEvents {
             if(KeyBinding.SABER_ABILITY_KEY.consumeClick()) {
                 //throw the saber the actually
                 //TODO: network packet to actually have the itemstack turn into an entity
-                //Minecraft.getInstance().player.sendSystemMessage(Component.literal("Pressed a Key!"));
+                //Minecraft.getInstance().player.connection.send(new ServerboundRotarySaberAbilityPacket());
+                ModMessages.sendToServer(new ServerboundRotarySaberAbilityPacket());
             }
         }
     }
