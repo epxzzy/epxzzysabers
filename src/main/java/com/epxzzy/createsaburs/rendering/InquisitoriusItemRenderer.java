@@ -26,6 +26,7 @@ import java.util.List;
 public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/rotary_blade"));
+    protected static final PartialModel SPIN_BIT = PartialModel.of(createsaburs.asResource("item/additive/spin"));
 
     protected static final PartialModel HANDLE = PartialModel.of(createsaburs.asResource("item/additive/rotary_handle"));
 
@@ -61,7 +62,7 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
                     //ms.mulPose(Axis.YP.rotationDegrees(-27));
                     //ms.mulPose(Axis.XP.rotationDegrees(90));
-                    ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * -3))));
+                    //ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * -0.000000000001))));
 
                     ms.pushPose();
                     ms.popPose();
@@ -179,8 +180,10 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
                 //ms.mulPose(Axis.YP.rotationDegrees(-27));
                 //ms.mulPose(Axis.XP.rotationDegrees(90));
+                ms.translate(0.05,0.179,0);
+                renderer.render(SPIN_BIT.get(), LightTexture.FULL_BRIGHT);
                 ms.translate(0,-0.179,0);
-                ms.mulPose(Axis.ZN.rotation(ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * -3))));
+                //ms.mulPose(Axis.ZN.rotation(ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * 0.000000000001))));
             }
             else {
                 ms.translate(0,-0.178,0);

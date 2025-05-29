@@ -1,10 +1,10 @@
 package com.epxzzy.createsaburs.entity.client;
 
 
+import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.minecraft.client.model.TridentModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -13,18 +13,17 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class ThrownRotarySaberRenderer extends EntityRenderer<ThrownRotarySaber> {
     public static final ResourceLocation TRIDENT_LOCATION = new ResourceLocation("textures/entity/trident.png");
-    private final TridentModel model;
+    private final ThrownRotarySaberModel model;
 
     public ThrownRotarySaberRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
-        this.model = new TridentModel(pContext.bakeLayer(ModelLayers.TRIDENT));
+        this.model = new ThrownRotarySaberModel(pContext.bakeLayer(ModelLayers.TRIDENT));
     }
 
     @Override
