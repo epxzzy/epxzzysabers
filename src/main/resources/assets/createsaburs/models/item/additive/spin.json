@@ -22,7 +22,7 @@
 	],
 	"display": {
 		"thirdperson_righthand": {
-			"translation": [0, 0, 0]
+			"translation": [0, -200, 0]
 		},
 		"thirdperson_lefthand": {
 			"translation": [0, 0, 0]

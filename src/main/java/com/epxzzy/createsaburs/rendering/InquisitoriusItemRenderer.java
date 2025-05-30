@@ -26,7 +26,7 @@ import java.util.List;
 public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/rotary_blade"));
-    protected static final PartialModel SPIN_BIT = PartialModel.of(createsaburs.asResource("item/additive/spin"));
+    protected static final PartialModel SPIN_BIT = PartialModel.of(createsaburs.asResource("item/additive/rotary_swing"));
 
     protected static final PartialModel HANDLE = PartialModel.of(createsaburs.asResource("item/additive/rotary_handle"));
 
@@ -62,7 +62,7 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
                     //ms.mulPose(Axis.YP.rotationDegrees(-27));
                     //ms.mulPose(Axis.XP.rotationDegrees(90));
-                    //ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * -0.000000000001))));
+                    ms.mulPose(Axis.ZP.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * 5))));
 
                     ms.pushPose();
                     ms.popPose();
@@ -153,12 +153,7 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
         renderer.render(model.getOriginalModel(), light);
         //}
 
-        if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
-            //stack.getUseAnimation()
-            ms.pushPose();
-            renderer.renderGlowing(GLOWLY_BIT.get(),  LightTexture.FULL_BRIGHT);
-            ms.popPose();
-        }
+
 
 
         float xOffset = -1 / 16f;
@@ -176,17 +171,29 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
         for (LivingEntity entity : allEntities) {
             if (((Player) entity).getAbilities().flying) {
+
                 //stack.getUseAnimation()
 
                 //ms.mulPose(Axis.YP.rotationDegrees(-27));
                 //ms.mulPose(Axis.XP.rotationDegrees(90));
-                ms.translate(0.05,0.179,0);
+                //ms.translate(0.05,0.179,0);
+                ms.pushPose();
+                ms.translate(0.035,-0.175,0);
                 renderer.render(SPIN_BIT.get(), LightTexture.FULL_BRIGHT);
-                ms.translate(0,-0.179,0);
-                //ms.mulPose(Axis.ZN.rotation(ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * 0.000000000001))));
+                ms.popPose();
+
+                ms.translate(0,-0.175,0);
+                ms.mulPose(Axis.ZN.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * 5))));
+                continue;
+            }
+            else if (stack.getOrCreateTag().getBoolean("ActiveBoiii")&& !((Player) entity).getAbilities().flying && transformType != ItemDisplayContext.GUI) {
+                //stack.getUseAnimation()
+                ms.pushPose();
+                renderer.renderGlowing(GLOWLY_BIT.get(),  LightTexture.FULL_BRIGHT);
+                ms.popPose();
             }
             else {
-                ms.translate(0,-0.178,0);
+                //ms.translate(0,-0.179,0);
 
             }
         }
