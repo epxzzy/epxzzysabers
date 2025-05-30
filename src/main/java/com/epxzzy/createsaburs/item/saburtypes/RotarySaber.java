@@ -5,6 +5,7 @@ import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.rendering.InquisitoriusItemRenderer;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -81,16 +82,28 @@ public class RotarySaber extends Protosaber {
 
         }
     }
+    public boolean isInAir(Player pPlayer){
+        BlockPos pos = pPlayer.blockPosition();
+        Level level = pPlayer.level();
+        return level.getBlockState(pos.below()).isAir()&&
+                level.getBlockState(pos.below(2)).isAir()&&
+                level.getBlockState(pos.below(3)).isAir()&&
+                level.getBlockState(pos.above()).isAir();
+    }
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, @NotNull InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
 
         if (readActivetag(pPlayer.getItemInHand(pHand)) && !pLevel.isClientSide) {
-            if((pPlayer.xRotO < -35 || pLevel.getBlockState(pPlayer.blockPosition().below(3)).isAir())){
+            if((pPlayer.xRotO < -35 || this.isInAir(pPlayer))){
                 if(this.flyCooldown == 0 && this.flightDuration >= 1) {
                     pPlayer.getAbilities().flying = true;
                     pPlayer.onUpdateAbilities();
+
+                    CompoundTag tug = itemstack.getOrCreateTag().copy();
+                    tug.putBoolean("FlyBoiii", true);
+                    itemstack.setTag(tug);
                     //this.flyCooldown = 40;
                     createsaburs.LOGGER.info("flying activated");
                 }

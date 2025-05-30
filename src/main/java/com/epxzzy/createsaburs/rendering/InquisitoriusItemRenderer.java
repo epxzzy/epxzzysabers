@@ -42,6 +42,7 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
         */
 
         List<LivingEntity> allEntities = getEntitiesHoldingItem(stack);
+
         for (LivingEntity entity : allEntities) {
             if(transformType.firstPerson() && entity.isUsingItem()){
                 int modifier = leftHand ? -1 : 1;
@@ -154,10 +155,15 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
         //}
 
 
-
+        if (stack.getOrCreateTag().getBoolean("ActiveBoiii") && !stack.getOrCreateTag().getBoolean("FlyBoiii")) {
+            //stack.getUseAnimation()
+            ms.pushPose();
+            renderer.renderGlowing(GLOWLY_BIT.get(),  LightTexture.FULL_BRIGHT);
+            ms.popPose();
+        }
 
         float xOffset = -1 / 16f;
-        ms.translate(0, xOffset * -3, 0);
+        //ms.translate(0, xOffset * -3, 0);
         /*
         if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
             ms.mulPose(Axis.YP.rotationDegrees(ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * 20));
@@ -170,7 +176,7 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
 
         for (LivingEntity entity : allEntities) {
-            if (((Player) entity).getAbilities().flying) {
+            if (((Player) entity).getAbilities().flying && transformType != ItemDisplayContext.GUI ) {
 
                 //stack.getUseAnimation()
 
@@ -178,15 +184,15 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
                 //ms.mulPose(Axis.XP.rotationDegrees(90));
                 //ms.translate(0.05,0.179,0);
                 ms.pushPose();
-                ms.translate(0.035,-0.175,0);
+                //ms.translate(0.035,-0.175,0);
                 renderer.render(SPIN_BIT.get(), LightTexture.FULL_BRIGHT);
                 ms.popPose();
 
-                ms.translate(0,-0.175,0);
+                //ms.translate(0,-0.175,0);
                 ms.mulPose(Axis.ZN.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * 5))));
                 continue;
             }
-            else if (stack.getOrCreateTag().getBoolean("ActiveBoiii")&& !((Player) entity).getAbilities().flying && transformType != ItemDisplayContext.GUI) {
+            else if (((Player) entity).getAbilities().flying && stack.getOrCreateTag().getBoolean("FlyBoiii")) {
                 //stack.getUseAnimation()
                 ms.pushPose();
                 renderer.renderGlowing(GLOWLY_BIT.get(),  LightTexture.FULL_BRIGHT);
