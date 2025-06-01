@@ -1,6 +1,7 @@
 package com.epxzzy.createsaburs.rendering;
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.rendering.poseRenderer.SingleBladed.SingleBladedItemPoseRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueHandler;
@@ -9,10 +10,8 @@ import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRendere
 import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.animation.AnimationTickHolder;
-import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +19,6 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.getEntitiesHoldingItem;
-import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.isHoldingItemOffHand;
 
 public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
     protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/gear"));
@@ -52,37 +50,7 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
 
             for (LivingEntity entity : allEntities) {
                 if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")){
-                    if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 2) {
-                        //float movement = Mth.sin(((float) ((time+10) * 5f /Math.PI)));
-                        float movement = Mth.sin(((float) ((time) * 5/ Math.PI)));
-
-                        ms.mulPose(Axis.XP.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (10))-(45*movement)));
-                        ms.mulPose(Axis.ZP.rotationDegrees(movement * 50));
-                        //ms.mulPose(Axis.YP.rotationDegrees(movement*10-10));
-
-                        //ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(30)));
-                        ms.pushPose();
-                        ms.popPose();
-                    }
-
-                    if (stack.getOrCreateTag().getCompound("display").getInt("flourish") == 1) {
-                        int multiplier = isHoldingItemOffHand(entity, stack)?-1:1;
-                        createsaburs.LOGGER.info("nbt offhand: " + stack.getOrCreateTag().getCompound("display").getBoolean("offhand") + " and thought to be: " + (isHoldingItemOffHand(entity, stack) ? "offhand" : "mainhand") + " and multiplier " + multiplier );
-                        float movement = Mth.sin(((float) ((time) * 6/ Math.PI)));
-                        float squaremovement = (Mth.sin(time) >= 0)? 1:-1;
-                        //ItemStack.isSameItemSameTags(entity.getOffhandItem())
-
-                        //ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
-                        ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
-                        ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(squaremovement*25)));
-
-                        //ms.mulPose(Axis.YP.rotation(AngleHelper.rad(30)));
-                        //ms.mulPose(Axis.ZP.rotation(AngleHelper.rad(movement * 20)));
-
-                        //ms.mulPose(Axis.XP.rotation(-AngleHelper.rad(movement * 60)));
-                        //System.out.print("I... AM STEEVE\n");
-                    }
-
+                    SingleBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
                 }
             }
         }

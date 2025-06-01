@@ -1,4 +1,4 @@
-package com.epxzzy.createsaburs.rendering.posehandlers;
+package com.epxzzy.createsaburs.rendering.poseHandlers;
 
 import com.google.common.collect.ImmutableList;
 

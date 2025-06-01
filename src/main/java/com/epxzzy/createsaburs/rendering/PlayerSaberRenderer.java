@@ -1,10 +1,11 @@
 package com.epxzzy.createsaburs.rendering;
 
-import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.item.saburtypes.RotarySaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
-import com.epxzzy.createsaburs.rendering.posehandlers.SaberPoseHandler;
+import com.epxzzy.createsaburs.rendering.poseHandlers.PlayerStanceRenderer;
+import com.epxzzy.createsaburs.rendering.poseRenderer.DualBladed.DualBladedArmPoseRenderer;
+import com.epxzzy.createsaburs.rendering.poseRenderer.SingleBladed.SingleBladedArmPoseRenderer;
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.client.Minecraft;
@@ -83,119 +84,18 @@ public class PlayerSaberRenderer {
         ModelPart MainArm = Lefty ? model.leftArm : model.rightArm;
         ModelPart otherArm = Lefty ? model.rightArm : model.leftArm;
 
-        //model.hat.y -= armPivotY;
-        //model.head.y -= armPivotY;
-        //otherArm.y -= armPivotY;
-        if(flourish == 1){
-            //skip catch
-            model.body.resetPose();
-            MainArm.resetPose();
-            otherArm.resetPose();
+        DualBladedArmPoseRenderer.setArmPose(flourish, Lefty, both, model);
 
-
-            float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));
-
-            MainArm.xRot = (float) (Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +AngleHelper.rad(movement*3));
-            MainArm.yRot = AngleHelper.rad(-27);
-            otherArm.xRot = (float)(Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +AngleHelper.rad(-movement*3));
-            otherArm.yRot = AngleHelper.rad(27);
-
-
-
-        }
-        if (flourish == 2) {
-            MainArm.resetPose();
-            otherArm.resetPose();
-            //spin behind the back
-            float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
-            float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));
-
-            float movement2 = Mth.sin(((float) ((time) * 3.3 / Math.PI)));
-            float movement3 = Mth.sin(((float) ((time+Mth.PI/-2) * 3.3 / Math.PI)));
-
-
-            MainArm.xRot = AngleHelper.rad(-45.04 * movement2);
-            otherArm.xRot = AngleHelper.rad(-45.04 * movement3);
-
-            MainArm.zRot = AngleHelper.rad(movement2 * -30);
-            otherArm.zRot = AngleHelper.rad(movement3 * 30);
-
-
-
-            //MainArm.yRot = AngleHelper.rad(-27);
-            //otherArm.xRot = (float)(Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +AngleHelper.rad(-movement*3));
-            //otherArm.yRot = AngleHelper.rad(27);
-
-        }
-        if(flourish == 3){
-            //heli behind the back
-            MainArm.resetPose();
-            otherArm.resetPose();
-
-            float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*2/Math.PI));
-
-            MainArm.xRot = (float) (Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +(-movement*1.1));
-            MainArm.yRot = AngleHelper.rad(-30);
-            otherArm.xRot = (float)(Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +(movement*1.1));
-            otherArm.yRot = AngleHelper.rad(30);
-
-        }
     }
 
     private static void setSingleBladedSaberPose(boolean Lefty, boolean both, HumanoidModel<?> model, int flourish) {
         if (Minecraft.getInstance().isPaused())
             return;
-        ModelPart MainArm = Lefty ? model.rightArm : model.leftArm;
-        ModelPart otherArm = Lefty ? model.leftArm : model.rightArm;
 
-
-        if (flourish == 1) {
-            createsaburs.LOGGER.info("the xcross");
-            //the x-cross
-            float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
-            float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
-
-            MainArm.resetPose();
-
-            MainArm.xRot = Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F;
-            MainArm.yRot = AngleHelper.rad(-20);
-            if (both) {
-                otherArm.resetPose();
-                //otherArm.xRot = -AngleHelper.rad(bodySwing + 150);
-                otherArm.xRot = Mth.clamp(model.head.xRot, -1.2F, 1.2F) - 1.4835298F;
-                MainArm.yRot = AngleHelper.rad(0);
-                //otherArm.zRot = (Lefty ? 1 : -1) * AngleHelper.rad(15);
-            }
-
-        }
-
-
-        if (flourish == 2) {
-            createsaburs.LOGGER.info("the circular");
-            //the circular
-            float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
-            float movement = Mth.sin(((float) ((time) * 3.3 / Math.PI)));
-            float movement2 = Mth.sin(((float) ((time) * 4 / Math.PI)));
-
-            MainArm.resetPose();
-            MainArm.xRot = AngleHelper.rad(-45.04 * movement - 10);
-            MainArm.zRot = AngleHelper.rad(movement2 * -30);
-
-
-            if (both) {
-                otherArm.resetPose();
-                otherArm.xRot = Mth.cos(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
-                otherArm.zRot = -AngleHelper.rad(20);
-            }
-            if (!both) {
-                //otherArm.zRot = (Lefty ? -1 : 1) * (-AngleHelper.rad(20)) + 0.5f * bodySwing + limbSwing;
-            }
-
-        }
-
+        SingleBladedArmPoseRenderer.setArmPose(flourish, Lefty, both, model);
     }
     private static void setBladedStance(Player player,HumanoidModel<?> model){
-        SaberPoseHandler.setPose(Protosaber.getStance(player),false, model);
+        PlayerStanceRenderer.setPose(Protosaber.getStance(player),false, model);
     }
 
     private static void setSaberFlyPose(Player player,HumanoidModel<?> model, boolean offhand){

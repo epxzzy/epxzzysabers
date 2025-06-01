@@ -1,9 +1,9 @@
-package com.epxzzy.createsaburs.rendering.posehandlers;
+package com.epxzzy.createsaburs.rendering.poseHandlers;
 
 import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.client.model.HumanoidModel;
 
-public class SaberPoseHandler {
+public class PlayerStanceRenderer {
     public static void setPose(BladeStance stance, boolean Lefty, HumanoidModel<?> model) {
         switch (stance) {
             case FORM1 -> SetStanceForm1(Lefty, model);

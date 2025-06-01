@@ -2,7 +2,7 @@ package com.epxzzy.createsaburs.item;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer;
-import com.epxzzy.createsaburs.rendering.posehandlers.BladeStance;
+import com.epxzzy.createsaburs.rendering.poseHandlers.BladeStance;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.google.common.collect.ArrayListMultimap;
@@ -325,9 +325,9 @@ public class Protosaber extends Item {
                 Vec3 vec31 = vec32.vectorTo(entity.position()).normalize();
                 vec31 = new Vec3(vec31.x, vec31.y, vec31.z);
                 if (vec31.dot(vec3) < 0.4D && speee > -2.0D) {
-                    createsaburs.LOGGER.warn("oh look what do we have here?");
-                    createsaburs.LOGGER.warn("is on ground: " + entity1.onGround() + " and is decending? " + entity1.isDescending());
-                    createsaburs.LOGGER.warn("avrg speed is " + (speee));
+                    //createsaburs.LOGGER.warn("oh look what do we have here?");
+                    //createsaburs.LOGGER.warn("is on ground: " + entity1.onGround() + " and is decending? " + entity1.isDescending());
+                    //createsaburs.LOGGER.warn("avrg speed is " + (speee));
 
                     if (Projectile.class.isAssignableFrom(entity1.getClass())) {
                         createsaburs.LOGGER.warn("its a projectile???");
