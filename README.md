@@ -30,6 +30,17 @@ ideas n stuff:
  - Saber flight
  - Saber Throw
 
+   
+# Stances:
+ 1. shi-cho
+ 2. makashi
+ 3. soresu
+ 4. ataru
+ 5. shen/djem so
+ 6. niman
+ 7. juyo/vapaad
+
+each form will have a different block, attack, parry and flourish animations/visuals
 
 
 
