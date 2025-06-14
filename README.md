@@ -1,6 +1,9 @@
 create saburs
 create 6.0.3-71
 
+I AM BACK BITCHES
+//TODO: kill create and make this a solo thing, though we might compat create when it comes to jetpacks and shit
+
 //TODO: make rotary saber put on as an chest item if rightclicked turned off
 //TODO: facilitate item renderer stance and player stance so we get proper stance grips
 
