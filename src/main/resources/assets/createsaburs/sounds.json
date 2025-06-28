@@ -1,6 +1,6 @@
 {
   "saber_activation": {
-    "subtitles": "sounds.createsaburs.activation",
+    "subtitle": "sounds.createsaburs.activation",
     "sounds": [
       "createsaburs:activation",
       "createsaburs:activation1",
