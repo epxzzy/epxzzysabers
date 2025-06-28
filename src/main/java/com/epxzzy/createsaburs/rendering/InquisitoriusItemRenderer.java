@@ -1,6 +1,7 @@
 package com.epxzzy.createsaburs.rendering;
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.item.saburtypes.RotarySaber;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueHandler;
@@ -58,7 +59,7 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
             float time = AnimationTickHolder.getTicks(false);
 
             for (LivingEntity entity : allEntities) {
-                if (((Player) entity).getAbilities().flying) {
+                if (RotarySaber.checkForSaberFly(entity)[0]) {
                     //stack.getUseAnimation()
 
                     //ms.mulPose(Axis.YP.rotationDegrees(-27));
@@ -176,7 +177,7 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
 
 
         for (LivingEntity entity : allEntities) {
-            if (((Player) entity).getAbilities().flying && transformType != ItemDisplayContext.GUI ) {
+            if ((RotarySaber.checkForSaberFly(entity)[0] && transformType != ItemDisplayContext.GUI )) {
 
                 //stack.getUseAnimation()
 
@@ -192,7 +193,7 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
                 ms.mulPose(Axis.ZN.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * 5))));
                 continue;
             }
-            else if (((Player) entity).getAbilities().flying && stack.getOrCreateTag().getBoolean("FlyBoiii")) {
+            else if (RotarySaber.checkForSaberFly(entity)[0]) {
                 //stack.getUseAnimation()
                 ms.pushPose();
                 renderer.renderGlowing(GLOWLY_BIT.get(),  LightTexture.FULL_BRIGHT);

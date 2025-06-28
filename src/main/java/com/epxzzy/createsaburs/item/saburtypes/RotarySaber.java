@@ -161,8 +161,11 @@ public class RotarySaber extends Protosaber {
     public static boolean[] checkForSaberFly(Entity Entityy){
 
         if(Entityy instanceof Player) {
-            boolean mainhand = ((Player) Entityy).getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER) && ((Player) Entityy).getAbilities().flying;
-            boolean offhand = ((Player) Entityy).getOffhandItem().is(ModTags.Items.CREATE_ROTARY_SABER) && ((Player) Entityy).getAbilities().flying;
+            ((Player) Entityy).getMainHandItem().getOrCreateTag().getBoolean("FlyBoiii");
+
+            boolean mainhand = (((Player) Entityy).getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER) && ((Player) Entityy).getMainHandItem().getOrCreateTag().getBoolean("FlyBoiii"))  && ((Player) Entityy).getAbilities().flying;
+            boolean offhand = (((Player) Entityy).getOffhandItem().is(ModTags.Items.CREATE_ROTARY_SABER) && ((Player) Entityy).getOffhandItem().getOrCreateTag().getBoolean("FlyBoiii"))  && ((Player) Entityy).getAbilities().flying;
+
             return  new boolean[]{ mainhand|| offhand, offhand};
         }
         return new boolean[]{false, false};
