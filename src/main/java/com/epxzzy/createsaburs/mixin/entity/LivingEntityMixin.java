@@ -31,6 +31,7 @@ public abstract class LivingEntityMixin {
     private void createsaburs$customhurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
 
         LivingEntity that = ((LivingEntity) (Object) this);
+
         Entity notThat = pSource.getEntity();
 
         if (notThat != null) {
@@ -63,17 +64,23 @@ public abstract class LivingEntityMixin {
                 //cir.cancel();
                 //cir.setReturnValue(false);
             }
-            if (blocking_with_sabur && !attacking_with_sabur) {
-                cir.cancel();
-                that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);
+
+            if (blocking_with_sabur && Projectile.class.isAssignableFrom(Objects.requireNonNull(pSource.getDirectEntity()).getClass())) {
+                if(Player.class.isAssignableFrom(Objects.requireNonNull(that.getClass()))&&!(((Player) that).getAbilities().flying)){
+                    createsaburs.LOGGER.warn("blocked a projectile");
+                    cir.cancel();
+                    that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);
+                }
+                else {
+                    createsaburs.LOGGER.warn("flying bozo spotted, die");
+                }
                 return;
             }
 
-            if (blocking_with_sabur && Projectile.class.isAssignableFrom(Objects.requireNonNull(pSource.getDirectEntity()).getClass())) {
+            if (blocking_with_sabur && !attacking_with_sabur) {
+                createsaburs.LOGGER.warn("blocked a regular ass weapon");
                 cir.cancel();
                 that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);
-                return;
-            } else {
                 return;
             }
 

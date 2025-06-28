@@ -81,7 +81,7 @@ public abstract class PlayerMixin {
 
     private void createsaburs$customIsInvulnerableTo(DamageSource pSource, CallbackInfoReturnable<Boolean> cir){
         Player that = ((Player) (Object) this);
-        if(pSource.is(DamageTypeTags.IS_PROJECTILE)){
+        if(pSource.is(DamageTypeTags.IS_PROJECTILE)&&!(that.getAbilities().flying)){
            cir.setReturnValue(Protosaber.checkForSaberBlock(that)||SingleBladed.checkForSaberBlock(that));
            cir.cancel();
         }
