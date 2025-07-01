@@ -190,7 +190,7 @@ public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
                 ms.popPose();
 
                 //ms.translate(0,-0.175,0);
-                ms.mulPose(Axis.ZN.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks() * 5))));
+                ms.mulPose(Axis.ZN.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * 5)));
                 continue;
             }
             else if (RotarySaber.checkForSaberFly(entity)[0]) {

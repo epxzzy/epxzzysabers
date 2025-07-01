@@ -34,7 +34,7 @@ public class DualBladedItemPoseRenderer {
         //ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
         ms.mulPose(Axis.YP.rotationDegrees(-27));
         ms.translate(-0.1,0,0);
-        ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * -3))));
+        ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks())) * -2));
 
     }
 
@@ -65,7 +65,7 @@ public class DualBladedItemPoseRenderer {
         ms.translate(-0.3 +movementreverse*0.6,0.2,0+movement*-0.3);
         //ms.mulPose(Axis.ZP.rotation(AngleHelper.rad(-30*-armXmovement)));//- ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks() *3)));
 
-        ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 5))));
+        ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks()))* 3));
 
 
         //ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(30)));

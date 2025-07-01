@@ -36,7 +36,7 @@ public class SingleBladedItemPoseRenderer {
         //ItemStack.isSameItemSameTags(entity.getOffhandItem())
 
         //ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
-        ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
+        ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10))*multiplier));
         ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(squaremovement*25)));
     }
 
@@ -44,7 +44,7 @@ public class SingleBladedItemPoseRenderer {
         float time = AnimationTickHolder.getTicks(false);
         float movement = Mth.sin(((float) ((time) * 5/ Math.PI)));
 
-        ms.mulPose(Axis.XP.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (10))-(45*movement)));
+        ms.mulPose(Axis.XP.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks())) * (10)-(45*movement)));
         ms.mulPose(Axis.ZP.rotationDegrees(movement * 50));
         //ms.mulPose(Axis.YP.rotationDegrees(movement*10-10));
 
