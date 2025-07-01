@@ -18,8 +18,8 @@ ideas n stuff:
  - Saber gauntlet (high attack speed, low attack damage, low parry range)
 
 # Items: 
- - Proton bombs (spherical superpowered tnt)
- - Kyber crystals
+ - Proton bombs (cylindrical superpowered tnt)
+ - Kyber crystals (Natural && Synthetic)
  - Thermal detonators (a grenade pretty much)
  - Laser Blaster (w/ variations)
  - Beskar alloy
@@ -28,11 +28,10 @@ ideas n stuff:
 
 # Mechanics:
  - Deflection
- - Crystal bleeding
- - Crystal purification
  - Parry 
- - Saber flight
+ - Saber Flight
  - Saber Throw
+ - Saber Shooting?
 
    
 # Stances:
