@@ -8,7 +8,7 @@ public enum DualBladedFlourish {
     NOFLOURISH("none", 0),
     SKIPCATCH("skip-catch", 1),
     BEHINDTHEBACK("behind-the-back", 2),
-    UNTITLEDANDUNFINISHED("untitled-and-unfinished", 3);
+    FIGUREEIGHT("figure-eight", 3);
 
 
     private final String str;
@@ -25,7 +25,7 @@ public enum DualBladedFlourish {
 
     public static List<DualBladedFlourish> getCategories() {
         List list;
-        list = ImmutableList.of(NOFLOURISH, SKIPCATCH, BEHINDTHEBACK, UNTITLEDANDUNFINISHED);
+        list = ImmutableList.of(NOFLOURISH, SKIPCATCH, BEHINDTHEBACK, FIGUREEIGHT);
 
         return list;
     }

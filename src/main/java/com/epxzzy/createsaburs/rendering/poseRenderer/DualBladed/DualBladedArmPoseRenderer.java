@@ -14,7 +14,7 @@ public class DualBladedArmPoseRenderer {
             case SKIPCATCH -> SetArmFlourishSKIPCATCH(Lefty, both, model);
             case BEHINDTHEBACK -> SetArmFlourishBEHINDTHEBACK(Lefty, both, model);
 
-            case UNTITLEDANDUNFINISHED -> SetArmFlourishUNTITLED(Lefty, both, model);
+            case FIGUREEIGHT -> SetArmFlourishFIGUREEIGHT(Lefty, both, model);
 
         }
     }
@@ -78,5 +78,23 @@ public class DualBladedArmPoseRenderer {
         otherArm.yRot = AngleHelper.rad(30);
 
     }
+    public static void SetArmFlourishFIGUREEIGHT(boolean Lefty, boolean both, HumanoidModel<?> model){
+        ModelPart MainArm = Lefty ? model.leftArm: model.rightArm;
+        ModelPart otherArm = Lefty ? model.rightArm: model.leftArm;
+
+        model.body.resetPose();
+
+        MainArm.resetPose();
+        otherArm.resetPose();
+
+
+        float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));
+
+        MainArm.xRot = (float) (Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +AngleHelper.rad(movement*3));
+        MainArm.yRot = AngleHelper.rad(-27);
+        otherArm.xRot = (float)(Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +AngleHelper.rad(-movement*3));
+        otherArm.yRot = AngleHelper.rad(27);
+    }
+
 
 }

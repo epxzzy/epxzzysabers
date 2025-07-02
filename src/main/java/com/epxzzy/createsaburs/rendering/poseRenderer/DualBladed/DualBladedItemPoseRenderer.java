@@ -19,9 +19,12 @@ public class DualBladedItemPoseRenderer {
         DualBladedFlourish flourish = DualBladedFlourish.fromTagID(stack.getOrCreateTag().getCompound("display").getInt("flourish"));
         switch (flourish) {
             case SKIPCATCH -> SetFlourishSKIPCATCH(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
-            //side to side
+            //front neeeeooommm
             case BEHINDTHEBACK -> SetFlourishBEHINDTHEBACK(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
-            //the "obi-ani"
+            //circling neeeeoommm
+            case FIGUREEIGHT -> SetFlourishFIGUREEIGHT(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+            //side neeeeooommm
+
         }
     }
     public static void SetFlourishSKIPCATCH(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
@@ -34,7 +37,7 @@ public class DualBladedItemPoseRenderer {
         //ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
         ms.mulPose(Axis.YP.rotationDegrees(-27));
         ms.translate(-0.1,0,0);
-        ms.mulPose(Axis.ZP.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks())) * -2));
+        ms.mulPose(Axis.ZP.rotation((float) (ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks())) * 2.5)));
 
     }
 
@@ -72,4 +75,21 @@ public class DualBladedItemPoseRenderer {
         ms.pushPose();
         ms.popPose();
     }
+
+    public static void SetFlourishFIGUREEIGHT(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
+        float time = AnimationTickHolder.getTicks(false);
+        float timeT = AnimationTickHolder.getPartialTicks();
+        float squaremovement = (Mth.sin((float) (time*1.5)) >= 0)? 1:-1;
+        float movement = Mth.sin(((float) ((time) * 2 / Math.PI)));
+        float movement2 = Mth.sin(((float) ((time) * 4/ Math.PI)));
+        //ItemStack.isSameItemSameTags(entity.getOffhandItem())
+
+        //ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
+        //ms.mulPose(Axis.YP.rotationDegrees(27));
+        ms.mulPose(Axis.YP.rotationDegrees(AngleHelper.deg(squaremovement*4)-27));
+        ms.translate(0.2,0,0);
+        ms.mulPose(Axis.ZP.rotation((float) (ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks())) * 2.6)));
+
+    }
+
 }
