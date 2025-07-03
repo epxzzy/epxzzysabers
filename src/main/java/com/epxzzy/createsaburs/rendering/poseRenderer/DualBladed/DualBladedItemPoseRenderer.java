@@ -82,13 +82,14 @@ public class DualBladedItemPoseRenderer {
         float squaremovement = (Mth.sin((float) (time*5)) >= 0)? 1:-1;
         float unsquaremovement = Mth.sin((float) (time*0.2));
 
+
         float movement = Mth.sin(((float) ((time) * 2 / Math.PI)));
         float movement2 = Mth.sin(((float) ((time) * 4/ Math.PI)));
         //ItemStack.isSameItemSameTags(entity.getOffhandItem())
 
         //ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
         //ms.mulPose(Axis.YP.rotationDegrees(27));
-        ms.mulPose(Axis.YP.rotationDegrees((unsquaremovement)-45));
+        ms.mulPose(Axis.YN.rotation((unsquaremovement*AngleHelper.rad(45))+AngleHelper.rad(120)));
         //ms.translate(0.1,0,0);
         ms.mulPose(Axis.ZP.rotationDegrees(90));
 

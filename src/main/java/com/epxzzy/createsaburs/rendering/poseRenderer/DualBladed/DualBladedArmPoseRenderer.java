@@ -91,9 +91,9 @@ public class DualBladedArmPoseRenderer {
         float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));
 
         MainArm.xRot = (float) (Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +AngleHelper.rad(movement*3));
-        MainArm.yRot = AngleHelper.rad(-27);
+        MainArm.yRot = AngleHelper.rad(-30);
         otherArm.xRot = (float)(Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +AngleHelper.rad(-movement*3));
-        otherArm.yRot = AngleHelper.rad(27);
+        otherArm.yRot = AngleHelper.rad(30);
     }
 
 
