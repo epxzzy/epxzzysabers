@@ -58,7 +58,9 @@ public class PlayerSaberRenderer {
 
     public static void afterSetupAnim(Player player, HumanoidModel<?> model) {
         int flourish = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("flourish");
-        createsaburs.LOGGER.warn("swing time is: "+ player.swingTime + " and attack time is: " + player.attackAnim);
+        if(player.swingTime > 0 || player.getAttackAnim(1) > 0) {
+            createsaburs.LOGGER.warn("swing time is: " + player.swingTime + " and attack time is: " + player.getAttackAnim(1));
+        }
         if (Protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
             setDualSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model, flourish);
         }
