@@ -28,7 +28,7 @@ public class ModCreativeModTabs {
                         //pOutput.accept(Items.DIAMOND);
 
                         pOutput.accept(ModBlocks.KYBERSTATION.get());
-                        pOutput.accept(ModItems.protosabur2.get());
+                        //pOutput.accept(ModItems.protosabur2.get());
 
                     })
                     .build());

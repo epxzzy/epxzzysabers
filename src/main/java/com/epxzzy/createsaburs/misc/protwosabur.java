@@ -1,5 +1,7 @@
-package com.epxzzy.createsaburs.item;
+package com.epxzzy.createsaburs.misc;
 
+import com.epxzzy.createsaburs.item.ModItems;
+import com.epxzzy.createsaburs.item.Protosaber;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -7,12 +9,13 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.function.Consumer;
 
-public class protwosabur extends Protosaber{
+public class protwosabur extends Protosaber {
     public protwosabur(Properties pProperties) {
         super(pProperties, 1,1,1);
     }
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        /*
         Minecraft.getInstance().getItemColors().register((stack, tintIndex) -> {
             if (tintIndex == 0) { // Tintindex 0 corresponds to the dyeable part
                 CompoundTag tag = stack.getTag();
@@ -26,6 +29,8 @@ public class protwosabur extends Protosaber{
             }
             return 0xFFFFFF; // Non-tinted
         }, ModItems.protosabur2.get());
+
+         */
     }
 
 }

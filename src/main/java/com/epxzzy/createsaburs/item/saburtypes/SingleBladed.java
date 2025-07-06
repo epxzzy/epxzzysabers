@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 public class SingleBladed extends Protosaber {
 
     public SingleBladed(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
-        super(pProperties, 3 , 14, 2);
+        super(pProperties, pRANGE , pDamage, pSpeed);
     }
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
