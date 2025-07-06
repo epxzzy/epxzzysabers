@@ -2,7 +2,7 @@ package com.epxzzy.createsaburs.item.saburtypes;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
-import com.epxzzy.createsaburs.rendering.InquisitoriusItemRenderer;
+import com.epxzzy.createsaburs.rendering.RotarySaberItemRenderer;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.core.BlockPos;
@@ -31,7 +31,7 @@ public class RotarySaber extends Protosaber {
     }
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        THE_RENDURR = new InquisitoriusItemRenderer();
+        THE_RENDURR = new RotarySaberItemRenderer();
         consumer.accept(SimpleCustomRenderer.create(this, THE_RENDURR));
     }
 

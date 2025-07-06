@@ -1,6 +1,7 @@
 package com.epxzzy.createsaburs.item;
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.item.saburtypes.CrossguardSaber;
 import com.epxzzy.createsaburs.item.saburtypes.RotarySaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import net.minecraft.world.item.Item;
@@ -25,6 +26,8 @@ public class ModItems {
     public static final RegistryObject<Item> SINGLE_BLADED_SABER = items.register("single_bladed_saber", () -> new SingleBladed(new Item.Properties().rarity(RARITY_KYBER), 4, 18, -2));
     public static final RegistryObject<Item> DUAL_BLADED_SABER = items.register("dual_bladed_saber", () -> new Protosaber(new Item.Properties().rarity(RARITY_KYBER), 6, 16, -1));
     public static final RegistryObject<Item> ROTARY_SABER = items.register("rotary_saber", () -> new RotarySaber(new Item.Properties().rarity(RARITY_KYBER), 5, 12, -1));
+    public static final RegistryObject<Item> CROSSGUARD_SABER = items.register("crossguard_saber", () -> new CrossguardSaber(new Item.Properties().rarity(RARITY_KYBER), 3, 10, -1));
+
 
 
 

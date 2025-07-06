@@ -24,7 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InquisitoriusItemRenderer extends CustomRenderedItemModelRenderer {
+public class RotarySaberItemRenderer extends CustomRenderedItemModelRenderer {
 
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/rotary_blade"));
     protected static final PartialModel SPIN_BIT = PartialModel.of(createsaburs.asResource("item/additive/rotary_swing"));

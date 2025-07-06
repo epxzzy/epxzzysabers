@@ -90,7 +90,7 @@ public class DualBladedItemPoseRenderer {
 
         //ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
         //ms.mulPose(Axis.YP.rotationDegrees(27));
-        ms.mulPose(Axis.YN.rotation((desquaremovement*AngleHelper.rad(45))+AngleHelper.rad(120)));
+        ms.mulPose(Axis.YN.rotation((desquaremovement*AngleHelper.rad(45))+AngleHelper.rad(30)));
         //ms.translate(0.1,0,0);
         //ms.mulPose(Axis.ZP.rotationDegrees(90));
 
