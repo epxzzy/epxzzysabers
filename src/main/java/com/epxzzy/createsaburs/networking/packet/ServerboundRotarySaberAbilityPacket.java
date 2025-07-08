@@ -3,6 +3,7 @@ package com.epxzzy.createsaburs.networking.packet;
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import com.epxzzy.createsaburs.item.ModItems;
+import com.epxzzy.createsaburs.sound.ModSounds;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -50,7 +51,7 @@ public class ServerboundRotarySaberAbilityPacket {
                     }
 
                     pLevel.addFreshEntity(throwntrident);
-                    pLevel.playSound((Player) null, throwntrident, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
+                    pLevel.playSound((Player) null, throwntrident, ModSounds.ACTIVATION.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
                     if (!player.getAbilities().instabuild) {
                         player.getInventory().removeItem(pStack);
                     }

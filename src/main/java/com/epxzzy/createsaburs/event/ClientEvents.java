@@ -1,10 +1,13 @@
 package com.epxzzy.createsaburs.event;
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.entity.ModModelLayers;
+import com.epxzzy.createsaburs.entity.client.ThrownRotarySaberModel;
 import com.epxzzy.createsaburs.misc.KeyBinding;
 import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.networking.packet.ServerboundRotarySaberAbilityPacket;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,6 +32,11 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onKeyRegister(RegisterKeyMappingsEvent event) {
             event.register(KeyBinding.SABER_ABILITY_KEY);
+        }
+
+        @SubscribeEvent
+        public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(ModModelLayers.thrownrotarysabermodellayer, ThrownRotarySaberModel::createBodyLayer);
         }
     }
 }

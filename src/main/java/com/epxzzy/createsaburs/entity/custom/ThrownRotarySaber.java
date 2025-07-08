@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs.entity.custom;
 
 import com.epxzzy.createsaburs.entity.ModEntities;
 import com.epxzzy.createsaburs.item.ModItems;
+import com.epxzzy.createsaburs.sound.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -44,10 +45,10 @@ public class ThrownRotarySaber extends AbstractArrow {
      * Called to update the entity's position/logic.
      */
     public void tick() {
-        if (this.inGroundTime > 4) {
+        if (this.inGroundTime > 2) {
             this.dealtDamage = true;
         }
-
+        this.playSound(ModSounds.SWING.get(), 10.0f, 1.0f);
         Entity entity = this.getOwner();
         if ((this.dealtDamage || this.isNoPhysics()) && entity != null) {
             if (!this.isAcceptibleReturnOwner()) {
@@ -67,7 +68,7 @@ public class ThrownRotarySaber extends AbstractArrow {
                 double d0 = 0.05D * 4;
                 this.setDeltaMovement(this.getDeltaMovement().scale(0.95D).add(vec3.normalize().scale(d0)));
                 if (this.clientSideReturnTridentTickCount == 0) {
-                    this.playSound(SoundEvents.TRIDENT_RETURN, 10.0F, 1.0F);
+                    this.playSound(ModSounds.CLASH.get(), 10.0F, 1.0F);
                 }
 
                 ++this.clientSideReturnTridentTickCount;
@@ -157,7 +158,7 @@ public class ThrownRotarySaber extends AbstractArrow {
      * The sound made when an entity is hit by this projectile
      */
     protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return SoundEvents.TRIDENT_HIT_GROUND;
+        return ModSounds.CLASH.get();
     }
 
     /**
