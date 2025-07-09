@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs.entity.custom;
 
 import com.epxzzy.createsaburs.entity.ModEntities;
 import com.epxzzy.createsaburs.item.ModItems;
+import com.epxzzy.createsaburs.misc.ColourConverter;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -41,6 +42,11 @@ public class ThrownRotarySaber extends AbstractArrow {
         super.defineSynchedData();
     }
 
+    public int[] getColour(){
+        return ColourConverter.PortedDecimaltoRGB(this.saberitem.getOrCreateTag().getCompound("display").getInt("color"));
+    };
+
+
     /**
      * Called to update the entity's position/logic.
      */
@@ -48,15 +54,15 @@ public class ThrownRotarySaber extends AbstractArrow {
         if (this.inGroundTime > 2) {
             this.dealtDamage = true;
         }
-        this.playSound(ModSounds.SWING.get(), 10.0f, 1.0f);
+        //this.playSound(ModSounds.SWING.get(), 0.2f, 1.0f);
         Entity entity = this.getOwner();
         if ((this.dealtDamage || this.isNoPhysics()) && entity != null) {
             if (!this.isAcceptibleReturnOwner()) {
                 if (!this.level().isClientSide && this.pickup == Pickup.ALLOWED) {
-                    this.spawnAtLocation(this.getPickupItem(), 0.1F);
+                    //this.spawnAtLocation(this.getPickupItem(), 0.1F);
                 }
 
-                this.discard();
+                //this.discard();
             } else {
                 this.setNoPhysics(true);
                 Vec3 vec3 = entity.getEyePosition().subtract(this.position());
@@ -68,15 +74,15 @@ public class ThrownRotarySaber extends AbstractArrow {
                 double d0 = 0.05D * 4;
                 this.setDeltaMovement(this.getDeltaMovement().scale(0.95D).add(vec3.normalize().scale(d0)));
                 if (this.clientSideReturnTridentTickCount == 0) {
-                    this.playSound(ModSounds.CLASH.get(), 10.0F, 1.0F);
+                    this.playSound(ModSounds.CLASH.get(), 5.0F, 1.0F);
                 }
 
                 ++this.clientSideReturnTridentTickCount;
             }
         }
         if (entity == null){
-            this.spawnAtLocation(this.getPickupItem(), 0.1F);
-            this.discard();
+            //this.spawnAtLocation(this.getPickupItem(), 0.1F);
+            //this.discard();
         }
 
         super.tick();

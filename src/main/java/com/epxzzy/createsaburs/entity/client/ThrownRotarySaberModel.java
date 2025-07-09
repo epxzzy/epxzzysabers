@@ -41,7 +41,7 @@ public class ThrownRotarySaberModel<T extends ThrownRotarySaber> extends Hierarc
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition group = partdefinition.addOrReplaceChild("group", CubeListBuilder.create().texOffs(0, 32).addBox(-2.0F, -24.0F, -24.0F, 0.0F, 48.0F, 48.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 1.5708F));
+        PartDefinition group = partdefinition.addOrReplaceChild("group", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 1.5708F));
 
         PartDefinition guard = group.addOrReplaceChild("guard", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -5.0F, -7.0F, 0.0F, 10.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 2.0F));
 
@@ -49,14 +49,6 @@ public class ThrownRotarySaberModel<T extends ThrownRotarySaber> extends Hierarc
 
         return LayerDefinition.create(meshdefinition, 128, 128);
     }
-
-    public void animate(AnimationState pAnimationState, AnimationDefinition pAnimationDefinition, float pAgeInTicks, float pSpeed) {
-        pAnimationState.updateTime(pAgeInTicks, pSpeed);
-        pAnimationState.ifStarted((p_233392_) -> {
-            KeyframeAnimations.animate(this, pAnimationDefinition, p_233392_.getAccumulatedTime(), 1.0F, ANIMATION_VECTOR_CACHE);
-        });
-    }
-
 
 
     public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
@@ -67,8 +59,6 @@ public class ThrownRotarySaberModel<T extends ThrownRotarySaber> extends Hierarc
     @Override
     public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
-        state.startIfStopped(pEntity.tickCount);
 
-        this.animate(state, thrownrotaryAnimation.spinn, pAgeInTicks, 1f);
     }
 }

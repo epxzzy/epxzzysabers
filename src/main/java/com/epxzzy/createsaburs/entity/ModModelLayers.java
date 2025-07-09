@@ -7,4 +7,8 @@ import net.minecraft.resources.ResourceLocation;
 public class ModModelLayers {
     public static final ModelLayerLocation thrownrotarysabermodellayer = new ModelLayerLocation(
             new ResourceLocation(createsaburs.MOD_ID, "thrownrotarysaber"), "main");
+
+    public static final ModelLayerLocation thrownrotarysaberblademodellayer = new ModelLayerLocation(
+            new ResourceLocation(createsaburs.MOD_ID, "thrownrotarysaber"), "main");
+
 }
