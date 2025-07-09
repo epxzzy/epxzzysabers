@@ -9,6 +9,6 @@ public class ModModelLayers {
             new ResourceLocation(createsaburs.MOD_ID, "thrownrotarysaber"), "main");
 
     public static final ModelLayerLocation thrownrotarysaberblademodellayer = new ModelLayerLocation(
-            new ResourceLocation(createsaburs.MOD_ID, "thrownrotarysaber"), "main");
+            new ResourceLocation(createsaburs.MOD_ID, "thrownrotarysaberblade"), "main");
 
 }

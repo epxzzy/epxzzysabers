@@ -3,6 +3,7 @@ package com.epxzzy.createsaburs.event;
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.entity.ModModelLayers;
 import com.epxzzy.createsaburs.entity.client.ThrownRotarySaberModel;
+import com.epxzzy.createsaburs.entity.client.thebladepart;
 import com.epxzzy.createsaburs.misc.KeyBinding;
 import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.networking.packet.ServerboundRotarySaberAbilityPacket;
@@ -37,6 +38,8 @@ public class ClientEvents {
         @SubscribeEvent
         public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(ModModelLayers.thrownrotarysabermodellayer, ThrownRotarySaberModel::createBodyLayer);
+            event.registerLayerDefinition(ModModelLayers.thrownrotarysaberblademodellayer, thebladepart::createBodyLayer);
+
         }
     }
 }

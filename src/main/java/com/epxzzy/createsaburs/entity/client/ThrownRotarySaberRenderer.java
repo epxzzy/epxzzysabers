@@ -25,6 +25,7 @@ import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class ThrownRotarySaberRenderer extends EntityRenderer<ThrownRotarySaber>
     public ThrownRotarySaberRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
         this.model = new ThrownRotarySaberModel<ThrownRotarySaber>(pContext.bakeLayer(ModModelLayers.thrownrotarysabermodellayer));
-        this.blade = new thebladepart<ThrownRotarySaber>(pContext.bakeLayer(thebladepart.LAYER_LOCATION));
+        this.blade = new thebladepart<ThrownRotarySaber>(pContext.bakeLayer(ModModelLayers.thrownrotarysaberblademodellayer));
 
         //this.addLayer(new GlowingBladeLayer( this,pContext.getModelSet()));
     }

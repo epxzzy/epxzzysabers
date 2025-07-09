@@ -22,7 +22,6 @@ import net.minecraft.world.item.DyeColor;
 
 public class thebladepart<T extends ThrownRotarySaber> extends Model {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("createsaburs", "thebladepart"), "main");
 	private final ModelPart bone;
 
 	public thebladepart(ModelPart root) {
