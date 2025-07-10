@@ -73,7 +73,7 @@ public class thebladepart<T extends ThrownRotarySaber> extends Model {
 
 		//}
 		//pMatrixStack.mulPose(Axis.YP.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * 5)));
-		pMatrixStack.mulPose(Axis.YP.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * 1)));
+		pMatrixStack.mulPose(Axis.YP.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * 3)));
 
 		pMatrixStack.translate(0, -1, 0);
 		VertexConsumer vertexconsumur = pBuffer.getBuffer(RenderType.entityTranslucentEmissive(GLOWLOC)).color(f/255, f1/255, f2/255, 1.0F);
