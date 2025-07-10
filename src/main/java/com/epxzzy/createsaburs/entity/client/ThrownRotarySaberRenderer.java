@@ -15,10 +15,15 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderBuffers;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.*;
+import net.minecraft.client.renderer.entity.layers.EnderEyesLayer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.layers.SheepFurLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.GlowSquid;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.projectile.ThrownTrident;
@@ -42,11 +47,13 @@ public class ThrownRotarySaberRenderer extends EntityRenderer<ThrownRotarySaber>
 
     public ThrownRotarySaberRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
+
         this.model = new ThrownRotarySaberModel<ThrownRotarySaber>(pContext.bakeLayer(ModModelLayers.thrownrotarysabermodellayer));
         this.blade = new thebladepart<ThrownRotarySaber>(pContext.bakeLayer(ModModelLayers.thrownrotarysaberblademodellayer));
 
         //this.addLayer(new GlowingBladeLayer( this,pContext.getModelSet()));
     }
+
     public final boolean addLayer(RenderLayer<ThrownRotarySaber, ThrownRotarySaberModel<ThrownRotarySaber>> pLayer) {
         return this.layers.add(pLayer);
     }
@@ -68,9 +75,9 @@ public class ThrownRotarySaberRenderer extends EntityRenderer<ThrownRotarySaber>
         //pMatrixStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.yRotO, pEntity.getYRot()) - 90.0F));
         //pMatrixStack.mulPose(Axis.YP.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * 5)));
         pMatrixStack.translate(0, -1, 0);
-       // pMatrixStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.xRotO, pEntity.getXRot()) + 90.0F));
+        // pMatrixStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.xRotO, pEntity.getXRot()) + 90.0F));
         VertexConsumer vertexconsumer = ItemRenderer.getFoilBufferDirect(pBuffer, this.model.renderType(this.getTextureLocation(pEntity)), false, pEntity.isFoil());
-        this.model.renderToBuffer(pMatrixStack, vertexconsumer, 15, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        this.model.renderToBuffer(pMatrixStack, vertexconsumer, 15728640, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         pMatrixStack.popPose();
 
 
