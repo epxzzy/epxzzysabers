@@ -3,6 +3,7 @@ package com.epxzzy.createsaburs.networking.packet;
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import com.epxzzy.createsaburs.item.ModItems;
+import com.epxzzy.createsaburs.item.saburtypes.RotarySaber;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -32,12 +33,12 @@ public class ServerboundRotarySaberAbilityPacket {
     }
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
-        createsaburs.LOGGER.info("message reciveved");
+        //createsaburs.LOGGER.info("message reciveved");
         NetworkEvent.Context contextt = supplier.get();
         contextt.enqueueWork(() -> {
-            createsaburs.LOGGER.info("message processed");
+            //createsaburs.LOGGER.info("message processed");
 
-            createsaburs.LOGGER.info(Objects.requireNonNull(contextt.getSender())+" named bond having a stonk");
+            //createsaburs.LOGGER.info(Objects.requireNonNull(contextt.getSender())+" named bond having a stonk");
 
             if(contextt.getSender() != null){
                 ServerPlayer player = contextt.getSender();
@@ -45,6 +46,7 @@ public class ServerboundRotarySaberAbilityPacket {
                 ItemStack pStack = player.getItemInHand(InteractionHand.MAIN_HAND);
                 if(pStack.is(ModItems.ROTARY_SABER.get())) {
                     ThrownRotarySaber throwntrident = new ThrownRotarySaber(pLevel, player, pStack);
+                    createsaburs.LOGGER.warn("colour given is:" + RotarySaber.getColor(pStack));
                     throwntrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 4 * 0.5F, 1.0F);
                     if (player.getAbilities().instabuild) {
                         throwntrident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;

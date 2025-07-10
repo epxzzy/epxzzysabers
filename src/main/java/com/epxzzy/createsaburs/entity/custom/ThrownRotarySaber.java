@@ -1,11 +1,16 @@
 package com.epxzzy.createsaburs.entity.custom;
 
+import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.entity.ModEntities;
 import com.epxzzy.createsaburs.item.ModItems;
+import com.epxzzy.createsaburs.item.saburtypes.RotarySaber;
 import com.epxzzy.createsaburs.misc.ColourConverter;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -17,6 +22,7 @@ import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
@@ -26,6 +32,7 @@ import javax.annotation.Nullable;
 
 public class ThrownRotarySaber extends AbstractArrow {
     private ItemStack saberitem = new ItemStack(ModItems.ROTARY_SABER.get());
+    private static final EntityDataAccessor<Integer> Decimal_Colour= SynchedEntityData.defineId(ThrownRotarySaber.class, EntityDataSerializers.INT);
     private boolean dealtDamage;
     public int clientSideReturnTridentTickCount;
 
@@ -35,15 +42,23 @@ public class ThrownRotarySaber extends AbstractArrow {
 
     public ThrownRotarySaber(Level pLevel, LivingEntity pShooter, ItemStack pStack) {
         super(ModEntities.ROTARY_SABER_ENTITY.get(), pShooter, pLevel);
-        this.saberitem= pStack.copy();
+        this.saberitem= pStack;
+        this.entityData.set(Decimal_Colour,RotarySaber.getColor(pStack));
+        createsaburs.LOGGER.warn("colour given to thrown saber is:" + RotarySaber.getColor(pStack));
+
     }
 
     protected void defineSynchedData() {
         super.defineSynchedData();
+        this.entityData.define(Decimal_Colour, 0);
     }
 
     public int[] getColour(){
-        return ColourConverter.PortedDecimaltoRGB(this.saberitem.getOrCreateTag().getCompound("display").getInt("color"));
+        createsaburs.LOGGER.warn("colour asked from thrown saber is:" + this.entityData.get(Decimal_Colour));
+        //int[] colour = ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour));
+        createsaburs.LOGGER.warn("colours have been set as: " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[0] + " " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[1] + " " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[2]);
+
+        return ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour)) ;
     };
 
 
@@ -60,6 +75,7 @@ public class ThrownRotarySaber extends AbstractArrow {
             if (!this.isAcceptibleReturnOwner()) {
                 if (!this.level().isClientSide && this.pickup == Pickup.ALLOWED) {
                     //this.spawnAtLocation(this.getPickupItem(), 0.1F);
+                    //this.saberitem.get
                 }
 
                 //this.discard();
@@ -182,7 +198,7 @@ public class ThrownRotarySaber extends AbstractArrow {
      */
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
-        if (pCompound.contains("Trident", 10)) {
+        if (pCompound.contains("saber", 10)) {
             this.saberitem = ItemStack.of(pCompound.getCompound("RotarySaber"));
         }
 

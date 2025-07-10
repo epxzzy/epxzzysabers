@@ -6,6 +6,9 @@ package com.epxzzy.createsaburs.entity.client;// Made with Blockbench 4.12.5
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
+import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueHandler;
+import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.Model;
@@ -33,7 +36,7 @@ public class thebladepart<T extends ThrownRotarySaber> extends Model {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition bone = partdefinition.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(-48, 0).addBox(-24.0F, -1.0F, -24.0F, 48.0F, 0.0F, 48.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition bone = partdefinition.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(-48, 0).addBox(-24.0F, -2.0F, -24.0F, 48.0F, 0.0F, 48.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 256, 256);
 	}
@@ -44,7 +47,9 @@ public class thebladepart<T extends ThrownRotarySaber> extends Model {
 		float f;
 		float f1;
 		float f2;
-		if (pEntity.getTags().contains("gay")) {
+
+		//if (pEntity.getTags().contains("gay")) {
+		/*
 			int i1 = 25;
 			int i = pEntity.tickCount / 25 + pEntity.getId();
 			int j = DyeColor.values().length;
@@ -56,19 +61,25 @@ public class thebladepart<T extends ThrownRotarySaber> extends Model {
 			f = (int) (afloat1[0] * (1.0F - f3) + afloat2[0] * f3);
 			f1 = (int) (afloat1[1] * (1.0F - f3) + afloat2[1] * f3);
 			f2 = (int) (afloat1[2] * (1.0F - f3) + afloat2[2] * f3);
-		} else {
+
+		 */
+		//} else {
+
+
 			int[] afloat = pEntity.getColour();
 			f = afloat[0];
 			f1 = afloat[1];
 			f2 = afloat[2];
-		}
+
+		//}
 		//pMatrixStack.mulPose(Axis.YP.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * 5)));
-		pMatrixStack.translate(0, -2, 0);
-		pMatrixStack.scale(2,2,2);
-		VertexConsumer vertexconsumur = pBuffer.getBuffer(RenderType.entityTranslucentEmissive(GLOWLOC));
+		pMatrixStack.mulPose(Axis.YP.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * 1)));
+
+		pMatrixStack.translate(0, -1, 0);
+		VertexConsumer vertexconsumur = pBuffer.getBuffer(RenderType.entityTranslucentEmissive(GLOWLOC)).color(f/255, f1/255, f2/255, 1.0F);
 		//VertexConsumer vertexconsumur = pBuffer.color(f, f1, f2, 1.0F);
 
-		this.bone.render(pMatrixStack, vertexconsumur, packedLight, packedOverlay, f, f1, f2, 1.0F);
+		this.bone.render(pMatrixStack, vertexconsumur, packedLight, packedOverlay, f/255, f1/255, f2/255, 1.0F);
 		pMatrixStack.popPose();
 
 
