@@ -20,12 +20,12 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-public class ServerboundRotarySaberAbilityPacket {
-    public ServerboundRotarySaberAbilityPacket(){
+public class ServerboundSaberAbilityPacket {
+    public ServerboundSaberAbilityPacket(){
     }
 
 
-    public ServerboundRotarySaberAbilityPacket(FriendlyByteBuf buf) {
+    public ServerboundSaberAbilityPacket(FriendlyByteBuf buf) {
 
     }
 
@@ -53,7 +53,7 @@ public class ServerboundRotarySaberAbilityPacket {
                     }
                     player.swing(InteractionHand.MAIN_HAND, true);
                     pLevel.addFreshEntity(throwntrident);
-                    pLevel.playSound((Player) null, throwntrident, ModSounds.ACTIVATION.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                    pLevel.playSound((Player) null, throwntrident, ModSounds.ACTIVATION.get(), SoundSource.PLAYERS, 0.05F, 1.0F);
                     if (!player.getAbilities().instabuild) {
                         player.getInventory().removeItem(pStack);
                     }

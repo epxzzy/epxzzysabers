@@ -91,7 +91,7 @@ public class ThrownRotarySaber extends AbstractArrow {
                 double d0 = 0.05D * 10;
                 this.setDeltaMovement(this.getDeltaMovement().scale(0.95D).add(vec3.normalize().scale(d0)));
                 if (this.clientSideReturnSaberTickCount == 0) {
-                    this.playSound(ModSounds.CLASH.get(), 0.1F, 1.0F);
+                    this.playSound(ModSounds.CLASH.get(), 0.05f, 1.0f);
                 }
 
                 ++this.clientSideReturnSaberTickCount;

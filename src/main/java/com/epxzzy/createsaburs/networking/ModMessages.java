@@ -3,8 +3,7 @@ package com.epxzzy.createsaburs.networking;
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.networking.packet.ServerboundKyberMenuSlotPosToggle;
 import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
-import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacketButBetter;
-import com.epxzzy.createsaburs.networking.packet.ServerboundRotarySaberAbilityPacket;
+import com.epxzzy.createsaburs.networking.packet.ServerboundSaberAbilityPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -38,20 +37,15 @@ public class ModMessages {
                 .encoder(ServerboundRecolourItemPacket::toBytes)
                 .consumerMainThread(ServerboundRecolourItemPacket::handle)
                 .add();
-        net.messageBuilder(ServerboundRecolourItemPacketButBetter.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(ServerboundRecolourItemPacketButBetter::new)
-                .encoder(ServerboundRecolourItemPacketButBetter::toBytes)
-                .consumerMainThread(ServerboundRecolourItemPacketButBetter::handle)
-                .add();
         net.messageBuilder(ServerboundKyberMenuSlotPosToggle.class, id(), NetworkDirection.PLAY_TO_SERVER)
                 .decoder(ServerboundKyberMenuSlotPosToggle::new)
                 .encoder(ServerboundKyberMenuSlotPosToggle::toBytes)
                 .consumerMainThread(ServerboundKyberMenuSlotPosToggle::handle)
                 .add();
-        net.messageBuilder(ServerboundRotarySaberAbilityPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(ServerboundRotarySaberAbilityPacket::new)
-                .encoder(ServerboundRotarySaberAbilityPacket::toBytes)
-                .consumerMainThread(ServerboundRotarySaberAbilityPacket::handle)
+        net.messageBuilder(ServerboundSaberAbilityPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(ServerboundSaberAbilityPacket::new)
+                .encoder(ServerboundSaberAbilityPacket::toBytes)
+                .consumerMainThread(ServerboundSaberAbilityPacket::handle)
                 .add();
 
 

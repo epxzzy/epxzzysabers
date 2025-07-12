@@ -39,7 +39,7 @@ public class RotarySaber extends Protosaber {
         CompoundTag compoundtag = pStack.getOrCreateTagElement("display");
         if (compoundtag.getInt("color") == 0) {
             //setColor(pStack, 65280);
-            return 16724787;
+            return 16711680;
         }
         return Objects.requireNonNull(pStack.getTagElement("display")).getInt("color");
     }
