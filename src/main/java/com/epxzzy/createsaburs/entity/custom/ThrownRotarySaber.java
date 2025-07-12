@@ -15,6 +15,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -34,7 +35,7 @@ public class ThrownRotarySaber extends AbstractArrow {
     private ItemStack saberitem = new ItemStack(ModItems.ROTARY_SABER.get());
     private static final EntityDataAccessor<Integer> Decimal_Colour= SynchedEntityData.defineId(ThrownRotarySaber.class, EntityDataSerializers.INT);
     private boolean dealtDamage;
-    public int clientSideReturnTridentTickCount;
+    public int clientSideReturnSaberTickCount;
 
     public ThrownRotarySaber(EntityType<ThrownRotarySaber> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -69,7 +70,7 @@ public class ThrownRotarySaber extends AbstractArrow {
         if (this.inGroundTime > 2) {
             this.dealtDamage = true;
         }
-        //this.playSound(ModSounds.SWING.get(), 0.2f, 1.0f);
+        this.playSound(ModSounds.SWING.get(), 0.05f, 1.0f);
         Entity entity = this.getOwner();
         if ((this.dealtDamage || this.isNoPhysics()) && entity != null) {
             if (!this.isAcceptibleReturnOwner()) {
@@ -87,21 +88,30 @@ public class ThrownRotarySaber extends AbstractArrow {
                     this.yOld = this.getY();
                 }
 
-                double d0 = 0.05D * 4;
+                double d0 = 0.05D * 10;
                 this.setDeltaMovement(this.getDeltaMovement().scale(0.95D).add(vec3.normalize().scale(d0)));
-                if (this.clientSideReturnTridentTickCount == 0) {
-                    this.playSound(ModSounds.CLASH.get(), 5.0F, 1.0F);
+                if (this.clientSideReturnSaberTickCount == 0) {
+                    this.playSound(ModSounds.CLASH.get(), 0.1F, 1.0F);
                 }
 
-                ++this.clientSideReturnTridentTickCount;
+                ++this.clientSideReturnSaberTickCount;
             }
         }
         if (entity == null){
-            //this.spawnAtLocation(this.getPickupItem(), 0.1F);
-            //this.discard();
+            this.spawnAtLocation(this.getPickupItem(), 0.1F);
+            this.discard();
         }
 
         super.tick();
+    }
+
+    public void shootFromRotation(Entity pShooter, float pX, float pY, float pZ, float pVelocity, float pInaccuracy) {
+        float f = -Mth.sin(pY * ((float)Math.PI / 180F)) * Mth.cos(pX * ((float)Math.PI / 180F));
+        float f1 = -Mth.sin((pX + pZ) * ((float)Math.PI / 180F));
+        float f2 = Mth.cos(pY * ((float)Math.PI / 180F)) * Mth.cos(pX * ((float)Math.PI / 180F));
+        this.shoot((double)f, (double)f1, (double)f2, pVelocity, pInaccuracy);
+        Vec3 vec3 = pShooter.getDeltaMovement();
+        this.setDeltaMovement(this.getDeltaMovement().add(vec3.x, pShooter.onGround() ? 0.0D : vec3.y, vec3.z));
     }
 
     private boolean isAcceptibleReturnOwner() {

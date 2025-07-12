@@ -47,23 +47,18 @@ public class ServerboundRotarySaberAbilityPacket {
                 if(pStack.is(ModItems.ROTARY_SABER.get())) {
                     ThrownRotarySaber throwntrident = new ThrownRotarySaber(pLevel, player, pStack);
                     createsaburs.LOGGER.warn("colour given is:" + RotarySaber.getColor(pStack));
-                    throwntrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 4 * 0.5F, 1.0F);
+                    throwntrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 8 * 0.5F, 1.0F);
                     if (player.getAbilities().instabuild) {
                         throwntrident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                     }
-
+                    player.swing(InteractionHand.MAIN_HAND, true);
                     pLevel.addFreshEntity(throwntrident);
                     pLevel.playSound((Player) null, throwntrident, ModSounds.ACTIVATION.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
                     if (!player.getAbilities().instabuild) {
                         player.getInventory().removeItem(pStack);
                     }
                 }
-
-
             }
-
-
-
 
             contextt.getSender().sendSystemMessage(Component.literal("serverplayer name:" + contextt.getSender().getTabListDisplayName().getString() + " and thats about it"));
 
