@@ -23,7 +23,6 @@ import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
@@ -67,7 +66,7 @@ public class ThrownRotarySaber extends AbstractArrow {
      * Called to update the entity's position/logic.
      */
     public void tick() {
-        if (this.inGroundTime > 2) {
+        if (this.inGroundTime > 1) {
             this.dealtDamage = true;
         }
         this.playSound(ModSounds.SWING.get(), 0.05f, 1.0f);

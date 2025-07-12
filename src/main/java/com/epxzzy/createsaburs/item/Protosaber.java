@@ -1,6 +1,7 @@
 package com.epxzzy.createsaburs.item;
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer;
 import com.epxzzy.createsaburs.rendering.poseHandlers.BladeStance;
 import com.epxzzy.createsaburs.sound.ModSounds;
@@ -336,6 +337,13 @@ public class Protosaber extends Item {
 
                             if (AbstractArrow.class.isAssignableFrom(entity1.getClass()) && !((AbstractArrow) entity1).inGround ) {
                                 createsaburs.LOGGER.warn("deflected an ordinary arrow");
+                                ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 2.0F, 1.0F);
+                                entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
+
+                                continue;
+                            }
+                            if (ThrownRotarySaber.class.isAssignableFrom(entity1.getClass())) {
+                                createsaburs.LOGGER.warn("deflected a thrown lightsaber");
                                 ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 2.0F, 1.0F);
                                 entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
 
