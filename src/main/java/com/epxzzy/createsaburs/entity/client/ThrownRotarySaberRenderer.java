@@ -7,30 +7,15 @@ import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
-import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueHandler;
-import net.createmod.catnip.animation.AnimationTickHolder;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderBuffers;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.*;
-import net.minecraft.client.renderer.entity.layers.EnderEyesLayer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.entity.layers.SheepFurLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.GlowSquid;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Sheep;
-import net.minecraft.world.entity.projectile.ThrownTrident;
-import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -64,8 +49,11 @@ public class ThrownRotarySaberRenderer extends EntityRenderer<ThrownRotarySaber>
     }
 
     @Override
-    public ResourceLocation getTextureLocation(com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber pEntity) {
+    public ResourceLocation getTextureLocation(ThrownRotarySaber pEntity) {
         return TRIDENT_LOCATION;
+    }
+    protected int getBlockLightLevel(ThrownRotarySaber p_234560_, BlockPos p_234561_) {
+        return 15;
     }
 
     public void render(@NotNull ThrownRotarySaber pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
@@ -76,12 +64,12 @@ public class ThrownRotarySaberRenderer extends EntityRenderer<ThrownRotarySaber>
         //pMatrixStack.mulPose(Axis.YP.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * 5)));
         pMatrixStack.translate(0, -1, 0);
         // pMatrixStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.xRotO, pEntity.getXRot()) + 90.0F));
-        VertexConsumer vertexconsumer = ItemRenderer.getFoilBufferDirect(pBuffer, this.model.renderType(this.getTextureLocation(pEntity)), false, pEntity.isFoil());
-        this.model.renderToBuffer(pMatrixStack, vertexconsumer, 15728640, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        VertexConsumer vertexconsumer = ItemRenderer.getFoilBufferDirect(pBuffer, this.model.renderType(this.getTextureLocation(pEntity)), false, true);
+        this.model.renderToBuffer(pMatrixStack, vertexconsumer, 15728880, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         pMatrixStack.popPose();
 
 
-        this.blade.renderToBuffer(pMatrixStack, pBuffer, pEntity, pPartialTicks, GLOWLOC, 15, OverlayTexture.NO_OVERLAY);
+        this.blade.renderToBuffer(pMatrixStack, pBuffer, pEntity, pPartialTicks, GLOWLOC,15728880, OverlayTexture.NO_OVERLAY);
         //super.render(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
     }
 }

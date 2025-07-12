@@ -54,9 +54,9 @@ public class ThrownRotarySaber extends AbstractArrow {
     }
 
     public int[] getColour(){
-        createsaburs.LOGGER.warn("colour asked from thrown saber is:" + this.entityData.get(Decimal_Colour));
+        //createsaburs.LOGGER.warn("colour asked from thrown saber is:" + this.entityData.get(Decimal_Colour));
         //int[] colour = ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour));
-        createsaburs.LOGGER.warn("colours have been set as: " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[0] + " " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[1] + " " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[2]);
+        //createsaburs.LOGGER.warn("colours have been set as: " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[0] + " " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[1] + " " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[2]);
 
         return ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour)) ;
     };

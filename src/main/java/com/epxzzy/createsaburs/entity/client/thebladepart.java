@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueHandler;
+import com.simibubi.create.foundation.render.RenderTypes;
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HierarchicalModel;
@@ -36,7 +37,8 @@ public class thebladepart<T extends ThrownRotarySaber> extends Model {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition bone = partdefinition.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(-48, 0).addBox(-24.0F, -2.0F, -24.0F, 48.0F, 0.0F, 48.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		//PartDefinition bone = partdefinition.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(-48, 0).addBox(-24.0F, -2.0F, -24.0F, 48.0F, 0.0F, 48.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition bone2 = partdefinition.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(-48, 0).addBox(-24.0F, -1.0F, -24.0F, 48.0F, 0.0F, 48.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 256, 256);
 	}
@@ -76,7 +78,8 @@ public class thebladepart<T extends ThrownRotarySaber> extends Model {
 		pMatrixStack.mulPose(Axis.YP.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * 3)));
 
 		pMatrixStack.translate(0, -1, 0);
-		VertexConsumer vertexconsumur = pBuffer.getBuffer(RenderType.entityTranslucentEmissive(GLOWLOC)).color(f/255, f1/255, f2/255, 1.0F);
+		VertexConsumer vertexconsumur = pBuffer.getBuffer(RenderType.entityTranslucentEmissive(GLOWLOC, true));
+		//.color(f/255, f1/255, f2/255, 1.0F);
 		//VertexConsumer vertexconsumur = pBuffer.color(f, f1, f2, 1.0F);
 
 		this.bone.render(pMatrixStack, vertexconsumur, packedLight, packedOverlay, f/255, f1/255, f2/255, 1.0F);
