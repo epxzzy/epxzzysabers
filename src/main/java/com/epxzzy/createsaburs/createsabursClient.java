@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs;
 
 import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.item.Protosaber;
+import com.epxzzy.createsaburs.item.saburtypes.BlasterHybrid;
 import com.epxzzy.createsaburs.item.saburtypes.CrossguardSaber;
 import com.epxzzy.createsaburs.item.saburtypes.RotarySaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
@@ -35,6 +36,8 @@ public class createsabursClient {
             event.register((stack, tint) -> tint > 0 ? -1 : Protosaber.getColor(stack), ModItems.DUAL_BLADED_SABER.get());
             event.register((stack, tint) -> tint > 0 ? -1 : RotarySaber.getColor(stack), ModItems.ROTARY_SABER.get());
             event.register((stack, tint) -> tint > 0 ? -1 : CrossguardSaber.getColor(stack), ModItems.CROSSGUARD_SABER.get());
+            event.register((stack, tint) -> tint > 0 ? -1 : BlasterHybrid.getColor(stack), ModItems.BLASTER_HYBRID.get());
+
 
 
 

@@ -1,6 +1,7 @@
 package com.epxzzy.createsaburs.item;
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.item.saburtypes.BlasterHybrid;
 import com.epxzzy.createsaburs.item.saburtypes.CrossguardSaber;
 import com.epxzzy.createsaburs.item.saburtypes.RotarySaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
@@ -27,6 +28,8 @@ public class ModItems {
     public static final RegistryObject<Item> DUAL_BLADED_SABER = items.register("dual_bladed_saber", () -> new Protosaber(new Item.Properties().rarity(RARITY_KYBER), 5, 16, -1));
     public static final RegistryObject<Item> ROTARY_SABER = items.register("rotary_saber", () -> new RotarySaber(new Item.Properties().rarity(RARITY_KYBER), 4, 12, -1));
     public static final RegistryObject<Item> CROSSGUARD_SABER = items.register("crossguard_saber", () -> new CrossguardSaber(new Item.Properties().rarity(RARITY_KYBER), 2, 10, -1));
+    public static final RegistryObject<Item> BLASTER_HYBRID = items.register("blaster_saber", () -> new BlasterHybrid(new Item.Properties().rarity(RARITY_KYBER), 3, 14, -2));
+
 
 
 
