@@ -1,6 +1,7 @@
 package com.epxzzy.createsaburs.networking.packet;
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.entity.custom.PlasmaBolt;
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.item.saburtypes.RotarySaber;
@@ -44,20 +45,31 @@ public class ServerboundSaberAbilityPacket {
                 ServerPlayer player = contextt.getSender();
                 Level pLevel = player.level();
                 ItemStack pStack = player.getItemInHand(InteractionHand.MAIN_HAND);
+                
                 if(pStack.is(ModItems.ROTARY_SABER.get())) {
-                    ThrownRotarySaber throwntrident = new ThrownRotarySaber(pLevel, player, pStack);
+                    ThrownRotarySaber thrownsaber = new ThrownRotarySaber(pLevel, player, pStack);
                     createsaburs.LOGGER.warn("colour given is:" + RotarySaber.getColor(pStack));
-                    throwntrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 8 * 0.5F, 1.0F);
+                    thrownsaber.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 8 * 0.5F, 1.0F);
                     if (player.getAbilities().instabuild) {
-                        throwntrident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
+                        thrownsaber.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                     }
                     player.swing(InteractionHand.MAIN_HAND, true);
-                    pLevel.addFreshEntity(throwntrident);
-                    pLevel.playSound((Player) null, throwntrident, ModSounds.ACTIVATION.get(), SoundSource.PLAYERS, 0.05F, 1.0F);
+                    pLevel.addFreshEntity(thrownsaber);
+                    pLevel.playSound((Player) null, thrownsaber, ModSounds.ACTIVATION.get(), SoundSource.PLAYERS, 0.05F, 1.0F);
                     if (!player.getAbilities().instabuild) {
                         player.getInventory().removeItem(pStack);
                     }
                 }
+                if(pStack.is(ModItems.BLASTER_HYBRID.get())) {
+                    PlasmaBolt blasterbolt = new PlasmaBolt(pLevel) {
+                    };
+                    blasterbolt.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 6 * 0.5F, 1.0F);
+                    player.swing(InteractionHand.MAIN_HAND, true);
+                    pLevel.addFreshEntity(blasterbolt);
+                    pLevel.playSound((Player) null, blasterbolt, ModSounds.ACTIVATION.get(), SoundSource.PLAYERS, 0.05F, 1.0F);
+                }
+                
+                
             }
 
             contextt.getSender().sendSystemMessage(Component.literal("serverplayer name:" + contextt.getSender().getTabListDisplayName().getString() + " and thats about it"));

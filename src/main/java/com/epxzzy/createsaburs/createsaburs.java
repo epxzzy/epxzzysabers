@@ -91,6 +91,8 @@ public class createsaburs {
 
 
             EntityRenderers.register(ModEntities.ROTARY_SABER_ENTITY.get(), ThrownRotarySaberRenderer::new);
+            EntityRenderers.register(ModEntities.PLASMA_BOLT.get(), ThrownRotarySaberRenderer::new);
+
 
         }
     }

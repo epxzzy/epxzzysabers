@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs.entity;
 
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.entity.custom.PlasmaBolt;
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -16,7 +17,11 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<ThrownRotarySaber>> ROTARY_SABER_ENTITY =
             ENTITY_TYPES.register("rotary_saber_entity", () -> EntityType.Builder.<ThrownRotarySaber>of(ThrownRotarySaber::new, MobCategory.MISC)
-                    .sized(0.5f, 0.5f).build("rotary_saber_entity"));
+                    .sized(2f, 0.5f).build("rotary_saber_entity"));
+
+    public static final RegistryObject<EntityType<PlasmaBolt>> PLASMA_BOLT =
+            ENTITY_TYPES.register("plasma_bolt", () -> EntityType.Builder.<PlasmaBolt>of(PlasmaBolt::new, MobCategory.MISC)
+                    .sized(0.5f, 0.5f).build("plasma_bolt"));
 
 
 
