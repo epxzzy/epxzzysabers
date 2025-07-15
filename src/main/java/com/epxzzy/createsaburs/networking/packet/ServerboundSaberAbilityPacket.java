@@ -68,7 +68,7 @@ public class ServerboundSaberAbilityPacket {
                     };
                     blasterbolt.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 1 * 0.5F, 1.0F);
                     pLevel.addFreshEntity(blasterbolt);
-                    pLevel.playSound((Player) null, blasterbolt,SoundEvents.BUBBLE_COLUMN_BUBBLE_POP , SoundSource.PLAYERS, 0.05F, 1.0F);
+                    pLevel.playSound((Player) null, blasterbolt,SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.PLAYERS, 0.05F, 1.0F);
                 }
 
 

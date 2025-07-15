@@ -35,7 +35,8 @@ public class RotarySaber extends Protosaber {
         consumer.accept(SimpleCustomRenderer.create(this, THE_RENDURR));
     }
 
-    public static int getColor(ItemStack pStack) {
+
+    public static int getColour(ItemStack pStack) {
         CompoundTag compoundtag = pStack.getOrCreateTagElement("display");
         if (compoundtag.getInt("color") == 0) {
             //setColor(pStack, 65280);

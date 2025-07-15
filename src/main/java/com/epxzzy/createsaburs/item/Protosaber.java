@@ -224,11 +224,6 @@ public class Protosaber extends Item {
         super.onStopUsing(pStack, entity, count);
     }
 
-    public boolean hasCustomColor(ItemStack pStack) {
-        CompoundTag compoundtag = pStack.getTagElement("display");
-        return compoundtag != null && compoundtag.contains("color", 99);
-    }
-
     public static int getColor(ItemStack pStack) {
         CompoundTag compoundtag = pStack.getOrCreateTagElement("display");
         if (compoundtag.getInt("color") == 0) {

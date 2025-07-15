@@ -1,6 +1,9 @@
 package com.epxzzy.createsaburs.entity.custom;
 
 import com.epxzzy.createsaburs.entity.ModEntities;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -21,7 +24,7 @@ public class PlasmaBolt extends AbstractHurtingProjectile implements ItemSupplie
     }
     public PlasmaBolt(Entity owner, Level level) {
         super(ModEntities.PLASMA_BOLT.get(), level);
-        this.setPos(owner.getX(),owner.getY()+2,owner.getZ());
+        this.setPos(owner.getX(),owner.getEyeY()-0.1,owner.getZ());
         this.setOwner(owner);
     }
     @Override
@@ -80,9 +83,15 @@ public class PlasmaBolt extends AbstractHurtingProjectile implements ItemSupplie
         return 1.0F;
     }
 
+    @Override
+    protected ParticleOptions getTrailParticle() {
+        return ParticleTypes.ELECTRIC_SPARK;
+    }
+
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+
 
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
