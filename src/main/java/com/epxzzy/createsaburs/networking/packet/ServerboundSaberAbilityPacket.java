@@ -66,7 +66,7 @@ public class ServerboundSaberAbilityPacket {
                 if(pStack.is(ModItems.BLASTER_HYBRID.get())) {
                     PlasmaBolt blasterbolt = new PlasmaBolt(player, pLevel) {
                     };
-                    blasterbolt.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 2 * 0.5F, 1.0F);
+                    blasterbolt.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 1 * 0.5F, 1.0F);
                     pLevel.addFreshEntity(blasterbolt);
                     pLevel.playSound((Player) null, blasterbolt,SoundEvents.BUBBLE_COLUMN_BUBBLE_POP , SoundSource.PLAYERS, 0.05F, 1.0F);
                 }

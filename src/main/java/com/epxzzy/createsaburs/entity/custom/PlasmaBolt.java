@@ -21,7 +21,7 @@ public class PlasmaBolt extends AbstractHurtingProjectile implements ItemSupplie
     }
     public PlasmaBolt(Entity owner, Level level) {
         super(ModEntities.PLASMA_BOLT.get(), level);
-        this.setPos(owner.getX(),owner.getY()+1,owner.getZ());
+        this.setPos(owner.getX(),owner.getY()+2,owner.getZ());
         this.setOwner(owner);
     }
     @Override
