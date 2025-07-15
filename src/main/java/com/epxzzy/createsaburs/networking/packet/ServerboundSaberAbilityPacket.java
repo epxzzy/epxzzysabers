@@ -1,6 +1,7 @@
 package com.epxzzy.createsaburs.networking.packet;
 
 import com.epxzzy.createsaburs.createsaburs;
+//import com.epxzzy.createsaburs.entity.custom.PlasmaBolt;
 import com.epxzzy.createsaburs.entity.custom.PlasmaBolt;
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import com.epxzzy.createsaburs.item.ModItems;
@@ -9,6 +10,7 @@ import com.epxzzy.createsaburs.sound.ModSounds;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -60,14 +62,16 @@ public class ServerboundSaberAbilityPacket {
                         player.getInventory().removeItem(pStack);
                     }
                 }
+
                 if(pStack.is(ModItems.BLASTER_HYBRID.get())) {
-                    PlasmaBolt blasterbolt = new PlasmaBolt(pLevel) {
+                    PlasmaBolt blasterbolt = new PlasmaBolt(player, pLevel) {
                     };
-                    blasterbolt.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 6 * 0.5F, 1.0F);
-                    player.swing(InteractionHand.MAIN_HAND, true);
+                    blasterbolt.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 2 * 0.5F, 1.0F);
                     pLevel.addFreshEntity(blasterbolt);
-                    pLevel.playSound((Player) null, blasterbolt, ModSounds.ACTIVATION.get(), SoundSource.PLAYERS, 0.05F, 1.0F);
+                    pLevel.playSound((Player) null, blasterbolt,SoundEvents.BUBBLE_COLUMN_BUBBLE_POP , SoundSource.PLAYERS, 0.05F, 1.0F);
                 }
+
+
                 
                 
             }

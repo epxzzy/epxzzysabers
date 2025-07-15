@@ -8,7 +8,12 @@ public class ModModelLayers {
     public static final ModelLayerLocation thrownrotarysabermodellayer = new ModelLayerLocation(
             new ResourceLocation(createsaburs.MOD_ID, "thrownrotarysaber"), "main");
 
+
     public static final ModelLayerLocation thrownrotarysaberblademodellayer = new ModelLayerLocation(
             new ResourceLocation(createsaburs.MOD_ID, "thrownrotarysaberblade"), "main");
+
+    public static final ModelLayerLocation PLASMA_BOLT_LAYER= new ModelLayerLocation(
+            new ResourceLocation(createsaburs.MOD_ID, "plasmaboltlayer"), "main");
+
 
 }

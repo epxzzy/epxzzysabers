@@ -3,6 +3,7 @@ package com.epxzzy.createsaburs;
 import com.epxzzy.createsaburs.block.ModBlockEntities;
 import com.epxzzy.createsaburs.block.ModBlocks;
 import com.epxzzy.createsaburs.entity.ModEntities;
+import com.epxzzy.createsaburs.entity.client.PlasmaBoltRenderer;
 import com.epxzzy.createsaburs.entity.client.ThrownRotarySaberRenderer;
 import com.epxzzy.createsaburs.item.ModCreativeModTabs;
 import com.epxzzy.createsaburs.item.ModItems;
@@ -91,7 +92,7 @@ public class createsaburs {
 
 
             EntityRenderers.register(ModEntities.ROTARY_SABER_ENTITY.get(), ThrownRotarySaberRenderer::new);
-            EntityRenderers.register(ModEntities.PLASMA_BOLT.get(), ThrownRotarySaberRenderer::new);
+            EntityRenderers.register(ModEntities.PLASMA_BOLT.get(), PlasmaBoltRenderer::new);
 
 
         }

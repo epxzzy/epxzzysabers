@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs.entity;
 
 
 import com.epxzzy.createsaburs.createsaburs;
+//import com.epxzzy.createsaburs.entity.custom.PlasmaBolt;
 import com.epxzzy.createsaburs.entity.custom.PlasmaBolt;
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import net.minecraft.world.entity.EntityType;
@@ -22,6 +23,8 @@ public class ModEntities {
     public static final RegistryObject<EntityType<PlasmaBolt>> PLASMA_BOLT =
             ENTITY_TYPES.register("plasma_bolt", () -> EntityType.Builder.<PlasmaBolt>of(PlasmaBolt::new, MobCategory.MISC)
                     .sized(0.5f, 0.5f).build("plasma_bolt"));
+
+
 
 
 
