@@ -343,7 +343,7 @@ public class KyberStationMenu extends AbstractContainerMenu {
 
         createsaburs.LOGGER.warn("crafting colours " + r + " " + g + " " + b);
 
-        taggussy.getCompound("display").putInt("color", colour);
+        taggussy.getCompound("display").putInt("colour", colour);
         base.setTag(taggussy);
 
         this.broadcastChanges();
@@ -359,7 +359,7 @@ public class KyberStationMenu extends AbstractContainerMenu {
         if (!(ColourConverter.portedRGBtoDecimal(baseInput) == colooorrr)) {
             ItemStack base = this.input_slot.getItem().copy();
             CompoundTag taggussy = base.getOrCreateTag();
-            taggussy.getCompound("display").putInt("color", colooorrr);
+            taggussy.getCompound("display").putInt("colour", colooorrr);
             base.setTag(taggussy);
 
             this.broadcastChanges();
@@ -368,7 +368,7 @@ public class KyberStationMenu extends AbstractContainerMenu {
     }
 
     public int[] getInputColour() {
-        return ColourConverter.PortedDecimaltoRGB(this.input_slot.getItem().getOrCreateTag().getCompound("display").getInt("color"));
+        return ColourConverter.PortedDecimaltoRGB(this.input_slot.getItem().getOrCreateTag().getCompound("display").getInt("colour"));
     }
 
     public boolean stillValid(@NotNull Player pPlayer) {

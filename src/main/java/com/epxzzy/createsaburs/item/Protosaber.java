@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs.item;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
+import com.epxzzy.createsaburs.misc.ColourConverter;
 import com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer;
 import com.epxzzy.createsaburs.rendering.poseHandlers.BladeStance;
 import com.epxzzy.createsaburs.sound.ModSounds;
@@ -85,13 +86,13 @@ public class Protosaber extends Item {
             tag.remove("AttributeModifiers");
         }
 
-        if (tag.getCompound("display").getInt("color") != 0) {
+        if (tag.getCompound("display").getInt("colour") != 0) {
             int flourishID = tag.getCompound("display").getInt("flourish");
-            displayTag.putInt("color", tag.getCompound("display").getInt("color"));
+            displayTag.putInt("colour", tag.getCompound("display").getInt("colour"));
             displayTag.putInt("flourish", flourishID);
 
         } else {
-            displayTag.putInt("color", BASE_COLOUR);
+            displayTag.putInt("colour", BASE_COLOUR);
         }
 
         tagsToApply.putBoolean("ActiveBoiii", bool);
@@ -226,11 +227,11 @@ public class Protosaber extends Item {
 
     public static int getColor(ItemStack pStack) {
         CompoundTag compoundtag = pStack.getOrCreateTagElement("display");
-        if (compoundtag.getInt("color") == 0) {
+        if (compoundtag.getInt("colour") == 0) {
             //setColor(pStack, 65280);
             return 65280;
         }
-        return Objects.requireNonNull(pStack.getTagElement("display")).getInt("color");
+        return Objects.requireNonNull(pStack.getTagElement("display")).getInt("colour");
     }
 
     public void clearColor(ItemStack pStack) {
@@ -252,9 +253,13 @@ public class Protosaber extends Item {
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
 
-        MutableComponent ActiveDetail = Component.literal(readActivetag(stack) ? "On" : "Off")
+        MutableComponent ActiveDetail = Component.literal(readActivetag(stack) ? "Active" : "Inactive")
                 .withStyle(readActivetag(stack) ? ChatFormatting.WHITE : ChatFormatting.GRAY);
         tooltip.add(ActiveDetail);
+        MutableComponent ColourDetail = Component.literal(ColourConverter.getHexString(getColor(stack)))
+                .withStyle(ChatFormatting.GRAY);
+        tooltip.add(ColourDetail);
+
         if (Screen.hasControlDown()) {
             tooltip.add(Component.literal(" hidden text displayed only when ctrl key is being held down"));
         }

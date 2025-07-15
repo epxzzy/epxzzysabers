@@ -1,5 +1,9 @@
 package com.epxzzy.createsaburs.misc;
 
+import net.createmod.catnip.theme.Color;
+
+import java.util.Locale;
+
 public class ColourConverter {
 
     // Convert decimal color to RGB
@@ -15,6 +19,16 @@ public class ColourConverter {
         //createsaburs.LOGGER.warn("converted(RGB2DEC) colour:" + aa);
         return aa;
     }
+
+    public static String getHexString(int decimalcolour) {
+        int[] theones = PortedDecimaltoRGB(decimalcolour);
+        String f = Integer.toHexString(theones[0]).equals("0") ? "00" : Integer.toHexString(theones[0]).toUpperCase();
+        String s = Integer.toHexString(theones[1]).equals("0") ? "00" : Integer.toHexString(theones[1]).toUpperCase();
+        String t = Integer.toHexString(theones[2]).equals("0") ? "00" : Integer.toHexString(theones[2]).toUpperCase();
+
+        return "#"+f+s+t;
+    }
+
     public static int[] RGBtoHSL(int r, int g, int b) {
         float rPercent = r / 255f;
         float gPercent = g / 255f;
@@ -52,7 +66,7 @@ public class ColourConverter {
 
         float rPrime = 0, gPrime = 0, bPrime = 0;
 
-        if(h == 360){
+        if (h == 360) {
             //rollback cause the decimal convertor seems to get fucky with it
             h = 0;
         }
@@ -83,7 +97,6 @@ public class ColourConverter {
 
         return new int[]{r, g, b};
     }
-
 
 
     public static void main(String[] args) {
