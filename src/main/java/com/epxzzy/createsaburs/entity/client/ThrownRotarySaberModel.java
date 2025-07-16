@@ -26,7 +26,7 @@ public class ThrownRotarySaberModel<T extends ThrownRotarySaber> extends Hierarc
     public AnimationState state = new AnimationState();
 
     public ThrownRotarySaberModel(ModelPart pRoot) {
-        super(RenderType::entityTranslucentEmissive);
+        super(RenderType::entityTranslucent);
         this.group = pRoot.getChild("group");
         this.guard = this.group.getChild("guard");
         this.handle = this.group.getChild("handle");

@@ -29,7 +29,7 @@ public class thebladepart<T extends ThrownRotarySaber> extends Model {
 	private final ModelPart bone;
 
 	public thebladepart(ModelPart root) {
-        super(RenderType::entityTranslucentEmissive);
+        super(RenderType::entitySolid);
         this.bone = root.getChild("bone");
 	}
 
