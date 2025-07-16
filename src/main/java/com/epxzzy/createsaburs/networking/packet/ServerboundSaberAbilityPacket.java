@@ -24,7 +24,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 public class ServerboundSaberAbilityPacket {
-    public ServerboundSaberAbilityPacket(){
+    public ServerboundSaberAbilityPacket() {
     }
 
 
@@ -43,12 +43,12 @@ public class ServerboundSaberAbilityPacket {
 
             //createsaburs.LOGGER.info(Objects.requireNonNull(contextt.getSender())+" named bond having a stonk");
 
-            if(contextt.getSender() != null){
+            if (contextt.getSender() != null) {
                 ServerPlayer player = contextt.getSender();
                 Level pLevel = player.level();
                 ItemStack pStack = player.getItemInHand(InteractionHand.MAIN_HAND);
-                
-                if(pStack.is(ModItems.ROTARY_SABER.get())) {
+
+                if (pStack.is(ModItems.ROTARY_SABER.get())) {
                     ThrownRotarySaber thrownsaber = new ThrownRotarySaber(pLevel, player, pStack);
                     createsaburs.LOGGER.warn("colour given is:" + RotarySaber.getColor(pStack));
                     thrownsaber.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 8 * 0.5F, 1.0F);
@@ -63,17 +63,20 @@ public class ServerboundSaberAbilityPacket {
                     }
                 }
 
-                if(pStack.is(ModItems.BLASTER_HYBRID.get())) {
-                    PlasmaBolt blasterbolt = new PlasmaBolt(player, pLevel) {
-                    };
-                    blasterbolt.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 1 * 0.5F, 1.0F);
-                    pLevel.addFreshEntity(blasterbolt);
-                    pLevel.playSound((Player) null, blasterbolt,SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.PLAYERS, 0.05F, 1.0F);
+                if (pStack.is(ModItems.BLASTER_HYBRID.get())) {
+                    if (!(player.getCooldowns().isOnCooldown(pStack.getItem()))){
+                        player.getCooldowns().addCooldown(pStack.getItem(), 6);
+                        player.stopUsingItem();
+
+                        PlasmaBolt blasterbolt = new PlasmaBolt(player, pLevel) {};
+
+                        blasterbolt.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 1 * 0.5F, 1.0F);
+                        pLevel.addFreshEntity(blasterbolt);
+                        pLevel.playSound((Player) null, blasterbolt, SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.PLAYERS, 0.05F, 1.0F);
+                    }
                 }
 
 
-                
-                
             }
 
             contextt.getSender().sendSystemMessage(Component.literal("serverplayer name:" + contextt.getSender().getTabListDisplayName().getString() + " and thats about it"));

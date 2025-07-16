@@ -115,6 +115,7 @@ public class RotarySaber extends Protosaber {
             }
             pPlayer.startUsingItem(pHand);
         }
+
         if (pPlayer.isShiftKeyDown() && pHand == InteractionHand.MAIN_HAND) {
             super.ToggleSaberCore(pLevel, pPlayer, itemstack);
             pPlayer.stopUsingItem();
