@@ -8,6 +8,7 @@ import com.epxzzy.createsaburs.entity.client.ThrownRotarySaberRenderer;
 import com.epxzzy.createsaburs.item.ModCreativeModTabs;
 import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.networking.ModMessages;
+import com.epxzzy.createsaburs.rendering.foundation.PartialModelEventHandler;
 import com.epxzzy.createsaburs.screen.KyberStationScreen;
 import com.epxzzy.createsaburs.screen.ModMenuTypes;
 import com.epxzzy.createsaburs.sound.ModSounds;
@@ -22,6 +23,7 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.CrashReportCallables;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -60,6 +62,10 @@ public class createsaburs {
 
 
         modEventBus.addListener(this::addCreative);
+
+
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> clientInit(MinecraftForge.EVENT_BUS, modEventBus));
+
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -70,7 +76,13 @@ public class createsaburs {
 
     }
 
-    // Add the example block item to the building blocks tab
+
+    private static void clientInit(IEventBus forgeEventBus, IEventBus modEventBus) {
+        modEventBus.addListener(PartialModelEventHandler::onRegisterAdditional);
+        modEventBus.addListener(PartialModelEventHandler::onBakingCompleted);
+    }
+
+        // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
 
     }

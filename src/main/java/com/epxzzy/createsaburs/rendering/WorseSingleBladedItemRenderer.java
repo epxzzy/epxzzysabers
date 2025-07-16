@@ -1,14 +1,11 @@
 package com.epxzzy.createsaburs.rendering;
 
 import com.epxzzy.createsaburs.createsaburs;
-import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModel;
-import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
-import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
-import com.epxzzy.createsaburs.rendering.foundation.PartialModel;
 import com.epxzzy.createsaburs.rendering.poseRenderer.SingleBladed.SingleBladedItemPoseRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueHandler;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,12 +13,18 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
+import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
+import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
+import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+
+
+
 import java.util.List;
 
 import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.getEntitiesHoldingItem;
 
-
-public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
+public class WorseSingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
     protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/gear"));
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/blade_single"));
 
@@ -51,7 +54,7 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
 
             for (LivingEntity entity : allEntities) {
                 if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")){
-                    SingleBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+                    //SingleBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
                 }
             }
         }

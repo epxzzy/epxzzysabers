@@ -10,7 +10,6 @@ import com.epxzzy.createsaburs.utils.ModTags;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.mojang.blaze3d.platform.InputConstants;
-import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -54,7 +53,9 @@ public class Protosaber extends Item {
     private final int PARRY_RANGE;
     private final int ATTACK_DAMAGE;
     private final int ATTACK_SPEED;
-    public static CustomRenderedItemModelRenderer THE_RENDURR;
+    public static com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer THE_RENDURR;
+    public static com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer THE_RENDURBETTUR;
+
     public static int BASE_COLOUR = 65280;
     public boolean isActive;
 

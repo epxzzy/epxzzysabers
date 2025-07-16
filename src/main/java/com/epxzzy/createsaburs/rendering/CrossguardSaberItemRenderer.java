@@ -50,7 +50,7 @@ public class CrossguardSaberItemRenderer extends CustomRenderedItemModelRenderer
 
             for (LivingEntity entity : allEntities) {
                 if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")){
-                    SingleBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+                    //SingleBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
                 }
             }
         }
