@@ -4,16 +4,22 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.function.Consumer;
 
+import com.epxzzy.createsaburs.createsaburs;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CustomRenderedItems {
 
     private static final Set<Item> ITEMS = new ReferenceOpenHashSet<>();
+    private static final Logger log = LoggerFactory.getLogger(CustomRenderedItems.class);
     private static boolean itemsFiltered = false;
 
     /**

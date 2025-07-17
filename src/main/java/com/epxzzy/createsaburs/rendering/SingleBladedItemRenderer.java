@@ -5,6 +5,12 @@ import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModel;
 import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.createsaburs.rendering.foundation.PartialModel;
+
+//import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
+//import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
+//import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
+//import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+
 import com.epxzzy.createsaburs.rendering.poseRenderer.SingleBladed.SingleBladedItemPoseRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -51,7 +57,7 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
 
             for (LivingEntity entity : allEntities) {
                 if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")){
-                    SingleBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+                    //SingleBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
                 }
             }
         }

@@ -9,6 +9,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.ModelEvent;
 
+@ApiStatus.Internal
 public final class PartialModelEventHandler {
     private PartialModelEventHandler() {
     }

@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs.rendering.foundation;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.simibubi.create.foundation.render.RenderTypes;
 
 import net.createmod.catnip.data.Iterate;
 import net.minecraft.client.Minecraft;
@@ -49,11 +50,11 @@ public class PartialItemModelRenderer {
     }
 
     public void renderGlowing(BakedModel model, int light) {
-        render(model, com.simibubi.create.foundation.render.RenderTypes.itemGlowingTranslucent(), light);
+        render(model, RenderTypes.itemGlowingTranslucent(), light);
     }
 
     public void renderSolidGlowing(BakedModel model, int light) {
-        render(model, com.simibubi.create.foundation.render.RenderTypes.itemGlowingSolid(), light);
+        render(model, RenderTypes.itemGlowingSolid(), light);
     }
 
     public void render(BakedModel model, RenderType type, int light) {
