@@ -26,10 +26,6 @@ public class ModelSwapper {
 
     protected CustomItemModels customItemModels = new CustomItemModels();
 
-    public CustomItemModels getCustomItemModels() {
-        return customItemModels;
-    }
-
     public void onModelBake(ModelEvent.ModifyBakingResult event) {
         Map<ResourceLocation, BakedModel> modelRegistry = event.getModels();
         customItemModels.forEach((item, modelFunc) -> swapModels(modelRegistry, getItemModelLocation(item), modelFunc));

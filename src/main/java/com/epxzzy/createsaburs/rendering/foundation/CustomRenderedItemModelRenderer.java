@@ -1,5 +1,6 @@
 package com.epxzzy.createsaburs.rendering.foundation;
 
+import com.epxzzy.createsaburs.createsaburs;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.Minecraft;
@@ -25,6 +26,9 @@ public abstract class CustomRenderedItemModelRenderer extends BlockEntityWithout
                 .getItemRenderer()
                 .getModel(stack, null, null, 0);
         PartialItemModelRenderer renderer = PartialItemModelRenderer.of(stack, transformType, ms, buffer, overlay);
+        if(transformType.equals(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)){
+            //
+        }
 
         ms.pushPose();
         ms.translate(0.5F, 0.5F, 0.5F);

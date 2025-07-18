@@ -7,14 +7,13 @@ import java.util.function.Consumer;
 import com.epxzzy.createsaburs.createsaburs;
 //import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
 //import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
+import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
+import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 public class CustomRenderedItems {
 
@@ -24,6 +23,7 @@ public class CustomRenderedItems {
     /**
      * Track an item that uses a subclass of {@link com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer} as its custom renderer
      * to automatically wrap its model with {@link CustomRenderedItemModel}.
+     *
      * @param item The item that should have its model swapped.
      */
     public static void register(Item item) {
@@ -47,5 +47,4 @@ public class CustomRenderedItems {
         }
         ITEMS.forEach(consumer);
     }
-
 }
