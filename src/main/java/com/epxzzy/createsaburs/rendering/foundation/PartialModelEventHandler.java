@@ -26,6 +26,7 @@ public final class PartialModelEventHandler {
         Map<ResourceLocation, BakedModel> models = event.getModels();
 
         for ( PartialModel partial : PartialModel.ALL.values()) {
+            createsaburs.LOGGER.warn("partial model: {}", partial.modelLocation());
             partial.bakedModel = models.get(partial.modelLocation());
         }
     }

@@ -63,10 +63,10 @@ public class createsaburs {
 
 
         modEventBus.addListener(this::addCreative);
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> createsaburs.clientInit( MinecraftForge.EVENT_BUS, modEventBus));
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> createsabursClient.onCtorClient(MinecraftForge.EVENT_BUS, modEventBus));
 
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> createsaburs.clientInit( MinecraftForge.EVENT_BUS, modEventBus));
 
     }
 
