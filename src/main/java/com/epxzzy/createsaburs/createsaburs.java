@@ -45,7 +45,6 @@ public class createsaburs {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> createsabursClient::init);
         modEventBus.addListener(this::commonSetup);
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> clientInit(MinecraftForge.EVENT_BUS, modEventBus));
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
@@ -64,7 +63,9 @@ public class createsaburs {
 
 
         modEventBus.addListener(this::addCreative);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> createsaburs.clientInit( MinecraftForge.EVENT_BUS, modEventBus));
 
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> createsabursClient.onCtorClient(MinecraftForge.EVENT_BUS, modEventBus));
 
 
     }
@@ -81,7 +82,7 @@ public class createsaburs {
     private static void clientInit(IEventBus forgeEventBus, IEventBus modEventBus) {
         modEventBus.addListener(PartialModelEventHandler::onRegisterAdditional);
         modEventBus.addListener(PartialModelEventHandler::onBakingCompleted);
-        modEventBus.addListener(ModelSwapper::onModifyBakingResult);
+        //modEventBus.addListener(ModelSwapper::registerListeners);
     }
 
         // Add the example block item to the building blocks tab

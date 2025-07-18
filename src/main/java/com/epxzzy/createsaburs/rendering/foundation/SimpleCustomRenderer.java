@@ -1,6 +1,8 @@
 package com.epxzzy.createsaburs.rendering.foundation;
 
-import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
+//import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
+//import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
+import com.simibubi.create.foundation.item.render.CustomRenderedItems;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
