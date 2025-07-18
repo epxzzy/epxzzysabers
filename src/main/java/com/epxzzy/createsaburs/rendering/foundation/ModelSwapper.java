@@ -4,7 +4,8 @@ import com.epxzzy.createsaburs.ModServices;
 import com.epxzzy.createsaburs.createsaburs;
 //import com.simibubi.create.foundation.item.render.CustomItemModels;
 //import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
-//import com.simibubi.create.foundation.item.render.CustomRenderedItems;
+import com.simibubi.create.foundation.item.render.CustomItemModels;
+import com.simibubi.create.foundation.item.render.CustomRenderedItems;
 
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.resources.model.BakedModel;
@@ -26,6 +27,10 @@ public class ModelSwapper {
 
     protected CustomItemModels customItemModels = new CustomItemModels();
 
+    public CustomItemModels getCustomItemModels() {
+        return customItemModels;
+    }
+
     public void onModelBake(ModelEvent.ModifyBakingResult event) {
         Map<ResourceLocation, BakedModel> modelRegistry = event.getModels();
         customItemModels.forEach((item, modelFunc) -> swapModels(modelRegistry, getItemModelLocation(item), modelFunc));
@@ -39,6 +44,7 @@ public class ModelSwapper {
 
     public static <T extends BakedModel> void swapModels(Map<ResourceLocation, BakedModel> modelRegistry,
                                                          ModelResourceLocation location, Function<BakedModel, T> factory) {
+        createsaburs.LOGGER.warn("now logging {}", location.toString());
         modelRegistry.put(location, factory.apply(modelRegistry.get(location)));
     }
 
