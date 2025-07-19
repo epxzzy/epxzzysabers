@@ -9,10 +9,10 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
-//import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModel;
-import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
-//import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
+//import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
+import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModel;
+//import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
+import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
 
 public abstract class CustomRenderedItemModelRenderer extends BlockEntityWithoutLevelRenderer {
 
@@ -26,6 +26,7 @@ public abstract class CustomRenderedItemModelRenderer extends BlockEntityWithout
                 .getItemRenderer()
                 .getModel(stack, null, null, 0);
         PartialItemModelRenderer renderer = PartialItemModelRenderer.of(stack, transformType, ms, buffer, overlay);
+
         if(transformType.equals(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)){
             //
         }

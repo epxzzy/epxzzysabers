@@ -19,8 +19,8 @@ public class SingleBladed extends Protosaber {
     }
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        THE_RENDURR = new SingleBladedItemRenderer();
-        consumer.accept(SimpleCustomRenderer.create(this, THE_RENDURR));
+        THE_RENDURBETTUR = new SingleBladedItemRenderer();
+        consumer.accept(SimpleCustomRenderer.create(this, THE_RENDURBETTUR));
     }
     public static boolean checkForSaberBlock(Entity Entityy){
         if(Entityy instanceof LivingEntity)

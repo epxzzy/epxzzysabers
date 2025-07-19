@@ -43,7 +43,6 @@ public class createsaburs {
 
     public createsaburs() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> createsabursClient::init);
         modEventBus.addListener(this::commonSetup);
 
         ModItems.register(modEventBus);
@@ -63,6 +62,7 @@ public class createsaburs {
 
 
         modEventBus.addListener(this::addCreative);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> createsabursClient::init);
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> createsabursClient.onCtorClient(MinecraftForge.EVENT_BUS, modEventBus));
 

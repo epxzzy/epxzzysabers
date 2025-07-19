@@ -3,6 +3,7 @@ package com.epxzzy.createsaburs.rendering.foundation;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
+import com.epxzzy.createsaburs.createsaburs;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
@@ -20,6 +21,7 @@ public class CustomItemModels {
     private boolean funcsLoaded = false;
 
     public void register(ResourceLocation item, NonNullFunction<BakedModel, ? extends BakedModel> func) {
+        createsaburs.LOGGER.warn("FKCRT added item to CustomItemModels {}", item);
         modelFuncs.put(item, func);
     }
 

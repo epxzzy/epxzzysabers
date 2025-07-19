@@ -4,8 +4,8 @@ import com.epxzzy.createsaburs.ModServices;
 import com.epxzzy.createsaburs.createsaburs;
 //import com.simibubi.create.foundation.item.render.CustomItemModels;
 //import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
-import com.simibubi.create.foundation.item.render.CustomItemModels;
-import com.simibubi.create.foundation.item.render.CustomRenderedItems;
+//import com.simibubi.create.foundation.item.render.CustomItemModels;
+//import com.simibubi.create.foundation.item.render.CustomRenderedItems;
 
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.resources.model.BakedModel;
@@ -39,12 +39,13 @@ public class ModelSwapper {
 
     public void registerListeners(IEventBus modEventBus) {
         modEventBus.addListener(this::onModelBake);
+        createsaburs.LOGGER.warn("FKCRT modelswapper is now listening");
     }
 
 
     public static <T extends BakedModel> void swapModels(Map<ResourceLocation, BakedModel> modelRegistry,
                                                          ModelResourceLocation location, Function<BakedModel, T> factory) {
-        createsaburs.LOGGER.warn("now logging {}", location.toString());
+        createsaburs.LOGGER.warn("FKCRT now swapping {}", location);
         modelRegistry.put(location, factory.apply(modelRegistry.get(location)));
     }
 

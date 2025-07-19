@@ -1,8 +1,9 @@
 package com.epxzzy.createsaburs.rendering.foundation;
 
-//import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
-import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
-import com.simibubi.create.foundation.item.render.CustomRenderedItems;
+import com.epxzzy.createsaburs.item.Protosaber;
+import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
+//import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
+//import com.simibubi.create.foundation.item.render.CustomRenderedItems;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -15,7 +16,7 @@ public class SimpleCustomRenderer implements IClientItemExtensions {
         this.renderer = renderer;
     }
 
-    public static SimpleCustomRenderer create(Item item, CustomRenderedItemModelRenderer renderer) {
+    public static SimpleCustomRenderer create(Protosaber item, CustomRenderedItemModelRenderer renderer) {
         CustomRenderedItems.register(item);
         return new SimpleCustomRenderer(renderer);
     }

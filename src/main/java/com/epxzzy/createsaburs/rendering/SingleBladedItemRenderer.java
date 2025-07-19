@@ -2,14 +2,14 @@ package com.epxzzy.createsaburs.rendering;
 
 import com.epxzzy.createsaburs.createsaburs;
 
-//import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModel;
-//import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
-//import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
+import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModel;
+import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
+import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.createsaburs.rendering.foundation.PartialModel;
 
-import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
-import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
-import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
+//import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
+//import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
+//import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
 //import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
 import com.epxzzy.createsaburs.rendering.poseRenderer.SingleBladed.SingleBladedItemPoseRenderer;

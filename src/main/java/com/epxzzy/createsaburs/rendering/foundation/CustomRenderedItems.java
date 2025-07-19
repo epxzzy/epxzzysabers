@@ -27,6 +27,7 @@ public class CustomRenderedItems {
      * @param item The item that should have its model swapped.
      */
     public static void register(Item item) {
+        createsaburs.LOGGER.warn("FKCRT item is being added to CustomRenderedItems {}", item);
         ITEMS.add(item);
     }
 
@@ -34,6 +35,7 @@ public class CustomRenderedItems {
      * This method must not be called before item registration is finished!
      */
     public static void forEach(Consumer<Item> consumer) {
+        createsaburs.LOGGER.warn("FKCRT now looping over CustomRenderedItems");
         if (!itemsFiltered) {
             Iterator<Item> iterator = ITEMS.iterator();
             while (iterator.hasNext()) {
