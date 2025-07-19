@@ -1,5 +1,6 @@
 package com.epxzzy.createsaburs.item.saburtypes;
 
+import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.rendering.SingleBladedItemRenderer;
 import com.epxzzy.createsaburs.rendering.WorseSingleBladedItemRenderer;

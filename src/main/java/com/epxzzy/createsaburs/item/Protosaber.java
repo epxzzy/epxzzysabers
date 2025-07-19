@@ -54,7 +54,7 @@ public class Protosaber extends Item {
     private final int ATTACK_DAMAGE;
     private final int ATTACK_SPEED;
     public static com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer THE_RENDURR;
-    public static com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer THE_RENDURBETTUR;
+    public static com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer THE_BETTER_RENDERER;
 
     public static int BASE_COLOUR = 65280;
     public boolean isActive;

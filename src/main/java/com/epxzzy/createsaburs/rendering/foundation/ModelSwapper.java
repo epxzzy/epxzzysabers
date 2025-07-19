@@ -25,23 +25,27 @@ import java.util.function.Function;
 
 public class ModelSwapper {
 
-    protected CustomItemModels customItemModels = new CustomItemModels();
 
-    public CustomItemModels getCustomItemModels() {
-        return customItemModels;
-    }
 
     public void onModelBake(ModelEvent.ModifyBakingResult event) {
+        createsaburs.LOGGER.warn("FKCRT bakin it rn");
+
         Map<ResourceLocation, BakedModel> modelRegistry = event.getModels();
-        customItemModels.forEach((item, modelFunc) -> swapModels(modelRegistry, getItemModelLocation(item), modelFunc));
+        //customItemModels.forEach((item, modelFunc) -> swapModels(modelRegistry, getItemModelLocation(item), modelFunc));
         CustomRenderedItems.forEach(item -> swapModels(modelRegistry, getItemModelLocation(item), CustomRenderedItemModel::new));
+        com.simibubi.create.foundation.item.render.CustomRenderedItems.forEach(item -> screamoutloud(modelRegistry, getItemModelLocation(item)));
+        CustomRenderedItems.forEach(item -> screamoutloud(modelRegistry, getItemModelLocation(item)));
+
     }
 
     public void registerListeners(IEventBus modEventBus) {
         modEventBus.addListener(this::onModelBake);
         createsaburs.LOGGER.warn("FKCRT modelswapper is now listening");
     }
-
+    public void screamoutloud(Map<ResourceLocation, BakedModel> modelRegistry,
+    ModelResourceLocation location){
+        createsaburs.LOGGER.warn("FKCRT customRenderedItems in create: {}", location);
+    }
 
     public static <T extends BakedModel> void swapModels(Map<ResourceLocation, BakedModel> modelRegistry,
                                                          ModelResourceLocation location, Function<BakedModel, T> factory) {

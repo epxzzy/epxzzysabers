@@ -1,5 +1,7 @@
 package com.epxzzy.createsaburs.item.saburtypes;
 
+import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.rendering.SingleBladedItemRenderer;
 import com.epxzzy.createsaburs.utils.ModTags;
@@ -17,11 +19,7 @@ public class SingleBladed extends Protosaber {
     public SingleBladed(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
         super(pProperties, pRANGE , pDamage, pSpeed);
     }
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        THE_RENDURBETTUR = new SingleBladedItemRenderer();
-        consumer.accept(SimpleCustomRenderer.create(this, THE_RENDURBETTUR));
-    }
+
     public static boolean checkForSaberBlock(Entity Entityy){
         if(Entityy instanceof LivingEntity)
             return ((LivingEntity)Entityy).getMainHandItem().is(ModTags.Items.CREATE_SINGLE_BLADED) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity)Entityy).isUsingItem();
@@ -35,5 +33,9 @@ public class SingleBladed extends Protosaber {
         }
         return false;
     }
-
+    @Override
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        THE_BETTER_RENDERER = new SingleBladedItemRenderer();
+        consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));
+    }
 }

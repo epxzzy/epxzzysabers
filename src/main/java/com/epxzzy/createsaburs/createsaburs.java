@@ -63,10 +63,9 @@ public class createsaburs {
 
         modEventBus.addListener(this::addCreative);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> createsabursClient::init);
-
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> createsaburs.clientInit( MinecraftForge.EVENT_BUS, modEventBus));
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> createsabursClient.onCtorClient(MinecraftForge.EVENT_BUS, modEventBus));
 
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> createsaburs.clientInit( MinecraftForge.EVENT_BUS, modEventBus));
 
     }
 
@@ -82,6 +81,7 @@ public class createsaburs {
     private static void clientInit(IEventBus forgeEventBus, IEventBus modEventBus) {
         modEventBus.addListener(PartialModelEventHandler::onRegisterAdditional);
         modEventBus.addListener(PartialModelEventHandler::onBakingCompleted);
+        createsaburs.LOGGER.warn("FKCRT PartialModelEventHandler events registered");
         //modEventBus.addListener(ModelSwapper::registerListeners);
     }
 
