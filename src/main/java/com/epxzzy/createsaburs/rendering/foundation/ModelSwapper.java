@@ -45,6 +45,7 @@ public class ModelSwapper {
     public void screamoutloud(Map<ResourceLocation, BakedModel> modelRegistry,
     ModelResourceLocation location){
         createsaburs.LOGGER.warn("FKCRT customRenderedItems in create: {}", location);
+
     }
 
     public static <T extends BakedModel> void swapModels(Map<ResourceLocation, BakedModel> modelRegistry,
