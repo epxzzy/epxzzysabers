@@ -25,10 +25,8 @@ public class DualBladedArmPoseRenderer {
         ModelPart MainArm = Lefty ? model.leftArm: model.rightArm;
         ModelPart otherArm = Lefty ? model.rightArm: model.leftArm;
 
-        model.body.resetPose();
+        //model.body.resetPose();
 
-        MainArm.resetPose();
-        otherArm.resetPose();
 
 
         float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));
@@ -45,8 +43,6 @@ public class DualBladedArmPoseRenderer {
 
         float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
 
-        MainArm.resetPose();
-        otherArm.resetPose();
 
         float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));
 
@@ -67,8 +63,6 @@ public class DualBladedArmPoseRenderer {
 
         float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
 
-        MainArm.resetPose();
-        otherArm.resetPose();
 
         float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*2/Math.PI));
 
@@ -82,10 +76,7 @@ public class DualBladedArmPoseRenderer {
         ModelPart MainArm = Lefty ? model.leftArm: model.rightArm;
         ModelPart otherArm = Lefty ? model.rightArm: model.leftArm;
 
-        model.body.resetPose();
 
-        MainArm.resetPose();
-        otherArm.resetPose();
 
 
         float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));

@@ -24,9 +24,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class ModelSwapper {
-
-
-
     public void onModelBake(ModelEvent.ModifyBakingResult event) {
         createsaburs.LOGGER.warn("FKCRT bakin it rn");
 

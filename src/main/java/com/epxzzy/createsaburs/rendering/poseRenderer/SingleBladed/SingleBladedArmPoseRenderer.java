@@ -28,13 +28,11 @@ public class SingleBladedArmPoseRenderer {
         float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
         float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
 
-        MainArm.resetPose();
 
         MainArm.xRot = Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F;
         MainArm.yRot = AngleHelper.rad(-20);
 
         if (both) {
-            otherArm.resetPose();
             //otherArm.xRot = -AngleHelper.rad(bodySwing + 150);
             otherArm.xRot = Mth.clamp(model.head.xRot, -1.2F, 1.2F) - 1.4835298F;
             MainArm.yRot = AngleHelper.rad(0);
@@ -50,12 +48,10 @@ public class SingleBladedArmPoseRenderer {
         float movement = Mth.sin(((float) ((time) * 3.3 / Math.PI)));
         float movement2 = Mth.sin(((float) ((time) * 4 / Math.PI)));
 
-        MainArm.resetPose();
         MainArm.xRot = AngleHelper.rad(-45.04 * movement - 10);
         MainArm.zRot = AngleHelper.rad(movement2 * -30);
 
         if (both) {
-            otherArm.resetPose();
             otherArm.xRot = Mth.cos(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
             otherArm.zRot = -AngleHelper.rad(20);
         }
