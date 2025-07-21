@@ -2,12 +2,14 @@ package com.epxzzy.createsaburs.item.saburtypes;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
+import com.epxzzy.createsaburs.rendering.ExperimentalBEWLR;
 import com.epxzzy.createsaburs.rendering.SingleBladedItemRenderer;
 import com.epxzzy.createsaburs.rendering.WorseSingleBladedItemRenderer;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import com.epxzzy.createsaburs.utils.ModTags;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -23,6 +25,8 @@ public class BlasterHybrid extends Protosaber {
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         THE_RENDURR = new WorseSingleBladedItemRenderer();
         consumer.accept(SimpleCustomRenderer.create(this, THE_RENDURR));
+
+
     }
     public static boolean checkForSaberBlock(Entity Entityy){
         if(Entityy instanceof LivingEntity)

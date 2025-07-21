@@ -24,8 +24,14 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class ModelSwapper {
+    protected CustomItemModels customItemModels = new CustomItemModels();
+
+    public CustomItemModels getCustomItemModels() {
+        return customItemModels;
+    }
+
     public void onModelBake(ModelEvent.ModifyBakingResult event) {
-        createsaburs.LOGGER.warn("FKCRT bakin it rn");
+        createsaburs.LOGGER.warn("FKCRT swaping it rn");
 
         Map<ResourceLocation, BakedModel> modelRegistry = event.getModels();
         //customItemModels.forEach((item, modelFunc) -> swapModels(modelRegistry, getItemModelLocation(item), modelFunc));
@@ -39,7 +45,7 @@ public class ModelSwapper {
         modEventBus.addListener(this::onModelBake);
         createsaburs.LOGGER.warn("FKCRT modelswapper is now listening");
     }
-    public void screamoutloud(Map<ResourceLocation, BakedModel> modelRegistry,
+    public static void screamoutloud(Map<ResourceLocation, BakedModel> modelRegistry,
     ModelResourceLocation location){
         createsaburs.LOGGER.warn("FKCRT customRenderedItems in create: {}", location);
 

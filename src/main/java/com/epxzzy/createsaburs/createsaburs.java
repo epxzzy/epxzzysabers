@@ -45,6 +45,7 @@ public class createsaburs {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
 
+
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModMenuTypes.register(modEventBus);
@@ -60,11 +61,15 @@ public class createsaburs {
         SABER_SWING = ToolAction.get("saber_swing");
         SABER_BLOCK = ToolAction.get("saber_block");
 
-
         modEventBus.addListener(this::addCreative);
+
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> createsabursClient.onClient( MinecraftForge.EVENT_BUS, modEventBus));
+
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> createsabursClient::init);
+        ModItems.letThereBeItemsRendered();
+
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> createsaburs.clientInit( MinecraftForge.EVENT_BUS, modEventBus));
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> createsabursClient.onCtorClient(MinecraftForge.EVENT_BUS, modEventBus));
+
 
 
     }
@@ -82,7 +87,6 @@ public class createsaburs {
         modEventBus.addListener(PartialModelEventHandler::onRegisterAdditional);
         modEventBus.addListener(PartialModelEventHandler::onBakingCompleted);
         createsaburs.LOGGER.warn("FKCRT PartialModelEventHandler events registered");
-        //modEventBus.addListener(ModelSwapper::registerListeners);
     }
 
         // Add the example block item to the building blocks tab

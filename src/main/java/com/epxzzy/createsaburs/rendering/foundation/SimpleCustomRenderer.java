@@ -1,6 +1,7 @@
 package com.epxzzy.createsaburs.rendering.foundation;
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.createsabursClient;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
 //import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
@@ -21,6 +22,7 @@ public class SimpleCustomRenderer implements IClientItemExtensions {
         createsaburs.LOGGER.warn("FKCRT SimpleCustomRenderer made for {}",item);
         CustomRenderedItems.register(item);
         com.simibubi.create.foundation.item.render.CustomRenderedItems.register(item);
+        //createsabursClient.MODEL_SWAPPER.getCustomItemModels().register(item.delegate, renderer::createModel)
         return new SimpleCustomRenderer(renderer);
     }
 

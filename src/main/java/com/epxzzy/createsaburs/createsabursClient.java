@@ -33,8 +33,7 @@ public class createsabursClient {
 
     public static void onClientSetup(FMLClientSetupEvent event) {
     }
-    public static void onCtorClient(IEventBus modEventBus, IEventBus forgeEventBus) {
-
+    public static void onClient(IEventBus modEventBus, IEventBus forgeEventBus) {
         MODEL_SWAPPER.registerListeners(modEventBus);
     }
     public static void itemTints(RegisterColorHandlersEvent.Item event) {

@@ -3,11 +3,15 @@ package com.epxzzy.createsaburs.item.saburtypes;
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.item.Protosaber;
+import com.epxzzy.createsaburs.rendering.ExperimentalBEWLR;
 import com.epxzzy.createsaburs.rendering.SingleBladedItemRenderer;
+import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItems;
 import com.epxzzy.createsaburs.utils.ModTags;
 //import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import com.epxzzy.createsaburs.rendering.foundation.SimpleCustomRenderer;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -36,6 +40,14 @@ public class SingleBladed extends Protosaber {
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         THE_BETTER_RENDERER = new SingleBladedItemRenderer();
-        consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));
+        CustomRenderedItems.register(this);
+        //consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));
+        consumer.accept(new IClientItemExtensions() {
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return ExperimentalBEWLR.getInstance();
+            }
+        });
+
     }
 }
