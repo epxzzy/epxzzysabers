@@ -55,13 +55,13 @@ public class ExperimentalBEWLR extends BlockEntityWithoutLevelRenderer {
                     overlay,
                     GEAR_BIT.get()
             );
-            createsaburs.LOGGER.warn("FKCRT now rendering a cog biatch");
+            //createsaburs.LOGGER.warn("FKCRT now rendering a cog biatch");
             poseStack.popPose();
         }
 
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
         poseStack.pushPose();
-        poseStack.translate(0.5, 0, 0); // Example transformation
+        //poseStack.translate(0.5, 0, 0); // Example transformation
         itemRenderer.render(stack, context, false, poseStack, bufferSource, packedLight, overlay, GEAR_BIT.get());
         poseStack.popPose();
 /*
