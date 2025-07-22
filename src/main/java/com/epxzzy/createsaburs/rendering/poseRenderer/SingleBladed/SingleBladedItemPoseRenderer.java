@@ -9,6 +9,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollVa
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -18,7 +19,7 @@ import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.isHolding
 
 
 public class SingleBladedItemPoseRenderer {
-    public static void setItemPose(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
+    public static void setItemPose(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
         SingleBladedFlourish flourish = SingleBladedFlourish.fromTagID(stack.getOrCreateTag().getCompound("display").getInt("flourish"));
         switch (flourish) {
             case XCROSS -> SetFlourishXCROSS(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
@@ -27,7 +28,7 @@ public class SingleBladedItemPoseRenderer {
             //the "obi-ani"
         }
     }
-    public static void SetFlourishXCROSS(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
+    public static void SetFlourishXCROSS(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
         float time = AnimationTickHolder.getTicks(false);
         int multiplier = isHoldingItemOffHand(entity, stack)?-1:1;
         //createsaburs.LOGGER.info("nbt offhand: " + stack.getOrCreateTag().getCompound("display").getBoolean("offhand") + " and thought to be: " + (isHoldingItemOffHand(entity, stack) ? "offhand" : "mainhand") + " and multiplier " + multiplier );
@@ -40,7 +41,7 @@ public class SingleBladedItemPoseRenderer {
         ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(squaremovement*25)));
     }
 
-    public static void SetFlourishCIRCULAR(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
+    public static void SetFlourishCIRCULAR(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
         float time = AnimationTickHolder.getTicks(false);
         float movement = Mth.sin(((float) ((time) * 5/ Math.PI)));
 

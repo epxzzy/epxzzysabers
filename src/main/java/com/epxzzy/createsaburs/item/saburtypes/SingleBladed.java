@@ -40,14 +40,16 @@ public class SingleBladed extends Protosaber {
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         THE_BETTER_RENDERER = new SingleBladedItemRenderer();
-        CustomRenderedItems.register(this);
-        //consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));
-        consumer.accept(new IClientItemExtensions() {
+        //CustomRenderedItems.register(this);
+        consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));
+       /* consumer.accept(new IClientItemExtensions() {
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return ExperimentalBEWLR.getInstance();
             }
         });
+
+        */
 
     }
 }

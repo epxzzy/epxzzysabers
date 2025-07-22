@@ -27,10 +27,11 @@ import java.util.List;
 import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.getEntitiesHoldingItem;
 
 public class ExperimentalBEWLR extends BlockEntityWithoutLevelRenderer {
+    protected static final PartialModel HILT_BIT = PartialModel.of(createsaburs.asResource("item/additive/mono_hilt"));
     protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/gear"));
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/blade_single"));
-    ModelManager modelManager = Minecraft.getInstance().getModelManager();
-    BakedModel model1 = modelManager.getModel(new ModelResourceLocation(createsaburs.asResource("item/additive/gear"), "inventory"));
+
+
     private static ExperimentalBEWLR instance;
 
     public ExperimentalBEWLR(BlockEntityRenderDispatcher pBlockEntityRenderDispatcher, EntityModelSet pEntityModelSet) {
@@ -42,6 +43,27 @@ public class ExperimentalBEWLR extends BlockEntityWithoutLevelRenderer {
     @Override
     public void renderByItem(ItemStack stack, ItemDisplayContext context, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int overlay) {
         float partialTick = Minecraft.getInstance().getPartialTick();
+        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+        PartialItemModelRenderer renderer = PartialItemModelRenderer.of(stack,context,poseStack,bufferSource,overlay);
+        /*
+        if (HILT_BIT.get() != null) {
+            poseStack.pushPose();
+            Minecraft.getInstance().getItemRenderer().render(
+                    stack,
+                    context,
+                    false,
+                    poseStack,
+                    bufferSource,
+                    packedLight,
+                    overlay,
+                    HILT_BIT.get()
+            );
+            //createsaburs.LOGGER.warn("FKCRT now rendering a cog biatch");
+            poseStack.popPose();
+        }
+
+         */
+        renderer.render(HILT_BIT.get(), packedLight);
 
         if (GEAR_BIT.get() != null) {
             poseStack.pushPose();
@@ -58,12 +80,24 @@ public class ExperimentalBEWLR extends BlockEntityWithoutLevelRenderer {
             //createsaburs.LOGGER.warn("FKCRT now rendering a cog biatch");
             poseStack.popPose();
         }
+        if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
+            poseStack.pushPose();
+            Minecraft.getInstance().getItemRenderer().render(
+                    stack,
+                    context,
+                    false,
+                    poseStack,
+                    bufferSource,
+                    packedLight,
+                    overlay,
+                    GLOWLY_BIT.get()
+            );
+            //createsaburs.LOGGER.warn("FKCRT now rendering a cog biatch");
+            poseStack.popPose();
+        }
 
-        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-        poseStack.pushPose();
-        //poseStack.translate(0.5, 0, 0); // Example transformation
-        itemRenderer.render(stack, context, false, poseStack, bufferSource, packedLight, overlay, GEAR_BIT.get());
-        poseStack.popPose();
+
+
 /*
         if (stack.is(JNEItems.PUMP_CHARGE_SHOTGUN.get())) {
             poseStack.pushPose();

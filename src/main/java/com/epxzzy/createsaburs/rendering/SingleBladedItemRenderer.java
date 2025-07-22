@@ -19,6 +19,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollVa
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -29,11 +30,13 @@ import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.getEntiti
 
 
 public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
+    protected static final PartialModel HILTBIT = PartialModel.of(createsaburs.asResource("item/additive/mono_hilt"));
     protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/gear"));
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/blade_single"));
+    public boolean lock;
 
     @Override
-    protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
+    protected void render(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
                           PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
 
         boolean leftHand = transformType == ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
@@ -58,13 +61,16 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
 
             for (LivingEntity entity : allEntities) {
                 if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")){
-                    //SingleBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+                    SingleBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
                 }
             }
         }
-        renderer.render(model.getOriginalModel(), light);
-
+        if(!lock) {
+            //renderer.render(model, light);
+            lock = true;
+        }
         //}
+        renderer.render(HILTBIT.get(), light);
 
         if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
             //stack.getUseAnimation()

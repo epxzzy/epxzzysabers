@@ -24,7 +24,6 @@ import net.minecraftforge.fml.common.Mod;
 import java.io.IOException;
 import java.util.Map;
 
-import static com.epxzzy.createsaburs.rendering.foundation.ModelSwapper.*;
 
 public class ClientEvents {
     public static ShaderInstance glowingShader;
@@ -56,6 +55,7 @@ public class ClientEvents {
 
 
         }
+        /*
         @SubscribeEvent
         public void modifyBakingResult(ModelEvent.ModifyBakingResult event) {
             createsaburs.LOGGER.warn("FKCRT swaping it rn");
@@ -67,6 +67,8 @@ public class ClientEvents {
             CustomRenderedItems.forEach(item -> screamoutloud(modelRegistry, getItemModelLocation(item)));
 
         }
+
+         */
     }
 
     @SubscribeEvent

@@ -8,7 +8,6 @@ import com.epxzzy.createsaburs.entity.client.ThrownRotarySaberRenderer;
 import com.epxzzy.createsaburs.item.ModCreativeModTabs;
 import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.networking.ModMessages;
-import com.epxzzy.createsaburs.rendering.foundation.ModelSwapper;
 import com.epxzzy.createsaburs.rendering.foundation.PartialModelEventHandler;
 import com.epxzzy.createsaburs.screen.KyberStationScreen;
 import com.epxzzy.createsaburs.screen.ModMenuTypes;

@@ -2,7 +2,6 @@ package com.epxzzy.createsaburs.item.saburtypes;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
-import com.epxzzy.createsaburs.rendering.ExperimentalBEWLR;
 import com.epxzzy.createsaburs.rendering.SingleBladedItemRenderer;
 import com.epxzzy.createsaburs.rendering.WorseSingleBladedItemRenderer;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
