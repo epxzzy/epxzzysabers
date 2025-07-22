@@ -22,6 +22,8 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItem;
+
 public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
 
     protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/gear"));
@@ -80,51 +82,4 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
         //ms.translate(xOffset, 0, 0);
         renderer.render(GEAR_BIT.get(), light);
     }
-
-
-    public static List<LivingEntity> getEntitiesHoldingItem(ItemStack stack) {
-        List<LivingEntity> result = new ArrayList<>();
-        Minecraft mc = Minecraft.getInstance();
-
-        Player player = mc.player;
-        if (player != null && isHoldingItemAnyHand(player, stack)) {
-            result.add(player);
-        }
-
-        // Check other entities in the loaded world
-        if (mc.level != null) {
-            for (Entity entity : mc.level.entitiesForRendering()) {
-                if (entity instanceof LivingEntity livingEntity) {
-                    // skippity
-                    if (livingEntity == player) continue;
-
-                    if (isHoldingItemAnyHand(livingEntity, stack)) {
-                        result.add(livingEntity);
-                    }
-                }
-            }
-        }
-
-        return result;
-    }
-
-    /**
-     * Checks if a living entity is holding the specified ItemStack.
-     * This is not an exact science - we're trying to determine if the stack
-     * we're rendering is the one being held by this entity.
-     */
-    public static boolean isHoldingItemAnyHand(LivingEntity entity, ItemStack stack) {
-        return (ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack) && ItemStack.isSameItemSameTags(entity.getOffhandItem(), stack)) || ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack);
-        //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
-    }
-    public static boolean isHoldingItemOffHand(LivingEntity entity, ItemStack stack) {
-        return ItemStack.isSameItemSameTags(entity.getOffhandItem(), stack);
-        //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
-    }
-    public static boolean isHoldingItemMainHand(LivingEntity entity, ItemStack stack) {
-        return ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack);
-        //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
-    }
-
-
 }

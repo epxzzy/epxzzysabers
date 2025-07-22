@@ -21,7 +21,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class createsabursClient {
-    //public static final ModelSwapper MODEL_SWAPPER = new ModelSwapper();
 
     public static void init() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -31,9 +30,6 @@ public class createsabursClient {
 
 
     public static void onClientSetup(FMLClientSetupEvent event) {
-    }
-    public static void onClient(IEventBus modEventBus, IEventBus forgeEventBus) {
-        //MODEL_SWAPPER.registerListeners(modEventBus);
     }
     public static void itemTints(RegisterColorHandlersEvent.Item event) {
         event.register((stack, tint) -> tint > 0 ? -1 : Protosaber.getColor(stack), ModItems.Protosaber.get());

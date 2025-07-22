@@ -3,7 +3,6 @@ package com.epxzzy.createsaburs.rendering.foundation;
 import com.epxzzy.createsaburs.createsaburs;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.simibubi.create.foundation.render.RenderTypes;
 
 import net.createmod.catnip.data.Iterate;
 import net.minecraft.client.Minecraft;

@@ -18,7 +18,8 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.getEntitiesHoldingItem;
+import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItem;
+
 
 public class CrossguardSaberItemRenderer extends CustomRenderedItemModelRenderer {
     protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/gear"));

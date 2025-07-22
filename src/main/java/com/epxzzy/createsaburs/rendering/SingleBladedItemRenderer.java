@@ -2,7 +2,6 @@ package com.epxzzy.createsaburs.rendering;
 
 import com.epxzzy.createsaburs.createsaburs;
 
-import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModel;
 import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.createsaburs.rendering.foundation.PartialModel;
@@ -26,11 +25,11 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.getEntitiesHoldingItem;
+import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItem;
 
 
 public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
-    protected static final PartialModel HILTBIT = PartialModel.of(createsaburs.asResource("item/additive/mono_hilt"));
+    protected static final PartialModel HILTBIT = PartialModel.of(createsaburs.asResource("item/hilt/mono_hilt"));
     protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/gear"));
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/blade_single"));
     public boolean lock;

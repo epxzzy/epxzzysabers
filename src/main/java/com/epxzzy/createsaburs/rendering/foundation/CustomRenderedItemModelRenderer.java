@@ -12,7 +12,6 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 //import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
-import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModel;
 //import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
 import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
 

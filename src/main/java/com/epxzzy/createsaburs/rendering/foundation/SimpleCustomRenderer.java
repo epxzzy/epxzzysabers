@@ -19,10 +19,6 @@ public class SimpleCustomRenderer implements IClientItemExtensions {
     }
 
     public static SimpleCustomRenderer create(Item item, CustomRenderedItemModelRenderer renderer) {
-        createsaburs.LOGGER.warn("FKCRT SimpleCustomRenderer made for {}",item);
-        //CustomRenderedItems.register(item);
-        //com.simibubi.create.foundation.item.render.CustomRenderedItems.register(item);
-        //createsabursClient.MODEL_SWAPPER.getCustomItemModels().register(item.delegate, renderer::createModel)
         return new SimpleCustomRenderer(renderer);
     }
 

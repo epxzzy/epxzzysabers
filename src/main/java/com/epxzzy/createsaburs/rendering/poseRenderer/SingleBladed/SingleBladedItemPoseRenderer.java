@@ -1,7 +1,6 @@
 package com.epxzzy.createsaburs.rendering.poseRenderer.SingleBladed;
 
 import com.epxzzy.createsaburs.createsaburs;
-import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModel;
 import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -15,7 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.isHoldingItemOffHand;
+import static com.epxzzy.createsaburs.utils.StackHelper.isHoldingItemOffHand;
 
 
 public class SingleBladedItemPoseRenderer {

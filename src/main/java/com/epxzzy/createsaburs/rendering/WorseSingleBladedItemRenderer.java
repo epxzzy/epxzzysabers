@@ -22,7 +22,7 @@ import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
 import java.util.List;
 
-import static com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer.getEntitiesHoldingItem;
+import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItem;
 
 public class WorseSingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
     protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/gear"));
