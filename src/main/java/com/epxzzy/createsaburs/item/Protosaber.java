@@ -170,18 +170,22 @@ public class Protosaber extends Item {
         CompoundTag tag = pStack.getOrCreateTag();
         tag.putInt("equiper", pEntity.getId());
         tag.putBoolean("offhand", false);
-        if(pEntity instanceof LivingEntity pLiving && !(pLevel.isClientSide())){
+        if(!(pLevel.isClientSide())){
         //    createsaburs.LOGGER.info("curr slott "+ pSlotId);
             //pEntity.
-            if(pLiving instanceof Player pPlayer) {
-                if (ItemStack.isSameItemSameTags(pPlayer.getInventory().offhand.get(0), pStack)) {
-                    tag.putBoolean("offhand",true);
-                    //createsaburs.LOGGER.info("offhanddd biatch");
-                }
-                else {
-                    tag.putBoolean("offhand", false);
+            if(pEntity instanceof LivingEntity pLiving) {
+                if (pLiving instanceof Player pPlayer) {
+                    if (ItemStack.isSameItemSameTags(pPlayer.getInventory().offhand.get(0), pStack)) {
+                        tag.putBoolean("offhand", true);
+                        //createsaburs.LOGGER.info("offhanddd biatch");
+                    } else {
+                        tag.putBoolean("offhand", false);
+                    }
                 }
             }
+
+        }
+        else {
         }
     }
 
@@ -228,17 +232,22 @@ public class Protosaber extends Item {
 
     public static int getColor(ItemStack pStack) {
         CompoundTag compoundtag = pStack.getOrCreateTagElement("display");
+        if(compoundtag.getBoolean("gay")) {
+            return ColourConverter.portedRGBtoDecimal(ColourConverter.rainbowColor((int) System.currentTimeMillis() * 2 ));
+        }
+
         if (compoundtag.getInt("colour") == 0) {
             //setColor(pStack, 65280);
             return 65280;
         }
+
         return Objects.requireNonNull(pStack.getTagElement("display")).getInt("colour");
     }
 
     public void clearColor(ItemStack pStack) {
         CompoundTag compoundtag = pStack.getTagElement("display");
-        if (compoundtag != null && compoundtag.contains("color")) {
-            compoundtag.remove("color");
+        if (compoundtag != null && compoundtag.contains("colour")) {
+            compoundtag.remove("colour");
         }
         pStack.setTag(compoundtag);
 
@@ -246,7 +255,7 @@ public class Protosaber extends Item {
 
     public static void setColor(ItemStack pStack, int pColor) {
         CompoundTag asdf = pStack.getOrCreateTagElement("display");
-        asdf.putInt("color", pColor);
+        asdf.putInt("colour", pColor);
         pStack.setTag(asdf);
     }
 

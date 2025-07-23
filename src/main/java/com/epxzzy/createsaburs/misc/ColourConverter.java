@@ -98,6 +98,27 @@ public class ColourConverter {
         return new int[]{r, g, b};
     }
 
+    public static int[] rainbowColor(int timeStep) {
+        int localTimeStep = Math.abs(timeStep) % 1536;
+        int timeStepInPhase = localTimeStep % 256;
+        int phaseBlue = localTimeStep / 256;
+        int red = colorInPhase(phaseBlue + 4, timeStepInPhase);
+        int green = colorInPhase(phaseBlue + 2, timeStepInPhase);
+        int blue = colorInPhase(phaseBlue, timeStepInPhase);
+        return new int[]{red, green, blue};
+    }
+    private static int colorInPhase(int phase, int progress) {
+        phase = phase % 6;
+        if (phase <= 1)
+            return 0;
+        if (phase == 2)
+            return progress;
+        if (phase <= 4)
+            return 255;
+        else
+            return 255 - progress;
+    }
+
 
     public static void main(String[] args) {
         /* Example usage
