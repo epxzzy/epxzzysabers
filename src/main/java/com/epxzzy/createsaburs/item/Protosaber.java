@@ -181,6 +181,7 @@ public class Protosaber extends Item {
                     } else {
                         tag.putBoolean("offhand", false);
                     }
+                    pStack.setTag(tag);
                 }
             }
 
@@ -242,6 +243,9 @@ public class Protosaber extends Item {
         }
 
         return Objects.requireNonNull(pStack.getTagElement("display")).getInt("colour");
+    }
+    public static boolean isGay(ItemStack pStack) {
+        return Objects.requireNonNull(pStack.getTagElement("display")).getBoolean("gay");
     }
 
     public void clearColor(ItemStack pStack) {
@@ -435,12 +439,13 @@ public class Protosaber extends Item {
         return false;
     }
     public static BladeStance getStance(Entity Entityy) {
-        int tagid = 1;
+        int tagid = 0;
         if (Entityy instanceof LivingEntity){
             tagid = ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getCompound("display").getInt("stance");
         }
         BladeStance returnee;
         switch (tagid) {
+            case 1 -> returnee = BladeStance.FORM1;
             case 2 -> returnee = BladeStance.FORM2;
             case 3 -> returnee = BladeStance.FORM3;
             case 4 -> returnee = BladeStance.FORM4;
@@ -449,7 +454,7 @@ public class Protosaber extends Item {
             case 7 -> returnee = BladeStance.FORM7;
 
 
-            default -> returnee = BladeStance.FORM1;
+            default -> returnee = BladeStance.FORM0;
         }
         return returnee;
     }

@@ -36,7 +36,7 @@ public class createsabursClient {
         //event.register((stack, tint) -> tint > 0 ? -1 : protosaber.getColor(stack), ModItems.protosabur2.get());
         event.register((stack, tint) -> tint > 0 ? -1 : SingleBladed.getColor(stack), ModItems.SINGLE_BLADED_SABER.get());
         event.register((stack, tint) -> tint > 0 ? -1 : Protosaber.getColor(stack), ModItems.DUAL_BLADED_SABER.get());
-        event.register((stack, tint) -> tint > 0 ? -1 : RotarySaber.getColor(stack), ModItems.ROTARY_SABER.get());
+        event.register((stack, tint) -> tint > 0 ? -1 : Protosaber.getColor(stack), ModItems.ROTARY_SABER.get());
         event.register((stack, tint) -> tint > 0 ? -1 : CrossguardSaber.getColor(stack), ModItems.CROSSGUARD_SABER.get());
         event.register((stack, tint) -> tint > 0 ? -1 : BlasterHybrid.getColor(stack), ModItems.BLASTER_HYBRID.get());
 

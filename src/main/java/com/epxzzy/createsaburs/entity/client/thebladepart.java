@@ -43,30 +43,11 @@ public class thebladepart<T extends ThrownRotarySaber> extends Model {
 		float f1;
 		float f2;
 
-		//if (pEntity.getTags().contains("gay")) {
-		/*
-			int i1 = 25;
-			int i = pEntity.tickCount / 25 + pEntity.getId();
-			int j = DyeColor.values().length;
-			int k = i % j;
-			int l = (i + 1) % j;
-			float f3 = ((float) (pEntity.tickCount % 25) + pPartialTicks) / 25.0F;
-			float[] afloat1 = Sheep.getColorArray(DyeColor.byId(k));
-			float[] afloat2 = Sheep.getColorArray(DyeColor.byId(l));
-			f = (int) (afloat1[0] * (1.0F - f3) + afloat2[0] * f3);
-			f1 = (int) (afloat1[1] * (1.0F - f3) + afloat2[1] * f3);
-			f2 = (int) (afloat1[2] * (1.0F - f3) + afloat2[2] * f3);
-
-		 */
-		//} else {
-
-
 			int[] afloat = pEntity.getColour();
 			f = afloat[0];
 			f1 = afloat[1];
 			f2 = afloat[2];
 
-		//}
 		//pMatrixStack.mulPose(Axis.YP.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * 5)));
 		pMatrixStack.mulPose(Axis.YP.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * 5)));
 

@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableList;
 import java.util.List;
 
 public enum BladeStance {
+    FORM0("nada "),
     FORM1("shii-cho"),
     // kit fisto, luke?
     FORM2("makashi"),
