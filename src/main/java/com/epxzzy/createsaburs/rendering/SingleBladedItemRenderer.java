@@ -12,10 +12,10 @@ import com.epxzzy.createsaburs.rendering.foundation.PartialModel;
 //import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
 import com.epxzzy.createsaburs.rendering.poseRenderer.SingleBladed.SingleBladedItemPoseRenderer;
+import com.epxzzy.createsaburs.utils.AnimationTickHolder;
 import com.epxzzy.createsaburs.utils.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.model.BakedModel;
