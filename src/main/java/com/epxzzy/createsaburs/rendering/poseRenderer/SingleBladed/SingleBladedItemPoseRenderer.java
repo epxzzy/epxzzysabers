@@ -2,9 +2,9 @@ package com.epxzzy.createsaburs.rendering.poseRenderer.SingleBladed;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
+import com.epxzzy.createsaburs.utils.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueHandler;
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.client.renderer.MultiBufferSource;
