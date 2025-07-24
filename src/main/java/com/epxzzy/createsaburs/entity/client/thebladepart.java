@@ -4,11 +4,11 @@ package com.epxzzy.createsaburs.entity.client;// Made with Blockbench 4.12.5
 
 
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
+import com.epxzzy.createsaburs.utils.AnimationTickHolder;
 import com.epxzzy.createsaburs.utils.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;

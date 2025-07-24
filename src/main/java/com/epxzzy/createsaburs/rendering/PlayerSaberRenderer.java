@@ -7,7 +7,7 @@ import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import com.epxzzy.createsaburs.rendering.poseHandlers.PlayerStanceRenderer;
 import com.epxzzy.createsaburs.rendering.poseRenderer.DualBladed.DualBladedArmPoseRenderer;
 import com.epxzzy.createsaburs.rendering.poseRenderer.SingleBladed.SingleBladedArmPoseRenderer;
-import net.createmod.catnip.animation.AnimationTickHolder;
+import com.epxzzy.createsaburs.utils.AnimationTickHolder;
 import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
