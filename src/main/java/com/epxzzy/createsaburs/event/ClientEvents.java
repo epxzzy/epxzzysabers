@@ -13,8 +13,6 @@ import com.epxzzy.createsaburs.utils.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 
 
-import com.simibubi.create.CreateClient;
-import com.simibubi.create.content.contraptions.actors.trainControls.ControlsHandler;
 import net.createmod.catnip.levelWrappers.WrappedClientLevel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -32,6 +30,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.io.IOException;
 
 
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class ClientEvents {
     public static ShaderInstance glowingShader;
 

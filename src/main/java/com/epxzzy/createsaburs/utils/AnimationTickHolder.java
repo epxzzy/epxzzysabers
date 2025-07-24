@@ -42,7 +42,7 @@ public class AnimationTickHolder {
 
     public static float getPartialTicks() {
         Minecraft mc = Minecraft.getInstance();
-        return (mc.isPaused() ? mc.pausePartialTick : mc.getFrameTime());
+        return (mc.getFrameTime());
     }
 
     public static float getPartialTicks(LevelAccessor level) {
