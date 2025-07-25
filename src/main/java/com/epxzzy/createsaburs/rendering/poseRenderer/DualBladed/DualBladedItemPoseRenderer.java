@@ -1,5 +1,6 @@
 package com.epxzzy.createsaburs.rendering.poseRenderer.DualBladed;
 
+import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.utils.AnimationTickHolder;
 import com.epxzzy.createsaburs.utils.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -12,6 +13,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import org.checkerframework.checker.units.qual.C;
 
 
 public class DualBladedItemPoseRenderer {
@@ -43,6 +45,7 @@ public class DualBladedItemPoseRenderer {
 
     public static void SetFlourishBEHINDTHEBACK(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
         float time = AnimationTickHolder.getTicks(false);
+        float CRTtime = net.createmod.catnip.animation.AnimationTickHolder.getTicks(false);
 
         float movement = Mth.sin(((float) ((time) * 3.3 / Math.PI)));
         float movementreverse = Mth.cos(((float) ((time) * 3.3 / Math.PI)));
@@ -53,7 +56,7 @@ public class DualBladedItemPoseRenderer {
 
         float movement3 = Mth.sin(((float) ((time) * 4 / Math.PI)));
 
-
+        createsaburs.LOGGER.debug("our time {} vs create time {}",time, CRTtime);
 
         //ms.mulPose(Axis.XP.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (10)) - (45 * movement)));
         //ms.mulPose(Axis.XP.rotation(AngleHelper.rad(-90*armXmovement)));

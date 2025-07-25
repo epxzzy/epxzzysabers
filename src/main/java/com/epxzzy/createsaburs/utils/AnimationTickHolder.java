@@ -15,6 +15,8 @@ public class AnimationTickHolder {
     public static void reset() {
         ticks = 0;
         pausedTicks = 0;
+        //createsaburs.LOGGER.warn("Ticks been reset");
+
     }
 
     public static void tick() {
@@ -32,7 +34,7 @@ public class AnimationTickHolder {
     }
 
     public static int getTicks(boolean includePaused) {
-        return includePaused ? ticks + pausedTicks : ticks;
+        return includePaused ? ticks + pausedTicks : (ticks/2);
     }
 
     public static int getTicks(LevelAccessor level) {
@@ -44,7 +46,9 @@ public class AnimationTickHolder {
 
     public static float getPartialTicks() {
         Minecraft mc = Minecraft.getInstance();
-        return (mc.getFrameTime());
+//        return (mc.getFrameTime());
+        return (mc.isPaused() ? mc.pausePartialTick : mc.getFrameTime());
+
     }
 
     public static float getPartialTicks(LevelAccessor level) {
