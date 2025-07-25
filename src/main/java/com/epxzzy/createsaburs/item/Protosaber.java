@@ -115,8 +115,8 @@ public class Protosaber extends Item {
 
         pStack.setTag(tagsToApply);
 
-        createsaburs.LOGGER.info("wrote nbt as" + bool);
-        createsaburs.LOGGER.info(pStack.getOrCreateTag().getAllKeys().toString());
+        //createsaburs.LOGGER.info("wrote nbt as" + bool);
+        //createsaburs.LOGGER.info(pStack.getOrCreateTag().getAllKeys().toString());
     }
 
     public void ToggleSaberCore(Level pLevel, Player pPlayer, ItemStack pStack) {
@@ -125,16 +125,16 @@ public class Protosaber extends Item {
 
             if (!readActivetag(pStack)) {
 
-                createsaburs.LOGGER.info("Saber is now Going Active");
+                //createsaburs.LOGGER.info("Saber is now Going Active");
                 //nbeetea.putInt("CustomModelData", 1);
                 writeActiveTag(pStack, true);
 
                 isActive = true;
             } else {
                 pPlayer.stopUsingItem();
-                createsaburs.LOGGER.info("Saber is now Turning Off");
+                //createsaburs.LOGGER.info("Saber is now Turning Off");
 
-                //nbeetea.putInt("CustomModelData", 0);
+                nbeetea.putInt("CustomModelData", 0);
                 writeActiveTag(pStack, false);
                 isActive = false;
             }
@@ -159,8 +159,8 @@ public class Protosaber extends Item {
 
             //pStack.setTag(tagsToApply);
 
-            createsaburs.LOGGER.info("Flourish =" + flourish);
-            createsaburs.LOGGER.info(pStack.getOrCreateTag().getAllKeys().toString());
+            //createsaburs.LOGGER.info("Flourish =" + flourish);
+            //createsaburs.LOGGER.info(pStack.getOrCreateTag().getAllKeys().toString());
         }
     }
 
@@ -350,14 +350,14 @@ public class Protosaber extends Item {
                             //createsaburs.LOGGER.warn("its a projectile???");
 
                             if (AbstractArrow.class.isAssignableFrom(entity1.getClass()) && !((AbstractArrow) entity1).inGround ) {
-                                createsaburs.LOGGER.warn("deflected an ordinary arrow");
+                                //createsaburs.LOGGER.warn("deflected an ordinary arrow");
                                 ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 2.0F, 1.0F);
                                 entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
 
                                 continue;
                             }
                             if (ThrownRotarySaber.class.isAssignableFrom(entity1.getClass())) {
-                                createsaburs.LOGGER.warn("deflected a thrown lightsaber");
+                                //createsaburs.LOGGER.warn("deflected a thrown lightsaber");
                                 ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 2.0F, 1.0F);
                                 entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
 
@@ -369,7 +369,7 @@ public class Protosaber extends Item {
                             //entity1.setDeltaMovement(pos);
                             //entity1.setDeltaMovement(vec3);
                             if (AbstractHurtingProjectile.class.isAssignableFrom(entity1.getClass())) {
-                                createsaburs.LOGGER.warn("deflected a projectile");
+                                //createsaburs.LOGGER.warn("deflected a projectile");
 
                                 ((AbstractHurtingProjectile) entity1).xPower = vec3.x * 0.1D;
                                 ((AbstractHurtingProjectile) entity1).yPower = vec3.y * 0.1D;
