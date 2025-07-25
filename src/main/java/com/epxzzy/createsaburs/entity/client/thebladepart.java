@@ -4,6 +4,7 @@ package com.epxzzy.createsaburs.entity.client;// Made with Blockbench 4.12.5
 
 
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
+import com.epxzzy.createsaburs.rendering.foundation.RenderTypes;
 import com.epxzzy.createsaburs.utils.AnimationTickHolder;
 import com.epxzzy.createsaburs.utils.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -52,7 +53,9 @@ public class thebladepart<T extends ThrownRotarySaber> extends Model {
 		pMatrixStack.mulPose(Axis.YP.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * 5)));
 
 		pMatrixStack.translate(0, -1, 0);
-		VertexConsumer vertexconsumur = pBuffer.getBuffer(RenderType.eyes(GLOWLOC));
+		VertexConsumer vertexconsumur = pBuffer.getBuffer(RenderTypes.glowingRotaryBlade());
+		//VertexConsumer vertexconsumur = pBuffer.getBuffer(RenderType.eyes(GLOWLOC));
+
 		//.color(f/255, f1/255, f2/255, 1.0F);
 		//VertexConsumer vertexconsumur = pBuffer.color(f, f1, f2, 1.0F);
 

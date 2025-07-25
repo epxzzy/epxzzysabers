@@ -5,6 +5,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.entity.client.ThrownRotarySaberRenderer;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 
@@ -28,7 +29,8 @@ public class RenderTypes extends RenderStateShard {
                     .setTextureState(BLOCK_SHEET)
                     .setLightmapState(LIGHTMAP)
                     .setOverlayState(OVERLAY)
-                    .createCompositeState(true));
+                    .createCompositeState(true)
+    );
 
     private static final RenderType ITEM_GLOWING_TRANSLUCENT = RenderType.create(createLayerName("item_glowing_translucent"),
             DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, true, true, RenderType.CompositeState.builder()
@@ -37,8 +39,19 @@ public class RenderTypes extends RenderStateShard {
                     .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
                     .setLightmapState(LIGHTMAP)
                     .setOverlayState(OVERLAY)
-                    .createCompositeState(true));
+                    .createCompositeState(true)
+    );
 
+    private static final RenderType ROTARY_BLADE = RenderType.create(
+            createLayerName("ROTARY_BLADE"),
+            DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, true, true, RenderType.CompositeState.builder()
+                    .setShaderState(GLOWING_SHADER)
+                    .setTextureState(new RenderStateShard.TextureStateShard(ThrownRotarySaberRenderer.GLOWLOC, false, false))
+                    .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                    .setLightmapState(LIGHTMAP)
+                    .setOverlayState(OVERLAY)
+                    .createCompositeState(true)
+    );
 
     public static RenderType itemGlowingSolid() {
         return ITEM_GLOWING_SOLID;
@@ -47,6 +60,10 @@ public class RenderTypes extends RenderStateShard {
     public static RenderType itemGlowingTranslucent() {
         return ITEM_GLOWING_TRANSLUCENT;
     }
+    public static RenderType glowingRotaryBlade() {
+        return ROTARY_BLADE;
+    }
+
 
     private static String createLayerName(String name) {
         return createsaburs.MOD_ID + ":" + name;
