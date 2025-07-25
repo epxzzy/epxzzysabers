@@ -1,19 +1,15 @@
 package com.epxzzy.createsaburs.rendering.foundation;
 
 import java.io.IOException;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 
 import com.epxzzy.createsaburs.createsaburs;
-import com.epxzzy.createsaburs.entity.client.ThrownRotarySaberRenderer;
+import com.epxzzy.createsaburs.entity.client.rotary.ThrownRotarySaberRenderer;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 
-import net.minecraft.Util;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceProvider;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterShadersEvent;

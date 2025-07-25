@@ -1,4 +1,4 @@
-package com.epxzzy.createsaburs.misc;
+package com.epxzzy.createsaburs.screen.components;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.world.item.ItemStack;

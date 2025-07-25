@@ -1,4 +1,4 @@
-package com.epxzzy.createsaburs.misc;
+package com.epxzzy.createsaburs.screen.components;
 
 import com.simibubi.create.AllSoundEvents;
 import net.minecraft.client.Minecraft;

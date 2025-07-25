@@ -1,4 +1,4 @@
-package com.epxzzy.createsaburs.misc;
+package com.epxzzy.createsaburs.screen.components;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;

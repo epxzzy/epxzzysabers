@@ -1,4 +1,4 @@
-package com.epxzzy.createsaburs.entity.client;// Made with Blockbench 4.12.5
+package com.epxzzy.createsaburs.entity.client.rotary;// Made with Blockbench 4.12.5
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
@@ -18,11 +18,11 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
-public class thebladepart<T extends ThrownRotarySaber> extends Model {
+public class ThrownRotarySaberBladeModel<T extends ThrownRotarySaber> extends Model {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	private final ModelPart bone;
 
-	public thebladepart(ModelPart root) {
+	public ThrownRotarySaberBladeModel(ModelPart root) {
         super(RenderType::entitySolid);
         this.bone = root.getChild("bone");
 	}

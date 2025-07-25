@@ -1,18 +1,16 @@
-package com.epxzzy.createsaburs.entity.client;
+package com.epxzzy.createsaburs.entity.client.bolt;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.entity.ModModelLayers;
 import com.epxzzy.createsaburs.entity.custom.PlasmaBolt;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 
 public class PlasmaBoltRenderer extends EntityRenderer<PlasmaBolt> {
     private static final ResourceLocation TEXTURE_LOCATION = createsaburs.asResource("textures/entity/wind_charge.png");

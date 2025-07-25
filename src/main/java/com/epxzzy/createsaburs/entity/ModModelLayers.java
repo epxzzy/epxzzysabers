@@ -5,11 +5,11 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 
 public class ModModelLayers {
-    public static final ModelLayerLocation thrownrotarysabermodellayer = new ModelLayerLocation(
-            new ResourceLocation(createsaburs.MOD_ID, "thrownrotarysaber"), "main");
+    public static final ModelLayerLocation THROWN_ROTARY_SABER_GUARD = new ModelLayerLocation(
+            new ResourceLocation(createsaburs.MOD_ID, "thrownrotarysaberguard"), "main");
 
 
-    public static final ModelLayerLocation thrownrotarysaberblademodellayer = new ModelLayerLocation(
+    public static final ModelLayerLocation THROWN_ROTART_SABER_BLADE = new ModelLayerLocation(
             new ResourceLocation(createsaburs.MOD_ID, "thrownrotarysaberblade"), "main");
 
     public static final ModelLayerLocation PLASMA_BOLT_LAYER= new ModelLayerLocation(

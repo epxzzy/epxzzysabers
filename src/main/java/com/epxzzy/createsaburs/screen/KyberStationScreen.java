@@ -2,10 +2,10 @@ package com.epxzzy.createsaburs.screen;
 
 
 import com.epxzzy.createsaburs.createsaburs;
-import com.epxzzy.createsaburs.misc.ColourConverter;
-import com.epxzzy.createsaburs.misc.KyberModes;
-import com.epxzzy.createsaburs.misc.KyberTabButton;
-import com.epxzzy.createsaburs.misc.SliderWidget;
+import com.epxzzy.createsaburs.utils.ColourConverter;
+import com.epxzzy.createsaburs.screen.components.KyberModes;
+import com.epxzzy.createsaburs.screen.components.KyberTabButton;
+import com.epxzzy.createsaburs.screen.components.SliderWidget;
 import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
 import com.epxzzy.createsaburs.utils.ModTags;

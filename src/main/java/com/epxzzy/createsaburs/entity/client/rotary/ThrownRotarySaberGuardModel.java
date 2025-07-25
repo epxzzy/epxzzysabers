@@ -1,31 +1,27 @@
-package com.epxzzy.createsaburs.entity.client;
+package com.epxzzy.createsaburs.entity.client.rotary;
 
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.animation.AnimationDefinition;
-import net.minecraft.client.animation.KeyframeAnimations;
 import net.minecraft.client.model.HierarchicalModel;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)
-public class ThrownRotarySaberModel<T extends ThrownRotarySaber> extends HierarchicalModel<T> {
+public class ThrownRotarySaberGuardModel<T extends ThrownRotarySaber> extends HierarchicalModel<T> {
     private static final Vector3f ANIMATION_VECTOR_CACHE = new Vector3f();
     private final ModelPart group;
     private final ModelPart guard;
     private final ModelPart handle;
     public AnimationState state = new AnimationState();
 
-    public ThrownRotarySaberModel(ModelPart pRoot) {
+    public ThrownRotarySaberGuardModel(ModelPart pRoot) {
         super(RenderType::entityTranslucent);
         this.group = pRoot.getChild("group");
         this.guard = this.group.getChild("guard");

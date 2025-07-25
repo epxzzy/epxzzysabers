@@ -2,7 +2,7 @@ package com.epxzzy.createsaburs.item;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
-import com.epxzzy.createsaburs.misc.ColourConverter;
+import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer;
 import com.epxzzy.createsaburs.rendering.poseHandlers.BladeStance;
 import com.epxzzy.createsaburs.sound.ModSounds;

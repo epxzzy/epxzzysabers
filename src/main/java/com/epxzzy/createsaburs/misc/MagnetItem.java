@@ -1,4 +1,4 @@
-package com.epxzzy.createsaburs.item;
+package com.epxzzy.createsaburs.misc;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;

@@ -1,6 +1,5 @@
-package com.epxzzy.createsaburs.entity.client;
+package com.epxzzy.createsaburs.entity.client.bolt;
 
-import com.epxzzy.createsaburs.entity.ModEntities;
 import com.epxzzy.createsaburs.entity.custom.PlasmaBolt;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -11,7 +10,6 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.entity.Entity;
 
 public class PlasmaBoltModel extends HierarchicalModel<PlasmaBolt> {
     private final ModelPart bone;

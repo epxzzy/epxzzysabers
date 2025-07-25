@@ -2,9 +2,9 @@ package com.epxzzy.createsaburs.event;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.entity.ModModelLayers;
-import com.epxzzy.createsaburs.entity.client.PlasmaBoltModel;
-import com.epxzzy.createsaburs.entity.client.ThrownRotarySaberModel;
-import com.epxzzy.createsaburs.entity.client.thebladepart;
+import com.epxzzy.createsaburs.entity.client.bolt.PlasmaBoltModel;
+import com.epxzzy.createsaburs.entity.client.rotary.ThrownRotarySaberBladeModel;
+import com.epxzzy.createsaburs.entity.client.rotary.ThrownRotarySaberGuardModel;
 import com.epxzzy.createsaburs.misc.KeyBinding;
 import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.networking.packet.ServerboundSaberAbilityPacket;
@@ -14,11 +14,9 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 
 
 import net.createmod.catnip.levelWrappers.WrappedClientLevel;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.server.packs.resources.ResourceProvider;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
@@ -55,8 +53,8 @@ public class ClientEvents {
 
         @SubscribeEvent
         public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            event.registerLayerDefinition(ModModelLayers.thrownrotarysabermodellayer, ThrownRotarySaberModel::createBodyLayer);
-            event.registerLayerDefinition(ModModelLayers.thrownrotarysaberblademodellayer, thebladepart::createBodyLayer);
+            event.registerLayerDefinition(ModModelLayers.THROWN_ROTARY_SABER_GUARD, ThrownRotarySaberGuardModel::createBodyLayer);
+            event.registerLayerDefinition(ModModelLayers.THROWN_ROTART_SABER_BLADE, ThrownRotarySaberBladeModel::createBodyLayer);
             event.registerLayerDefinition(ModModelLayers.PLASMA_BOLT_LAYER, PlasmaBoltModel::createBodyLayer);
 
 

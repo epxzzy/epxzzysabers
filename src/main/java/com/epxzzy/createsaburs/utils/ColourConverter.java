@@ -1,8 +1,4 @@
-package com.epxzzy.createsaburs.misc;
-
-import net.createmod.catnip.theme.Color;
-
-import java.util.Locale;
+package com.epxzzy.createsaburs.utils;
 
 public class ColourConverter {
 

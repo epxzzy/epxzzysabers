@@ -3,7 +3,7 @@ package com.epxzzy.createsaburs.screen;
 
 import com.epxzzy.createsaburs.block.ModBlocks;
 import com.epxzzy.createsaburs.createsaburs;
-import com.epxzzy.createsaburs.misc.ColourConverter;
+import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
 import net.minecraft.nbt.CompoundTag;

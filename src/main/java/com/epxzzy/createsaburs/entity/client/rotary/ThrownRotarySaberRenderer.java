@@ -1,10 +1,9 @@
-package com.epxzzy.createsaburs.entity.client;
+package com.epxzzy.createsaburs.entity.client.rotary;
 
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.entity.ModModelLayers;
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
-import com.epxzzy.createsaburs.rendering.foundation.RenderTypes;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -21,30 +20,30 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public class ThrownRotarySaberRenderer extends EntityRenderer<ThrownRotarySaber> implements RenderLayerParent<ThrownRotarySaber, ThrownRotarySaberModel<ThrownRotarySaber>> {
+public class ThrownRotarySaberRenderer extends EntityRenderer<ThrownRotarySaber> implements RenderLayerParent<ThrownRotarySaber, ThrownRotarySaberGuardModel<ThrownRotarySaber>> {
     public static final ResourceLocation TRIDENT_LOCATION = createsaburs.asResource("textures/entity/thrownrotarysaber.png");
     public static final ResourceLocation GLOWLOC = createsaburs.asResource("textures/entity/glowingpart.png");
 
-    private final ThrownRotarySaberModel<ThrownRotarySaber> model;
-    private final thebladepart<ThrownRotarySaber> blade;
+    private final ThrownRotarySaberGuardModel<ThrownRotarySaber> model;
+    private final ThrownRotarySaberBladeModel<ThrownRotarySaber> blade;
 
-    protected final List<RenderLayer<ThrownRotarySaber, ThrownRotarySaberModel<ThrownRotarySaber>>> layers = Lists.newArrayList();
+    protected final List<RenderLayer<ThrownRotarySaber, ThrownRotarySaberGuardModel<ThrownRotarySaber>>> layers = Lists.newArrayList();
 
     public ThrownRotarySaberRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
 
-        this.model = new ThrownRotarySaberModel<ThrownRotarySaber>(pContext.bakeLayer(ModModelLayers.thrownrotarysabermodellayer));
-        this.blade = new thebladepart<ThrownRotarySaber>(pContext.bakeLayer(ModModelLayers.thrownrotarysaberblademodellayer));
+        this.model = new ThrownRotarySaberGuardModel<ThrownRotarySaber>(pContext.bakeLayer(ModModelLayers.THROWN_ROTARY_SABER_GUARD));
+        this.blade = new ThrownRotarySaberBladeModel<ThrownRotarySaber>(pContext.bakeLayer(ModModelLayers.THROWN_ROTART_SABER_BLADE));
 
         //this.addLayer(new GlowingBladeLayer( this,pContext.getModelSet()));
     }
 
-    public final boolean addLayer(RenderLayer<ThrownRotarySaber, ThrownRotarySaberModel<ThrownRotarySaber>> pLayer) {
+    public final boolean addLayer(RenderLayer<ThrownRotarySaber, ThrownRotarySaberGuardModel<ThrownRotarySaber>> pLayer) {
         return this.layers.add(pLayer);
     }
 
     @Override
-    public ThrownRotarySaberModel<ThrownRotarySaber> getModel() {
+    public ThrownRotarySaberGuardModel<ThrownRotarySaber> getModel() {
         return this.model;
     }
 

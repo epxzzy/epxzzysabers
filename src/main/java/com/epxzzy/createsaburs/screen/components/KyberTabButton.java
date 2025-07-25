@@ -1,5 +1,6 @@
-package com.epxzzy.createsaburs.misc;
+package com.epxzzy.createsaburs.screen.components;
 
+import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -87,7 +88,7 @@ public class KyberTabButton extends AbstractButton {
         pGuiGraphics.blit(this.resourceLocation, k, this.getY(), i, j, this.width, this.height);
         RenderSystem.enableDepthTest();
         this.renderIcon(pGuiGraphics, minecraft.getItemRenderer());
-        pGuiGraphics.renderOutline(this.getX(),this.getY(),this.width, this.height,ColourConverter.portedRGBtoDecimal(new int[]{255,0,0}));
+        pGuiGraphics.renderOutline(this.getX(),this.getY(),this.width, this.height, ColourConverter.portedRGBtoDecimal(new int[]{255,0,0}));
         /*
         if (this.animationTime > 0.0F) {
             pGuiGraphics.pose().popPose();
