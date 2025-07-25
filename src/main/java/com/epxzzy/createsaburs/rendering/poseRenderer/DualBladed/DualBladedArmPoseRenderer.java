@@ -1,7 +1,7 @@
 package com.epxzzy.createsaburs.rendering.poseRenderer.DualBladed;
 
+import com.epxzzy.createsaburs.utils.AngleHelper;
 import com.epxzzy.createsaburs.utils.AnimationTickHolder;
-import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;

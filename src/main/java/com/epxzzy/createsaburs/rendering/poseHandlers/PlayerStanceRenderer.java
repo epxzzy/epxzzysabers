@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.rendering.poseHandlers;
 
-import net.createmod.catnip.math.AngleHelper;
+import com.epxzzy.createsaburs.utils.AngleHelper;
 import net.minecraft.client.model.HumanoidModel;
 
 public class PlayerStanceRenderer {
