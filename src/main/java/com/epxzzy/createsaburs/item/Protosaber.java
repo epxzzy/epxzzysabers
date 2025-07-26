@@ -4,6 +4,7 @@ import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.networking.packet.ServerboundSaberAbilityPacket;
+import com.epxzzy.createsaburs.networking.packet.ServerboundSaberDeflectPacket;
 import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer;
 import com.epxzzy.createsaburs.rendering.poseHandlers.BladeStance;
@@ -52,9 +53,9 @@ import java.util.function.Predicate;
 
 public class Protosaber extends Item {
     private ArrayListMultimap<Attribute, AttributeModifier> defaultModifiers;
-    private final int PARRY_RANGE;
-    private final int ATTACK_DAMAGE;
-    private final int ATTACK_SPEED;
+    public final int PARRY_RANGE;
+    public final int ATTACK_DAMAGE;
+    public final int ATTACK_SPEED;
     public static com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer THE_RENDURR;
     public static com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer THE_BETTER_RENDERER;
 
@@ -311,17 +312,14 @@ public class Protosaber extends Item {
     }
 
     public static int getSaberParryRange(ItemStack pStack){
-        if(pStack.getItem() instanceof Protosaber){
-            return ((Protosaber) pStack.getItem()).PARRY_RANGE;
-        }
-        return 0;
+        return ((Protosaber) pStack.getItem().asItem()).PARRY_RANGE;
         //return false;
     }
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
         //addFlourishTag(entity, stack);
-        ModMessages.sendToServer(new ServerboundSaberAbilityPacket());
-        return true;
+        ModMessages.sendToServer(new ServerboundSaberDeflectPacket());
+        return false;
         //}
         //return false;
     }
