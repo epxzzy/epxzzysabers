@@ -4,6 +4,7 @@ import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.networking.packet.ServerboundKyberMenuSlotPosToggle;
 import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
 import com.epxzzy.createsaburs.networking.packet.ServerboundSaberAbilityPacket;
+import com.epxzzy.createsaburs.networking.packet.ServerboundSaberDeflectPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -46,6 +47,11 @@ public class ModMessages {
                 .decoder(ServerboundSaberAbilityPacket::new)
                 .encoder(ServerboundSaberAbilityPacket::toBytes)
                 .consumerMainThread(ServerboundSaberAbilityPacket::handle)
+                .add();
+        net.messageBuilder(ServerboundSaberDeflectPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(ServerboundSaberDeflectPacket::new)
+                .encoder(ServerboundSaberDeflectPacket::toBytes)
+                .consumerMainThread(ServerboundSaberDeflectPacket::handle)
                 .add();
 
 
