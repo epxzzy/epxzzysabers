@@ -24,6 +24,8 @@ public class SingleBladedArmPoseRenderer {
         ModelPart MainArm = Lefty ? model.rightArm : model.leftArm;
         ModelPart otherArm = Lefty ? model.leftArm : model.rightArm;
 
+        model.rightArm.resetPose();
+
         //the x-cross
         float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
         float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
@@ -33,6 +35,8 @@ public class SingleBladedArmPoseRenderer {
         MainArm.yRot = AngleHelper.rad(-20);
 
         if (both) {
+            model.leftArm.resetPose();
+
             //otherArm.xRot = -AngleHelper.rad(bodySwing + 150);
             otherArm.xRot = Mth.clamp(model.head.xRot, -1.2F, 1.2F) - 1.4835298F;
             MainArm.yRot = AngleHelper.rad(0);
@@ -43,6 +47,8 @@ public class SingleBladedArmPoseRenderer {
         ModelPart MainArm = Lefty ? model.rightArm : model.leftArm;
         ModelPart otherArm = Lefty ? model.leftArm : model.rightArm;
 
+        model.rightArm.resetPose();
+
         //the circular
         float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
         float movement = Mth.sin(((float) ((time) * 3.3 / Math.PI)));
@@ -52,6 +58,8 @@ public class SingleBladedArmPoseRenderer {
         MainArm.zRot = AngleHelper.rad(movement2 * -30);
 
         if (both) {
+            model.leftArm.resetPose();
+
             otherArm.xRot = Mth.cos(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
             otherArm.zRot = -AngleHelper.rad(20);
         }

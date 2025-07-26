@@ -26,7 +26,8 @@ public class DualBladedArmPoseRenderer {
         ModelPart otherArm = Lefty ? model.rightArm: model.leftArm;
 
         //model.body.resetPose();
-
+        model.leftArm.resetPose();
+        model.rightArm.resetPose();
 
 
         float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));
@@ -39,6 +40,9 @@ public class DualBladedArmPoseRenderer {
     public static void SetArmFlourishBEHINDTHEBACK(boolean Lefty, boolean both, HumanoidModel<?> model){
         ModelPart MainArm = Lefty ? model.leftArm: model.rightArm;
         ModelPart otherArm = Lefty ? model.rightArm: model.leftArm;
+
+        model.leftArm.resetPose();
+        model.rightArm.resetPose();
 
 
         float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
@@ -76,6 +80,8 @@ public class DualBladedArmPoseRenderer {
         ModelPart MainArm = Lefty ? model.leftArm: model.rightArm;
         ModelPart otherArm = Lefty ? model.rightArm: model.leftArm;
 
+        model.leftArm.resetPose();
+        model.rightArm.resetPose();
 
 
 
