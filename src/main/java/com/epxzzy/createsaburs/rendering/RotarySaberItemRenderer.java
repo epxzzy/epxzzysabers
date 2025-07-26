@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItem;
+import static com.epxzzy.createsaburs.utils.StackHelper.isCorrectArmLeading;
 
 public class RotarySaberItemRenderer extends CustomRenderedItemModelRenderer {
 
@@ -186,16 +187,18 @@ public class RotarySaberItemRenderer extends CustomRenderedItemModelRenderer {
                 //ms.mulPose(Axis.YP.rotationDegrees(-27));
                 //ms.mulPose(Axis.XP.rotationDegrees(90));
                 //ms.translate(0.05,0.179,0);
-                ms.pushPose();
                 //ms.translate(0.035,-0.175,0);
-                renderer.render(SPIN_BIT.get(), LightTexture.FULL_BRIGHT);
-                ms.popPose();
+                if(isCorrectArmLeading(entity,transformType,RotarySaber.checkForSaberFly(entity))) {
+                    ms.pushPose();
+                    renderer.render(SPIN_BIT.get(), LightTexture.FULL_BRIGHT);
+                    ms.popPose();
+                }
 
                 //ms.translate(0,-0.175,0);
                 ms.mulPose(Axis.ZN.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * 5)));
                 continue;
             }
-            else if (RotarySaber.checkForSaberFly(entity)[0]) {
+            else if (!RotarySaber.checkForSaberFly(entity)[0]) {
                 //stack.getUseAnimation()
                 ms.pushPose();
                 renderer.renderGlowing(GLOWLY_BIT.get(),  LightTexture.FULL_BRIGHT);

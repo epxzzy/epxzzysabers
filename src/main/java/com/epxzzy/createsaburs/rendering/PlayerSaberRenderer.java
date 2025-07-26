@@ -113,7 +113,7 @@ public class PlayerSaberRenderer {
         boolean isLeftArmMain = (player.getMainArm() == HumanoidArm.LEFT);
         isLeftArmMain = offhand?!isLeftArmMain: isLeftArmMain;
 
-        float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
+        float time = (AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks())/2;
         float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
         float limbCycle = Mth.sin(((float) (time * 0.3f / Math.PI)));
         float bodySwing = AngleHelper.rad(15 + (mainCycle * 10));

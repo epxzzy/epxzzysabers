@@ -4,6 +4,7 @@ import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.rendering.RotarySaberItemRenderer;
 import com.epxzzy.createsaburs.utils.ModTags;
+import com.epxzzy.createsaburs.utils.StackHelper;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -167,9 +168,10 @@ public class RotarySaber extends Protosaber {
             boolean mainhand = (((Player) Entityy).getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER) && ((Player) Entityy).getMainHandItem().getOrCreateTag().getBoolean("FlyBoiii"))  && ((Player) Entityy).getAbilities().flying;
             boolean offhand = (((Player) Entityy).getOffhandItem().is(ModTags.Items.CREATE_ROTARY_SABER) && ((Player) Entityy).getOffhandItem().getOrCreateTag().getBoolean("FlyBoiii"))  && ((Player) Entityy).getAbilities().flying;
 
-            return  new boolean[]{ mainhand|| offhand, offhand};
+            //first one meaning flight is true, second specifies the hand, third is both hands have one
+            return  new boolean[]{ mainhand||offhand, offhand, mainhand&&offhand};
         }
-        return new boolean[]{false, false};
+        return new boolean[]{false, false, false};
     }
 
 
