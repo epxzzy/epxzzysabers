@@ -22,7 +22,7 @@ import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
 import java.util.List;
 
-import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItem;
+import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItemRightOrBoth;
 
 public class WorseSingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
     protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/gear"));
@@ -40,7 +40,7 @@ public class WorseSingleBladedItemRenderer extends CustomRenderedItemModelRender
 
          */
 
-        List<LivingEntity> allEntities = getEntitiesHoldingItem(stack);
+        List<LivingEntity> allEntities = getEntitiesHoldingItemRightOrBoth(stack);
         for (LivingEntity entity : allEntities) {
             if (transformType.firstPerson() && entity.isUsingItem()) {
                 int modifier = leftHand ? -1 : 1;

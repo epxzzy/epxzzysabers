@@ -22,7 +22,8 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItem;
+import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItemRightOrBoth;
+
 
 public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
 
@@ -40,7 +41,7 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
         else {
         */
 
-        List<LivingEntity> allEntities = getEntitiesHoldingItem(stack);
+        List<LivingEntity> allEntities = getEntitiesHoldingItemRightOrBoth(stack);
         for (LivingEntity entity : allEntities) {
             if(transformType.firstPerson() && entity.isUsingItem()){
                 int modifier = leftHand ? -1 : 1;

@@ -3,9 +3,9 @@ package com.epxzzy.createsaburs.item.saburtypes;
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.rendering.RotarySaberItemRenderer;
+import com.epxzzy.createsaburs.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.epxzzy.createsaburs.utils.StackHelper;
-import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
@@ -32,8 +32,8 @@ public class RotarySaber extends Protosaber {
     }
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        THE_RENDURR = new RotarySaberItemRenderer();
-        consumer.accept(SimpleCustomRenderer.create(this, THE_RENDURR));
+        THE_BETTER_RENDERER = new RotarySaberItemRenderer();
+        consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));
     }
 
     public static int getColor(ItemStack pStack) {

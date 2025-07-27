@@ -25,7 +25,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItem;
+import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItemRightOrBoth;
 
 
 public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
@@ -46,7 +46,7 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
 
          */
 
-        List<LivingEntity> allEntities = getEntitiesHoldingItem(stack);
+        List<LivingEntity> allEntities = getEntitiesHoldingItemRightOrBoth(stack);
         for (LivingEntity entity : allEntities) {
             if (transformType.firstPerson() && entity.isUsingItem()) {
                 int modifier = leftHand ? -1 : 1;

@@ -12,7 +12,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StackHelper {
-    public static List<LivingEntity> getEntitiesHoldingItem(ItemStack stack) {
+    public static List<LivingEntity> getEntitiesHoldingItemRightOrBoth(ItemStack stack) {
+        List<LivingEntity> result = new ArrayList<>();
+        Minecraft mc = Minecraft.getInstance();
+
+        Player player = mc.player;
+        if (player != null && isHoldingItemMainOrBoth(player, stack)) {
+            result.add(player);
+        }
+
+        // Check other entities in the loaded world
+        if (mc.level != null) {
+            for (Entity entity : mc.level.entitiesForRendering()) {
+                if (entity instanceof LivingEntity livingEntity) {
+                    // skippity
+                    if (livingEntity == player) continue;
+
+                    if (isHoldingItemMainOrBoth(livingEntity, stack)) {
+                        result.add(livingEntity);
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public static List<LivingEntity> getEntitiesHoldingItemAnyHand(ItemStack stack) {
         List<LivingEntity> result = new ArrayList<>();
         Minecraft mc = Minecraft.getInstance();
 
@@ -38,10 +64,17 @@ public class StackHelper {
         return result;
     }
 
-    public static boolean isHoldingItemAnyHand(LivingEntity entity, ItemStack stack) {
-        return (ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack) && ItemStack.isSameItemSameTags(entity.getOffhandItem(), stack)) || ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack);
+    public static boolean isHoldingItemMainOrBoth(LivingEntity entity, ItemStack stack) {
+        return (ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack)
+                && ItemStack.isSameItemSameTags(entity.getOffhandItem(), stack)) || ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack);
         //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
     }
+    public static boolean isHoldingItemAnyHand(LivingEntity entity, ItemStack stack) {
+        return (isHoldingItemMainHand(entity, stack)) ||
+                (isHoldingItemOffHand(entity, stack));
+        //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
+    }
+
     public static boolean isHoldingItemOffHand(LivingEntity entity, ItemStack stack) {
         return ItemStack.isSameItemSameTags(entity.getOffhandItem(), stack);
         //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
@@ -67,18 +100,18 @@ public class StackHelper {
 
         // Case 1: Both hands have the item (offhand priority)
         if (BOTH_HANDS_USED) {
-            return (offhandIsLeft && isOffhandContext) || (!offhandIsLeft && isMainhandContext);
+            return (offhandIsLeft) || (!offhandIsLeft);
         }
 
         // Case 2: Only offhand has the item
         if (OFFHAND && !BOTH_HANDS_USED) {
-            return (offhandIsLeft && isOffhandContext) || (!offhandIsLeft && isMainhandContext);
+            return (offhandIsLeft) || (!offhandIsLeft);
         }
 
         // Case 3: Offhand is empty, mainhand has the item (implied when OFFHAND is false)
         if (!OFFHAND && !BOTH_HANDS_USED) {
             // Assume item is in mainhand if OFFHAND is false and item is present
-            return (mainhandIsLeft && isOffhandContext) || (!mainhandIsLeft && isMainhandContext);
+            return (mainhandIsLeft) || (!mainhandIsLeft);
         }
 
         // Case 4: No item in either hand (or invalid state)
