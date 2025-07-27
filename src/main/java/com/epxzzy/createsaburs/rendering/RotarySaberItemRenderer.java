@@ -63,7 +63,7 @@ public class RotarySaberItemRenderer extends CustomRenderedItemModelRenderer {
         renderer.render(GUARD_BIT.get(), light);
         if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
             if (stack.getOrCreateTag().getBoolean("FlyBoiii")) {
-                ms.mulPose(Axis.ZN.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * -1)));
+                ms.mulPose(Axis.ZN.rotation(-ScrollValueHandler.getScroll((float) ((float) (AnimationTickHolder.getPartialTicks()) * 0.5))));
                 RenderSmearBlade(stack, model, renderer, transformType, ms, buffer, light, overlay);
             }
             else {
