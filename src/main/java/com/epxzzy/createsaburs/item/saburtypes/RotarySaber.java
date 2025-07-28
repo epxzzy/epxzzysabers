@@ -2,6 +2,8 @@ package com.epxzzy.createsaburs.item.saburtypes;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
+import com.epxzzy.createsaburs.networking.ModMessages;
+import com.epxzzy.createsaburs.networking.packet.ServerboundSaberDeflectPacket;
 import com.epxzzy.createsaburs.rendering.RotarySaberItemRenderer;
 import com.epxzzy.createsaburs.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.createsaburs.utils.ModTags;
@@ -14,6 +16,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
@@ -43,6 +46,15 @@ public class RotarySaber extends Protosaber {
             return 16711680;
         }
         return Objects.requireNonNull(pStack.getTagElement("display")).getInt("colour");
+    }
+
+    @Override
+    public @NotNull UseAnim getUseAnimation(@NotNull ItemStack pStack) {
+        //if(pStack.getOrCreateTag().getBoolean("FlyBoiii")) {
+            //return UseAnim.CROSSBOW;
+        //}
+        //UseAnim.
+        return super.getUseAnimation(pStack);
     }
 
     @Override
@@ -83,6 +95,17 @@ public class RotarySaber extends Protosaber {
 
         }
     }
+
+    @Override
+    public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
+        if(pRemainingUseDuration > 120){
+            //pLivingEntity.stopUsingItem();
+            //return;
+        }
+        ModMessages.sendToServer(new ServerboundSaberDeflectPacket());
+        super.onUseTick(pLevel, pLivingEntity, pStack, pRemainingUseDuration);
+    }
+
     public boolean isInAir(Player pPlayer){
         BlockPos pos = pPlayer.blockPosition();
         Level level = pPlayer.level();
@@ -95,6 +118,9 @@ public class RotarySaber extends Protosaber {
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, @NotNull InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
+        CompoundTag tug = itemstack.getOrCreateTag().copy();
+        tug.putBoolean("BlockBoiii", true);
+        itemstack.setTag(tug);
 
         if (readActivetag(pPlayer.getItemInHand(pHand)) && !pLevel.isClientSide) {
             if((pPlayer.xRotO < -35 || this.isInAir(pPlayer))){
@@ -102,9 +128,9 @@ public class RotarySaber extends Protosaber {
                     pPlayer.getAbilities().flying = true;
                     pPlayer.onUpdateAbilities();
 
-                    CompoundTag tug = itemstack.getOrCreateTag().copy();
-                    tug.putBoolean("FlyBoiii", true);
-                    itemstack.setTag(tug);
+                    CompoundTag tuge = itemstack.getOrCreateTag().copy();
+                    tuge.putBoolean("FlyBoiii", true);
+                    itemstack.setTag(tuge);
                     //this.flyCooldown = 40;
                     createsaburs.LOGGER.info("flying activated");
                 }

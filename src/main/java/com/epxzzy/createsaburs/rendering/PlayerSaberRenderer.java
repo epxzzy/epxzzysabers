@@ -10,13 +10,16 @@ import com.epxzzy.createsaburs.rendering.poseRenderer.SingleBladed.SingleBladedA
 import com.epxzzy.createsaburs.utils.AngleHelper;
 import com.epxzzy.createsaburs.utils.AnimationTickHolder;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.AnimationUtils;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 
-import static com.epxzzy.createsaburs.rendering.poseRenderer.Rotary.ArmPoseRenderer.setSaberFlyPose;
+import static com.epxzzy.createsaburs.rendering.poseRenderer.Rotary.ArmPoseRenderer.setRotaryBlockPose;
+import static com.epxzzy.createsaburs.rendering.poseRenderer.Rotary.ArmPoseRenderer.setRotaryFlyPose;
+
 
 public class PlayerSaberRenderer {
     public static boolean IsPlayerStationary(Player player){
@@ -78,8 +81,11 @@ public class PlayerSaberRenderer {
         if((Protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player))&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
             setBladedStance(player, model);
         }
-        else if (RotarySaber.checkForSaberFly(player)[0]){
-            setSaberFlyPose(player, model, RotarySaber.checkForSaberFly(player)[1]);
+        if(RotarySaber.checkForSaberBlock(player)){
+            setRotaryBlockPose(player, model);
+        }
+        if (RotarySaber.checkForSaberFly(player)[0]){
+            setRotaryFlyPose(player, model, RotarySaber.checkForSaberFly(player)[1]);
         }
     }
 

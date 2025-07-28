@@ -31,10 +31,10 @@ public class RotarySaberItemPoseRenderer {
             //side to side
             case CIRCULAR ->
                     SetFlourishCIRCULAR(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+            //the "obi-ani"
 
             default ->
                 setDefault(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
-            //the "obi-ani"
         }
     }
 

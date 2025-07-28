@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Player;
 
 public class ArmPoseRenderer {
 
-    public static void setSaberFlyPose(Player player, HumanoidModel<?> model, boolean offhand){
+    public static void setRotaryFlyPose(Player player, HumanoidModel<?> model, boolean offhand){
         model.head.x = 0;
         model.hat.x = 0;
         model.body.resetPose();
@@ -83,4 +83,12 @@ public class ArmPoseRenderer {
         leadingLeg.y -= armPivotY;
     }
 
+    public static void setRotaryBlockPose(Player player, HumanoidModel<?> model){
+        ModelPart modelpart =  model.leftArm;
+        ModelPart modelpart1 = model.rightArm;
+        modelpart.yRot = 0.6F + model.head.yRot;
+        modelpart1.yRot = -0.6F + model.head.yRot;
+        modelpart.xRot = (-(float)Math.PI / 2F) + model.head.xRot + 0.1F;
+        modelpart1.xRot = -1.5F + model.head.xRot;
+    }
 }
