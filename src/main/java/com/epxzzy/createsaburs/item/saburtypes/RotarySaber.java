@@ -96,6 +96,10 @@ public class RotarySaber extends Protosaber {
         }
     }
 
+    public int getUseDuration(ItemStack pStack) {
+        return 20 * 2;
+    }
+
     @Override
     public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
         /*if(pRemainingUseDuration > 120){
@@ -167,6 +171,7 @@ public class RotarySaber extends Protosaber {
         }
 
         pStack.setTag(nbeetea);
+        ((Player) entity).getCooldowns().addCooldown(entity.getUseItem().getItem(), 50);
         super.onStopUsing(pStack, entity, count);
     }
 
