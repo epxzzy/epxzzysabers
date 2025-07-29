@@ -5,6 +5,7 @@ import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.networking.packet.ServerboundSaberAbilityPacket;
 import com.epxzzy.createsaburs.networking.packet.ServerboundSaberDeflectPacket;
+import com.epxzzy.createsaburs.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer;
 import com.epxzzy.createsaburs.rendering.poseHandlers.BladeStance;
@@ -13,7 +14,6 @@ import com.epxzzy.createsaburs.utils.ModTags;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.mojang.blaze3d.platform.InputConstants;
-import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -392,7 +392,7 @@ public class Protosaber extends Item {
 
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        THE_RENDURR = new ProtosaberItemRenderer();
-        consumer.accept(SimpleCustomRenderer.create(this, THE_RENDURR));
+        THE_BETTER_RENDERER = new ProtosaberItemRenderer();
+        consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));
     }
 }

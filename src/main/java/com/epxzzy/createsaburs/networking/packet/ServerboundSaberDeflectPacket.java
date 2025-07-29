@@ -96,7 +96,7 @@ public class ServerboundSaberDeflectPacket {
 
                                 if (AbstractArrow.class.isAssignableFrom(entity1.getClass()) && !((AbstractArrow) entity1).inGround ) {
                                     //createsaburs.LOGGER.warn("deflected an ordinary arrow");
-                                    ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 2.0F, 1.0F);
+                                    ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 1.5F, 1.0F);
                                     entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
 
                                     continue;

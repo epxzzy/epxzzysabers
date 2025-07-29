@@ -1,23 +1,21 @@
 package com.epxzzy.createsaburs.rendering.poseRenderer.DualBladed;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.createsaburs.utils.AngleHelper;
 import com.epxzzy.createsaburs.utils.AnimationTickHolder;
 import com.epxzzy.createsaburs.utils.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
-import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import org.checkerframework.checker.units.qual.C;
 
 
 public class DualBladedItemPoseRenderer {
-    public static void setItemPose( ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
+    public static void setItemPose(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
         DualBladedFlourish flourish = DualBladedFlourish.fromTagID(stack.getOrCreateTag().getCompound("display").getInt("flourish"));
         switch (flourish) {
             case SKIPCATCH -> SetFlourishSKIPCATCH(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
@@ -29,7 +27,7 @@ public class DualBladedItemPoseRenderer {
 
         }
     }
-    public static void SetFlourishSKIPCATCH(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
+    public static void SetFlourishSKIPCATCH(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
         float time = AnimationTickHolder.getTicks(false);
 
         float movement = Mth.sin(((float) ((time) * 2 / Math.PI)));
@@ -43,7 +41,7 @@ public class DualBladedItemPoseRenderer {
 
     }
 
-    public static void SetFlourishBEHINDTHEBACK(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
+    public static void SetFlourishBEHINDTHEBACK(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
         float time = AnimationTickHolder.getTicks(false);
 
         float movement = Mth.sin(((float) ((time) * 3.3 / Math.PI)));
@@ -77,7 +75,7 @@ public class DualBladedItemPoseRenderer {
         ms.popPose();
     }
 
-    public static void SetFlourishFIGUREEIGHT(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
+    public static void SetFlourishFIGUREEIGHT(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
         float time = AnimationTickHolder.getTicks(false);
         float timeT = AnimationTickHolder.getPartialTicks();
         float squaremovement = (Mth.sin((float) (time*5)) >= 0)? 1:-1;

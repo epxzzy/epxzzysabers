@@ -59,7 +59,7 @@ public class RotarySaberItemRenderer extends CustomRenderedItemModelRenderer {
         }
 
          */
-        if(stack.getOrCreateTag().getBoolean("BlockBoiii")){
+        if(stack.getOrCreateTag().getBoolean("BlockBoiii") && !stack.getOrCreateTag().getBoolean("FlyBoiii")){
             ms.mulPose(Axis.YP.rotationDegrees(-27));
             ms.mulPose(Axis.ZN.rotationDegrees(90));
             ms.translate(-0.1,0,0);

@@ -2,11 +2,8 @@ package com.epxzzy.createsaburs.item.saburtypes;
 
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
-import com.epxzzy.createsaburs.rendering.SingleBladedItemRenderer;
-import com.epxzzy.createsaburs.rendering.WorseSingleBladedItemRenderer;
-import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
-import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
-import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
+import com.epxzzy.createsaburs.rendering.BlasterSaberItemRenderer;
+import com.epxzzy.createsaburs.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.createsaburs.utils.ModTags;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.entity.Entity;
@@ -22,8 +19,8 @@ public class BlasterHybrid extends Protosaber {
     }
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        THE_RENDURR = new WorseSingleBladedItemRenderer();
-        consumer.accept(SimpleCustomRenderer.create(this, THE_RENDURR));
+        THE_BETTER_RENDERER = new BlasterSaberItemRenderer();
+        consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));
 
 
     }

@@ -1,6 +1,8 @@
 package com.epxzzy.createsaburs.rendering;
 
 import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
+import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.createsaburs.rendering.poseRenderer.SingleBladed.SingleBladedItemPoseRenderer;
 import com.epxzzy.createsaburs.utils.AnimationTickHolder;
 import com.epxzzy.createsaburs.utils.ScrollValueHandler;
@@ -9,14 +11,11 @@ import com.mojang.math.Axis;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
-import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
-import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
 
 
@@ -24,12 +23,13 @@ import java.util.List;
 
 import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItemRightOrBoth;
 
-public class WorseSingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
+public class BlasterSaberItemRenderer extends CustomRenderedItemModelRenderer {
+    protected static final PartialModel HILT_BIT = PartialModel.of(createsaburs.asResource("item/hilt/blaster_hilt"));
     protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/gear"));
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/blade_single"));
 
     @Override
-    protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
+    protected void render(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
                           PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
 
         boolean leftHand = transformType == ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
@@ -58,7 +58,7 @@ public class WorseSingleBladedItemRenderer extends CustomRenderedItemModelRender
                 }
             }
         }
-        renderer.render(model.getOriginalModel(), light);
+        renderer.render(HILT_BIT.get(), light);
 
         //}
 

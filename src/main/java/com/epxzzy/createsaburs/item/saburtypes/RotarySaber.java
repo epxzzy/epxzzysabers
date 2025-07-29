@@ -98,12 +98,14 @@ public class RotarySaber extends Protosaber {
 
     @Override
     public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
-        if(pRemainingUseDuration > 120){
+        /*if(pRemainingUseDuration > 120){
             //pLivingEntity.stopUsingItem();
             //return;
         }
-        ModMessages.sendToServer(new ServerboundSaberDeflectPacket());
-        super.onUseTick(pLevel, pLivingEntity, pStack, pRemainingUseDuration);
+
+         */
+        if (pRemainingUseDuration % 2 == 0)ModMessages.sendToServer(new ServerboundSaberDeflectPacket());
+        //super.onUseTick(pLevel, pLivingEntity, pStack, pRemainingUseDuration);
     }
 
     public boolean isInAir(Player pPlayer){
