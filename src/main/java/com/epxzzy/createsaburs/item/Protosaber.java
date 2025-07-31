@@ -11,6 +11,7 @@ import com.epxzzy.createsaburs.rendering.ProtosaberItemRenderer;
 import com.epxzzy.createsaburs.rendering.poseHandlers.BladeStance;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
+import com.epxzzy.createsaburs.utils.StackHelper;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -319,6 +320,7 @@ public class Protosaber extends Item {
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
         //addFlourishTag(entity, stack);
         ModMessages.sendToServer(new ServerboundSaberDeflectPacket());
+        StackHelper.AnimateDefelctionClient(stack, (Player) entity);
         return false;
         //}
         //return false;
