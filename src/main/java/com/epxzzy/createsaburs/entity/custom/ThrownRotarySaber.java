@@ -160,7 +160,7 @@ public class ThrownRotarySaber extends AbstractArrow {
         DamageSource dmgsrc = this.damageSources().generic();
 
         this.dealtDamage = true;
-        SoundEvent soundevent = SoundEvents.TRIDENT_HIT;
+        SoundEvent soundevent = ModSounds.CLASH.get();
         if (entity.hurt(dmgsrc, f)) {
             if (entity.getType() == EntityType.ENDERMAN) {
                 return;

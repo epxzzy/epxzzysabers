@@ -73,6 +73,9 @@ public abstract class LivingEntityMixin {
                 }
                 else {
                     createsaburs.LOGGER.warn("flying bozo spotted, die");
+                    //((Player) that).getCooldowns().addCooldown(that.getUseItem().getItem(), 20*8);
+                    that.stopUsingItem();
+                    that.swing(InteractionHand.MAIN_HAND);
                 }
                 return;
             }
