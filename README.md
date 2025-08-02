@@ -2,8 +2,6 @@ create saburs
 create 6.0.3-71
 
 //TODO: make rotary saber put on as an chest item if rightclicked turned off
-//TODO: use custom rendering on all the sabers
-//TODO: move deflection fully over to serverside via a packet
 
 ideas n stuff:
 

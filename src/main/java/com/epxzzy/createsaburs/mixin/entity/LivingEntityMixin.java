@@ -53,8 +53,12 @@ public abstract class LivingEntityMixin {
                     if (that instanceof Player) {
                         createsaburs.LOGGER.warn("adding kewldown to the blocking player");
                         cir.cancel();
-                        ((Player) that).getCooldowns().addCooldown(that.getUseItem().getItem(), 10);
-                        that.stopUsingItem();
+                        if(!that.getUseItem().is(ModTags.Items.CREATE_ROTARY_SABER)){
+                            ((Player) that).getCooldowns().addCooldown(that.getUseItem().getItem(), 10);
+                            that.stopUsingItem();
+                            that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5F, 1);
+                            return;
+                        }
                         //that.level().broadcastEntityEvent(that, (byte) 30);
                         //that.playSound(ModSounds.CLASH.get(), 0.2F, 1);
                         that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);
