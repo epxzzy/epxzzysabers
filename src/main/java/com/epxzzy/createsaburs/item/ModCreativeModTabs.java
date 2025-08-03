@@ -24,6 +24,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.ROTARY_SABER.get());
                         pOutput.accept(ModItems.CROSSGUARD_SABER.get());
                         pOutput.accept(ModItems.BLASTER_HYBRID.get());
+                        pOutput.accept(ModItems.SABER_PIKE.get());
 
                         //pOutput.accept(ModItems.mognet.get());
 

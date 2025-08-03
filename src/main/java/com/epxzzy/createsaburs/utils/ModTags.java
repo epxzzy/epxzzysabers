@@ -23,6 +23,7 @@ public class ModTags {
         public static final TagKey<Item> CREATE_ROTARY_SABER = tag("create_rotary_saber");
         public static final TagKey<Item> CREATE_CROSSGUARD_SABER = tag("create_crossguard_saber");
         public static final TagKey<Item> CREATE_BLASTER_HYBRID = tag("create_blaster_hybrid");
+        public static final TagKey<Item> CREATE_PIKE = tag("create_pike_saber");
 
         public static final TagKey<Item> CREATE_KYBER_CRYSTAL= tag("create_kyber_crystal");
 

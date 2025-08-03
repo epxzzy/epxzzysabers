@@ -11,6 +11,7 @@ ideas n stuff:
  - [DONE] Inquisitorious (dualblade but fly)
  - [DONE] Saber-blaster hybrid (singleblade but pew pew)
  - [DONE] Unstable crossguard (high attack speed, randomised damage, low parry range)
+ - Saber Pike (high attack speed, mid attack damage, very high parry range)
  - Saber gauntlet (high attack speed, low attack damage, low parry range)
 
 # Items: 
@@ -34,11 +35,11 @@ ideas n stuff:
 # Stances:
  1. shi-cho [DONE]
  2. makashi [DONE] 
- 3. soresu  
- 4. ataru 
+ 3. soresu [DONE] 
+ 4. atarua [DONE] 
  5. shen/djem so
  6. niman [DONE] 
- 7. juyo/vapaad
+ 7. juyo/vapaad 
 
 each form will have a different block, attack, parry and flourish animations/visuals
 //TODO expand on above

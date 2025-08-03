@@ -3,6 +3,7 @@ package com.epxzzy.createsaburs.rendering;
 import com.epxzzy.createsaburs.createsaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.item.saburtypes.RotarySaber;
+import com.epxzzy.createsaburs.item.saburtypes.SaberPike;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import com.epxzzy.createsaburs.rendering.poseHandlers.PlayerStanceRenderer;
 import com.epxzzy.createsaburs.rendering.poseRenderer.DualBladed.DualBladedArmPoseRenderer;
@@ -66,7 +67,7 @@ public class PlayerSaberRenderer {
         if(player.swingTime > 0 || player.getAttackAnim(1) > 0) {
             //createsaburs.LOGGER.warn("swing time is: " + player.swingTime + " and attack time is: " + player.getAttackAnim(1));
         }
-        if (Protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
+        if ((Protosaber.checkForSaberEquipment(player, true) ||SaberPike.checkForSaberEquipment(player, true)) && player.swingTime > 0) {
             setDualSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model, flourish);
         }
         if (Protosaber.checkForSaberEquipment(player, false) && Protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {

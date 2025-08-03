@@ -2,10 +2,7 @@ package com.epxzzy.createsaburs;
 
 import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.item.Protosaber;
-import com.epxzzy.createsaburs.item.saburtypes.BlasterHybrid;
-import com.epxzzy.createsaburs.item.saburtypes.CrossguardSaber;
-import com.epxzzy.createsaburs.item.saburtypes.RotarySaber;
-import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
+import com.epxzzy.createsaburs.item.saburtypes.*;
 import com.epxzzy.createsaburs.rendering.foundation.PartialModelEventHandler;
 import com.simibubi.create.AllParticleTypes;
 import com.simibubi.create.CreateClient;
@@ -39,6 +36,8 @@ public class createsabursClient {
         event.register((stack, tint) -> tint > 0 ? -1 : Protosaber.getColor(stack), ModItems.ROTARY_SABER.get());
         event.register((stack, tint) -> tint > 0 ? -1 : CrossguardSaber.getColor(stack), ModItems.CROSSGUARD_SABER.get());
         event.register((stack, tint) -> tint > 0 ? -1 : BlasterHybrid.getColor(stack), ModItems.BLASTER_HYBRID.get());
+        event.register((stack, tint) -> tint > 0 ? -1 : SaberPike.getColor(stack), ModItems.SABER_PIKE.get());
+
 
     }
 
