@@ -80,6 +80,19 @@ public class PlayerStanceRenderer {
     }
 
     public static void SetStanceForm4(Boolean lefty, HumanoidModel<?> model) {
+        model.body.setRotation(AngleHelper.rad(0), AngleHelper.rad(57.5), AngleHelper.rad(0));
+
+        model.rightArm.setPos(-3, 1F, 6);
+        model.rightArm.setRotation(AngleHelper.rad(-74), AngleHelper.rad(26), AngleHelper.rad(0));
+
+        model.leftArm.setPos(0, 1F, -5);
+        model.leftArm.setRotation(AngleHelper.rad(26), AngleHelper.rad(4), AngleHelper.rad(76));
+
+        model.rightLeg.setPos(-2, 12, 1);
+        model.rightLeg.setRotation(AngleHelper.rad(0), AngleHelper.rad(72.5), AngleHelper.rad(0));
+
+        model.leftLeg.setPos(2, 12, -2);
+        model.leftLeg.setRotation(AngleHelper.rad(-7.5),  AngleHelper.rad(0), AngleHelper.rad(0));
 
     }
 
