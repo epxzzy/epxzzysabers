@@ -1,0 +1,112 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.stance.shii_cho2": {
+			"loop": true,
+			"bones": {
+				"Head": {
+					"position": [0, -41, -2]
+				},
+				"Body": {
+					"rotation": [16.99819, 15.45986, 1.40461],
+					"position": [0, -2, -2]
+				},
+				"RightArm": {
+					"rotation": [-48.48357, -23.71976, -18.22591],
+					"position": [0, -3, 0]
+				},
+				"LeftArm": {
+					"rotation": [-8.56666, 46.03708, 36.73319],
+					"position": [0, -3, -3]
+				},
+				"RightLeg": {
+					"rotation": [41.05573, 15.81499, 7.59001],
+					"position": [-1, -2, 1]
+				},
+				"LeftLeg": {
+					"rotation": [-16.41058, -5.28748, 6.49502],
+					"position": [1, -1, -1]
+				}
+			}
+		},
+		"animation.model.new": {
+			"loop": true,
+			"bones": {
+				"Head": {
+					"position": [0, -37, 1]
+				},
+				"Body": {
+					"rotation": [-5, 0, 0],
+					"position": [0, 0, 1]
+				},
+				"Right Arm": {
+					"rotation": [0, 20, 25],
+					"position": [0, -1, 0]
+				},
+				"Left Arm": {
+					"rotation": [0, -20, -25],
+					"position": [0, -1, 0]
+				},
+				"Right Leg": {
+					"rotation": [5, 7.5, -1],
+					"position": [0, 0, -1]
+				},
+				"Left Leg": {
+					"rotation": [5, -7.5, 1],
+					"position": [0, 0, 0]
+				}
+			}
+		},
+		"animation.stance.soresu": {
+			"loop": true,
+			"bones": {
+				"Body": {
+					"rotation": [0, 57.5, 0]
+				},
+				"RightArm": {
+					"rotation": [0, 0, 155],
+					"position": [1, 1, 6]
+				},
+				"LeftArm": {
+					"rotation": [-90, 0, 0],
+					"position": [-4, 0, -6]
+				},
+				"RightLeg": {
+					"rotation": [0, 90, 2],
+					"position": [0, 0, 2]
+				},
+				"LeftLeg": {
+					"rotation": [-7.5, 0, 0],
+					"position": [0, 0, -3]
+				},
+				"Head": {
+					"position": [0, -34, 0]
+				}
+			}
+		},
+		"animation.stance.ataru": {
+			"loop": true,
+			"bones": {
+				"Body": {
+					"rotation": [0, 65, 0]
+				},
+				"RightArm": {
+					"rotation": [-74, 26, 0],
+					"position": [3, 0, 7]
+				},
+				"LeftArm": {
+					"rotation": [26, 4, 76],
+					"position": [-5, 1, -7]
+				},
+				"RightLeg": {
+					"rotation": [-2.5, 72.5, 0],
+					"position": [0, 0, 2]
+				},
+				"LeftLeg": {
+					"rotation": [-5, 10, 0],
+					"position": [0, 0, -3]
+				}
+			}
+		}
+	}
+}
