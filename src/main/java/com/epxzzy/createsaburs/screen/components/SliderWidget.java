@@ -1,12 +1,13 @@
 package com.epxzzy.createsaburs.screen.components;
 
-import com.simibubi.create.AllSoundEvents;
+import com.epxzzy.createsaburs.createsaburs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
@@ -118,7 +119,7 @@ public class SliderWidget extends AbstractSliderButton {
         float pitch = (float) (this.getValue() / (float) maxValue);
         if (this.value != this.maxValue && this.value != this.minValue ) {
 
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(AllSoundEvents.SCROLL_VALUE.getMainEvent(), pitch, 0.25f));
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_HAT.get(), pitch, 0.25f));
 
         }
 
@@ -183,9 +184,9 @@ public class SliderWidget extends AbstractSliderButton {
         this.value = this.snapToNearest(value);
         if (!Mth.equal(oldValue, this.value)) {
             this.applyValue();
-            float pitch = (float) Math.max((this.getValue() / (float) maxValue), 0.5);
+            float pitch = (float) (this.getValue() / (float) maxValue);
             if (this.value != this.maxValue && this.value != this.minValue ) {
-                Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(AllSoundEvents.SCROLL_VALUE.getMainEvent(), pitch, 0.25f));
+                Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_HAT.get(), pitch, 0.25f));
 
             }
 
