@@ -71,6 +71,8 @@ public abstract class LivingEntityMixin {
 
             if (blocking_with_sabur && Projectile.class.isAssignableFrom(Objects.requireNonNull(pSource.getDirectEntity()).getClass())) {
                 if(Player.class.isAssignableFrom(Objects.requireNonNull(that.getClass()))&&!(((Player) that).getAbilities().flying)){
+                    if(((Player) that).getTicksUsingItem() > 50) return;
+
                     createsaburs.LOGGER.warn("blocked a projectile");
                     cir.cancel();
                     that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);

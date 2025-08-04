@@ -72,7 +72,7 @@ public abstract class PlayerMixin {
 
     }
 
-
+/*
     @Inject(
             method = "isInvulnerableTo",
             at = @At(value = "HEAD"),
@@ -86,6 +86,8 @@ public abstract class PlayerMixin {
            cir.cancel();
         }
     }
+
+ */
     @Inject(
             method = "attack",
             at = @At(value = "HEAD")
