@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.networking.packet;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.entity.custom.PlasmaBolt;
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import com.epxzzy.createsaburs.item.ModItems;
@@ -41,19 +41,19 @@ public class ServerboundSaberDeflectPacket {
     }
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
-        //createsaburs.LOGGER.info("message reciveved");
+        //CreateSaburs.LOGGER.info("message reciveved");
         NetworkEvent.Context contextt = supplier.get();
         contextt.enqueueWork(() -> {
-            //createsaburs.LOGGER.info("message processed");
+            //CreateSaburs.LOGGER.info("message processed");
 
-            //createsaburs.LOGGER.info(Objects.requireNonNull(contextt.getSender())+" named bond having a stonk");
+            //CreateSaburs.LOGGER.info(Objects.requireNonNull(contextt.getSender())+" named bond having a stonk");
 
             if (contextt.getSender() != null) {
                 ServerPlayer entity = contextt.getSender();
                 Level pLevel = entity.level();
                 ItemStack pStack = entity.getItemInHand(InteractionHand.MAIN_HAND);
                 int PARRY_RANGE = Protosaber.getSaberParryRange(pStack);
-                //createsaburs.LOGGER.info("parry range for this deflection packet {}", PARRY_RANGE);
+                //CreateSaburs.LOGGER.info("parry range for this deflection packet {}", PARRY_RANGE);
 
 
                 Vec3 asdf = entity.blockPosition().getCenter();
@@ -69,7 +69,7 @@ public class ServerboundSaberDeflectPacket {
                     @Override
                     public boolean test(Entity entity) {
                         if (entity instanceof Player) {
-                            //createsaburs.LOGGER.warn("PLAYUR???? NAHHHHH!!");
+                            //CreateSaburs.LOGGER.warn("PLAYUR???? NAHHHHH!!");
                             return true;
                         }
                         return false;
@@ -84,25 +84,25 @@ public class ServerboundSaberDeflectPacket {
                         Vec3 vec31 = vec32.vectorTo(entity.position()).normalize();
                         vec31 = new Vec3(vec31.x, vec31.y, vec31.z);
                         if (vec31.dot(vec3) < 0.4D && speee > -2.0D) {
-                            //createsaburs.LOGGER.warn("oh look what do we have here?");
-                            //createsaburs.LOGGER.warn("is on ground: " + entity1.onGround() + " and is decending? " + entity1.isDescending());
-                            //createsaburs.LOGGER.warn("avrg speed is " + (speee));
+                            //CreateSaburs.LOGGER.warn("oh look what do we have here?");
+                            //CreateSaburs.LOGGER.warn("is on ground: " + entity1.onGround() + " and is decending? " + entity1.isDescending());
+                            //CreateSaburs.LOGGER.warn("avrg speed is " + (speee));
 
-                            //createsaburs.LOGGER.warn("GET DEFELECTED IDIOT");
+                            //CreateSaburs.LOGGER.warn("GET DEFELECTED IDIOT");
 
 
                             if (Projectile.class.isAssignableFrom(entity1.getClass())) {
-                                //createsaburs.LOGGER.warn("its a projectile???");
+                                //CreateSaburs.LOGGER.warn("its a projectile???");
 
                                 if (AbstractArrow.class.isAssignableFrom(entity1.getClass()) && !((AbstractArrow) entity1).inGround ) {
-                                    //createsaburs.LOGGER.warn("deflected an ordinary arrow");
+                                    //CreateSaburs.LOGGER.warn("deflected an ordinary arrow");
                                     ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 1.5F, 1.0F);
                                     entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
 
                                     continue;
                                 }
                                 if (ThrownRotarySaber.class.isAssignableFrom(entity1.getClass())) {
-                                    //createsaburs.LOGGER.warn("deflected a thrown lightsaber");
+                                    //CreateSaburs.LOGGER.warn("deflected a thrown lightsaber");
                                     ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 2.0F, 1.0F);
                                     entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
 
@@ -114,7 +114,7 @@ public class ServerboundSaberDeflectPacket {
                                 //entity1.setDeltaMovement(pos);
                                 //entity1.setDeltaMovement(vec3);
                                 if (AbstractHurtingProjectile.class.isAssignableFrom(entity1.getClass())) {
-                                    //createsaburs.LOGGER.warn("deflected a projectile");
+                                    //CreateSaburs.LOGGER.warn("deflected a projectile");
 
                                     ((AbstractHurtingProjectile) entity1).xPower = vec3.x * 0.1D;
                                     ((AbstractHurtingProjectile) entity1).yPower = vec3.y * 0.1D;
@@ -137,7 +137,7 @@ public class ServerboundSaberDeflectPacket {
                             }
                         }
                     }
-                    //createsaburs.LOGGER.warn("wait was that all of them? dam thats sad");
+                    //CreateSaburs.LOGGER.warn("wait was that all of them? dam thats sad");
                 } else if (pStack.getOrCreateTag().getBoolean("ActiveBoiii")) {
                     entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.SWING.get(), SoundSource.PLAYERS, 0.1F, 0.8F + entity.level().random.nextFloat() * 0.4F);
 

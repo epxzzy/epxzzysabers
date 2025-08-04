@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.entity.custom;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.entity.ModEntities;
 import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.item.Protosaber;
@@ -50,7 +50,7 @@ public class ThrownRotarySaber extends AbstractArrow {
         this.entityData.set(Decimal_Colour,RotarySaber.getColor(pStack));
         this.entityData.set(Gay, Protosaber.isGay(pStack));
 
-        createsaburs.LOGGER.warn("colour given to thrown saber is:" + RotarySaber.getColor(pStack));
+        CreateSaburs.LOGGER.warn("colour given to thrown saber is:" + RotarySaber.getColor(pStack));
 
     }
 
@@ -61,9 +61,9 @@ public class ThrownRotarySaber extends AbstractArrow {
     }
 
     public int[] getColour(){
-        //createsaburs.LOGGER.warn("colour asked from thrown saber is:" + this.entityData.get(Decimal_Colour));
+        //CreateSaburs.LOGGER.warn("colour asked from thrown saber is:" + this.entityData.get(Decimal_Colour));
         //int[] colour = ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour));
-        //createsaburs.LOGGER.warn("colours have been set as: " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[0] + " " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[1] + " " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[2]);
+        //CreateSaburs.LOGGER.warn("colours have been set as: " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[0] + " " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[1] + " " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[2]);
         if(this.entityData.get(Gay)){
             return ColourConverter.rainbowColor((int) System.currentTimeMillis() * 2 );
         }

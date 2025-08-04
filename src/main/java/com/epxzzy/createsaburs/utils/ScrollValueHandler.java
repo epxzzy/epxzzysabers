@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.utils;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.misc.PhysicalFloat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;

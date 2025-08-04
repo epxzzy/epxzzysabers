@@ -1,7 +1,7 @@
 package com.epxzzy.createsaburs.entity.client.rotary;
 
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.entity.ModModelLayers;
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import com.google.common.collect.Lists;
@@ -21,8 +21,8 @@ import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class ThrownRotarySaberRenderer extends EntityRenderer<ThrownRotarySaber> implements RenderLayerParent<ThrownRotarySaber, ThrownRotarySaberGuardModel<ThrownRotarySaber>> {
-    public static final ResourceLocation TRIDENT_LOCATION = createsaburs.asResource("textures/entity/thrownrotarysaber.png");
-    public static final ResourceLocation GLOWLOC = createsaburs.asResource("textures/entity/glowingpart.png");
+    public static final ResourceLocation TRIDENT_LOCATION = CreateSaburs.asResource("textures/entity/thrownrotarysaber.png");
+    public static final ResourceLocation GLOWLOC = CreateSaburs.asResource("textures/entity/glowingpart.png");
 
     private final ThrownRotarySaberGuardModel<ThrownRotarySaber> model;
     private final ThrownRotarySaberBladeModel<ThrownRotarySaber> blade;

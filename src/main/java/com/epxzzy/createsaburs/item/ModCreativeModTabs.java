@@ -1,7 +1,7 @@
 package com.epxzzy.createsaburs.item;
 
 import com.epxzzy.createsaburs.block.ModBlocks;
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -12,11 +12,11 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModCreativeModTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, createsaburs.MOD_ID);
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CreateSaburs.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> TUTORIAL_TAB = CREATIVE_MODE_TABS.register("moditums",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.Protosaber.get()))
-                    .title(Component.translatable("createsaburs.moditemsiglol"))
+                    .title(Component.translatable("CreateSaburs.moditemsiglol"))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.Protosaber.get());
                         pOutput.accept(ModItems.SINGLE_BLADED_SABER.get());

@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.mixin.entity;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
 import net.minecraft.sounds.SoundSource;
@@ -28,7 +28,7 @@ public abstract class LivingEntityMixin {
             at = @At(value = "HEAD"),
             cancellable = true
     )
-    private void createsaburs$customhurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
+    private void CreateSaburs$customhurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
 
         LivingEntity that = ((LivingEntity) (Object) this);
 
@@ -36,12 +36,12 @@ public abstract class LivingEntityMixin {
 
         if (notThat != null) {
 
-            boolean blocking_with_sabur = that.getUseItem().canPerformAction(createsaburs.SABER_BLOCK);
+            boolean blocking_with_sabur = that.getUseItem().canPerformAction(CreateSaburs.SABER_BLOCK);
 
             boolean attacking_with_sabur = LivingEntity.class.isAssignableFrom(notThat.getClass()) ? ((LivingEntity) notThat).getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER) : false;
 
-            createsaburs.LOGGER.info("living entity custom hurt can be cancelled: " + cir.isCancellable());
-            createsaburs.LOGGER.warn("living entity hurt in mixin");
+            CreateSaburs.LOGGER.info("living entity custom hurt can be cancelled: " + cir.isCancellable());
+            CreateSaburs.LOGGER.warn("living entity hurt in mixin");
 
             if (blocking_with_sabur && attacking_with_sabur) {
                 Vec3 vec32 = notThat.position();
@@ -49,9 +49,9 @@ public abstract class LivingEntityMixin {
                 Vec3 vec31 = vec32.vectorTo(that.position()).normalize();
                 vec31 = new Vec3(vec31.x, 0.0D, vec31.z);
                 if (vec31.dot(vec3) < 0.0D) {
-                    createsaburs.LOGGER.warn("attack was blocked via a lightsaber");
+                    CreateSaburs.LOGGER.warn("attack was blocked via a lightsaber");
                     if (that instanceof Player) {
-                        createsaburs.LOGGER.warn("adding kewldown to the blocking player");
+                        CreateSaburs.LOGGER.warn("adding kewldown to the blocking player");
                         cir.cancel();
                         if(!that.getUseItem().is(ModTags.Items.CREATE_ROTARY_SABER)){
                             ((Player) that).getCooldowns().addCooldown(that.getUseItem().getItem(), 10);
@@ -73,12 +73,12 @@ public abstract class LivingEntityMixin {
                 if(Player.class.isAssignableFrom(Objects.requireNonNull(that.getClass()))&&!(((Player) that).getAbilities().flying)){
                     if(((Player) that).getTicksUsingItem() > 50) return;
 
-                    createsaburs.LOGGER.warn("blocked a projectile");
+                    CreateSaburs.LOGGER.warn("blocked a projectile");
                     cir.cancel();
                     that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);
                 }
                 else {
-                    createsaburs.LOGGER.warn("flying bozo spotted, die");
+                    CreateSaburs.LOGGER.warn("flying bozo spotted, die");
                     //((Player) that).getCooldowns().addCooldown(that.getUseItem().getItem(), 20*8);
                     that.stopUsingItem();
                     that.swing(InteractionHand.MAIN_HAND);
@@ -87,7 +87,7 @@ public abstract class LivingEntityMixin {
             }
 
             if (blocking_with_sabur && !attacking_with_sabur) {
-                createsaburs.LOGGER.warn("blocked a regular ass weapon");
+                CreateSaburs.LOGGER.warn("blocked a regular ass weapon");
                 cir.cancel();
                 that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);
                 return;
@@ -104,7 +104,7 @@ public abstract class LivingEntityMixin {
             method = "swing(Lnet/minecraft/world/InteractionHand;)V",
             at = @At(value = "HEAD")
     )
-    private void createsaburs$customSwing(InteractionHand pHand, CallbackInfo ci) {
+    private void CreateSaburs$customSwing(InteractionHand pHand, CallbackInfo ci) {
         LivingEntity that = ((LivingEntity) (Object) this);
         ItemStack stacc = that.getMainHandItem();
         if (stacc.is(ModTags.Items.CREATE_LIGHTSABER) && stacc.getOrCreateTag().getBoolean("ActiveBoiii")) {
@@ -117,7 +117,7 @@ public abstract class LivingEntityMixin {
     @Inject(
             method = "handleEntityEvent",
             at = @At(value = "HEAD"), cancellable = true)
-    private void createsaburs$HandleEntityEventCustom(byte pId, CallbackInfo ci) {
+    private void CreateSaburs$HandleEntityEventCustom(byte pId, CallbackInfo ci) {
         if (pId == 29) {
             LivingEntity that = ((LivingEntity) (Object) this);
             if (that.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER)) {

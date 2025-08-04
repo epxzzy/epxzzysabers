@@ -47,12 +47,12 @@ public class KyberTabButton extends AbstractButton {
     }
     @Override
     public void onPress() {
-        //createsaburs.LOGGER.info("whatss sup biatches "+this.isStateTriggered);
+        //CreateSaburs.LOGGER.info("whatss sup biatches "+this.isStateTriggered);
     }
 
     public void renderWidget(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
         if(this.isMouseOver(pMouseX,pMouseY)) {
-            //createsaburs.LOGGER.info("being rendered properly");
+            //CreateSaburs.LOGGER.info("being rendered properly");
         }
         /*
         if (this.animationTime > 0.0F) {

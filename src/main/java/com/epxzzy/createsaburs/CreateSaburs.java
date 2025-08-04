@@ -31,15 +31,15 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(createsaburs.MOD_ID)
-public class createsaburs {
+@Mod(CreateSaburs.MOD_ID)
+public class CreateSaburs {
     public static final String MOD_ID = "createsaburs";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static ToolAction SABER_SWING = null;
     public static ToolAction SABER_BLOCK = null;
 
 
-    public createsaburs() {
+    public CreateSaburs() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
 
@@ -61,9 +61,9 @@ public class createsaburs {
 
         modEventBus.addListener(this::addCreative);
 
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> createsabursClient::init);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CreateSabursClient::init);
 
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> createsaburs.clientInit( MinecraftForge.EVENT_BUS, modEventBus));
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CreateSaburs.clientInit( MinecraftForge.EVENT_BUS, modEventBus));
 
 
 
@@ -81,7 +81,7 @@ public class createsaburs {
     private static void clientInit(IEventBus forgeEventBus, IEventBus modEventBus) {
         modEventBus.addListener(PartialModelEventHandler::onRegisterAdditional);
         modEventBus.addListener(PartialModelEventHandler::onBakingCompleted);
-        //createsaburs.LOGGER.warn("FKCRT PartialModelEventHandler events registered");
+        //CreateSaburs.LOGGER.warn("FKCRT PartialModelEventHandler events registered");
     }
 
         // Add the example block item to the building blocks tab

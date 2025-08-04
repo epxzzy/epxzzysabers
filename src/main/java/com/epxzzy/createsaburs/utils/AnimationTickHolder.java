@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.utils;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import net.createmod.catnip.levelWrappers.WrappedClientLevel;
 import net.createmod.ponder.api.level.PonderLevel;
 import net.createmod.ponder.foundation.ui.PonderUI;
@@ -15,7 +15,7 @@ public class AnimationTickHolder {
     public static void reset() {
         ticks = 0;
         pausedTicks = 0;
-        //createsaburs.LOGGER.warn("Ticks been reset");
+        //CreateSaburs.LOGGER.warn("Ticks been reset");
 
     }
 
@@ -26,7 +26,7 @@ public class AnimationTickHolder {
         } else {
             pausedTicks = (pausedTicks + 1) % 1_728_000;
         }
-        //createsaburs.LOGGER.warn("tickkkkkk");
+        //CreateSaburs.LOGGER.warn("tickkkkkk");
     }
 
     public static int getTicks() {

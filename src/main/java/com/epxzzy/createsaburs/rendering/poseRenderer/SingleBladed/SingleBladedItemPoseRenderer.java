@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.rendering.poseRenderer.SingleBladed;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.createsaburs.utils.AngleHelper;
 import com.epxzzy.createsaburs.utils.AnimationTickHolder;
@@ -30,7 +30,7 @@ public class SingleBladedItemPoseRenderer {
     public static void SetFlourishXCROSS(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
         float time = AnimationTickHolder.getTicks(false);
         int multiplier = isHoldingItemOffHand(entity, stack)?-1:1;
-        //createsaburs.LOGGER.info("nbt offhand: " + stack.getOrCreateTag().getCompound("display").getBoolean("offhand") + " and thought to be: " + (isHoldingItemOffHand(entity, stack) ? "offhand" : "mainhand") + " and multiplier " + multiplier );
+        //CreateSaburs.LOGGER.info("nbt offhand: " + stack.getOrCreateTag().getCompound("display").getBoolean("offhand") + " and thought to be: " + (isHoldingItemOffHand(entity, stack) ? "offhand" : "mainhand") + " and multiplier " + multiplier );
         float movement = Mth.sin(((float) ((time) * 6/ Math.PI)));
         float squaremovement = (Mth.sin(time) >= 0)? 1:-1;
         //ItemStack.isSameItemSameTags(entity.getOffhandItem())

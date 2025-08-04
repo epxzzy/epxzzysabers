@@ -1,7 +1,7 @@
 package com.epxzzy.createsaburs.block;
 
 import com.epxzzy.createsaburs.block.custom.KyberStationBlock;
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
-            DeferredRegister.create(ForgeRegistries.BLOCKS, createsaburs.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.BLOCKS, CreateSaburs.MOD_ID);
 
     //public static final RegistryObject<Block> SAPPHIRE_BLOCK = registerBlock("sapphire_block",
      //       () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).sound(SoundType.AMETHYST)));

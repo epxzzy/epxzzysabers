@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.entity.client.bolt;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.entity.ModModelLayers;
 import com.epxzzy.createsaburs.entity.custom.PlasmaBolt;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
 public class PlasmaBoltRenderer extends EntityRenderer<PlasmaBolt> {
-    private static final ResourceLocation TEXTURE_LOCATION = createsaburs.asResource("textures/entity/wind_charge.png");
+    private static final ResourceLocation TEXTURE_LOCATION = CreateSaburs.asResource("textures/entity/wind_charge.png");
     private final PlasmaBoltModel model;
 
     public PlasmaBoltRenderer(Context context) {

@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.item;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
 import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.networking.packet.ServerboundSaberAbilityPacket;
@@ -78,7 +78,7 @@ public class Protosaber extends Item {
     public boolean readActivetag(ItemStack pStack) {
         CompoundTag temp = pStack.getOrCreateTag();
         boolean temp2 = temp.getBoolean("ActiveBoiii");
-        //createsaburs.LOGGER.info("read nbt as " + temp2);
+        //CreateSaburs.LOGGER.info("read nbt as " + temp2);
         return temp2;
     }
 
@@ -119,8 +119,8 @@ public class Protosaber extends Item {
 
         pStack.setTag(tagsToApply);
 
-        //createsaburs.LOGGER.info("wrote nbt as" + bool);
-        //createsaburs.LOGGER.info(pStack.getOrCreateTag().getAllKeys().toString());
+        //CreateSaburs.LOGGER.info("wrote nbt as" + bool);
+        //CreateSaburs.LOGGER.info(pStack.getOrCreateTag().getAllKeys().toString());
     }
 
     public void ToggleSaberCore(Level pLevel, Player pPlayer, ItemStack pStack) {
@@ -129,14 +129,14 @@ public class Protosaber extends Item {
 
             if (!readActivetag(pStack)) {
 
-                //createsaburs.LOGGER.info("Saber is now Going Active");
+                //CreateSaburs.LOGGER.info("Saber is now Going Active");
                 //nbeetea.putInt("CustomModelData", 1);
                 writeActiveTag(pStack, true);
 
                 isActive = true;
             } else {
                 pPlayer.stopUsingItem();
-                //createsaburs.LOGGER.info("Saber is now Turning Off");
+                //CreateSaburs.LOGGER.info("Saber is now Turning Off");
 
                 nbeetea.putInt("CustomModelData", 0);
                 writeActiveTag(pStack, false);
@@ -163,8 +163,8 @@ public class Protosaber extends Item {
 
             //pStack.setTag(tagsToApply);
 
-            //createsaburs.LOGGER.info("Flourish =" + flourish);
-            //createsaburs.LOGGER.info(pStack.getOrCreateTag().getAllKeys().toString());
+            //CreateSaburs.LOGGER.info("Flourish =" + flourish);
+            //CreateSaburs.LOGGER.info(pStack.getOrCreateTag().getAllKeys().toString());
         }
     }
 
@@ -175,13 +175,13 @@ public class Protosaber extends Item {
         tag.putInt("equiper", pEntity.getId());
         tag.putBoolean("offhand", false);
         if(!(pLevel.isClientSide())){
-        //    createsaburs.LOGGER.info("curr slott "+ pSlotId);
+        //    CreateSaburs.LOGGER.info("curr slott "+ pSlotId);
             //pEntity.
             if(pEntity instanceof LivingEntity pLiving) {
                 if (pLiving instanceof Player pPlayer) {
                     if (ItemStack.isSameItemSameTags(pPlayer.getInventory().offhand.get(0), pStack)) {
                         tag.putBoolean("offhand", true);
-                        //createsaburs.LOGGER.info("offhanddd biatch");
+                        //CreateSaburs.LOGGER.info("offhanddd biatch");
                     } else {
                         tag.putBoolean("offhand", false);
                     }
@@ -221,7 +221,7 @@ public class Protosaber extends Item {
 
     @Override
     public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged) {
-        //createsaburs.LOGGER.info("stopped blocking, changing custom model data");
+        //CreateSaburs.LOGGER.info("stopped blocking, changing custom model data");
         CompoundTag nbeetea = pStack.getOrCreateTag();
         nbeetea.putBoolean("BlockBoiii", false);
         pStack.setTag(nbeetea);
@@ -285,8 +285,8 @@ public class Protosaber extends Item {
 
     @Override
     public boolean canPerformAction(ItemStack stack, net.minecraftforge.common.ToolAction toolAction) {
-        if (toolAction == createsaburs.SABER_BLOCK&&this.readActivetag(stack)) return true;
-        return toolAction == createsaburs.SABER_SWING;
+        if (toolAction == CreateSaburs.SABER_BLOCK&&this.readActivetag(stack)) return true;
+        return toolAction == CreateSaburs.SABER_SWING;
 
         //return net.minecraftforge.common.ToolActions.DEFAULT_SHIELD_ACTIONS.contains(toolAction);
     }

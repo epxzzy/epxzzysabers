@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.rendering;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.createsaburs.rendering.foundation.PartialModel;
@@ -21,8 +21,8 @@ import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItemRi
 
 
 public class SaberGauntletItemRenderer extends CustomRenderedItemModelRenderer {
-    protected static final PartialModel HILT_BIT = PartialModel.of(createsaburs.asResource("item/hilt/gauntlet"));
-    protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/katar_blades"));
+    protected static final PartialModel HILT_BIT = PartialModel.of(CreateSaburs.asResource("item/hilt/gauntlet"));
+    protected static final PartialModel GLOWLY_BIT = PartialModel.of(CreateSaburs.asResource("item/additive/katar_blades"));
 
     @Override
     protected void render(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,

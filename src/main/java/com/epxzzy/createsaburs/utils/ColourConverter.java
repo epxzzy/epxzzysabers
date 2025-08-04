@@ -12,7 +12,7 @@ public class ColourConverter {
 
     public static int portedRGBtoDecimal(int[] reg) {
         int aa = (reg[0] << 16) | (reg[1] << 8) | reg[2];
-        //createsaburs.LOGGER.warn("converted(RGB2DEC) colour:" + aa);
+        //CreateSaburs.LOGGER.warn("converted(RGB2DEC) colour:" + aa);
         return aa;
     }
 

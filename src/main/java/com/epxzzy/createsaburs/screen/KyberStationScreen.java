@@ -1,7 +1,7 @@
 package com.epxzzy.createsaburs.screen;
 
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.epxzzy.createsaburs.screen.components.KyberModes;
 import com.epxzzy.createsaburs.screen.components.KyberTabButton;
@@ -34,16 +34,16 @@ import javax.annotation.Nullable;
 
 public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu> {
     private static final ResourceLocation RECOLOUR_TEXTURE =
-            new ResourceLocation(createsaburs.MOD_ID, "textures/gui/kyber_recolour.png");
+            new ResourceLocation(CreateSaburs.MOD_ID, "textures/gui/kyber_recolour.png");
 
     private static final ResourceLocation STANCE_TEXTURE =
-            new ResourceLocation(createsaburs.MOD_ID, "textures/gui/kyber_stance.png");
+            new ResourceLocation(CreateSaburs.MOD_ID, "textures/gui/kyber_stance.png");
 
 
     private static final ResourceLocation OFF_TOGGLE=
-            new ResourceLocation(createsaburs.MOD_ID, "textures/gui/toggle_off.png");
+            new ResourceLocation(CreateSaburs.MOD_ID, "textures/gui/toggle_off.png");
     private static final ResourceLocation ON_TOGGLE =
-            new ResourceLocation(createsaburs.MOD_ID, "textures/gui/toggle_on.png");
+            new ResourceLocation(CreateSaburs.MOD_ID, "textures/gui/toggle_on.png");
 
 
 
@@ -101,7 +101,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
 
         //menu.craftSabur(HUE_SLIDER.getValueInt(), SAT_SLIDER.getValueInt(),LIT_SLIDER.getValueInt());
-        //createsaburs.LOGGER.info("client kyber station change");
+        //CreateSaburs.LOGGER.info("client kyber station change");
 
         return;
     }
@@ -196,7 +196,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
                     BLUE_SLIDER.setValue(gur[2]);
                 }
 
-                createsaburs.LOGGER.info("RGB MODE NOW " + RGB_MODE);
+                CreateSaburs.LOGGER.info("RGB MODE NOW " + RGB_MODE);
                 UpdateServerRecipe();
             }
         };

@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.rendering;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.item.saburtypes.RotarySaber;
 import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
@@ -30,10 +30,10 @@ import static com.epxzzy.createsaburs.utils.StackHelper.*;
 
 public class RotarySaberItemRenderer extends CustomRenderedItemModelRenderer {
 
-    public static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/rotary_blade"));
-    public static final PartialModel SMEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/rotary_swing"));
-    public static final PartialModel SPIN_BIT = PartialModel.of(createsaburs.asResource("item/hilt/spin_bit"));
-    public static final PartialModel GUARD_BIT = PartialModel.of(createsaburs.asResource("item/hilt/rotary_guard"));
+    public static final PartialModel GLOWLY_BIT = PartialModel.of(CreateSaburs.asResource("item/additive/rotary_blade"));
+    public static final PartialModel SMEAR_BIT = PartialModel.of(CreateSaburs.asResource("item/additive/rotary_swing"));
+    public static final PartialModel SPIN_BIT = PartialModel.of(CreateSaburs.asResource("item/hilt/spin_bit"));
+    public static final PartialModel GUARD_BIT = PartialModel.of(CreateSaburs.asResource("item/hilt/rotary_guard"));
 
     @Override
     protected void render(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,

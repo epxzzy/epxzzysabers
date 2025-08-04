@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.rendering;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 
 import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
@@ -29,9 +29,9 @@ import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItemRi
 
 
 public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
-    protected static final PartialModel HILTBIT = PartialModel.of(createsaburs.asResource("item/hilt/mono_hilt"));
-    protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/gear"));
-    protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/blade_single"));
+    protected static final PartialModel HILTBIT = PartialModel.of(CreateSaburs.asResource("item/hilt/mono_hilt"));
+    protected static final PartialModel GEAR_BIT = PartialModel.of(CreateSaburs.asResource("item/additive/gear"));
+    protected static final PartialModel GLOWLY_BIT = PartialModel.of(CreateSaburs.asResource("item/additive/blade_single"));
     public boolean lock;
 
     @Override

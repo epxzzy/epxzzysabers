@@ -2,7 +2,7 @@ package com.epxzzy.createsaburs.rendering.foundation;
 
 import java.util.Map;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import org.jetbrains.annotations.ApiStatus;
 
 import net.minecraft.client.resources.model.BakedModel;
@@ -22,11 +22,11 @@ public final class PartialModelEventHandler {
 
     public static void onBakingCompleted(ModelEvent.BakingCompleted event) {
         PartialModel.populateOnInit = true;
-        //createsaburs.LOGGER.warn("FKCRT PRTLMDLEVHNDLR partial models baked lmao");
+        //CreateSaburs.LOGGER.warn("FKCRT PRTLMDLEVHNDLR partial models baked lmao");
         Map<ResourceLocation, BakedModel> models = event.getModels();
 
         for ( PartialModel partial : PartialModel.ALL.values()) {
-            //createsaburs.LOGGER.warn("FKCRT PRTLMDLEVHNDLR partial model: {}", partial.modelLocation());
+            //CreateSaburs.LOGGER.warn("FKCRT PRTLMDLEVHNDLR partial model: {}", partial.modelLocation());
             partial.bakedModel = models.get(partial.modelLocation());
         }
     }

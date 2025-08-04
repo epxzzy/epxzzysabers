@@ -1,7 +1,7 @@
 package com.epxzzy.createsaburs.entity;
 
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 //import com.epxzzy.createsaburs.entity.custom.PlasmaBolt;
 import com.epxzzy.createsaburs.entity.custom.PlasmaBolt;
 import com.epxzzy.createsaburs.entity.custom.ThrownRotarySaber;
@@ -14,7 +14,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
-            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, createsaburs.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, CreateSaburs.MOD_ID);
 
     public static final RegistryObject<EntityType<ThrownRotarySaber>> ROTARY_SABER_ENTITY =
             ENTITY_TYPES.register("rotary_saber_entity", () -> EntityType.Builder.<ThrownRotarySaber>of(ThrownRotarySaber::new, MobCategory.MISC)

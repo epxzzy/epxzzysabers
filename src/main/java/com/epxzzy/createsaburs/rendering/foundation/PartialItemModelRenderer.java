@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.rendering.foundation;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
@@ -32,7 +32,7 @@ public class PartialItemModelRenderer {
 
     public static PartialItemModelRenderer of(ItemStack stack, ItemDisplayContext transformType,
                                                                                          PoseStack ms, MultiBufferSource buffer, int overlay) {
-        //createsaburs.LOGGER.warn("FKCRT PartialItemModelRenderer made for itemstacc {}", stack);
+        //CreateSaburs.LOGGER.warn("FKCRT PartialItemModelRenderer made for itemstacc {}", stack);
         PartialItemModelRenderer instance = INSTANCE;
         instance.stack = stack;
         instance.transformType = transformType;

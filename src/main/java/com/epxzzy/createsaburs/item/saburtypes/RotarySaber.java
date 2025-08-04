@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.item.saburtypes;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.networking.packet.ServerboundSaberDeflectPacket;
@@ -67,7 +67,7 @@ public class RotarySaber extends Protosaber {
                 --this.flightDuration;
                 if(this.flightDuration >= 0){
                     pPlayer.stopUsingItem();
-                    createsaburs.LOGGER.info("you can no longer fly");
+                    CreateSaburs.LOGGER.info("you can no longer fly");
                     this.flightDuration = 40;
                 }
             }
@@ -79,7 +79,7 @@ public class RotarySaber extends Protosaber {
 
                     if (this.flightDuration == 0) {
                         pPlayer.stopUsingItem();
-                        createsaburs.LOGGER.info("you can no longer fly");
+                        CreateSaburs.LOGGER.info("you can no longer fly");
                     }
                 }
             }
@@ -153,11 +153,11 @@ public class RotarySaber extends Protosaber {
                     tuge.putBoolean("FlyBoiii", true);
                     itemstack.setTag(tuge);
                     //this.flyCooldown = 40;
-                    createsaburs.LOGGER.info("flying activated");
+                    CreateSaburs.LOGGER.info("flying activated");
                 }
 
                 if (this.flightDuration == 0) {
-                    createsaburs.LOGGER.info("you cant seem to fly, flightduration: ");
+                    CreateSaburs.LOGGER.info("you cant seem to fly, flightduration: ");
                 }
 
             }
@@ -181,7 +181,7 @@ public class RotarySaber extends Protosaber {
             nbeetea.putBoolean("FlyBoiii", false);
             ((Player) entity).getAbilities().flying = false;
             ((Player) entity).onUpdateAbilities();
-            createsaburs.LOGGER.info("flying deactivated");
+            CreateSaburs.LOGGER.info("flying deactivated");
             ((Player) entity).getCooldowns().addCooldown(entity.getUseItem().getItem(), 20 * 6);
         } else {
             ((Player) entity).getCooldowns().addCooldown(entity.getUseItem().getItem(), (int) (20 * 2.5));
@@ -202,9 +202,9 @@ public class RotarySaber extends Protosaber {
 
     public static boolean checkForSaberBlock(Player Entityy) {
         /*
-        createsaburs.LOGGER.info("first:" +Entityy.getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER));
-        createsaburs.LOGGER.info("second:" +Entityy.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") );
-        createsaburs.LOGGER.info("third:" +Entityy.isUsingItem());
+        CreateSaburs.LOGGER.info("first:" +Entityy.getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER));
+        CreateSaburs.LOGGER.info("second:" +Entityy.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") );
+        CreateSaburs.LOGGER.info("third:" +Entityy.isUsingItem());
 
          */
         //Entityy.getMainHandItem().is(RotarySaber)

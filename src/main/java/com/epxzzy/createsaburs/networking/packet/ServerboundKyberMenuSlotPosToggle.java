@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.networking.packet;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.screen.KyberStationMenu;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -41,7 +41,7 @@ public class ServerboundKyberMenuSlotPosToggle {
                     return;
 
                 }
-                createsaburs.LOGGER.info("changing slot pos "+isDefaultTab);
+                CreateSaburs.LOGGER.info("changing slot pos "+isDefaultTab);
                 if(this.isDefaultTab()){
                    stationMenu.stanceSlotPose();
                 }

@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.mixin.entity;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import com.epxzzy.createsaburs.utils.ModTags;
@@ -24,8 +24,8 @@ public abstract class PlayerMixin {
             method = "blockUsingShield",
             at = @At(value = "HEAD"),
             cancellable = true)
-    private void createsaburs$customblockUsingShield(LivingEntity pttEntity, CallbackInfo ci) {
-        createsaburs.LOGGER.info(" event can be cancelled: "+ ci.isCancellable() );
+    private void CreateSaburs$customblockUsingShield(LivingEntity pttEntity, CallbackInfo ci) {
+        CreateSaburs.LOGGER.info(" event can be cancelled: "+ ci.isCancellable() );
         pttEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 15));
         boolean has_saber = pttEntity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER)
                 || pttEntity.getOffhandItem().is(ModTags.Items.CREATE_LIGHTSABER);
@@ -53,13 +53,13 @@ public abstract class PlayerMixin {
             at = @At(value = "HEAD"),
             cancellable = true)
 
-    private void createsaburs$customPlayerhurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
-        //createsaburs.LOGGER.warn("player hurt");
+    private void CreateSaburs$customPlayerhurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
+        //CreateSaburs.LOGGER.warn("player hurt");
         Player that = ((Player) (Object) this);
         LivingEntity notThat = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
 
         if (notThat != null) {
-            boolean blocking_with_sabur = that.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER) && that.getUseItem().canPerformAction(createsaburs.SABER_BLOCK);
+            boolean blocking_with_sabur = that.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER) && that.getUseItem().canPerformAction(CreateSaburs.SABER_BLOCK);
             boolean attacking_with_sabur = notThat.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
 
             if (blocking_with_sabur && attacking_with_sabur) {
@@ -79,7 +79,7 @@ public abstract class PlayerMixin {
             cancellable = true
     )
 
-    private void createsaburs$customIsInvulnerableTo(DamageSource pSource, CallbackInfoReturnable<Boolean> cir){
+    private void CreateSaburs$customIsInvulnerableTo(DamageSource pSource, CallbackInfoReturnable<Boolean> cir){
         Player that = ((Player) (Object) this);
         if(pSource.is(DamageTypeTags.IS_PROJECTILE)&&!(that.getAbilities().flying)){
            cir.setReturnValue(Protosaber.checkForSaberBlock(that)||SingleBladed.checkForSaberBlock(that));
@@ -92,7 +92,7 @@ public abstract class PlayerMixin {
             method = "attack",
             at = @At(value = "HEAD")
     )
-    private void createsaburs$customattacknoise(Entity pTarget, CallbackInfo ci) {
+    private void CreateSaburs$customattacknoise(Entity pTarget, CallbackInfo ci) {
         Player that = ((Player) (Object) this);
         if (that.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER) && that.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii")) {
             //that.level().playSound((Player) null, that.getX(), that.getY(), that.getZ(), ModSounds.SWING.get(), that.getSoundSource(), 1.0F, 1.0F);

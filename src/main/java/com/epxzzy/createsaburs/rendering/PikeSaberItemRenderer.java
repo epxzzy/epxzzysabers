@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.rendering;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.createsaburs.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.createsaburs.rendering.poseRenderer.DualBladed.DualBladedItemPoseRenderer;
@@ -21,10 +21,10 @@ import java.util.List;
 import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItemRightOrBoth;
 
 public class PikeSaberItemRenderer extends CustomRenderedItemModelRenderer {
-    protected static final PartialModel HILT_BIT = PartialModel.of(createsaburs.asResource("item/hilt/pike_hilt"));
-    protected static final PartialModel GEAR_BIT = PartialModel.of(createsaburs.asResource("item/additive/gear"));
-    protected static final PartialModel GLOWLY_BIT = PartialModel.of(createsaburs.asResource("item/additive/pike_top"));
-    protected static final PartialModel GLOWLY_BIT_B = PartialModel.of(createsaburs.asResource("item/additive/pike_bottom"));
+    protected static final PartialModel HILT_BIT = PartialModel.of(CreateSaburs.asResource("item/hilt/pike_hilt"));
+    protected static final PartialModel GEAR_BIT = PartialModel.of(CreateSaburs.asResource("item/additive/gear"));
+    protected static final PartialModel GLOWLY_BIT = PartialModel.of(CreateSaburs.asResource("item/additive/pike_top"));
+    protected static final PartialModel GLOWLY_BIT_B = PartialModel.of(CreateSaburs.asResource("item/additive/pike_bottom"));
 
 
     @Override

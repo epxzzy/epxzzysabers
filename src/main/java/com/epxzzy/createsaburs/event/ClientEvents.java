@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.event;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.entity.ModModelLayers;
 import com.epxzzy.createsaburs.entity.client.bolt.PlasmaBoltModel;
 import com.epxzzy.createsaburs.entity.client.rotary.ThrownRotarySaberBladeModel;
@@ -32,7 +32,7 @@ import java.io.IOException;
 public class ClientEvents {
     public static ShaderInstance glowingShader;
 
-    @Mod.EventBusSubscriber(modid = createsaburs.MOD_ID, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = CreateSaburs.MOD_ID, value = Dist.CLIENT)
     public static class ClientForgeEvents {
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event) {
@@ -44,7 +44,7 @@ public class ClientEvents {
         }
     }
 
-    @Mod.EventBusSubscriber(modid = createsaburs.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+    @Mod.EventBusSubscriber(modid = CreateSaburs.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ClientModBusEvents {
         @SubscribeEvent
         public static void onKeyRegister(RegisterKeyMappingsEvent event) {
@@ -92,7 +92,7 @@ public class ClientEvents {
         @SubscribeEvent
     public static void onRegisterShaders(RegisterShadersEvent event) throws IOException {
         ResourceProvider resourceProvider = event.getResourceProvider();
-        event.registerShader(new ShaderInstance(resourceProvider, createsaburs.asResource("glowing_shader"),
+        event.registerShader(new ShaderInstance(resourceProvider, CreateSaburs.asResource("glowing_shader"),
                 DefaultVertexFormat.NEW_ENTITY), shader -> glowingShader = shader);
     }
 }

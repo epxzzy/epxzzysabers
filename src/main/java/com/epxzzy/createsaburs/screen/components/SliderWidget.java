@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.screen.components;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
@@ -150,7 +150,7 @@ public class SliderWidget extends AbstractSliderButton {
         } else {
             this.setValue(this.getValue() - 1);
         }
-        //createsaburs.LOGGER.warn("scroll has scrolled as scroll {}", pDelta);
+        //CreateSaburs.LOGGER.warn("scroll has scrolled as scroll {}", pDelta);
         return super.mouseScrolled(pMouseX, pMouseY, pDelta);
     }
 

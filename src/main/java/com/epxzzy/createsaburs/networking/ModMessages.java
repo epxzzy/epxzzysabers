@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.networking;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.networking.packet.ServerboundKyberMenuSlotPosToggle;
 import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
 import com.epxzzy.createsaburs.networking.packet.ServerboundSaberAbilityPacket;
@@ -25,7 +25,7 @@ public class ModMessages {
 
     public static void register(){
         SimpleChannel net = NetworkRegistry.ChannelBuilder
-                .named(new ResourceLocation(createsaburs.MOD_ID, "main"))
+                .named(new ResourceLocation(CreateSaburs.MOD_ID, "main"))
                 .networkProtocolVersion(()->"1.0")
                 .clientAcceptedVersions(s->true)
                 .serverAcceptedVersions(s->true)

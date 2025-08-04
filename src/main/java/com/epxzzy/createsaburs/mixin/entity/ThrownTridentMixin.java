@@ -1,7 +1,7 @@
 package com.epxzzy.createsaburs.mixin.entity;
 
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import net.minecraft.sounds.SoundEvent;
@@ -25,7 +25,7 @@ public class ThrownTridentMixin {
         ThrownTrident that = ((ThrownTrident) (Object) this);
         if(Protosaber.checkForSaberBlock(pResult.getEntity())|| SingleBladed.checkForSaberBlock(pResult.getEntity())){
             that.setDeltaMovement(that.getDeltaMovement().multiply(-0.01D, -0.1D, -0.01D));
-            createsaburs.LOGGER.info("trident understands player is blocking");
+            CreateSaburs.LOGGER.info("trident understands player is blocking");
             float f1 = 1.0F;
             SoundEvent soundevent = SoundEvents.TRIDENT_HIT;
             that.playSound(soundevent, 1.0f, 1.0F);

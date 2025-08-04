@@ -1,7 +1,7 @@
 package com.epxzzy.createsaburs.screen;
 
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
-            DeferredRegister.create(ForgeRegistries.MENU_TYPES, createsaburs.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.MENU_TYPES, CreateSaburs.MOD_ID);
 
     public static final RegistryObject<MenuType<KyberStationMenu>> SKREEN=
             registerMenuType("kyber_station_menu", KyberStationMenu::new);

@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.rendering.foundation;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.google.common.collect.MapMaker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.BakedModel;
@@ -26,7 +26,7 @@ public class PartialModel {
         if (populateOnInit) {
             bakedModel = getBakedModel(Minecraft.getInstance().getModelManager(), modelLocation);
         }
-        //createsaburs.LOGGER.warn("FKCRT PartialModel made for {}",modelLocation);
+        //CreateSaburs.LOGGER.warn("FKCRT PartialModel made for {}",modelLocation);
     }
 
 

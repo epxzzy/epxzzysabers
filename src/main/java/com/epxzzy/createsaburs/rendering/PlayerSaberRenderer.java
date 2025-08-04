@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.rendering;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.item.saburtypes.RotarySaber;
 import com.epxzzy.createsaburs.item.saburtypes.SaberPike;
@@ -25,7 +25,7 @@ import static com.epxzzy.createsaburs.rendering.poseRenderer.Rotary.ArmPoseRende
 public class PlayerSaberRenderer {
     public static boolean IsPlayerStationary(Player player){
 
-        //createsaburs.LOGGER.info("getdeltamovementplayer "+ player.getDeltaMovement().length());
+        //CreateSaburs.LOGGER.info("getdeltamovementplayer "+ player.getDeltaMovement().length());
         return !(player.getDeltaMovement().length() > 0.08);
 
         //return x+y+z;
@@ -65,7 +65,7 @@ public class PlayerSaberRenderer {
     public static void afterSetupAnim(Player player, HumanoidModel<?> model) {
         int flourish = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("flourish");
         if(player.swingTime > 0 || player.getAttackAnim(1) > 0) {
-            //createsaburs.LOGGER.warn("swing time is: " + player.swingTime + " and attack time is: " + player.getAttackAnim(1));
+            //CreateSaburs.LOGGER.warn("swing time is: " + player.swingTime + " and attack time is: " + player.getAttackAnim(1));
         }
         if ((Protosaber.checkForSaberEquipment(player, true) ||SaberPike.checkForSaberEquipment(player, true)) && player.swingTime > 0) {
             setDualSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model, flourish);

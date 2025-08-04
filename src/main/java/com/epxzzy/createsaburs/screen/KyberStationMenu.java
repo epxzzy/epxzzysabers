@@ -2,7 +2,7 @@ package com.epxzzy.createsaburs.screen;
 
 
 import com.epxzzy.createsaburs.block.ModBlocks;
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
@@ -93,7 +93,7 @@ public class KyberStationMenu extends AbstractContainerMenu {
                 pAccess.execute((a, b) -> {
                     a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
-                createsaburs.LOGGER.warn("taken??");
+                CreateSaburs.LOGGER.warn("taken??");
                 super.onTake(pPlayer, stacc);
             }
         });
@@ -142,7 +142,7 @@ public class KyberStationMenu extends AbstractContainerMenu {
                 access.execute((a, b) -> {
                     a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
-                createsaburs.LOGGER.warn("taken??");
+                CreateSaburs.LOGGER.warn("taken??");
                 super.onTake(pPlayer, stacc);
             }
         };
@@ -188,7 +188,7 @@ public class KyberStationMenu extends AbstractContainerMenu {
                 access.execute((a, b) -> {
                     a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
-                createsaburs.LOGGER.warn("taken??");
+                CreateSaburs.LOGGER.warn("taken??");
                 super.onTake(pPlayer, stacc);
             }
         };
@@ -219,7 +219,7 @@ public class KyberStationMenu extends AbstractContainerMenu {
             //this.ColourValueIndexes[1].set(b);
             //this.ColourValueIndexes[2].set(c);
             //this.broadcastChanges();
-            createsaburs.LOGGER.warn("colours have been set as: " + colour[0] + " " + colour[1] + " " + colour[2]);
+            CreateSaburs.LOGGER.warn("colours have been set as: " + colour[0] + " " + colour[1] + " " + colour[2]);
             this.setupResultSlot(colour[0], colour[1], colour[2]);
             return true;
 
@@ -236,7 +236,7 @@ public class KyberStationMenu extends AbstractContainerMenu {
         //this.ColourValueIndexes[1].set(b);
         //this.ColourValueIndexes[2].set(c);
         //this.broadcastChanges();
-        //createsaburs.LOGGER.warn("colours have been set as: "+colour[0]+" "+colour[1]+" "+colour[2]);
+        //CreateSaburs.LOGGER.warn("colours have been set as: "+colour[0]+" "+colour[1]+" "+colour[2]);
         this.setupResultSlotButBetter(colour);
         return true;
     }
@@ -302,10 +302,10 @@ public class KyberStationMenu extends AbstractContainerMenu {
         ItemStack krystal = this.krystal_slot.getItem();
         if (!saber.isEmpty()) {
             if (!krystal.isEmpty()) {
-                createsaburs.LOGGER.warn("THE MERGE");
+                CreateSaburs.LOGGER.warn("THE MERGE");
                 return;
             } else {
-                //createsaburs.LOGGER.warn("THE FORGE");
+                //CreateSaburs.LOGGER.warn("THE FORGE");
                 /*
                 setupResultSlot(
                         this.ColourValueIndexes[0].get(),
@@ -318,7 +318,7 @@ public class KyberStationMenu extends AbstractContainerMenu {
                 return;
             }
         } else if (!krystal.isEmpty() && saber.isEmpty()) {
-            createsaburs.LOGGER.warn("THE ZA ZA KRYSTALLL");
+            CreateSaburs.LOGGER.warn("THE ZA ZA KRYSTALLL");
             return;
         }
         this.resultSlot.set(ItemStack.EMPTY);
@@ -341,7 +341,7 @@ public class KyberStationMenu extends AbstractContainerMenu {
         ItemStack base = this.input_slot.getItem().copy();
         CompoundTag taggussy = base.getOrCreateTag();
 
-        createsaburs.LOGGER.warn("crafting colours " + r + " " + g + " " + b);
+        CreateSaburs.LOGGER.warn("crafting colours " + r + " " + g + " " + b);
 
         taggussy.getCompound("display").putInt("colour", colour);
         base.setTag(taggussy);

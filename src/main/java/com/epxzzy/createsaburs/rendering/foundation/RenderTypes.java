@@ -2,7 +2,7 @@ package com.epxzzy.createsaburs.rendering.foundation;
 
 import java.io.IOException;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.entity.client.rotary.ThrownRotarySaberRenderer;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
@@ -62,7 +62,7 @@ public class RenderTypes extends RenderStateShard {
 
 
     private static String createLayerName(String name) {
-        return createsaburs.MOD_ID + ":" + name;
+        return CreateSaburs.MOD_ID + ":" + name;
     }
 
     // Mmm gimme those protected fields
@@ -77,7 +77,7 @@ public class RenderTypes extends RenderStateShard {
         @SubscribeEvent
         public static void onRegisterShaders(RegisterShadersEvent event) throws IOException {
             ResourceProvider resourceProvider = event.getResourceProvider();
-            event.registerShader(new ShaderInstance(resourceProvider, createsaburs.asResource("glowing_shader"),
+            event.registerShader(new ShaderInstance(resourceProvider, CreateSaburs.asResource("glowing_shader"),
                     DefaultVertexFormat.NEW_ENTITY), shader -> glowingShader = shader);
         }
     }

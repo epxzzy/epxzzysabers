@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.item;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.item.saburtypes.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -12,8 +12,8 @@ import net.minecraftforge.registries.RegistryObject;
 import java.awt.*;
 
 public class ModItems {
-    public static final DeferredRegister<Item> items = DeferredRegister.create(ForgeRegistries.ITEMS, createsaburs.MOD_ID);
-    public static final Rarity RARITY_KYBER = Rarity.create("createsaburs:fire",
+    public static final DeferredRegister<Item> items = DeferredRegister.create(ForgeRegistries.ITEMS, CreateSaburs.MOD_ID);
+    public static final Rarity RARITY_KYBER = Rarity.create("CreateSaburs:fire",
             style -> {
                 float hue = 0.5f + (float)(0.1 * Math.sin(System.currentTimeMillis() / 300.0));
                 return style.withColor(Color.HSBtoRGB(hue, 1f, 1f));

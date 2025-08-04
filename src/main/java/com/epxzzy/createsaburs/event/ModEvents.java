@@ -1,8 +1,8 @@
 package com.epxzzy.createsaburs.event;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = createsaburs.MOD_ID)
+@Mod.EventBusSubscriber(modid = CreateSaburs.MOD_ID)
 public class ModEvents {
 }

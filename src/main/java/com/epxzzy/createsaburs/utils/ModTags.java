@@ -1,6 +1,6 @@
 package com.epxzzy.createsaburs.utils;
 
-import com.epxzzy.createsaburs.createsaburs;
+import com.epxzzy.createsaburs.CreateSaburs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -12,7 +12,7 @@ public class ModTags {
     public static class Blocks {
 
         private static TagKey<Block> tag(String name){
-            return BlockTags.create(new ResourceLocation(createsaburs.MOD_ID, name));
+            return BlockTags.create(new ResourceLocation(CreateSaburs.MOD_ID, name));
         }
     }
     public static class Items {
@@ -31,7 +31,7 @@ public class ModTags {
 
 
         private static TagKey<Item> tag(String name){
-            return ItemTags.create(new ResourceLocation(createsaburs.MOD_ID, name));
+            return ItemTags.create(new ResourceLocation(CreateSaburs.MOD_ID, name));
         }
 
     }
