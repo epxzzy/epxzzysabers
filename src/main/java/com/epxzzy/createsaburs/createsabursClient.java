@@ -32,6 +32,8 @@ public class createsabursClient {
         event.register((stack, tint) -> tint > 0 ? -1 : CrossguardSaber.getColor(stack), ModItems.CROSSGUARD_SABER.get());
         event.register((stack, tint) -> tint > 0 ? -1 : BlasterHybrid.getColor(stack), ModItems.BLASTER_HYBRID.get());
         event.register((stack, tint) -> tint > 0 ? -1 : SaberPike.getColor(stack), ModItems.SABER_PIKE.get());
+        event.register((stack, tint) -> tint > 0 ? -1 : SaberGauntlet.getColor(stack), ModItems.SABER_GAUNTLET.get());
+
 
 
     }
