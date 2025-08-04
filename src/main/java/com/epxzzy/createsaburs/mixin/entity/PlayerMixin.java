@@ -27,8 +27,8 @@ public abstract class PlayerMixin {
     private void CreateSaburs$customblockUsingShield(LivingEntity pttEntity, CallbackInfo ci) {
         CreateSaburs.LOGGER.info(" event can be cancelled: "+ ci.isCancellable() );
         pttEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 15));
-        boolean has_saber = pttEntity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER)
-                || pttEntity.getOffhandItem().is(ModTags.Items.CREATE_LIGHTSABER);
+        boolean has_saber = pttEntity.getMainHandItem().is(ModTags.Items.LIGHTSABER)
+                || pttEntity.getOffhandItem().is(ModTags.Items.LIGHTSABER);
         boolean is_active = pttEntity.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii")
                 || pttEntity.getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
 
@@ -59,8 +59,8 @@ public abstract class PlayerMixin {
         LivingEntity notThat = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
 
         if (notThat != null) {
-            boolean blocking_with_sabur = that.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER) && that.getUseItem().canPerformAction(CreateSaburs.SABER_BLOCK);
-            boolean attacking_with_sabur = notThat.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
+            boolean blocking_with_sabur = that.getMainHandItem().is(ModTags.Items.LIGHTSABER) && that.getUseItem().canPerformAction(CreateSaburs.SABER_BLOCK);
+            boolean attacking_with_sabur = notThat.getMainHandItem().is(ModTags.Items.LIGHTSABER);
 
             if (blocking_with_sabur && attacking_with_sabur) {
                 //cir.cancel();
@@ -94,7 +94,7 @@ public abstract class PlayerMixin {
     )
     private void CreateSaburs$customattacknoise(Entity pTarget, CallbackInfo ci) {
         Player that = ((Player) (Object) this);
-        if (that.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER) && that.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii")) {
+        if (that.getMainHandItem().is(ModTags.Items.LIGHTSABER) && that.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii")) {
             //that.level().playSound((Player) null, that.getX(), that.getY(), that.getZ(), ModSounds.SWING.get(), that.getSoundSource(), 1.0F, 1.0F);
         }
 

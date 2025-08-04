@@ -1,6 +1,7 @@
 package com.epxzzy.createsaburs.mixin.entity;
 
 import com.epxzzy.createsaburs.CreateSaburs;
+import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
 import net.minecraft.sounds.SoundSource;
@@ -38,7 +39,7 @@ public abstract class LivingEntityMixin {
 
             boolean blocking_with_sabur = that.getUseItem().canPerformAction(CreateSaburs.SABER_BLOCK);
 
-            boolean attacking_with_sabur = LivingEntity.class.isAssignableFrom(notThat.getClass()) ? ((LivingEntity) notThat).getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER) : false;
+            boolean attacking_with_sabur = LivingEntity.class.isAssignableFrom(notThat.getClass()) ? ((LivingEntity) notThat).getMainHandItem().is(ModTags.Items.LIGHTSABER) : false;
 
             CreateSaburs.LOGGER.info("living entity custom hurt can be cancelled: " + cir.isCancellable());
             CreateSaburs.LOGGER.warn("living entity hurt in mixin");
@@ -53,7 +54,7 @@ public abstract class LivingEntityMixin {
                     if (that instanceof Player) {
                         CreateSaburs.LOGGER.warn("adding kewldown to the blocking player");
                         cir.cancel();
-                        if(!that.getUseItem().is(ModTags.Items.CREATE_ROTARY_SABER)){
+                        if(!that.getUseItem().is(ModItems.ROTARY_SABER.get())){
                             ((Player) that).getCooldowns().addCooldown(that.getUseItem().getItem(), 10);
                             that.stopUsingItem();
                             that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5F, 1);
@@ -107,7 +108,7 @@ public abstract class LivingEntityMixin {
     private void CreateSaburs$customSwing(InteractionHand pHand, CallbackInfo ci) {
         LivingEntity that = ((LivingEntity) (Object) this);
         ItemStack stacc = that.getMainHandItem();
-        if (stacc.is(ModTags.Items.CREATE_LIGHTSABER) && stacc.getOrCreateTag().getBoolean("ActiveBoiii")) {
+        if (stacc.is(ModTags.Items.LIGHTSABER) && stacc.getOrCreateTag().getBoolean("ActiveBoiii")) {
             //ci.cancel();
             that.playSound(ModSounds.SWING.get(), 0.1F, 0.8F + that.level().random.nextFloat() * 0.4F);
             return;
@@ -120,7 +121,7 @@ public abstract class LivingEntityMixin {
     private void CreateSaburs$HandleEntityEventCustom(byte pId, CallbackInfo ci) {
         if (pId == 29) {
             LivingEntity that = ((LivingEntity) (Object) this);
-            if (that.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER)) {
+            if (that.getMainHandItem().is(ModTags.Items.LIGHTSABER)) {
                 that.playSound(ModSounds.CLASH.get(), 0.09F, 0.8F + that.level().random.nextFloat() * 0.4F);
                 ci.cancel();
                 return;

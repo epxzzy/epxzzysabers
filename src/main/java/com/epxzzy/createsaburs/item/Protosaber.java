@@ -358,7 +358,7 @@ public class Protosaber extends Item {
 
     public static boolean checkForSaberBlock(Entity Entityy) {
         if (Entityy instanceof LivingEntity)
-            return ((LivingEntity) Entityy).getMainHandItem().is(ModTags.Items.CREATE_DUAL_BLADED) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity) Entityy).isUsingItem();
+            return ((LivingEntity) Entityy).getMainHandItem().is(ModTags.Items.DUAL_BLADED) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity) Entityy).isUsingItem();
         return false;
     }
     public static BladeStance getStance(Entity Entityy) {
@@ -386,8 +386,8 @@ public class Protosaber extends Item {
     public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand) {
         if (Entityy instanceof LivingEntity) {
             if (Mainhand)
-                return ((LivingEntity) Entityy).getMainHandItem().is(ModTags.Items.CREATE_DUAL_BLADED) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-            return ((LivingEntity) Entityy).getOffhandItem().is(ModTags.Items.CREATE_DUAL_BLADED) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
+                return ((LivingEntity) Entityy).getMainHandItem().is(ModTags.Items.DUAL_BLADED) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
+            return ((LivingEntity) Entityy).getOffhandItem().is(ModTags.Items.DUAL_BLADED) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
         }
         return false;
     }

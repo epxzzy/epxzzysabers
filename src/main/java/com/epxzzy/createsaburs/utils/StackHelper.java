@@ -80,23 +80,23 @@ public class StackHelper {
     public static boolean isHoldingItemMainOrBoth(LivingEntity entity, ItemStack stack) {
         return (ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack)
                 && ItemStack.isSameItemSameTags(entity.getOffhandItem(), stack)) || ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack);
-        //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
+        //return entity.getMainHandItem().is(ModTags.Items.LIGHTSABER);
     }
 
     public static boolean isHoldingItemAnyHand(LivingEntity entity, ItemStack stack) {
         return (isHoldingItemMainHand(entity, stack)) ||
                 (isHoldingItemOffHand(entity, stack));
-        //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
+        //return entity.getMainHandItem().is(ModTags.Items.LIGHTSABER);
     }
 
     public static boolean isHoldingItemOffHand(LivingEntity entity, ItemStack stack) {
         return ItemStack.isSameItemSameTags(entity.getOffhandItem(), stack);
-        //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
+        //return entity.getMainHandItem().is(ModTags.Items.LIGHTSABER);
     }
 
     public static boolean isHoldingItemMainHand(LivingEntity entity, ItemStack stack) {
         return ItemStack.isSameItemSameTags(entity.getMainHandItem(), stack);
-        //return entity.getMainHandItem().is(ModTags.Items.CREATE_LIGHTSABER);
+        //return entity.getMainHandItem().is(ModTags.Items.LIGHTSABER);
     }
 
     public static boolean isLeftArmMain(LivingEntity entity) {

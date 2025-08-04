@@ -10,7 +10,6 @@ import com.epxzzy.createsaburs.sound.ModSounds;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -20,7 +19,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
 
-import java.util.Objects;
 import java.util.function.Supplier;
 
 public class ServerboundSaberAbilityPacket {
@@ -63,7 +61,7 @@ public class ServerboundSaberAbilityPacket {
                     }
                 }
 
-                if (pStack.is(ModItems.BLASTER_HYBRID.get())) {
+                if (pStack.is(ModItems.BLASTER_SABER.get())) {
                     if (!(player.getCooldowns().isOnCooldown(pStack.getItem()))){
                         player.getCooldowns().addCooldown(pStack.getItem(), 6);
                         player.stopUsingItem();

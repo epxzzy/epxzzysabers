@@ -1,6 +1,7 @@
 package com.epxzzy.createsaburs.item.saburtypes;
 
 import com.epxzzy.createsaburs.CreateSaburs;
+import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.networking.packet.ServerboundSaberDeflectPacket;
@@ -194,21 +195,21 @@ public class RotarySaber extends Protosaber {
     public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand) {
         if (Entityy instanceof LivingEntity) {
             if (Mainhand)
-                return ((LivingEntity) Entityy).getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-            return ((LivingEntity) Entityy).getOffhandItem().is(ModTags.Items.CREATE_ROTARY_SABER) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
+                return ((LivingEntity) Entityy).getMainHandItem().is(ModItems.ROTARY_SABER.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
+            return ((LivingEntity) Entityy).getOffhandItem().is(ModItems.ROTARY_SABER.get()) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
         }
         return false;
     }
 
     public static boolean checkForSaberBlock(Player Entityy) {
         /*
-        CreateSaburs.LOGGER.info("first:" +Entityy.getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER));
+        CreateSaburs.LOGGER.info("first:" +Entityy.getMainHandItem().is(ModItems.ROTARY_SABER.get()));
         CreateSaburs.LOGGER.info("second:" +Entityy.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") );
         CreateSaburs.LOGGER.info("third:" +Entityy.isUsingItem());
 
          */
         //Entityy.getMainHandItem().is(RotarySaber)
-        return Entityy.getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER) && Entityy.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && Entityy.isUsingItem();
+        return Entityy.getMainHandItem().is(ModItems.ROTARY_SABER.get()) && Entityy.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && Entityy.isUsingItem();
     }
 
     public static boolean[] checkForSaberFly(Entity Entityy) {
@@ -216,8 +217,8 @@ public class RotarySaber extends Protosaber {
         if (Entityy instanceof Player) {
             ((Player) Entityy).getMainHandItem().getOrCreateTag().getBoolean("FlyBoiii");
 
-            boolean mainhand = (((Player) Entityy).getMainHandItem().is(ModTags.Items.CREATE_ROTARY_SABER) && ((Player) Entityy).getMainHandItem().getOrCreateTag().getBoolean("FlyBoiii")) && ((Player) Entityy).getAbilities().flying;
-            boolean offhand = (((Player) Entityy).getOffhandItem().is(ModTags.Items.CREATE_ROTARY_SABER) && ((Player) Entityy).getOffhandItem().getOrCreateTag().getBoolean("FlyBoiii")) && ((Player) Entityy).getAbilities().flying;
+            boolean mainhand = (((Player) Entityy).getMainHandItem().is(ModItems.ROTARY_SABER.get()) && ((Player) Entityy).getMainHandItem().getOrCreateTag().getBoolean("FlyBoiii")) && ((Player) Entityy).getAbilities().flying;
+            boolean offhand = (((Player) Entityy).getOffhandItem().is(ModItems.ROTARY_SABER.get()) && ((Player) Entityy).getOffhandItem().getOrCreateTag().getBoolean("FlyBoiii")) && ((Player) Entityy).getAbilities().flying;
 
             //first one meaning flight is true, second specifies the hand, third is both hands have one
             return new boolean[]{mainhand || offhand, offhand, mainhand && offhand};

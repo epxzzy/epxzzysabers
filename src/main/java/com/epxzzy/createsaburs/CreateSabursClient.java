@@ -3,6 +3,7 @@ package com.epxzzy.createsaburs;
 import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.item.saburtypes.*;
+import com.epxzzy.createsaburs.utils.ModTags;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
@@ -28,7 +29,7 @@ public class CreateSabursClient {
         event.register((stack, tint) -> tint > 0 ? -1 : Protosaber.getColor(stack), ModItems.DUAL_BLADED_SABER.get());
         event.register((stack, tint) -> tint > 0 ? -1 : Protosaber.getColor(stack), ModItems.ROTARY_SABER.get());
         event.register((stack, tint) -> tint > 0 ? -1 : CrossguardSaber.getColor(stack), ModItems.CROSSGUARD_SABER.get());
-        event.register((stack, tint) -> tint > 0 ? -1 : BlasterHybrid.getColor(stack), ModItems.BLASTER_HYBRID.get());
+        event.register((stack, tint) -> tint > 0 ? -1 : BlasterHybrid.getColor(stack), ModItems.BLASTER_SABER.get());
         event.register((stack, tint) -> tint > 0 ? -1 : SaberPike.getColor(stack), ModItems.SABER_PIKE.get());
         event.register((stack, tint) -> tint > 0 ? -1 : SaberGauntlet.getColor(stack), ModItems.SABER_GAUNTLET.get());
 

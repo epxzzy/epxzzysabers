@@ -70,14 +70,14 @@ public class KyberStationMenu extends AbstractContainerMenu {
         this.input_slot = this.addSlot(new Slot(this.inputContainer, 0, 8, 59){
             @Override
             public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(ModTags.Items.CREATE_DYEABLE_LIGHTSABER);
+                return pStack.is(ModTags.Items.DYEABLE_LIGHTSABER);
             }
         });
 
         this.krystal_slot =  this.addSlot(new Slot(this.inputContainer, 1, 44, 59){
             @Override
             public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(ModTags.Items.CREATE_KYBER_CRYSTAL);
+                return pStack.is(ModTags.Items.KYBER_CRYSTAL);
             }
 
         });
@@ -121,13 +121,13 @@ public class KyberStationMenu extends AbstractContainerMenu {
         this.input_slot = new Slot(this.inputContainer, 0, 8, 59){
             @Override
             public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(ModTags.Items.CREATE_DYEABLE_LIGHTSABER);
+                return pStack.is(ModTags.Items.DYEABLE_LIGHTSABER);
             }
         } ;
         this.krystal_slot = new Slot(this.inputContainer, 1, 44, 59){
             @Override
             public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(ModTags.Items.CREATE_KYBER_CRYSTAL);
+                return pStack.is(ModTags.Items.KYBER_CRYSTAL);
             }
 
         };
@@ -167,13 +167,13 @@ public class KyberStationMenu extends AbstractContainerMenu {
         this.input_slot = new Slot(this.inputContainer, 0, 7, 8){
             @Override
             public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(ModTags.Items.CREATE_DYEABLE_LIGHTSABER);
+                return pStack.is(ModTags.Items.DYEABLE_LIGHTSABER);
             }
         };
         this.krystal_slot = new Slot(this.inputContainer, 1, 7, 28){
             @Override
             public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(ModTags.Items.CREATE_KYBER_CRYSTAL);
+                return pStack.is(ModTags.Items.KYBER_CRYSTAL);
             }
 
         };

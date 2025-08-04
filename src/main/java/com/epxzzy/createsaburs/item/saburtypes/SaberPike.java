@@ -1,5 +1,6 @@
 package com.epxzzy.createsaburs.item.saburtypes;
 
+import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.rendering.CrossguardSaberItemRenderer;
 import com.epxzzy.createsaburs.rendering.PikeSaberItemRenderer;
@@ -23,14 +24,14 @@ public class SaberPike extends Protosaber {
     }
     public static boolean checkForSaberBlock(Entity Entityy){
         if(Entityy instanceof LivingEntity)
-            return ((LivingEntity)Entityy).getMainHandItem().is(ModTags.Items.CREATE_PIKE) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity)Entityy).isUsingItem();
+            return ((LivingEntity)Entityy).getMainHandItem().is(ModItems.SABER_PIKE.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity)Entityy).isUsingItem();
         return false;
     }
 
     public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand){
         if(Entityy instanceof LivingEntity) {
-            if(Mainhand) return ((LivingEntity) Entityy).getMainHandItem().is(ModTags.Items.CREATE_PIKE) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-            return ((LivingEntity) Entityy).getOffhandItem().is(ModTags.Items.CREATE_PIKE) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
+            if(Mainhand) return ((LivingEntity) Entityy).getMainHandItem().is(ModItems.SABER_PIKE.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
+            return ((LivingEntity) Entityy).getOffhandItem().is(ModItems.SABER_PIKE.get()) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
         }
         return false;
     }

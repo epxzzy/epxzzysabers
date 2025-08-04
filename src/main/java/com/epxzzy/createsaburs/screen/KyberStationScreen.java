@@ -305,7 +305,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
 
         Slot slot = this.menu.getSlot(0);
-        if (slot.getItem().is(ModTags.Items.CREATE_LIGHTSABER)) {
+        if (slot.getItem().is(ModTags.Items.LIGHTSABER)) {
             if (this.menu.setItemColour(regbee)) {
                 //this.minecraft.player.connection.send(new HonkPacket.Serverbound)
                 //Color.HSBtoRGB(this.menu.getInputColour())
