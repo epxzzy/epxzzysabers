@@ -21,7 +21,7 @@ ideas n stuff:
  - Laser Blaster (w/ variations)
  - Beskar alloy
  - Beskar armour (armour that is resistant to saber attacks)
- - (Ark pulse generator)[https://starwars.fandom.com/wiki/Arc_Pulse_Generator]
+ - [Ark pulse generator](https://starwars.fandom.com/wiki/Arc_Pulse_Generator)
  - grevious mobile
 
 # Mechanics:
