@@ -11,8 +11,8 @@ ideas n stuff:
  - [DONE] Inquisitorious (dualblade but fly)
  - [DONE] Saber-blaster hybrid (singleblade but pew pew)
  - [DONE] Unstable crossguard (high attack speed, randomised damage, low parry range)
- - Saber Pike (high attack speed, mid attack damage, very high parry range)
- - Saber gauntlet (high attack speed, low attack damage, low parry range)
+ - [DONE] Saber Pike (high attack speed, mid attack damage, very high parry range)
+ - [DONE] Saber gauntlet (high attack speed, low attack damage, low parry range)
 
 # Items: 
  - Proton bombs (cylindrical superpowered tnt)
