@@ -9,7 +9,7 @@ import com.epxzzy.createsaburs.item.ModCreativeModTabs;
 import com.epxzzy.createsaburs.item.ModItems;
 import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.rendering.foundation.PartialModelEventHandler;
-import com.epxzzy.createsaburs.screen.KyberStationScreen;
+import com.epxzzy.createsaburs.screen.tint.KyberStationTintScreen;
 import com.epxzzy.createsaburs.screen.ModMenuTypes;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.mojang.logging.LogUtils;
@@ -102,7 +102,7 @@ public class CreateSaburs {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            MenuScreens.register(ModMenuTypes.SKREEN.get(), KyberStationScreen::new);
+            MenuScreens.register(ModMenuTypes.SKREEN.get(), KyberStationTintScreen::new);
 
 
             EntityRenderers.register(ModEntities.ROTARY_SABER_ENTITY.get(), ThrownRotarySaberRenderer::new);

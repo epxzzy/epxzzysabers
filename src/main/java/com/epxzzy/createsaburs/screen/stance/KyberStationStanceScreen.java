@@ -1,13 +1,13 @@
-package com.epxzzy.createsaburs.screen;
+package com.epxzzy.createsaburs.screen.stance;
 
 
 import com.epxzzy.createsaburs.CreateSaburs;
-import com.epxzzy.createsaburs.utils.ColourConverter;
+import com.epxzzy.createsaburs.networking.ModMessages;
+import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
 import com.epxzzy.createsaburs.screen.components.KyberModes;
 import com.epxzzy.createsaburs.screen.components.KyberTabButton;
 import com.epxzzy.createsaburs.screen.components.SliderWidget;
-import com.epxzzy.createsaburs.networking.ModMessages;
-import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
+import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -32,7 +32,7 @@ import org.joml.Quaternionf;
 
 import javax.annotation.Nullable;
 
-public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu> {
+public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStationStanceMenu> {
     private static final ResourceLocation RECOLOUR_TEXTURE =
             new ResourceLocation(CreateSaburs.MOD_ID, "textures/gui/kyber_recolour.png");
 
@@ -89,7 +89,7 @@ public class KyberStationScreen extends AbstractContainerScreen<KyberStationMenu
 
     }
 
-    public KyberStationScreen(KyberStationMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+    public KyberStationStanceScreen(KyberStationStanceMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
         pMenu.registerUpdateListener(this::containerChanged);
         pMenu.registerInputUpdateListener(this::TakeInput);

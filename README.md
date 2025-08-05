@@ -2,6 +2,7 @@ create saburs
 create 6.0.3-71
 
 //TODO: make rotary saber put on as an chest item if rightclicked turned off
+//TODO: make most of the unaccessible content (flourishes, stances, gaycolour) accessible
 
 ideas n stuff:
 
@@ -13,6 +14,8 @@ ideas n stuff:
  - [DONE] Unstable crossguard (high attack speed, randomised damage, low parry range)
  - [DONE] Saber Pike (high attack speed, mid attack damage, very high parry range)
  - [DONE] Saber gauntlet (high attack speed, low attack damage, low parry range)
+
+//above stats are bs, update them too
 
 # Items: 
  - Proton bombs (cylindrical superpowered tnt)

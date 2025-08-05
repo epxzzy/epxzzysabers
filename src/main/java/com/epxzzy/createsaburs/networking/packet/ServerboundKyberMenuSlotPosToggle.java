@@ -1,7 +1,7 @@
 package com.epxzzy.createsaburs.networking.packet;
 
 import com.epxzzy.createsaburs.CreateSaburs;
-import com.epxzzy.createsaburs.screen.KyberStationMenu;
+import com.epxzzy.createsaburs.screen.tint.KyberStationTintMenu;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraftforge.network.NetworkEvent;
@@ -36,7 +36,7 @@ public class ServerboundKyberMenuSlotPosToggle {
         contextt.enqueueWork(() -> {
 
             AbstractContainerMenu menuu = contextt.getSender().containerMenu;
-            if (menuu instanceof KyberStationMenu stationMenu) {
+            if (menuu instanceof KyberStationTintMenu stationMenu) {
                 if (!stationMenu.stillValid(contextt.getSender())) {
                     return;
 

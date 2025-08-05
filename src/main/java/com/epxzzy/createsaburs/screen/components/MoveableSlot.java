@@ -11,7 +11,7 @@ public class MoveableSlot extends Slot {
         return new int[]{this.x,this.y};
     }
     public void setPos(int newx,int newy){
-       //this.x = newx;
-       //this.y = newy;
+       this.x = newx;
+       this.y = newy;
     }
 }

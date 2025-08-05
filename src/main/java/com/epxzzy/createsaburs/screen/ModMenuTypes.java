@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs.screen;
 
 
 import com.epxzzy.createsaburs.CreateSaburs;
+import com.epxzzy.createsaburs.screen.tint.KyberStationTintMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
@@ -15,8 +16,8 @@ public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
             DeferredRegister.create(ForgeRegistries.MENU_TYPES, CreateSaburs.MOD_ID);
 
-    public static final RegistryObject<MenuType<KyberStationMenu>> SKREEN=
-            registerMenuType("kyber_station_menu", KyberStationMenu::new);
+    public static final RegistryObject<MenuType<KyberStationTintMenu>> SKREEN=
+            registerMenuType("kyber_station_menu", KyberStationTintMenu::new);
 
 
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {

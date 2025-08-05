@@ -2,7 +2,7 @@ package com.epxzzy.createsaburs.block.custom;
 
 
 //import com.epxzzy.createsaburs.block.entity.KyberStationBlockEntity;
-import com.epxzzy.createsaburs.screen.KyberStationMenu;
+import com.epxzzy.createsaburs.screen.tint.KyberStationTintMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -70,7 +70,7 @@ public class KyberStationBlock extends Block {
     }
     public MenuProvider getMenuProvider(BlockState pState, Level pLevel,BlockPos pPos){
        return new SimpleMenuProvider((MenuConstructor, b, c) ->
-               new KyberStationMenu(
+               new KyberStationTintMenu(
                        MenuConstructor,
                        b,
                        ContainerLevelAccess.create(pLevel, pPos)

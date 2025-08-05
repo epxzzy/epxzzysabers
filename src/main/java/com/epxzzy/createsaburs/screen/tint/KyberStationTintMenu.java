@@ -1,8 +1,9 @@
-package com.epxzzy.createsaburs.screen;
+package com.epxzzy.createsaburs.screen.tint;
 
 
 import com.epxzzy.createsaburs.block.ModBlocks;
 import com.epxzzy.createsaburs.CreateSaburs;
+import com.epxzzy.createsaburs.screen.ModMenuTypes;
 import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
@@ -20,14 +21,12 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class KyberStationMenu extends AbstractContainerMenu {
+public class KyberStationTintMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
-    private Slot input_slot;
-    private Slot krystal_slot;
-    private Slot resultSlot;
-    public ItemStack lastCachedItemStacc = null;
-    public int CachedColour = 0;
-    public boolean isColourCached = false;
+    public Slot input_slot;
+    public Slot krystal_slot;
+    public Slot resultSlot;
+
     private final DataSlot[] ColourValueIndexes = {DataSlot.standalone(), DataSlot.standalone(), DataSlot.standalone()};
     Runnable slotUpdateListener = () -> {
     };
@@ -35,33 +34,25 @@ public class KyberStationMenu extends AbstractContainerMenu {
     };
 
     private final Container inputContainer = new SimpleContainer(2) {
-        /**
-         * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think
-         * it hasn't changed and skip it.
-         */
         public void setChanged() {
             super.setChanged();
-            KyberStationMenu.this.slotsChanged(this);
-            KyberStationMenu.this.slotUpdateListener.run();
-            KyberStationMenu.this.inputUpdateListener.run();
+            KyberStationTintMenu.this.slotsChanged(this);
+            KyberStationTintMenu.this.slotUpdateListener.run();
+            KyberStationTintMenu.this.inputUpdateListener.run();
         }
     };
     private final Container outputContainer = new SimpleContainer(1) {
-        /**
-         * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think
-         * it hasn't changed and skip it.
-         */
         public void setChanged() {
             super.setChanged();
-            KyberStationMenu.this.slotUpdateListener.run();
+            KyberStationTintMenu.this.slotUpdateListener.run();
         }
     };
 
-    public KyberStationMenu(int pContainerId, Inventory inv, FriendlyByteBuf ffff) {
+    public KyberStationTintMenu(int pContainerId, Inventory inv, FriendlyByteBuf ffff) {
         this(pContainerId, inv, ContainerLevelAccess.NULL);
     }
 
-    public KyberStationMenu(int pContainerId, Inventory playerinv, final ContainerLevelAccess pAccess) {
+    public KyberStationTintMenu(int pContainerId, Inventory playerinv, final ContainerLevelAccess pAccess) {
         super(ModMenuTypes.SKREEN.get(), pContainerId);
         checkContainerSize(playerinv, 2);
         playerinv.player.level();
@@ -88,8 +79,8 @@ public class KyberStationMenu extends AbstractContainerMenu {
             }
 
             public void onTake(@NotNull Player pPlayer, @NotNull ItemStack stacc) {
-                KyberStationMenu.this.input_slot.remove(1);
-                KyberStationMenu.this.krystal_slot.remove(1);
+                KyberStationTintMenu.this.input_slot.remove(1);
+                KyberStationTintMenu.this.krystal_slot.remove(1);
                 pAccess.execute((a, b) -> {
                     a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
@@ -137,8 +128,8 @@ public class KyberStationMenu extends AbstractContainerMenu {
             }
 
             public void onTake(@NotNull Player pPlayer, @NotNull ItemStack stacc) {
-                KyberStationMenu.this.input_slot.remove(1);
-                KyberStationMenu.this.krystal_slot.remove(1);
+                KyberStationTintMenu.this.input_slot.remove(1);
+                KyberStationTintMenu.this.krystal_slot.remove(1);
                 access.execute((a, b) -> {
                     a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
@@ -183,8 +174,8 @@ public class KyberStationMenu extends AbstractContainerMenu {
             }
 
             public void onTake(@NotNull Player pPlayer, @NotNull ItemStack stacc) {
-                KyberStationMenu.this.input_slot.remove(1);
-                KyberStationMenu.this.krystal_slot.remove(1);
+                KyberStationTintMenu.this.input_slot.remove(1);
+                KyberStationTintMenu.this.krystal_slot.remove(1);
                 access.execute((a, b) -> {
                     a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
@@ -408,19 +399,19 @@ public class KyberStationMenu extends AbstractContainerMenu {
         return this.resultSlot.index;
     }
 
-    private int getInventorySlotStart() {
+    public int getInventorySlotStart() {
         return this.getResultSlot() + 1;
     }
 
-    private int getInventorySlotEnd() {
+    public int getInventorySlotEnd() {
         return this.getInventorySlotStart() + 27;
     }
 
-    private int getUseRowStart() {
+    public int getUseRowStart() {
         return this.getInventorySlotEnd();
     }
 
-    private int getUseRowEnd() {
+    public int getUseRowEnd() {
         return this.getUseRowStart() + 9;
     }
 }
