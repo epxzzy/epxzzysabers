@@ -1,4 +1,4 @@
-package com.epxzzy.createsaburs.screen.stance;
+package com.epxzzy.createsaburs.screen.flourish;
 
 
 import com.epxzzy.createsaburs.block.ModBlocks;
@@ -24,7 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import org.checkerframework.checker.units.qual.K;
 import org.jetbrains.annotations.NotNull;
 
-public class KyberStationStanceMenu extends KyberMenuBase {
+public class KyberStationFlourishMenu extends KyberMenuBase {
     public final ContainerLevelAccess access;
     public Slot input_slot;
     public Slot krystal_slot;
@@ -39,9 +39,9 @@ public class KyberStationStanceMenu extends KyberMenuBase {
     private final Container inputContainer = new SimpleContainer(2) {
         public void setChanged() {
             super.setChanged();
-            KyberStationStanceMenu.this.slotsChanged(this);
-            KyberStationStanceMenu.this.slotUpdateListener.run();
-            KyberStationStanceMenu.this.inputUpdateListener.run();
+            KyberStationFlourishMenu.this.slotsChanged(this);
+            KyberStationFlourishMenu.this.slotUpdateListener.run();
+            KyberStationFlourishMenu.this.inputUpdateListener.run();
         }
     };
     private final Container outputContainer = new SimpleContainer(1) {
@@ -51,49 +51,47 @@ public class KyberStationStanceMenu extends KyberMenuBase {
         }
     };
 
-    public KyberStationStanceMenu(int pContainerId, Inventory inv, FriendlyByteBuf ffff) {
+    public KyberStationFlourishMenu(int pContainerId, Inventory inv, FriendlyByteBuf ffff) {
         this(pContainerId, inv, BlockPos.ZERO, ContainerLevelAccess.NULL);
     }
 
-    public KyberStationStanceMenu(int pContainerId, Inventory inv, BlockPos pos, FriendlyByteBuf ffff) {
+    public KyberStationFlourishMenu(int pContainerId, Inventory inv, BlockPos pos, FriendlyByteBuf ffff) {
         this(pContainerId, inv, pos, ContainerLevelAccess.NULL);
     }
 
-    public KyberStationStanceMenu(int pContainerId, Inventory playerinv, BlockPos pos, final ContainerLevelAccess pAccess) {
+    public KyberStationFlourishMenu(int pContainerId, Inventory playerinv, BlockPos pos, final ContainerLevelAccess pAccess) {
         super(ModMenuTypes.SKREEN_TINT.get(), pos, pContainerId);
         checkContainerSize(playerinv, 2);
         playerinv.player.level();
         this.access = pAccess;
-        this.input_slot = this.addSlot(new Slot(this.inputContainer, 0, 8, 59) {
+        this.input_slot = new Slot(this.inputContainer, 0, 7, 8) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
                 return pStack.is(ModTags.Items.DYEABLE_LIGHTSABER);
             }
-        });
-
-        this.krystal_slot = this.addSlot(new Slot(this.inputContainer, 1, 44, 59) {
+        };
+        this.krystal_slot = new Slot(this.inputContainer, 1, 7, 28) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
                 return pStack.is(ModTags.Items.KYBER_CRYSTAL);
             }
 
-        });
-
-        this.resultSlot = this.addSlot(new Slot(this.outputContainer, 0, 152, 59) {
+        };
+        this.resultSlot = new Slot(this.outputContainer, 0, 153, 8) {
             public boolean mayPlace(@NotNull ItemStack stacc) {
                 return false;
             }
 
             public void onTake(@NotNull Player pPlayer, @NotNull ItemStack stacc) {
-                KyberStationStanceMenu.this.input_slot.remove(1);
-                KyberStationStanceMenu.this.krystal_slot.remove(1);
-                pAccess.execute((a, b) -> {
+                KyberStationFlourishMenu.this.input_slot.remove(1);
+                KyberStationFlourishMenu.this.krystal_slot.remove(1);
+                access.execute((a, b) -> {
                     a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
                 CreateSaburs.LOGGER.warn("taken??");
                 super.onTake(pPlayer, stacc);
             }
-        });
+        };
 
         addPlayerInventory(playerinv);
         addPlayerHotbar(playerinv);
@@ -106,58 +104,6 @@ public class KyberStationStanceMenu extends KyberMenuBase {
         return !this.inputContainer.getItem(0).isEmpty() ^ !this.inputContainer.getItem(1).isEmpty();
     }
 
-
-    public boolean setItemColour(int[] colour, boolean gay) {
-        return false;
-    }
-
-    @Override
-    public @NotNull ItemStack quickMoveStack(Player pPlayer, int pIndex) {
-        ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(pIndex);
-        if (slot != null && slot.hasItem()) {
-            ItemStack itemstack1 = slot.getItem();
-            itemstack = itemstack1.copy();
-            int i = this.getInventorySlotStart();
-            int j = this.getUseRowEnd();
-            if (pIndex == this.getResultSlot()) {
-                if (!this.moveItemStackTo(itemstack1, i, j, true)) {
-                    return ItemStack.EMPTY;
-                }
-
-                slot.onQuickCraft(itemstack1, itemstack);
-            } else if ((pIndex == this.input_slot.index || (pIndex == this.krystal_slot.index))) {
-                if (!this.moveItemStackTo(itemstack1, i, j, false)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (this.canMoveIntoInputSlots(itemstack1) && pIndex >= this.getInventorySlotStart() && pIndex < this.getUseRowEnd()) {
-                int k = this.getSlotToQuickMoveTo(itemstack);
-                if (!this.moveItemStackTo(itemstack1, k, this.getResultSlot(), false)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (pIndex >= this.getInventorySlotStart() && pIndex < this.getInventorySlotEnd()) {
-                if (!this.moveItemStackTo(itemstack1, this.getUseRowStart(), this.getUseRowEnd(), false)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (pIndex >= this.getUseRowStart() && pIndex < this.getUseRowEnd() && !this.moveItemStackTo(itemstack1, this.getInventorySlotStart(), this.getInventorySlotEnd(), false)) {
-                return ItemStack.EMPTY;
-            }
-
-            if (itemstack1.isEmpty()) {
-                slot.setByPlayer(ItemStack.EMPTY);
-            } else {
-                slot.setChanged();
-            }
-
-            if (itemstack1.getCount() == itemstack.getCount()) {
-                return ItemStack.EMPTY;
-            }
-
-            slot.onTake(pPlayer, itemstack1);
-        }
-
-        return itemstack;
-    }
 
     @Override
     public void removed(@NotNull Player pPlayer) {
@@ -287,5 +233,54 @@ public class KyberStationStanceMenu extends KyberMenuBase {
     public int getUseRowEnd() {
         return this.getUseRowStart() + 9;
     }
+
+    @Override
+    public @NotNull ItemStack quickMoveStack(Player pPlayer, int pIndex) {
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(pIndex);
+        if (slot != null && slot.hasItem()) {
+            ItemStack itemstack1 = slot.getItem();
+            itemstack = itemstack1.copy();
+            int i = this.getInventorySlotStart();
+            int j = this.getUseRowEnd();
+            if (pIndex == this.getResultSlot()) {
+                if (!this.moveItemStackTo(itemstack1, i, j, true)) {
+                    return ItemStack.EMPTY;
+                }
+
+                slot.onQuickCraft(itemstack1, itemstack);
+            } else if ((pIndex == this.input_slot.index || (pIndex == this.krystal_slot.index))) {
+                if (!this.moveItemStackTo(itemstack1, i, j, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (this.canMoveIntoInputSlots(itemstack1) && pIndex >= this.getInventorySlotStart() && pIndex < this.getUseRowEnd()) {
+                int k = this.getSlotToQuickMoveTo(itemstack);
+                if (!this.moveItemStackTo(itemstack1, k, this.getResultSlot(), false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (pIndex >= this.getInventorySlotStart() && pIndex < this.getInventorySlotEnd()) {
+                if (!this.moveItemStackTo(itemstack1, this.getUseRowStart(), this.getUseRowEnd(), false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (pIndex >= this.getUseRowStart() && pIndex < this.getUseRowEnd() && !this.moveItemStackTo(itemstack1, this.getInventorySlotStart(), this.getInventorySlotEnd(), false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (itemstack1.isEmpty()) {
+                slot.setByPlayer(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
+            }
+
+            if (itemstack1.getCount() == itemstack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTake(pPlayer, itemstack1);
+        }
+
+        return itemstack;
+    }
+
 
 }

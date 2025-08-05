@@ -8,7 +8,8 @@ import java.util.List;
 
 public enum KyberModes implements net.minecraftforge.common.IExtensibleEnum {
     RECOLOUR(new ItemStack(Items.RED_DYE), new ItemStack(Items.GREEN_DYE), new ItemStack(Items.BLUE_DYE)),
-    STANCE(new ItemStack(Items.ARMOR_STAND));
+    STANCE(new ItemStack(Items.ARMOR_STAND)),
+    FLOURISH(new ItemStack(Items.FEATHER));
 
     private final List<ItemStack> itemIcons;
 
@@ -23,7 +24,7 @@ public enum KyberModes implements net.minecraftforge.common.IExtensibleEnum {
 
     public static List<KyberModes> getCategories() {
         List list;
-        list = ImmutableList.of(RECOLOUR, STANCE);
+        list = ImmutableList.of(RECOLOUR, STANCE, FLOURISH);
 
         return list;
     }

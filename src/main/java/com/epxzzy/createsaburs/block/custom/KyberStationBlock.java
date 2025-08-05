@@ -73,6 +73,7 @@ public class KyberStationBlock extends Block {
                new KyberStationTintMenu(
                        MenuConstructor,
                        b,
+                       pPos,
                        ContainerLevelAccess.create(pLevel, pPos)
                ),
                Component.literal("REEE COLROOURUR")

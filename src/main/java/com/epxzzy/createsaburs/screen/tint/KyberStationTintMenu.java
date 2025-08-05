@@ -4,9 +4,11 @@ package com.epxzzy.createsaburs.screen.tint;
 import com.epxzzy.createsaburs.block.ModBlocks;
 import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.screen.ModMenuTypes;
+import com.epxzzy.createsaburs.screen.components.KyberMenuBase;
 import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundSource;
@@ -21,8 +23,8 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class KyberStationTintMenu extends AbstractContainerMenu {
-    private final ContainerLevelAccess access;
+public class KyberStationTintMenu extends KyberMenuBase {
+    public final ContainerLevelAccess access;
     public Slot input_slot;
     public Slot krystal_slot;
     public Slot resultSlot;
@@ -48,17 +50,19 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
             //KyberStationTintMenu.this.slotUpdateListener.run();
         }
     };
-
     public KyberStationTintMenu(int pContainerId, Inventory inv, FriendlyByteBuf ffff) {
-        this(pContainerId, inv, ContainerLevelAccess.NULL);
+        this(pContainerId, inv, BlockPos.ZERO, ContainerLevelAccess.NULL);
     }
 
-    public KyberStationTintMenu(int pContainerId, Inventory playerinv, final ContainerLevelAccess pAccess) {
-        super(ModMenuTypes.SKREEN.get(), pContainerId);
+    public KyberStationTintMenu(int pContainerId, Inventory inv,BlockPos pos, FriendlyByteBuf ffff) {
+        this(pContainerId, inv, pos, ContainerLevelAccess.NULL);
+    }
+
+    public KyberStationTintMenu(int pContainerId, Inventory playerinv, BlockPos pos , final ContainerLevelAccess pAccess) {
+        super(ModMenuTypes.SKREEN_TINT.get(),pos, pContainerId);
         checkContainerSize(playerinv, 2);
         playerinv.player.level();
         this.access = pAccess;
-
         this.input_slot = this.addSlot(new Slot(this.inputContainer, 0, 8, 59) {
             @Override
             public boolean mayPlace(ItemStack pStack) {

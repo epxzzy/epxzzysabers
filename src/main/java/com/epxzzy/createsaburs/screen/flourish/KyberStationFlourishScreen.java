@@ -1,4 +1,4 @@
-package com.epxzzy.createsaburs.screen.stance;
+package com.epxzzy.createsaburs.screen.flourish;
 
 
 import com.epxzzy.createsaburs.CreateSaburs;
@@ -8,6 +8,7 @@ import com.epxzzy.createsaburs.networking.packet.ServerboundRecolourItemPacket;
 import com.epxzzy.createsaburs.screen.components.KyberModes;
 import com.epxzzy.createsaburs.screen.components.KyberTabButton;
 import com.epxzzy.createsaburs.screen.components.SliderWidget;
+import com.epxzzy.createsaburs.screen.flourish.KyberStationFlourishMenu;
 import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.mojang.blaze3d.platform.Lighting;
@@ -33,15 +34,34 @@ import org.joml.Quaternionf;
 
 import javax.annotation.Nullable;
 
-public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStationStanceMenu> {
-    private static final ResourceLocation STANCE_TEXTURE =
-            new ResourceLocation(CreateSaburs.MOD_ID, "textures/gui/kyber_stance.png");
+public class KyberStationFlourishScreen extends AbstractContainerScreen<KyberStationFlourishMenu> {
+
+    private static final ResourceLocation STANCED_TEXTURE =
+            new ResourceLocation(CreateSaburs.MOD_ID, "textures/gui/kyber_stanced.png");
+
 
     private KyberTabButton RECOLOUR_TAB_BUTTON;
     private KyberTabButton STANCE_TAB_BUTTON;
     private KyberTabButton FLOURISH_TAB_BUTTON;
 
-    private int selectedTab = 1;
+            /*
+
+    private List<KyberTabButton> tabButtons = new ArrayList<>().add(
+            new KyberTabButton(KyberModes.RECOLOUR, 0,this.topPos+50, this.leftPos+150){
+                @Override
+                public void onPress() {
+                    SelectTab(tabID);
+                    super.onPress();
+                }
+            }
+    );
+
+    };
+
+             */
+
+    private int selectedTab = 2;
+
 
     private boolean widthTooNarrow = this.width < 379;
     private int TABLE_MODE = 0;
@@ -55,7 +75,7 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
 
     }
 
-    public KyberStationStanceScreen(KyberStationStanceMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+    public KyberStationFlourishScreen(KyberStationFlourishMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
         pMenu.registerUpdateListener(this::containerChanged);
         pMenu.registerInputUpdateListener(this::TakeInput);
@@ -84,7 +104,6 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         this.inventoryLabelY = 10000;
         this.titleLabelY = 10000;
 
-
         RECOLOUR_TAB_BUTTON = new KyberTabButton(KyberModes.RECOLOUR, 0,this.topPos+10, this.leftPos-45){
             @Override
             public void onPress() {
@@ -92,7 +111,6 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
                 super.onPress();
             }
         };
-
         STANCE_TAB_BUTTON= new KyberTabButton(KyberModes.STANCE, 1,this.topPos+40, this.leftPos-45){
                     @Override
                     public void onPress(){
@@ -100,7 +118,6 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
                         super.onPress();
                     }
                 };
-
         FLOURISH_TAB_BUTTON= new KyberTabButton(KyberModes.FLOURISH, 2,this.topPos+70, this.leftPos-45){
             @Override
             public void onPress(){
@@ -109,20 +126,28 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
             }
         };
 
-
+        FLOURISH_TAB_BUTTON.setStateTriggered(true);
         this.addWidget(RECOLOUR_TAB_BUTTON);
         this.addWidget(STANCE_TAB_BUTTON);
         this.addWidget(FLOURISH_TAB_BUTTON);
-        STANCE_TAB_BUTTON.setStateTriggered(true);
 
+
+            /*
+            {
+                @Override
+                public void onPress() {
+                    SelectTab(tabID);
+                    super.onPress();
+                }
+            });
+
+             */
     }
 
     public void UpdateServerRecipe() {
-        //send packet to craft
     }
 
 
-    @Override
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
         UpdateServerRecipe();
         return super.keyPressed(pKeyCode, pScanCode, pModifiers);
@@ -133,21 +158,24 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         return super.mouseClicked(pMouseX, pMouseY, pButton);
     }
 
+
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            RenderSystem.setShaderTexture(0, STANCE_TEXTURE);
+            RenderSystem.setShaderTexture(0, STANCED_TEXTURE);
             int x = (width - imageWidth) / 2;
             int y = (height - imageHeight) / 2;
 
-            guiGraphics.blit(STANCE_TEXTURE, x - 15, y, 0, 0, 215, imageHeight);
+            guiGraphics.blit(STANCED_TEXTURE, x - 15, y, 0, 0, 215, imageHeight);
+
     }
 
     @Override
     public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, delta);
+
         renderEntityInInventoryFollowsMouse(guiGraphics, this.leftPos + 125, this.topPos + 70, 30, (float)(this.leftPos + 125) - this.xMouse, (float)(this.topPos + 70 - 50) - this.yMouse, this.minecraft.player);
 
         //LIST.render(guiGraphics, mouseX, mouseY, delta);
@@ -159,26 +187,41 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         this.xMouse = (float)mouseX;
         this.yMouse = (float)mouseY;
 
+        /*
+        for(KyberTabButton recipebooktabbutton : this.tabButtons) {
+            if(recipebooktabbutton.tabID==0){
+                //recipebooktabbutton.setPosition(this.leftPos,this.topPos-(35)+5);
+            }
+            if(recipebooktabbutton.tabID==1){
+                //recipebooktabbutton.setPosition(this.leftPos,this.topPos-(2*35)+5);
+            }
+            recipebooktabbutton.renderWidget(guiGraphics, mouseX, mouseY, delta);
+        if(tabButtons != null) {
+            tabButtons.get(0).renderWidget(guiGraphics, mouseX, mouseY, delta);
+            tabButtons.get(1).renderWidget(guiGraphics, mouseX, mouseY, delta);
+        }
+            }
+         */
+
         RECOLOUR_TAB_BUTTON.renderWidget(guiGraphics,mouseX,mouseY,delta);
         STANCE_TAB_BUTTON.renderWidget(guiGraphics,mouseX,mouseY,delta);
         FLOURISH_TAB_BUTTON.renderWidget(guiGraphics,mouseX,mouseY,delta);
+
 
 
         guiGraphics.pose().popPose();
     }
 
 
-
     void SelectTab(int index){
-
         if(index==0){
-
             ModMessages.sendToServer(new ServerboundKyberMenuTabChange(0));
         }
-        if(index==2){
-            ModMessages.sendToServer(new ServerboundKyberMenuTabChange(2));
-        }
+        if(index==1){
+            ModMessages.sendToServer(new ServerboundKyberMenuTabChange(1));
 
+
+        }
     }
 
     public static void renderEntityInInventoryFollowsMouse(GuiGraphics pGuiGraphics, int pX, int pY, int pScale, float p_275604_, float p_275546_, LivingEntity pEntity) {

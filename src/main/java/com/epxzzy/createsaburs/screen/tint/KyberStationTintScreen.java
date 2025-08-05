@@ -2,6 +2,8 @@ package com.epxzzy.createsaburs.screen.tint;
 
 
 import com.epxzzy.createsaburs.CreateSaburs;
+import com.epxzzy.createsaburs.networking.packet.ServerboundKyberMenuTabChange;
+import com.epxzzy.createsaburs.screen.stance.KyberStationStanceMenu;
 import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.epxzzy.createsaburs.screen.components.KyberModes;
 import com.epxzzy.createsaburs.screen.components.KyberTabButton;
@@ -28,6 +30,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -44,19 +47,16 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
     private static final ResourceLocation RECOLOUR_TEXTURE =
             new ResourceLocation(CreateSaburs.MOD_ID, "textures/gui/kyber_recolour.png");
 
-    private static final ResourceLocation STANCE_TEXTURE =
-            new ResourceLocation(CreateSaburs.MOD_ID, "textures/gui/kyber_stance.png");
 
-
-    private static final ResourceLocation OFF_TOGGLE=
+    private static final ResourceLocation OFF_TOGGLE =
             new ResourceLocation(CreateSaburs.MOD_ID, "textures/gui/toggle_off.png");
     private static final ResourceLocation ON_TOGGLE =
             new ResourceLocation(CreateSaburs.MOD_ID, "textures/gui/toggle_on.png");
 
 
-
     private KyberTabButton RECOLOUR_TAB_BUTTON;
     private KyberTabButton STANCE_TAB_BUTTON;
+    private KyberTabButton FLOURISH_TAB_BUTTON;
 
             /*
 
@@ -118,8 +118,8 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
     public void TakeInput() {
         int[] gur = menu.getInputColour();
-        GAY_INPUT= menu.isInputGay();
-        if(GAY_INPUT) return;
+        GAY_INPUT = menu.isInputGay();
+        if (GAY_INPUT) return;
         if (!RGB_MODE) {
             int[] inputColour = ColourConverter.RGBtoHSL(gur[0], gur[1], gur[2]);
 
@@ -217,24 +217,34 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         this.addWidget(this.RGB_TOGGLE);
         initSliderStuff();
 
-        RECOLOUR_TAB_BUTTON = new KyberTabButton(KyberModes.RECOLOUR, 0,this.topPos+10, this.leftPos-45){
+        RECOLOUR_TAB_BUTTON = new KyberTabButton(KyberModes.RECOLOUR, 0, this.topPos + 10, this.leftPos - 45) {
             @Override
             public void onPress() {
-                SelectTab(tabID);
+                SelectTab(0);
                 super.onPress();
             }
         };
-        STANCE_TAB_BUTTON= new KyberTabButton(KyberModes.STANCE, 1,this.topPos+40, this.leftPos-45){
-                    @Override
-                    public void onPress(){
-                        SelectTab(tabID);
-                        super.onPress();
-                    }
-                };
+        STANCE_TAB_BUTTON = new KyberTabButton(KyberModes.STANCE, 1, this.topPos + 40, this.leftPos - 45) {
+            @Override
+            public void onPress() {
+                SelectTab(1);
+                super.onPress();
+            }
+        };
 
+        FLOURISH_TAB_BUTTON = new KyberTabButton(KyberModes.FLOURISH, 2, this.topPos + 70, this.leftPos - 45) {
+            @Override
+            public void onPress() {
+                SelectTab(2);
+                super.onPress();
+            }
+        };
 
+        RECOLOUR_TAB_BUTTON.setStateTriggered(true);
         this.addWidget(RECOLOUR_TAB_BUTTON);
         this.addWidget(STANCE_TAB_BUTTON);
+        this.addWidget(FLOURISH_TAB_BUTTON);
+
 
 
             /*
@@ -247,7 +257,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
             });
 
              */
-        this.SelectTab();
 
 
         PLAYERpreview = new LocalPlayer(this.getMinecraft(), this.minecraft.level, this.minecraft.getConnection(), null, null, false, false);
@@ -337,17 +346,17 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
     @Override
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
-        if(!this.menu.canCraft()) return false;
+        if (!this.menu.canCraft()) return false;
         UpdateServerRecipe();
         return super.getFocused() != null && super.isDragging() && pButton == 0 && this.getFocused().mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
     }
 
     @Override
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
-        if(pKeyCode == GLFW.GLFW_KEY_PERIOD){
-           GAY_MODE = !GAY_MODE;
+        if (pKeyCode == GLFW.GLFW_KEY_PERIOD) {
+            GAY_MODE = !GAY_MODE;
         }
-        if(pKeyCode == GLFW.GLFW_KEY_SPACE){
+        if (pKeyCode == GLFW.GLFW_KEY_SPACE) {
             RGB_MODE = !RGB_MODE;
         }
         UpdateServerRecipe();
@@ -401,26 +410,13 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
-        if(selectedTab== 0) {
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            RenderSystem.setShaderTexture(0, RECOLOUR_TEXTURE);
-            int x = (width - imageWidth) / 2;
-            int y = (height - imageHeight) / 2;
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, RECOLOUR_TEXTURE);
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
 
-            guiGraphics.blit(RECOLOUR_TEXTURE, x - 15, y, 0, 0, 215, imageHeight);
-        }
-        if(selectedTab== 1) {
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            RenderSystem.setShaderTexture(0, STANCE_TEXTURE);
-            int x = (width - imageWidth) / 2;
-            int y = (height - imageHeight) / 2;
-
-            guiGraphics.blit(STANCE_TEXTURE, x - 15, y, 0, 0, 215, imageHeight);
-            if(PLAYERpreview != null) renderEntityInInventoryFollowsMouse(guiGraphics, this.leftPos + 125, this.topPos + 70, 30, (float)(this.leftPos + 125) - this.xMouse, (float)(this.topPos + 70 - 50) - this.yMouse, this.PLAYERpreview);
-
-        }
+        guiGraphics.blit(RECOLOUR_TEXTURE, x - 15, y, 0, 0, 215, imageHeight);
 
     }
 
@@ -428,11 +424,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
     public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, delta);
-        if(selectedTab==0){
-            renderRecolourTab(guiGraphics,mouseX,mouseY,delta);
-        }
-        if(selectedTab==1){
-        }
+        renderRecolourTab(guiGraphics, mouseX, mouseY, delta);
 
         //LIST.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
@@ -440,27 +432,12 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
         guiGraphics.pose().pushPose();
         guiGraphics.pose().translate(0.0F, 0.0F, 100.0F);
-        this.xMouse = (float)mouseX;
-        this.yMouse = (float)mouseY;
+        this.xMouse = (float) mouseX;
+        this.yMouse = (float) mouseY;
 
-        /*
-        for(KyberTabButton recipebooktabbutton : this.tabButtons) {
-            if(recipebooktabbutton.tabID==0){
-                //recipebooktabbutton.setPosition(this.leftPos,this.topPos-(35)+5);
-            }
-            if(recipebooktabbutton.tabID==1){
-                //recipebooktabbutton.setPosition(this.leftPos,this.topPos-(2*35)+5);
-            }
-            recipebooktabbutton.renderWidget(guiGraphics, mouseX, mouseY, delta);
-        if(tabButtons != null) {
-            tabButtons.get(0).renderWidget(guiGraphics, mouseX, mouseY, delta);
-            tabButtons.get(1).renderWidget(guiGraphics, mouseX, mouseY, delta);
-        }
-            }
-         */
-
-        RECOLOUR_TAB_BUTTON.renderWidget(guiGraphics,mouseX,mouseY,delta);
-        STANCE_TAB_BUTTON.renderWidget(guiGraphics,mouseX,mouseY,delta);
+        RECOLOUR_TAB_BUTTON.renderWidget(guiGraphics, mouseX, mouseY, delta);
+        STANCE_TAB_BUTTON.renderWidget(guiGraphics, mouseX, mouseY, delta);
+        FLOURISH_TAB_BUTTON.renderWidget(guiGraphics, mouseX, mouseY, delta);
 
 
         guiGraphics.pose().popPose();
@@ -471,7 +448,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         if (this.RGB_TOGGLE != null) this.RGB_TOGGLE.render(guiGraphics, mouseX, mouseY, delta);
         manShutYourBitchAssUp(!this.menu.canCraft());
 
-        guiGraphics.blit(RGB_MODE?ON_TOGGLE:OFF_TOGGLE,this.leftPos-30, this.topPos+90, (float)0, (float)0, 20, 10, 20, 10);
+        guiGraphics.blit(RGB_MODE ? ON_TOGGLE : OFF_TOGGLE, this.leftPos - 30, this.topPos + 90, (float) 0, (float) 0, 20, 10, 20, 10);
 
         if (menu.canCraft()) {
             if (!this.RGB_MODE) {
@@ -529,8 +506,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
                 this.HUE_SLIDER.visible = true;
                 this.SAT_SLIDER.visible = true;
                 this.LIT_SLIDER.visible = true;
-            }
-            else {
+            } else {
                 this.RED_SLIDER.active = true;
                 this.GREEN_SLIDER.active = true;
                 this.BLUE_SLIDER.active = true;
@@ -545,52 +521,53 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
     }
 
-   void initSliderStuff(){
-       this.HUE_SLIDER = getSliderForColour(0, 360, "hue ", 1);
-       this.SAT_SLIDER = getSliderForColour(0, 100, "sat ", 2);
-       this.LIT_SLIDER = getSliderForColour(0, 100, "light ", 3);
+    void initSliderStuff() {
+        this.HUE_SLIDER = getSliderForColour(0, 360, "hue ", 1);
+        this.SAT_SLIDER = getSliderForColour(0, 100, "sat ", 2);
+        this.LIT_SLIDER = getSliderForColour(0, 100, "light ", 3);
 
-       this.RED_SLIDER = getSliderForColour(0, 255, "red ", 1);
-       this.GREEN_SLIDER = getSliderForColour(0, 255, "green ", 2);
-       this.BLUE_SLIDER = getSliderForColour(0, 255, "blue ", 3);
-
-
-       this.addWidget(this.HUE_SLIDER);
-       this.addWidget(this.SAT_SLIDER);
-       this.addWidget(this.LIT_SLIDER);
-
-       this.addWidget(this.RED_SLIDER);
-       this.addWidget(this.GREEN_SLIDER);
-       this.addWidget(this.BLUE_SLIDER);
+        this.RED_SLIDER = getSliderForColour(0, 255, "red ", 1);
+        this.GREEN_SLIDER = getSliderForColour(0, 255, "green ", 2);
+        this.BLUE_SLIDER = getSliderForColour(0, 255, "blue ", 3);
 
 
-       this.HUE_SLIDER.active = false;
-       this.SAT_SLIDER.active = false;
-       this.LIT_SLIDER.active = false;
+        this.addWidget(this.HUE_SLIDER);
+        this.addWidget(this.SAT_SLIDER);
+        this.addWidget(this.LIT_SLIDER);
 
-       this.HUE_SLIDER.visible = false;
-       this.SAT_SLIDER.visible = false;
-       this.LIT_SLIDER.visible = false;
+        this.addWidget(this.RED_SLIDER);
+        this.addWidget(this.GREEN_SLIDER);
+        this.addWidget(this.BLUE_SLIDER);
 
 
-       this.RED_SLIDER.active = false;
-       this.GREEN_SLIDER.active = false;
-       this.BLUE_SLIDER.active = false;
+        this.HUE_SLIDER.active = false;
+        this.SAT_SLIDER.active = false;
+        this.LIT_SLIDER.active = false;
 
-       this.RED_SLIDER.visible = false;
-       this.GREEN_SLIDER.visible = false;
-       this.BLUE_SLIDER.visible = false;
+        this.HUE_SLIDER.visible = false;
+        this.SAT_SLIDER.visible = false;
+        this.LIT_SLIDER.visible = false;
 
-   }
-   void manShutYourBitchAssUp(boolean yesnt){
-       this.HUE_SLIDER.kys = yesnt;
-       this.SAT_SLIDER.kys = yesnt;
-       this.LIT_SLIDER.kys = yesnt;
 
-       this.RED_SLIDER.kys = yesnt;
-       this.GREEN_SLIDER.kys = yesnt;
-       this.BLUE_SLIDER.kys = yesnt;
-        if(yesnt) {
+        this.RED_SLIDER.active = false;
+        this.GREEN_SLIDER.active = false;
+        this.BLUE_SLIDER.active = false;
+
+        this.RED_SLIDER.visible = false;
+        this.GREEN_SLIDER.visible = false;
+        this.BLUE_SLIDER.visible = false;
+
+    }
+
+    void manShutYourBitchAssUp(boolean yesnt) {
+        this.HUE_SLIDER.kys = yesnt;
+        this.SAT_SLIDER.kys = yesnt;
+        this.LIT_SLIDER.kys = yesnt;
+
+        this.RED_SLIDER.kys = yesnt;
+        this.GREEN_SLIDER.kys = yesnt;
+        this.BLUE_SLIDER.kys = yesnt;
+        if (yesnt) {
             this.HUE_SLIDER.setPosition(0, -99999);
             this.SAT_SLIDER.setPosition(0, -99999);
             this.LIT_SLIDER.setPosition(0, -99999);
@@ -599,87 +576,34 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
             this.GREEN_SLIDER.setPosition(0, -99999);
             this.BLUE_SLIDER.setPosition(0, -99999);
         }
-       if(!yesnt) {
-           this.HUE_SLIDER.setPosition(this.leftPos+12, this.topPos+ 12);
-           this.SAT_SLIDER.setPosition(this.leftPos+12, this.topPos+ 12*2);
-           this.LIT_SLIDER.setPosition(this.leftPos+12, this.topPos+ 12*3);
+        if (!yesnt) {
+            this.HUE_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12);
+            this.SAT_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12 * 2);
+            this.LIT_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12 * 3);
 
-           this.RED_SLIDER.setPosition(this.leftPos+12, this.topPos+ 12);
-           this.GREEN_SLIDER.setPosition(this.leftPos+12, this.topPos+ 12*2);
-           this.BLUE_SLIDER.setPosition(this.leftPos+12, this.topPos+ 12*3);
-       }
-
-   }
-   void SelectTab(){
-           this.selectedTab = 0;
-           this.RECOLOUR_TAB_BUTTON.setStateTriggered(true);
-   }
-    void SelectTab(int index){
-        (this.selectedTab==0?RECOLOUR_TAB_BUTTON:STANCE_TAB_BUTTON).setStateTriggered(false);
-        this.selectedTab = index;
-        (this.selectedTab==0?RECOLOUR_TAB_BUTTON:STANCE_TAB_BUTTON).setStateTriggered(true);
-
-        if(selectedTab==0){
-            //ModMessages.sendToServer(new ServerboundKyberMenuSlotPosToggle(true));
-            this.menu.resetSlotPose();
+            this.RED_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12);
+            this.GREEN_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12 * 2);
+            this.BLUE_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12 * 3);
         }
-        if(selectedTab==1){
+
+    }
+
+    void SelectTab(int index) {
+
+        if (index == 0) {
+            //this.menu.resetSlotPose();
+        }
+        if (index == 1) {
+
             //ModMessages.sendToServer(new ServerboundKyberMenuSlotPosToggle(false));
-
-            this.menu.stanceSlotPose();
+            ModMessages.sendToServer(new ServerboundKyberMenuTabChange(1));
 
         }
+        if (index == 2) {
 
-    }
+            ModMessages.sendToServer(new ServerboundKyberMenuTabChange(2));
 
-    public static void renderEntityInInventoryFollowsMouse(GuiGraphics pGuiGraphics, int pX, int pY, int pScale, float p_275604_, float p_275546_, Player pEntity) {
-        float f = (float)Math.atan((double)(p_275604_ / 40.0F));
-        float f1 = (float)Math.atan((double)(p_275546_ / 40.0F));
-        // Forge: Allow passing in direct angle components instead of mouse position
-        renderEntityInInventoryFollowsAngle(pGuiGraphics, pX, pY, pScale, f, f1, pEntity);
-    }
-
-    public static void renderEntityInInventoryFollowsAngle(GuiGraphics pGuiGraphics, int pX, int pY, int pScale, float angleXComponent, float angleYComponent, Player pEntity) {
-        Quaternionf quaternionf = (new Quaternionf()).rotateZ((float)Math.PI);
-        Quaternionf quaternionf1 = (new Quaternionf()).rotateX(angleYComponent * 20.0F * ((float)Math.PI / 180F));
-        quaternionf.mul(quaternionf1);
-        float bodyY = pEntity.yBodyRot;
-        float rotY = pEntity.getYRot();
-        float X = pEntity.getXRot();
-        float headYold = pEntity.yHeadRotO;
-        float headYnew = pEntity.yHeadRot;
-        pEntity.yBodyRot = 180.0F + angleXComponent * 20.0F;
-        pEntity.setYRot(180.0F + angleXComponent * 40.0F);
-        pEntity.setXRot(-angleYComponent * 20.0F);
-        pEntity.yHeadRot = pEntity.getYRot();
-        pEntity.yHeadRotO = pEntity.getYRot();
-        renderEntityInInventory(pGuiGraphics, pX, pY, pScale, quaternionf, quaternionf1, pEntity);
-        pEntity.yBodyRot = bodyY;
-        pEntity.setYRot(rotY);
-        pEntity.setXRot(X);
-        pEntity.yHeadRotO = headYold;
-        pEntity.yHeadRot = headYnew;
-    }
-
-    public static void renderEntityInInventory(GuiGraphics pGuiGraphics, int pX, int pY, int pScale, Quaternionf p_281880_, @Nullable Quaternionf pCameraOrientation, LivingEntity pEntity) {
-        pGuiGraphics.pose().pushPose();
-        pGuiGraphics.pose().translate((double)pX, (double)pY, 50.0D);
-        pGuiGraphics.pose().mulPoseMatrix((new Matrix4f()).scaling((float)pScale, (float)pScale, (float)(-pScale)));
-        pGuiGraphics.pose().mulPose(p_281880_);
-        Lighting.setupForEntityInInventory();
-        EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
-        if (pCameraOrientation != null) {
-            pCameraOrientation.conjugate();
-            entityrenderdispatcher.overrideCameraOrientation(pCameraOrientation);
+            //this.menu.resetSlotPose();
         }
-
-        entityrenderdispatcher.setRenderShadow(false);
-        RenderSystem.runAsFancy(() -> {
-            entityrenderdispatcher.render(pEntity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, pGuiGraphics.pose(), pGuiGraphics.bufferSource(), 15728880);
-        });
-        pGuiGraphics.flush();
-        entityrenderdispatcher.setRenderShadow(true);
-        pGuiGraphics.pose().popPose();
-        Lighting.setupFor3DItems();
     }
 }
