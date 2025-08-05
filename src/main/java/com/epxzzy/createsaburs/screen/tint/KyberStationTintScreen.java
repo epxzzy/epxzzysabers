@@ -108,7 +108,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
     }
 
     private void containerChanged() {
-        //UpdateServerRecipe();
 
 
         //menu.craftSabur(HUE_SLIDER.getValueInt(), SAT_SLIDER.getValueInt(),LIT_SLIDER.getValueInt());
@@ -133,6 +132,8 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
             this.GREEN_SLIDER.setValue(gur[1]);
             this.BLUE_SLIDER.setValue(gur[2]);
         }
+
+        UpdateServerRecipe();
     }
 
     @Override

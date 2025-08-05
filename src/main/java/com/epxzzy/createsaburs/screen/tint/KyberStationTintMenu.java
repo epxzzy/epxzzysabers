@@ -45,7 +45,7 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
     private final Container outputContainer = new SimpleContainer(1) {
         public void setChanged() {
             super.setChanged();
-            KyberStationTintMenu.this.slotUpdateListener.run();
+            //KyberStationTintMenu.this.slotUpdateListener.run();
         }
     };
 
