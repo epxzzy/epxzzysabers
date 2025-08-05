@@ -309,7 +309,7 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
             if (this.menu.setItemColour(regbee)) {
                 //this.minecraft.player.connection.send(new HonkPacket.Serverbound)
                 //Color.HSBtoRGB(this.menu.getInputColour())
-                ModMessages.sendToServer(new ServerboundRecolourItemPacket(regbee));
+                ModMessages.sendToServer(new ServerboundRecolourItemPacket(regbee, false));
             }
         }
     }

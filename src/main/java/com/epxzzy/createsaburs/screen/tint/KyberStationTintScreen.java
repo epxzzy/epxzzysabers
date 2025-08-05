@@ -36,6 +36,7 @@ import org.apache.commons.lang3.SerializationUtils;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
+import org.lwjgl.glfw.GLFW;
 
 import javax.annotation.Nullable;
 
@@ -84,6 +85,8 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
     private SliderWidget BLUE_SLIDER;
 
     private boolean RGB_MODE = false;
+    public boolean GAY_MODE = false;
+    public boolean GAY_INPUT = false;
     private boolean widthTooNarrow = this.width < 379;
     private int TABLE_MODE = 0;
     //0 = recolour
@@ -116,6 +119,8 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
     public void TakeInput() {
         int[] gur = menu.getInputColour();
+        GAY_INPUT= menu.isInputGay();
+        if(GAY_INPUT) return;
         if (!RGB_MODE) {
             int[] inputColour = ColourConverter.RGBtoHSL(gur[0], gur[1], gur[2]);
 
@@ -318,10 +323,10 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
         Slot slot = this.menu.getSlot(0);
         if (slot.getItem().is(ModTags.Items.DYEABLE_LIGHTSABER)) {
-            if (this.menu.setItemColour(regbee)) {
+            if (this.menu.setItemColour(regbee, GAY_MODE)) {
                 //this.minecraft.player.connection.send(new HonkPacket.Serverbound)
                 //Color.HSBtoRGB(this.menu.getInputColour())
-                ModMessages.sendToServer(new ServerboundRecolourItemPacket(regbee));
+                ModMessages.sendToServer(new ServerboundRecolourItemPacket(regbee, GAY_MODE));
             }
         }
         PLAYERpreview.setItemInHand(InteractionHand.MAIN_HAND, this.menu.input_slot.getItem());
@@ -338,7 +343,14 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
     @Override
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
+        if(pKeyCode == GLFW.GLFW_KEY_PERIOD){
+           GAY_MODE = !GAY_MODE;
+        }
+        if(pKeyCode == GLFW.GLFW_KEY_SPACE){
+            RGB_MODE = !RGB_MODE;
+        }
         UpdateServerRecipe();
+
         return super.keyPressed(pKeyCode, pScanCode, pModifiers);
     }
 
@@ -627,29 +639,25 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
     }
 
     public static void renderEntityInInventoryFollowsAngle(GuiGraphics pGuiGraphics, int pX, int pY, int pScale, float angleXComponent, float angleYComponent, Player pEntity) {
-        float f = angleXComponent;
-        float f1 = angleYComponent;
         Quaternionf quaternionf = (new Quaternionf()).rotateZ((float)Math.PI);
-        Quaternionf quaternionf1 = (new Quaternionf()).rotateX(f1 * 20.0F * ((float)Math.PI / 180F));
+        Quaternionf quaternionf1 = (new Quaternionf()).rotateX(angleYComponent * 20.0F * ((float)Math.PI / 180F));
         quaternionf.mul(quaternionf1);
-        float f2 = pEntity.yBodyRot;
-        float f3 = pEntity.getYRot();
-        float f4 = pEntity.getXRot();
-        float f5 = pEntity.yHeadRotO;
-        float f6 = pEntity.yHeadRot;
-        pEntity.yBodyRot = 180.0F + f * 20.0F;
-        pEntity.setYRot(180.0F + f * 40.0F);
-        pEntity.setXRot(-f1 * 20.0F);
+        float bodyY = pEntity.yBodyRot;
+        float rotY = pEntity.getYRot();
+        float X = pEntity.getXRot();
+        float headYold = pEntity.yHeadRotO;
+        float headYnew = pEntity.yHeadRot;
+        pEntity.yBodyRot = 180.0F + angleXComponent * 20.0F;
+        pEntity.setYRot(180.0F + angleXComponent * 40.0F);
+        pEntity.setXRot(-angleYComponent * 20.0F);
         pEntity.yHeadRot = pEntity.getYRot();
         pEntity.yHeadRotO = pEntity.getYRot();
         renderEntityInInventory(pGuiGraphics, pX, pY, pScale, quaternionf, quaternionf1, pEntity);
-        pEntity.yBodyRot = f2;
-        pEntity.setYRot(f3);
-        pEntity.setXRot(f4);
-        pEntity.yHeadRotO = f5;
-        pEntity.yHeadRot = f6;
-
-
+        pEntity.yBodyRot = bodyY;
+        pEntity.setYRot(rotY);
+        pEntity.setXRot(X);
+        pEntity.yHeadRotO = headYold;
+        pEntity.yHeadRot = headYnew;
     }
 
     public static void renderEntityInInventory(GuiGraphics pGuiGraphics, int pX, int pY, int pScale, Quaternionf p_281880_, @Nullable Quaternionf pCameraOrientation, LivingEntity pEntity) {

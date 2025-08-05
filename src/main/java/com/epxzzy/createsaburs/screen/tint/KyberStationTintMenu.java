@@ -28,6 +28,7 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
     public Slot resultSlot;
 
     private final DataSlot[] ColourValueIndexes = {DataSlot.standalone(), DataSlot.standalone(), DataSlot.standalone()};
+    public final DataSlot gay = DataSlot.standalone();
     Runnable slotUpdateListener = () -> {
     };
     Runnable inputUpdateListener = () -> {
@@ -58,14 +59,14 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
         playerinv.player.level();
         this.access = pAccess;
 
-        this.input_slot = this.addSlot(new Slot(this.inputContainer, 0, 8, 59){
+        this.input_slot = this.addSlot(new Slot(this.inputContainer, 0, 8, 59) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
                 return pStack.is(ModTags.Items.DYEABLE_LIGHTSABER);
             }
         });
 
-        this.krystal_slot =  this.addSlot(new Slot(this.inputContainer, 1, 44, 59){
+        this.krystal_slot = this.addSlot(new Slot(this.inputContainer, 1, 44, 59) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
                 return pStack.is(ModTags.Items.KYBER_CRYSTAL);
@@ -95,13 +96,15 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
         this.addDataSlot(ColourValueIndexes[0]);
         this.addDataSlot(ColourValueIndexes[1]);
         this.addDataSlot(ColourValueIndexes[2]);
+        this.addDataSlot(gay);
     }
 
 
     public boolean canCraft() {
         return !this.inputContainer.getItem(0).isEmpty() ^ !this.inputContainer.getItem(1).isEmpty();
     }
-    public void resetSlotPose(){
+
+    public void resetSlotPose() {
         int InputIndex = this.slots.indexOf(this.input_slot);
         int CostIndex = this.slots.indexOf(this.krystal_slot);
         int resutlIndex = this.slots.indexOf(this.resultSlot);
@@ -109,13 +112,13 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
         ItemStack InputItem = this.input_slot.getItem();
         ItemStack CostItem = this.krystal_slot.getItem();
 
-        this.input_slot = new Slot(this.inputContainer, 0, 8, 59){
+        this.input_slot = new Slot(this.inputContainer, 0, 8, 59) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
                 return pStack.is(ModTags.Items.DYEABLE_LIGHTSABER);
             }
-        } ;
-        this.krystal_slot = new Slot(this.inputContainer, 1, 44, 59){
+        };
+        this.krystal_slot = new Slot(this.inputContainer, 1, 44, 59) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
                 return pStack.is(ModTags.Items.KYBER_CRYSTAL);
@@ -144,10 +147,11 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
         this.slots.get(InputIndex).set(InputItem);
         this.slots.get(CostIndex).set(CostItem);
 
-        this.slots.set(resutlIndex, this.resultSlot );
+        this.slots.set(resutlIndex, this.resultSlot);
 
     }
-    public void stanceSlotPose(){
+
+    public void stanceSlotPose() {
         int InputIndex = this.slots.indexOf(this.input_slot);
         int CostIndex = this.slots.indexOf(this.krystal_slot);
         int resutlIndex = this.slots.indexOf(this.resultSlot);
@@ -155,13 +159,13 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
         ItemStack InputItem = this.input_slot.getItem();
         ItemStack CostItem = this.krystal_slot.getItem();
 
-        this.input_slot = new Slot(this.inputContainer, 0, 7, 8){
+        this.input_slot = new Slot(this.inputContainer, 0, 7, 8) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
                 return pStack.is(ModTags.Items.DYEABLE_LIGHTSABER);
             }
         };
-        this.krystal_slot = new Slot(this.inputContainer, 1, 7, 28){
+        this.krystal_slot = new Slot(this.inputContainer, 1, 7, 28) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
                 return pStack.is(ModTags.Items.KYBER_CRYSTAL);
@@ -192,16 +196,26 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
 
         this.slots.set(resutlIndex, this.resultSlot);
     }
-    public Slot slotsHelper(int indexprob, Slot pSlot){
+
+    public Slot slotsHelper(int indexprob, Slot pSlot) {
         this.slots.add(indexprob, pSlot);
         return pSlot;
-    };
+    }
+
+    ;
 
 
-    public boolean setItemColour(int[] colour) {
+    public boolean setItemColour(int[] colour, boolean gay) {
         if (this.ColourValueIndexes[2].get() == colour[0] && this.ColourValueIndexes[1].get() == colour[1] && this.ColourValueIndexes[0].get() == colour[2]) {
+            //if(dd(gay ? 1 : 0)){}
+
             return false;
+        /*} else if ((gay && isInputGay()) || (!gay && !isInputGay())) {
+            return false;
+
+         */
         } else {
+            this.gay.set(gay ? 1 : 0);
             this.ColourValueIndexes[0].set(colour[0]);
             this.ColourValueIndexes[1].set(colour[1]);
             this.ColourValueIndexes[2].set(colour[2]);
@@ -211,7 +225,7 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
             //this.ColourValueIndexes[2].set(c);
             //this.broadcastChanges();
             CreateSaburs.LOGGER.warn("colours have been set as: " + colour[0] + " " + colour[1] + " " + colour[2]);
-            this.setupResultSlot(colour[0], colour[1], colour[2]);
+            this.setupResultSlot(colour[0], colour[1], colour[2], (this.gay.get() == 1));
             return true;
 
         }
@@ -222,15 +236,6 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
          */
     }
 
-    public boolean setItemColourButBetter(int colour) {
-        //this.ColourValueIndexes[0].set(a);
-        //this.ColourValueIndexes[1].set(b);
-        //this.ColourValueIndexes[2].set(c);
-        //this.broadcastChanges();
-        //CreateSaburs.LOGGER.warn("colours have been set as: "+colour[0]+" "+colour[1]+" "+colour[2]);
-        this.setupResultSlotButBetter(colour);
-        return true;
-    }
     @Override
     public @NotNull ItemStack quickMoveStack(Player pPlayer, int pIndex) {
         ItemStack itemstack = ItemStack.EMPTY;
@@ -316,7 +321,7 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
         super.slotsChanged(pContainer);
     }
 
-    public void setupResultSlot(int r, int g, int b) {
+    public void setupResultSlot(int r, int g, int b, boolean gay) {
         //int colour;
         //if(isColourCached){
         //    colour = this.CachedColour;
@@ -335,6 +340,7 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
         CreateSaburs.LOGGER.warn("crafting colours " + r + " " + g + " " + b);
 
         taggussy.getCompound("display").putInt("colour", colour);
+        taggussy.getCompound("display").putBoolean("gay", gay);
         base.setTag(taggussy);
 
         this.broadcastChanges();
@@ -345,21 +351,12 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
         this.resultSlot.set(base);
     }
 
-    public void setupResultSlotButBetter(int colooorrr) {
-        int[] baseInput = this.getInputColour();
-        if (!(ColourConverter.portedRGBtoDecimal(baseInput) == colooorrr)) {
-            ItemStack base = this.input_slot.getItem().copy();
-            CompoundTag taggussy = base.getOrCreateTag();
-            taggussy.getCompound("display").putInt("colour", colooorrr);
-            base.setTag(taggussy);
-
-            this.broadcastChanges();
-            this.resultSlot.set(base);
-        }
-    }
-
     public int[] getInputColour() {
         return ColourConverter.PortedDecimaltoRGB(this.input_slot.getItem().getOrCreateTag().getCompound("display").getInt("colour"));
+    }
+
+    public boolean isInputGay() {
+        return this.input_slot.getItem().getOrCreateTag().getCompound("display").getBoolean("gay");
     }
 
     public boolean stillValid(@NotNull Player pPlayer) {
@@ -387,6 +384,7 @@ public class KyberStationTintMenu extends AbstractContainerMenu {
     public void registerInputUpdateListener(Runnable pListener) {
         this.inputUpdateListener = pListener;
     }
+
     protected boolean canMoveIntoInputSlots(ItemStack pStack) {
         return true;
     }

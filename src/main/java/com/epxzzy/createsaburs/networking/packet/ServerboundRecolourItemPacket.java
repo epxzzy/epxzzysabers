@@ -9,14 +9,18 @@ import java.util.function.Supplier;
 
 public class ServerboundRecolourItemPacket {
     private int[] COLOURS;
-    public ServerboundRecolourItemPacket( int[] colours){
+    private boolean GAY;
+
+    public ServerboundRecolourItemPacket( int[] colours, boolean gay){
         COLOURS = colours;
+        GAY = gay;
     }
             //int[] neww
 
 
     public ServerboundRecolourItemPacket(FriendlyByteBuf buf) {
         COLOURS = buf.readVarIntArray();
+        GAY = buf.readBoolean();
 
     }
 
@@ -28,6 +32,7 @@ public class ServerboundRecolourItemPacket {
 
     public void toBytes(FriendlyByteBuf buf) {
         buf.writeVarIntArray(COLOURS);
+        buf.writeBoolean(GAY);
     }
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
@@ -40,7 +45,7 @@ public class ServerboundRecolourItemPacket {
                     return;
 
                 }
-                stationMenu.setItemColour(this.getColourIndexes());
+                stationMenu.setItemColour(this.getColourIndexes(), GAY);
             }
 
 
