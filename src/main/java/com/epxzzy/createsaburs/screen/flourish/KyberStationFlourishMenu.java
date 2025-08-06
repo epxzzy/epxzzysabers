@@ -60,7 +60,7 @@ public class KyberStationFlourishMenu extends KyberMenuBase {
     }
 
     public KyberStationFlourishMenu(int pContainerId, Inventory playerinv, BlockPos pos, final ContainerLevelAccess pAccess) {
-        super(ModMenuTypes.SKREEN_TINT.get(), pos, pContainerId);
+        super(ModMenuTypes.SKREEN_FLOURISH.get(), pos, pContainerId);
         checkContainerSize(playerinv, 2);
         playerinv.player.level();
         this.access = pAccess;

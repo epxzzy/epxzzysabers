@@ -41,7 +41,6 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
     private KyberTabButton STANCE_TAB_BUTTON;
     private KyberTabButton FLOURISH_TAB_BUTTON;
 
-    private int selectedTab = 1;
 
     private boolean widthTooNarrow = this.width < 379;
     private int TABLE_MODE = 0;

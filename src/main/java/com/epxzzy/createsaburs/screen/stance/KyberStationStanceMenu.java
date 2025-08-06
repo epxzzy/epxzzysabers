@@ -60,7 +60,7 @@ public class KyberStationStanceMenu extends KyberMenuBase {
     }
 
     public KyberStationStanceMenu(int pContainerId, Inventory playerinv, BlockPos pos, final ContainerLevelAccess pAccess) {
-        super(ModMenuTypes.SKREEN_TINT.get(), pos, pContainerId);
+        super(ModMenuTypes.SKREEN_STANCE.get(), pos, pContainerId);
         checkContainerSize(playerinv, 2);
         playerinv.player.level();
         this.access = pAccess;
