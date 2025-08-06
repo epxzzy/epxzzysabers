@@ -94,7 +94,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
     private float xMouse;
     private float yMouse;
-    public LocalPlayer PLAYERpreview;
 
     public void slotChanged() {
 
@@ -259,7 +258,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
              */
 
 
-        PLAYERpreview = new LocalPlayer(this.getMinecraft(), this.minecraft.level, this.minecraft.getConnection(), null, null, false, false);
         //PLAYERpreview = this.minecraft.player;
     }
 
@@ -339,8 +337,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
                 ModMessages.sendToServer(new ServerboundRecolourItemPacket(regbee, GAY_MODE));
             }
         }
-        PLAYERpreview.setItemInHand(InteractionHand.MAIN_HAND, this.menu.input_slot.getItem());
-        PLAYERpreview.startUsingItem(InteractionHand.MAIN_HAND);
     }
 
 

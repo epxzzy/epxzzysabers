@@ -12,6 +12,7 @@ import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.simibubi.create.Create;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -19,11 +20,13 @@ import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
@@ -49,6 +52,8 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
 
     private float xMouse;
     private float yMouse;
+    public LocalPlayer PLAYERpreview;
+
 
     public void slotChanged() {
 
@@ -62,7 +67,7 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
     }
 
     private void containerChanged() {
-        //UpdateServerRecipe();
+        UpdateServerRecipe();
 
 
         //menu.craftSabur(HUE_SLIDER.getValueInt(), SAT_SLIDER.getValueInt(),LIT_SLIDER.getValueInt());
@@ -72,7 +77,7 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
     }
 
     public void TakeInput() {
-
+        UpdateServerRecipe();
     }
 
     @Override
@@ -113,11 +118,14 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         this.addWidget(STANCE_TAB_BUTTON);
         this.addWidget(FLOURISH_TAB_BUTTON);
         STANCE_TAB_BUTTON.setStateTriggered(true);
-
+        PLAYERpreview = new LocalPlayer(this.getMinecraft(), this.minecraft.level, this.minecraft.getConnection(), null, null, false, false);
+        UpdateServerRecipe();
     }
 
     public void UpdateServerRecipe() {
         //send packet to craft
+        PLAYERpreview.setItemInHand(InteractionHand.MAIN_HAND, this.menu.input_slot.getItem());
+        PLAYERpreview.startUsingItem(InteractionHand.MAIN_HAND);
     }
 
 
@@ -129,6 +137,7 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
 
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
+        UpdateServerRecipe();
         return super.mouseClicked(pMouseX, pMouseY, pButton);
     }
 
@@ -147,7 +156,7 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
     public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, delta);
-        renderEntityInInventoryFollowsMouse(guiGraphics, this.leftPos + 125, this.topPos + 70, 30, (float)(this.leftPos + 125) - this.xMouse, (float)(this.topPos + 70 - 50) - this.yMouse, this.minecraft.player);
+        renderEntityInInventoryFollowsMouse(guiGraphics, this.leftPos + 125, this.topPos + 70, 30, (float)(this.leftPos + 125) - this.xMouse, (float)(this.topPos + 70 - 50) - this.yMouse, PLAYERpreview);
 
         //LIST.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);

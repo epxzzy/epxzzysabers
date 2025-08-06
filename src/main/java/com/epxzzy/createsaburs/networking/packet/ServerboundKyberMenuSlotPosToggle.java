@@ -45,10 +45,10 @@ public class ServerboundKyberMenuSlotPosToggle {
                 }
                 CreateSaburs.LOGGER.info("changing slot pos "+isDefaultTab);
                 if(this.isDefaultTab()){
-                   stationMenu.stanceSlotPose();
+                   //stationMenu.stanceSlotPose();
                 }
                 else {
-                    stationMenu.resetSlotPose();
+                    //stationMenu.resetSlotPose();
                 }
             }
 
