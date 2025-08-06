@@ -71,8 +71,6 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
     private int TABLE_MODE = 0;
     //0 = recolour
     //1 = stance
-    private float scrollOffs;
-    private boolean scrolling;
     private int startRow;
     private boolean hasMaxPatterns = true;
 
@@ -111,10 +109,6 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
 
         this.displayStances = !itemstack1.isEmpty() && !this.hasMaxPatterns && !this.menu.selectableStances.isEmpty();
 
-        if (this.startRow >= this.totalRowCount()) {
-            this.startRow = 0;
-            this.scrollOffs = 0.0F;
-        }
 
 
         //menu.craftSabur(HUE_SLIDER.getValueInt(), SAT_SLIDER.getValueInt(),LIT_SLIDER.getValueInt());
@@ -177,27 +171,11 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
 
     @Override
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
-        int i = this.totalRowCount() - 4;
-        if (this.scrolling && this.displayStances && i > 0) {
-            int j = this.topPos + 13;
-            int k = j + 56;
-            this.scrollOffs = ((float) pMouseY - (float) j - 7.5F) / ((float) (k - j) - 15.0F);
-            this.scrollOffs = Mth.clamp(this.scrollOffs, 0.0F, 1.0F);
-            this.startRow = Math.max((int) ((double) (this.scrollOffs * (float) i) + 0.5D), 0);
-            return true;
-        } else {
-            return super.mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
-        }
+        return super.mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
     }
 
     public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
         int i = this.totalRowCount() - 4;
-        if (this.displayStances && i > 0) {
-            float f = (float) pDelta / (float) i;
-            this.scrollOffs = Mth.clamp(this.scrollOffs - f, 0.0F, 1.0F);
-            this.startRow = Math.max((int) (this.scrollOffs * (float) i + 0.5F), 0);
-        }
-
         return true;
     }
 
@@ -208,10 +186,9 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
 
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
-        this.scrolling = false;
         if (this.displayStances) {
-            int i = this.leftPos + 60;
-            int j = this.topPos + 13;
+            int i = this.leftPos + 27; //+ 30;
+            int j = this.topPos + 8;
 
             for (int k = 0; k < 4; ++k) {
                 for (int l = 0; l < 4; ++l) {
@@ -226,12 +203,6 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
                         return true;
                     }
                 }
-            }
-
-            i = this.leftPos + 119;
-            j = this.topPos + 9;
-            if (pMouseX >= (double) i && pMouseX < (double) (i + 12) && pMouseY >= (double) j && pMouseY < (double) (j + 56)) {
-                this.scrolling = true;
             }
         }
 
@@ -250,7 +221,7 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         guiGraphics.blit(STANCE_TEXTURE, x - 15, y, 0, 0, 215, imageHeight);
         if (this.resultStance != null && !this.hasMaxPatterns) {
             guiGraphics.pose().pushPose();
-            guiGraphics.pose().translate((float)(i + 139), (float)(j + 52), 0.0F);
+            guiGraphics.pose().translate((float) (i + 139), (float) (j + 52), 0.0F);
             guiGraphics.pose().scale(24.0F, -24.0F, 1.0F);
             guiGraphics.pose().translate(0.5F, 0.5F, 0.5F);
             float f = 0.6666667F;
@@ -261,8 +232,8 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
             guiGraphics.blit(LOOMSHISH, i + this.menu.resultSlot.x - 2, j + this.menu.resultSlot.y - 2, this.imageWidth, 17, 17, 16);
         }
         if (this.displayStances) {
-            int l2 = i + 60;
-            int l = j + 13;
+            int l2 = i + 27;
+            int l = j + 8; //+ 13;
             List<BladeStance> list = this.menu.getSelectableStances();
 
             label64:
