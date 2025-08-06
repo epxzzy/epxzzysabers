@@ -5,25 +5,25 @@ import com.google.common.collect.ImmutableList;
 import java.util.List;
 
 public enum BladeStance {
-    FORM0("nada "),
-    FORM1("shii-cho"),
+    FORM0(0,"nada "),
+    FORM1(1,"shii-cho"),
     // kit fisto, luke?
-    FORM2("makashi"),
+    FORM2(2,"makashi"),
     // darth tyranus, grand inquisitor
-    FORM3("soresu"),
+    FORM3(3,"soresu"),
     // hello there
-    FORM4("ataru"),
+    FORM4(4,"ataru"),
     // yoda, qui gon jinn
-    FORM5("shien","djem-so"),
+    FORM5(5,"shien","djem-so"),
     // skywanker
-    FORM6("niman"),
+    FORM6(6,"niman"),
     // maul
-    FORM7("juyo","vaapad");
+    FORM7(7,"juyo","vaapad");
     // sidious, windu
 
-    List<String> flourishes;
-    private BladeStance(String... str) {
-        this.flourishes = ImmutableList.copyOf(str);
+    List<String> stances;
+    private BladeStance(int order, String... str) {
+        this.stances= ImmutableList.copyOf(str);
     }
 
 

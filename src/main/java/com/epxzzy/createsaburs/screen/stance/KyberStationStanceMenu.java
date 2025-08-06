@@ -3,16 +3,21 @@ package com.epxzzy.createsaburs.screen.stance;
 
 import com.epxzzy.createsaburs.block.ModBlocks;
 import com.epxzzy.createsaburs.CreateSaburs;
+import com.epxzzy.createsaburs.rendering.poseHandlers.BladeStance;
 import com.epxzzy.createsaburs.screen.ModMenuTypes;
 import com.epxzzy.createsaburs.screen.components.KyberMenuBase;
 import com.epxzzy.createsaburs.screen.flourish.KyberStationFlourishMenu;
 import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
+import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BannerPatternTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -21,15 +26,23 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.BannerPatternItem;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BannerPattern;
 import org.checkerframework.checker.units.qual.K;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class KyberStationStanceMenu extends KyberMenuBase {
     public final ContainerLevelAccess access;
     public Slot input_slot;
     public Slot krystal_slot;
     public Slot resultSlot;
+    final DataSlot selectedStanceIndex = DataSlot.standalone();
+    public List<BladeStance> selectableStances = List.of();
 
     Runnable slotUpdateListener = () -> {
     };
@@ -92,10 +105,11 @@ public class KyberStationStanceMenu extends KyberMenuBase {
                 super.onTake(pPlayer, stacc);
             }
         });
-
+        
         addPlayerInventory(playerinv);
         addPlayerHotbar(playerinv);
-
+    
+        this.addDataSlot(this.selectedStanceIndex);
     }
 
 
@@ -119,8 +133,47 @@ public class KyberStationStanceMenu extends KyberMenuBase {
 
     @Override
     public void slotsChanged(@NotNull Container pContainer) {
+
+
         ItemStack saber = this.input_slot.getItem();
         ItemStack krystal = this.krystal_slot.getItem();
+        if (!saber.isEmpty()) {
+            int i = this.selectedStanceIndex.get();
+            boolean flag = this.isValidStanceIndex(i);
+            List<BladeStance> list = this.selectableStances;
+            this.selectableStances = this.getSelectableStances();
+            BladeStance holder;
+            if (this.selectableStances.size() == 1) {
+                this.selectedStanceIndex.set(0);
+                holder = this.selectableStances.get(0);
+            } else if (!flag) {
+                this.selectedStanceIndex.set(-1);
+                holder = null;
+            } else {
+                BladeStance holder1 = list.get(i);
+                int j = this.selectableStances.indexOf(holder1);
+                if (j != -1) {
+                    holder = holder1;
+                    this.selectedStanceIndex.set(j);
+                } else {
+                    holder = null;
+                    this.selectedStanceIndex.set(-1);
+                }
+            }
+
+            if (holder != null) {
+                    this.setupResultSlot(holder);
+            } else {
+                this.resultSlot.set(ItemStack.EMPTY);
+            }
+
+            this.broadcastChanges();
+        } else {
+            this.resultSlot.set(ItemStack.EMPTY);
+            this.selectableStances = List.of();
+            this.selectedStanceIndex.set(-1);
+        }
+
         if (!saber.isEmpty()) {
             if (!krystal.isEmpty()) {
                 CreateSaburs.LOGGER.warn("THE MERGE");
@@ -146,33 +199,16 @@ public class KyberStationStanceMenu extends KyberMenuBase {
         super.slotsChanged(pContainer);
     }
 
-    public void setupResultSlot(int r, int g, int b, boolean gay) {
-        //int colour;
-        //if(isColourCached){
-        //    colour = this.CachedColour;
-        //this.resultSlot.set(this.lastCachedItemStacc);
-        //return;
-        //}
-        //else {
-        int colour = ColourConverter.portedRGBtoDecimal(new int[]{r, g, b});
-        //    this.CachedColour = colour;
-        //    this.isColourCached = true;
-        //}
-
+    public void setupResultSlot(BladeStance stance) {
         ItemStack base = this.input_slot.getItem().copy();
         CompoundTag taggussy = base.getOrCreateTag();
 
-        CreateSaburs.LOGGER.warn("crafting colours " + r + " " + g + " " + b);
 
-        taggussy.getCompound("display").putInt("colour", colour);
-        taggussy.getCompound("display").putBoolean("gay", gay);
+        taggussy.getCompound("display").putInt("stance", stance.ordinal());
         base.setTag(taggussy);
 
         this.broadcastChanges();
-        //if(this.lastCachedItemStacc == null){
-        //    lastCachedItemStacc = base;
-        //}
-        //this.outputContainer.setItem(base);
+
         this.resultSlot.set(base);
     }
 
@@ -183,11 +219,29 @@ public class KyberStationStanceMenu extends KyberMenuBase {
     public boolean isInputGay() {
         return this.input_slot.getItem().getOrCreateTag().getCompound("display").getBoolean("gay");
     }
+    public boolean clickMenuButton(Player pPlayer, int pId) {
+        if (pId >= 0 && pId < this.selectableStances.size()) {
+            this.selectedStanceIndex.set(pId);
+            this.setupResultSlot(this.selectableStances.get(pId));
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public int getSelectedStanceIndex() {
+        return this.selectedStanceIndex.get();
+    }
 
+
+    public List<BladeStance> getSelectableStances() {
+            return BladeStance.getStances();
+    }
     public boolean stillValid(@NotNull Player pPlayer) {
         return stillValid(this.access, pPlayer, ModBlocks.KYBERSTATION.get());
     }
-
+    private boolean isValidStanceIndex(int pIndex) {
+        return pIndex >= 0 && pIndex < this.selectableStances.size();
+    }
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
