@@ -2,7 +2,6 @@ package com.epxzzy.createsaburs.networking.packet;
 
 import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.screen.components.KyberMenuBase;
-import com.epxzzy.createsaburs.screen.flourish.KyberStationFlourishMenu;
 import com.epxzzy.createsaburs.screen.stance.KyberStationStanceMenu;
 import com.epxzzy.createsaburs.screen.tint.KyberStationTintMenu;
 import com.simibubi.create.Create;
@@ -97,18 +96,6 @@ public class ServerboundKyberMenuTabChange {
                     Component.literal("Stance Menu")
                 );
             }
-            case 2 -> {
-                return new SimpleMenuProvider((MenuConstructor, b, c) ->
-                    new KyberStationFlourishMenu(
-                            MenuConstructor,
-                            b,
-                            pPos,
-                            ContainerLevelAccess.create(pLevel, pPos)
-                    ),
-                    Component.literal("Flourish Menu")
-                );
-            }
-
         }
 
         return null;

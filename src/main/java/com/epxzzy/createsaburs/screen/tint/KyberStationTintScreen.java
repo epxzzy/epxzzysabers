@@ -56,7 +56,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
     private KyberTabButton RECOLOUR_TAB_BUTTON;
     private KyberTabButton STANCE_TAB_BUTTON;
-    private KyberTabButton FLOURISH_TAB_BUTTON;
+    //private KyberTabButton FLOURISH_TAB_BUTTON;
 
             /*
 
@@ -230,7 +230,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
                 super.onPress();
             }
         };
-
+        /*
         FLOURISH_TAB_BUTTON = new KyberTabButton(KyberModes.FLOURISH, 2, this.topPos + 70, this.leftPos - 45) {
             @Override
             public void onPress() {
@@ -239,10 +239,12 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
             }
         };
 
+         */
+
         RECOLOUR_TAB_BUTTON.setStateTriggered(true);
         this.addWidget(RECOLOUR_TAB_BUTTON);
         this.addWidget(STANCE_TAB_BUTTON);
-        this.addWidget(FLOURISH_TAB_BUTTON);
+        //this.addWidget(FLOURISH_TAB_BUTTON);
 
 
 
@@ -423,7 +425,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         renderRecolourTab(guiGraphics, mouseX, mouseY, delta);
 
         //LIST.render(guiGraphics, mouseX, mouseY, delta);
-        renderTooltip(guiGraphics, mouseX, mouseY);
 
 
         guiGraphics.pose().pushPose();
@@ -433,10 +434,11 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
         RECOLOUR_TAB_BUTTON.renderWidget(guiGraphics, mouseX, mouseY, delta);
         STANCE_TAB_BUTTON.renderWidget(guiGraphics, mouseX, mouseY, delta);
-        FLOURISH_TAB_BUTTON.renderWidget(guiGraphics, mouseX, mouseY, delta);
+        //FLOURISH_TAB_BUTTON.renderWidget(guiGraphics, mouseX, mouseY, delta);
 
 
         guiGraphics.pose().popPose();
+        renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
 

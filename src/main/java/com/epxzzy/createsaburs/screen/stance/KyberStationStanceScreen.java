@@ -63,7 +63,7 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
 
     private KyberTabButton RECOLOUR_TAB_BUTTON;
     private KyberTabButton STANCE_TAB_BUTTON;
-    private KyberTabButton FLOURISH_TAB_BUTTON;
+    //private KyberTabButton FLOURISH_TAB_BUTTON;
     public boolean displayStances;
     private List<BladeStance> resultStance;
 
@@ -145,7 +145,7 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
                 super.onPress();
             }
         };
-
+        /*
         FLOURISH_TAB_BUTTON = new KyberTabButton(KyberModes.FLOURISH, 2, this.topPos + 70, this.leftPos - 45) {
             @Override
             public void onPress() {
@@ -154,10 +154,12 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
             }
         };
 
+         */
+
 
         this.addWidget(RECOLOUR_TAB_BUTTON);
         this.addWidget(STANCE_TAB_BUTTON);
-        this.addWidget(FLOURISH_TAB_BUTTON);
+        //this.addWidget(FLOURISH_TAB_BUTTON);
         STANCE_TAB_BUTTON.setStateTriggered(true);
         PLAYERpreview = new LocalPlayer(this.getMinecraft(), this.minecraft.level, this.minecraft.getConnection(), null, null, false, false);
         UpdateServerRecipe();
@@ -273,7 +275,6 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         renderEntityInInventoryFollowsMouse(guiGraphics, this.leftPos + 125, this.topPos + 70, 30, (float) (this.leftPos + 125) - this.xMouse, (float) (this.topPos + 70 - 50) - this.yMouse, PLAYERpreview);
 
         //LIST.render(guiGraphics, mouseX, mouseY, delta);
-        renderTooltip(guiGraphics, mouseX, mouseY);
 
 
         guiGraphics.pose().pushPose();
@@ -283,10 +284,11 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
 
         RECOLOUR_TAB_BUTTON.renderWidget(guiGraphics, mouseX, mouseY, delta);
         STANCE_TAB_BUTTON.renderWidget(guiGraphics, mouseX, mouseY, delta);
-        FLOURISH_TAB_BUTTON.renderWidget(guiGraphics, mouseX, mouseY, delta);
+        //FLOURISH_TAB_BUTTON.renderWidget(guiGraphics, mouseX, mouseY, delta);
 
 
         guiGraphics.pose().popPose();
+        renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
     private void renderStanceButton(GuiGraphics pGuiGraphics, int num, int pX, int pY) {
