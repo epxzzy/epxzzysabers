@@ -6,7 +6,6 @@ import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.rendering.poseHandlers.BladeStance;
 import com.epxzzy.createsaburs.screen.ModMenuTypes;
 import com.epxzzy.createsaburs.screen.components.KyberMenuBase;
-import com.epxzzy.createsaburs.screen.flourish.KyberStationFlourishMenu;
 import com.epxzzy.createsaburs.utils.ColourConverter;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;

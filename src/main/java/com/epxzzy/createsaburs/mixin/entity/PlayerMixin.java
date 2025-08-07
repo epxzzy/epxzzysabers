@@ -4,9 +4,12 @@ import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import com.epxzzy.createsaburs.utils.ModTags;
+import com.epxzzy.createsaburs.utils.PlayerHelperLmao;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,9 +19,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
-public abstract class PlayerMixin {
+public abstract class PlayerMixin implements PlayerHelperLmao {
 
+    public boolean attacking = false;
 
+    public InteractionHand attackingHand;
+    public boolean attackingWithSaber = false;
+
+    public int attackProgress = 0;
+    //^^^^^^ max should be 6 ticks
+
+    public float SaberAnim = 0;
+    public float oSaberAnim = 0;
     /*
     @Inject(
             method = "blockUsingShield",
@@ -46,8 +58,44 @@ public abstract class PlayerMixin {
     }
 
      */
+    @Inject(
+            method = "tick",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/LivingEntity;tick()V"
+                 ),
+            cancellable = true)
 
+    private void CreateSaburs$customTick(CallbackInfo ci) {
+        //CreateSaburs.LOGGER.warn("player hurt");
+        Player that = ((Player) (Object) this);
 
+        if (this.attacking) {
+            ++this.attackProgress;
+            if (this.attackProgress>= 6) {
+                this.attackProgress = 0;
+                this.attacking = false;
+            }
+        } else {
+            this.attackProgress = 0;
+        }
+
+        //this.SaberAnim = (float)this.swingTime / (float)i;
+
+        //ATTACKING = true;
+    }
+    public float getSaberAttackAnim(float pPartialTick) {
+        float f = this.SaberAnim - this.oSaberAnim;
+        if (f < 0.0F) {
+            ++f;
+        }
+
+        return this.oSaberAnim + f * pPartialTick;
+    }
+
+    public void LogFlightDetails(){
+       CreateSaburs.LOGGER.debug("PROG: {} ATTK: {}, ARM: {}",this.attackProgress,this.attacking,this.attackingHand);
+    };
     @Inject(
             method = "hurt",
             at = @At(value = "HEAD"),
@@ -72,22 +120,41 @@ public abstract class PlayerMixin {
 
     }
 
-/*
     @Inject(
-            method = "isInvulnerableTo",
+            method = "attack",
             at = @At(value = "HEAD"),
-            cancellable = true
-    )
+            cancellable = true)
 
-    private void CreateSaburs$customIsInvulnerableTo(DamageSource pSource, CallbackInfoReturnable<Boolean> cir){
+    private void CreateSaburs$customAttack(Entity pTarget, CallbackInfo ci) {
+        //CreateSaburs.LOGGER.warn("player hurt");
         Player that = ((Player) (Object) this);
-        if(pSource.is(DamageTypeTags.IS_PROJECTILE)&&!(that.getAbilities().flying)){
-           cir.setReturnValue(Protosaber.checkForSaberBlock(that)||SingleBladed.checkForSaberBlock(that));
-           cir.cancel();
+        Entity notThat = pTarget;
+
+        if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {
+            this.attackProgress = -1;
+            this.attacking = true;
+            this.attackingHand = that.swingingArm;
         }
+        attacking = true;
     }
 
- */
+
+    /*
+        @Inject(
+                method = "isInvulnerableTo",
+                at = @At(value = "HEAD"),
+                cancellable = true
+        )
+
+        private void CreateSaburs$customIsInvulnerableTo(DamageSource pSource, CallbackInfoReturnable<Boolean> cir){
+            Player that = ((Player) (Object) this);
+            if(pSource.is(DamageTypeTags.IS_PROJECTILE)&&!(that.getAbilities().flying)){
+               cir.setReturnValue(Protosaber.checkForSaberBlock(that)||SingleBladed.checkForSaberBlock(that));
+               cir.cancel();
+            }
+        }
+
+     */
     @Inject(
             method = "attack",
             at = @At(value = "HEAD")

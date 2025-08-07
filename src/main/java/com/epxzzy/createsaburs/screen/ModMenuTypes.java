@@ -2,7 +2,6 @@ package com.epxzzy.createsaburs.screen;
 
 
 import com.epxzzy.createsaburs.CreateSaburs;
-import com.epxzzy.createsaburs.screen.flourish.KyberStationFlourishMenu;
 import com.epxzzy.createsaburs.screen.stance.KyberStationStanceMenu;
 import com.epxzzy.createsaburs.screen.stance.KyberStationStanceScreen;
 import com.epxzzy.createsaburs.screen.tint.KyberStationTintMenu;
@@ -23,9 +22,6 @@ public class ModMenuTypes {
             registerMenuType("kyber_station_menu_tint", KyberStationTintMenu::new);
     public static final RegistryObject<MenuType<KyberStationStanceMenu>> SKREEN_STANCE=
             registerMenuType("kyber_station_menu_stance", KyberStationStanceMenu::new);
-    public static final RegistryObject<MenuType<KyberStationFlourishMenu>> SKREEN_FLOURISH=
-            registerMenuType("kyber_station_menu_flourish", KyberStationFlourishMenu::new);
-
 
 
 
