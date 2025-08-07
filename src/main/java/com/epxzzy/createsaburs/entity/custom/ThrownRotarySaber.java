@@ -207,7 +207,7 @@ public class ThrownRotarySaber extends AbstractArrow {
 
     @Override
     public void remove(RemovalReason pReason) {
-        this.getOwner().spawnAtLocation(this.getPickupItem());
+        //this.getOwner().spawnAtLocation(this.getPickupItem());
         super.remove(pReason);
     }
 
