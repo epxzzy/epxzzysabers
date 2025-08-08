@@ -33,6 +33,8 @@ public class PlayerSaberRenderer {
     }
 
     public static void beforeSetupAnim(Player player, HumanoidModel<?> model) {
+        boolean[] bbc = RotarySaber.checkForSaberFly(player);
+
         if (Protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
             model.leftArm.resetPose();
             model.rightArm.resetPose();
@@ -42,7 +44,7 @@ public class PlayerSaberRenderer {
             model.rightArm.resetPose();
             model.rightArm.resetPose();
         }
-        if((Protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player))&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
+        if((Protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player))&& player.isShiftKeyDown()){
             model.rightArm.resetPose();
             model.leftArm.resetPose();
             model.head.resetPose();
@@ -51,7 +53,7 @@ public class PlayerSaberRenderer {
             model.rightLeg.resetPose();
             
         };
-        if(RotarySaber.checkForSaberFly(player)[0]){
+        if(bbc[0]){
             model.head.resetPose();
             model.hat.resetPose();
             model.body.resetPose();
@@ -64,29 +66,37 @@ public class PlayerSaberRenderer {
 
     public static void afterSetupAnim(Player player, HumanoidModel<?> model) {
         int flourish = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("flourish");
+        boolean[] bbc = RotarySaber.checkForSaberFly(player);
         if(player.swingTime > 0 || player.getAttackAnim(1) > 0) {
             //CreateSaburs.LOGGER.warn("swing time is: " + player.swingTime + " and attack time is: " + player.getAttackAnim(1));
         }
-        if ((Protosaber.checkForSaberEquipment(player, true) ||SaberPike.checkForSaberEquipment(player, true)) && player.swingTime > 0) {
-            setDualSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model, flourish);
-        }
-        if (Protosaber.checkForSaberEquipment(player, false) && Protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
-            setDualSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
-        }
-        if (SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0) {
-            setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, false, model, flourish);
-        }
-        if (SingleBladed.checkForSaberEquipment(player, false) && SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0) {
-            setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
-        }
-        if((Protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player))&& IsPlayerStationary(player)){//&& player.isShiftKeyDown()){
+        if((Protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player)) && player.isShiftKeyDown()){
             setBladedStance(player, model);
+            return;
+        }
+        if (bbc[0]){
+            setRotaryFlyPose(player, model, bbc[1]);
+            return;
         }
         if(RotarySaber.checkForSaberBlock(player)){
             setRotaryBlockPose(player, model);
+            return;
         }
-        if (RotarySaber.checkForSaberFly(player)[0]){
-            setRotaryFlyPose(player, model, RotarySaber.checkForSaberFly(player)[1]);
+        if ((Protosaber.checkForSaberEquipment(player, true) ||SaberPike.checkForSaberEquipment(player, true)) && player.swingTime > 0) {
+            setDualSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model, flourish);
+            return;
+        }
+        if (Protosaber.checkForSaberEquipment(player, false) && Protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
+            setDualSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
+            return;
+        }
+        if (SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0) {
+            setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, false, model, flourish);
+            return;
+        }
+        if (SingleBladed.checkForSaberEquipment(player, false) && SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0) {
+            setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
+            return;
         }
     }
 

@@ -94,7 +94,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     }
 
     public void LogFlightDetails(){
-       CreateSaburs.LOGGER.debug("PROG: {} ATTK: {}, ARM: {}",this.attackProgress,this.attacking,this.attackingHand);
+       //CreateSaburs.LOGGER.debug("PROG: {} ATTK: {}, ARM: {}",this.attackProgress,this.attacking,this.attackingHand);
     };
     @Inject(
             method = "hurt",
@@ -110,6 +110,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             boolean blocking_with_sabur = that.getMainHandItem().is(ModTags.Items.LIGHTSABER) && that.getUseItem().canPerformAction(CreateSaburs.SABER_BLOCK);
             boolean attacking_with_sabur = notThat.getMainHandItem().is(ModTags.Items.LIGHTSABER);
 
+            CreateSaburs.LOGGER.debug("before i get killed, i would like to preface that i was infact hit by a attack of {}",notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
             if (blocking_with_sabur && attacking_with_sabur) {
                 //cir.cancel();
                 //that.playSound(ModSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
@@ -129,6 +130,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         //CreateSaburs.LOGGER.warn("player hurt");
         Player that = ((Player) (Object) this);
         Entity notThat = pTarget;
+        CreateSaburs.LOGGER.debug("before i kill this individual, i would like to preface that i was infact attacking an attack of {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
 
         if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {
             this.attackProgress = -1;

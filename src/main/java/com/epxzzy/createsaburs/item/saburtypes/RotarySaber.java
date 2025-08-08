@@ -215,13 +215,14 @@ public class RotarySaber extends Protosaber {
     public static boolean[] checkForSaberFly(Entity Entityy) {
 
         if (Entityy instanceof Player) {
-            ((Player) Entityy).getMainHandItem().getOrCreateTag().getBoolean("FlyBoiii");
+            //((Player) Entityy).getMainHandItem().getOrCreateTag().getBoolean("FlyBoiii");
 
-            boolean mainhand = (((Player) Entityy).getMainHandItem().is(ModItems.ROTARY_SABER.get()) && ((Player) Entityy).getMainHandItem().getOrCreateTag().getBoolean("FlyBoiii")) && ((Player) Entityy).getAbilities().flying;
-            boolean offhand = (((Player) Entityy).getOffhandItem().is(ModItems.ROTARY_SABER.get()) && ((Player) Entityy).getOffhandItem().getOrCreateTag().getBoolean("FlyBoiii")) && ((Player) Entityy).getAbilities().flying;
+            boolean mainhand = (((Player) Entityy).getMainHandItem().is(ModItems.ROTARY_SABER.get()) && ((Player) Entityy).getMainHandItem().getOrCreateTag().getBoolean("FlyBoiii"));
+            boolean offhand = (((Player) Entityy).getOffhandItem().is(ModItems.ROTARY_SABER.get()) && ((Player) Entityy).getOffhandItem().getOrCreateTag().getBoolean("FlyBoiii"));
+            //checking for entity fly ability here makes flight animation fine in singleplayer, but broken in multiplayer
 
             //first one meaning flight is true, second specifies the hand, third is both hands have one
-            return new boolean[]{mainhand || offhand, offhand, mainhand && offhand};
+            return new boolean[]{ (mainhand || offhand), offhand, mainhand && offhand};
         }
         return new boolean[]{false, false, false};
     }
