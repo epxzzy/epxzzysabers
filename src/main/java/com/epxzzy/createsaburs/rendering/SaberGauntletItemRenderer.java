@@ -67,15 +67,6 @@ public class SaberGauntletItemRenderer extends CustomRenderedItemModelRenderer {
         }
 
 
-       /*
-        if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
-            ms.mulPose(Axis.YP.rotationDegrees(ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * 20));
-        }
-        else {
-        */
-
-        //
-        //ms.translate(xOffset, 0, 0);
 
 
 

@@ -94,17 +94,6 @@ public class RotarySaberItemRenderer extends CustomRenderedItemModelRenderer {
         //}
 
 
-        float xOffset = -1 / 16f;
-        //ms.translate(0, xOffset * -3, 0);
-        /*
-        if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
-            ms.mulPose(Axis.YP.rotationDegrees(ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * 20));
-        }
-        else {
-        */
-        //
-        //ms.translate(xOffset, 0, 0);
-
 
 
 

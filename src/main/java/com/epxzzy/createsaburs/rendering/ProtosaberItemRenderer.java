@@ -28,7 +28,6 @@ import static com.epxzzy.createsaburs.utils.StackHelper.getEntitiesHoldingItemRi
 
 public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
     protected static final PartialModel HILT_BIT = PartialModel.of(CreateSaburs.asResource("item/hilt/dual_hilt"));
-    protected static final PartialModel GEAR_BIT = PartialModel.of(CreateSaburs.asResource("item/additive/gear"));
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(CreateSaburs.asResource("item/additive/blade"));
 
     @Override
@@ -71,17 +70,5 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
         }
 
 
-        float xOffset = -1 / 16f;
-        ms.translate(0, xOffset * -3, 0);
-        /*
-        if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
-            ms.mulPose(Axis.YP.rotationDegrees(ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * 20));
-        }
-        else {
-        */
-        ms.mulPose(Axis.YP.rotationDegrees(ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (stack.getOrCreateTag().getBoolean("ActiveBoiii")? -30 : 4)));
-//
-        //ms.translate(xOffset, 0, 0);
-        renderer.render(GEAR_BIT.get(), light);
     }
 }
