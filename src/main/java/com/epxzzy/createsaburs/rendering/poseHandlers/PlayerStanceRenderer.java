@@ -57,7 +57,7 @@ public class PlayerStanceRenderer {
         model.rightLeg.setPos(-2, 9, -1);
         model.rightLeg.setRotation(AngleHelper.rad(5), AngleHelper.rad(7.5), AngleHelper.rad(-1));
 
-        model.leftLeg.setPos(0, 9, 0);
+        model.leftLeg.setPos(2, 9, 1);
         model.leftLeg.setRotation(AngleHelper.rad(5),  AngleHelper.rad(-7.5), AngleHelper.rad(1));
 
     }
