@@ -40,6 +40,7 @@ public class SingleBladed extends Protosaber {
 
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+        /*
         if(!entity.level().isClientSide()) {
             CompoundTag tagger = stack.getOrCreateTag();
             int baller = (int) ((Math.random() * 8) + 1);
@@ -47,6 +48,9 @@ public class SingleBladed extends Protosaber {
             CreateSaburs.LOGGER.debug("randomiser decided on number {}", baller);
             stack.setTag(tagger);
         }
+
+         */
+
         //SWANG = true;
         //CreateSaburs.LOGGER.debug("swang: {}, hurted: {}", this.SWANG, this.HURTED);
         //ofc swing triggers first cause why the fuck would things make sense

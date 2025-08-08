@@ -5,6 +5,7 @@ import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.epxzzy.createsaburs.utils.PlayerHelperLmao;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
@@ -111,6 +112,8 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             boolean attacking_with_sabur = notThat.getMainHandItem().is(ModTags.Items.LIGHTSABER);
 
             CreateSaburs.LOGGER.debug("before i get killed, i would like to preface that i was infact hit by a attack of {}",notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
+
+
             if (blocking_with_sabur && attacking_with_sabur) {
                 //cir.cancel();
                 //that.playSound(ModSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
@@ -131,6 +134,19 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         Player that = ((Player) (Object) this);
         Entity notThat = pTarget;
         CreateSaburs.LOGGER.debug("before i kill this individual, i would like to preface that i was infact attacking an attack of {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
+
+        if(!that.level().isClientSide()) {
+            CompoundTag tagger = that.getMainHandItem().getOrCreateTag();
+            int old = tagger.getCompound("display").getInt("atk");
+            int baller = old > 0 && old < 8? old+1:1;
+            tagger.getCompound("display").putInt("atk", baller);
+
+            CreateSaburs.LOGGER.debug("setting an atk of  {}", baller);
+            that.getMainHandItem().setTag(tagger);
+        }
+
+
+
 
         if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {
             this.attackProgress = -1;
