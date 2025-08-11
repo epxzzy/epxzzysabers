@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.epxzzy.createsaburs.rendering.PlayerSaberRenderer;
+import com.epxzzy.createsaburs.rendering.PlayerPoseRouter;
 
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -25,14 +25,13 @@ public class HumanoidModelMixin<T extends LivingEntity> {
         if (!(pEntity instanceof AbstractClientPlayer player))
             return;
 
-        PlayerSaberRenderer.afterSetupAnim(player, (HumanoidModel<?>) (Object) this);
+        PlayerPoseRouter.afterSetupAnim(player, (HumanoidModel<?>) (Object) this);
     }
-
-    @Inject(method = "setupAnim*", at = @At("HEAD"))
+ @Inject(method = "setupAnim*", at = @At("HEAD"))
     private void create$beforeSetupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch, CallbackInfo callbackInfo) {
         if (!(pEntity instanceof AbstractClientPlayer player))
             return;
 
-        PlayerSaberRenderer.beforeSetupAnim(player, (HumanoidModel<?>) (Object) this);
+        PlayerPoseRouter.beforeSetupAnim(player, (HumanoidModel<?>) (Object) this);
     }
 }

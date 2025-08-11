@@ -6,6 +6,7 @@ import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.epxzzy.createsaburs.utils.PlayerHelperLmao;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
@@ -79,6 +80,8 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             }
         } else {
             this.attackProgress = 0;
+            that.displayClientMessage(Component.literal(""), true);
+
         }
 
         //this.SaberAnim = (float)this.swingTime / (float)i;
@@ -92,6 +95,9 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         }
 
         return this.oSaberAnim + f * pPartialTick;
+    }
+    public int getAttackTime(){
+        return this.attackProgress;
     }
 
     public void LogFlightDetails(){
@@ -108,13 +114,22 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         LivingEntity notThat = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
 
         if (notThat != null) {
-            boolean blocking_with_sabur = that.getMainHandItem().is(ModTags.Items.LIGHTSABER) && that.getUseItem().canPerformAction(CreateSaburs.SABER_BLOCK);
+            boolean blocking_with_sabur = that.getUseItem().is(ModTags.Items.LIGHTSABER);
             boolean attacking_with_sabur = notThat.getMainHandItem().is(ModTags.Items.LIGHTSABER);
 
-            CreateSaburs.LOGGER.debug("before i get killed, i would like to preface that i was infact hit by a attack of {}",notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
+
 
 
             if (blocking_with_sabur && attacking_with_sabur) {
+                CreateSaburs.LOGGER.debug("before i get killed, i would like to preface that i was infact hit by a attack of {}",notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
+                int block_value = notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk");
+
+                CompoundTag tagger = that.getUseItem().getOrCreateTag();
+                tagger.getCompound("display").putInt("blk", block_value);
+
+                that.getMainHandItem().setTag(tagger);
+
+                //remove the custom block animation
                 //cir.cancel();
                 //that.playSound(ModSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
                 return;
@@ -142,6 +157,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             tagger.getCompound("display").putInt("atk", baller);
 
             CreateSaburs.LOGGER.debug("setting an atk of  {}", baller);
+            that.displayClientMessage(Component.literal("attacking " +baller), true);
             that.getMainHandItem().setTag(tagger);
         }
 
