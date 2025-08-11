@@ -43,6 +43,8 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 
@@ -224,6 +226,8 @@ public class Protosaber extends Item {
         //CreateSaburs.LOGGER.info("stopped blocking, changing custom model data");
         CompoundTag nbeetea = pStack.getOrCreateTag();
         nbeetea.putBoolean("BlockBoiii", false);
+        nbeetea.getCompound("display").remove("blk");
+        //remove custom block place
         pStack.setTag(nbeetea);
     }
 
@@ -392,7 +396,7 @@ public class Protosaber extends Item {
         return false;
     }
 
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         THE_BETTER_RENDERER = new ProtosaberItemRenderer();
         consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));

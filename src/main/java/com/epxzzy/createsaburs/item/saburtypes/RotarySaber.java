@@ -21,6 +21,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,7 +37,7 @@ public class RotarySaber extends Protosaber {
         super(pProperties, pRANGE, pDamage, pSpeed);
     }
 
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         THE_BETTER_RENDERER = new RotarySaberItemRenderer();
         consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));
