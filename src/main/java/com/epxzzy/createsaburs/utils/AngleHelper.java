@@ -21,13 +21,14 @@ public class AngleHelper {
     public static float verticalAngle(Direction facing) {
         return facing == Direction.UP ? -90 : facing == Direction.DOWN ? 90 : 0;
     }
-
+    //deg to rad
     public static float rad(double angle) {
         if (angle == 0)
             return 0;
         return (float) (angle / 180 * Math.PI);
     }
 
+    //rad to deg
     public static float deg(double angle) {
         if (angle == 0)
             return 0;

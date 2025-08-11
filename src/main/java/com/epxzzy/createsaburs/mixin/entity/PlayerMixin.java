@@ -71,6 +71,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     private void CreateSaburs$customTick(CallbackInfo ci) {
         //CreateSaburs.LOGGER.warn("player hurt");
         Player that = ((Player) (Object) this);
+        this.oSaberAnim = this.SaberAnim;
 
         if (this.attacking) {
             ++this.attackProgress;
@@ -84,7 +85,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
         }
 
-        //this.SaberAnim = (float)this.swingTime / (float)i;
+        this.SaberAnim = (float)this.attackProgress / (float)6;
 
         //ATTACKING = true;
     }

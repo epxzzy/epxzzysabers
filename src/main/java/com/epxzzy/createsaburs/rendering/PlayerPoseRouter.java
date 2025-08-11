@@ -80,8 +80,8 @@ public class PlayerPoseRouter {
             //CreateSaburs.LOGGER.warn("swing time is: " + player.swingTime + " and attack time is: " + player.getAttackAnim(1));
         }
         //attack
-        if((Protosaber.checkForSaberEquipment(player, true)||SingleBladed.checkForSaberEquipment(player, true)) && attack > 0 && SaberSwingTime > 0){
-            setBladedAttack(attack, model, SaberSwingTime);
+        if((Protosaber.checkForSaberEquipment(player, true)||SingleBladed.checkForSaberEquipment(player, true)) && attack > 0 && player.swingTime > 0 ){//&& SaberSwingTime > 0){
+            setBladedAttack(attack, model, player.getAttackAnim(1));
             return;
         }
         //block
@@ -146,7 +146,7 @@ public class PlayerPoseRouter {
     private static void setBladedStance(Player player,HumanoidModel<?> model){
         PlayerStanceRenderer.setPose(Protosaber.getStance(player),false, model);
     }
-    private static void setBladedAttack(int attack, HumanoidModel<?> model, int lerper){
+    private static void setBladedAttack(int attack, HumanoidModel<?> model,float lerper){
         PlayerAttackRenderer.setPose(attack,false, model, lerper);
     }
     private static void setBladedBlock(int block,HumanoidModel<?> model){
