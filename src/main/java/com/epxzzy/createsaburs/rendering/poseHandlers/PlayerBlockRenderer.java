@@ -28,26 +28,26 @@ public class PlayerBlockRenderer {
 
     //left shoulder
     public static void SetBlock1(Boolean lefty, HumanoidModel<?> model) {
-        model.rightArm.setRotation(AngleHelper.rad(45), AngleHelper.rad(-80), AngleHelper.rad(0));
+        model.rightArm.setRotation(AngleHelper.rad(-76), AngleHelper.rad(-50), AngleHelper.rad(18));
 
     }
     //right shoulder
     public static void SetBlock2(Boolean lefty, HumanoidModel<?> model) {
-        model.rightArm.setRotation(AngleHelper.rad(45), AngleHelper.rad(20), AngleHelper.rad(0));
+        model.rightArm.setRotation(AngleHelper.rad(-54), AngleHelper.rad(-20), AngleHelper.rad(-32));
     }
 
     //left knee
     public static void SetBlock3(Boolean lefty, HumanoidModel<?> model) {
-        model.rightArm.setRotation(AngleHelper.rad(-45), AngleHelper.rad(-80), AngleHelper.rad(0));
+        model.rightArm.setRotation(AngleHelper.rad(-70), AngleHelper.rad(-52), AngleHelper.rad(90));
     }
     //right knee
     public static void SetBlock4(Boolean lefty, HumanoidModel<?> model) {
-        model.rightArm.setRotation(AngleHelper.rad(-45), AngleHelper.rad(20), AngleHelper.rad(0));
+        model.rightArm.setRotation(AngleHelper.rad(-42), AngleHelper.rad(50), AngleHelper.rad(-80));
     }
 
     //left abdomen
     public static void SetBlock5(Boolean lefty, HumanoidModel<?> model) {
-        model.rightArm.setRotation(AngleHelper.rad(22), AngleHelper.rad(20), AngleHelper.rad(0));
+        model.rightArm.setRotation(AngleHelper.rad(-100), AngleHelper.rad(-65), AngleHelper.rad(0));
     }
     //right abdomen
     public static void SetBlock6(Boolean lefty, HumanoidModel<?> model) {
