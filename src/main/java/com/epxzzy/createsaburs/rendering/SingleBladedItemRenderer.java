@@ -13,6 +13,7 @@ import com.epxzzy.createsaburs.rendering.foundation.PartialModel;
 
 import com.epxzzy.createsaburs.rendering.poseRenderer.SingleBladed.SingleBladedItemPoseRenderer;
 import com.epxzzy.createsaburs.utils.AnimationTickHolder;
+import com.epxzzy.createsaburs.utils.PlayerHelperLmao;
 import com.epxzzy.createsaburs.utils.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -58,7 +59,7 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
             float time = AnimationTickHolder.getTicks(false);
 
             for (LivingEntity entity : allEntities) {
-                if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")){
+                if ((entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii") && !(((PlayerHelperLmao) entity).getSaberAttackAnim(1) > 0)){
                     SingleBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
                 }
             }

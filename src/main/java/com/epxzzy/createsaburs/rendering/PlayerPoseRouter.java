@@ -72,7 +72,6 @@ public class PlayerPoseRouter {
         int block = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("blk");
         int attack = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk");
         float SaberSwingAnim = ((PlayerHelperLmao) player).getSaberAttackAnim(1);
-        int SaberSwingTime = ((PlayerHelperLmao) player).getAttackTime();
 
         boolean[] bbc = RotarySaber.checkForSaberFly(player);
         //debug purposes
@@ -80,8 +79,8 @@ public class PlayerPoseRouter {
             //CreateSaburs.LOGGER.warn("swing time is: " + player.swingTime + " and attack time is: " + player.getAttackAnim(1));
         }
         //attack
-        if((Protosaber.checkForSaberEquipment(player, true)||SingleBladed.checkForSaberEquipment(player, true)) && attack > 0 && player.swingTime > 0 ){//&& SaberSwingTime > 0){
-            setBladedAttack(attack, model, player.getAttackAnim(1));
+        if((Protosaber.checkForSaberEquipment(player, true)||SingleBladed.checkForSaberEquipment(player, true)) && attack > 0 && SaberSwingAnim > 0){
+            setBladedAttack(attack, model, SaberSwingAnim);
             return;
         }
         //block
