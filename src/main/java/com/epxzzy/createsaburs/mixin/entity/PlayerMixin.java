@@ -127,7 +127,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
                 CompoundTag tagger = that.getUseItem().getOrCreateTag();
                 tagger.getCompound("display").putInt("blk", block_value);
-
+                that.displayClientMessage(Component.literal("blocking " + block_value), true);
                 that.getMainHandItem().setTag(tagger);
 
                 //remove the custom block animation

@@ -227,6 +227,8 @@ public class Protosaber extends Item {
         CompoundTag nbeetea = pStack.getOrCreateTag();
         nbeetea.putBoolean("BlockBoiii", false);
         nbeetea.getCompound("display").remove("blk");
+        ((Player) pLivingEntity).displayClientMessage(Component.literal(""), true);
+
         //remove custom block place
         pStack.setTag(nbeetea);
     }

@@ -47,20 +47,20 @@ public class PlayerBlockRenderer {
 
     //left abdomen
     public static void SetBlock5(Boolean lefty, HumanoidModel<?> model) {
-        model.rightArm.setRotation(AngleHelper.rad(-100), AngleHelper.rad(-65), AngleHelper.rad(0));
+        model.rightArm.setRotation(AngleHelper.rad(-100), AngleHelper.rad(-65), AngleHelper.rad(64));
     }
     //right abdomen
     public static void SetBlock6(Boolean lefty, HumanoidModel<?> model) {
-        model.rightArm.setRotation(AngleHelper.rad(22), AngleHelper.rad(-80), AngleHelper.rad(0));
+        model.rightArm.setRotation(AngleHelper.rad(-65), AngleHelper.rad(-22), AngleHelper.rad(-172));
     }
 
     //balls
     public static void SetBlock7(Boolean lefty, HumanoidModel<?> model) {
-        model.rightArm.setRotation(AngleHelper.rad(-90), AngleHelper.rad(0), AngleHelper.rad(0));
+        model.rightArm.setRotation(AngleHelper.rad(-70), AngleHelper.rad(-65), AngleHelper.rad(85));
     }
     //head
     public static void SetBlock8(Boolean lefty, HumanoidModel<?> model) {
-        model.rightArm.setRotation(AngleHelper.rad(90), AngleHelper.rad(0), AngleHelper.rad(0));
+        model.rightArm.setRotation(AngleHelper.rad(-80), AngleHelper.rad(42.5), AngleHelper.rad(85));
     }
 
 
