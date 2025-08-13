@@ -1,8 +1,9 @@
 package com.epxzzy.createsaburs.mixin.entity;
 
 import com.epxzzy.createsaburs.CreateSaburs;
+import com.epxzzy.createsaburs.networking.ModMessages;
 import com.epxzzy.createsaburs.networking.packet.ClientboundPlayerAttackPacket;
-import com.epxzzy.createsaburs.networking.packet.ServerboundPlayerDefendPacket;
+import com.epxzzy.createsaburs.networking.packet.ClientboundPlayerDefendPacket;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.epxzzy.createsaburs.utils.PlayerHelperLmao;
 import net.minecraft.nbt.CompoundTag;
@@ -130,15 +131,18 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     }
 
 
-    public void SyncDEFtoPacket(ServerboundPlayerDefendPacket packet) {
+    public void SyncDEFtoPacket(ClientboundPlayerDefendPacket packet) {
         this.defendProgress = packet.defendProgress;
         this.defending = packet.defending;
 
+        CreateSaburs.LOGGER.debug("successfully synced DEF for {}", packet.entityId);
     }
 
     public void SyncATKtoPacket(ClientboundPlayerAttackPacket packet) {
         this.attackProgress = packet.attackProgress;
         this.attacking = packet.attacking;
+
+        CreateSaburs.LOGGER.debug("successfully synced ATK for {}", packet.entityId);
     }
 
 
@@ -154,13 +158,8 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         boolean blocking_with_sabur = that.getUseItem().is(ModTags.Items.LIGHTSABER);
 
         if (blocking_with_sabur && that.level() instanceof ServerLevel && that instanceof ServerPlayer serverPlayer) {
-            if (!this.defending || this.defendProgress >= 6 / 2 || this.defendProgress < 0) {
-                this.defendProgress = -1;
-                this.defending = true;
-            }
-            defending = true;
 
-            ServerboundPlayerDefendPacket defendPacket = new ServerboundPlayerDefendPacket(serverPlayer.getId(), this.defending, this.defendProgress);
+            //ClientboundPlayerDefendPacket defendPacket = new ClientboundPlayerDefendPacket(serverPlayer.getId(), this.defending, this.defendProgress);
             //ServerChunkCache serverChunkCache = ((ServerLevel) that.level()).getChunkSource();
             //serverChunkCache.broadcastAndSend(that, defendPacket);
 
@@ -168,11 +167,19 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             //ModMessages.sendToPlayer(defendPacket, serverPlayer);
         }
 
-        if(!that.level().isClientSide()){
-            CreateSaburs.LOGGER.debug("hurt runs on client");
+        if(!that.level().isClientSide() && blocking_with_sabur){
+            if (!this.defending || this.defendProgress >= 6 / 2 || this.defendProgress < 0) {
+                this.defendProgress = -1;
+                this.defending = true;
+            }
+            defending = true;
+
+            ModMessages.fuckingAnnounce(new ClientboundPlayerDefendPacket(that.getId(), this.defending, this.defendProgress), that);
+
+            //CreateSaburs.LOGGER.debug("serverhurt: {}", this.defending);
         }
         else {
-            CreateSaburs.LOGGER.debug("hurt runs on client");
+            //CreateSaburs.LOGGER.debug("clienthurt: {}", this.defending);
         }
 
         if (notThat != null) {
@@ -211,6 +218,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         CreateSaburs.LOGGER.debug("attacking {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
 
 
+
         if(!that.level().isClientSide()) {
             if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {
                 this.attackProgress = -1;
@@ -220,15 +228,8 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             this.attacking = true;
             //ModMessages.sendToServer(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress));
 
+            ModMessages.fuckingAnnounce(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress), that);
 
-            if (notThat instanceof Player pPlayer && pPlayer.getUseItem().is(ModTags.Items.LIGHTSABER)) {
-
-            }
-            CreateSaburs.LOGGER.debug("attack runs on server");
-
-        }
-        else {
-            CreateSaburs.LOGGER.debug("attack runs on client");
         }
     }
 

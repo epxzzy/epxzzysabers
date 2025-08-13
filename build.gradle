@@ -94,7 +94,9 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', mod_id
-            args "--username=${usernamelmao}",
+            args "--username=${usernamelmao}"
+            jvmArgs "-Xmx2G", "-Djava.net.preferIPv4Stack=true"
+
             mods {
                 "${mod_id}" {
                     source sourceSets.main
@@ -109,6 +111,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             property 'forge.enabledGameTestNamespaces', mod_id
+            jvmArgs "-Xmx2G"
 
             mods {
                 "${mod_id}" {

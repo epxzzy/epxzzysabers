@@ -4,6 +4,7 @@ import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.networking.packet.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
@@ -61,10 +62,10 @@ public class ModMessages {
                 .encoder(ClientboundPlayerAttackPacket::toBytes)
                 .consumerMainThread(ClientboundPlayerAttackPacket::handle)
                 .add();
-        net.messageBuilder(ServerboundPlayerDefendPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(ServerboundPlayerDefendPacket::new)
-                .encoder(ServerboundPlayerDefendPacket::toBytes)
-                .consumerMainThread(ServerboundPlayerDefendPacket::handle)
+        net.messageBuilder(ClientboundPlayerDefendPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(ClientboundPlayerDefendPacket::new)
+                .encoder(ClientboundPlayerDefendPacket::toBytes)
+                .consumerMainThread(ClientboundPlayerDefendPacket::handle)
                 .add();
 
 
@@ -78,6 +79,8 @@ public class ModMessages {
     public static <MSG> void sendToPlayer(MSG message, ServerPlayer player){
         INSTANCE.send(PacketDistributor.PLAYER.with(()->player),message );
     }
-
+    public static <MSG> void fuckingAnnounce(MSG message, Player player){
+        INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player),message);
+    }
 
 }
