@@ -59,7 +59,7 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
             float time = AnimationTickHolder.getTicks(false);
 
             for (LivingEntity entity : allEntities) {
-                if ((entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii") && !(((PlayerHelperLmao) entity).getSaberAttackAnim(1) > 0)){
+                if ((entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii") && !(((PlayerHelperLmao) entity).getSaberAttackAnim() > 0)){
                     SingleBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
                 }
             }

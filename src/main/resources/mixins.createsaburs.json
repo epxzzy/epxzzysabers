@@ -5,13 +5,17 @@
   "minVersion": "0.8",
   "mixins": [
     "entity.LivingEntityMixin",
-    "entity.PlayerMixin",
-    "entity.ThrownTridentMixin"
+    "entity.ThrownTridentMixin",
+    "entity.PlayerMixin"
+
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
     "client.HumanoidModelMixin"
+  ],
+  "server": [
+
   ]
 }

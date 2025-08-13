@@ -226,10 +226,6 @@ public class Protosaber extends Item {
         //CreateSaburs.LOGGER.info("stopped blocking, changing custom model data");
         CompoundTag nbeetea = pStack.getOrCreateTag();
         nbeetea.putBoolean("BlockBoiii", false);
-        nbeetea.getCompound("display").remove("blk");
-        ((Player) pLivingEntity).displayClientMessage(Component.literal(""), true);
-
-        //remove custom block place
         pStack.setTag(nbeetea);
     }
 

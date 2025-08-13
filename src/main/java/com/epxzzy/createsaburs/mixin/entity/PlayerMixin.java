@@ -1,20 +1,23 @@
 package com.epxzzy.createsaburs.mixin.entity;
 
 import com.epxzzy.createsaburs.CreateSaburs;
-import com.epxzzy.createsaburs.item.Protosaber;
-import com.epxzzy.createsaburs.item.saburtypes.SingleBladed;
+import com.epxzzy.createsaburs.networking.packet.ClientboundPlayerAttackPacket;
+import com.epxzzy.createsaburs.networking.packet.ServerboundPlayerDefendPacket;
 import com.epxzzy.createsaburs.utils.ModTags;
 import com.epxzzy.createsaburs.utils.PlayerHelperLmao;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -22,50 +25,38 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin implements PlayerHelperLmao {
-
+    @Shadow
+    @Final
+    private Inventory inventory;
     public boolean attacking = false;
-
     public InteractionHand attackingHand;
-    public boolean attackingWithSaber = false;
-
     public int attackProgress = 0;
     //^^^^^^ max should be 6 ticks
 
     public float SaberAnim = 0;
     public float oSaberAnim = 0;
-    /*
-    @Inject(
-            method = "blockUsingShield",
-            at = @At(value = "HEAD"),
-            cancellable = true)
-    private void CreateSaburs$customblockUsingShield(LivingEntity pttEntity, CallbackInfo ci) {
-        CreateSaburs.LOGGER.info(" event can be cancelled: "+ ci.isCancellable() );
-        pttEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 15));
-        boolean has_saber = pttEntity.getMainHandItem().is(ModTags.Items.LIGHTSABER)
-                || pttEntity.getOffhandItem().is(ModTags.Items.LIGHTSABER);
-        boolean is_active = pttEntity.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii")
-                || pttEntity.getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
 
-        if (has_saber && is_active) {
-            //ci.cancel();
-            Player that = ((Player) (Object) this);
-            that.getCooldowns().addCooldown(that.getUseItem().getItem(), 5);
-            that.stopUsingItem();
-            //that.level().broadcastEntityEvent(that, (byte) 30);
-            that.playSound(ModSounds.CLASH.get(), 0.2F, 1);
-            //that.level().
+    public boolean defending = false;
+    public InteractionHand defendingHand;
+    public int defendProgress = 0;
+    //^^^^^^ max should be 6 ticks
 
-        }
+    public float SaberdefAnim = 0;
+    public float oSaberdefAnim = 0;
 
+    public void LogFlightDetails() {
+        //CreateSaburs.LOGGER.debug("PROG: {} ATTK: {}, BLKPROG: {}, DEF: {}", this.attackProgress, this.attacking, this.defendProgress, this.defending);
     }
 
-     */
+    ;
+
+
     @Inject(
             method = "tick",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/entity/LivingEntity;tick()V"
-                 ),
+            ),
             cancellable = true)
 
     private void CreateSaburs$customTick(CallbackInfo ci) {
@@ -75,35 +66,82 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
         if (this.attacking) {
             ++this.attackProgress;
-            if (this.attackProgress>= 6) {
+            if (this.attackProgress >= 6) {
                 this.attackProgress = 0;
                 this.attacking = false;
+                if (!that.level().isClientSide()) {
+                    CompoundTag tagger = that.getMainHandItem().getOrCreateTag();
+                    int old = tagger.getCompound("display").getInt("atk");
+                    int baller = old > 0 && old < 8 ? old + 1 : 1;
+                    tagger.getCompound("display").putInt("atk", baller);
+
+                    CreateSaburs.LOGGER.debug("next possible attack value  {}", baller);
+                    that.displayClientMessage(Component.literal("attacking " + baller), true);
+                    that.getMainHandItem().setTag(tagger);
+                }
             }
         } else {
             this.attackProgress = 0;
-            that.displayClientMessage(Component.literal(""), true);
+            //that.displayClientMessage(Component.literal(""), true);
 
         }
 
-        this.SaberAnim = (float)this.attackProgress / (float)6;
+        this.SaberAnim = (float) this.attackProgress / (float) 6;
 
-        //ATTACKING = true;
+        this.oSaberdefAnim = this.SaberdefAnim;
+
+        if (this.defending) {
+            ++this.defendProgress;
+            if (this.defendProgress >= 6) {
+                this.defendProgress = 0;
+                this.defending = false;
+                CompoundTag temptag = that.getMainHandItem().getOrCreateTag().getCompound("display");
+                temptag.remove("blk");
+            }
+        } else {
+            this.defendProgress = 0;
+            //that.displayClientMessage(Component.literal(""), true);
+
+        }
+
+        this.SaberdefAnim = (float) this.defendProgress / (float) 6;
+
+
+        //LogFlightDetails();
     }
-    public float getSaberAttackAnim(float pPartialTick) {
+
+
+    public float getSaberAttackAnim() {
         float f = this.SaberAnim - this.oSaberAnim;
         if (f < 0.0F) {
             ++f;
         }
 
-        return this.oSaberAnim + f * pPartialTick;
-    }
-    public int getAttackTime(){
-        return this.attackProgress;
+        return this.oSaberAnim + f;
     }
 
-    public void LogFlightDetails(){
-       //CreateSaburs.LOGGER.debug("PROG: {} ATTK: {}, ARM: {}",this.attackProgress,this.attacking,this.attackingHand);
-    };
+    public float getSaberDefendAnim() {
+        float f = this.SaberdefAnim - this.oSaberdefAnim;
+        if (f < 0.0F) {
+            ++f;
+        }
+
+        return this.oSaberdefAnim + f;
+    }
+
+
+    public void SyncDEFtoPacket(ServerboundPlayerDefendPacket packet) {
+        this.defendProgress = packet.defendProgress;
+        this.defending = packet.defending;
+
+    }
+
+    public void SyncATKtoPacket(ClientboundPlayerAttackPacket packet) {
+        this.attackProgress = packet.attackProgress;
+        this.attacking = packet.attacking;
+    }
+
+
     @Inject(
             method = "hurt",
             at = @At(value = "HEAD"),
@@ -113,16 +151,36 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         //CreateSaburs.LOGGER.warn("player hurt");
         Player that = ((Player) (Object) this);
         LivingEntity notThat = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
+        boolean blocking_with_sabur = that.getUseItem().is(ModTags.Items.LIGHTSABER);
+
+        if (blocking_with_sabur && that.level() instanceof ServerLevel && that instanceof ServerPlayer serverPlayer) {
+            if (!this.defending || this.defendProgress >= 6 / 2 || this.defendProgress < 0) {
+                this.defendProgress = -1;
+                this.defending = true;
+            }
+            defending = true;
+
+            ServerboundPlayerDefendPacket defendPacket = new ServerboundPlayerDefendPacket(serverPlayer.getId(), this.defending, this.defendProgress);
+            //ServerChunkCache serverChunkCache = ((ServerLevel) that.level()).getChunkSource();
+            //serverChunkCache.broadcastAndSend(that, defendPacket);
+
+            //CreateSaburs.LOGGER.debug("Sending {}, {}", serverPlayer, defendPacket);
+            //ModMessages.sendToPlayer(defendPacket, serverPlayer);
+        }
+
+        if(!that.level().isClientSide()){
+            CreateSaburs.LOGGER.debug("hurt runs on client");
+        }
+        else {
+            CreateSaburs.LOGGER.debug("hurt runs on client");
+        }
 
         if (notThat != null) {
-            boolean blocking_with_sabur = that.getUseItem().is(ModTags.Items.LIGHTSABER);
             boolean attacking_with_sabur = notThat.getMainHandItem().is(ModTags.Items.LIGHTSABER);
 
 
-
-
             if (blocking_with_sabur && attacking_with_sabur) {
-                CreateSaburs.LOGGER.debug("before i get killed, i would like to preface that i was infact hit by a attack of {}",notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
+                CreateSaburs.LOGGER.debug("blocked {}", notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
                 int block_value = notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk");
 
                 CompoundTag tagger = that.getUseItem().getOrCreateTag();
@@ -135,6 +193,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
                 //that.playSound(ModSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
                 return;
             }
+
         }
 
 
@@ -149,28 +208,28 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         //CreateSaburs.LOGGER.warn("player hurt");
         Player that = ((Player) (Object) this);
         Entity notThat = pTarget;
-        CreateSaburs.LOGGER.debug("before i kill this individual, i would like to preface that i was infact attacking an attack of {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
+        CreateSaburs.LOGGER.debug("attacking {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
+
 
         if(!that.level().isClientSide()) {
-            CompoundTag tagger = that.getMainHandItem().getOrCreateTag();
-            int old = tagger.getCompound("display").getInt("atk");
-            int baller = old > 0 && old < 8? old+1:1;
-            tagger.getCompound("display").putInt("atk", baller);
-
-            CreateSaburs.LOGGER.debug("setting an atk of  {}", baller);
-            that.displayClientMessage(Component.literal("attacking " +baller), true);
-            that.getMainHandItem().setTag(tagger);
-        }
-
-
-
-
-        if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {
-            this.attackProgress = -1;
+            if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {
+                this.attackProgress = -1;
+                this.attacking = true;
+                this.attackingHand = that.swingingArm;
+            }
             this.attacking = true;
-            this.attackingHand = that.swingingArm;
+            //ModMessages.sendToServer(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress));
+
+
+            if (notThat instanceof Player pPlayer && pPlayer.getUseItem().is(ModTags.Items.LIGHTSABER)) {
+
+            }
+            CreateSaburs.LOGGER.debug("attack runs on server");
+
         }
-        attacking = true;
+        else {
+            CreateSaburs.LOGGER.debug("attack runs on client");
+        }
     }
 
 

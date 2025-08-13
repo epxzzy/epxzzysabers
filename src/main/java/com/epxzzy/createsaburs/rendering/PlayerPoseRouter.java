@@ -71,8 +71,12 @@ public class PlayerPoseRouter {
         int flourish = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("flourish");
         int block = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("blk");
         int attack = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk");
-        float SaberSwingAnim = ((PlayerHelperLmao) player).getSaberAttackAnim(1);
+        float SaberSwingAnim = ((PlayerHelperLmao) player).getSaberAttackAnim();
+        float SaberDefAnim = ((PlayerHelperLmao) player).getSaberDefendAnim();
 
+        //((PlayerHelperLmao) player).LogFlightDetails();
+        //CreateSaburs.LOGGER.debug("");
+        //
         boolean[] bbc = RotarySaber.checkForSaberFly(player);
         //debug purposes
         if(player.swingTime > 0 || player.getAttackAnim(1) > 0) {
@@ -84,7 +88,7 @@ public class PlayerPoseRouter {
             return;
         }
         //block
-        if((Protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player)) && block > 0){
+        if((Protosaber.checkForSaberEquipment(player, true)||SingleBladed.checkForSaberEquipment(player, true)) && block > 0 && SaberDefAnim > 0){
             setBladedBlock(block, model);
             return;
         }

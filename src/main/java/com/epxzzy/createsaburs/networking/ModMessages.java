@@ -56,6 +56,16 @@ public class ModMessages {
                 .encoder(ServerboundSaberDeflectPacket::toBytes)
                 .consumerMainThread(ServerboundSaberDeflectPacket::handle)
                 .add();
+        net.messageBuilder(ClientboundPlayerAttackPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(ClientboundPlayerAttackPacket::new)
+                .encoder(ClientboundPlayerAttackPacket::toBytes)
+                .consumerMainThread(ClientboundPlayerAttackPacket::handle)
+                .add();
+        net.messageBuilder(ServerboundPlayerDefendPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(ServerboundPlayerDefendPacket::new)
+                .encoder(ServerboundPlayerDefendPacket::toBytes)
+                .consumerMainThread(ServerboundPlayerDefendPacket::handle)
+                .add();
 
 
     }

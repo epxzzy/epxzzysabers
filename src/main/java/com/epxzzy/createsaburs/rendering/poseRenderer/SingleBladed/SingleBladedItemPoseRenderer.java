@@ -28,7 +28,7 @@ public class SingleBladedItemPoseRenderer {
             case CIRCULAR -> SetFlourishCIRCULAR(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
             //the "obi-ani"
         }
-        ((PlayerHelperLmao) entity).LogFlightDetails();
+        //((PlayerHelperLmao) entity).LogFlightDetails();
     }
     public static void SetFlourishXCROSS(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
         float time = AnimationTickHolder.getTicks(false);
