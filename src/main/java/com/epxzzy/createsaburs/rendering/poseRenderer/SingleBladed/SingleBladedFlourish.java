@@ -7,7 +7,9 @@ import java.util.List;
 public enum SingleBladedFlourish {
     NOFLOURISH("none", 0),
     XCROSS("xcross", 1),
-    CIRCULAR("circular", 2);
+    CIRCULAR("circular", 2),
+    SPIN("spin", 3);
+
 
     List<Flourish> flourishes;
     private final String str;
@@ -21,7 +23,7 @@ public enum SingleBladedFlourish {
 
     public static List<SingleBladedFlourish> getCategories() {
         List list;
-        list = ImmutableList.of(NOFLOURISH,XCROSS, CIRCULAR);
+        list = ImmutableList.of(NOFLOURISH,XCROSS, CIRCULAR,SPIN);
 
         return list;
     }

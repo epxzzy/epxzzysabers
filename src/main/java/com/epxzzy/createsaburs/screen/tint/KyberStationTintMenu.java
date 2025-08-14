@@ -89,7 +89,7 @@ public class KyberStationTintMenu extends KyberMenuBase {
                 pAccess.execute((a, b) -> {
                     a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
-                CreateSaburs.LOGGER.warn("taken??");
+                //CreateSaburs.LOGGER.debug("taken??");
                 super.onTake(pPlayer, stacc);
             }
         });
@@ -140,7 +140,7 @@ public class KyberStationTintMenu extends KyberMenuBase {
                 access.execute((a, b) -> {
                     a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
-                CreateSaburs.LOGGER.warn("taken??");
+                //CreateSaburs.LOGGER.debug("taken??");
                 super.onTake(pPlayer, stacc);
             }
         };
@@ -187,7 +187,7 @@ public class KyberStationTintMenu extends KyberMenuBase {
                 access.execute((a, b) -> {
                     a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
-                CreateSaburs.LOGGER.warn("taken??");
+                //CreateSaburs.LOGGER.debug("taken??");
                 super.onTake(pPlayer, stacc);
             }
         };
@@ -228,7 +228,7 @@ public class KyberStationTintMenu extends KyberMenuBase {
             //this.ColourValueIndexes[1].set(b);
             //this.ColourValueIndexes[2].set(c);
             //this.broadcastChanges();
-            CreateSaburs.LOGGER.warn("colours have been set as: " + colour[0] + " " + colour[1] + " " + colour[2]);
+            //CreateSaburs.LOGGER.debug("colours have been set as: " + colour[0] + " " + colour[1] + " " + colour[2]);
             this.setupResultSlot(colour[0], colour[1], colour[2], (this.gay.get() == 1));
             return true;
 
@@ -302,10 +302,10 @@ public class KyberStationTintMenu extends KyberMenuBase {
         ItemStack krystal = this.krystal_slot.getItem();
         if (!saber.isEmpty()) {
             if (!krystal.isEmpty()) {
-                CreateSaburs.LOGGER.warn("THE MERGE");
+                //CreateSaburs.LOGGER.debug("THE MERGE");
                 return;
             } else {
-                //CreateSaburs.LOGGER.warn("THE FORGE");
+                //CreateSaburs.LOGGER.debug("THE FORGE");
                 /*
                 setupResultSlot(
                         this.ColourValueIndexes[0].get(),
@@ -318,7 +318,7 @@ public class KyberStationTintMenu extends KyberMenuBase {
                 return;
             }
         } else if (!krystal.isEmpty() && saber.isEmpty()) {
-            CreateSaburs.LOGGER.warn("THE ZA ZA KRYSTALLL");
+            //CreateSaburs.LOGGER.debug("THE ZA ZA KRYSTALLL");
             return;
         }
         this.resultSlot.set(ItemStack.EMPTY);
@@ -341,7 +341,7 @@ public class KyberStationTintMenu extends KyberMenuBase {
         ItemStack base = this.input_slot.getItem().copy();
         CompoundTag taggussy = base.getOrCreateTag();
 
-        CreateSaburs.LOGGER.warn("crafting colours " + r + " " + g + " " + b);
+        //CreateSaburs.LOGGER.debug("crafting colours " + r + " " + g + " " + b);
 
         taggussy.getCompound("display").putInt("colour", colour);
         taggussy.getCompound("display").putBoolean("gay", gay);

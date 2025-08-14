@@ -41,8 +41,8 @@ public abstract class LivingEntityMixin {
 
             boolean attacking_with_sabur = LivingEntity.class.isAssignableFrom(notThat.getClass()) ? ((LivingEntity) notThat).getMainHandItem().is(ModTags.Items.LIGHTSABER) : false;
 
-            CreateSaburs.LOGGER.info("living entity custom hurt can be cancelled: " + cir.isCancellable());
-            CreateSaburs.LOGGER.warn("living entity hurt in mixin");
+            //CreateSaburs.LOGGER.info("living entity custom hurt can be cancelled: " + cir.isCancellable());
+            //CreateSaburs.LOGGER.debug("living entity hurt in mixin");
 
             if (blocking_with_sabur && attacking_with_sabur) {
                 Vec3 vec32 = notThat.position();
@@ -50,12 +50,12 @@ public abstract class LivingEntityMixin {
                 Vec3 vec31 = vec32.vectorTo(that.position()).normalize();
                 vec31 = new Vec3(vec31.x, 0.0D, vec31.z);
                 if (vec31.dot(vec3) < 0.0D) {
-                    CreateSaburs.LOGGER.warn("attack was blocked via a lightsaber");
+                    //CreateSaburs.LOGGER.debug("attack was blocked via a lightsaber");
                     if (that instanceof Player) {
-                        CreateSaburs.LOGGER.warn("adding kewldown to the blocking player");
+                        //CreateSaburs.LOGGER.debug("adding kewldown to the blocking player");
                         cir.cancel();
                         if(!that.getUseItem().is(ModItems.ROTARY_SABER.get())){
-                            ((Player) that).getCooldowns().addCooldown(that.getUseItem().getItem(), 10);
+                            ((Player) that).getCooldowns().addCooldown(that.getUseItem().getItem(), 5);
                             that.stopUsingItem();
                             that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5F, 1);
                             return;
@@ -74,12 +74,12 @@ public abstract class LivingEntityMixin {
                 if(Player.class.isAssignableFrom(Objects.requireNonNull(that.getClass()))&&!(((Player) that).getAbilities().flying)){
                     if(((Player) that).getTicksUsingItem() > 50) return;
 
-                    CreateSaburs.LOGGER.warn("blocked a projectile");
+                    //CreateSaburs.LOGGER.debug("blocked a projectile");
                     cir.cancel();
                     that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);
                 }
                 else {
-                    CreateSaburs.LOGGER.warn("flying bozo spotted, die");
+                    //CreateSaburs.LOGGER.debug("flying bozo spotted, die");
                     //((Player) that).getCooldowns().addCooldown(that.getUseItem().getItem(), 20*8);
                     that.stopUsingItem();
                     that.swing(InteractionHand.MAIN_HAND);
@@ -88,7 +88,7 @@ public abstract class LivingEntityMixin {
             }
 
             if (blocking_with_sabur && !attacking_with_sabur) {
-                CreateSaburs.LOGGER.warn("blocked a regular ass weapon");
+                //CreateSaburs.LOGGER.debug("blocked a regular ass weapon");
                 cir.cancel();
                 that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);
                 return;

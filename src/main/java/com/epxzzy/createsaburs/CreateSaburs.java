@@ -82,7 +82,7 @@ public class CreateSaburs {
     private static void clientInit(IEventBus forgeEventBus, IEventBus modEventBus) {
         modEventBus.addListener(PartialModelEventHandler::onRegisterAdditional);
         modEventBus.addListener(PartialModelEventHandler::onBakingCompleted);
-        //CreateSaburs.LOGGER.warn("FKCRT PartialModelEventHandler events registered");
+        //CreateSaburs.LOGGER.debug("FKCRT PartialModelEventHandler events registered");
     }
 
         // Add the example block item to the building blocks tab

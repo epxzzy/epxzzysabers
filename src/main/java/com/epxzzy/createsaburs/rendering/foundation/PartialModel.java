@@ -26,7 +26,7 @@ public class PartialModel {
         if (populateOnInit) {
             bakedModel = getBakedModel(Minecraft.getInstance().getModelManager(), modelLocation);
         }
-        //CreateSaburs.LOGGER.warn("FKCRT PartialModel made for {}",modelLocation);
+        //CreateSaburs.LOGGER.debug("FKCRT PartialModel made for {}",modelLocation);
     }
 
 

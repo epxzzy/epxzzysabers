@@ -15,6 +15,9 @@ public class SingleBladedArmPoseRenderer {
             //side to front ro side
             case CIRCULAR -> SetArmFlourishCIRCULAR(Lefty, both, model);
             //the "obi-ani"
+            case SPIN -> SetArmFlourishSPIN(Lefty, both, model);
+            //the "obi-ani"
+
         }
     }
 
@@ -70,5 +73,29 @@ public class SingleBladedArmPoseRenderer {
 
 
     }
+    public static void SetArmFlourishSPIN(boolean Lefty, boolean both, HumanoidModel<?> model) {
 
+        float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
+        float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
+
+        ModelPart otherArm = Lefty ? model.leftArm : model.rightArm;
+        ModelPart mainArm = Lefty ? model.rightArm : model.leftArm;
+        mainArm.resetPose();
+
+        //hangingArm.y -= 3;
+        mainArm.xRot = Mth.cos(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
+        mainArm.yRot = AngleHelper.rad(20);
+        //hangingArm.xRot = -AngleHelper.rad(bodySwing+150);
+        //hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
+        if (both) {
+            otherArm.resetPose();
+            otherArm.xRot = Mth.sin(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
+            otherArm.yRot = AngleHelper.rad(20);
+
+            //otherArm.zRot = (Lefty ? 1 : -1) * AngleHelper.rad(15);
+        }
+        if (!both) {
+            //otherArm.zRot = (Lefty ? -1 : 1) * (-AngleHelper.rad(20)) + 0.5f * bodySwing + limbSwing;
+        }
+    }
 }

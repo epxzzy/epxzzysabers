@@ -22,11 +22,11 @@ public final class PartialModelEventHandler {
 
     public static void onBakingCompleted(ModelEvent.BakingCompleted event) {
         PartialModel.populateOnInit = true;
-        //CreateSaburs.LOGGER.warn("FKCRT PRTLMDLEVHNDLR partial models baked lmao");
+        //CreateSaburs.LOGGER.debug("FKCRT PRTLMDLEVHNDLR partial models baked lmao");
         Map<ResourceLocation, BakedModel> models = event.getModels();
 
         for ( PartialModel partial : PartialModel.ALL.values()) {
-            //CreateSaburs.LOGGER.warn("FKCRT PRTLMDLEVHNDLR partial model: {}", partial.modelLocation());
+            //CreateSaburs.LOGGER.debug("FKCRT PRTLMDLEVHNDLR partial model: {}", partial.modelLocation());
             partial.bakedModel = models.get(partial.modelLocation());
         }
     }

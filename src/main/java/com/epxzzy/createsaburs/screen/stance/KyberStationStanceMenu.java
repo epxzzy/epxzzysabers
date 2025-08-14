@@ -100,7 +100,7 @@ public class KyberStationStanceMenu extends KyberMenuBase {
                 access.execute((a, b) -> {
                     a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
-                CreateSaburs.LOGGER.warn("taken??");
+                CreateSaburs.LOGGER.debug("taken??");
                 super.onTake(pPlayer, stacc);
             }
         });
@@ -175,10 +175,10 @@ public class KyberStationStanceMenu extends KyberMenuBase {
 
         if (!saber.isEmpty()) {
             if (!krystal.isEmpty()) {
-                CreateSaburs.LOGGER.warn("THE MERGE");
+                CreateSaburs.LOGGER.debug("THE MERGE");
                 return;
             } else {
-                //CreateSaburs.LOGGER.warn("THE FORGE");
+                //CreateSaburs.LOGGER.debug("THE FORGE");
                 /*
                 setupResultSlot(
                         this.ColourValueIndexes[0].get(),
@@ -191,7 +191,7 @@ public class KyberStationStanceMenu extends KyberMenuBase {
                 return;
             }
         } else if (!krystal.isEmpty() && saber.isEmpty()) {
-            CreateSaburs.LOGGER.warn("THE ZA ZA KRYSTALLL");
+            CreateSaburs.LOGGER.debug("THE ZA ZA KRYSTALLL");
             return;
         }
         this.resultSlot.set(ItemStack.EMPTY);

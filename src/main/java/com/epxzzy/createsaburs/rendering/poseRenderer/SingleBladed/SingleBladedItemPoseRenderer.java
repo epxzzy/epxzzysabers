@@ -27,6 +27,9 @@ public class SingleBladedItemPoseRenderer {
             //side to side
             case CIRCULAR -> SetFlourishCIRCULAR(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
             //the "obi-ani"
+            case SPIN -> SetFlourishSPIN(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+            //regular onehanded spin
+
         }
         //((PlayerHelperLmao) entity).LogFlightDetails();
     }
@@ -41,6 +44,10 @@ public class SingleBladedItemPoseRenderer {
         //ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10)*multiplier)));
         ms.mulPose(Axis.XN.rotation(ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks() * 10))*multiplier));
         ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(squaremovement*25)));
+
+        ms.pushPose();
+        ms.popPose();
+
     }
 
     public static void SetFlourishCIRCULAR(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
@@ -55,4 +62,16 @@ public class SingleBladedItemPoseRenderer {
         ms.pushPose();
         ms.popPose();
     }
+    public static void SetFlourishSPIN(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
+        float time = AnimationTickHolder.getTicks(false);
+        float movement = Mth.sin(((float) ((time+10) * 5f /Math.PI)));
+        ms.mulPose(Axis.XP.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (5))));
+        //ms.mulPose(Axis.YP.rotation(AngleHelper.rad(movement * 5)));
+        ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(movement)));
+        //ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(30)));
+
+        ms.pushPose();
+        ms.popPose();
+    }
+
 }

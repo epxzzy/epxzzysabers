@@ -32,7 +32,7 @@ public class PartialItemModelRenderer {
 
     public static PartialItemModelRenderer of(ItemStack stack, ItemDisplayContext transformType,
                                                                                          PoseStack ms, MultiBufferSource buffer, int overlay) {
-        //CreateSaburs.LOGGER.warn("FKCRT PartialItemModelRenderer made for itemstacc {}", stack);
+        //CreateSaburs.LOGGER.debug("FKCRT PartialItemModelRenderer made for itemstacc {}", stack);
         PartialItemModelRenderer instance = INSTANCE;
         instance.stack = stack;
         instance.transformType = transformType;

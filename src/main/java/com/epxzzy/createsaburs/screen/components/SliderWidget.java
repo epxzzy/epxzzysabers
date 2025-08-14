@@ -150,7 +150,7 @@ public class SliderWidget extends AbstractSliderButton {
         } else {
             this.setValue(this.getValue() - 1);
         }
-        //CreateSaburs.LOGGER.warn("scroll has scrolled as scroll {}", pDelta);
+        //CreateSaburs.LOGGER.debug("scroll has scrolled as scroll {}", pDelta);
         return super.mouseScrolled(pMouseX, pMouseY, pDelta);
     }
 

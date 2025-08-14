@@ -80,7 +80,7 @@ public class PlayerPoseRouter {
         boolean[] bbc = RotarySaber.checkForSaberFly(player);
         //debug purposes
         if(player.swingTime > 0 || player.getAttackAnim(1) > 0) {
-            //CreateSaburs.LOGGER.warn("swing time is: " + player.swingTime + " and attack time is: " + player.getAttackAnim(1));
+            //CreateSaburs.LOGGER.debug("swing time is: " + player.swingTime + " and attack time is: " + player.getAttackAnim(1));
         }
         //attack
         if((Protosaber.checkForSaberEquipment(player, true)||SingleBladed.checkForSaberEquipment(player, true)) && attack > 0 && SaberSwingAnim > 0){

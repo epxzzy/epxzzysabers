@@ -61,7 +61,6 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             cancellable = true)
 
     private void CreateSaburs$customTick(CallbackInfo ci) {
-        //CreateSaburs.LOGGER.warn("player hurt");
         Player that = ((Player) (Object) this);
         this.oSaberAnim = this.SaberAnim;
 
@@ -76,7 +75,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
                     int baller = old > 0 && old < 8 ? old + 1 : 1;
                     tagger.getCompound("display").putInt("atk", baller);
 
-                    CreateSaburs.LOGGER.debug("next possible attack value  {}", baller);
+                    //CreateSaburs.LOGGER.debug("next possible attack value  {}", baller);
                     that.displayClientMessage(Component.literal("attacking " + baller), true);
                     that.getMainHandItem().setTag(tagger);
                 }
@@ -101,14 +100,10 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             }
         } else {
             this.defendProgress = 0;
-            //that.displayClientMessage(Component.literal(""), true);
 
         }
 
         this.SaberdefAnim = (float) this.defendProgress / (float) 6;
-
-
-        //LogFlightDetails();
     }
 
 
@@ -132,17 +127,21 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
 
     public void SyncDEFtoPacket(ClientboundPlayerDefendPacket packet) {
+        Player that = ((Player) (Object) this);
+
         this.defendProgress = packet.defendProgress;
         this.defending = packet.defending;
 
-        CreateSaburs.LOGGER.debug("successfully synced DEF for {}", packet.entityId);
+        //CreateSaburs.LOGGER.debug("successfully synced DEF for {}", that);
     }
 
     public void SyncATKtoPacket(ClientboundPlayerAttackPacket packet) {
+        Player that = ((Player) (Object) this);
+
         this.attackProgress = packet.attackProgress;
         this.attacking = packet.attacking;
 
-        CreateSaburs.LOGGER.debug("successfully synced ATK for {}", packet.entityId);
+        //CreateSaburs.LOGGER.debug("successfully synced ATK for {}", that);
     }
 
 
@@ -152,20 +151,10 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             cancellable = true)
 
     private void CreateSaburs$customPlayerhurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
-        //CreateSaburs.LOGGER.warn("player hurt");
+        //CreateSaburs.LOGGER.debug("player hurt");
         Player that = ((Player) (Object) this);
         LivingEntity notThat = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
         boolean blocking_with_sabur = that.getUseItem().is(ModTags.Items.LIGHTSABER);
-
-        if (blocking_with_sabur && that.level() instanceof ServerLevel && that instanceof ServerPlayer serverPlayer) {
-
-            //ClientboundPlayerDefendPacket defendPacket = new ClientboundPlayerDefendPacket(serverPlayer.getId(), this.defending, this.defendProgress);
-            //ServerChunkCache serverChunkCache = ((ServerLevel) that.level()).getChunkSource();
-            //serverChunkCache.broadcastAndSend(that, defendPacket);
-
-            //CreateSaburs.LOGGER.debug("Sending {}, {}", serverPlayer, defendPacket);
-            //ModMessages.sendToPlayer(defendPacket, serverPlayer);
-        }
 
         if(!that.level().isClientSide() && blocking_with_sabur){
             if (!this.defending || this.defendProgress >= 6 / 2 || this.defendProgress < 0) {
@@ -174,36 +163,33 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             }
             defending = true;
 
-            ModMessages.fuckingAnnounce(new ClientboundPlayerDefendPacket(that.getId(), this.defending, this.defendProgress), that);
-
-            //CreateSaburs.LOGGER.debug("serverhurt: {}", this.defending);
-        }
-        else {
-            //CreateSaburs.LOGGER.debug("clienthurt: {}", this.defending);
-        }
-
-        if (notThat != null) {
-            boolean attacking_with_sabur = notThat.getMainHandItem().is(ModTags.Items.LIGHTSABER);
 
 
-            if (blocking_with_sabur && attacking_with_sabur) {
-                CreateSaburs.LOGGER.debug("blocked {}", notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
-                int block_value = notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk");
 
-                CompoundTag tagger = that.getUseItem().getOrCreateTag();
-                tagger.getCompound("display").putInt("blk", block_value);
-                that.displayClientMessage(Component.literal("blocking " + block_value), true);
-                that.getMainHandItem().setTag(tagger);
+            if (notThat != null) {
+                boolean attacking_with_sabur = notThat.getMainHandItem().is(ModTags.Items.LIGHTSABER);
 
-                //remove the custom block animation
-                //cir.cancel();
-                //that.playSound(ModSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
-                return;
+
+                if (blocking_with_sabur && attacking_with_sabur) {
+                    CreateSaburs.LOGGER.debug("blocked {}", notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
+                    int block_value = notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk");
+
+                    CompoundTag tagger = that.getUseItem().getOrCreateTag();
+                    tagger.getCompound("display").putInt("blk", block_value);
+                    that.displayClientMessage(Component.literal("blocking " + block_value), true);
+                    that.getMainHandItem().setTag(tagger);
+
+                    //remove the custom block animation
+                    //cir.cancel();
+                    //that.playSound(ModSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
+                    return;
+                }
+
             }
 
+            ModMessages.fuckingAnnounce(new ClientboundPlayerDefendPacket(that.getId(), this.defending, this.defendProgress), that);
+
         }
-
-
     }
 
     @Inject(
@@ -212,7 +198,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             cancellable = true)
 
     private void CreateSaburs$customAttack(Entity pTarget, CallbackInfo ci) {
-        //CreateSaburs.LOGGER.warn("player hurt");
+        //CreateSaburs.LOGGER.debug("player hurt");
         Player that = ((Player) (Object) this);
         Entity notThat = pTarget;
         CreateSaburs.LOGGER.debug("attacking {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));

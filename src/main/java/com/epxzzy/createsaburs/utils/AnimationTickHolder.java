@@ -15,7 +15,7 @@ public class AnimationTickHolder {
     public static void reset() {
         ticks = 0;
         pausedTicks = 0;
-        //CreateSaburs.LOGGER.warn("Ticks been reset");
+        //CreateSaburs.LOGGER.debug("Ticks been reset");
 
     }
 
@@ -26,7 +26,7 @@ public class AnimationTickHolder {
         } else {
             pausedTicks = (pausedTicks + 1) % 1_728_000;
         }
-        //CreateSaburs.LOGGER.warn("tickkkkkk");
+        //CreateSaburs.LOGGER.debug("tickkkkkk");
     }
 
     public static int getTicks() {

@@ -69,7 +69,7 @@ public class ServerboundSaberDeflectPacket {
                     @Override
                     public boolean test(Entity entity) {
                         if (entity instanceof Player) {
-                            //CreateSaburs.LOGGER.warn("PLAYUR???? NAHHHHH!!");
+                            //CreateSaburs.LOGGER.debug("PLAYUR???? NAHHHHH!!");
                             return true;
                         }
                         return false;
@@ -84,25 +84,25 @@ public class ServerboundSaberDeflectPacket {
                         Vec3 vec31 = vec32.vectorTo(entity.position()).normalize();
                         vec31 = new Vec3(vec31.x, vec31.y, vec31.z);
                         if (vec31.dot(vec3) < 0.4D && speee > -2.0D) {
-                            //CreateSaburs.LOGGER.warn("oh look what do we have here?");
-                            //CreateSaburs.LOGGER.warn("is on ground: " + entity1.onGround() + " and is decending? " + entity1.isDescending());
-                            //CreateSaburs.LOGGER.warn("avrg speed is " + (speee));
+                            //CreateSaburs.LOGGER.debug("oh look what do we have here?");
+                            //CreateSaburs.LOGGER.debug("is on ground: " + entity1.onGround() + " and is decending? " + entity1.isDescending());
+                            //CreateSaburs.LOGGER.debug("avrg speed is " + (speee));
 
-                            //CreateSaburs.LOGGER.warn("GET DEFELECTED IDIOT");
+                            //CreateSaburs.LOGGER.debug("GET DEFELECTED IDIOT");
 
 
                             if (Projectile.class.isAssignableFrom(entity1.getClass())) {
-                                //CreateSaburs.LOGGER.warn("its a projectile???");
+                                //CreateSaburs.LOGGER.debug("its a projectile???");
 
                                 if (AbstractArrow.class.isAssignableFrom(entity1.getClass()) && !((AbstractArrow) entity1).inGround ) {
-                                    //CreateSaburs.LOGGER.warn("deflected an ordinary arrow");
+                                    //CreateSaburs.LOGGER.debug("deflected an ordinary arrow");
                                     ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 1.5F, 1.0F);
                                     entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
 
                                     continue;
                                 }
                                 if (ThrownRotarySaber.class.isAssignableFrom(entity1.getClass())) {
-                                    //CreateSaburs.LOGGER.warn("deflected a thrown lightsaber");
+                                    //CreateSaburs.LOGGER.debug("deflected a thrown lightsaber");
                                     ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 2.0F, 1.0F);
                                     entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
 
@@ -114,7 +114,7 @@ public class ServerboundSaberDeflectPacket {
                                 //entity1.setDeltaMovement(pos);
                                 //entity1.setDeltaMovement(vec3);
                                 if (AbstractHurtingProjectile.class.isAssignableFrom(entity1.getClass())) {
-                                    //CreateSaburs.LOGGER.warn("deflected a projectile");
+                                    //CreateSaburs.LOGGER.debug("deflected a projectile");
 
                                     ((AbstractHurtingProjectile) entity1).xPower = vec3.x * 0.1D;
                                     ((AbstractHurtingProjectile) entity1).yPower = vec3.y * 0.1D;
@@ -137,7 +137,7 @@ public class ServerboundSaberDeflectPacket {
                             }
                         }
                     }
-                    //CreateSaburs.LOGGER.warn("wait was that all of them? dam thats sad");
+                    //CreateSaburs.LOGGER.debug("wait was that all of them? dam thats sad");
                 } else if (pStack.getOrCreateTag().getBoolean("ActiveBoiii")) {
                     entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.SWING.get(), SoundSource.PLAYERS, 0.1F, 0.8F + entity.level().random.nextFloat() * 0.4F);
 
