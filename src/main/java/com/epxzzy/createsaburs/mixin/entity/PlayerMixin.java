@@ -24,6 +24,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Random;
+
 @Mixin(Player.class)
 public abstract class PlayerMixin implements PlayerHelperLmao {
     @Shadow
@@ -72,11 +74,12 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
                 if (!that.level().isClientSide()) {
                     CompoundTag tagger = that.getMainHandItem().getOrCreateTag();
                     int old = tagger.getCompound("display").getInt("atk");
-                    int baller = old > 0 && old < 8 ? old + 1 : 1;
-                    tagger.getCompound("display").putInt("atk", baller);
+                    int sequential = old > 0 && old < 8 ? old + 1 : 1;
+                    int random = (int) new Random().nextInt(8)+1;
+                    tagger.getCompound("display").putInt("atk", random);
 
                     //CreateSaburs.LOGGER.debug("next possible attack value  {}", baller);
-                    that.displayClientMessage(Component.literal("attacking " + baller), true);
+                    that.displayClientMessage(Component.literal("attacking " + random), true);
                     that.getMainHandItem().setTag(tagger);
                 }
             }

@@ -47,16 +47,19 @@ ideas n stuff:
 each form will have a different block, attack, parry and flourish animations/visuals
 //TODO expand on above
 
-TODO for now give every saber a randomised attack area out of nine.
+[DONE]
+give every saber a randomised attack area out of nine.
 then a player mixin would trace every [attack, miss, block, parry(missed attack)].
-
+[DONE]
 a block will get attacker's saber to see what attack to animate playermodel to.
-
+[DONE]
 an attack will be traced and animated by the mixin as to the itemstack.
 
+[DONE]
 a miss(not hitting any entity, just swinging)(where saber is not parrying(more on this later)) animate flourishes that you worked on.
 flourishes will change unless player keeps missing every goddamn time.
 
+[DONE]
 a parry will be read from itemstack and handled either flouish or custom animations
 
 
