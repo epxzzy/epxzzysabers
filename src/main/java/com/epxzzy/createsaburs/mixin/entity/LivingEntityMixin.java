@@ -86,7 +86,7 @@ public abstract class LivingEntityMixin {
 
             if (blocking_with_sabur && Projectile.class.isAssignableFrom(Objects.requireNonNull(pSource.getDirectEntity()).getClass())) {
                 if(Player.class.isAssignableFrom(Objects.requireNonNull(that.getClass()))&&!(((Player) that).getAbilities().flying)){
-                    if(((Player) that).getTicksUsingItem() > 50) return;
+                    if(((Player) that).getTicksUsingItem() > 50) return; // GH-#1
 
                     //CreateSaburs.LOGGER.debug("blocked a projectile");
                     cir.cancel();

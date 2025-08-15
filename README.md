@@ -2,11 +2,18 @@ epxzzy's sabers
 create 6.0.3-71
 
 //TODO: make rotary saber put on as an chest item if rightclicked turned off
-//TODO: make most of the unaccessible content (flourishes, stances, gaycolour) accessible
+
+[DONE] TODO: make most of the unaccessible content (flourishes, stances, gaycolour) accessible
+
+//TODO: lefty animations (parrying, attacking, blocking, misc)
+
 //TODO: rename le mod
+
+//TODO: kill create, but fr this time
+
 ideas n stuff:
 
-# Saber Types:
+# Saber Types [DONE]
  - [DONE] Single blade (low attack speed, high attack damage, low parry range)
  - [DONE] Dual blade (high attack speed, mildly low attack damage, high parry range)
  - [DONE] Inquisitorious (dualblade but fly)
@@ -17,7 +24,7 @@ ideas n stuff:
 
 //above stats are bs, update them too
 
-# Items: 
+# Items 
  - Proton bombs (cylindrical superpowered tnt)
  - Kyber crystals (Natural && Synthetic)
  - Thermal detonators (a grenade pretty much)
@@ -27,15 +34,18 @@ ideas n stuff:
  - [Ark pulse generator](https://starwars.fandom.com/wiki/Arc_Pulse_Generator)
  - grevious mobile
 
-# Mechanics:
+# Mechanics 
  - [DONE] Deflection
  - [DONE] Parry 
  - [DONE] Saber Flight
  - [DONE] Saber Throw
- - [DONE] Saber Shooting?
+ - [DONE] Saber Shooting
+ - Saber Supercharge
+ - Saber Kybersurge
+ - Saber Disruption
 
    
-# Stances:
+# Stances 
  1. shi-cho [DONE]
  2. makashi [DONE] 
  3. soresu [DONE] 
@@ -45,21 +55,67 @@ ideas n stuff:
  7. juyo/vapaad 
 
 each form will have a different block, attack, parry and flourish animations/visuals
+then a player mixin would trace every [attack, miss(flourish), block, parry(deflection)].
+
 //TODO expand on above
 
-[DONE]
-give every saber a randomised attack area out of nine.
-then a player mixin would trace every [attack, miss, block, parry(missed attack)].
-[DONE]
-a block will get attacker's saber to see what attack to animate playermodel to.
-[DONE]
-an attack will be traced and animated by the mixin as to the itemstack.
-[DONE]
-a miss(not hitting any entity, just swinging)(where saber is not parrying(more on this later)) animate flourishes that you worked on.
-flourishes will change unless player keeps missing every goddamn time.
+### Attacking [DONE]
+every saber a randomised attack out of one to eight upon swing.
+ofc these will only be animated if the item is applicable FOR NOW.
+(ie; saber gauntlet, saber pike)
+
+might cause an unintentional parry.
+(more on parrying below)
 
 [DONE]
-a parry will be read from itemstack and handled either flouish or custom animations
+an attack will be traced and animated by the mixin as to the itemstack.
+
+
+### Blocking 
+every saber attack can be blocked via holding down right click,
+as you would do with a shield. blocking will only work for sabers
+though and will not defend against any other form of melee, BUT
+it can block ANY projectile IF the saber is held for less than
+50 ticks (2.5 Seconds). any more than that and saber will fail to
+block.
+(more on ranged defence below: parrying)
+
+NOTE: you don't have to worry about blocking the correct attack as 
+the saber automatically syncs up with other players to block properly.
+just imagine you're fighting with a really deadly shield, only thing
+you need to worry about is facing the source of damage.
+
+[DONE]
+a block will get attacker's saber to see what attack to animate playermodel to.
+
+//TODO: make blocking only work in mainhand.
+
+### Parrying 
+upon either:   
+    - A. double left clicking
+    - B. just left clicking
+
+the saber will perform what is called a parry. a parry deflects
+ANY projectile in a certain range
+(determined by type of saber equipped: parry range)
+towards/in the direction player was facing. certain projectiles
+like shulker bullets and (now fixed) tridents are processed
+differently so those might fail to change directions by a 
+player.
+(juggling: blocking an incoming projectile
+to parry it back to the source)
+
+NOTE: parry is nothing special, its just when you swing a saber
+it changes trajectories of projects in your parry range.
+
+//TODO: make flourishes exclusive to parrying
+
+### ~~Missed Attacks (Flourishes)~~ [MERGED WITH PARRYING]
+a miss(not hitting any entity, just swinging)
+(where saber is not parrying) animate flourishes.
+flourishes will not toggle between animations unless player keeps
+missing every goddamn time. a parry will be read from itemstack
+and handled either flouish or custom animations.
 
 
 
