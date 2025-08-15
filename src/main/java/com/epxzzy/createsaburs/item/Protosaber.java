@@ -129,25 +129,25 @@ public class Protosaber extends Item {
         CompoundTag nbeetea = pStack.getOrCreateTag();
         //if (!pLevel.isClientSide) {
 
-            if (!readActivetag(pStack)) {
+        if (!readActivetag(pStack)) {
 
-                //CreateSaburs.LOGGER.info("Saber is now Going Active");
-                //nbeetea.putInt("CustomModelData", 1);
-                writeActiveTag(pStack, true);
+            //CreateSaburs.LOGGER.info("Saber is now Going Active");
+            //nbeetea.putInt("CustomModelData", 1);
+            writeActiveTag(pStack, true);
 
-                isActive = true;
-            } else {
-                pPlayer.stopUsingItem();
-                //CreateSaburs.LOGGER.info("Saber is now Turning Off");
+            isActive = true;
+        } else {
+            pPlayer.stopUsingItem();
+            //CreateSaburs.LOGGER.info("Saber is now Turning Off");
 
-                nbeetea.putInt("CustomModelData", 0);
-                writeActiveTag(pStack, false);
-                isActive = false;
-            }
+            nbeetea.putInt("CustomModelData", 0);
+            writeActiveTag(pStack, false);
+            isActive = false;
+        }
 
-            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(),
-                    (readActivetag(pStack) ? ModSounds.ACTIVATION.get() : ModSounds.DEACTIVATION.get()), SoundSource.NEUTRAL, 0.5f, 1f
-            );
+        pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(),
+                (readActivetag(pStack) ? ModSounds.ACTIVATION.get() : ModSounds.DEACTIVATION.get()), SoundSource.NEUTRAL, 0.5f, 1f
+        );
         //}
     }
 
@@ -156,17 +156,14 @@ public class Protosaber extends Item {
             int flourish = (int) ((Math.random() * 3) + 1);
 
             pStack.getOrCreateTag().getCompound("display").putInt("flourish", flourish);
-            //CompoundTag tagsToApply = new CompoundTag();
-            //CompoundTag displayTag = new CompoundTag();
+        }
+    }
 
-            //displayTag.putInt("flourish", flourish);
-
-            //tagsToApply.put("display", displayTag);
-
-            //pStack.setTag(tagsToApply);
-
-            //CreateSaburs.LOGGER.info("Flourish =" + flourish);
-            //CreateSaburs.LOGGER.info(pStack.getOrCreateTag().getAllKeys().toString());
+    public static void removeFlourishTag(Entity pEntity, ItemStack pStack) {
+        if (pEntity instanceof Player player && !player.swinging) {
+            if (!pEntity.level().isClientSide()) {
+                pStack.getOrCreateTag().getCompound("display").remove("flourish");
+            }
         }
     }
 
@@ -176,10 +173,10 @@ public class Protosaber extends Item {
         CompoundTag tag = pStack.getOrCreateTag();
         tag.putInt("equiper", pEntity.getId());
         tag.putBoolean("offhand", false);
-        if(!(pLevel.isClientSide())){
-        //    CreateSaburs.LOGGER.info("curr slott "+ pSlotId);
+        if (!(pLevel.isClientSide())) {
+            //    CreateSaburs.LOGGER.info("curr slott "+ pSlotId);
             //pEntity.
-            if(pEntity instanceof LivingEntity pLiving) {
+            if (pEntity instanceof LivingEntity pLiving) {
                 if (pLiving instanceof Player pPlayer) {
                     if (ItemStack.isSameItemSameTags(pPlayer.getInventory().offhand.get(0), pStack)) {
                         tag.putBoolean("offhand", true);
@@ -191,9 +188,10 @@ public class Protosaber extends Item {
                 }
             }
 
+        } else {
         }
-        else {
-        }
+
+
     }
 
 
@@ -239,8 +237,8 @@ public class Protosaber extends Item {
 
     public static int getColor(ItemStack pStack) {
         CompoundTag compoundtag = pStack.getOrCreateTagElement("display");
-        if(compoundtag.getBoolean("gay")) {
-            return ColourConverter.portedRGBtoDecimal(ColourConverter.rainbowColor((int) System.currentTimeMillis() * 2 ));
+        if (compoundtag.getBoolean("gay")) {
+            return ColourConverter.portedRGBtoDecimal(ColourConverter.rainbowColor((int) System.currentTimeMillis() * 2));
         }
 
         if (compoundtag.getInt("colour") == 0) {
@@ -250,6 +248,7 @@ public class Protosaber extends Item {
 
         return Objects.requireNonNull(pStack.getTagElement("display")).getInt("colour");
     }
+
     public static boolean isGay(ItemStack pStack) {
         return Objects.requireNonNull(pStack.getTagElement("display")).getBoolean("gay");
     }
@@ -287,7 +286,7 @@ public class Protosaber extends Item {
 
     @Override
     public boolean canPerformAction(ItemStack stack, net.minecraftforge.common.ToolAction toolAction) {
-        if (toolAction == CreateSaburs.SABER_BLOCK&&this.readActivetag(stack)) return true;
+        if (toolAction == CreateSaburs.SABER_BLOCK && this.readActivetag(stack)) return true;
         return toolAction == CreateSaburs.SABER_SWING;
 
         //return net.minecraftforge.common.ToolActions.DEFAULT_SHIELD_ACTIONS.contains(toolAction);
@@ -314,13 +313,16 @@ public class Protosaber extends Item {
         return true;
     }
 
-    public static int getSaberParryRange(ItemStack pStack){
+    public static int getSaberParryRange(ItemStack pStack) {
         return ((Protosaber) pStack.getItem().asItem()).PARRY_RANGE;
         //return false;
     }
+
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-        //addFlourishTag(entity, stack);
+        if (entity.swingTime >= 3) {
+            addFlourishTag(entity, stack);
+        }
         ModMessages.sendToServer(new ServerboundSaberDeflectPacket());
         StackHelper.AnimateDefelctionClient(stack, (Player) entity);
         return false;
@@ -363,9 +365,10 @@ public class Protosaber extends Item {
             return ((LivingEntity) Entityy).getMainHandItem().is(ModTags.Items.DUAL_BLADED) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity) Entityy).isUsingItem();
         return false;
     }
+
     public static BladeStance getStance(Entity Entityy) {
         int tagid = 0;
-        if (Entityy instanceof LivingEntity){
+        if (Entityy instanceof LivingEntity) {
             tagid = ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getCompound("display").getInt("stance");
         }
         BladeStance returnee;
@@ -394,7 +397,8 @@ public class Protosaber extends Item {
         return false;
     }
 
-    @Override @OnlyIn(Dist.CLIENT)
+    @Override
+    @OnlyIn(Dist.CLIENT)
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         THE_BETTER_RENDERER = new ProtosaberItemRenderer();
         consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));

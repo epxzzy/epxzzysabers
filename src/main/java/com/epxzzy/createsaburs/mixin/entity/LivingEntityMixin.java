@@ -2,6 +2,7 @@ package com.epxzzy.createsaburs.mixin.entity;
 
 import com.epxzzy.createsaburs.CreateSaburs;
 import com.epxzzy.createsaburs.item.ModItems;
+import com.epxzzy.createsaburs.item.Protosaber;
 import com.epxzzy.createsaburs.sound.ModSounds;
 import com.epxzzy.createsaburs.utils.ModTags;
 import net.minecraft.sounds.SoundSource;
@@ -23,6 +24,19 @@ import java.util.Objects;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
+
+    @Inject(
+            method = "updateSwingTime",
+            at = @At(value = "TAIL")
+    )
+    private void clearFlourish(CallbackInfo ci){
+        LivingEntity that = ((LivingEntity) (Object) this);
+        ItemStack pStack = that.getMainHandItem();
+        if(that.swingTime == 0 && pStack.is(ModTags.Items.LIGHTSABER)){
+            Protosaber.removeFlourishTag(that, pStack);
+        }
+    }
+
 
     @Inject(
             method = "hurt",

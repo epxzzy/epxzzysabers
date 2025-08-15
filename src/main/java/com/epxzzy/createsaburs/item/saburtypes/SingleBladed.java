@@ -41,26 +41,6 @@ public class SingleBladed extends Protosaber {
     }
 
     @Override
-    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-        /*
-        if(!entity.level().isClientSide()) {
-            CompoundTag tagger = stack.getOrCreateTag();
-            int baller = (int) ((Math.random() * 8) + 1);
-            tagger.getCompound("display").putInt("atk", baller);
-            CreateSaburs.LOGGER.debug("randomiser decided on number {}", baller);
-            stack.setTag(tagger);
-        }
-
-         */
-
-        //SWANG = true;
-        //CreateSaburs.LOGGER.debug("swang: {}, hurted: {}", this.SWANG, this.HURTED);
-        //ofc swing triggers first cause why the fuck would things make sense
-        return false;
-        //return super.onEntitySwing(stack, entity);
-    }
-
-    @Override
     public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
         //HURTED = true;
         //CreateSaburs.LOGGER.debug("swang: {}, hurted: {}", this.SWANG, this.HURTED);
