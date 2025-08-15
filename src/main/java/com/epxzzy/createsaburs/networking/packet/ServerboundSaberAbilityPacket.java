@@ -73,6 +73,11 @@ public class ServerboundSaberAbilityPacket {
                         pLevel.playSound((Player) null, blasterbolt, SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.PLAYERS, 0.05F, 1.0F);
                     }
                 }
+                if (player.getUseItem().is(ModItems.SABER_GAUNTLET.get()) && player.getUseItem().getUseDuration() <= 40) {
+
+                    //set appropriate abilty
+
+                }
 
 
 

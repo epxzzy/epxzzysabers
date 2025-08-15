@@ -34,6 +34,9 @@ public class ClientEvents {
 
     @Mod.EventBusSubscriber(modid = CreateSaburs.MOD_ID, value = Dist.CLIENT)
     public static class ClientForgeEvents {
+        //private static long bengignhold = 0;
+        //private static boolean held = false;
+
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event) {
             if (KeyBinding.SABER_ABILITY_KEY.consumeClick()) {
@@ -41,6 +44,16 @@ public class ClientEvents {
                 //Minecraft.getInstance().player.connection.send(new ServerboundRotarySaberAbilityPacket());
                 ModMessages.sendToServer(new ServerboundSaberAbilityPacket());
             }
+            /*
+            if (KeyBinding.SABER_ABILITY_KEY.isDown()) {
+                if(!held){
+                   bengignhold = System.currentTimeMillis();
+                   held = true;
+                }
+            }
+
+             */
+
         }
     }
 
