@@ -89,7 +89,7 @@ public class PlayerPoseRouter {
         }
         //block
         if((Protosaber.checkForSaberEquipment(player, true)||SingleBladed.checkForSaberEquipment(player, true)) && block > 0 && SaberDefAnim > 0){
-            setBladedBlock(block, model);
+            setBladedBlock(block, model, SaberDefAnim);
             return;
         }
         //stancing
@@ -152,8 +152,8 @@ public class PlayerPoseRouter {
     private static void setBladedAttack(int attack, HumanoidModel<?> model,float lerper){
         PlayerAttackRenderer.setPose(attack,false, model, lerper);
     }
-    private static void setBladedBlock(int block,HumanoidModel<?> model){
-        PlayerBlockRenderer.setPose(block,false, model);
+    private static void setBladedBlock(int block,HumanoidModel<?> model, float lerper){
+        PlayerBlockRenderer.setPose(block,false, model, lerper);
     }
 
 
