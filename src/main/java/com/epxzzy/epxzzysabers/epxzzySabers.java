@@ -1,6 +1,5 @@
 package com.epxzzy.epxzzysabers;
 
-import com.epxzzy.epxzzysabers.block.ModBlockEntities;
 import com.epxzzy.epxzzysabers.block.ModBlocks;
 import com.epxzzy.epxzzysabers.entity.ModEntities;
 import com.epxzzy.epxzzysabers.entity.client.bolt.PlasmaBoltRenderer;

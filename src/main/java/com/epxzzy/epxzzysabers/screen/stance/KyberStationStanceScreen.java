@@ -146,6 +146,15 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
     public void UpdateServerRecipe() {
         //send packet to craft
         PLAYERpreview.setItemInHand(InteractionHand.MAIN_HAND, this.menu.resultSlot.getItem());
+
+        if(this.menu.resultSlot.hasItem()){
+            PLAYERpreview.setShiftKeyDown(true);
+        }
+        else {
+            PLAYERpreview.setShiftKeyDown(false);
+        }
+
+        PLAYERpreview.setShiftKeyDown(true);
         PLAYERpreview.startUsingItem(InteractionHand.MAIN_HAND);
     }
 
