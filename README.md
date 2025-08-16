@@ -1,7 +1,5 @@
 epxzzy's sabers
-create 6.0.3-71
-
-//TODO: make rotary saber put on as an chest item if rightclicked turned off
+//create 6.0.3-71
 
 [DONE] TODO: make most of the unaccessible content (flourishes, stances, gaycolour) accessible
 
@@ -10,6 +8,8 @@ create 6.0.3-71
 //TODO: rename le mod
 
 //TODO: kill create, but fr this time
+
+//TODO: make a fuckin wiki lmao
 
 ideas n stuff:
 

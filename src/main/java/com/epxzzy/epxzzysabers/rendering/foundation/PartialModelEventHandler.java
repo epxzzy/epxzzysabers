@@ -1,0 +1,33 @@
+package com.epxzzy.epxzzysabers.rendering.foundation;
+
+import java.util.Map;
+
+import com.epxzzy.epxzzysabers.epxzzySabers;
+import org.jetbrains.annotations.ApiStatus;
+
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.client.event.ModelEvent;
+
+@ApiStatus.Internal
+public final class PartialModelEventHandler {
+    private PartialModelEventHandler() {
+    }
+
+    public static void onRegisterAdditional(ModelEvent.RegisterAdditional event) {
+        for (ResourceLocation modelLocation : PartialModel.ALL.keySet()) {
+            event.register(modelLocation);
+        }
+    }
+
+    public static void onBakingCompleted(ModelEvent.BakingCompleted event) {
+        PartialModel.populateOnInit = true;
+        //epxzzySabers.LOGGER.debug("FKCRT PRTLMDLEVHNDLR partial models baked lmao");
+        Map<ResourceLocation, BakedModel> models = event.getModels();
+
+        for ( PartialModel partial : PartialModel.ALL.values()) {
+            //epxzzySabers.LOGGER.debug("FKCRT PRTLMDLEVHNDLR partial model: {}", partial.modelLocation());
+            partial.bakedModel = models.get(partial.modelLocation());
+        }
+    }
+}

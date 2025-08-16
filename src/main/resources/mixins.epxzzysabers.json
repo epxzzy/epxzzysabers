@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "package": "com.epxzzy.epxzzysabers.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "mixins": [
+    "entity.LivingEntityMixin",
+    "entity.ThrownTridentMixin",
+    "entity.PlayerMixin"
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "client.HumanoidModelMixin"
+  ],
+  "server": [
+
+  ]
+}

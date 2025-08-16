@@ -1,0 +1,45 @@
+{
+  "saber_activation": {
+    "subtitle": "sounds.epxzzysabers.activation",
+    "sounds": [
+      "epxzzysabers:activation",
+      "epxzzysabers:activation1",
+      "epxzzysabers:activation2",
+      "epxzzysabers:activation3",
+      "epxzzysabers:activation4",
+      "epxzzysabers:activation5"
+
+    ]
+  },
+  "saber_deactivation": {
+    "subtitle": "sounds.epxzzysabers.deactivation",
+    "sounds": [
+      "epxzzysabers:deactivation",
+      "epxzzysabers:deactivation1",
+      "epxzzysabers:deactivation2",
+      "epxzzysabers:deactivation3",
+      "epxzzysabers:deactivation4",
+      "epxzzysabers:deactivation5"
+    ]
+  },
+  "clash": {
+    "subtitle": "sounds.epxzzysabers.clash",
+    "sounds": [
+      "epxzzysabers:clash",
+      "epxzzysabers:clash1",
+      "epxzzysabers:clash2",
+      "epxzzysabers:clash3",
+      "epxzzysabers:clash4",
+      "epxzzysabers:clash5"
+    ]
+  },
+  "swing": {
+    "subtitle": "sounds.epxzzysabers.swing",
+    "sounds": [
+      "epxzzysabers:swing",
+      "epxzzysabers:swing1",
+      "epxzzysabers:swing2",
+      "epxzzysabers:swing3"
+    ]
+  }
+}
