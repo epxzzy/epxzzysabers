@@ -29,6 +29,7 @@ ideas n stuff:
  - Beskar armour (armour that is resistant to saber attacks)
  - [Ark pulse generator](https://starwars.fandom.com/wiki/Arc_Pulse_Generator)
  - grevious mobile
+ - gungan shield and big booma????
 
 # Mechanics 
  - [DONE] Deflection
@@ -80,17 +81,17 @@ you need to worry about is facing the source of damage.
 
 //TODO: make blocking only work in mainhand.
 
-### Parrying 
+### Parrying
 upon either:   
-    - A. double left clicking
-    - B. just left clicking
+- A. double left clicking
+- B. just left clicking
 
 the saber will perform what is called a parry. a parry deflects
 ANY projectile in a certain range
 (determined by type of saber equipped: parry range)
 towards/in the direction player was facing. certain projectiles
 like shulker bullets and (now fixed) tridents are processed
-differently so those might fail to change directions by a 
+differently so those might fail to change directions by a
 player.
 (juggling: blocking an incoming projectile
 to parry it back to the source)
@@ -111,25 +112,10 @@ and handled either flouish or custom animations.
 crouching during blocking with a saber triggers a stance.
 there are eight total stances, and to assume them you need to get
 them on your item. this can be done via the kyber station.
-NOTE: parry is nothing special, its just when you swing a saber
-it changes trajectories of projects in your parry range.
-
-//TODO: make flourishes exclusive to parrying
-
-### ~~Missed Attacks (Flourishes)~~ [MERGED WITH PARRYING]
-a miss(not hitting any entity, just swinging)
-(where saber is not parrying) animate flourishes.
-flourishes will not toggle between animations unless player keeps
-missing every goddamn time. a parry will be read from itemstack
-and handled either flouish or custom animations.
-
-### Posing (Assuming Stance)
-crouching during blocking with a saber triggers a stance.
-there are eight total stances, and to assume
 
 a stance does literally nothing but look cool.
 
-NOTE: as of right now there are a few stances missing. posing 
+NOTE: as of right now there are a few stances missing. posing
 overall is buggy or doesn't render properly.
 
-### 
+###
