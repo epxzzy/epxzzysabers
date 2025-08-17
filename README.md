@@ -3,8 +3,6 @@ epxzzy's sabers
 
 //TODO: lefty animations (parrying, attacking, blocking, misc)
 
-//TODO: rename le mod
-
 //TODO: make a fuckin wiki lmao
 
 ideas n stuff:
@@ -106,3 +104,15 @@ a miss(not hitting any entity, just swinging)
 flourishes will not toggle between animations unless player keeps
 missing every goddamn time. a parry will be read from itemstack
 and handled either flouish or custom animations.
+
+### Posing (Assuming Stance)
+crouching during blocking with a saber triggers a stance.
+there are eight total stances, and to assume them you need to get
+them on your item. this can be done via the kyber station.
+
+a stance does literally nothing but look cool.
+
+NOTE: as of right now there are a few stances missing. posing 
+overall is buggy or doesn't render properly.
+
+### 

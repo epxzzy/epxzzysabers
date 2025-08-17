@@ -141,6 +141,7 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         //this.addWidget(FLOURISH_TAB_BUTTON);
         STANCE_TAB_BUTTON.setStateTriggered(true);
         PLAYERpreview = new LocalPlayer(this.getMinecraft(), this.minecraft.level, this.minecraft.getConnection(), null, null, false, false);
+        PLAYERpreview.setCustomNameVisible(true);
         //PLAYERpreview.setShiftKeyDown(true);
 
         UpdateServerRecipe();
