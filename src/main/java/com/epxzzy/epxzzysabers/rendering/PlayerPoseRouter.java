@@ -38,7 +38,8 @@ public class PlayerPoseRouter {
 
     public static void beforeSetupAnim(Player player, HumanoidModel<?> model) {
         boolean[] bbc = RotarySaber.checkForSaberFly(player);
-        if(player.getMainHandItem().is(ModTags.Items.LIGHTSABER)){
+
+        if(player.getMainHandItem().is(ModTags.Items.LIGHTSABER)) {
             model.head.resetPose();
             model.hat.resetPose();
             model.body.resetPose();
@@ -46,7 +47,6 @@ public class PlayerPoseRouter {
             model.rightArm.resetPose();
             model.leftLeg.resetPose();
             model.rightLeg.resetPose();
-
         }
 
         if (Protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
@@ -58,6 +58,7 @@ public class PlayerPoseRouter {
             model.rightArm.resetPose();
             model.rightArm.resetPose();
         }
+
         if((Protosaber.checkForSaberBlock(player)||SingleBladed.checkForSaberBlock(player))&& player.isShiftKeyDown()){
             model.rightArm.resetPose();
             model.leftArm.resetPose();
@@ -65,8 +66,8 @@ public class PlayerPoseRouter {
             model.body.resetPose();
             model.leftLeg.resetPose();
             model.rightLeg.resetPose();
-            
-        };
+        }
+
         if(bbc[0]){
             model.head.resetPose();
             model.hat.resetPose();

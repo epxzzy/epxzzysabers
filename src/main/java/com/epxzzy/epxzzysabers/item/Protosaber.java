@@ -381,7 +381,6 @@ public class Protosaber extends Item {
             case 6 -> returnee = BladeStance.FORM6;
             case 7 -> returnee = BladeStance.FORM7;
 
-
             default -> returnee = BladeStance.FORM0;
         }
         return returnee;
