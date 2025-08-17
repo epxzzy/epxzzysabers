@@ -5,6 +5,7 @@ import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRende
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialModel;
 import com.epxzzy.epxzzysabers.rendering.poseRenderer.HeavyWeapon.HeavyWeaponItemPoseRenderer;
+import com.epxzzy.epxzzysabers.utils.PlayerHelperLmao;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 
@@ -47,7 +48,7 @@ public class DualBladedItemRenderer extends CustomRenderedItemModelRenderer {
 
         if (transformType != ItemDisplayContext.GUI && transformType != ItemDisplayContext.FIXED) {
             for (LivingEntity entity : allEntities) {
-                if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
+                if ((entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii") && !(((PlayerHelperLmao) entity).getSaberAttackAnim() > 0)){
                     HeavyWeaponItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
                 }
             }
