@@ -12,6 +12,7 @@ import com.epxzzy.epxzzysabers.rendering.poseRenderer.DualBladed.DualBladedArmPo
 import com.epxzzy.epxzzysabers.rendering.poseRenderer.SingleBladed.SingleBladedArmPoseRenderer;
 import com.epxzzy.epxzzysabers.utils.AngleHelper;
 import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
+import com.epxzzy.epxzzysabers.utils.ModTags;
 import com.epxzzy.epxzzysabers.utils.PlayerHelperLmao;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.AnimationUtils;
@@ -37,6 +38,16 @@ public class PlayerPoseRouter {
 
     public static void beforeSetupAnim(Player player, HumanoidModel<?> model) {
         boolean[] bbc = RotarySaber.checkForSaberFly(player);
+        if(player.getMainHandItem().is(ModTags.Items.LIGHTSABER)){
+            model.head.resetPose();
+            model.hat.resetPose();
+            model.body.resetPose();
+            model.leftArm.resetPose();
+            model.rightArm.resetPose();
+            model.leftLeg.resetPose();
+            model.rightLeg.resetPose();
+
+        }
 
         if (Protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
             model.leftArm.resetPose();

@@ -22,6 +22,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Predicate;
 
 public class StackHelper {
@@ -50,6 +51,12 @@ public class StackHelper {
 
         return result;
     }
+
+
+    public static int random1to8(int old){
+        int random = (int) new Random().nextInt(8) + 1;
+        return old != random? random: random1to8(old);
+    };
 
     public static List<LivingEntity> getEntitiesHoldingItemAnyHand(ItemStack stack) {
         List<LivingEntity> result = new ArrayList<>();

@@ -1,13 +1,9 @@
 epxzzy's sabers
 //create 6.0.3-71
 
-[DONE] TODO: make most of the unaccessible content (flourishes, stances, gaycolour) accessible
-
 //TODO: lefty animations (parrying, attacking, blocking, misc)
 
 //TODO: rename le mod
-
-//TODO: kill create, but fr this time
 
 //TODO: make a fuckin wiki lmao
 
@@ -67,9 +63,6 @@ ofc these will only be animated if the item is applicable FOR NOW.
 might cause an unintentional parry.
 (more on parrying below)
 
-[DONE]
-an attack will be traced and animated by the mixin as to the itemstack.
-
 
 ### Blocking 
 every saber attack can be blocked via holding down right click,
@@ -84,9 +77,6 @@ NOTE: you don't have to worry about blocking the correct attack as
 the saber automatically syncs up with other players to block properly.
 just imagine you're fighting with a really deadly shield, only thing
 you need to worry about is facing the source of damage.
-
-[DONE]
-a block will get attacker's saber to see what attack to animate playermodel to.
 
 //TODO: make blocking only work in mainhand.
 
@@ -116,7 +106,3 @@ a miss(not hitting any entity, just swinging)
 flourishes will not toggle between animations unless player keeps
 missing every goddamn time. a parry will be read from itemstack
 and handled either flouish or custom animations.
-
-
-
- 

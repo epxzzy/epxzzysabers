@@ -224,6 +224,7 @@ public class RotarySaber extends Protosaber {
             //checking for entity fly ability here makes flight animation fine in singleplayer, but broken in multiplayer
 
             //first one meaning flight is true, second specifies the hand, third is both hands have one
+            //TODO: drop offhand item use support
             return new boolean[]{ (mainhand || offhand), offhand, mainhand && offhand};
         }
         return new boolean[]{false, false, false};

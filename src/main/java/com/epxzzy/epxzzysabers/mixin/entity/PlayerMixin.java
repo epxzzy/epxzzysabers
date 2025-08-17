@@ -6,6 +6,7 @@ import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerAttackPacket;
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerDefendPacket;
 import com.epxzzy.epxzzysabers.utils.ModTags;
 import com.epxzzy.epxzzysabers.utils.PlayerHelperLmao;
+import com.epxzzy.epxzzysabers.utils.StackHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -72,15 +73,9 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
                 this.attackProgress = 0;
                 this.attacking = false;
                 if (!that.level().isClientSide()) {
-                    CompoundTag tagger = that.getMainHandItem().getOrCreateTag();
-                    int old = tagger.getCompound("display").getInt("atk");
-                    int sequential = old > 0 && old < 8 ? old + 1 : 1;
-                    int random = (int) new Random().nextInt(8)+1;
-                    tagger.getCompound("display").putInt("atk", random);
-
-                    //epxzzysabers.LOGGER.debug("next possible attack value  {}", baller);
-                    that.displayClientMessage(Component.literal("attacking " + random), true);
-                    that.getMainHandItem().setTag(tagger);
+                    CompoundTag temptag = that.getMainHandItem().getOrCreateTag().getCompound("display");
+                    temptag.remove("atk");
+                    that.displayClientMessage(Component.literal(""), true);
                 }
             }
         } else {
@@ -98,8 +93,11 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             if (this.defendProgress >= 6) {
                 this.defendProgress = 0;
                 this.defending = false;
-                CompoundTag temptag = that.getMainHandItem().getOrCreateTag().getCompound("display");
-                temptag.remove("blk");
+                if (!that.level().isClientSide()) {
+                    CompoundTag temptag = that.getMainHandItem().getOrCreateTag().getCompound("display");
+                    temptag.remove("blk");
+                    that.displayClientMessage(Component.literal(""), true);
+                }
             }
         } else {
             this.defendProgress = 0;
@@ -159,14 +157,12 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         LivingEntity notThat = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
         boolean blocking_with_sabur = that.getUseItem().is(ModTags.Items.LIGHTSABER);
 
-        if(!that.level().isClientSide() && blocking_with_sabur){
+        if (!that.level().isClientSide() && blocking_with_sabur) {
             if (!this.defending || this.defendProgress >= 6 / 2 || this.defendProgress < 0) {
                 this.defendProgress = -1;
                 this.defending = true;
             }
             defending = true;
-
-
 
 
             if (notThat != null) {
@@ -207,14 +203,25 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         epxzzySabers.LOGGER.debug("attacking {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
 
 
-
-        if(!that.level().isClientSide()) {
+        if (!that.level().isClientSide()) {
             if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {
                 this.attackProgress = -1;
                 this.attacking = true;
                 this.attackingHand = that.swingingArm;
             }
             this.attacking = true;
+
+            CompoundTag tagger = that.getMainHandItem().getOrCreateTag();
+            int old = tagger.getCompound("display").getInt("atk");
+            int sequential = old > 0 && old < 8 ? old + 1 : 1;
+            int random = StackHelper.random1to8(old);
+            tagger.getCompound("display").putInt("atk", random);
+
+            //epxzzysabers.LOGGER.debug("next possible attack value  {}", baller);
+            that.displayClientMessage(Component.literal("attacking " + random), true);
+            that.getMainHandItem().setTag(tagger);
+
+
             //ModMessages.sendToServer(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress));
 
             ModMessages.fuckingAnnounce(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress), that);

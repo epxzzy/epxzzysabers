@@ -12,6 +12,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
@@ -140,6 +141,8 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         //this.addWidget(FLOURISH_TAB_BUTTON);
         STANCE_TAB_BUTTON.setStateTriggered(true);
         PLAYERpreview = new LocalPlayer(this.getMinecraft(), this.minecraft.level, this.minecraft.getConnection(), null, null, false, false);
+        //PLAYERpreview.setShiftKeyDown(true);
+
         UpdateServerRecipe();
     }
 
@@ -147,17 +150,20 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         //send packet to craft
         PLAYERpreview.setItemInHand(InteractionHand.MAIN_HAND, this.menu.resultSlot.getItem());
 
-        if(this.menu.resultSlot.hasItem()){
-            PLAYERpreview.setShiftKeyDown(true);
-        }
-        else {
-            PLAYERpreview.setShiftKeyDown(false);
-        }
+        //PLAYERpreview.setShiftKeyDown(this.menu.resultSlot.hasItem());
+        //PLAYERpreview.setShiftKeyDown(true);
 
-        PLAYERpreview.setShiftKeyDown(true);
+        setShiftForThyPlayer(PLAYERpreview, true);
+        //PLAYERpreview.setShiftKeyDown(false);
+
         PLAYERpreview.startUsingItem(InteractionHand.MAIN_HAND);
+        //epxzzySabers.LOGGER.debug("is shifty downy {}", PLAYERpreview.isShiftKeyDown());
     }
-
+    public static void setShiftForThyPlayer(LocalPlayer pPlayer, boolean value){
+        Input inpoo = new Input();
+        inpoo.shiftKeyDown = true;
+        pPlayer.input = inpoo;
+    }
     @Override
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
         return super.mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
@@ -321,6 +327,7 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         pEntity.setXRot(-f1 * 20.0F);
         pEntity.yHeadRot = pEntity.getYRot();
         pEntity.yHeadRotO = pEntity.getYRot();
+        pEntity.setShiftKeyDown(true);
         renderEntityInInventory(pGuiGraphics, pX, pY, pScale, quaternionf, quaternionf1, pEntity);
         pEntity.yBodyRot = f2;
         pEntity.setYRot(f3);
