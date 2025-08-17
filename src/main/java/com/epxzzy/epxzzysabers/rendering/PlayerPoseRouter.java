@@ -1,24 +1,17 @@
 package com.epxzzy.epxzzysabers.rendering;
 
-import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.item.saburtypes.RotarySaber;
-import com.epxzzy.epxzzysabers.item.saburtypes.SaberPike;
 import com.epxzzy.epxzzysabers.item.saburtypes.SingleBladed;
 import com.epxzzy.epxzzysabers.rendering.poseHandlers.PlayerAttackRenderer;
 import com.epxzzy.epxzzysabers.rendering.poseHandlers.PlayerBlockRenderer;
 import com.epxzzy.epxzzysabers.rendering.poseHandlers.PlayerStanceRenderer;
-import com.epxzzy.epxzzysabers.rendering.poseRenderer.DualBladed.DualBladedArmPoseRenderer;
-import com.epxzzy.epxzzysabers.rendering.poseRenderer.SingleBladed.SingleBladedArmPoseRenderer;
-import com.epxzzy.epxzzysabers.utils.AngleHelper;
-import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
-import com.epxzzy.epxzzysabers.utils.ModTags;
-import com.epxzzy.epxzzysabers.utils.PlayerHelperLmao;
+import com.epxzzy.epxzzysabers.rendering.poseRenderer.HeavyWeapon.HeavyWeaponArmPoseRenderer;
+import com.epxzzy.epxzzysabers.rendering.poseRenderer.LightWeapon.LightWeaponArmPoseRenderer;
+import com.epxzzy.epxzzysabers.utils.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.AnimationUtils;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 
@@ -114,28 +107,33 @@ public class PlayerPoseRouter {
             setRotaryFlyPose(player, model, bbc[1]);
             return;
         }
+
         //joint hands spin
         if(RotarySaber.checkForSaberBlock(player)){
             setRotaryBlockPose(player, model);
             return;
         }
+
         //heavy weapon attack miss mainhand
-        if ((Protosaber.checkForSaberEquipment(player, true) ||SaberPike.checkForSaberEquipment(player, true)) && player.swingTime > 0) {
+        if ( StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.HEAVY_WEAPON) && player.swingTime > 0) {
             setDualSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model, flourish);
             return;
         }
+
         //heavy weapon attack miss jarr kai type shit
-        if (Protosaber.checkForSaberEquipment(player, false) && Protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
+        if ( StackHelper.checkHoldingActiveTag(player, false, ModTags.Items.HEAVY_WEAPON) && player.swingTime > 0) {
             setDualSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
             return;
         }
+
         //light weapon attack miss mainhand
-        if (SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0) {
+        if ( StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.LIGHT_WEAPON) && player.swingTime > 0) {
             setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, false, model, flourish);
             return;
         }
+
         //light weapon attack miss jarr jai type shit
-        if (SingleBladed.checkForSaberEquipment(player, false) && SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0) {
+        if ( StackHelper.checkHoldingActiveTag(player, false, ModTags.Items.LIGHT_WEAPON) && player.swingTime > 0) {
             setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
             return;
         }
@@ -148,7 +146,7 @@ public class PlayerPoseRouter {
         ModelPart MainArm = Lefty ? model.leftArm : model.rightArm;
         ModelPart otherArm = Lefty ? model.rightArm : model.leftArm;
 
-        DualBladedArmPoseRenderer.setArmPose(flourish, Lefty, both, model);
+        HeavyWeaponArmPoseRenderer.setArmPose(flourish, Lefty, both, model);
 
     }
 
@@ -156,7 +154,7 @@ public class PlayerPoseRouter {
         if (Minecraft.getInstance().isPaused())
             return;
 
-        SingleBladedArmPoseRenderer.setArmPose(flourish, Lefty, both, model);
+        LightWeaponArmPoseRenderer.setArmPose(flourish, Lefty, both, model);
     }
     private static void setBladedStance(Player player,HumanoidModel<?> model){
         PlayerStanceRenderer.setPose(Protosaber.getStance(player),false, model);

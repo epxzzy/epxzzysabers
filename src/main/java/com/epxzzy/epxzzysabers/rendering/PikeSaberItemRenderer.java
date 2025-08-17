@@ -4,9 +4,8 @@ import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialModel;
-import com.epxzzy.epxzzysabers.rendering.poseRenderer.DualBladed.DualBladedItemPoseRenderer;
+import com.epxzzy.epxzzysabers.rendering.poseRenderer.HeavyWeapon.HeavyWeaponItemPoseRenderer;
 import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
-import com.epxzzy.epxzzysabers.utils.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.LightTexture;
@@ -52,7 +51,7 @@ public class PikeSaberItemRenderer extends CustomRenderedItemModelRenderer {
 
             for (LivingEntity entity : allEntities) {
                 if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")){
-                    DualBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+                    HeavyWeaponItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.epxzzy.epxzzysabers.rendering.poseRenderer.DualBladed;
+package com.epxzzy.epxzzysabers.rendering.poseRenderer.HeavyWeapon;
 
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.epxzzysabers.utils.AngleHelper;
@@ -14,9 +14,9 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 
-public class DualBladedItemPoseRenderer {
+public class HeavyWeaponItemPoseRenderer {
     public static void setItemPose(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
-        DualBladedFlourish flourish = DualBladedFlourish.fromTagID(stack.getOrCreateTag().getCompound("display").getInt("flourish"));
+        HeavyWeaponFlourish flourish = HeavyWeaponFlourish.fromTagID(stack.getOrCreateTag().getCompound("display").getInt("flourish"));
         switch (flourish) {
             case SKIPCATCH -> SetFlourishSKIPCATCH(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
             //front neeeeooommm

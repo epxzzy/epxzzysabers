@@ -4,10 +4,10 @@ import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialModel;
-import com.epxzzy.epxzzysabers.rendering.poseRenderer.LightWeapon.LightWeaponItemPoseRenderer;
-import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
+import com.epxzzy.epxzzysabers.rendering.poseRenderer.HeavyWeapon.HeavyWeaponItemPoseRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.model.BakedModel;
@@ -20,9 +20,9 @@ import java.util.List;
 import static com.epxzzy.epxzzysabers.utils.StackHelper.getEntitiesHoldingItemRightOrBoth;
 
 
-public class CrossguardSaberItemRenderer extends CustomRenderedItemModelRenderer {
-    protected static final PartialModel HILT_BIT = PartialModel.of(epxzzySabers.asResource("item/hilt/crossguard_hilt"));
-    protected static final PartialModel GLOWLY_BIT = PartialModel.of(epxzzySabers.asResource("item/additive/crossguard_blade"));
+public class DualBladedItemRenderer extends CustomRenderedItemModelRenderer {
+    protected static final PartialModel HILT_BIT = PartialModel.of(epxzzySabers.asResource("item/hilt/dual_hilt"));
+    protected static final PartialModel GLOWLY_BIT = PartialModel.of(epxzzySabers.asResource("item/additive/blade"));
 
     @Override
     protected void render(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
@@ -33,39 +33,36 @@ public class CrossguardSaberItemRenderer extends CustomRenderedItemModelRenderer
             renderer.render(BLOCING_BIT.get(), light);
         }
         else {
-
-         */
+        */
 
         List<LivingEntity> allEntities = getEntitiesHoldingItemRightOrBoth(stack);
         for (LivingEntity entity : allEntities) {
-            if (transformType.firstPerson() && entity.isUsingItem()) {
+            if(transformType.firstPerson() && entity.isUsingItem()){
                 int modifier = leftHand ? -1 : 1;
-                ms.mulPose(Axis.ZP.rotationDegrees(modifier * 60));
+                ms.mulPose(Axis.ZP.rotationDegrees(modifier * 30));
                 ms.pushPose();
                 ms.popPose();
             }
         }
-        if (transformType != ItemDisplayContext.GUI && transformType != ItemDisplayContext.FIXED) {
-            float time = AnimationTickHolder.getTicks(false);
 
+        if (transformType != ItemDisplayContext.GUI && transformType != ItemDisplayContext.FIXED) {
             for (LivingEntity entity : allEntities) {
-                if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")){
-                    LightWeaponItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+                if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
+                    HeavyWeaponItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
                 }
             }
         }
         renderer.render(HILT_BIT.get(), light);
-
         //}
+
 
         if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
             //stack.getUseAnimation()
             ms.pushPose();
-            renderer.renderGlowing(GLOWLY_BIT.get(), LightTexture.FULL_BRIGHT);
-
+            renderer.renderGlowing(GLOWLY_BIT.get(),  LightTexture.FULL_BRIGHT);
             ms.popPose();
         }
 
-    }
 
+    }
 }

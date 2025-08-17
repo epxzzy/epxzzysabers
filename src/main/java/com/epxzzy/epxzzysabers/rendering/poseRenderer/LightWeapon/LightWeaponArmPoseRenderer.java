@@ -1,4 +1,4 @@
-package com.epxzzy.epxzzysabers.rendering.poseRenderer.SingleBladed;
+package com.epxzzy.epxzzysabers.rendering.poseRenderer.LightWeapon;
 
 import com.epxzzy.epxzzysabers.utils.AngleHelper;
 import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
@@ -7,9 +7,9 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
 
 
-public class SingleBladedArmPoseRenderer {
+public class LightWeaponArmPoseRenderer {
     public static void setArmPose(int flouriseh, boolean Lefty, boolean both, HumanoidModel<?> model) {
-        SingleBladedFlourish flourish = SingleBladedFlourish.fromTagID(flouriseh);
+        LightWeaponFlourish flourish = LightWeaponFlourish.fromTagID(flouriseh);
         switch (flourish) {
             case XCROSS -> SetArmFlourishXCROSS(Lefty, both, model);
             //side to front ro side

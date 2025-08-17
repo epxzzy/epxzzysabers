@@ -3,6 +3,8 @@ epxzzy's sabers
 
 //TODO: lefty animations (parrying, attacking, blocking, misc)
 
+//TODO: make jarr kai a thing its been so long lmao
+
 //TODO: make a fuckin wiki lmao
 
 ideas n stuff:
@@ -37,7 +39,7 @@ ideas n stuff:
  - Saber Supercharge
  - Saber Kybersurge
  - Saber Disruption
-
+ - Pike combat
    
 # Stances 
  1. shi-cho [DONE]
@@ -109,6 +111,21 @@ and handled either flouish or custom animations.
 crouching during blocking with a saber triggers a stance.
 there are eight total stances, and to assume them you need to get
 them on your item. this can be done via the kyber station.
+NOTE: parry is nothing special, its just when you swing a saber
+it changes trajectories of projects in your parry range.
+
+//TODO: make flourishes exclusive to parrying
+
+### ~~Missed Attacks (Flourishes)~~ [MERGED WITH PARRYING]
+a miss(not hitting any entity, just swinging)
+(where saber is not parrying) animate flourishes.
+flourishes will not toggle between animations unless player keeps
+missing every goddamn time. a parry will be read from itemstack
+and handled either flouish or custom animations.
+
+### Posing (Assuming Stance)
+crouching during blocking with a saber triggers a stance.
+there are eight total stances, and to assume
 
 a stance does literally nothing but look cool.
 

@@ -4,23 +4,17 @@ import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialModel;
-import com.epxzzy.epxzzysabers.rendering.poseRenderer.DualBladed.DualBladedItemPoseRenderer;
-import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
-import com.epxzzy.epxzzysabers.utils.ScrollValueHandler;
+import com.epxzzy.epxzzysabers.rendering.poseRenderer.HeavyWeapon.HeavyWeaponItemPoseRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.epxzzy.epxzzysabers.utils.StackHelper.getEntitiesHoldingItemRightOrBoth;
@@ -54,7 +48,7 @@ public class ProtosaberItemRenderer extends CustomRenderedItemModelRenderer {
         if (transformType != ItemDisplayContext.GUI && transformType != ItemDisplayContext.FIXED) {
             for (LivingEntity entity : allEntities) {
                 if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
-                    DualBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+                    HeavyWeaponItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
                 }
             }
         }

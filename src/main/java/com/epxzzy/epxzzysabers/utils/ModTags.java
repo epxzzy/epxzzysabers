@@ -19,8 +19,10 @@ public class ModTags {
         public static final TagKey<Item> LIGHTSABER = tag("lightsaber");
         public static final TagKey<Item> DYEABLE_LIGHTSABER = tag("lightsaber_dyeable");
         public static final TagKey<Item> POSEABLE_LIGHTSABER = tag("lightsaber_poseable");
-        public static final TagKey<Item> SINGLE_BLADED = tag("single_bladed");
-        public static final TagKey<Item> DUAL_BLADED = tag("dual_bladed");
+
+        public static final TagKey<Item> LIGHT_WEAPON = tag("light_weapon");
+        public static final TagKey<Item> HEAVY_WEAPON = tag("heavy_weapon");
+
 
         public static final TagKey<Item> KYBER_CRYSTAL= tag("kyber_crystal");
 

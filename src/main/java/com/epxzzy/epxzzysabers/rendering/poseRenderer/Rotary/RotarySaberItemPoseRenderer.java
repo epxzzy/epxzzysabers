@@ -1,7 +1,7 @@
 package com.epxzzy.epxzzysabers.rendering.poseRenderer.Rotary;
 
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
-import com.epxzzy.epxzzysabers.rendering.poseRenderer.SingleBladed.SingleBladedFlourish;
+import com.epxzzy.epxzzysabers.rendering.poseRenderer.LightWeapon.LightWeaponFlourish;
 import com.epxzzy.epxzzysabers.utils.AngleHelper;
 import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
 import com.epxzzy.epxzzysabers.utils.ScrollValueHandler;
@@ -21,7 +21,7 @@ import static com.epxzzy.epxzzysabers.utils.StackHelper.isHoldingItemOffHand;
 
 public class RotarySaberItemPoseRenderer {
     public static void setItemPose(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity) {
-        SingleBladedFlourish flourish = SingleBladedFlourish.fromTagID(stack.getOrCreateTag().getCompound("display").getInt("flourish"));
+        LightWeaponFlourish flourish = LightWeaponFlourish.fromTagID(stack.getOrCreateTag().getCompound("display").getInt("flourish"));
         if (stack.getOrCreateTag().getBoolean("FlyBoiii")) {
             setSuperSpin(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
             return;

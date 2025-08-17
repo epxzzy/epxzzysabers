@@ -3,7 +3,7 @@ package com.epxzzy.epxzzysabers.item.saburtypes;
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.ModItems;
 import com.epxzzy.epxzzysabers.item.Protosaber;
-import com.epxzzy.epxzzysabers.rendering.SingleBladedItemRenderer;
+import com.epxzzy.epxzzysabers.rendering.DualBladedItemRenderer;
 import com.epxzzy.epxzzysabers.utils.ModTags;
 //import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
@@ -18,25 +18,25 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.function.Consumer;
 
-public class SingleBladed extends Protosaber {
+public class DualBladed extends Protosaber {
     public boolean HURTED;
     public boolean SWANG;
 
 
-    public SingleBladed(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
+    public DualBladed(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
         super(pProperties, pRANGE , pDamage, pSpeed);
     }
 
     public static boolean checkForSaberBlock(Entity Entityy){
         if(Entityy instanceof LivingEntity)
-            return ((LivingEntity)Entityy).getMainHandItem().is(ModItems.SINGLE_BLADED_SABER.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity)Entityy).isUsingItem();
+            return ((LivingEntity)Entityy).getMainHandItem().is(ModItems.DUAL_BLADED_SABER.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity)Entityy).isUsingItem();
         return false;
     }
 
     public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand){
         if(Entityy instanceof LivingEntity) {
-            if(Mainhand) return ((LivingEntity) Entityy).getMainHandItem().is(ModItems.SINGLE_BLADED_SABER.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-            return ((LivingEntity) Entityy).getOffhandItem().is(ModItems.SINGLE_BLADED_SABER.get()) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
+            if(Mainhand) return ((LivingEntity) Entityy).getMainHandItem().is(ModItems.DUAL_BLADED_SABER.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
+            return ((LivingEntity) Entityy).getOffhandItem().is(ModItems.DUAL_BLADED_SABER.get()) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
         }
         return false;
     }
@@ -50,7 +50,7 @@ public class SingleBladed extends Protosaber {
 
     @Override @OnlyIn(Dist.CLIENT)
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        THE_BETTER_RENDERER = new SingleBladedItemRenderer();
+        THE_BETTER_RENDERER = new DualBladedItemRenderer();
         //CustomRenderedItems.register(this);
         consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));
        /* consumer.accept(new IClientItemExtensions() {

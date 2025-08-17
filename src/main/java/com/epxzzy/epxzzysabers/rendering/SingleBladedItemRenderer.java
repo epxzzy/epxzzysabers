@@ -11,10 +11,9 @@ import com.epxzzy.epxzzysabers.rendering.foundation.PartialModel;
 //import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
 //import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
-import com.epxzzy.epxzzysabers.rendering.poseRenderer.SingleBladed.SingleBladedItemPoseRenderer;
+import com.epxzzy.epxzzysabers.rendering.poseRenderer.LightWeapon.LightWeaponItemPoseRenderer;
 import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
 import com.epxzzy.epxzzysabers.utils.PlayerHelperLmao;
-import com.epxzzy.epxzzysabers.utils.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.LightTexture;
@@ -60,7 +59,7 @@ public class SingleBladedItemRenderer extends CustomRenderedItemModelRenderer {
 
             for (LivingEntity entity : allEntities) {
                 if ((entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii") && !(((PlayerHelperLmao) entity).getSaberAttackAnim() > 0)){
-                    SingleBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+                    LightWeaponItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
                 }
             }
         }

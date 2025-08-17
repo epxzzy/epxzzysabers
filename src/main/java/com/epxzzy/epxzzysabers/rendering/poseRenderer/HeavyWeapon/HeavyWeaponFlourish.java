@@ -1,10 +1,10 @@
-package com.epxzzy.epxzzysabers.rendering.poseRenderer.DualBladed;
+package com.epxzzy.epxzzysabers.rendering.poseRenderer.HeavyWeapon;
 
 import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 
-public enum DualBladedFlourish {
+public enum HeavyWeaponFlourish {
     NOFLOURISH("none", 0),
     SKIPCATCH("skip-catch", 1),
     BEHINDTHEBACK("behind-the-back", 2),
@@ -14,7 +14,7 @@ public enum DualBladedFlourish {
     private final String str;
     private final int tagID;
     List<Flourish> flourishes;
-    private DualBladedFlourish(String str, int value) {
+    private HeavyWeaponFlourish(String str, int value) {
         this.str = str;
         this.tagID = value;
 
@@ -23,15 +23,15 @@ public enum DualBladedFlourish {
     }
 
 
-    public static List<DualBladedFlourish> getCategories() {
+    public static List<HeavyWeaponFlourish> getCategories() {
         List list;
         list = ImmutableList.of(NOFLOURISH, SKIPCATCH, BEHINDTHEBACK, FIGUREEIGHT);
 
         return list;
     }
 
-    public static DualBladedFlourish fromTagID(int tagID) {
-        for (DualBladedFlourish flourish : values()) {
+    public static HeavyWeaponFlourish fromTagID(int tagID) {
+        for (HeavyWeaponFlourish flourish : values()) {
             if (flourish.tagID == tagID) {
                 return flourish;
             }

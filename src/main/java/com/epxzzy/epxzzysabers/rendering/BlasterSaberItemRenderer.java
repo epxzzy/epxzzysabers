@@ -4,9 +4,8 @@ import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialModel;
-import com.epxzzy.epxzzysabers.rendering.poseRenderer.SingleBladed.SingleBladedItemPoseRenderer;
+import com.epxzzy.epxzzysabers.rendering.poseRenderer.LightWeapon.LightWeaponItemPoseRenderer;
 import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
-import com.epxzzy.epxzzysabers.utils.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.LightTexture;
@@ -53,7 +52,7 @@ public class BlasterSaberItemRenderer extends CustomRenderedItemModelRenderer {
 
             for (LivingEntity entity : allEntities) {
                 if ((entity.swingTime > 0 || entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")){
-                    //SingleBladedItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+                    LightWeaponItemPoseRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
                 }
             }
         }

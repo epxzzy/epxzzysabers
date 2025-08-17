@@ -1,10 +1,8 @@
-package com.epxzzy.epxzzysabers.rendering.poseRenderer.SingleBladed;
+package com.epxzzy.epxzzysabers.rendering.poseRenderer.LightWeapon;
 
-import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.epxzzysabers.utils.AngleHelper;
 import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
-import com.epxzzy.epxzzysabers.utils.PlayerHelperLmao;
 import com.epxzzy.epxzzysabers.utils.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -12,16 +10,15 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 import static com.epxzzy.epxzzysabers.utils.StackHelper.isHoldingItemOffHand;
 
 
-public class SingleBladedItemPoseRenderer {
+public class LightWeaponItemPoseRenderer {
     public static void setItemPose(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
-        SingleBladedFlourish flourish = SingleBladedFlourish.fromTagID(stack.getOrCreateTag().getCompound("display").getInt("flourish"));
+        LightWeaponFlourish flourish = LightWeaponFlourish.fromTagID(stack.getOrCreateTag().getCompound("display").getInt("flourish"));
         switch (flourish) {
             case XCROSS -> SetFlourishXCROSS(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
             //side to side

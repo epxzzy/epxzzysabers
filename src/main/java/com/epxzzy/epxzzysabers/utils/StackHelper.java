@@ -1,11 +1,13 @@
 package com.epxzzy.epxzzysabers.utils;
 
 import com.epxzzy.epxzzysabers.entity.custom.ThrownRotarySaber;
+import com.epxzzy.epxzzysabers.item.ModItems;
 import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.sound.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
@@ -14,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -50,6 +53,15 @@ public class StackHelper {
         }
 
         return result;
+    }
+
+    public static boolean checkHoldingActiveTag(Entity Entityy, boolean Mainhand, TagKey<Item> tagg) {
+        if (Entityy instanceof LivingEntity) {
+            if (Mainhand)
+                return ((LivingEntity) Entityy).getMainHandItem().is(tagg) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
+            return ((LivingEntity) Entityy).getOffhandItem().is(tagg) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
+        }
+        return false;
     }
 
 

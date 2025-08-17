@@ -1,4 +1,4 @@
-package com.epxzzy.epxzzysabers.rendering.poseRenderer.DualBladed;
+package com.epxzzy.epxzzysabers.rendering.poseRenderer.HeavyWeapon;
 
 import com.epxzzy.epxzzysabers.utils.AngleHelper;
 import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
@@ -7,9 +7,9 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
 
 
-public class DualBladedArmPoseRenderer {
+public class HeavyWeaponArmPoseRenderer {
     public static void setArmPose(int flouriseh, boolean Lefty, boolean both, HumanoidModel<?> model) {
-        DualBladedFlourish flourish = DualBladedFlourish.fromTagID(flouriseh);
+        HeavyWeaponFlourish flourish = HeavyWeaponFlourish.fromTagID(flouriseh);
         switch (flourish) {
             case SKIPCATCH -> SetArmFlourishSKIPCATCH(Lefty, both, model);
             case BEHINDTHEBACK -> SetArmFlourishBEHINDTHEBACK(Lefty, both, model);
