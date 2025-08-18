@@ -189,16 +189,18 @@ public class PlayerBlockRenderer {
 
 
     public static void ShieldPositionToPos(double x, double y, double z, boolean lefty, double lerper, HumanoidModel<?> model) {
-        double startX = 0, startY = 0, startZ =0, currX = 0, currY = 0, currZ = 0;
+        double startX = 0, startY = 0, startZ =0,
+                currX = 0, currY = 0, currZ = 0;
         if (lefty) {
-            startX = 45;
-            startY = 30;
+            startX = model.leftArm.xRot * 0.5F - 0.9424779F;
+            startY = (-(float)Math.PI / 6F);
+
         }
 
 
         if (!lefty) {
-            startX = -287;
-            startY = -15;
+            startX = model.rightArm.xRot * 0.5F - 0.9424779F;
+            startY = (-(float)Math.PI / 6F);
         }
 
         currX = startX + (x - startX) * lerper;
