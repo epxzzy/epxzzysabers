@@ -17,6 +17,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.fml.common.Mod;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -133,7 +134,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         this.defendProgress = packet.defendProgress;
         this.defending = packet.defending;
 
-        //epxzzysabers.LOGGER.debug("successfully synced DEF for {}", that);
+        epxzzySabers.LOGGER.debug("successfully synced DEF for {}", that);
     }
 
     public void SyncATKtoPacket(ClientboundPlayerAttackPacket packet) {
@@ -142,7 +143,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         this.attackProgress = packet.attackProgress;
         this.attacking = packet.attacking;
 
-        //epxzzysabers.LOGGER.debug("successfully synced ATK for {}", that);
+        epxzzySabers.LOGGER.debug("successfully synced ATK for {}", that);
     }
 
 
@@ -181,7 +182,6 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
                     //remove the custom block animation
                     //cir.cancel();
                     //that.playSound(ModSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
-                    return;
                 }
 
             }
@@ -200,10 +200,9 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         //epxzzySabers.LOGGER.debug("player hurt");
         Player that = ((Player) (Object) this);
         Entity notThat = pTarget;
-        epxzzySabers.LOGGER.debug("attacking {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
 
 
-        if (!that.level().isClientSide()) {
+        if (!that.level().isClientSide() && that.getMainHandItem().is(ModTags.Items.LIGHTSABER)) {
             if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {
                 this.attackProgress = -1;
                 this.attacking = true;
@@ -223,6 +222,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
 
             //ModMessages.sendToServer(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress));
+            epxzzySabers.LOGGER.debug("attacking {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
 
             ModMessages.fuckingAnnounce(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress), that);
 

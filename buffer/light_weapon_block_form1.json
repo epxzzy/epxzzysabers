@@ -1,0 +1,109 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.player.block1": {
+			"loop": true,
+			"bones": {
+				"RightArm": {
+					"rotation": {
+						"0.0": {
+							"post": [-76, -50, 10],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				}
+			}
+		},
+		"animation.player.block2": {
+			"loop": true,
+			"bones": {
+				"RightArm": {
+					"rotation": {
+						"0.0": {
+							"post": [-54, -20, -32],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				}
+			}
+		},
+		"animation.player.block3": {
+			"loop": true,
+			"bones": {
+				"RightArm": {
+					"rotation": {
+						"0.0": {
+							"post": [-70, -52, -90],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				}
+			}
+		},
+		"animation.player.block4": {
+			"loop": true,
+			"bones": {
+				"RightArm": {
+					"rotation": {
+						"0.0": {
+							"post": [-42, -50, -80],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				}
+			}
+		},
+		"animation.player.block5": {
+			"loop": true,
+			"bones": {
+				"RightArm": {
+					"rotation": {
+						"0.0": {
+							"post": [-100, -65, 64],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				}
+			}
+		},
+		"animation.player.block6": {
+			"loop": true,
+			"bones": {
+				"RightArm": {
+					"rotation": {
+						"0.0": {
+							"post": [-65, -22, -172],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				}
+			}
+		},
+		"animation.player.block7": {
+			"loop": true,
+			"bones": {
+				"RightArm": {
+					"rotation": {
+						"0.0": {
+							"post": [-70, -65, 85],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				}
+			}
+		},
+		"animation.player.block8": {
+			"loop": true,
+			"bones": {
+				"RightArm": {
+					"rotation": {
+						"0.0": {
+							"post": [-80, 42, 85],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				}
+			}
+		}
+	}
+}

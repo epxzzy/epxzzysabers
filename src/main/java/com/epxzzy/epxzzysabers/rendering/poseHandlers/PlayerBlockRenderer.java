@@ -1,11 +1,13 @@
 package com.epxzzy.epxzzysabers.rendering.poseHandlers;
 
+import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.utils.AngleHelper;
 import net.minecraft.client.model.HumanoidModel;
 
 public class PlayerBlockRenderer {
     public static void setPose(int Block, boolean Lefty, HumanoidModel<?> model, double lerpusy) {
         double lerper = 1 - Math.pow(1 - lerpusy, 5); //ease-out
+        epxzzySabers.LOGGER.debug("now animating block {}", Block);
         switch (Block) {
             //left shoulder
             case 1 -> SetBlock1(Lefty, model, lerper);
@@ -189,7 +191,7 @@ public class PlayerBlockRenderer {
 
 
     public static void ShieldPositionToPos(double x, double y, double z, boolean lefty, double lerper, HumanoidModel<?> model) {
-        double startX = 0, startY = 0, startZ =0,
+        double startX = 1, startY = 1, startZ = 1,
                 currX = 0, currY = 0, currZ = 0;
         if (lefty) {
             startX = model.leftArm.xRot * 0.5F - 0.9424779F;
@@ -199,14 +201,20 @@ public class PlayerBlockRenderer {
 
 
         if (!lefty) {
-            startX = model.rightArm.xRot * 0.5F - 0.9424779F;
-            startY = (-(float)Math.PI / 6F);
+            /*
+
+            startX = model.rightArm.xRot;
+            startY = model.rightArm.yRot;
+            startZ = model.rightArm.zRot;
+
+            */
         }
 
         currX = startX + (x - startX) * lerper;
         currY = startY + (y - startY) * lerper;
         currZ = startZ + (z - startZ) * lerper;
 
+        epxzzySabers.LOGGER.debug("arm x y z {} {} {}", currX, currY, currZ);
 
         if (!lefty) {
             model.rightArm.setRotation(
@@ -221,9 +229,7 @@ public class PlayerBlockRenderer {
                     AngleHelper.rad(currX),
                     AngleHelper.rad(currY),
                     AngleHelper.rad(currZ)
-
             );
         }
-
     }
 }

@@ -93,7 +93,9 @@ public class PlayerPoseRouter {
             return;
         }
         //block
-        if((StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.HEAVY_WEAPON)||StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.LIGHT_WEAPON)) && block > 0 && SaberDefAnim> 0){
+
+        //       if((StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.HEAVY_WEAPON)||StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.LIGHT_WEAPON)) && block > 0 && SaberDefAnim > 0){
+        if((Protosaber.checkForSaberEquipment(player, true)||SingleBladed.checkForSaberEquipment(player, true)) && block > 0 && SaberDefAnim > 0){
             setBladedBlock(block, model, SaberDefAnim);
             return;
         }
