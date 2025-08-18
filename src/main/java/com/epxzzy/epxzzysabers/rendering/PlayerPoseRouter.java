@@ -20,14 +20,7 @@ import static com.epxzzy.epxzzysabers.rendering.poseRenderer.Rotary.ArmPoseRende
 
 
 public class PlayerPoseRouter {
-    public static boolean IsPlayerStationary(Player player){
 
-        //epxzzySabers.LOGGER.info("getdeltamovementplayer "+ player.getDeltaMovement().length());
-        return !(player.getDeltaMovement().length() > 0.08);
-
-        //return x+y+z;
-        //return true;
-    }
 
     public static void beforeSetupAnim(Player player, HumanoidModel<?> model) {
         boolean[] bbc = RotarySaber.checkForSaberFly(player);

@@ -2,12 +2,13 @@ package com.epxzzy.epxzzysabers.rendering.poseHandlers;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.utils.AngleHelper;
+import com.epxzzy.epxzzysabers.utils.AnimationHelper;
 import com.epxzzy.epxzzysabers.utils.ScrollValueHandler;
 import net.minecraft.client.model.HumanoidModel;
 
 public class PlayerAttackRenderer {
     public static void setPose(int Attack, boolean Lefty, HumanoidModel<?> model, float lerper) {
-        double smooth = 1 - Math.pow(1 - lerper, 5); // ease-out
+        double smooth = AnimationHelper.easeOut(lerper);
 
         switch (Attack) {
             //left shoulder

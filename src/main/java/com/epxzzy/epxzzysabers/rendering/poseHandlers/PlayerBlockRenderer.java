@@ -2,12 +2,14 @@ package com.epxzzy.epxzzysabers.rendering.poseHandlers;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.utils.AngleHelper;
+import com.epxzzy.epxzzysabers.utils.AnimationHelper;
 import net.minecraft.client.model.HumanoidModel;
 
 public class PlayerBlockRenderer {
     public static void setPose(int Block, boolean Lefty, HumanoidModel<?> model, double lerpusy) {
-        double lerper = 1 - Math.pow(1 - lerpusy, 5); //ease-out
-        epxzzySabers.LOGGER.debug("now animating block {}", Block);
+        double lerper = AnimationHelper.easeOutBack(lerpusy);
+        //double lerper = AnimationHelper.easeOutBack(lerpusy);
+
         switch (Block) {
             //left shoulder
             case 1 -> SetBlock1(Lefty, model, lerper);
@@ -213,8 +215,6 @@ public class PlayerBlockRenderer {
         currX = startX + (x - startX) * lerper;
         currY = startY + (y - startY) * lerper;
         currZ = startZ + (z - startZ) * lerper;
-
-        epxzzySabers.LOGGER.debug("arm x y z {} {} {}", currX, currY, currZ);
 
         if (!lefty) {
             model.rightArm.setRotation(

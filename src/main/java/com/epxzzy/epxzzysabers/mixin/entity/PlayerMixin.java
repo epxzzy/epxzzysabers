@@ -1,6 +1,7 @@
 package com.epxzzy.epxzzysabers.mixin.entity;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
+import com.epxzzy.epxzzysabers.misc.KewlFightsOrchestrator;
 import com.epxzzy.epxzzysabers.networking.ModMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerAttackPacket;
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerDefendPacket;
@@ -214,10 +215,11 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             int old = tagger.getCompound("display").getInt("atk");
             int sequential = old > 0 && old < 8 ? old + 1 : 1;
             int random = StackHelper.random1to8(old);
-            tagger.getCompound("display").putInt("atk", random);
+            int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(old, that);
+            tagger.getCompound("display").putInt("atk", methodic);
 
             //epxzzysabers.LOGGER.debug("next possible attack value  {}", baller);
-            that.displayClientMessage(Component.literal("attacking " + random), true);
+            that.displayClientMessage(Component.literal("attacking " + methodic), true);
             that.getMainHandItem().setTag(tagger);
 
 

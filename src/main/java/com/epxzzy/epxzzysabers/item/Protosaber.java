@@ -2,6 +2,7 @@ package com.epxzzy.epxzzysabers.item;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.entity.custom.ThrownRotarySaber;
+import com.epxzzy.epxzzysabers.misc.KewlFightsOrchestrator;
 import com.epxzzy.epxzzysabers.networking.ModMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberAbilityPacket;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberDeflectPacket;
@@ -152,10 +153,12 @@ public class Protosaber extends Item {
     }
 
     public void addFlourishTag(LivingEntity pPlayer, ItemStack pStack) {
-        if (!pPlayer.level().isClientSide()) {
-            int flourish = (int) ((Math.random() * 3) + 1);
+        if (!pPlayer.level().isClientSide() && pPlayer instanceof Player) {
+            int random = (int) ((Math.random() * 3) + 1);
 
-            pStack.getOrCreateTag().getCompound("display").putInt("flourish", flourish);
+            int methodic = KewlFightsOrchestrator.DetermineParryAnimation((Player) pPlayer);
+
+            pStack.getOrCreateTag().getCompound("display").putInt("flourish", methodic);
         }
     }
 
