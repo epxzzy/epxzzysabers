@@ -27,6 +27,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -269,6 +270,16 @@ public class Protosaber extends Item {
         CompoundTag asdf = pStack.getOrCreateTagElement("display");
         asdf.putInt("colour", pColor);
         pStack.setTag(asdf);
+    }
+
+    @Override
+    public boolean canBeHurtBy(DamageSource pDamageSource) {
+        return false;
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
+        return super.hurtEnemy(pStack, pTarget, pAttacker);
     }
 
     @Override

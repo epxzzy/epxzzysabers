@@ -103,8 +103,8 @@ public abstract class LivingEntityMixin {
 
             if (blocking_with_sabur && !attacking_with_sabur) {
                 //epxzzySabers.LOGGER.debug("blocked a regular ass weapon");
-                cir.cancel();
-                that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);
+                //cir.cancel();
+                //that.level().playSound((Player) null, that.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS);
                 return;
             }
 
