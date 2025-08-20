@@ -57,4 +57,19 @@ public class AngleHelper {
         return (angle + 180) % 360 - 180;
     }
 
+    public static float normalizeAngle(float angle) {
+        angle = angle % 360;
+        if (angle < 0) {
+            angle += 360;
+        }
+        return angle;
+    }
+    public static float calculateHeadOffset(float headAngle, float bodyAngle) {
+        float offset = headAngle - bodyAngle;
+
+        offset = normalizeAngle(offset);
+
+
+        return offset;
+    }
 }
