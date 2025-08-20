@@ -104,10 +104,13 @@ public class PlayerPoseRouter {
         }
 
         //joint hands spin
+        /*
         if(RotarySaber.checkForSaberBlock(player)){
             setRotaryBlockPose(player, model);
             return;
         }
+
+         */
 
         //heavy weapon attack miss mainhand
         if ( StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.HEAVY_WEAPON) && player.swingTime > 0) {

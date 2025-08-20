@@ -11,12 +11,17 @@ import com.epxzzy.epxzzysabers.sound.ModSounds;
 import com.epxzzy.epxzzysabers.utils.ModTags;
 import com.epxzzy.epxzzysabers.utils.StackHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
@@ -30,14 +35,15 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class RotarySaber extends Protosaber {
+    public int flyCooldown = 40;
+    //160 == cant fly, 0 == can fly
     public int flightDuration = 200;
     //0 == no more fly, 300 == flyyy
 
     public RotarySaber(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
-        super(pProperties, pRANGE, pDamage, pSpeed);
+        super(pProperties, pRANGE , pDamage, pSpeed);
     }
-
-    @Override @OnlyIn(Dist.CLIENT)
+    @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         THE_BETTER_RENDERER = new RotarySaberItemRenderer();
         consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));
@@ -53,53 +59,6 @@ public class RotarySaber extends Protosaber {
     }
 
     @Override
-    public @NotNull UseAnim getUseAnimation(@NotNull ItemStack pStack) {
-        //if(pStack.getOrCreateTag().getBoolean("FlyBoiii")) {
-        //return UseAnim.CROSSBOW;
-        //}
-        //UseAnim.
-        return super.getUseAnimation(pStack);
-    }
-
-    @Override
-    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
-        if (pEntity instanceof LivingEntity pLiving && !(pLevel.isClientSide())) {
-/*
-            if(pLiving instanceof Player pPlayer && pPlayer.getAbilities().flying){
-                --this.flightDuration;
-                if(this.flightDuration >= 0){
-                    pPlayer.stopUsingItem();
-                    epxzzySabers.LOGGER.info("you can no longer fly");
-                    this.flightDuration = 40;
-                }
-            }
-
- */
-            if (pLiving instanceof Player pPlayer && (pPlayer.getAbilities().flying)) {
-                if (this.flightDuration >= 1) {
-                    --this.flightDuration;
-
-                    if (this.flightDuration == 0) {
-                        pPlayer.stopUsingItem();
-                        epxzzySabers.LOGGER.info("you can no longer fly");
-                    }
-                }
-            }
-            if (pLiving instanceof Player pPlayer && !(pPlayer.getAbilities().flying)) {
-                this.flightDuration = 200;
-            }
-        }
-    }
-
-    public int getUseDuration(ItemStack pStack) {
-        if (pStack.getOrCreateTag().getBoolean("FlyBoiii")) {
-            return 20 * 10;
-        }
-        return 20 * 2;
-    }
-
-    @Override
     public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
         /*if(pRemainingUseDuration > 120){
             //pLivingEntity.stopUsingItem();
@@ -107,60 +66,85 @@ public class RotarySaber extends Protosaber {
         }
 
          */
-        if (pRemainingUseDuration % 2 == 0) {
-            if (pLivingEntity instanceof Player pPlayer && !(pPlayer.getAbilities().flying)) {
-                ModMessages.sendToServer(new ServerboundSaberDeflectPacket());
-                pLivingEntity.level().playSound((Player) null,
-                        pLivingEntity.blockPosition(), ModSounds.SWING.get(),
-                        SoundSource.PLAYERS,
-                        0.1F,
-                        0.7F
-                );
-
-            } else {
+        if (pRemainingUseDuration % 2 == 0 && pStack.getOrCreateTag().getBoolean("FlyBoiii")) {
+            if (pLivingEntity instanceof Player pPlayer && (pPlayer.getAbilities().flying)) {
                 pLivingEntity.level().playSound((Player) null,
                         pLivingEntity.blockPosition(), ModSounds.SWING.get(),
                         SoundSource.PLAYERS,
                         0.1F,
                         0.9F
                 );
-
             }
         }
         //super.onUseTick(pLevel, pLivingEntity, pStack, pRemainingUseDuration);
     }
 
-    public boolean isInAir(Player pPlayer) {
+    @Override
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+        if(pEntity instanceof LivingEntity pLiving && !(pLevel.isClientSide())){
+/*
+            if(pLiving instanceof Player pPlayer && pPlayer.getAbilities().flying){
+                --this.flightDuration;
+                if(this.flightDuration >= 0){
+                    pPlayer.stopUsingItem();
+                    createsaburs.LOGGER.info("you can no longer fly");
+                    this.flightDuration = 40;
+                }
+            }
+
+ */
+            if(pLiving instanceof Player pPlayer && (pPlayer.getAbilities().flying)){
+                if(this.flightDuration >= 1){
+                    --this.flightDuration;
+
+                    if(this.flightDuration== 0) {
+                        pPlayer.stopUsingItem();
+                        epxzzySabers.LOGGER.info("you can no longer fly");
+                    }
+                }
+            }
+
+            if(pLiving instanceof Player pPlayer && !(pPlayer.getAbilities().flying)){
+                if(this.flyCooldown >= 1){
+                    --this.flyCooldown;
+                    if(this.flyCooldown == 0) {
+                        this.flightDuration = 200;
+                        epxzzySabers.LOGGER.info("you can now fly");
+                    }
+                }
+            }
+
+        }
+    }
+    public boolean isInAir(Player pPlayer){
         BlockPos pos = pPlayer.blockPosition();
         Level level = pPlayer.level();
-        return level.getBlockState(pos.below()).isAir() &&
-                level.getBlockState(pos.below(2)).isAir() &&
-                level.getBlockState(pos.below(3)).isAir() &&
+        return level.getBlockState(pos.below()).isAir()&&
+                level.getBlockState(pos.below(2)).isAir()&&
+                level.getBlockState(pos.below(3)).isAir()&&
                 level.getBlockState(pos.above()).isAir();
     }
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, @NotNull InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        CompoundTag tug = itemstack.getOrCreateTag().copy();
-        tug.putBoolean("BlockBoiii", true);
-        itemstack.setTag(tug);
 
         if (readActivetag(pPlayer.getItemInHand(pHand)) && !pLevel.isClientSide) {
-            if ((pPlayer.xRotO < -35 || this.isInAir(pPlayer))) {
-                if (this.flightDuration >= 1) {
+            if((pPlayer.xRotO < -35 || this.isInAir(pPlayer))){
+                if(this.flyCooldown == 0 && this.flightDuration >= 1) {
                     pPlayer.getAbilities().flying = true;
                     pPlayer.onUpdateAbilities();
 
-                    CompoundTag tuge = itemstack.getOrCreateTag().copy();
-                    tuge.putBoolean("FlyBoiii", true);
-                    itemstack.setTag(tuge);
+                    CompoundTag tug = itemstack.getOrCreateTag().copy();
+                    tug.putBoolean("FlyBoiii", true);
+                    itemstack.setTag(tug);
                     //this.flyCooldown = 40;
                     epxzzySabers.LOGGER.info("flying activated");
                 }
 
-                if (this.flightDuration == 0) {
-                    epxzzySabers.LOGGER.info("you cant seem to fly, flightduration: ");
+                if(this.flyCooldown >= 1 && this.flightDuration == 0){
+                    epxzzySabers.LOGGER.info("you cant seem to fly, flightcooldown: "+this.flyCooldown+ " and flightduration: " + this.flightDuration);
                 }
 
             }
@@ -180,27 +164,16 @@ public class RotarySaber extends Protosaber {
         CompoundTag nbeetea = pStack.getOrCreateTag();
         nbeetea.putBoolean("BlockBoiii", false);
 
-        if (pStack.getOrCreateTag().getBoolean("FlyBoiii")) {
-            nbeetea.putBoolean("FlyBoiii", false);
+        nbeetea.putBoolean("FlyBoiii", false);
+        if (entity instanceof Player pPlayer && pPlayer.getAbilities().flying){
             ((Player) entity).getAbilities().flying = false;
             ((Player) entity).onUpdateAbilities();
             epxzzySabers.LOGGER.info("flying deactivated");
-            ((Player) entity).getCooldowns().addCooldown(entity.getUseItem().getItem(), 20 * 6);
-        } else {
-            ((Player) entity).getCooldowns().addCooldown(entity.getUseItem().getItem(), (int) (20 * 2.5));
+            this.flyCooldown = 40;
         }
 
         pStack.setTag(nbeetea);
         super.onStopUsing(pStack, entity, count);
-    }
-
-    public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand) {
-        if (Entityy instanceof LivingEntity) {
-            if (Mainhand)
-                return ((LivingEntity) Entityy).getMainHandItem().is(ModItems.ROTARY_SABER.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-            return ((LivingEntity) Entityy).getOffhandItem().is(ModItems.ROTARY_SABER.get()) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-        }
-        return false;
     }
 
     public static boolean checkForSaberBlock(Player Entityy) {
@@ -225,7 +198,7 @@ public class RotarySaber extends Protosaber {
 
             //first one meaning flight is true, second specifies the hand, third is both hands have one
             //TODO: drop offhand item use support
-            return new boolean[]{ (mainhand || offhand), offhand, mainhand && offhand};
+            return new boolean[]{(mainhand || offhand), offhand, mainhand && offhand};
         }
         return new boolean[]{false, false, false};
     }
