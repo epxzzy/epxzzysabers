@@ -29,6 +29,7 @@ public class KewlFightsOrchestrator {
         return StackHelper.random1to8(old);
     };
 
+    //this method was written by grok, im not that good at math obviously
     public static int DetermineNextPossibleAttack(int old, Player pPlayer, Entity pEntity){
         if(pEntity instanceof LivingEntity pLiving){
             Player attacker = pPlayer;

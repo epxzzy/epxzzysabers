@@ -51,15 +51,8 @@ public class AnimationTickHolder {
 
     }
 
-    public static float getPartialTicks(LevelAccessor level) {
-        return getPartialTicks();
-    }
-
     public static float getRenderTime() {
         return getTicks() + getPartialTicks();
     }
 
-    public static float getRenderTime(LevelAccessor level) {
-        return getTicks(level) + getPartialTicks(level);
-    }
 }

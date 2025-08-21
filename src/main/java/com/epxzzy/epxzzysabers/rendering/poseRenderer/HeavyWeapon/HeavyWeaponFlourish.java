@@ -6,9 +6,10 @@ import java.util.List;
 
 public enum HeavyWeaponFlourish {
     NOFLOURISH("none", 0),
-    SKIPCATCH("skip-catch", 1),
+    FIGUREEIGHT("figure-eight", 1),
     BEHINDTHEBACK("behind-the-back", 2),
-    FIGUREEIGHT("figure-eight", 3);
+    SKIPCATCH("skip-catch", 3);
+
 
 
     private final String str;

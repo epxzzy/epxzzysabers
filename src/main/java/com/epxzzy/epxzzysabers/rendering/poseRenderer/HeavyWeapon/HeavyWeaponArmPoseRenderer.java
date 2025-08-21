@@ -85,7 +85,8 @@ public class HeavyWeaponArmPoseRenderer {
 
 
 
-        float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));
+        //float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));
+        float movement = 1;
 
         MainArm.xRot = (float) (Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +AngleHelper.rad(movement*3));
         MainArm.yRot = AngleHelper.rad(-30);

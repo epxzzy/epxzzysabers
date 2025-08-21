@@ -1,6 +1,14 @@
 package com.epxzzy.epxzzysabers.utils;
 
+import net.minecraft.util.Mth;
+
 public class AnimationHelper {
+
+    //youre a square harry
+    public static double squareInterpolation(double number) {
+        return (Mth.sin((float) (number * 5)) >= 0) ? 1 : -1;
+    }
+
     // regular ease out
     public static double easeOut(double number) {
        return 1 - Math.pow(1 - number, 5);
