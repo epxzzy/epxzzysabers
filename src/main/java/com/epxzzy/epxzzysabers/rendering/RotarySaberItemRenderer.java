@@ -1,31 +1,23 @@
 package com.epxzzy.epxzzysabers.rendering;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.item.saburtypes.RotarySaber;
 import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialModel;
-import com.epxzzy.epxzzysabers.utils.AngleHelper;
 import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
 import com.epxzzy.epxzzysabers.utils.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.epxzzy.epxzzysabers.rendering.poseRenderer.Rotary.RotarySaberItemPoseRenderer.*;
+import static com.epxzzy.epxzzysabers.rendering.parryrenderers.Rotary.RotarySaberItemPoseRenderer.*;
 import static com.epxzzy.epxzzysabers.utils.StackHelper.*;
 
 public class RotarySaberItemRenderer extends CustomRenderedItemModelRenderer {

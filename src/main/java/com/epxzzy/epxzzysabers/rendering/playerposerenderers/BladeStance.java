@@ -1,4 +1,4 @@
-package com.epxzzy.epxzzysabers.rendering.poseHandlers;
+package com.epxzzy.epxzzysabers.rendering.playerposerenderers;
 
 import com.google.common.collect.ImmutableList;
 

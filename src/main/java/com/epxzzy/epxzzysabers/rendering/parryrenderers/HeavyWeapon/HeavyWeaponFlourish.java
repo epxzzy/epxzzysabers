@@ -1,34 +1,38 @@
-package com.epxzzy.epxzzysabers.rendering.poseRenderer.LightWeapon;
+package com.epxzzy.epxzzysabers.rendering.parryrenderers.HeavyWeapon;
 
 import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 
-public enum LightWeaponFlourish {
+public enum HeavyWeaponFlourish {
     NOFLOURISH("none", 0),
-    XCROSS("xcross", 1),
-    CIRCULAR("circular", 2),
-    SPIN("spin", 3);
+    FIGUREEIGHT("figure-eight", 1),
+    BEHINDTHEBACK("behind-the-back", 2),
+    SKIPCATCH("skip-catch", 3);
 
 
-    List<Flourish> flourishes;
+
     private final String str;
     private final int tagID;
-    private LightWeaponFlourish(String str, int value) {
+    List<Flourish> flourishes;
+    private HeavyWeaponFlourish(String str, int value) {
         this.str = str;
         this.tagID = value;
+
+
         this.flourishes = ImmutableList.copyOf(new Flourish[]{new Flourish(str, value)});
     }
 
 
-    public static List<LightWeaponFlourish> getCategories() {
+    public static List<HeavyWeaponFlourish> getCategories() {
         List list;
-        list = ImmutableList.of(NOFLOURISH,XCROSS, CIRCULAR,SPIN);
+        list = ImmutableList.of(NOFLOURISH, SKIPCATCH, BEHINDTHEBACK, FIGUREEIGHT);
 
         return list;
     }
-    public static LightWeaponFlourish fromTagID(int tagID) {
-        for (LightWeaponFlourish flourish : values()) {
+
+    public static HeavyWeaponFlourish fromTagID(int tagID) {
+        for (HeavyWeaponFlourish flourish : values()) {
             if (flourish.tagID == tagID) {
                 return flourish;
             }
@@ -36,12 +40,13 @@ public enum LightWeaponFlourish {
         return NOFLOURISH;
     }
 
-    public String getName() {
+        public String getName() {
         return str;
     }
 
     public int getTagID() {
         return tagID;
     }
+
     public record Flourish(String name, int TagID){}
 }

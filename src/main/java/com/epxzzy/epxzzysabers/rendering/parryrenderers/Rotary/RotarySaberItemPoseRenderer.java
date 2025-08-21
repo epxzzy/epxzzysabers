@@ -1,7 +1,7 @@
-package com.epxzzy.epxzzysabers.rendering.poseRenderer.Rotary;
+package com.epxzzy.epxzzysabers.rendering.parryrenderers.Rotary;
 
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
-import com.epxzzy.epxzzysabers.rendering.poseRenderer.LightWeapon.LightWeaponFlourish;
+import com.epxzzy.epxzzysabers.rendering.parryrenderers.LightWeapon.LightWeaponFlourish;
 import com.epxzzy.epxzzysabers.utils.AngleHelper;
 import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
 import com.epxzzy.epxzzysabers.utils.ScrollValueHandler;

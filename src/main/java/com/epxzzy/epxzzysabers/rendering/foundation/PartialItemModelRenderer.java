@@ -1,7 +1,5 @@
 package com.epxzzy.epxzzysabers.rendering.foundation;
 
-import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.misc.Iterate;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 

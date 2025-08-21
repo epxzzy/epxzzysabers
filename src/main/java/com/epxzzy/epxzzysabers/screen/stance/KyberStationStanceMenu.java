@@ -3,7 +3,7 @@ package com.epxzzy.epxzzysabers.screen.stance;
 
 import com.epxzzy.epxzzysabers.block.ModBlocks;
 import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.rendering.poseHandlers.BladeStance;
+import com.epxzzy.epxzzysabers.rendering.playerposerenderers.BladeStance;
 import com.epxzzy.epxzzysabers.screen.ModMenuTypes;
 import com.epxzzy.epxzzysabers.screen.components.KyberMenuBase;
 import com.epxzzy.epxzzysabers.utils.ColourConverter;

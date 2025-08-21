@@ -1,6 +1,5 @@
-package com.epxzzy.epxzzysabers.rendering.poseHandlers;
+package com.epxzzy.epxzzysabers.rendering.playerposerenderers;
 
-import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.utils.AngleHelper;
 import com.epxzzy.epxzzysabers.utils.AnimationHelper;
 import net.minecraft.client.model.HumanoidModel;

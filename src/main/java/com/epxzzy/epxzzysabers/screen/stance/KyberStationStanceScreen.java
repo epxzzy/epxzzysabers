@@ -4,7 +4,7 @@ package com.epxzzy.epxzzysabers.screen.stance;
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.networking.ModMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundKyberMenuTabChange;
-import com.epxzzy.epxzzysabers.rendering.poseHandlers.BladeStance;
+import com.epxzzy.epxzzysabers.rendering.playerposerenderers.BladeStance;
 import com.epxzzy.epxzzysabers.screen.components.KyberModes;
 import com.epxzzy.epxzzysabers.screen.components.KyberTabButton;
 import com.mojang.blaze3d.platform.Lighting;

@@ -4,7 +4,7 @@ import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialModel;
-import com.epxzzy.epxzzysabers.rendering.poseRenderer.LightWeapon.LightWeaponItemPoseRenderer;
+import com.epxzzy.epxzzysabers.rendering.parryrenderers.LightWeapon.LightWeaponItemPoseRenderer;
 import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
 import com.epxzzy.epxzzysabers.utils.PlayerHelperLmao;
 import com.mojang.blaze3d.vertex.PoseStack;

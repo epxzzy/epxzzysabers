@@ -1,4 +1,4 @@
-package com.epxzzy.epxzzysabers.rendering.poseRenderer.LightWeapon;
+package com.epxzzy.epxzzysabers.rendering.parryrenderers.LightWeapon;
 
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.epxzzysabers.utils.AngleHelper;
@@ -13,8 +13,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-
-import static com.epxzzy.epxzzysabers.utils.StackHelper.isHoldingItemOffHand;
 
 
 public class LightWeaponItemPoseRenderer {

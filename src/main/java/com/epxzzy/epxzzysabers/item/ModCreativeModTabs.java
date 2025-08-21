@@ -14,11 +14,11 @@ public class ModCreativeModTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, epxzzySabers.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> TUTORIAL_TAB = CREATIVE_MODE_TABS.register("moditums",
+    public static final RegistryObject<CreativeModeTab> SABERS_TAB = CREATIVE_MODE_TABS.register("moditums",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.Protosaber.get()))
-                    .title(Component.translatable("epxzzySabers.moditemsiglol"))
+                    .title(Component.translatable("epxzzysabers.moditemsiglol"))
                     .displayItems((pParameters, pOutput) -> {
-                        pOutput.accept(ModItems.Protosaber.get());
+                        //pOutput.accept(ModItems.Protosaber.get());
                         pOutput.accept(ModItems.SINGLE_BLADED_SABER.get());
                         pOutput.accept(ModItems.DUAL_BLADED_SABER.get());
                         pOutput.accept(ModItems.ROTARY_SABER.get());
@@ -27,9 +27,6 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.SABER_PIKE.get());
                         pOutput.accept(ModItems.SABER_GAUNTLET.get());
 
-                        //pOutput.accept(ModItems.mognet.get());
-
-                        //pOutput.accept(Items.DIAMOND);
 
                         pOutput.accept(ModBlocks.KYBERSTATION.get());
                         //pOutput.accept(ModItems.protosabur2.get());

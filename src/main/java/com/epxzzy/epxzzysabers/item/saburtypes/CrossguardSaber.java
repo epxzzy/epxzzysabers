@@ -5,6 +5,7 @@ import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.rendering.CrossguardSaberItemRenderer;
 import com.epxzzy.epxzzysabers.rendering.SingleBladedItemRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
+import com.epxzzy.epxzzysabers.utils.LevelHelper;
 import com.epxzzy.epxzzysabers.utils.ModTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,17 +26,11 @@ public class CrossguardSaber extends Protosaber {
         consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));
     }
     public static boolean checkForSaberBlock(Entity Entityy){
-        if(Entityy instanceof LivingEntity)
-            return ((LivingEntity)Entityy).getMainHandItem().is(ModItems.CROSSGUARD_SABER.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity)Entityy).isUsingItem();
-        return false;
+        return LevelHelper.EntityBlockingWithActiveItem(Entityy, ModItems.CROSSGUARD_SABER.get());
     }
 
     public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand){
-        if(Entityy instanceof LivingEntity) {
-            if(Mainhand) return ((LivingEntity) Entityy).getMainHandItem().is(ModItems.CROSSGUARD_SABER.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-            return ((LivingEntity) Entityy).getOffhandItem().is(ModItems.CROSSGUARD_SABER.get()) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-        }
-        return false;
+        return LevelHelper.EntityEquippedActiveItem(Entityy, Mainhand, ModItems.CROSSGUARD_SABER.get());
     }
 
 }

@@ -5,6 +5,7 @@ import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.rendering.CrossguardSaberItemRenderer;
 import com.epxzzy.epxzzysabers.rendering.SaberGauntletItemRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
+import com.epxzzy.epxzzysabers.utils.LevelHelper;
 import com.epxzzy.epxzzysabers.utils.ModTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,23 +37,23 @@ public class SaberGauntlet extends Protosaber {
         if(GetCurrentAbility(pStack, 1)){
             //not much to do here
             if(abilityActiveDuration > 200){
-                SetAbility(1, false, pStack, pLevel, pEntity, pSlotId, pIsSelected);
+                TriggerAbility(1, false, pStack, pLevel, pEntity, pSlotId, pIsSelected);
             }
         }
         if(GetCurrentAbility(pStack, 2)){
             //fuck with people and their lightsabers
 
             if(abilityActiveDuration > 100){
-                SetAbility(2, false, pStack, pLevel, pEntity, pSlotId, pIsSelected);
+                TriggerAbility(2, false, pStack, pLevel, pEntity, pSlotId, pIsSelected);
             }
         }
         if(GetCurrentAbility(pStack, 3)){
-            //fuck with people and their lightsabers
+            //3 hits a second
 
             //if hit limit is reached
             //TODO: make this incremented if someone is is hit with this ability
             if(abilityActiveDuration > 5){
-                SetAbility(3, false, pStack, pLevel, pEntity, pSlotId, pIsSelected);
+                TriggerAbility(3, false, pStack, pLevel, pEntity, pSlotId, pIsSelected);
             }
         }
 
@@ -64,7 +65,7 @@ public class SaberGauntlet extends Protosaber {
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
-    public void SetAbility(int abilityID, boolean switchvalue, ItemStack stacc, Level pLevel, Entity pEntity, int pSlotID, boolean pIsSelcted){
+    public void TriggerAbility(int abilityID, boolean switchvalue, ItemStack stacc, Level pLevel, Entity pEntity, int pSlotID, boolean pIsSelcted){
         stacc.getOrCreateTag().remove("ActiveAbility");
         //remove the ability already written so we dont fuck with the next assigned ability
 
@@ -107,17 +108,11 @@ public class SaberGauntlet extends Protosaber {
     }
 
     public static boolean checkForSaberBlock(Entity Entityy){
-        if(Entityy instanceof LivingEntity)
-            return ((LivingEntity)Entityy).getMainHandItem().is(ModItems.SABER_GAUNTLET.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity)Entityy).isUsingItem();
-        return false;
+        return LevelHelper.EntityBlockingWithActiveItem(Entityy, ModItems.SABER_GAUNTLET.get());
     }
 
     public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand){
-        if(Entityy instanceof LivingEntity) {
-            if(Mainhand) return ((LivingEntity) Entityy).getMainHandItem().is(ModItems.SABER_GAUNTLET.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-            return ((LivingEntity) Entityy).getOffhandItem().is(ModItems.SABER_GAUNTLET.get()) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-        }
-        return false;
+        return LevelHelper.EntityEquippedActiveItem(Entityy, Mainhand, ModItems.SABER_GAUNTLET.get());
     }
 
 }

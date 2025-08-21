@@ -4,6 +4,7 @@ import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.ModItems;
 import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.rendering.SingleBladedItemRenderer;
+import com.epxzzy.epxzzysabers.utils.LevelHelper;
 import com.epxzzy.epxzzysabers.utils.ModTags;
 //import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
@@ -28,17 +29,11 @@ public class SingleBladed extends Protosaber {
     }
 
     public static boolean checkForSaberBlock(Entity Entityy){
-        if(Entityy instanceof LivingEntity)
-            return ((LivingEntity)Entityy).getMainHandItem().is(ModItems.SINGLE_BLADED_SABER.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity)Entityy).isUsingItem();
-        return false;
+        return LevelHelper.EntityBlockingWithActiveItem(Entityy, ModItems.SINGLE_BLADED_SABER.get());
     }
 
     public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand){
-        if(Entityy instanceof LivingEntity) {
-            if(Mainhand) return ((LivingEntity) Entityy).getMainHandItem().is(ModItems.SINGLE_BLADED_SABER.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-            return ((LivingEntity) Entityy).getOffhandItem().is(ModItems.SINGLE_BLADED_SABER.get()) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-        }
-        return false;
+        return LevelHelper.EntityEquippedActiveItem(Entityy, Mainhand, ModItems.SINGLE_BLADED_SABER.get());
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.epxzzy.epxzzysabers.rendering.poseRenderer.HeavyWeapon;
+package com.epxzzy.epxzzysabers.rendering.parryrenderers.HeavyWeapon;
 
 import com.epxzzy.epxzzysabers.utils.AngleHelper;
 import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;

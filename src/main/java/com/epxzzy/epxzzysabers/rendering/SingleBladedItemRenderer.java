@@ -11,7 +11,7 @@ import com.epxzzy.epxzzysabers.rendering.foundation.PartialModel;
 //import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
 //import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
-import com.epxzzy.epxzzysabers.rendering.poseRenderer.LightWeapon.LightWeaponItemPoseRenderer;
+import com.epxzzy.epxzzysabers.rendering.parryrenderers.LightWeapon.LightWeaponItemPoseRenderer;
 import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
 import com.epxzzy.epxzzysabers.utils.PlayerHelperLmao;
 import com.mojang.blaze3d.vertex.PoseStack;

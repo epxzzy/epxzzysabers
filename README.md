@@ -1,41 +1,25 @@
 epxzzy's sabers
-//create 6.0.3-71
-
-//TODO: lefty animations (parrying, attacking, blocking, misc)
-
-//TODO: make jarr kai a thing its been so long lmao
 
 //TODO: make a fuckin wiki lmao
-
-//TODO: 
 
 ideas n stuff:
 
 # Saber Types [DONE]
  - [DONE] Single blade (low attack speed, high attack damage, low parry range)
  - [DONE] Dual blade (high attack speed, mildly low attack damage, high parry range)
- - [DONE] Inquisitorious (dualblade but fly)
+ - [DONE] Rotary Saber (dualblade but fly)
  - [DONE] Saber-blaster hybrid (singleblade but pew pew)
- - [DONE] Unstable crossguard (high attack speed, randomised damage, low parry range)
+ - [DONE] Crossguard (high attack speed, randomised damage, low parry range)
  - [DONE] Saber Pike (high attack speed, mid attack damage, very high parry range)
  - [DONE] Saber gauntlet (high attack speed, low attack damage, low parry range)
+ - Saber Whip (fishing rod like functionality, cant block but can be blocked)
 
 //above stats are bs, update them too
-
-# Items 
- - Proton bombs (cylindrical superpowered tnt)
- - Kyber crystals (Natural && Synthetic)
- - Thermal detonators (a grenade pretty much)
- - Laser Blaster (w/ variations)
- - Beskar alloy
- - Beskar armour (armour that is resistant to saber attacks)
- - [Ark pulse generator](https://starwars.fandom.com/wiki/Arc_Pulse_Generator)
- - grevious mobile
- - gungan shield and big booma????
+//also add more exotic saber types
 
 # Mechanics 
- - [DONE] Deflection
  - [DONE] Parry 
+ - [DONE] Deflection (different from parry)
  - [DONE] Saber Flight
  - [DONE] Saber Throw
  - [DONE] Saber Shooting
@@ -103,12 +87,6 @@ it changes trajectories of projects in your parry range.
 
 //TODO: make flourishes exclusive to parrying
 
-### ~~Missed Attacks (Flourishes)~~ [MERGED WITH PARRYING]
-a miss(not hitting any entity, just swinging)
-(where saber is not parrying) animate flourishes.
-flourishes will not toggle between animations unless player keeps
-missing every goddamn time. a parry will be read from itemstack
-and handled either flouish or custom animations.
 
 ### Posing (Assuming Stance)
 crouching during blocking with a saber triggers a stance.
@@ -120,4 +98,37 @@ a stance does literally nothing but look cool.
 NOTE: as of right now there are a few stances missing. posing
 overall is buggy or doesn't render properly.
 
-###
+### ~~Missed Attacks (Flourishes)~~ [MERGED WITH PARRYING]
+~~a miss(not hitting any entity, just swinging)
+(where saber is not parrying) animate flourishes.
+flourishes will not toggle between animations unless player keeps
+missing every goddamn time. a parry will be read from itemstack
+and handled either flouish or custom animations.~~
+
+
+
+
+
+## FOR NEXT UPDATE:
+- attack & block animations for all saber forms
+- heavy weapon attack and block animations
+- lefty animations for le above
+- jarr kai
+- pike combat
+- more possible saber types
+- armour for sabers
+- items planned (probably mentioned somewhere below)
+
+
+
+### Items
+- Proton bombs (cylindrical superpowered tnt)
+- Kyber crystals (Natural && Synthetic)
+- Thermal detonators (a grenade pretty much)
+- Laser Blaster (w/ variations)
+- Beskar alloy
+- Beskar armour (armour that is resistant to saber attacks)
+- [Ark pulse generator](https://starwars.fandom.com/wiki/Arc_Pulse_Generator)
+- grevious mobile
+- gungan shield and big booma????
+

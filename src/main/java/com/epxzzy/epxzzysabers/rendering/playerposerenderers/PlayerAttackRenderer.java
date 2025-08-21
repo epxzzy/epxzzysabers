@@ -1,9 +1,7 @@
-package com.epxzzy.epxzzysabers.rendering.poseHandlers;
+package com.epxzzy.epxzzysabers.rendering.playerposerenderers;
 
-import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.utils.AngleHelper;
 import com.epxzzy.epxzzysabers.utils.AnimationHelper;
-import com.epxzzy.epxzzysabers.utils.ScrollValueHandler;
 import net.minecraft.client.model.HumanoidModel;
 
 public class PlayerAttackRenderer {

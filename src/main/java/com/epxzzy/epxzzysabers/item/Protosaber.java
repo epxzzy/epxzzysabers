@@ -1,23 +1,18 @@
 package com.epxzzy.epxzzysabers.item;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.entity.custom.ThrownRotarySaber;
 import com.epxzzy.epxzzysabers.misc.KewlFightsOrchestrator;
 import com.epxzzy.epxzzysabers.networking.ModMessages;
-import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberAbilityPacket;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberDeflectPacket;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.epxzzysabers.utils.ColourConverter;
 import com.epxzzy.epxzzysabers.rendering.ProtosaberItemRenderer;
-import com.epxzzy.epxzzysabers.rendering.poseHandlers.BladeStance;
+import com.epxzzy.epxzzysabers.rendering.playerposerenderers.BladeStance;
 import com.epxzzy.epxzzysabers.sound.ModSounds;
-import com.epxzzy.epxzzysabers.utils.ModTags;
-import com.epxzzy.epxzzysabers.utils.StackHelper;
+import com.epxzzy.epxzzysabers.utils.LevelHelper;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -35,16 +30,11 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -54,7 +44,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 public class Protosaber extends Item {
     private ArrayListMultimap<Attribute, AttributeModifier> defaultModifiers;
@@ -198,16 +187,6 @@ public class Protosaber extends Item {
 
     }
 
-
-    public boolean isPlayerClientPressing(int pInputConstraint, Level pLevel) {
-        if (pLevel.isClientSide) {
-            long winhandl = Minecraft.getInstance().getWindow().getWindow();
-            return InputConstants.isKeyDown(winhandl, pInputConstraint) || InputConstants.isKeyDown(winhandl, pInputConstraint);
-        } else {
-            return false;
-        }
-    }
-
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, @NotNull InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
@@ -294,7 +273,7 @@ public class Protosaber extends Item {
         tooltip.add(ColourDetail);
 
         if (Screen.hasControlDown()) {
-            tooltip.add(Component.literal(" hidden text displayed only when ctrl key is being held down"));
+            tooltip.add(Component.literal("this item will not do anything when saberability is key down"));
         }
     }
 
@@ -338,7 +317,7 @@ public class Protosaber extends Item {
             addFlourishTag(entity, stack);
         }
         ModMessages.sendToServer(new ServerboundSaberDeflectPacket());
-        StackHelper.AnimateDefelctionClient(stack, (Player) entity);
+        LevelHelper.AnimateDefelctionClient(stack, (Player) entity);
         return false;
         //}
         //return false;
@@ -374,12 +353,6 @@ public class Protosaber extends Item {
         return false;
     }
 
-    public static boolean checkForSaberBlock(Entity Entityy) {
-        if (Entityy instanceof LivingEntity)
-            return ((LivingEntity) Entityy).getMainHandItem().is(ModItems.Protosaber.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity) Entityy).isUsingItem();
-        return false;
-    }
-
     public static BladeStance getStance(Entity Entityy) {
         int tagid = 0;
         if (Entityy instanceof LivingEntity) {
@@ -400,14 +373,13 @@ public class Protosaber extends Item {
         return returnee;
     }
 
+    public static boolean checkForSaberBlock(Entity Entityy) {
+        return LevelHelper.EntityBlockingWithActiveItem(Entityy, ModItems.Protosaber.get());
+    }
+
 
     public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand) {
-        if (Entityy instanceof LivingEntity) {
-            if (Mainhand)
-                return ((LivingEntity) Entityy).getMainHandItem().is(ModItems.Protosaber.get()) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-            return ((LivingEntity) Entityy).getOffhandItem().is(ModItems.Protosaber.get()) && ((LivingEntity) Entityy).getOffhandItem().getOrCreateTag().getBoolean("ActiveBoiii");
-        }
-        return false;
+        return LevelHelper.EntityEquippedActiveItem(Entityy, Mainhand, ModItems.Protosaber.get());
     }
 
     @Override

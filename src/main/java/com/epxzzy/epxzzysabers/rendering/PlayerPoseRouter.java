@@ -3,11 +3,11 @@ package com.epxzzy.epxzzysabers.rendering;
 import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.item.saburtypes.RotarySaber;
 import com.epxzzy.epxzzysabers.item.saburtypes.SingleBladed;
-import com.epxzzy.epxzzysabers.rendering.poseHandlers.PlayerAttackRenderer;
-import com.epxzzy.epxzzysabers.rendering.poseHandlers.PlayerBlockRenderer;
-import com.epxzzy.epxzzysabers.rendering.poseHandlers.PlayerStanceRenderer;
-import com.epxzzy.epxzzysabers.rendering.poseRenderer.HeavyWeapon.HeavyWeaponArmPoseRenderer;
-import com.epxzzy.epxzzysabers.rendering.poseRenderer.LightWeapon.LightWeaponArmPoseRenderer;
+import com.epxzzy.epxzzysabers.rendering.playerposerenderers.PlayerAttackRenderer;
+import com.epxzzy.epxzzysabers.rendering.playerposerenderers.PlayerBlockRenderer;
+import com.epxzzy.epxzzysabers.rendering.playerposerenderers.PlayerStanceRenderer;
+import com.epxzzy.epxzzysabers.rendering.parryrenderers.HeavyWeapon.HeavyWeaponArmPoseRenderer;
+import com.epxzzy.epxzzysabers.rendering.parryrenderers.LightWeapon.LightWeaponArmPoseRenderer;
 import com.epxzzy.epxzzysabers.utils.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -15,8 +15,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 
-import static com.epxzzy.epxzzysabers.rendering.poseRenderer.Rotary.ArmPoseRenderer.setRotaryBlockPose;
-import static com.epxzzy.epxzzysabers.rendering.poseRenderer.Rotary.ArmPoseRenderer.setRotaryFlyPose;
+import static com.epxzzy.epxzzysabers.rendering.parryrenderers.Rotary.ArmPoseRenderer.setRotaryFlyPose;
 
 
 public class PlayerPoseRouter {

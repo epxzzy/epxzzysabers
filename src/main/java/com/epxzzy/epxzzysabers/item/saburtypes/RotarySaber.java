@@ -8,6 +8,7 @@ import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberDeflectPacket;
 import com.epxzzy.epxzzysabers.rendering.RotarySaberItemRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.epxzzysabers.sound.ModSounds;
+import com.epxzzy.epxzzysabers.utils.LevelHelper;
 import com.epxzzy.epxzzysabers.utils.ModTags;
 import com.epxzzy.epxzzysabers.utils.StackHelper;
 import net.minecraft.core.BlockPos;
@@ -177,14 +178,7 @@ public class RotarySaber extends Protosaber {
     }
 
     public static boolean checkForSaberBlock(Player Entityy) {
-        /*
-        epxzzySabers.LOGGER.info("first:" +Entityy.getMainHandItem().is(ModItems.ROTARY_SABER.get()));
-        epxzzySabers.LOGGER.info("second:" +Entityy.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") );
-        epxzzySabers.LOGGER.info("third:" +Entityy.isUsingItem());
-
-         */
-        //Entityy.getMainHandItem().is(RotarySaber)
-        return Entityy.getMainHandItem().is(ModItems.ROTARY_SABER.get()) && Entityy.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && Entityy.isUsingItem();
+        return LevelHelper.EntityBlockingWithActiveItem(Entityy, ModItems.ROTARY_SABER.get());
     }
 
     public static boolean[] checkForSaberFly(Entity Entityy) {

@@ -1,7 +1,6 @@
 package com.epxzzy.epxzzysabers.utils;
 
-import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.misc.PhysicalFloat;
+import com.epxzzy.epxzzysabers.rendering.foundation.PhysicalFloat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
