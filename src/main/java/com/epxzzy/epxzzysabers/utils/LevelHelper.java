@@ -32,6 +32,8 @@ public class LevelHelper {
         return false;
     }
 
+
+
     public static boolean EntityBlockingWithActiveItem(Entity Entityy, Item item){
         if(Entityy instanceof LivingEntity)
             return ((LivingEntity)Entityy).getMainHandItem().is(item) && ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii") && ((LivingEntity)Entityy).isUsingItem();

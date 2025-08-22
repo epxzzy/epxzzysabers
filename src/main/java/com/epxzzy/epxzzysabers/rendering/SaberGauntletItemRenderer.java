@@ -57,7 +57,10 @@ public class SaberGauntletItemRenderer extends CustomRenderedItemModelRenderer {
         renderer.render(HILT_BIT.get(), light);
 
         //}
-
+        if (stack.getOrCreateTag().getBoolean("ChargedBoiii")) {
+            ms.translate(Math.random() * 0.1 + -0.05, Math.random() * 0.1 + -0.05 , Math.random() * 0.1+ -0.05 );
+            ms.scale( 1F, 1F, (float) (Math.random() * 0.2) + 1F);
+        }
         if (stack.getOrCreateTag().getBoolean("ActiveBoiii")) {
             //stack.getUseAnimation()
             ms.pushPose();

@@ -131,7 +131,7 @@ public class Protosaber extends Item {
             pPlayer.stopUsingItem();
             //epxzzySabers.LOGGER.info("Saber is now Turning Off");
 
-            nbeetea.putInt("CustomModelData", 0);
+            //nbeetea.putInt("CustomModelData", 0);
             writeActiveTag(pStack, false);
             isActive = false;
         }
@@ -139,7 +139,6 @@ public class Protosaber extends Item {
         pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(),
                 (readActivetag(pStack) ? ModSounds.ACTIVATION.get() : ModSounds.DEACTIVATION.get()), SoundSource.NEUTRAL, 0.5f, 1f
         );
-        //}
     }
 
     public void addFlourishTag(LivingEntity pPlayer, ItemStack pStack) {
