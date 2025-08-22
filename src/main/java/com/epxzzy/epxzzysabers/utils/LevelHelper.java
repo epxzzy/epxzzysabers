@@ -18,6 +18,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -43,25 +44,9 @@ public class LevelHelper {
         //epxzzySabers.LOGGER.info("parry range for this deflection packet {}", PARRY_RANGE);
 
         if (pLevel.isClientSide) {
-            Vec3 asdf = entity.blockPosition().getCenter();
-            List<Entity> notThat = entity.level().getEntities(null, new AABB(
-                    asdf.x - PARRY_RANGE,
-                    asdf.y - PARRY_RANGE,
-                    asdf.z - PARRY_RANGE,
-                    asdf.x + PARRY_RANGE,
-                    asdf.y + PARRY_RANGE,
-                    asdf.z + PARRY_RANGE)
-            );
-            notThat.removeIf(new Predicate<Entity>() {
-                @Override
-                public boolean test(Entity entity) {
-                    if (entity instanceof Player) {
-                        return true;
-                    }
-                    return false;
-                }
-            });
-            //if (!entity.level().isClientSide()) {
+            Vec3 asdf = entity.position();
+            List<Projectile> notThat = LevelHelper.getProjectilesInRadius(asdf, pLevel, PARRY_RANGE);
+
             if (!notThat.isEmpty() && pStack.getOrCreateTag().getBoolean("ActiveBoiii")) {
                 for (Entity entity1 : notThat) {
                     Vec3 vec32 = entity1.position();
@@ -111,7 +96,34 @@ public class LevelHelper {
     }
 
 
+    public static List<LivingEntity> getEntitiesInRadius(Vec3 poss, Level level, double radius) {
+        List<LivingEntity> entities = level.getEntitiesOfClass(
+                LivingEntity.class,
+                new AABB(
+                        poss.x - radius, poss.y - radius, poss.z - radius,
+                        poss.x + radius, poss.y + radius, poss.z + radius
+                )
+        );
 
+        // remove if not in radious
+        entities.removeIf(moron -> poss.distanceTo(moron.position()) >= radius);
 
+        return entities;
+    }
+
+    public static List<Projectile> getProjectilesInRadius(Vec3 poss, Level level, double radius) {
+        List<Projectile> entities = level.getEntitiesOfClass(
+                Projectile.class,
+                new AABB(
+                        poss.x - radius, poss.y - radius, poss.z - radius,
+                        poss.x + radius, poss.y + radius, poss.z + radius
+                )
+        );
+
+        // remove if not in radious
+        entities.removeIf(moron -> poss.distanceTo(moron.position()) >= radius);
+
+        return entities;
+    }
 
 }

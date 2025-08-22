@@ -7,6 +7,7 @@ import com.epxzzy.epxzzysabers.item.ModItems;
 import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.item.saburtypes.RotarySaber;
 import com.epxzzy.epxzzysabers.sound.ModSounds;
+import com.epxzzy.epxzzysabers.utils.LevelHelper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -56,25 +57,10 @@ public class ServerboundSaberDeflectPacket {
                 //epxzzySabers.LOGGER.info("parry range for this deflection packet {}", PARRY_RANGE);
 
 
-                Vec3 asdf = entity.blockPosition().getCenter();
-                List<Entity> notThat = entity.level().getEntities(null, new AABB(
-                        asdf.x - PARRY_RANGE,
-                        asdf.y - PARRY_RANGE,
-                        asdf.z - PARRY_RANGE,
-                        asdf.x + PARRY_RANGE,
-                        asdf.y + PARRY_RANGE,
-                        asdf.z + PARRY_RANGE)
-                );
-                notThat.removeIf(new Predicate<Entity>() {
-                    @Override
-                    public boolean test(Entity entity) {
-                        if (entity instanceof Player) {
-                            //epxzzySabers.LOGGER.debug("PLAYUR???? NAHHHHH!!");
-                            return true;
-                        }
-                        return false;
-                    }
-                });
+                Vec3 asdf = entity.position();
+                List<Projectile> notThat = LevelHelper.getProjectilesInRadius(asdf, pLevel, PARRY_RANGE);
+
+
                 //if (!entity.level().isClientSide()) {
                 if (!notThat.isEmpty() && pStack.getOrCreateTag().getBoolean("ActiveBoiii")) {
                     for (Entity entity1 : notThat) {

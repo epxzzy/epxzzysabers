@@ -21,6 +21,7 @@ import java.util.function.Consumer;
 public class SaberGauntlet extends Protosaber {
     int ability = 0;
     int abilityActiveDuration = 0;
+
     // 0 = none, 1 = supercharge, 2 = possibly disruption, 3 = possibly kyber surge
     public SaberGauntlet(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
         super(pProperties, pRANGE , pDamage, pSpeed);
@@ -40,13 +41,7 @@ public class SaberGauntlet extends Protosaber {
                 TriggerAbility(1, false, pStack, pLevel, pEntity, pSlotId, pIsSelected);
             }
         }
-        if(GetCurrentAbility(pStack, 2)){
-            //fuck with people and their lightsabers
 
-            if(abilityActiveDuration > 100){
-                TriggerAbility(2, false, pStack, pLevel, pEntity, pSlotId, pIsSelected);
-            }
-        }
         if(GetCurrentAbility(pStack, 3)){
             //3 hits a second
 
