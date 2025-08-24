@@ -1,6 +1,7 @@
 package com.epxzzy.epxzzysabers.mixin.entity;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
+import com.epxzzy.epxzzysabers.item.saburtypes.SaberGauntlet;
 import com.epxzzy.epxzzysabers.misc.KewlFightsOrchestrator;
 import com.epxzzy.epxzzysabers.networking.ModMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerAttackPacket;
@@ -12,12 +13,15 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.fml.common.Mod;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -202,6 +206,19 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         Player that = ((Player) (Object) this);
         Entity notThat = pTarget;
 
+        if(SaberGauntlet.checkForSaberCharge(that, true)){
+
+            for(LivingEntity livingentity : that.level().getEntitiesOfClass(LivingEntity.class, Items.STONE_SWORD.getSweepHitBox(that.getMainHandItem(), that, pTarget))) {
+                double entityReachSq = Mth.square(that.getEntityReach()); // Use entity reach instead of constant 9.0. Vanilla uses bottom center-to-center checks here, so don't update this to use canReach, since it uses closest-corner checks.
+                if (livingentity != that && livingentity != pTarget && !that.isAlliedTo(livingentity) && (!(livingentity instanceof ArmorStand) || !((ArmorStand)livingentity).isMarker()) && that.distanceToSqr(livingentity) < entityReachSq) {
+                    livingentity.knockback((double)0.4F, (double)Mth.sin(that.getYRot() * ((float)Math.PI / 180F)), (double)(-Mth.cos(that.getYRot() * ((float)Math.PI / 180F))));
+                    livingentity.hurt(that.damageSources().playerAttack(that), 1);
+
+                }
+            }
+
+            that.sweepAttack();
+        }
 
         if (!that.level().isClientSide() && that.getMainHandItem().is(ModTags.Items.LIGHTSABER)) {
             if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {

@@ -53,6 +53,8 @@ import java.util.function.Supplier;
 @Mod.EventBusSubscriber
 public class SaberGauntlet extends Protosaber {
     int supercharredTime = 0;
+    int CHARGEDDAMAGE = 2;
+
     //0 == natty/normal, 300 == goddamn this thing is hot
     public static final AttributeModifier singleRangeAttributeModifier =
             new AttributeModifier(UUID.fromString("7f7dbdb2-0d0d-458a-aa40-ac7633691f66"), "Range modifier", 3,
@@ -87,6 +89,20 @@ public class SaberGauntlet extends Protosaber {
             pStack.getOrCreateTag().putBoolean("ChargedBoiii", false);
             pLevel.playSound(null, pEntity.blockPosition(), SoundEvents.AXE_STRIP, SoundSource.PLAYERS);
             supercharredTime--;
+
+            CompoundTag tagsToApply = pStack.getOrCreateTag().copy();
+            tagsToApply.put("AttributeModifiers", new ListTag());
+            ListTag listtag = tagsToApply.getList("AttributeModifiers", 10);
+
+
+            CompoundTag baseAttackAttribute = (new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", ATTACK_DAMAGE, AttributeModifier.Operation.ADDITION)).save();
+
+            baseAttackAttribute.putString("AttributeName", BuiltInRegistries.ATTRIBUTE.getKey(Attributes.ATTACK_DAMAGE).toString());
+            baseAttackAttribute.putString("Slot", EquipmentSlot.MAINHAND.getName());
+
+            listtag.add(baseAttackAttribute);
+            pStack.setTag(tagsToApply);
+
         }
 
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
@@ -98,6 +114,20 @@ public class SaberGauntlet extends Protosaber {
         if (pRemainingUseDuration == 1) {
             pStack.getOrCreateTag().putBoolean("ChargedBoiii", true);
             supercharredTime = 160;
+
+            CompoundTag tagsToApply = pStack.getOrCreateTag().copy();
+            tagsToApply.put("AttributeModifiers", new ListTag());
+            ListTag listtag = tagsToApply.getList("AttributeModifiers", 10);
+
+
+            CompoundTag baseAttackAttribute = (new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", ATTACK_DAMAGE + CHARGEDDAMAGE, AttributeModifier.Operation.ADDITION)).save();
+
+            baseAttackAttribute.putString("AttributeName", BuiltInRegistries.ATTRIBUTE.getKey(Attributes.ATTACK_DAMAGE).toString());
+            baseAttackAttribute.putString("Slot", EquipmentSlot.MAINHAND.getName());
+
+            listtag.add(baseAttackAttribute);
+            pStack.setTag(tagsToApply);
+
             pLevel.playSound(null, pLivingEntity.blockPosition(), SoundEvents.AXE_SCRAPE, SoundSource.PLAYERS);
             pLivingEntity.stopUsingItem();
         }
@@ -105,7 +135,8 @@ public class SaberGauntlet extends Protosaber {
 
     @Override
     public int getUseDuration(@NotNull ItemStack pStack) {
-        return 40;
+        if(pStack.getOrCreateTag().getBoolean("ActiveBoiii")) return 40;
+        return super.getUseDuration(pStack);
     }
 
 
