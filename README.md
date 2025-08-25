@@ -23,9 +23,8 @@ ideas n stuff:
  - [DONE] Saber Flight
  - [DONE] Saber Throw
  - [DONE] Saber Shooting
- - Saber Supercharge
- - Saber Kybersurge
- - Saber Disruption
+ - [DONE] Saber Supercharge
+ - [DONE] Saber Disruption
  - Pike combat
    
 # Stances 
@@ -115,7 +114,7 @@ and handled either flouish or custom animations.~~
 - lefty animations for le above
 - jarr kai
 - pike combat
-- more possible saber types
+- more possible saber types (whips etc)
 - armour for sabers
 - items planned (probably mentioned somewhere below)
 
@@ -131,4 +130,5 @@ and handled either flouish or custom animations.~~
 - [Ark pulse generator](https://starwars.fandom.com/wiki/Arc_Pulse_Generator)
 - grevious mobile
 - gungan shield and big booma????
+- disrupter block as redstone component
 

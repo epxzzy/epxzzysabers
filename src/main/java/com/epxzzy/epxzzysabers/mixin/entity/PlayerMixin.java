@@ -212,7 +212,12 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
                 double entityReachSq = Mth.square(that.getEntityReach()); // Use entity reach instead of constant 9.0. Vanilla uses bottom center-to-center checks here, so don't update this to use canReach, since it uses closest-corner checks.
                 if (livingentity != that && livingentity != pTarget && !that.isAlliedTo(livingentity) && (!(livingentity instanceof ArmorStand) || !((ArmorStand)livingentity).isMarker()) && that.distanceToSqr(livingentity) < entityReachSq) {
                     livingentity.knockback((double)0.4F, (double)Mth.sin(that.getYRot() * ((float)Math.PI / 180F)), (double)(-Mth.cos(that.getYRot() * ((float)Math.PI / 180F))));
-                    livingentity.hurt(that.damageSources().playerAttack(that), 1);
+                    for (int b = 0; b != 3; b++ ){
+                        livingentity.invulnerableTime = 0;
+                        livingentity.hurt(that.damageSources().playerAttack(that), 1);
+                        livingentity.hurtTime = 3;
+
+                    }
 
                 }
             }
