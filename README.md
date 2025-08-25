@@ -1,7 +1,7 @@
 epxzzy's sabers
-shiii
-//TODO: make a fuckin wiki lmao
 
+//TODO: make a fuckin wiki lmao
+//TODO: disruption cooldown
 ideas n stuff:
 
 # Saber Types [DONE]
@@ -13,6 +13,7 @@ ideas n stuff:
  - [DONE] Saber Pike (high attack speed, mid attack damage, very high parry range)
  - [DONE] Saber gauntlet (high attack speed, low attack damage, low parry range)
  - Saber Whip (fishing rod like functionality, cant block but can be blocked)
+ - Saber Trident (probably do something fun)
 
 //above stats are bs, update them too
 //also add more exotic saber types
