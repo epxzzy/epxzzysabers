@@ -35,9 +35,9 @@ ideas n stuff:
  2. makashi [DONE] 
  3. soresu [DONE] 
  4. atarua [DONE] 
- 5. shen/djem so
+ 5. shen/djem so [DONE]
  6. niman [DONE] 
- 7. juyo/vapaad 
+ 7. juyo/vapaad [DONE]
 
 each form will have a different block, attack, parry and flourish animations/visuals
 then a player mixin would trace every [attack, miss(flourish), block, parry(deflection)].
