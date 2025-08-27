@@ -2,8 +2,6 @@ epxzzy's sabers
 
 //TODO: make a fuckin wiki lmao
 
-//TODO: djem so and palpatine stance
-
 ideas n stuff:
 
 # Saber Types [DONE]
