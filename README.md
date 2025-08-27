@@ -2,6 +2,8 @@ epxzzy's sabers
 
 //TODO: make a fuckin wiki lmao
 
+//TODO: make wiki prettyy
+
 ideas n stuff:
 
 # Saber Types [DONE]
