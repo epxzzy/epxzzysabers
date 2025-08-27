@@ -1,8 +1,8 @@
 epxzzy's sabers
 
 //TODO: make a fuckin wiki lmao
-
-//TODO: make wiki prettyy
+//TODO: add info to wiki lmao
+//TODO: make wiki prettyy lmao
 
 ideas n stuff:
 
