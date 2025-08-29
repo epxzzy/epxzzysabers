@@ -1,0 +1,111 @@
+
+.wikitable {
+  background-color:var(--background-color-neutral-subtle,#f8f9fa);
+  color:var(--color-base,#202122);
+  margin:1em 0;
+  border:1px solid var(--border-color-base,#a2a9b1);
+  border-collapse:collapse;
+  width: 300px;
+}
+
+
+.toc-container {
+  background: white;
+  border: 1px solid #a2a9b1;
+  border-radius: 4px;
+  padding: 15px;
+  margin: 20px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  width: 30%
+}
+
+.toc-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eaecf0;
+  color: #000;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-item {
+  margin: 3px 0;
+}
+
+.toc-link {
+  text-decoration: none;
+  color: #0645ad;
+  font-size: 14px;
+  display: block;
+  padding: 2px 0;
+}
+
+.toc-link:hover {
+  text-decoration: underline;
+  color: #0b0080;
+}
+
+.toc-link:visited {
+  color: #0b0080;
+}
+
+.toc-number {
+  color: #666;
+  margin-right: 5px;
+}
+
+/* Indentation for subsections */
+.toc-level-2 {
+  margin-left: 15px;
+}
+
+.toc-level-3 {
+  margin-left: 30px;
+}
+
+.sidebar {
+  flex: 1;
+  background-color: #f1f2f6;
+  padding: 1.5rem;
+  height: fit-content;
+  width: 20%;
+  display: inline-block;
+  position: absolute;
+  left: 75%;
+  z-index:-1;
+}
+.block-image {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1rem;
+  image-rendering: pixelated;
+}
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.info-table th,
+.info-table td {
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.info-table th {
+  background-color: #34495e;
+  color: white;
+  font-weight: bold;
+}
+
+.info-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
