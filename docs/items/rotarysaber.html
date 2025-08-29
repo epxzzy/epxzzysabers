@@ -7,12 +7,12 @@
 
   <nav class="navigation">
     <div class="breadcrumb">
-      <a href="../">root</a> > <a href="./">items</a> > <strong>SingleBladed</strong>
+      <a href="../">root</a> > <a href="./">items</a> > <strong>rotarysaber</strong>
     </div>
   <br>
-  <a href="https://github.com/epxzzy/epxzzysabers/blob/master/docs/items/singlebladed.html">source</a>
+  <a href="https://github.com/epxzzy/epxzzysabers/blob/master/docs/items/rotarysaber.html">source</a>
   </nav>
-  <h1 class="wiki-title">Single Bladed Saber</h1>
+  <h1 class="wiki-title">Rotary Saber</h1>
   <hr>
     <div class="sidebar">
       <div class="block-image">
@@ -21,19 +21,19 @@
 
       <table class="info-table">
         <tr>
-          <th colspan="2">Single Bladed Saber</th>
+          <th colspan="2">Rotary Saber</th>
         </tr>
         <tr>
           <td><strong>Attack Damage</strong></td>
-          <td>18</td>
+          <td>12</td>
         </tr>
         <tr>
           <td><strong>Attack Speed</strong></td>
-          <td>-2(idk how many seconds is this)</td>
+          <td>-1(idk how many seconds is this)</td>
         </tr>
         <tr>
           <td><strong>Parry Range</strong></td>
-          <td>2</td>
+          <td>3</td>
         </tr>
         <tr>
           <td><strong>Stackable</strong></td>
@@ -53,7 +53,7 @@
   <div class="content">
     <main class="main-content">
       <div id="Description">
-        An elegant weapon for a more civilised age. Can act as a ranged weapon under right circumstances.</div>
+        Melee AND ranged weapon. Also serves as temporary aeral escape.</div>
 
       <div class="toc-container">
         <div class="toc-title">Contents</div>
@@ -97,6 +97,16 @@
                   <span class="toc-number">4.2</span>Blocking
                 </a>
               </li>
+              <li class="toc-item">
+                <a href="#SaberThrow" class="toc-link">
+                  <span class="toc-number">4.3</span>Boomrang
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#SaberFlight" class="toc-link">
+                  <span class="toc-number">4.4</span>Flight
+                </a>
+              </li>
             </ul>
           </li>
           <li class="toc-item">
@@ -112,7 +122,7 @@
         <h2>Obtaining</h2>
         <div id="CreativeInventory">
           <h3>Creative Inventory Tab</h3>
-          <p><strong>Single Bladed Saber</strong> should be somewhere in the creative inventory tab for epxzzy's sabers</p>
+          <p><strong>Rotary Saber</strong> should be somewhere in the creative inventory tab for epxzzy's sabers</p>
         </div>
 
       </div>
@@ -128,12 +138,22 @@
         <h2>Usage</h2>
         <div id="Attacking">
           <h3>Attacking</h3>
-          When the item is active, it does 18hp of damage when left-clicked on an entity (or player). However like any other saber item, this can be countered via <a href="#Blocking">Blocking</a>. A left-click can also deflect any incoming(in parry range, or in 2 block radius for this specific item) projectiles (given that the projectile is in a somewhat linear path, unlike shulkers for example), but timing would have to be precise. 
+          When the item is active, it does 12hp of damage when left-clicked on an entity (or player). However like any other saber item, this can be countered via <a href="#Blocking">Blocking</a>. A left-click can also deflect any incoming(in parry range, or in 3 block radius for this specific item) projectiles (given that the projectile is in a somewhat linear path, unlike shulkers for example), but timing would have to be precise. 
         </div>
 
         <div id="Blocking">
           <h3>Blocking</h3>
-          <strong>Single Bladed Saber</strong>, like any other saber item, when right-clicked, will block any damage coming from a saber item, and even projectiles if timed properly. Can be held down for about ~1.75 seconds which if exceeded will cause the projectile to do damage.
+          <strong>Rotary Saber</strong>, like any other saber item, when right-clicked, will block any damage coming from a saber item, and even projectiles if timed properly. Can be held down for about ~1.75 seconds which if exceeded will cause the projectile to do damage.
+        </div>
+
+        <div id="SaberThrow">
+          <h3>Boomrang</h3>
+          Pressing [SABER-ABILITY] key throws the rotary saber like a boomrang, once it hits an entity or a block it will return back to you. this will temporarly disable blocking after you pick it up. this however can be parryed and blocked. if the player is not in the distance (this also means not online, or in another dimention, or chunk not loaded) of the thrown rotary saber it will just crash into anything and drop as an item.
+        </div>
+
+        <div id="SaberFlight">
+          <h3>Flight</h3>
+          Looking up, Jumping and holding down right-click will toggle flight as long as the item is held down. Flight is better suited for scaling vertically, like mountains for example, or if you just skill issue into the void. Flying does mean the user is vulnerable to any melee and ranged attacks. If a player is shot while flying they will stop flying. A flying player can only fly for 200 ticks (10 seconds) after which flight disables and they start falling. It will take them about [TO BE CHANGED] 40 ticks (2 seconds) to fly again if their flight has ended, canceled or disabled. Another Way to Counter a flying player is to activate <a href="./sabergauntlet.html/#Disruption">Disruption<a>. 
         </div>
 
       </div>
@@ -142,10 +162,18 @@
       <div id="History">
         <h2>History</h2>
         <table class="wikitable">
-          <tbody><tr>
+          <tbody>
+            <tr>
             <td><b>0.0.1</b></td>
             <td>Introduced.
-            </td></tr>
+            </td
+            </tr>
+            <tr>
+            <td><b>0.0.2</b></td>
+            <td>Flight made vulnerable by Disruption.
+            </td
+            </tr>
+
           </tbody>
         </table>
       </div>
