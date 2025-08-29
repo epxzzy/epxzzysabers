@@ -109,3 +109,23 @@
 .info-table tr:nth-child(even) {
   background-color: #f8f9fa;
 }
+
+
+.menutitle {
+  font-size: 0.85rem;
+}
+
+.main1 {
+  padding-right: 5px;
+  padding-left: 1px;
+  padding-top: 10px;
+  padding-bottom: 2px;
+}
+.item {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 30px; 
+  width:30px; 
+  display: block;
+  cursor: default;
+}
