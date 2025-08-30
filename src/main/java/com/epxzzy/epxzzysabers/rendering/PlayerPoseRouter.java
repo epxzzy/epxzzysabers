@@ -80,14 +80,12 @@ public class PlayerPoseRouter {
             //epxzzySabers.LOGGER.debug("swing time is: " + player.swingTime + " and attack time is: " + player.getAttackAnim(1));
         }
         //attack
-        if ((StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.HEAVY_WEAPON) || StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.LIGHT_WEAPON)) && attack > 0 && SaberSwingAnim > 0) {
+        if ((StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.LIGHT_WEAPON)) && attack > 0 && SaberSwingAnim > 0) {
             setBladedAttack(attack, model, SaberSwingAnim);
             return;
         }
         //block
-
-        //       if((StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.HEAVY_WEAPON)||StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.LIGHT_WEAPON)) && block > 0 && SaberDefAnim > 0){
-        if ((Protosaber.checkForSaberEquipment(player, true) || SingleBladed.checkForSaberEquipment(player, true)) && block > 0 && SaberDefAnim > 0) {
+        if ((StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.LIGHT_WEAPON)) && block > 0 && SaberDefAnim > 0) {
             setBladedBlock(block, model, SaberDefAnim);
             return;
         }
