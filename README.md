@@ -70,10 +70,10 @@ you need to worry about is facing the source of damage.
 //TODO: make blocking only work in mainhand.
 
 ### Parrying
-upon either:   
-- A. double left clicking
-- B. just left clicking
-
+~~upon either:~~
+~~- A. double left clicking~~
+~~- B. just left clicking~~
+on every (arm swing, attack, punching air, mining blocks. as long as it is being "swung" around)
 the saber will perform what is called a parry. a parry deflects
 ANY projectile in a certain range
 (determined by type of saber equipped: parry range)
@@ -106,8 +106,6 @@ overall is buggy or doesn't render properly.
 flourishes will not toggle between animations unless player keeps
 missing every goddamn time. a parry will be read from itemstack
 and handled either flouish or custom animations.~~
-
-
 
 
 

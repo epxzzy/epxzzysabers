@@ -54,6 +54,32 @@ public class StackHelper {
 
         return result;
     }
+    public static List<LivingEntity> getPlayersHoldingItemRightOrBoth(ItemStack stack) {
+        List<LivingEntity> result = new ArrayList<>();
+        Minecraft mc = Minecraft.getInstance();
+
+        Player player = mc.player;
+        if (player != null && isHoldingItemMainOrBoth(player, stack)) {
+            result.add(player);
+        }
+
+        // Check other entities in the loaded world
+        if (mc.level != null) {
+            for (Entity entity : mc.level.entitiesForRendering()) {
+                if (entity instanceof Player livingEntity) {
+                    // skippity
+                    if (livingEntity == player) continue;
+
+                    if (isHoldingItemMainOrBoth(livingEntity, stack)) {
+                        result.add(livingEntity);
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
 
     public static boolean checkHoldingActiveTag(Entity Entityy, boolean Mainhand, TagKey<Item> tagg) {
         if (Entityy instanceof LivingEntity) {

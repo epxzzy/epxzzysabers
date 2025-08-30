@@ -38,7 +38,7 @@ public class RotarySaberItemRenderer extends CustomRenderedItemModelRenderer {
         else {
         */
 
-        List<LivingEntity> allEntities = getEntitiesHoldingItemAnyHand(stack);
+        List<LivingEntity> allEntities = getPlayersHoldingItemRightOrBoth(stack);
 
         /*
         for (LivingEntity entity : allEntities) {

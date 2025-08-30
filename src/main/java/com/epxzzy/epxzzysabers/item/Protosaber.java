@@ -312,9 +312,11 @@ public class Protosaber extends Item {
 
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+        if(!(entity instanceof Player)) return false;
         if (entity.swingTime >= 3) {
             addFlourishTag(entity, stack);
         }
+
         ModMessages.sendToServer(new ServerboundSaberDeflectPacket());
         LevelHelper.AnimateDefelctionClient(stack, (Player) entity);
         return false;

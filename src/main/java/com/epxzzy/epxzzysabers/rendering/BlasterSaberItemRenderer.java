@@ -22,6 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 import static com.epxzzy.epxzzysabers.utils.StackHelper.getEntitiesHoldingItemRightOrBoth;
+import static com.epxzzy.epxzzysabers.utils.StackHelper.getPlayersHoldingItemRightOrBoth;
 
 public class BlasterSaberItemRenderer extends CustomRenderedItemModelRenderer {
     protected static final PartialModel HILT_BIT = PartialModel.of(epxzzySabers.asResource("item/hilt/blaster_hilt"));
@@ -39,7 +40,7 @@ public class BlasterSaberItemRenderer extends CustomRenderedItemModelRenderer {
 
          */
 
-        List<LivingEntity> allEntities = getEntitiesHoldingItemRightOrBoth(stack);
+        List<LivingEntity> allEntities = getPlayersHoldingItemRightOrBoth(stack);
         for (LivingEntity entity : allEntities) {
             if (transformType.firstPerson() && entity.isUsingItem()) {
                 int modifier = leftHand ? -1 : 1;
