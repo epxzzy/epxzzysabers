@@ -53,7 +53,7 @@ import java.util.function.Supplier;
 @Mod.EventBusSubscriber
 public class SaberGauntlet extends Protosaber {
     int supercharredTime = 0;
-    int CHARGEDDAMAGE = 2;
+    int CHARGEDDAMAGE = 8;
 
     //0 == natty/normal, 300 == goddamn this thing is hot
     public static final AttributeModifier singleRangeAttributeModifier =
