@@ -82,7 +82,7 @@ public class ServerboundSaberAbilityPacket {
                     if (!(player.getCooldowns().isOnCooldown(pStack.getItem()))) {
                         player.getCooldowns().addCooldown(pStack.getItem(), 6);
                         player.stopUsingItem();
-                        player.swing(InteractionHand.MAIN_HAND, true);
+                        //player.swing(InteractionHand.MAIN_HAND, true);
 
                         PlasmaBolt blasterbolt = new PlasmaBolt(player, pLevel) {
                         };
