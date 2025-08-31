@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "S": {
+      "item": "epxzzysabers:krystal"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    }
+
+  },
+  "pattern": [
+    " S ",
+    "PCP",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "item": "epxzzysabers:rotary_saber"
+  }
+}

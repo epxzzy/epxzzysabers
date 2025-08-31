@@ -4,6 +4,7 @@ import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.saburtypes.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.SimpleFoiledItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -28,6 +29,8 @@ public class ModItems {
     public static final RegistryObject<Item> BLASTER_SABER = items.register("blaster_saber", () -> new BlasterHybrid(new Item.Properties().rarity(RARITY_KYBER), 2, 14, -2));
     public static final RegistryObject<Item> SABER_PIKE = items.register("saber_pike", () -> new SaberPike(new Item.Properties().rarity(RARITY_KYBER), 4, 16, -1));
     public static final RegistryObject<Item> SABER_GAUNTLET = items.register("saber_gauntlet", () -> new SaberGauntlet(new Item.Properties().rarity(RARITY_KYBER), 3, 12, 0));
+
+    public static final RegistryObject<Item> KRYSTAL = items.register("krystal", () -> new SimpleFoiledItem(new Item.Properties().fireResistant()));
 
 
 

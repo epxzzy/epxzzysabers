@@ -27,6 +27,8 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.SABER_PIKE.get());
                         pOutput.accept(ModItems.SABER_GAUNTLET.get());
 
+                        pOutput.accept(ModItems.KRYSTAL.get());
+
 
                         pOutput.accept(ModBlocks.KYBERSTATION.get());
                         //pOutput.accept(ModItems.protosabur2.get());

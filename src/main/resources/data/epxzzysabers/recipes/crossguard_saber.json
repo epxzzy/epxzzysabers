@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "S": {
+      "item": "epxzzysabers:krystal"
+    }
+  },
+  "pattern": [
+    " S ",
+    "NCN",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "item": "epxzzysabers:crossguard_saber"
+  }
+}

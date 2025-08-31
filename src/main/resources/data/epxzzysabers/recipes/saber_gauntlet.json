@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "B": {
+      "item": "minecraft:bell"
+    },
+    "R": {
+      "item": "minecraft:redstone_torch"
+    },
+
+    "S": {
+      "item": "epxzzysabers:krystal"
+    }
+  },
+  "pattern": [
+    " S ",
+    "BCR",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "item": "epxzzysabers:saber_gauntlet"
+  }
+}

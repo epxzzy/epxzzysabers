@@ -7,6 +7,7 @@ import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.item.saburtypes.RotarySaber;
 import com.epxzzy.epxzzysabers.utils.ColourConverter;
 import com.epxzzy.epxzzysabers.sound.ModSounds;
+import com.epxzzy.epxzzysabers.utils.LevelHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -15,6 +16,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,10 +29,11 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class ThrownRotarySaber extends AbstractArrow {
     private ItemStack saberitem = new ItemStack(ModItems.ROTARY_SABER.get());
-    private static final EntityDataAccessor<Integer> Decimal_Colour= SynchedEntityData.defineId(ThrownRotarySaber.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> Decimal_Colour = SynchedEntityData.defineId(ThrownRotarySaber.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> Gay = SynchedEntityData.defineId(ThrownRotarySaber.class, EntityDataSerializers.BOOLEAN);
 
     private boolean dealtDamage;
@@ -42,8 +45,8 @@ public class ThrownRotarySaber extends AbstractArrow {
 
     public ThrownRotarySaber(Level pLevel, LivingEntity pShooter, ItemStack pStack) {
         super(ModEntities.ROTARY_SABER_ENTITY.get(), pShooter, pLevel);
-        this.saberitem= pStack;
-        this.entityData.set(Decimal_Colour,RotarySaber.getColor(pStack));
+        this.saberitem = pStack;
+        this.entityData.set(Decimal_Colour, RotarySaber.getColor(pStack));
         this.entityData.set(Gay, Protosaber.isGay(pStack));
 
         epxzzySabers.LOGGER.debug("colour given to thrown saber is:" + RotarySaber.getColor(pStack));
@@ -56,16 +59,18 @@ public class ThrownRotarySaber extends AbstractArrow {
         this.entityData.define(Gay, false);
     }
 
-    public int[] getColour(){
+    public int[] getColour() {
         //epxzzySabers.LOGGER.debug("colour asked from thrown saber is:" + this.entityData.get(Decimal_Colour));
         //int[] colour = ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour));
         //epxzzySabers.LOGGER.debug("colours have been set as: " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[0] + " " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[1] + " " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[2]);
-        if(this.entityData.get(Gay)){
-            return ColourConverter.rainbowColor((int) System.currentTimeMillis() * 2 );
+        if (this.entityData.get(Gay)) {
+            return ColourConverter.rainbowColor((int) System.currentTimeMillis() * 2);
         }
 
-        return ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour)) ;
-    };
+        return ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour));
+    }
+
+    ;
 
 
     /**
@@ -75,6 +80,14 @@ public class ThrownRotarySaber extends AbstractArrow {
         if (this.inGroundTime > 1) {
             this.dealtDamage = true;
         }
+
+        List<LivingEntity> titesInRegion = LevelHelper.getEntitiesInRadius(this.position(), this.level(), 2.5);
+        titesInRegion.remove(this.getOwner());
+
+        for (LivingEntity thisSpecficTity : titesInRegion) {
+            thisSpecficTity.hurt(this.getOwner().damageSources().mobAttack((Player) this.getOwner()), 2);
+        }
+
         this.playSound(ModSounds.SWING.get(), 0.05f, 1.0f);
         Entity entity = this.getOwner();
         if ((this.dealtDamage || this.isNoPhysics()) && entity != null) {
@@ -103,7 +116,7 @@ public class ThrownRotarySaber extends AbstractArrow {
                 ++this.clientSideReturnSaberTickCount;
             }
         }
-        if (entity == null){
+        if (entity == null) {
             this.spawnAtLocation(this.getPickupItem(), 0.1F);
             this.discard();
         }
@@ -112,10 +125,10 @@ public class ThrownRotarySaber extends AbstractArrow {
     }
 
     public void shootFromRotation(Entity pShooter, float pX, float pY, float pZ, float pVelocity, float pInaccuracy) {
-        float f = -Mth.sin(pY * ((float)Math.PI / 180F)) * Mth.cos(pX * ((float)Math.PI / 180F));
-        float f1 = -Mth.sin((pX + pZ) * ((float)Math.PI / 180F));
-        float f2 = Mth.cos(pY * ((float)Math.PI / 180F)) * Mth.cos(pX * ((float)Math.PI / 180F));
-        this.shoot((double)f, (double)f1, (double)f2, pVelocity, pInaccuracy);
+        float f = -Mth.sin(pY * ((float) Math.PI / 180F)) * Mth.cos(pX * ((float) Math.PI / 180F));
+        float f1 = -Mth.sin((pX + pZ) * ((float) Math.PI / 180F));
+        float f2 = Mth.cos(pY * ((float) Math.PI / 180F)) * Mth.cos(pX * ((float) Math.PI / 180F));
+        this.shoot((double) f, (double) f1, (double) f2, pVelocity, pInaccuracy);
         Vec3 vec3 = pShooter.getDeltaMovement();
         this.setDeltaMovement(this.getDeltaMovement().add(vec3.x, pShooter.onGround() ? 0.0D : vec3.y, vec3.z));
     }
