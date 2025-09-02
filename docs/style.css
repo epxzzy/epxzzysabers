@@ -91,9 +91,21 @@ p, a {
   margin: 0 auto 1rem;
   image-rendering: pixelated;
 }
+
 .block-image > img {
   width: 100px;
   height: 100px;
+}
+
+.other-image {
+  width: 100px;
+  height: auto;
+  margin: 0 auto 1rem;
+  image-rendering: pixelated;
+}
+.other-image > img {
+  width: 100px;
+  height: auto;
 }
 
 .info-table {

@@ -23,7 +23,7 @@ public class ModBlocks {
      //       () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).sound(SoundType.AMETHYST)));
 
     public static final RegistryObject<Block> KYBERSTATION = registerBlock("kyber_station",
-            () -> new KyberStationBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
+            () -> new KyberStationBlock(BlockBehaviour.Properties.copy(Blocks.BEDROCK).noOcclusion()));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
