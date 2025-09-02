@@ -98,13 +98,11 @@ p, a {
 }
 
 .other-image {
-  width: 100px;
+  width: 20vw;
   height: auto;
-  margin: 0 auto 1rem;
-  image-rendering: pixelated;
 }
 .other-image > img {
-  width: 100px;
+  width: 20vw;
   height: auto;
 }
 
