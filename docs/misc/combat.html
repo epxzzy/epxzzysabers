@@ -16,12 +16,6 @@
   <p>IMPORTANT: things below may or may not be explained properly, if you find discrepancies, or if anything feels off feel free to scream at me either in dms or in the discord server. if you are working on datapacks/scripts that may interact with this mod, you will find information below very useful.</p>
   <h1 class="wiki-title">Combat</h1>
   <hr>
-  <div class="sidebar">
-    <div class="block-image">
-      examples:
-      <img src="https://minecraft.wiki/images/thumb/Missing_Model_JE3.png/100px-Missing_Model_JE3.png">
-    </div>
-  </div>
   <div class="content">
     <main class="main-content">
       <div id="Description">
@@ -63,8 +57,7 @@
 
       <div id="Attacking">
         <h2>Attacking</h2>
-<p>
-          every saber (any item with tag "epxzzysabers:lightsaber") will be given a randomised attack(1/8) upon hitting any entity, this includes armour stands, itemframes and all else. if any of these entities were to to be consuming saber item (tag "epxzzysabers:lightsaber"), the random attack(1/8) will be told to the consumed item, which then displays the appropriate animation. ofc these will only be animated if the item is applicable FOR NOW("heavy weapons" like pikes, dualbladed sabers are given this info but they are routed differently so they can be animated different, but as i am not done with the animations for the "heavy weapons", they dont do anything). attacking might cause an unintentional parry, as there is no clear intention of what player is trying to do. (more on parrying below)<br>
+        <p>every saber (any item with tag "epxzzysabers:lightsaber") will be given a randomised attack(1/8) upon hitting any entity, this includes armour stands, itemframes and all else. if any of these entities were to to be consuming saber item (tag "epxzzysabers:lightsaber"), the random attack(1/8) will be told to the consumed item, which then displays the appropriate animation. ofc these will only be animated if the item is applicable FOR NOW("heavy weapons" like pikes, dualbladed sabers are given this info but they are routed differently so they can be animated different, but as i am not done with the animations for the "heavy weapons", they dont do anything). attacking might cause an unintentional parry, as there is no clear intention of what player is trying to do. (more on parrying below)<br>
 
         there will be a more deterministic/controlled way to perform attacks. i am experimenting with a bunch of ways to allow for more control, without it being overwhelming to the player.
         </p>
@@ -72,6 +65,7 @@
 
       <div id="Blocking">
         <h2>Blocking</h2>
+          <p>
         every saber attack(1/8) can be blocked via holding down right click,
         as you would do with a shield. blocking will only work for sabers (tag "epxzzysabers:lightsaber")
         though and will not defend against any other form of melee, BUT
@@ -84,28 +78,14 @@
         the saber automatically syncs up with other players to block properly.
         just imagine you're fighting with a really deadly shield, only thing
         you need to worry about is facing the source of damage.
+          </p>
 
       </div>
 
       <div id="Parrying">
-  <div class="sidebar">
-      "x cross front"
-    <div class="block-image">
-      <img src="https://minecraft.wiki/images/thumb/Missing_Model_JE3.png/100px-Missing_Model_JE3.png">
-    </div>
-      "spinning good trick"
-
-    <div class="block-image">
-      <img src="https://minecraft.wiki/images/thumb/Missing_Model_JE3.png/100px-Missing_Model_JE3.png">
-    </div>
-      "the grevious move"
-    <div class="block-image">
-      <img src="https://minecraft.wiki/images/thumb/Missing_Model_JE3.png/100px-Missing_Model_JE3.png">
-    </div>
-
-  </div>
 
         <h2>Parrying</h2>
+          <p>
         on every (arm swing, attack, punching air, mining blocks. as long as it is being "swung" around)
         the saber will perform what is called a parry. a parry deflects
         ANY projectile in a certain range
@@ -137,6 +117,7 @@
         <br>
 
         the reason these are conditional is cause i wanted to allow some control over the visuals here, i know this isnt the best way to do this and i will be working on changing this.
+          </p>
 
       </div>
 
@@ -145,11 +126,12 @@
   <div class="sidebar">
     <div class="block-image">
       stance menu in kyberstation
-      <img src="https://minecraft.wiki/images/thumb/Missing_Model_JE3.png/100px-Missing_Model_JE3.png">
+      <img src="../media/stances.gif">
     </div>
   </div>
 
         <h2>Assuming Stance</h2>
+          <p>
         crouching during blocking with a saber triggers a stance.
         there are eight total stances, and to assume them you need to get
         them on your item. this can be done via the kyber station.
@@ -211,6 +193,8 @@
         <br>
 
         every listed from is meant to have its own set of attack/block animations, with both heavy and light weapons.
+          </p>
+
       </div>
     </main>
   </div>

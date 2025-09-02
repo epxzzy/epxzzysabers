@@ -82,6 +82,8 @@
 }
 p, a {
   z-index: 2;
+  position: relative;
+  width: 75%;
 }
 .block-image {
   width: 100px;
