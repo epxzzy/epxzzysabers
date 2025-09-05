@@ -10,7 +10,6 @@
 
 
 .toc-container {
-  background: white;
   border: 1px solid #a2a9b1;
   border-radius: 4px;
   padding: 15px;
@@ -25,7 +24,6 @@
   margin-bottom: 10px;
   padding-bottom: 5px;
   border-bottom: 1px solid #eaecf0;
-  color: #000;
 }
 
 .toc-list {
@@ -40,7 +38,6 @@
 
 .toc-link {
   text-decoration: none;
-  color: #0645ad;
   font-size: 14px;
   display: block;
   padding: 2px 0;
@@ -48,15 +45,10 @@
 
 .toc-link:hover {
   text-decoration: underline;
-  color: #0b0080;
 }
 
-.toc-link:visited {
-  color: #0b0080;
-}
 
 .toc-number {
-  color: #666;
   margin-right: 5px;
 }
 
@@ -71,7 +63,6 @@
 
 .sidebar {
   flex: 1;
-  background-color: #f1f2f6;
   padding: 1.5rem;
   height: fit-content;
   width: 20%;
@@ -84,20 +75,28 @@ p, a {
   z-index: 2;
   position: relative;
   width: 75%;
+  font-family: system-ui, sans-serif;
 }
 .block-image {
   width: 100px;
   height: 100px;
   margin: 0 auto 1rem;
   image-rendering: pixelated;
+  border: 1px solid #a2a9b1;
+}
+
+.wikititle{
+  font-family: system-ui, sans-serif;
 }
 
 .block-image > img {
   width: 100px;
   height: 100px;
+
 }
 
 .other-image {
+  border: 1px solid #a2a9b1;
   width: 20vw;
   height: auto;
 }
@@ -109,29 +108,28 @@ p, a {
 .info-table {
   width: 100%;
   border-collapse: collapse;
+  border-bottom: 1px solid #eaecf0;
+  border: 1px solid #a2a9b1;
   margin-bottom: 1rem;
 }
 
 .info-table th,
 .info-table td {
   padding: 0.5rem;
-  text-align: left;
   border-bottom: 1px solid #ddd;
 }
 
 .info-table th {
-  background-color: #34495e;
-  color: white;
   font-weight: bold;
 }
 
 .info-table tr:nth-child(even) {
-  background-color: #f8f9fa;
 }
 
 
 .menutitle {
   font-size: 0.85rem;
+
 }
 
 .main1 {
@@ -147,4 +145,46 @@ p, a {
   width:30px; 
   display: block;
   cursor: default;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 2rem; 
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5 {
+  line-height: 1.2;
+  font-family: system-ui, sans-serif;
+}
+
+ul {
+  padding-left: 2rem;
+}
+
+section {
+  margin-block: 2rem;
+}
+
+.links a {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+details {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-block: 0.5rem;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
 }
