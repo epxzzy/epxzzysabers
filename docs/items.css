@@ -1,0 +1,39 @@
+
+.KrystalItem {
+  background-image: url(./media/krystal.png)
+}
+
+.DiamondItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Diamond.png)
+}
+
+.NetheriteItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Netherite_Ingot.png)
+}
+
+.GoldItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Gold_Ingot.png)
+}
+
+.EchoShardItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Echo_Shard.png)
+}
+
+.GlowstoneItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Glowstone_Dust.png)
+}
+
+.LapisItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Lapis_Lazuli.png)
+}
+
+.AmethystItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Amethyst_Shard.png)
+}
+
+.NetherStarItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Nether_Star.gif)
+}
+
+
+

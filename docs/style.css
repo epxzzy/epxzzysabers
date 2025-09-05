@@ -138,6 +138,7 @@ p, a {
   padding-top: 10px;
   padding-bottom: 2px;
 }
+
 .item {
   background-size: cover;
   background-repeat: no-repeat;
@@ -145,7 +146,109 @@ p, a {
   width:30px; 
   display: block;
   cursor: default;
+  margin: auto;
 }
+
+.item > .count {
+  display: block;
+  position: relative;
+  bottom: 30px;
+  left: 14px;
+  font-family: minefont;
+  font-size: 18px;
+  text-shadow: #333 1px 2px 1px;
+  color: white;
+}
+
+.craftinggrid {
+  padding: 10px 4px 10px 10px;
+  display: grid;
+  align-content: center;
+  grid-template-columns: repeat(3, calc(30px + 4px));
+  grid-auto-rows: calc(30px + 4px);
+  grid-gap: 0px;
+  width: fit-content;
+  height: fit-content;
+  cursor: default;
+}
+
+.craftingarrow {
+background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?a4894) no-repeat;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?a4894");
+  width: 32px;
+  height: 26px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+
+.craftingui {
+  width: max-content;
+  background-color: #c6c6c6;
+  box-shadow: 4px 0 0 0 #555555,
+    0 4px 0 0 #555555,
+    2px 2px 0 0 #555555,
+    -4px 0 0 0 #e8e8e8,
+    0 -4px 0 0 #e8e8e8,
+    -2px -2px 0 0 #e8e8e8,
+    0 0 0 2px #b5b4b5,
+    2px 4px 0 0 #555,
+    4px 2px 0 0 #555,
+    -2px -4px 0 0 #e8e8e8,
+    -4px -2px 0 0 #e8e8e8,
+    4px -2px 0 0 #000,
+    2px -4px 0 0 #000,
+    -4px 2px 0 0 #000,
+    -2px 4px 0 0 #000,
+    -4px -4px 0 0 #000,
+    4px 4px 0 0 #000,
+    -6px 0 0 0 #000,
+    -6px -2px 0 0 #000,
+    6px 0 0 0 #000,
+    6px 2px 0 0 #000,
+    0 -6px 0 0 #000,
+    -2px -6px 0 0 #000,
+    0 6px 0 0 #000,
+    2px 6px 0 0 #000;
+  margin-left: 8px;
+  display: inline-flex; 
+  align-items: center;
+
+}
+
+.slot {
+  font-size: calc(30px - 6px);
+  line-height: 30px;
+  text-align: center;
+  color: #292929;
+  height: 30px;
+  width: 30px; 
+  background-color: #919191;
+  box-shadow: 1px 1px 0 1px #e8e8e8,
+    -1px -1px 0 1px #555,
+    0 0 0 2px #8b8b8b;
+  cursor: default;
+}
+
+.slotbig {
+  font-size: calc(50px - 6px);
+  line-height: 50px;
+  text-align: center;
+  color: #292929;
+  height: 50px;
+  width: 50px; 
+  background-color: #919191;
+  box-shadow: 1px 1px 0 1px #e8e8e8,
+    -1px -1px 0 1px #555,
+    0 0 0 2px #8b8b8b;
+  cursor: default;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 body {
   font-family: system-ui, sans-serif;
@@ -188,3 +291,6 @@ summary {
   cursor: pointer;
   font-weight: 600;
 }
+
+
+
