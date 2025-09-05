@@ -35,5 +35,23 @@
   background-image: url(https://minecraft.wiki/images/Invicon_Nether_Star.gif)
 }
 
+.IronNugItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Iron_Nugget.png)
+}
 
+.PistonItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Piston.png)
+}
+
+.CrossbowItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Crossbow.png)
+}
+
+.BellItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Bell.png)
+}
+
+.RedstoneTorchItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Redstone_Torch.png)
+}
 
