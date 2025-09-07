@@ -144,76 +144,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         this.titleLabelY = 10000;
 
 
-        this.RGB_TOGGLE = new AbstractButton(topPos, leftPos - 140, 20, 10, Component.literal("Toggle")) {
-            @Override
-            public void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
-            }
-
-            @Override
-            public void renderString(GuiGraphics pGuiGraphics, Font pFont, int pColor) {
-                super.renderString(pGuiGraphics, pFont, pColor);
-                //this.renderTexture(pGuiGraphics, RGB_MODE?ON_TOGGLE:OFF_TOGGLE, this.getX()-11, this.getY(), 0, 0, this.getX(), 20, 10, 20, 10);
-
-            }
-
-            @Override
-            public void onPress() {
-                RGB_MODE = !RGB_MODE;
-                if (RGB_MODE) {
-                    HUE_SLIDER.setFocused(false);
-                    SAT_SLIDER.setFocused(false);
-                    LIT_SLIDER.setFocused(false);
-
-                    HUE_SLIDER.active = false;
-                    SAT_SLIDER.active = false;
-                    LIT_SLIDER.active = false;
-
-                    HUE_SLIDER.visible = false;
-                    SAT_SLIDER.visible = false;
-                    LIT_SLIDER.visible = false;
-
-                }
-                if (!RGB_MODE) {
-                    RED_SLIDER.setFocused(false);
-                    GREEN_SLIDER.setFocused(false);
-                    BLUE_SLIDER.setFocused(false);
-
-                    RED_SLIDER.active = false;
-                    GREEN_SLIDER.active = false;
-                    BLUE_SLIDER.active = false;
-
-                    RED_SLIDER.visible = false;
-                    GREEN_SLIDER.visible = false;
-                    BLUE_SLIDER.visible = false;
-
-                }
-                int[] gur = !RGB_MODE ? ColourConverter.RGBtoHSL(
-                        RED_SLIDER.getValueInt(),
-                        GREEN_SLIDER.getValueInt(),
-                        BLUE_SLIDER.getValueInt()
-                ) : ColourConverter.HSLtoRGB(
-                        HUE_SLIDER.getValueInt(),
-                        SAT_SLIDER.getValueInt(),
-                        LIT_SLIDER.getValueInt()
-                );
-
-                if (!RGB_MODE) {
-
-                    HUE_SLIDER.setValue(gur[0]);
-                    SAT_SLIDER.setValue(gur[1]);
-                    LIT_SLIDER.setValue(gur[2]);
-                }
-                if (RGB_MODE) {
-                    RED_SLIDER.setValue(gur[0]);
-                    GREEN_SLIDER.setValue(gur[1]);
-                    BLUE_SLIDER.setValue(gur[2]);
-                }
-
-                epxzzySabers.LOGGER.info("RGB MODE NOW " + RGB_MODE);
-                UpdateServerRecipe();
-            }
-        };
-        this.addWidget(this.RGB_TOGGLE);
         initSliderStuff();
 
         RECOLOUR_TAB_BUTTON = new KyberTabButton(KyberModes.RECOLOUR, 0, this.topPos + 10, this.leftPos - 45) {
@@ -355,7 +285,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
             GAY_MODE = !GAY_MODE;
         }
         if (pKeyCode == GLFW.GLFW_KEY_SPACE) {
-            RGB_MODE = !RGB_MODE;
+            setRGBmode();
         }
         UpdateServerRecipe();
 
@@ -441,12 +371,67 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
+    public void setRGBmode(){
+        RGB_MODE = !RGB_MODE;
+        if (RGB_MODE) {
+            HUE_SLIDER.setFocused(false);
+            SAT_SLIDER.setFocused(false);
+            LIT_SLIDER.setFocused(false);
+
+            HUE_SLIDER.active = false;
+            SAT_SLIDER.active = false;
+            LIT_SLIDER.active = false;
+
+            HUE_SLIDER.visible = false;
+            SAT_SLIDER.visible = false;
+            LIT_SLIDER.visible = false;
+
+        }
+        if (!RGB_MODE) {
+            RED_SLIDER.setFocused(false);
+            GREEN_SLIDER.setFocused(false);
+            BLUE_SLIDER.setFocused(false);
+
+            RED_SLIDER.active = false;
+            GREEN_SLIDER.active = false;
+            BLUE_SLIDER.active = false;
+
+            RED_SLIDER.visible = false;
+            GREEN_SLIDER.visible = false;
+            BLUE_SLIDER.visible = false;
+
+        }
+        int[] gur = !RGB_MODE ? ColourConverter.RGBtoHSL(
+                RED_SLIDER.getValueInt(),
+                GREEN_SLIDER.getValueInt(),
+                BLUE_SLIDER.getValueInt()
+        ) : ColourConverter.HSLtoRGB(
+                HUE_SLIDER.getValueInt(),
+                SAT_SLIDER.getValueInt(),
+                LIT_SLIDER.getValueInt()
+        );
+
+        if (!RGB_MODE) {
+
+            HUE_SLIDER.setValue(gur[0]);
+            SAT_SLIDER.setValue(gur[1]);
+            LIT_SLIDER.setValue(gur[2]);
+        }
+        if (RGB_MODE) {
+            RED_SLIDER.setValue(gur[0]);
+            GREEN_SLIDER.setValue(gur[1]);
+            BLUE_SLIDER.setValue(gur[2]);
+        }
+
+        epxzzySabers.LOGGER.info("RGB MODE NOW " + RGB_MODE);
+        UpdateServerRecipe();
+
+    }
 
     public void renderRecolourTab(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         if (this.RGB_TOGGLE != null) this.RGB_TOGGLE.render(guiGraphics, mouseX, mouseY, delta);
         manShutYourBitchAssUp(!this.menu.canCraft());
 
-        guiGraphics.blit(RGB_MODE ? ON_TOGGLE : OFF_TOGGLE, this.leftPos - 30, this.topPos + 90, (float) 0, (float) 0, 20, 10, 20, 10);
 
         if (menu.canCraft()) {
             if (!this.RGB_MODE) {

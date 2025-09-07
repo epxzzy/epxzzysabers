@@ -209,7 +209,7 @@ public class KyberStationTintMenu extends KyberMenuBase {
 
 
     public boolean setItemColour(int[] colour, boolean gay) {
-        if (this.ColourValueIndexes[2].get() == colour[0] && this.ColourValueIndexes[1].get() == colour[1] && this.ColourValueIndexes[0].get() == colour[2]) {
+        if ((this.ColourValueIndexes[2].get() == colour[0] && this.ColourValueIndexes[1].get() == colour[1] && this.ColourValueIndexes[0].get() == colour[2]) && this.gay.get() == (gay?1:0)) {
             //if(dd(gay ? 1 : 0)){}
 
             return false;
