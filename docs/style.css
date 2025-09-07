@@ -292,5 +292,6 @@ summary {
   font-weight: 600;
 }
 
-
-
+.textaligncenter {
+   text-align: center;
+}
