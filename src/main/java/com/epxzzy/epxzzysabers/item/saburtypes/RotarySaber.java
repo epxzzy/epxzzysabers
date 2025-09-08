@@ -44,7 +44,7 @@ public class RotarySaber extends Protosaber {
     public RotarySaber(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
         super(pProperties, pRANGE , pDamage, pSpeed);
     }
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         THE_BETTER_RENDERER = new RotarySaberItemRenderer();
         consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));

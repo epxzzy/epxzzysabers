@@ -26,10 +26,10 @@ import java.util.Objects;
 public abstract class LivingEntityMixin {
 
     @Inject(
-            method = "updateSwingTime",
+            method = "tick",
             at = @At(value = "TAIL")
     )
-    private void clearFlourish(CallbackInfo ci){
+    private void epxzzySabers$clearFlourish(CallbackInfo ci){
         LivingEntity that = ((LivingEntity) (Object) this);
         ItemStack pStack = that.getMainHandItem();
         if(that.swingTime == 0 && pStack.is(ModTags.Items.LIGHTSABER)){
