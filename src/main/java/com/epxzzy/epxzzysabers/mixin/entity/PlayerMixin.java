@@ -1,6 +1,7 @@
 package com.epxzzy.epxzzysabers.mixin.entity;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
+import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.item.saburtypes.SaberGauntlet;
 import com.epxzzy.epxzzysabers.misc.KewlFightsOrchestrator;
 import com.epxzzy.epxzzysabers.networking.ModMessages;
@@ -21,6 +22,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.fml.common.Mod;
 import org.spongepowered.asm.mixin.Final;
@@ -281,5 +283,18 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         }
 
     }
+
+    @Inject(
+            method = "serverAiStep",
+            at = @At(value = "HEAD")
+    )
+    private void epxzzySabers$customattacknoise(CallbackInfo ci) {
+        LivingEntity that = ((LivingEntity) (Object) this);
+        ItemStack pStack = that.getMainHandItem();
+        if(that.swingTime == 0 && pStack.is(ModTags.Items.LIGHTSABER)){
+            Protosaber.removeFlourishTag(that, pStack);
+        }
+    }
+
 
 }

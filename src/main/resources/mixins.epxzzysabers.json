@@ -1,6 +1,7 @@
 {
   "required": true,
   "package": "com.epxzzy.epxzzysabers.mixin",
+  "refmap": "mixins.epxzzysabers.refmap.json",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "mixins": [
@@ -14,8 +15,5 @@
   },
   "client": [
     "client.HumanoidModelMixin"
-  ],
-  "server": [
-
   ]
 }

@@ -25,18 +25,6 @@ import java.util.Objects;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 
-    @Inject(
-            method = "tick",
-            at = @At(value = "TAIL")
-    )
-    private void epxzzySabers$clearFlourish(CallbackInfo ci){
-        LivingEntity that = ((LivingEntity) (Object) this);
-        ItemStack pStack = that.getMainHandItem();
-        if(that.swingTime == 0 && pStack.is(ModTags.Items.LIGHTSABER)){
-            Protosaber.removeFlourishTag(that, pStack);
-        }
-    }
-
 
     @Inject(
             method = "hurt",
