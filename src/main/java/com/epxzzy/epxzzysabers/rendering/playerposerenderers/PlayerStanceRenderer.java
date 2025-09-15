@@ -25,6 +25,7 @@ public class PlayerStanceRenderer {
 
     public static void SetStanceForm1(Boolean lefty, HumanoidModel<?> model) {
         model.head.setPos(0, 2, -3);
+        model.hat.setPos(0, 2, -3);
 
         model.body.setPos(0, 2, -2);
         model.body.setRotation(AngleHelper.rad(16), AngleHelper.rad(15), AngleHelper.rad(1));
@@ -44,6 +45,7 @@ public class PlayerStanceRenderer {
 
     public static void SetStanceForm2(Boolean lefty, HumanoidModel<?> model) {
         model.head.setPos(0, -1, 1);
+        model.hat.setPos(0, -1, 1);
 
         model.body.setPos(0, -1, 1);
         model.body.setRotation(AngleHelper.rad(-5), AngleHelper.rad(0), AngleHelper.rad(0));
@@ -64,6 +66,7 @@ public class PlayerStanceRenderer {
 
     public static void SetStanceForm3(Boolean lefty, HumanoidModel<?> model) {
         model.head.setPos(0, -1, 0);
+        model.hat.setPos(0, -1, 0);
 
         model.body.setRotation(AngleHelper.rad(0), AngleHelper.rad(57.5), AngleHelper.rad(0));
         model.body.setPos(0, -1, 0);
@@ -85,6 +88,7 @@ public class PlayerStanceRenderer {
 
     public static void SetStanceForm4(Boolean lefty, HumanoidModel<?> model) {
         model.head.setPos(0, -1, 0);
+        model.hat.setPos(0, -1, 0);
 
         model.body.setRotation(AngleHelper.rad(0), AngleHelper.rad(57.5), AngleHelper.rad(0));
         model.body.setPos(0, -1, 0);
@@ -105,6 +109,7 @@ public class PlayerStanceRenderer {
 
     public static void SetStanceForm5(Boolean lefty, HumanoidModel<?> model) {
         model.head.y = 0;
+        model.hat.y = 0;
 
         model.body.setPos(0, -1, 0);
         model.body.setRotation(AngleHelper.rad(-2.5), 0, 0);
@@ -127,6 +132,9 @@ public class PlayerStanceRenderer {
         //model.head.setPos(1,-1,0);
         model.head.x = 1;
         model.head.y = 0;
+        model.hat.x = 1;
+        model.hat.y = 0;
+
 
         model.body.setPos(0, -1, 0);
         model.body.setRotation(AngleHelper.rad(5), AngleHelper.rad(-57.6), 0);
@@ -150,6 +158,7 @@ public class PlayerStanceRenderer {
 
     public static void SetStanceForm7(Boolean lefty, HumanoidModel<?> model) {
         model.head.y = -1;
+        model.hat.y = -1;
 
         model.body.setRotation(0, AngleHelper.rad(-57.5), 0);
         model.body.setPos(0, -1, 0);
