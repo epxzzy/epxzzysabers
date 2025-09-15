@@ -3,18 +3,22 @@
   "category": "misc",
   "key": {
     "C": {
-      "item": "minecraft:netherite_ingot"
+      "item": "minecraft:netherite_scrap"
+
     },
     "N": {
       "item": "minecraft:crossbow"
     },
     "S": {
       "item": "epxzzysabers:krystal"
+    },
+    "R": {
+      "tag": "forge:dusts/redstone"
     }
   },
   "pattern": [
     " S ",
-    "NC ",
+    "NCR",
     "   "
   ],
   "result": {

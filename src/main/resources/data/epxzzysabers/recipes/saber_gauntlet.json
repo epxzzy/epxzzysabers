@@ -3,13 +3,13 @@
   "category": "misc",
   "key": {
     "C": {
-      "item": "minecraft:netherite_ingot"
+      "item": "minecraft:netherite_scrap"
     },
     "B": {
-      "item": "minecraft:bell"
+      "item": "minecraft:heart_of_the_sea"
     },
     "R": {
-      "item": "minecraft:redstone_torch"
+      "tag": "forge:dusts/redstone"
     },
 
     "S": {

@@ -6,7 +6,7 @@
       "tag": "minecraft:planks"
     },
     "C": {
-      "item": "minecraft:gold_ingot"
+      "tag": "forge:ingots/gold"
     },
     "S": {
       "item": "epxzzysabers:krystal"

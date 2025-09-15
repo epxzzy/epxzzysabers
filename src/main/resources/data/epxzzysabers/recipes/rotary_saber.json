@@ -3,19 +3,22 @@
   "category": "misc",
   "key": {
     "C": {
-      "item": "minecraft:netherite_ingot"
+      "item": "minecraft:netherite_scrap"
     },
     "S": {
       "item": "epxzzysabers:krystal"
     },
+    "R": {
+      "tag": "forge:dusts/redstone"
+    },
     "P": {
-      "item": "minecraft:piston"
+      "tag": "minecraft:music_discs"
     }
 
   },
   "pattern": [
     " S ",
-    "PCP",
+    "PCR",
     " S "
   ],
   "result": {

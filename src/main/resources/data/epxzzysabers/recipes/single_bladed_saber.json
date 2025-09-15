@@ -3,7 +3,9 @@
   "category": "misc",
   "key": {
     "C": {
-      "item": "minecraft:netherite_ingot"
+      "item": "minecraft:netherite_scrap"
+
+
     },
     "S": {
       "item": "epxzzysabers:krystal"
