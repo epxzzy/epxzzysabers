@@ -15,6 +15,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.protocol.game.ClientboundTeleportEntityPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -27,6 +29,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -121,10 +124,10 @@ public class RotarySaber extends Protosaber {
     public boolean isInAir(Player pPlayer){
         BlockPos pos = pPlayer.blockPosition();
         Level level = pPlayer.level();
-        return level.getBlockState(pos.below()).isAir()&&
-                level.getBlockState(pos.below(2)).isAir()&&
-                level.getBlockState(pos.below(3)).isAir()&&
-                level.getBlockState(pos.above()).isAir();
+        return
+                level.getBlockState(pos.below()).isAir()&&
+                        level.getBlockState(pos).isAir()&&
+                        level.getBlockState(pos.above()).isAir();
     }
 
     @Override
@@ -134,8 +137,12 @@ public class RotarySaber extends Protosaber {
         if (readActivetag(pPlayer.getItemInHand(pHand)) && !pLevel.isClientSide) {
             if((pPlayer.xRotO < -35 || this.isInAir(pPlayer))){
                 if(this.flyCooldown == 0 && this.flightDuration >= 1) {
+                    Vec3 bbc = pPlayer.position();
+                    pPlayer.teleportTo(bbc.x, bbc.y+0.5, bbc.z);
+
                     pPlayer.getAbilities().flying = true;
                     pPlayer.onUpdateAbilities();
+
 
                     CompoundTag tug = itemstack.getOrCreateTag().copy();
                     tug.putBoolean("FlyBoiii", true);

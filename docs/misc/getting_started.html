@@ -1,0 +1,201 @@
+<head>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<div class="container">
+  <header>
+  </header>
+
+  <nav class="navigation">
+    <div class="breadcrumb">
+      <a href="../">root</a> > <a href="./">misc</a> > <strong>getting_started</strong>
+    </div>
+    <br>
+    <a href="https://github.com/epxzzy/epxzzysabers/blob/master/docs/misc/getting_started.html">source</a>
+  </nav>
+
+  <h1 class="wiki-title">Getting Started</h1>
+  <hr>
+  <div class="content">
+    <main class="main-content">
+      <div id="Description">
+        epxzzy's sabers adds in a bunch of lazer/plasma weaponry. 
+      </div>
+
+      <div class="toc-container">
+        <div class="toc-title">Contents</div>
+        <ul class="toc-list">
+          <li class="toc-item">
+            <a href="#Description" class="toc-link">
+              <span class="toc-number">1</span>Description
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#Attacking" class="toc-link">
+              <span class="toc-number">2</span>Attacking
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#Blocking" class="toc-link">
+              <span class="toc-number">3</span>Blocking
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#Parrying" class="toc-link">
+              <span class="toc-number">4</span>Parrying
+            </a>
+          </li>
+
+          <li class="toc-item">
+            <a href="#Posing" class="toc-link">
+              <span class="toc-number">5</span>Posing
+            </a>
+          </li>
+        </ul>
+      </div>
+
+
+      <div id="Attacking">
+        <h2>Attacking</h2>
+        <p>every saber (any item with tag "epxzzysabers:lightsaber") will be given a randomised attack(1/8) upon hitting any entity, this includes armour stands, itemframes and all else. if any of these entities were to to be consuming saber item (tag "epxzzysabers:lightsaber"), the random attack(1/8) will be told to the consumed item, which then displays the appropriate animation. ofc these will only be animated if the item is applicable FOR NOW("heavy weapons" like pikes, dualbladed sabers are given this info but they are routed differently so they can be animated different, but as i am not done with the animations for the "heavy weapons", they dont do anything). attacking might cause an unintentional parry, as there is no clear intention of what player is trying to do. (more on parrying below)<br>
+
+        there will be a more deterministic/controlled way to perform attacks. i am experimenting with a bunch of ways to allow for more control, without it being overwhelming to the player.
+        </p>
+      </div>
+
+      <div id="Blocking">
+        <h2>Blocking</h2>
+          <p>
+        every saber attack(1/8) can be blocked via holding down right click,
+        as you would do with a shield. blocking will only work for sabers (tag "epxzzysabers:lightsaber")
+        though and will not defend against any other form of melee, BUT
+        it can block ANY projectile IF the specified item is held for less than
+        50 ticks (2.5 Seconds). any more than that and saber will fail to
+        block projectile. <br>
+        (more on ranged defence below: parrying)
+        <br><br>
+        NOTE: you don't have to worry about blocking the correct attack as 
+        the saber automatically syncs up with other players to block properly.
+        just imagine you're fighting with a really deadly shield, only thing
+        you need to worry about is facing the source of damage.
+          </p>
+
+      </div>
+
+      <div id="Parrying">
+
+        <h2>Parrying</h2>
+          <p>
+        on every (arm swing, attack, punching air, mining blocks. as long as it is being "swung" around)
+        the saber will perform what is called a parry. a parry deflects
+        ANY projectile in a certain range
+        (determined by type of saber equipped: parry range)(parry range is not something that can be changed via external means)
+        <br><br>
+        towards/in the direction player was facing. certain projectiles
+        like shulker bullets and (now fixed) tridents are processed
+        differently so those might fail to change directions by a
+        player.
+        <br><br>
+
+        (juggling: blocking an incoming projectile
+        to parry it back to the source)
+        <br><br>
+        NOTE: parry is nothing special, its just when you swing a saber
+        it changes trajectories of projects in your parry range.
+        <br><br>
+        parries have 3 different animations, these play whenever saber is attempting to parry.
+        these dont have a label or a name, but to explain ill give them names. 
+        <br>
+        <br>
+
+        1. "x cross front": default, when player is not doing anything
+        <br>
+        2. "ill try spinning, thats a good trick": played when player is looking at ground (x rot > 40)
+        <br>
+        3. "the grevious move": played when player is sprinting, 2. has priority over this.
+        <br>
+        <br>
+
+        the reason these are conditional is cause i wanted to allow some control over the visuals here, i know this isnt the best way to do this and i will be working on changing this.
+          </p>
+
+      </div>
+
+
+      <div id="Posing">
+  <div class="sidebar">
+    <div class="other-image">
+      stance menu in kyberstation
+      <img src="../media/stances.gif">
+    </div>
+  </div>
+
+        <h2>Assuming Stance</h2>
+          <p>
+        crouching during blocking with a saber triggers a stance.
+        there are eight total stances, and to assume them you need to get
+        them on your item. this can be done via the kyber station.
+        <br>
+        <br>
+
+        a stance does literally nothing but look cool.
+        <br>
+        <br>
+
+        below are stances and characters that are seen doing the stance just so you get a rough idea, these (in this exact order below) are also given in the kyberstation stance menu.
+        <br>
+        <br>
+
+        1. shi-cho
+        <br>
+
+        (luke, kit fisto)
+        <br>
+        <br>
+
+        2. makashi 
+        <br>
+
+        (count dooku, grand inquisitor)
+        <br>
+        <br>
+
+        3. soresu
+        <br>
+
+        (obi wan, maul in "maul vs the senate" from that one clone wars episode)
+        <br>
+        <br>
+
+        4. ataru 
+        <br>
+
+        (qui gon jinn, master yoda)
+        <br>
+        <br>
+
+        5. shen/djem so
+        <br>
+        (anakin, ashoker, and that blue lady)
+        <br>
+        <br>
+
+        6. niman 
+        <br>
+        (maul and pong krell i think)
+        <br>
+        <br>
+
+        7. juyo/vapaad
+        <br>
+        (mace windu and the senate)
+        <br>
+        <br>
+
+        every listed form is meant to have its own set of attack/block animations, with both heavy and light weapons.
+          </p>
+
+      </div>
+    </main>
+  </div>
+</div>
+
