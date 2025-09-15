@@ -41,5 +41,15 @@
       "epxzzysabers:swing2",
       "epxzzysabers:swing3"
     ]
+  },
+  "swing_heavy": {
+    "subtitle": "sounds.epxzzysabers.swing_heavy",
+    "sounds": [
+      "epxzzysabers:swing",
+      "epxzzysabers:swing1",
+      "epxzzysabers:swing2",
+      "epxzzysabers:swing3"
+    ]
   }
+
 }

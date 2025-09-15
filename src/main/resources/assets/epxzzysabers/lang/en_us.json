@@ -9,8 +9,16 @@
 
   "item.epxzzysabers.krystal": "krystal",
 
-
+  "key.epxzzysabers.saber_ability": "Saber ability (epxzzysabers)",
 
   "block.epxzzysabers.kyber_station": "Kyber Station",
-  "epxzzysabers.moditemsiglol": "Sabers"
+  "epxzzysabers.moditemsiglol": "Sabers",
+
+
+  "sounds.epxzzysabers.activation": "Saber Activates",
+  "sounds.epxzzysabers.deactivation": "Saber Deactivates",
+  "sounds.epxzzysabers.clash": "Sabers Clash",
+  "sounds.epxzzysabers.swing": "Saber Swings",
+  "sounds.epxzzysabers.swing_heavy": "Saber Swings Rapidly"
+
 }
