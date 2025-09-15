@@ -16,6 +16,7 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> DEACTIVATION = registerSoundEvents("saber_deactivation");
     public static final RegistryObject<SoundEvent> CLASH = registerSoundEvents("clash");
     public static final RegistryObject<SoundEvent> SWING = registerSoundEvents("swing");
+    public static final RegistryObject<SoundEvent> SWING_RAPID = registerSoundEvents("swing_rapid");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
         epxzzySabers.LOGGER.info("sounding the sound of "+ name);

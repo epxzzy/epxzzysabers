@@ -73,10 +73,10 @@ public class RotarySaber extends Protosaber {
         if (pRemainingUseDuration % 2 == 0 && pStack.getOrCreateTag().getBoolean("FlyBoiii")) {
             if (pLivingEntity instanceof Player pPlayer && (pPlayer.getAbilities().flying)) {
                 pLivingEntity.level().playSound((Player) null,
-                        pLivingEntity.blockPosition(), ModSounds.SWING.get(),
+                        pLivingEntity.blockPosition(), ModSounds.SWING_RAPID.get(),
                         SoundSource.PLAYERS,
                         0.1F,
-                        0.9F
+                        1F
                 );
             }
         }

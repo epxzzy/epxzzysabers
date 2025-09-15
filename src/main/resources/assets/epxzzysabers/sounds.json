@@ -42,8 +42,8 @@
       "epxzzysabers:swing3"
     ]
   },
-  "swing_heavy": {
-    "subtitle": "sounds.epxzzysabers.swing_heavy",
+  "swing_rapid": {
+    "subtitle": "sounds.epxzzysabers.swing_rapid",
     "sounds": [
       "epxzzysabers:swing",
       "epxzzysabers:swing1",
