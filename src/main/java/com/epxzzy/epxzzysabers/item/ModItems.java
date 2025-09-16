@@ -30,7 +30,7 @@ public class ModItems {
     public static final RegistryObject<Item> SABER_PIKE = items.register("saber_pike", () -> new SaberPike(new Item.Properties().rarity(RARITY_KYBER), 4, 16, -1));
     public static final RegistryObject<Item> SABER_GAUNTLET = items.register("saber_gauntlet", () -> new SaberGauntlet(new Item.Properties().rarity(RARITY_KYBER), 3, 12, 0));
 
-    public static final RegistryObject<Item> KRYSTAL = items.register("krystal", () -> new SimpleFoiledItem(new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> KRYSTAL = items.register("krystal", () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
 
 
 

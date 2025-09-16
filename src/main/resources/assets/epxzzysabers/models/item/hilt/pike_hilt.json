@@ -4,7 +4,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"1": "epxzzysabers:item/settextures",
-		"particle": "settextures"
+		"particle": "epxzzysabers:item/settexture"
 	},
 	"elements": [
 		{

@@ -4,7 +4,7 @@
 	"texture_size": [128, 128],
 	"textures": {
 		"4": "epxzzysabers:item/spin_outer",
-		"particle": "spin_outer"
+		"particle":"epxzzysabers:item/spin_outer"
 	},
 	"elements": [
 		{
