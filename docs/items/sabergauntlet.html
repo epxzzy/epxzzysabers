@@ -1,6 +1,13 @@
+<html>
 <head>
-  <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../items.css">
+    <link rel="stylesheet" href="https://epxzzy.github.io/gui/itemhover.css">
+    <link rel="stylesheet" href="https://epxzzy.github.io/gui/itemdrag.css">
 </head>
+<body>
+<div id="minetip-tooltip" style="display: none; positiion: absolute; top: 0px; left: 0px;"><br><span class="mcTextGrey"></span></div>
+
 <div class="container">
   <header>
   </header>
@@ -136,8 +143,46 @@
       <section id="Crafting">
         <div  class="crafting">
           <h2>crafting</h2>
-          <img src="../media/gauntlet.png"><br>
-        </div>
+
+          <div class="craftingui">
+              <div class="craftinggrid">
+
+                  <div class="slot"></div>
+
+                  <div class="slot">
+                      <a class="item" draggable="false"><span class="minetext item KrystalItem" onclick="location.href = 'https://epxzzy.github.io/epxzzysabers/docs/items/krystal';" data-mctitle="Krystal"></span></a>
+                  </div>
+
+                  <div class="slot"></div>
+
+                  <div class="slot">
+                      <a class="item" draggable="false"><span class="minetext item SeaHeartItem" onclick="location.href = 'https://minecraft.wiki/w/Heart_of_the_Sea';" data-mctitle="Heart of the Sea"></span></a>
+
+                  </div>
+
+                  <div class="slot">
+                      <a class="item" draggable="false"><span class="minetext item NetheriteItem" onclick="location.href = 'https://minecraft.wiki/w/Netherite_Scrap';" data-mctitle="Netherite Scrap"></span></a>
+                  </div>
+
+                  <div class="slot">
+                      <a class="item" draggable="false"><span class="minetext item RedstoneDustItem" onclick="location.href = 'https://minecraft.wiki/w/Redstone_Dust';" data-mctitle="Redstone Dust"></span></a>
+                  </div>
+
+                  <div class="slot"></div>
+                  <div class="slot"></div>
+                  <div class="slot"></div>
+
+
+              </div>
+              <div class="craftingarrow"></div>
+              <div class="slotbig">
+                  <div class="item" draggable="false">
+                      <a class="item" draggable="false"><span class="minetext item" style="background-image: url(https://minecraft.wiki/images/Missing_Texture_JE4.png)" onclick="location.href = 'https://epxzzy.github.io/epxzzysabers/docs/items/sabergauntlet';" data-mctitle="Saber Gauntlet&lt;br&gt;&lt;span class='mcTextGrey'&gt;add shit here&lt;/span&gt;"></span></a>
+
+                  </div>
+              </div>
+          </div>
+
       </section>
 
       <section id="Usage">
@@ -194,12 +239,12 @@
             <tr>
               <td><b>0.0.1</b></td>
               <td>Introduced.
-              </td
+              </td>
             </tr>
             <tr>
               <td><b>0.0.2</b></td>
               <td>Supercharge and Disruption added.
-              </td
+              </td>
             </tr>
 
           </tbody>
@@ -210,3 +255,8 @@
 
   </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://epxzzy.github.io/gui/itemhover.js"></script>
+</body>
+</html>
