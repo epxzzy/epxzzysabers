@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "minefont";
+  src: url("https://epxzzy.github.io/mcfont.woff") format("woff");
+}
 
 .wikitable {
   background-color:var(--background-color-neutral-subtle,#f8f9fa);
