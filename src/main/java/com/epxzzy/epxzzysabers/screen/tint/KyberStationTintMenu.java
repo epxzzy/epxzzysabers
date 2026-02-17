@@ -1,13 +1,12 @@
 package com.epxzzy.epxzzysabers.screen.tint;
 
 
-import com.epxzzy.epxzzysabers.block.ModBlocks;
-import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.screen.ModMenuTypes;
+import com.epxzzy.epxzzysabers.block.SaberBlocks;
+import com.epxzzy.epxzzysabers.screen.SaberMenuTypes;
 import com.epxzzy.epxzzysabers.screen.components.KyberMenuBase;
-import com.epxzzy.epxzzysabers.utils.ColourConverter;
-import com.epxzzy.epxzzysabers.sound.ModSounds;
-import com.epxzzy.epxzzysabers.utils.ModTags;
+import com.epxzzy.epxzzysabers.sound.SaberSounds;
+import com.epxzzy.epxzzysabers.util.ColourConverter;
+import com.epxzzy.epxzzysabers.util.SaberTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -58,21 +57,21 @@ public class KyberStationTintMenu extends KyberMenuBase {
     }
 
     public KyberStationTintMenu(int pContainerId, Inventory playerinv, BlockPos pos , final ContainerLevelAccess pAccess) {
-        super(ModMenuTypes.SKREEN_TINT.get(),pos, pContainerId);
+        super(SaberMenuTypes.SKREEN_TINT.get(),pos, pContainerId);
         checkContainerSize(playerinv, 2);
         playerinv.player.level();
         this.access = pAccess;
         this.input_slot = this.addSlot(new Slot(this.inputContainer, 0, 8, 59) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(ModTags.Items.DYEABLE_LIGHTSABER);
+                return pStack.is(SaberTags.Items.DYEABLE_LIGHTSABER);
             }
         });
 
         this.krystal_slot = this.addSlot(new Slot(this.inputContainer, 1, 44, 59) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(ModTags.Items.KYBER_CRYSTAL);
+                return pStack.is(SaberTags.Items.KYBER_CRYSTAL);
             }
 
         });
@@ -86,7 +85,7 @@ public class KyberStationTintMenu extends KyberMenuBase {
                 KyberStationTintMenu.this.input_slot.remove(1);
                 KyberStationTintMenu.this.krystal_slot.remove(1);
                 pAccess.execute((a, b) -> {
-                    a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
+                    a.playSound((Player) null, b, SaberSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
                 //epxzzySabers.LOGGER.debug("taken??");
                 super.onTake(pPlayer, stacc);
@@ -118,13 +117,13 @@ public class KyberStationTintMenu extends KyberMenuBase {
         this.input_slot = new Slot(this.inputContainer, 0, 8, 59) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(ModTags.Items.DYEABLE_LIGHTSABER);
+                return pStack.is(SaberTags.Items.DYEABLE_LIGHTSABER);
             }
         };
         this.krystal_slot = new Slot(this.inputContainer, 1, 44, 59) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(ModTags.Items.KYBER_CRYSTAL);
+                return pStack.is(SaberTags.Items.KYBER_CRYSTAL);
             }
 
         };
@@ -137,7 +136,7 @@ public class KyberStationTintMenu extends KyberMenuBase {
                 KyberStationTintMenu.this.input_slot.remove(1);
                 KyberStationTintMenu.this.krystal_slot.remove(1);
                 access.execute((a, b) -> {
-                    a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
+                    a.playSound((Player) null, b, SaberSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
                 //epxzzySabers.LOGGER.debug("taken??");
                 super.onTake(pPlayer, stacc);
@@ -165,13 +164,13 @@ public class KyberStationTintMenu extends KyberMenuBase {
         this.input_slot = new Slot(this.inputContainer, 0, 7, 8) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(ModTags.Items.DYEABLE_LIGHTSABER);
+                return pStack.is(SaberTags.Items.DYEABLE_LIGHTSABER);
             }
         };
         this.krystal_slot = new Slot(this.inputContainer, 1, 7, 28) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(ModTags.Items.KYBER_CRYSTAL);
+                return pStack.is(SaberTags.Items.KYBER_CRYSTAL);
             }
 
         };
@@ -184,7 +183,7 @@ public class KyberStationTintMenu extends KyberMenuBase {
                 KyberStationTintMenu.this.input_slot.remove(1);
                 KyberStationTintMenu.this.krystal_slot.remove(1);
                 access.execute((a, b) -> {
-                    a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
+                    a.playSound((Player) null, b, SaberSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
                 //epxzzySabers.LOGGER.debug("taken??");
                 super.onTake(pPlayer, stacc);
@@ -363,7 +362,7 @@ public class KyberStationTintMenu extends KyberMenuBase {
     }
 
     public boolean stillValid(@NotNull Player pPlayer) {
-        return stillValid(this.access, pPlayer, ModBlocks.KYBERSTATION.get());
+        return stillValid(this.access, pPlayer, SaberBlocks.KYBERSTATION.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

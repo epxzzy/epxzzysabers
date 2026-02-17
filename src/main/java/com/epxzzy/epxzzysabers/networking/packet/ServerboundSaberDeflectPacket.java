@@ -1,17 +1,11 @@
 package com.epxzzy.epxzzysabers.networking.packet;
 
-import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.entity.custom.PlasmaBolt;
 import com.epxzzy.epxzzysabers.entity.custom.ThrownRotarySaber;
-import com.epxzzy.epxzzysabers.item.ModItems;
 import com.epxzzy.epxzzysabers.item.Protosaber;
-import com.epxzzy.epxzzysabers.item.saburtypes.RotarySaber;
-import com.epxzzy.epxzzysabers.sound.ModSounds;
-import com.epxzzy.epxzzysabers.utils.LevelHelper;
+import com.epxzzy.epxzzysabers.sound.SaberSounds;
+import com.epxzzy.epxzzysabers.util.LevelHelper;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -21,12 +15,10 @@ import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class ServerboundSaberDeflectPacket {
@@ -83,14 +75,14 @@ public class ServerboundSaberDeflectPacket {
                                 if (AbstractArrow.class.isAssignableFrom(entity1.getClass()) && !((AbstractArrow) entity1).inGround ) {
                                     //epxzzySabers.LOGGER.debug("deflected an ordinary arrow");
                                     ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 1.5F, 1.0F);
-                                    entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
+                                    entity.level().playSound((Player) null, entity.blockPosition(), SaberSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
 
                                     continue;
                                 }
                                 if (ThrownRotarySaber.class.isAssignableFrom(entity1.getClass())) {
                                     //epxzzySabers.LOGGER.debug("deflected a thrown lightsaber");
                                     ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 2.0F, 1.0F);
-                                    entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
+                                    entity.level().playSound((Player) null, entity.blockPosition(), SaberSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
 
                                     continue;
                                 }
@@ -111,7 +103,7 @@ public class ServerboundSaberDeflectPacket {
                                     entity1.setDeltaMovement(vec3);
                                     ((AbstractHurtingProjectile) entity1).setOwner(entity);
 
-                                    entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
+                                    entity.level().playSound((Player) null, entity.blockPosition(), SaberSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
                                 }
 
 
@@ -125,7 +117,7 @@ public class ServerboundSaberDeflectPacket {
                     }
                     //epxzzySabers.LOGGER.debug("wait was that all of them? dam thats sad");
                 } else if (pStack.getOrCreateTag().getBoolean("ActiveBoiii")) {
-                    entity.level().playSound((Player) null, entity.blockPosition(), ModSounds.SWING.get(), SoundSource.PLAYERS, 0.1F, 0.8F + entity.level().random.nextFloat() * 0.4F);
+                    entity.level().playSound((Player) null, entity.blockPosition(), SaberSounds.SWING.get(), SoundSource.PLAYERS, 0.1F, 0.8F + entity.level().random.nextFloat() * 0.4F);
 
                 }
 

@@ -1,6 +1,6 @@
 package com.epxzzy.epxzzysabers.screen.components;
 
-import com.epxzzy.epxzzysabers.utils.ColourConverter;
+import com.epxzzy.epxzzysabers.util.ColourConverter;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

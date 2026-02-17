@@ -1,13 +1,13 @@
 package com.epxzzy.epxzzysabers.entity.custom;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.entity.ModEntities;
-import com.epxzzy.epxzzysabers.item.ModItems;
+import com.epxzzy.epxzzysabers.entity.SaberEntities;
 import com.epxzzy.epxzzysabers.item.Protosaber;
-import com.epxzzy.epxzzysabers.item.saburtypes.RotarySaber;
-import com.epxzzy.epxzzysabers.utils.ColourConverter;
-import com.epxzzy.epxzzysabers.sound.ModSounds;
-import com.epxzzy.epxzzysabers.utils.LevelHelper;
+import com.epxzzy.epxzzysabers.item.SaberItems;
+import com.epxzzy.epxzzysabers.item.types.RotarySaber;
+import com.epxzzy.epxzzysabers.sound.SaberSounds;
+import com.epxzzy.epxzzysabers.util.ColourConverter;
+import com.epxzzy.epxzzysabers.util.LevelHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -16,7 +16,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -32,7 +31,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ThrownRotarySaber extends AbstractArrow {
-    private ItemStack saberitem = new ItemStack(ModItems.ROTARY_SABER.get());
+    private ItemStack saberitem = new ItemStack(SaberItems.ROTARY_SABER.get());
     private static final EntityDataAccessor<Integer> Decimal_Colour = SynchedEntityData.defineId(ThrownRotarySaber.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> Gay = SynchedEntityData.defineId(ThrownRotarySaber.class, EntityDataSerializers.BOOLEAN);
 
@@ -44,7 +43,7 @@ public class ThrownRotarySaber extends AbstractArrow {
     }
 
     public ThrownRotarySaber(Level pLevel, LivingEntity pShooter, ItemStack pStack) {
-        super(ModEntities.ROTARY_SABER_ENTITY.get(), pShooter, pLevel);
+        super(SaberEntities.ROTARY_SABER_ENTITY.get(), pShooter, pLevel);
         this.saberitem = pStack;
         this.entityData.set(Decimal_Colour, RotarySaber.getColor(pStack));
         this.entityData.set(Gay, Protosaber.isGay(pStack));
@@ -88,7 +87,7 @@ public class ThrownRotarySaber extends AbstractArrow {
             thisSpecficTity.hurt(this.getOwner().damageSources().mobAttack((Player) this.getOwner()), 2);
         }
 
-        this.playSound(ModSounds.SWING.get(), 0.05f, 1.0f);
+        this.playSound(SaberSounds.SWING.get(), 0.05f, 1.0f);
         Entity entity = this.getOwner();
         if ((this.dealtDamage || this.isNoPhysics()) && entity != null) {
             if (!this.isAcceptibleReturnOwner()) {
@@ -110,7 +109,7 @@ public class ThrownRotarySaber extends AbstractArrow {
                 double d0 = 0.05D * 10;
                 this.setDeltaMovement(this.getDeltaMovement().scale(0.95D).add(vec3.normalize().scale(d0)));
                 if (this.clientSideReturnSaberTickCount == 0) {
-                    this.playSound(ModSounds.CLASH.get(), 0.05f, 1.0f);
+                    this.playSound(SaberSounds.CLASH.get(), 0.05f, 1.0f);
                 }
 
                 ++this.clientSideReturnSaberTickCount;
@@ -169,7 +168,7 @@ public class ThrownRotarySaber extends AbstractArrow {
         DamageSource dmgsrc = this.damageSources().generic();
 
         this.dealtDamage = true;
-        SoundEvent soundevent = ModSounds.CLASH.get();
+        SoundEvent soundevent = SaberSounds.CLASH.get();
         if (entity.hurt(dmgsrc, f)) {
             if (entity.getType() == EntityType.ENDERMAN) {
                 return;
@@ -195,7 +194,7 @@ public class ThrownRotarySaber extends AbstractArrow {
      * The sound made when an entity is hit by this projectile
      */
     protected @NotNull SoundEvent getDefaultHitGroundSoundEvent() {
-        return ModSounds.CLASH.get();
+        return SaberSounds.CLASH.get();
     }
 
     /**

@@ -1,7 +1,7 @@
 package com.epxzzy.epxzzysabers.entity.client.bolt;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.entity.ModModelLayers;
+import com.epxzzy.epxzzysabers.entity.SaberModelLayers;
 import com.epxzzy.epxzzysabers.entity.custom.PlasmaBolt;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -18,7 +18,7 @@ public class PlasmaBoltRenderer extends EntityRenderer<PlasmaBolt> {
 
     public PlasmaBoltRenderer(Context context) {
         super(context);
-        this.model = new PlasmaBoltModel(context.bakeLayer(ModModelLayers.PLASMA_BOLT_LAYER));
+        this.model = new PlasmaBoltModel(context.bakeLayer(SaberModelLayers.PLASMA_BOLT_LAYER));
     }
 
     public void render(PlasmaBolt entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {

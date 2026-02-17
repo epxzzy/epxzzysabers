@@ -2,7 +2,7 @@ package com.epxzzy.epxzzysabers.entity.client.rotary;
 
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.entity.ModModelLayers;
+import com.epxzzy.epxzzysabers.entity.SaberModelLayers;
 import com.epxzzy.epxzzysabers.entity.custom.ThrownRotarySaber;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -32,8 +32,8 @@ public class ThrownRotarySaberRenderer extends EntityRenderer<ThrownRotarySaber>
     public ThrownRotarySaberRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
 
-        this.model = new ThrownRotarySaberGuardModel<ThrownRotarySaber>(pContext.bakeLayer(ModModelLayers.THROWN_ROTARY_SABER_GUARD));
-        this.blade = new ThrownRotarySaberBladeModel<ThrownRotarySaber>(pContext.bakeLayer(ModModelLayers.THROWN_ROTART_SABER_BLADE));
+        this.model = new ThrownRotarySaberGuardModel<ThrownRotarySaber>(pContext.bakeLayer(SaberModelLayers.THROWN_ROTARY_SABER_GUARD));
+        this.blade = new ThrownRotarySaberBladeModel<ThrownRotarySaber>(pContext.bakeLayer(SaberModelLayers.THROWN_ROTART_SABER_BLADE));
 
         //this.addLayer(new GlowingBladeLayer( this,pContext.getModelSet()));
     }
@@ -71,6 +71,6 @@ public class ThrownRotarySaberRenderer extends EntityRenderer<ThrownRotarySaber>
 
 
         this.blade.renderToBuffer(pMatrixStack, pBuffer, pEntity, pPartialTicks, GLOWLOC,15728880, OverlayTexture.NO_OVERLAY);
-        //super.render(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
+        //super.renderMid(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
     }
 }

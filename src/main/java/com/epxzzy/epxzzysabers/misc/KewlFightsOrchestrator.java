@@ -1,8 +1,7 @@
 package com.epxzzy.epxzzysabers.misc;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.utils.AngleHelper;
-import com.epxzzy.epxzzysabers.utils.StackHelper;
+import com.epxzzy.epxzzysabers.util.StackHelper;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

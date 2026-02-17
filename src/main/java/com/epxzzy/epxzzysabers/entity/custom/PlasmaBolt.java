@@ -1,6 +1,6 @@
 package com.epxzzy.epxzzysabers.entity.custom;
 
-import com.epxzzy.epxzzysabers.entity.ModEntities;
+import com.epxzzy.epxzzysabers.entity.SaberEntities;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -23,7 +23,7 @@ public class PlasmaBolt extends AbstractHurtingProjectile implements ItemSupplie
         super(entityType, level);
     }
     public PlasmaBolt(Entity owner, Level level) {
-        super(ModEntities.PLASMA_BOLT.get(), level);
+        super(SaberEntities.PLASMA_BOLT.get(), level);
         this.setPos(owner.getX(),owner.getEyeY()-0.1,owner.getZ());
         this.setOwner(owner);
     }

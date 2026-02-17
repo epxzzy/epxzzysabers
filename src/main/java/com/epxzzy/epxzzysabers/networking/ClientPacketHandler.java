@@ -2,7 +2,7 @@ package com.epxzzy.epxzzysabers.networking;
 
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerAttackPacket;
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerDefendPacket;
-import com.epxzzy.epxzzysabers.utils.PlayerHelperLmao;
+import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;

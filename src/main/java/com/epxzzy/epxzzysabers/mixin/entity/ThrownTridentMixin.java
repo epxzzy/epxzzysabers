@@ -3,7 +3,7 @@ package com.epxzzy.epxzzysabers.mixin.entity;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.Protosaber;
-import com.epxzzy.epxzzysabers.item.saburtypes.SingleBladed;
+import com.epxzzy.epxzzysabers.item.types.SingleBladed;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.projectile.ThrownTrident;

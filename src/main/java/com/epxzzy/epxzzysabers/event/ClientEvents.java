@@ -1,15 +1,15 @@
 package com.epxzzy.epxzzysabers.event;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.entity.ModModelLayers;
+import com.epxzzy.epxzzysabers.entity.SaberModelLayers;
 import com.epxzzy.epxzzysabers.entity.client.bolt.PlasmaBoltModel;
 import com.epxzzy.epxzzysabers.entity.client.rotary.ThrownRotarySaberBladeModel;
 import com.epxzzy.epxzzysabers.entity.client.rotary.ThrownRotarySaberGuardModel;
 import com.epxzzy.epxzzysabers.misc.KeyBinding;
 import com.epxzzy.epxzzysabers.networking.ModMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberAbilityPacket;
-import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
-import com.epxzzy.epxzzysabers.utils.ScrollValueHandler;
+import com.epxzzy.epxzzysabers.util.AnimationTickHolder;
+import com.epxzzy.epxzzysabers.util.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 
 
@@ -66,9 +66,9 @@ public class ClientEvents {
 
         @SubscribeEvent
         public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            event.registerLayerDefinition(ModModelLayers.THROWN_ROTARY_SABER_GUARD, ThrownRotarySaberGuardModel::createBodyLayer);
-            event.registerLayerDefinition(ModModelLayers.THROWN_ROTART_SABER_BLADE, ThrownRotarySaberBladeModel::createBodyLayer);
-            event.registerLayerDefinition(ModModelLayers.PLASMA_BOLT_LAYER, PlasmaBoltModel::createBodyLayer);
+            event.registerLayerDefinition(SaberModelLayers.THROWN_ROTARY_SABER_GUARD, ThrownRotarySaberGuardModel::createBodyLayer);
+            event.registerLayerDefinition(SaberModelLayers.THROWN_ROTART_SABER_BLADE, ThrownRotarySaberBladeModel::createBodyLayer);
+            event.registerLayerDefinition(SaberModelLayers.PLASMA_BOLT_LAYER, PlasmaBoltModel::createBodyLayer);
 
 
         }

@@ -5,8 +5,8 @@ package com.epxzzy.epxzzysabers.entity.client.rotary;// Made with Blockbench 4.1
 
 import com.epxzzy.epxzzysabers.entity.custom.ThrownRotarySaber;
 import com.epxzzy.epxzzysabers.rendering.foundation.RenderTypes;
-import com.epxzzy.epxzzysabers.utils.AnimationTickHolder;
-import com.epxzzy.epxzzysabers.utils.ScrollValueHandler;
+import com.epxzzy.epxzzysabers.util.AnimationTickHolder;
+import com.epxzzy.epxzzysabers.util.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -63,7 +63,7 @@ public class ThrownRotarySaberBladeModel<T extends ThrownRotarySaber> extends Mo
 		pMatrixStack.popPose();
 
 
-		//bone.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		//bone.renderMid(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
 	public ModelPart root() {

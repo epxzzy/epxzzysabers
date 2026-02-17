@@ -3,45 +3,26 @@ package com.epxzzy.epxzzysabers.screen.tint;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundKyberMenuTabChange;
-import com.epxzzy.epxzzysabers.screen.stance.KyberStationStanceMenu;
-import com.epxzzy.epxzzysabers.utils.ColourConverter;
+import com.epxzzy.epxzzysabers.util.ColourConverter;
 import com.epxzzy.epxzzysabers.screen.components.KyberModes;
 import com.epxzzy.epxzzysabers.screen.components.KyberTabButton;
 import com.epxzzy.epxzzysabers.screen.components.SliderWidget;
 import com.epxzzy.epxzzysabers.networking.ModMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundRecolourItemPacket;
-import com.epxzzy.epxzzysabers.utils.ModTags;
-import com.llamalad7.mixinextras.sugar.Local;
-import com.mojang.blaze3d.platform.Lighting;
+import com.epxzzy.epxzzysabers.util.SaberTags;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.Tooltip;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
-import org.apache.commons.lang3.SerializationUtils;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Matrix4f;
-import org.joml.Quaternionf;
 import org.lwjgl.glfw.GLFW;
-
-import javax.annotation.Nullable;
 
 public class KyberStationTintScreen extends AbstractContainerScreen<KyberStationTintMenu> {
     private static final ResourceLocation RECOLOUR_TEXTURE =
@@ -262,7 +243,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
 
         Slot slot = this.menu.getSlot(0);
-        if (slot.getItem().is(ModTags.Items.DYEABLE_LIGHTSABER)) {
+        if (slot.getItem().is(SaberTags.Items.DYEABLE_LIGHTSABER)) {
             if (this.menu.setItemColour(regbee, GAY_MODE)) {
                 //this.minecraft.player.connection.send(new HonkPacket.Serverbound)
                 //Color.HSBtoRGB(this.menu.getInputColour())
@@ -354,7 +335,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderRecolourTab(guiGraphics, mouseX, mouseY, delta);
 
-        //LIST.render(guiGraphics, mouseX, mouseY, delta);
+        //LIST.renderMid(guiGraphics, mouseX, mouseY, delta);
 
 
         guiGraphics.pose().pushPose();

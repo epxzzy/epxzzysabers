@@ -268,7 +268,7 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderEntityInInventoryFollowsMouse(guiGraphics, this.leftPos + 125, this.topPos + 70, 30, (float) (this.leftPos + 125) - this.xMouse, (float) (this.topPos + 70 - 50) - this.yMouse, PLAYERpreview);
 
-        //LIST.render(guiGraphics, mouseX, mouseY, delta);
+        //LIST.renderMid(guiGraphics, mouseX, mouseY, delta);
 
 
         guiGraphics.pose().pushPose();

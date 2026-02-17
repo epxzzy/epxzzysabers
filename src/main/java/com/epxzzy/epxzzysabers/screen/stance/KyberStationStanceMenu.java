@@ -1,14 +1,14 @@
 package com.epxzzy.epxzzysabers.screen.stance;
 
 
-import com.epxzzy.epxzzysabers.block.ModBlocks;
+import com.epxzzy.epxzzysabers.block.SaberBlocks;
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.rendering.playerposerenderers.BladeStance;
-import com.epxzzy.epxzzysabers.screen.ModMenuTypes;
+import com.epxzzy.epxzzysabers.screen.SaberMenuTypes;
 import com.epxzzy.epxzzysabers.screen.components.KyberMenuBase;
-import com.epxzzy.epxzzysabers.utils.ColourConverter;
-import com.epxzzy.epxzzysabers.sound.ModSounds;
-import com.epxzzy.epxzzysabers.utils.ModTags;
+import com.epxzzy.epxzzysabers.sound.SaberSounds;
+import com.epxzzy.epxzzysabers.util.ColourConverter;
+import com.epxzzy.epxzzysabers.util.SaberTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -62,20 +62,20 @@ public class KyberStationStanceMenu extends KyberMenuBase {
     }
 
     public KyberStationStanceMenu(int pContainerId, Inventory playerinv, BlockPos pos, final ContainerLevelAccess pAccess) {
-        super(ModMenuTypes.SKREEN_STANCE.get(), pos, pContainerId);
+        super(SaberMenuTypes.SKREEN_STANCE.get(), pos, pContainerId);
         checkContainerSize(playerinv, 2);
         playerinv.player.level();
         this.access = pAccess;
         this.input_slot = this.addSlot(new Slot(this.inputContainer, 0, 7, 8) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(ModTags.Items.LIGHTSABER);
+                return pStack.is(SaberTags.Items.LIGHTSABER);
             }
         });
         this.krystal_slot = this.addSlot(new Slot(this.inputContainer, 1, 7, 28) {
             @Override
             public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(ModTags.Items.KYBER_CRYSTAL);
+                return pStack.is(SaberTags.Items.KYBER_CRYSTAL);
             }
 
         });
@@ -88,7 +88,7 @@ public class KyberStationStanceMenu extends KyberMenuBase {
                 KyberStationStanceMenu.this.input_slot.remove(1);
                 KyberStationStanceMenu.this.krystal_slot.remove(1);
                 access.execute((a, b) -> {
-                    a.playSound((Player) null, b, ModSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
+                    a.playSound((Player) null, b, SaberSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
                 epxzzySabers.LOGGER.debug("taken??");
                 super.onTake(pPlayer, stacc);
@@ -226,7 +226,7 @@ public class KyberStationStanceMenu extends KyberMenuBase {
             return BladeStance.getStances();
     }
     public boolean stillValid(@NotNull Player pPlayer) {
-        return stillValid(this.access, pPlayer, ModBlocks.KYBERSTATION.get());
+        return stillValid(this.access, pPlayer, SaberBlocks.KYBERSTATION.get());
     }
     private boolean isValidStanceIndex(int pIndex) {
         return pIndex >= 0 && pIndex < this.selectableStances.size();

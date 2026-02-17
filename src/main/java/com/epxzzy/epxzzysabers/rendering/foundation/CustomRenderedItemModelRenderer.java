@@ -1,19 +1,17 @@
 package com.epxzzy.epxzzysabers.rendering.foundation;
 
-import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.BuiltInModel;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-//import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
-//import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
-import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
+//import com.simibubi.create.foundation.item.renderMid.CustomRenderedItemModel;
+//import com.simibubi.create.foundation.item.renderMid.PartialItemModelRenderer;
+
 
 public abstract class CustomRenderedItemModelRenderer extends BlockEntityWithoutLevelRenderer {
     private BakedModel mainModel;
@@ -41,6 +39,6 @@ public abstract class CustomRenderedItemModelRenderer extends BlockEntityWithout
     }
 
     protected abstract void render(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
-                                   PoseStack ms, MultiBufferSource buffer, int light, int overlay);
+                                      PoseStack ms, MultiBufferSource buffer, int light, int overlay);
 
 }

@@ -1,17 +1,17 @@
 package com.epxzzy.epxzzysabers;
 
-import com.epxzzy.epxzzysabers.block.ModBlocks;
-import com.epxzzy.epxzzysabers.entity.ModEntities;
+import com.epxzzy.epxzzysabers.block.SaberBlocks;
+import com.epxzzy.epxzzysabers.entity.SaberEntities;
 import com.epxzzy.epxzzysabers.entity.client.bolt.PlasmaBoltRenderer;
 import com.epxzzy.epxzzysabers.entity.client.rotary.ThrownRotarySaberRenderer;
-import com.epxzzy.epxzzysabers.item.ModCreativeModTabs;
-import com.epxzzy.epxzzysabers.item.ModItems;
+import com.epxzzy.epxzzysabers.item.SaberCreativeModTabs;
+import com.epxzzy.epxzzysabers.item.SaberItems;
 import com.epxzzy.epxzzysabers.networking.ModMessages;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialModelEventHandler;
 import com.epxzzy.epxzzysabers.screen.stance.KyberStationStanceScreen;
 import com.epxzzy.epxzzysabers.screen.tint.KyberStationTintScreen;
-import com.epxzzy.epxzzysabers.screen.ModMenuTypes;
-import com.epxzzy.epxzzysabers.sound.ModSounds;
+import com.epxzzy.epxzzysabers.screen.SaberMenuTypes;
+import com.epxzzy.epxzzysabers.sound.SaberSounds;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -44,14 +44,14 @@ public class epxzzySabers{
         modEventBus.addListener(this::commonSetup);
 
 
-        ModItems.register(modEventBus);
-        ModBlocks.register(modEventBus);
-        ModMenuTypes.register(modEventBus);
-        ModSounds.register(modEventBus);
-        ModEntities.register(modEventBus);
+        SaberItems.register(modEventBus);
+        SaberBlocks.register(modEventBus);
+        SaberMenuTypes.register(modEventBus);
+        SaberSounds.register(modEventBus);
+        SaberEntities.register(modEventBus);
 
 
-        ModCreativeModTabs.register(modEventBus);
+        SaberCreativeModTabs.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -101,12 +101,12 @@ public class epxzzySabers{
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            MenuScreens.register(ModMenuTypes.SKREEN_TINT.get(), KyberStationTintScreen::new);
-            MenuScreens.register(ModMenuTypes.SKREEN_STANCE.get(), KyberStationStanceScreen::new);
+            MenuScreens.register(SaberMenuTypes.SKREEN_TINT.get(), KyberStationTintScreen::new);
+            MenuScreens.register(SaberMenuTypes.SKREEN_STANCE.get(), KyberStationStanceScreen::new);
 
 
-            EntityRenderers.register(ModEntities.ROTARY_SABER_ENTITY.get(), ThrownRotarySaberRenderer::new);
-            EntityRenderers.register(ModEntities.PLASMA_BOLT.get(), PlasmaBoltRenderer::new);
+            EntityRenderers.register(SaberEntities.ROTARY_SABER_ENTITY.get(), ThrownRotarySaberRenderer::new);
+            EntityRenderers.register(SaberEntities.PLASMA_BOLT.get(), PlasmaBoltRenderer::new);
 
 
         }

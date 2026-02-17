@@ -1,6 +1,6 @@
 package com.epxzzy.epxzzysabers.misc;
 
-import com.epxzzy.epxzzysabers.item.ModItems;
+import com.epxzzy.epxzzysabers.item.SaberItems;
 import com.epxzzy.epxzzysabers.item.Protosaber;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
@@ -28,7 +28,7 @@ public class protwosabur extends Protosaber {
                 return 0xFFFFFF; // Default color (white)
             }
             return 0xFFFFFF; // Non-tinted
-        }, ModItems.protosabur2.get());
+        }, SaberItems.protosabur2.get());
 
          */
     }

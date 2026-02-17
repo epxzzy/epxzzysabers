@@ -1,6 +1,6 @@
 package com.epxzzy.epxzzysabers.rendering.playerposerenderers;
 
-import com.epxzzy.epxzzysabers.utils.AngleHelper;
+import com.epxzzy.epxzzysabers.util.AngleHelper;
 import net.minecraft.client.model.HumanoidModel;
 
 public class PlayerStanceRenderer {

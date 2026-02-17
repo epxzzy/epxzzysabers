@@ -2,18 +2,16 @@ package com.epxzzy.epxzzysabers.mixin.entity;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.Protosaber;
-import com.epxzzy.epxzzysabers.item.saburtypes.SaberGauntlet;
+import com.epxzzy.epxzzysabers.item.types.SaberGauntlet;
 import com.epxzzy.epxzzysabers.misc.KewlFightsOrchestrator;
 import com.epxzzy.epxzzysabers.networking.ModMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerAttackPacket;
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerDefendPacket;
-import com.epxzzy.epxzzysabers.utils.ModTags;
-import com.epxzzy.epxzzysabers.utils.PlayerHelperLmao;
-import com.epxzzy.epxzzysabers.utils.StackHelper;
+import com.epxzzy.epxzzysabers.util.SaberTags;
+import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
+import com.epxzzy.epxzzysabers.util.StackHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
@@ -24,7 +22,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.fml.common.Mod;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -32,8 +29,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.Random;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin implements PlayerHelperLmao {
@@ -163,7 +158,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         //epxzzySabers.LOGGER.debug("player hurt");
         Player that = ((Player) (Object) this);
         LivingEntity notThat = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
-        boolean blocking_with_sabur = that.getUseItem().is(ModTags.Items.LIGHTSABER);
+        boolean blocking_with_sabur = that.getUseItem().is(SaberTags.Items.LIGHTSABER);
 
         if (!that.level().isClientSide() && blocking_with_sabur) {
             if (!this.defending || this.defendProgress >= 6 / 2 || this.defendProgress < 0) {
@@ -174,7 +169,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
 
             if (notThat != null) {
-                boolean attacking_with_sabur = notThat.getMainHandItem().is(ModTags.Items.LIGHTSABER);
+                boolean attacking_with_sabur = notThat.getMainHandItem().is(SaberTags.Items.LIGHTSABER);
 
 
                 if (blocking_with_sabur && attacking_with_sabur) {
@@ -188,7 +183,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
                     //remove the custom block animation
                     //cir.cancel();
-                    //that.playSound(ModSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
+                    //that.playSound(SaberSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
                 }
 
             }
@@ -227,7 +222,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             that.sweepAttack();
         }
 
-        if (!that.level().isClientSide() && that.getMainHandItem().is(ModTags.Items.LIGHTSABER)) {
+        if (!that.level().isClientSide() && that.getMainHandItem().is(SaberTags.Items.LIGHTSABER)) {
             if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {
                 this.attackProgress = -1;
                 this.attacking = true;
@@ -278,8 +273,8 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     )
     private void epxzzySabers$customattacknoise(Entity pTarget, CallbackInfo ci) {
         Player that = ((Player) (Object) this);
-        if (that.getMainHandItem().is(ModTags.Items.LIGHTSABER) && that.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii")) {
-            //that.level().playSound((Player) null, that.getX(), that.getY(), that.getZ(), ModSounds.SWING.get(), that.getSoundSource(), 1.0F, 1.0F);
+        if (that.getMainHandItem().is(SaberTags.Items.LIGHTSABER) && that.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii")) {
+            //that.level().playSound((Player) null, that.getX(), that.getY(), that.getZ(), SaberSounds.SWING.get(), that.getSoundSource(), 1.0F, 1.0F);
         }
 
     }
@@ -291,7 +286,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     private void epxzzySabers$customattacknoise(CallbackInfo ci) {
         LivingEntity that = ((LivingEntity) (Object) this);
         ItemStack pStack = that.getMainHandItem();
-        if(that.swingTime == 0 && pStack.is(ModTags.Items.LIGHTSABER)){
+        if(that.swingTime == 0 && pStack.is(SaberTags.Items.LIGHTSABER)){
             Protosaber.removeFlourishTag(that, pStack);
         }
     }

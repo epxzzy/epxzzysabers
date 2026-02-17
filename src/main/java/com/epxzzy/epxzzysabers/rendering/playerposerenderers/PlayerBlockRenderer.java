@@ -1,7 +1,7 @@
 package com.epxzzy.epxzzysabers.rendering.playerposerenderers;
 
-import com.epxzzy.epxzzysabers.utils.AngleHelper;
-import com.epxzzy.epxzzysabers.utils.AnimationHelper;
+import com.epxzzy.epxzzysabers.util.AngleHelper;
+import com.epxzzy.epxzzysabers.util.AnimationHelper;
 import net.minecraft.client.model.HumanoidModel;
 
 public class PlayerBlockRenderer {

@@ -5,11 +5,11 @@ import com.epxzzy.epxzzysabers.misc.KewlFightsOrchestrator;
 import com.epxzzy.epxzzysabers.networking.ModMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberDeflectPacket;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
-import com.epxzzy.epxzzysabers.utils.ColourConverter;
-import com.epxzzy.epxzzysabers.rendering.ProtosaberItemRenderer;
+import com.epxzzy.epxzzysabers.util.ColourConverter;
+import com.epxzzy.epxzzysabers.rendering.item.ProtosaberItemRenderer;
 import com.epxzzy.epxzzysabers.rendering.playerposerenderers.BladeStance;
-import com.epxzzy.epxzzysabers.sound.ModSounds;
-import com.epxzzy.epxzzysabers.utils.LevelHelper;
+import com.epxzzy.epxzzysabers.sound.SaberSounds;
+import com.epxzzy.epxzzysabers.util.LevelHelper;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
@@ -50,7 +50,7 @@ public class Protosaber extends Item {
     public final int PARRY_RANGE;
     public final int ATTACK_DAMAGE;
     public final int ATTACK_SPEED;
-    //public static com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer THE_RENDURR;
+    //public static com.simibubi.create.foundation.item.renderMid.CustomRenderedItemModelRenderer THE_RENDURR;
     public static com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRenderer THE_BETTER_RENDERER;
 
     public static int BASE_COLOUR = 65280;
@@ -137,7 +137,7 @@ public class Protosaber extends Item {
         }
 
         pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(),
-                (readActivetag(pStack) ? ModSounds.ACTIVATION.get() : ModSounds.DEACTIVATION.get()), SoundSource.NEUTRAL, 0.5f, 1f
+                (readActivetag(pStack) ? SaberSounds.ACTIVATION.get() : SaberSounds.DEACTIVATION.get()), SoundSource.NEUTRAL, 0.5f, 1f
         );
     }
 
@@ -343,7 +343,7 @@ public class Protosaber extends Item {
             isActive = false;
 
             player.level().playSound((Player) null, player.getX(), player.getY(), player.getZ(),
-                    ModSounds.DEACTIVATION.get(), SoundSource.NEUTRAL, 0.5f, 1f
+                    SaberSounds.DEACTIVATION.get(), SoundSource.NEUTRAL, 0.5f, 1f
             );
         }
 
@@ -375,12 +375,12 @@ public class Protosaber extends Item {
     }
 
     public static boolean checkForSaberBlock(Entity Entityy) {
-        return LevelHelper.EntityBlockingWithActiveItem(Entityy, ModItems.Protosaber.get());
+        return LevelHelper.EntityBlockingWithActiveItem(Entityy, SaberItems.Protosaber.get());
     }
 
 
     public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand) {
-        return LevelHelper.EntityEquippedActiveItem(Entityy, Mainhand, ModItems.Protosaber.get());
+        return LevelHelper.EntityEquippedActiveItem(Entityy, Mainhand, SaberItems.Protosaber.get());
     }
 
     @Override

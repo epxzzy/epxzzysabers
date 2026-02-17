@@ -1,21 +1,21 @@
 package com.epxzzy.epxzzysabers.rendering;
 
 import com.epxzzy.epxzzysabers.item.Protosaber;
-import com.epxzzy.epxzzysabers.item.saburtypes.RotarySaber;
-import com.epxzzy.epxzzysabers.item.saburtypes.SingleBladed;
+import com.epxzzy.epxzzysabers.item.types.RotarySaber;
+import com.epxzzy.epxzzysabers.item.types.SingleBladed;
 import com.epxzzy.epxzzysabers.rendering.playerposerenderers.PlayerAttackRenderer;
 import com.epxzzy.epxzzysabers.rendering.playerposerenderers.PlayerBlockRenderer;
 import com.epxzzy.epxzzysabers.rendering.playerposerenderers.PlayerStanceRenderer;
-import com.epxzzy.epxzzysabers.rendering.parryrenderers.HeavyWeapon.HeavyWeaponArmPoseRenderer;
-import com.epxzzy.epxzzysabers.rendering.parryrenderers.LightWeapon.LightWeaponArmPoseRenderer;
-import com.epxzzy.epxzzysabers.utils.*;
+import com.epxzzy.epxzzysabers.rendering.parry.heavy.HeavyArmRenderer;
+import com.epxzzy.epxzzysabers.rendering.parry.light.LightArmRenderer;
+import com.epxzzy.epxzzysabers.util.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 
-import static com.epxzzy.epxzzysabers.rendering.parryrenderers.Rotary.ArmPoseRenderer.setRotaryFlyPose;
+import static com.epxzzy.epxzzysabers.rendering.parry.rotary.RotaryPoseRenderer.setRotaryFlyPose;
 
 
 public class PlayerPoseRouter {
@@ -24,7 +24,7 @@ public class PlayerPoseRouter {
     public static void beforeSetupAnim(Player player, HumanoidModel<?> model) {
         boolean[] bbc = RotarySaber.checkForSaberFly(player);
 
-        //if(player.getMainHandItem().is(ModTags.Items.LIGHTSABER)) {
+        //if(player.getMainHandItem().is(SaberTags.Items.LIGHTSABER)) {
         model.head.resetPose();
         model.hat.resetPose();
         model.body.resetPose();
@@ -70,67 +70,69 @@ public class PlayerPoseRouter {
         int attack = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk");
         float SaberSwingAnim = ((PlayerHelperLmao) player).getSaberAttackAnim();
         float SaberDefAnim = ((PlayerHelperLmao) player).getSaberDefendAnim();
+        //[ flight, mainhand ]
+        boolean[] isInFlight = RotarySaber.checkForSaberFly(player);
 
         //((PlayerHelperLmao) player).LogFlightDetails();
         //epxzzySabers.LOGGER.debug("");
-        //
-        boolean[] bbc = RotarySaber.checkForSaberFly(player);
+
+
         //debug purposes
+        /*
         if (player.swingTime > 0 || player.getAttackAnim(1) > 0) {
-            //epxzzySabers.LOGGER.debug("swing time is: " + player.swingTime + " and attack time is: " + player.getAttackAnim(1));
+            epxzzySabers.LOGGER.debug("swing time is: " + player.swingTime + " and attack time is: " + player.getAttackAnim(1));
         }
-        //attack
-        if ((StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.LIGHT_WEAPON)) && attack > 0 && SaberSwingAnim > 0) {
+         */
+
+        //attack hit
+        if ((TagHelper.checkMainhandActiveLightWeapon(player) && attack > 0 && SaberSwingAnim > 0)) {
             setBladedAttack(attack, model, SaberSwingAnim);
             return;
         }
-        //block
-        if ((StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.LIGHT_WEAPON)) && block > 0 && SaberDefAnim > 0) {
+
+        //block hit
+        if (TagHelper.checkMainhandActiveLightWeapon(player) && block > 0 && SaberDefAnim > 0) {
             setBladedBlock(block, model, SaberDefAnim);
             return;
         }
-        //stancing
-        if ((StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.HEAVY_WEAPON) || StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.LIGHT_WEAPON)) && player.isShiftKeyDown()) {
+
+        //stance pose
+        if ((TagHelper.checkMainhandPoseableWeapon(player) && player.isShiftKeyDown())) {
             setBladedStance(player, model);
             return;
         }
+
         //flight pose
-        if (bbc[0]) {
-            setRotaryFlyPose(player, model, bbc[1]);
+        if (isInFlight[0]) {
+            setRotaryFlyPose(player, model, isInFlight[1]);
             return;
         }
 
-        //joint hands spin
-        /*
-        if(RotarySaber.checkForSaberBlock(player)){
-            setRotaryBlockPose(player, model);
-            return;
-        }
+        //attack miss//empty swing
+        if(player.swingTime > 0){
+            //heavy weapon mainhand
+            if (TagHelper.checkMainhandActiveHeavyWeapon(player)) {
+                setDualSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model, flourish);
+                return;
+            }
 
-         */
+            //heavy weapon jarr kai type shit
+            if (TagHelper.checkActiveHeavyWeapon(player, false)) {
+                setDualSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
+                return;
+            }
 
-        //heavy weapon attack miss mainhand
-        if (StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.HEAVY_WEAPON) && player.swingTime > 0) {
-            setDualSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model, flourish);
-            return;
-        }
+            //light weapon mainhand
+            if (TagHelper.checkMainhandActiveLightWeapon(player)) {
+                setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, false, model, flourish);
+                return;
+            }
 
-        //heavy weapon attack miss jarr kai type shit
-        if (StackHelper.checkHoldingActiveTag(player, false, ModTags.Items.HEAVY_WEAPON) && player.swingTime > 0) {
-            setDualSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
-            return;
-        }
+            //light weapon jarr jai type shit
+            if (TagHelper.checkActiveLightWeapon(player, false)) {
+                setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
+            }
 
-        //light weapon attack miss mainhand
-        if (StackHelper.checkHoldingActiveTag(player, true, ModTags.Items.LIGHT_WEAPON) && player.swingTime > 0) {
-            setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, false, model, flourish);
-            return;
-        }
-
-        //light weapon attack miss jarr jai type shit
-        if (StackHelper.checkHoldingActiveTag(player, false, ModTags.Items.LIGHT_WEAPON) && player.swingTime > 0) {
-            setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
-            return;
         }
     }
 
@@ -141,7 +143,7 @@ public class PlayerPoseRouter {
         ModelPart MainArm = Lefty ? model.leftArm : model.rightArm;
         ModelPart otherArm = Lefty ? model.rightArm : model.leftArm;
 
-        HeavyWeaponArmPoseRenderer.setArmPose(flourish, Lefty, both, model);
+        HeavyArmRenderer.setArmPose(flourish, Lefty, both, model);
 
     }
 
@@ -149,7 +151,7 @@ public class PlayerPoseRouter {
         if (Minecraft.getInstance().isPaused())
             return;
 
-        LightWeaponArmPoseRenderer.setArmPose(flourish, Lefty, both, model);
+        LightArmRenderer.setArmPose(flourish, Lefty, both, model);
     }
 
     private static void setBladedStance(Player player, HumanoidModel<?> model) {
