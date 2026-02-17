@@ -3,6 +3,7 @@ package com.epxzzy.epxzzysabers.rendering.item;
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.rendering.ItemTransformRouter;
 import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRenderer;
+import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedSaberModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialModel;
 import com.epxzzy.epxzzysabers.rendering.parry.light.LightItemRenderer;
@@ -25,52 +26,25 @@ import java.util.List;
 
 import static com.epxzzy.epxzzysabers.util.StackHelper.getPlayersHoldingItemRightOrBoth;
 
-public class BlasterSaberItemRenderer extends CustomRenderedItemModelRenderer {
+public class BlasterSaberItemRenderer extends CustomRenderedSaberModelRenderer {
     protected static final PartialModel HILT_BIT = PartialModel.of(epxzzySabers.asResource("item/hilt/blaster_hilt"));
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(epxzzySabers.asResource("item/additive/blade_single"));
 
     @Override
-    protected void render(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
-                             PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-
-        boolean leftHand = transformType == ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
-        /*if(stack.getOrCreateTag().getBoolean("BlockBoiii")){
-            renderer.renderMid(BLOCING_BIT.get(), light);
-        }
-        else {
-
-         */
-
-        List<LivingEntity> allEntities = getPlayersHoldingItemRightOrBoth(stack);
-        for (LivingEntity entity : allEntities) {
-            if (transformType.firstPerson() && entity.isUsingItem()) {
-                int modifier = leftHand ? -1 : 1;
-                ms.mulPose(Axis.ZP.rotationDegrees(modifier * 60));
-                ms.pushPose();
-                ms.popPose();
-            }
-        }
-        if (transformType != ItemDisplayContext.GUI && transformType != ItemDisplayContext.FIXED) {
-            float time = AnimationTickHolder.getTicks(false);
-
-            for (LivingEntity entity : allEntities) {
-                if ((entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii") && !(((PlayerHelperLmao) entity).getSaberAttackAnim() > 0)){
-                    ItemTransformRouter.transform(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
-                }
-            }
-        }
-        renderer.render(HILT_BIT.get(), light);
-
-        //}
-
-        if (StackHelper.isActive(stack)) {
-            //stack.getUseAnimation()
-            ms.pushPose();
-            renderer.renderGlowing(GLOWLY_BIT.get(), LightTexture.FULL_BRIGHT);
-
-            ms.popPose();
-        }
-
+    protected void renderBlade(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+        renderer.renderGlowing(GLOWLY_BIT.get(), LightTexture.FULL_BRIGHT);
     }
 
+    @Override
+    protected void renderHilt(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+        renderer.render(HILT_BIT.get(), light);
+    }
+
+    @Override
+    protected void renderFirstPersonBlock(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+        boolean leftHand = transformType == ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
+        int modifier = leftHand ? -1 : 1;
+        ms.mulPose(Axis.ZP.rotationDegrees(modifier * 60));
+
+    }
 }

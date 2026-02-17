@@ -1,5 +1,6 @@
 package com.epxzzy.epxzzysabers.rendering.foundation;
 
+import com.epxzzy.epxzzysabers.rendering.ItemTransformRouter;
 import com.epxzzy.epxzzysabers.rendering.parry.light.LightItemRenderer;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import com.epxzzy.epxzzysabers.util.StackHelper;
@@ -26,6 +27,7 @@ public abstract class CustomRenderedSaberModelRenderer extends CustomRenderedIte
 
     public void render(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
              PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+        renderCustom(stack, mainModel, renderer, transformType, ms, buffer, light, overlay);
         List<LivingEntity> allEntities = getPlayersHoldingItemRightOrBoth(stack);
         for (LivingEntity entity : allEntities) {
             if (transformType.firstPerson() && entity.isUsingItem()){
@@ -35,12 +37,13 @@ public abstract class CustomRenderedSaberModelRenderer extends CustomRenderedIte
             }
         }
 
+
         if (transformType != ItemDisplayContext.GUI && transformType != ItemDisplayContext.FIXED) {
             for (LivingEntity entity : allEntities) {
                 renderTransforms(stack, mainModel, renderer, transformType, ms, buffer, light, overlay, entity);
 
-                if ((entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii") && !(((PlayerHelperLmao) entity).getSaberAttackAnim() > 0)){
-                    LightItemRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+                if ((entity.swinging) && StackHelper.isActive(stack) && !(((PlayerHelperLmao) entity).getSaberAttackAnim() > 0)){
+                    ItemTransformRouter.transform(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
                 }
             }
         }
@@ -57,8 +60,16 @@ public abstract class CustomRenderedSaberModelRenderer extends CustomRenderedIte
 
     }
 
-    protected abstract void renderTransforms(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
-                                      PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity);
+    protected void renderTransforms(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
+                                      PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
+        if ((entity.swinging) && StackHelper.isActive(stack) && !(((PlayerHelperLmao) entity).getSaberAttackAnim() > 0)){
+            ItemTransformRouter.transform(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+        }
+    };
+    protected void renderCustom(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
+                                    PoseStack ms, MultiBufferSource buffer, int light, int overlay){
+    };
+
     protected abstract void renderFirstPersonBlock(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
                                              PoseStack ms, MultiBufferSource buffer, int light, int overlay);
 

@@ -36,14 +36,17 @@ public class SingleBladedItemRenderer extends CustomRenderedSaberModelRenderer {
     protected static final PartialModel HILTBIT = PartialModel.of(epxzzySabers.asResource("item/hilt/mono_hilt"));
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(epxzzySabers.asResource("item/additive/blade_single"));
 
+    @Override
     protected void renderBlade(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         renderer.renderGlowing(GLOWLY_BIT.get(), LightTexture.FULL_BRIGHT);
     }
 
+    @Override
     protected void renderHilt(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         renderer.render(HILTBIT.get(), light);
     }
 
+    @Override
     protected void renderTransforms(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
                              PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity) {
         if ((entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii") && !(((PlayerHelperLmao) entity).getSaberAttackAnim() > 0)){
@@ -51,12 +54,11 @@ public class SingleBladedItemRenderer extends CustomRenderedSaberModelRenderer {
         }
     }
 
+    @Override
     protected void renderFirstPersonBlock(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         boolean leftHand = transformType == ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
         int modifier = leftHand ? -1 : 1;
         ms.mulPose(Axis.ZP.rotationDegrees(modifier * 60));
 
     }
-
-
 }

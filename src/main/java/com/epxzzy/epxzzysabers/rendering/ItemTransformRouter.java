@@ -48,8 +48,7 @@ public class ItemTransformRouter {
             }
 
             if(TagHelper.isUnusualWeapon(stack)){
-                //redirection to light weapon rendering for now
-                LightItemRenderer.setItemPose(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
+                //void rendering for now
                 return;
             }
 
