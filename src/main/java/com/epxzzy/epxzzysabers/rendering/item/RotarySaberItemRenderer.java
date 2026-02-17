@@ -33,6 +33,9 @@ public class RotarySaberItemRenderer extends CustomRenderedItemModelRenderer {
                              PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
 
         boolean leftHand = transformType == ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
+        boolean firstPerson = transformType.firstPerson();
+        boolean rightHand = transformType == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND;
+
         /*if(stack.getOrCreateTag().getBoolean("BlockBoiii")){
             renderer.renderMid(BLOCING_BIT.get(), light);
         }
@@ -60,8 +63,10 @@ public class RotarySaberItemRenderer extends CustomRenderedItemModelRenderer {
         }
 
          */
-
-        renderer.render(GUARD_BIT.get(), light);
+        //nand
+        if(stack.getOrCreateTag().getBoolean("FlyBoiii") ? !(firstPerson) : true){
+            renderer.render(GUARD_BIT.get(), light);
+        }
         if (StackHelper.isActive(stack)) {
             if (stack.getOrCreateTag().getBoolean("FlyBoiii")) {
                 ms.mulPose(Axis.ZN.rotation(ScrollValueHandler.getScroll((float) ((float) (AnimationTickHolder.getPartialTicks()) * 5))));
@@ -72,7 +77,12 @@ public class RotarySaberItemRenderer extends CustomRenderedItemModelRenderer {
             }
 
         }
-        renderer.render(SPIN_BIT.get(), light);
+        //nand
+        if(stack.getOrCreateTag().getBoolean("FlyBoiii") ? !(firstPerson) : true) {
+
+            renderer.render(SPIN_BIT.get(), light);
+        }
+
 
         //if (transformType != ItemDisplayContext.GUI && transformType != ItemDisplayContext.FIXED) {
         //    float time = AnimationTickHolder.getTicks(false);
