@@ -51,6 +51,9 @@ public class PartialItemModelRenderer {
     public void renderGlowing(BakedModel model, int light) {
         render(model, RenderTypes.itemGlowingTranslucent(), light);
     }
+    public void renderGlowing(BakedModel model, int light, MultiBufferSource bugger) {
+        renderExp(model, RenderTypes.ITEM_GLOWING_EXPERIMENTAL, light, bugger);
+    }
 
     public void renderSolidGlowing(BakedModel model, int light) {
         render(model, RenderTypes.itemGlowingSolid(), light);
@@ -77,6 +80,43 @@ public class PartialItemModelRenderer {
     }
 
     private void renderBakedItemModel(BakedModel model, int light, PoseStack ms, VertexConsumer buffer) {
+        ItemRenderer ir = Minecraft.getInstance()
+                .getItemRenderer();
+        ModelData data = ModelData.EMPTY;
+
+        for (RenderType renderType : model.getRenderTypes(stack, false)) {
+            for (Direction direction : Iterate.directions) {
+                random.setSeed(42L);
+                ir.renderQuadList(ms, buffer, model.getQuads(null, direction, random, data, renderType), stack, light,
+                        overlay);
+            }
+
+            random.setSeed(42L);
+            ir.renderQuadList(ms, buffer, model.getQuads(null, null, random, data, renderType), stack, light, overlay);
+        }
+    }
+
+    public void renderExp(BakedModel model, RenderType type, int light, MultiBufferSource bugger) {
+        if (stack.isEmpty())
+            return;
+
+        ms.pushPose();
+        ms.translate(-0.5D, -0.5D, -0.5D);
+
+        if (!model.isCustomRenderer()) {
+            VertexConsumer vc =  bugger.getBuffer(type);
+            for (BakedModel pass : model.getRenderPasses(stack, false)) {
+                renderBakedItemModelExp(pass, light, ms, vc);
+            }
+        } else
+            IClientItemExtensions.of(stack)
+                    .getCustomRenderer()
+                    .renderByItem(stack, transformType, ms, buffer, light, overlay);
+
+        ms.popPose();
+    }
+
+    private void renderBakedItemModelExp(BakedModel model, int light, PoseStack ms, VertexConsumer buffer) {
         ItemRenderer ir = Minecraft.getInstance()
                 .getItemRenderer();
         ModelData data = ModelData.EMPTY;

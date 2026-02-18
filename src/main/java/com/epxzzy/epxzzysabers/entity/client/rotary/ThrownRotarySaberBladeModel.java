@@ -53,7 +53,7 @@ public class ThrownRotarySaberBladeModel<T extends ThrownRotarySaber> extends Mo
 		pMatrixStack.mulPose(Axis.YP.rotation(-ScrollValueHandler.getScroll((float) (AnimationTickHolder.getPartialTicks()) * 5)));
 
 		pMatrixStack.translate(0, -1, 0);
-		VertexConsumer vertexconsumur = pBuffer.getBuffer(RenderTypes.glowingRotaryBlade());
+		VertexConsumer vertexconsumur = pBuffer.getBuffer(RenderTypes.ROTARY_BLADE_EXPERIMENTAL);
 		//VertexConsumer vertexconsumur = pBuffer.getBuffer(RenderType.eyes(GLOWLOC));
 
 		//.color(f/255, f1/255, f2/255, 1.0F);

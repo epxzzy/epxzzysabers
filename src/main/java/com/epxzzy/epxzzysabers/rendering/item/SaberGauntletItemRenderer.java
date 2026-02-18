@@ -29,7 +29,11 @@ public class SaberGauntletItemRenderer extends CustomRenderedSaberModelRenderer 
 
     @Override
     protected void renderBlade(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        renderer.renderGlowing(GLOWLY_BIT.get(), LightTexture.FULL_BRIGHT);
+        if (stack.getOrCreateTag().getBoolean("ChargedBoiii")) {
+            ms.translate(Math.random() * 0.1 + -0.05, Math.random() * 0.1 + -0.05 , Math.random() * 0.1+ -0.05 );
+            ms.scale( 1F, 1F, (float) (Math.random() * 0.2) + 1F);
+        }
+        renderer.renderGlowing(GLOWLY_BIT.get(), LightTexture.FULL_BRIGHT, buffer);
     }
 
     @Override

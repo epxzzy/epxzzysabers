@@ -4,12 +4,15 @@ import java.io.IOException;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.entity.client.rotary.ThrownRotarySaberRenderer;
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceProvider;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterShadersEvent;
@@ -19,8 +22,14 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 public class RenderTypes extends RenderStateShard {
     public static final RenderStateShard.ShaderStateShard GLOWING_SHADER = new RenderStateShard.ShaderStateShard(() -> com.epxzzy.epxzzysabers.rendering.foundation.RenderTypes.Shaders.glowingShader);
 
-    private static final RenderType ITEM_GLOWING_SOLID = RenderType.create(createLayerName("item_glowing_solid"),
-            DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, true, false, RenderType.CompositeState.builder()
+    private static final RenderType ITEM_GLOWING_SOLID = RenderType.create(
+            createLayerName("item_glowing_solid"),
+            DefaultVertexFormat.NEW_ENTITY,
+            VertexFormat.Mode.QUADS,
+            256,
+            true,
+            false,
+            RenderType.CompositeState.builder()
                     .setShaderState(GLOWING_SHADER)
                     .setTextureState(BLOCK_SHEET)
                     .setLightmapState(LIGHTMAP)
@@ -28,8 +37,14 @@ public class RenderTypes extends RenderStateShard {
                     .createCompositeState(true)
     );
 
-    private static final RenderType ITEM_GLOWING_TRANSLUCENT = RenderType.create(createLayerName("item_glowing_translucent"),
-            DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, true, true, RenderType.CompositeState.builder()
+    private static final RenderType ITEM_GLOWING_TRANSLUCENT = RenderType.create(
+            createLayerName("item_glowing_translucent"),
+            DefaultVertexFormat.NEW_ENTITY,
+            VertexFormat.Mode.QUADS,
+            256,
+            true,
+            true,
+            RenderType.CompositeState.builder()
                     .setShaderState(GLOWING_SHADER)
                     .setTextureState(BLOCK_SHEET)
                     .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
@@ -40,7 +55,12 @@ public class RenderTypes extends RenderStateShard {
 
     private static final RenderType ROTARY_BLADE = RenderType.create(
             createLayerName("ROTARY_BLADE"),
-            DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, true, true, RenderType.CompositeState.builder()
+            DefaultVertexFormat.NEW_ENTITY,
+            VertexFormat.Mode.QUADS,
+            256,
+            true,
+            true,
+            RenderType.CompositeState.builder()
                     .setShaderState(GLOWING_SHADER)
                     .setTextureState(new RenderStateShard.TextureStateShard(ThrownRotarySaberRenderer.GLOWLOC, false, false))
                     .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
@@ -48,7 +68,47 @@ public class RenderTypes extends RenderStateShard {
                     .setOverlayState(OVERLAY)
                     .createCompositeState(true)
     );
+    /* experimental rendertypes for external shader support
+    */
 
+    public static RenderType ITEM_GLOWING_EXPERIMENTAL = RenderType.create(
+        createLayerName("item_glowing_experimental"),
+        DefaultVertexFormat.NEW_ENTITY,
+        VertexFormat.Mode.QUADS,
+       256,
+        true,
+            true,
+                RenderType.CompositeState.builder()
+                        .setShaderState(RenderStateShard.RENDERTYPE_EYES_SHADER)
+                        .setTextureState(BLOCK_SHEET)
+                        //.setTextureState(new RenderStateShard.TextureStateShard(BLADE_TEXTURE, false, false))
+                        .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                        .setLightmapState(LIGHTMAP)
+                        .setOverlayState(OVERLAY)
+                        //.setCullState(NO_CULL)
+                        .createCompositeState(true)
+    );
+
+    public static final RenderType ROTARY_BLADE_EXPERIMENTAL = RenderType.create(
+            createLayerName("rotary_blade_experimental"),
+            DefaultVertexFormat.NEW_ENTITY,
+            VertexFormat.Mode.QUADS,
+            256,
+            true,
+            true,
+            RenderType.CompositeState.builder()
+                    .setShaderState(RENDERTYPE_EYES_SHADER)
+                    //.setTextureState(BLOCK_SHEET)
+                    //.setTextureState(new RenderStateShard.)
+                    .setTextureState(new RenderStateShard.TextureStateShard(ThrownRotarySaberRenderer.GLOWLOC, false, false))
+                    .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+                    .setLightmapState(LIGHTMAP)
+                    .setOverlayState(OVERLAY)
+                    .createCompositeState(true)
+    );
+
+    /*
+     */
     public static RenderType itemGlowingSolid() {
         return ITEM_GLOWING_SOLID;
     }

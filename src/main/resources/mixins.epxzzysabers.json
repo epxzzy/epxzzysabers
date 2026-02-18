@@ -6,9 +6,8 @@
   "minVersion": "0.8",
   "mixins": [
     "entity.LivingEntityMixin",
-    "entity.ThrownTridentMixin",
-    "entity.PlayerMixin"
-
+    "entity.PlayerMixin",
+    "entity.ThrownTridentMixin"
   ],
   "injectors": {
     "defaultRequire": 1

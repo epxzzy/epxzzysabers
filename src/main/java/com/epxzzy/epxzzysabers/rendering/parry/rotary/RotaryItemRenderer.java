@@ -81,7 +81,7 @@ public class RotaryItemRenderer {
 
 
         ms.pushPose();
-        renderer.renderGlowing(SMEAR_BIT.get(), LightTexture.FULL_BRIGHT);
+        renderer.renderGlowing(SMEAR_BIT.get(), LightTexture.FULL_BRIGHT, buffer);
         ms.mulPose(Axis.ZN.rotation(ScrollValueHandler.getScroll(new Random().nextInt() * 15)));
         //bit of enhancement
 
@@ -91,7 +91,7 @@ public class RotaryItemRenderer {
     public static void RenderStaticBlade(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         //if (stack.getOrCreateTag().getBoolean("ActiveBoiii") && !stack.getOrCreateTag().getBoolean("FlyBoiii")) {
             ms.pushPose();
-            renderer.renderGlowing(GLOWLY_BIT.get(), LightTexture.FULL_BRIGHT);
+            renderer.renderGlowing(GLOWLY_BIT.get(), LightTexture.FULL_BRIGHT, buffer);
             ms.popPose();
         //}
     }

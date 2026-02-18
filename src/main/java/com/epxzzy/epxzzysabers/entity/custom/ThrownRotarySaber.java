@@ -83,8 +83,10 @@ public class ThrownRotarySaber extends AbstractArrow {
         List<LivingEntity> titesInRegion = LevelHelper.getEntitiesInRadius(this.position(), this.level(), 2.5);
         titesInRegion.remove(this.getOwner());
 
-        for (LivingEntity thisSpecficTity : titesInRegion) {
-            thisSpecficTity.hurt(this.getOwner().damageSources().mobAttack((Player) this.getOwner()), 2);
+        if(this.getOwner() != null) {
+            for (LivingEntity thisSpecficTity : titesInRegion) {
+                thisSpecficTity.hurt(this.getOwner().damageSources().mobAttack((Player) this.getOwner()), 2);
+            }
         }
 
         this.playSound(SaberSounds.SWING.get(), 0.05f, 1.0f);

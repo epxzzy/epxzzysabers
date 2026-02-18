@@ -31,7 +31,7 @@ public class ProtosaberItemRenderer extends CustomRenderedSaberModelRenderer {
 
     @Override
     protected void renderBlade(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        renderer.renderGlowing(GLOWLY_BIT.get(), LightTexture.FULL_BRIGHT);
+        renderer.renderGlowing(GLOWLY_BIT.get(), LightTexture.FULL_BRIGHT, buffer);
     }
 
     @Override
