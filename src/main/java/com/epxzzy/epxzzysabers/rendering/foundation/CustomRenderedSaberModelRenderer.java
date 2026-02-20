@@ -21,18 +21,21 @@ import static com.epxzzy.epxzzysabers.util.StackHelper.getPlayersHoldingItemRigh
 //import com.simibubi.create.foundation.item.renderMid.CustomRenderedItemModel;
 //import com.simibubi.create.foundation.item.renderMid.PartialItemModelRenderer;
 
-
 public abstract class CustomRenderedSaberModelRenderer extends CustomRenderedItemModelRenderer {
     private BakedModel mainModel;
 
     public void render(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
              PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        renderCustom(stack, mainModel, renderer, transformType, ms, buffer, light, overlay);
+        if(isUnsualRenderer()){
+            renderCustom(stack, mainModel, renderer, transformType, ms, buffer, light, overlay);
+            return;
+        }
         List<LivingEntity> allEntities = getPlayersHoldingItemRightOrBoth(stack);
+
         for (LivingEntity entity : allEntities) {
             if (transformType.firstPerson() && entity.isUsingItem()){
-                ms.pushPose();
                 renderFirstPersonBlock(stack, mainModel, renderer, transformType, ms, buffer, light, overlay);
+                ms.pushPose();
                 ms.popPose();
             }
         }
@@ -69,9 +72,16 @@ public abstract class CustomRenderedSaberModelRenderer extends CustomRenderedIte
     protected void renderCustom(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
                                     PoseStack ms, MultiBufferSource buffer, int light, int overlay){
     };
+    protected boolean isUnsualRenderer(){
+        return false;
+    }
 
-    protected abstract void renderFirstPersonBlock(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
-                                             PoseStack ms, MultiBufferSource buffer, int light, int overlay);
+    protected void renderFirstPersonBlock(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
+                                             PoseStack ms, MultiBufferSource buffer, int light, int overlay){
+        boolean leftHand = transformType == ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
+        int modifier = leftHand ? -1 : 1;
+        ms.mulPose(Axis.ZP.rotationDegrees(modifier * 60));
+    };
 
     protected abstract void renderBlade(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
                                    PoseStack ms, MultiBufferSource buffer, int light, int overlay);

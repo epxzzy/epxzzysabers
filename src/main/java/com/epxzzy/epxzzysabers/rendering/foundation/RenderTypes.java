@@ -20,54 +20,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 public class RenderTypes extends RenderStateShard {
-    public static final RenderStateShard.ShaderStateShard GLOWING_SHADER = new RenderStateShard.ShaderStateShard(() -> com.epxzzy.epxzzysabers.rendering.foundation.RenderTypes.Shaders.glowingShader);
 
-    private static final RenderType ITEM_GLOWING_SOLID = RenderType.create(
-            createLayerName("item_glowing_solid"),
-            DefaultVertexFormat.NEW_ENTITY,
-            VertexFormat.Mode.QUADS,
-            256,
-            true,
-            false,
-            RenderType.CompositeState.builder()
-                    .setShaderState(GLOWING_SHADER)
-                    .setTextureState(BLOCK_SHEET)
-                    .setLightmapState(LIGHTMAP)
-                    .setOverlayState(OVERLAY)
-                    .createCompositeState(true)
-    );
-
-    private static final RenderType ITEM_GLOWING_TRANSLUCENT = RenderType.create(
-            createLayerName("item_glowing_translucent"),
-            DefaultVertexFormat.NEW_ENTITY,
-            VertexFormat.Mode.QUADS,
-            256,
-            true,
-            true,
-            RenderType.CompositeState.builder()
-                    .setShaderState(GLOWING_SHADER)
-                    .setTextureState(BLOCK_SHEET)
-                    .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                    .setLightmapState(LIGHTMAP)
-                    .setOverlayState(OVERLAY)
-                    .createCompositeState(true)
-    );
-
-    private static final RenderType ROTARY_BLADE = RenderType.create(
-            createLayerName("ROTARY_BLADE"),
-            DefaultVertexFormat.NEW_ENTITY,
-            VertexFormat.Mode.QUADS,
-            256,
-            true,
-            true,
-            RenderType.CompositeState.builder()
-                    .setShaderState(GLOWING_SHADER)
-                    .setTextureState(new RenderStateShard.TextureStateShard(ThrownRotarySaberRenderer.GLOWLOC, false, false))
-                    .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                    .setLightmapState(LIGHTMAP)
-                    .setOverlayState(OVERLAY)
-                    .createCompositeState(true)
-    );
     /* experimental rendertypes for external shader support
     */
 
@@ -109,17 +62,6 @@ public class RenderTypes extends RenderStateShard {
 
     /*
      */
-    public static RenderType itemGlowingSolid() {
-        return ITEM_GLOWING_SOLID;
-    }
-
-    public static RenderType itemGlowingTranslucent() {
-        return ITEM_GLOWING_TRANSLUCENT;
-    }
-    public static RenderType glowingRotaryBlade() {
-        return ROTARY_BLADE;
-    }
-
 
     private static String createLayerName(String name) {
         return epxzzySabers.MOD_ID + ":" + name;
@@ -130,16 +72,5 @@ public class RenderTypes extends RenderStateShard {
         super(null, null, null);
     }
 
-    @EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
-    private static class Shaders {
-        private static ShaderInstance glowingShader;
-
-        @SubscribeEvent
-        public static void onRegisterShaders(RegisterShadersEvent event) throws IOException {
-            ResourceProvider resourceProvider = event.getResourceProvider();
-            event.registerShader(new ShaderInstance(resourceProvider, epxzzySabers.asResource("glowing_shader"),
-                    DefaultVertexFormat.NEW_ENTITY), shader -> glowingShader = shader);
-        }
-    }
 }
 

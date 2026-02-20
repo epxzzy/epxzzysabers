@@ -162,6 +162,9 @@ public class StackHelper {
     public static boolean isActive(ItemStack stacc) {
         return stacc.getOrCreateTag().getBoolean("ActiveBoiii");
     }
+    public static boolean isFlying(ItemStack stacc) {
+        return stacc.getOrCreateTag().getBoolean("FlyBoiii");
+    }
 
 
 }

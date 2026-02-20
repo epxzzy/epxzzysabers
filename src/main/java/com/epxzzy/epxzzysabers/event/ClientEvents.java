@@ -102,12 +102,6 @@ public class ClientEvents {
         AnimationTickHolder.reset();
     }
 
-        @SubscribeEvent
-    public static void onRegisterShaders(RegisterShadersEvent event) throws IOException {
-        ResourceProvider resourceProvider = event.getResourceProvider();
-        event.registerShader(new ShaderInstance(resourceProvider, epxzzySabers.asResource("glowing_shader"),
-                DefaultVertexFormat.NEW_ENTITY), shader -> glowingShader = shader);
-    }
 }
 
 
