@@ -7,8 +7,10 @@ import com.epxzzy.epxzzysabers.rendering.item.RotarySaberItemRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.epxzzysabers.sound.SaberSounds;
 import com.epxzzy.epxzzysabers.util.LevelHelper;
+import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -27,10 +29,8 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class RotarySaber extends Protosaber {
-    public int flyCooldown = 40;
-    //160 == cant fly, 0 == can fly
-    public int flightDuration = 200;
-    //0 == no more fly, 300 == flyyy
+    public static int MAX_FLIGHT_DURATION = 200;
+    public static int MAX_FLIGHT_COOLDOWN = 40;
 
     public RotarySaber(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
         super(pProperties, pRANGE , pDamage, pSpeed);
@@ -75,7 +75,7 @@ public class RotarySaber extends Protosaber {
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
         if(pEntity instanceof LivingEntity pLiving && !(pLevel.isClientSide())){
-/*
+            /*
             if(pLiving instanceof Player pPlayer && pPlayer.getAbilities().flying){
                 --this.flightDuration;
                 if(this.flightDuration >= 0){
@@ -85,28 +85,41 @@ public class RotarySaber extends Protosaber {
                 }
             }
 
- */
-            if(pLiving instanceof Player pPlayer && (pPlayer.getAbilities().flying)){
-                if(this.flightDuration >= 1){
-                    --this.flightDuration;
+            */
+            if(pLiving instanceof ServerPlayer pPlayer) {
+                PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) pPlayer;
 
-                    if(this.flightDuration== 0) {
-                        pPlayer.stopUsingItem();
-                        epxzzySabers.LOGGER.info("you can no longer fly");
+                if(pPlayer.isCreative()){
+                    //forcefully stop flight and put on cooldown
+                    MixinPlayer.setFlyCooldown(MAX_FLIGHT_COOLDOWN);
+                    MixinPlayer.setFlightDuration(0);
+                }
+
+                //fight duration tick
+                if (pPlayer.getAbilities().flying) {
+                    if (MixinPlayer.getFlightDuration() >= 1) {
+                        MixinPlayer.setFlightDuration(MixinPlayer.getFlightDuration() - 1);
+
+                        if (MixinPlayer.getFlightDuration() == 0) {
+                            pPlayer.stopUsingItem();
+                            epxzzySabers.LOGGER.info("you can no longer fly");
+                        }
                     }
                 }
-            }
 
-            if(pLiving instanceof Player pPlayer && !(pPlayer.getAbilities().flying)){
-                if(this.flyCooldown >= 1){
-                    --this.flyCooldown;
-                    if(this.flyCooldown == 0) {
-                        this.flightDuration = 200;
-                        epxzzySabers.LOGGER.info("you can now fly");
+                //flight cooldown tick
+                if (!(pPlayer.getAbilities().flying)) {
+                    if (MixinPlayer.getFlyCooldown() >= 1) {
+                        MixinPlayer.setFlyCooldown(MixinPlayer.getFlyCooldown() - 1);
+
+                        if (MixinPlayer.getFlyCooldown() == 0) {
+                            MixinPlayer.setFlightDuration(MAX_FLIGHT_DURATION);
+                            epxzzySabers.LOGGER.info("you can now fly");
+                        }
                     }
                 }
-            }
 
+            }
         }
     }
     public boolean isInAir(Player pPlayer){
@@ -121,10 +134,12 @@ public class RotarySaber extends Protosaber {
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, @NotNull InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
+        boolean Justified = !pPlayer.isCreative() ? pHand != InteractionHand.OFF_HAND: false;
 
-        if (readActivetag(pPlayer.getItemInHand(pHand)) && !pLevel.isClientSide) {
+        if (readActivetag(pPlayer.getItemInHand(pHand)) && (!pLevel.isClientSide && Justified)) {
+            PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) pPlayer;
             if((pPlayer.xRotO < -35 || this.isInAir(pPlayer))){
-                if(this.flyCooldown == 0 && this.flightDuration >= 1) {
+                if(MixinPlayer.getFlyCooldown() == 0 && MixinPlayer.getFlightDuration() >= 1) {
                     Vec3 bbc = pPlayer.position();
                     pPlayer.teleportTo(bbc.x, bbc.y+0.5, bbc.z);
 
@@ -139,8 +154,12 @@ public class RotarySaber extends Protosaber {
                     epxzzySabers.LOGGER.info("flying activated");
                 }
 
-                if(this.flyCooldown >= 1 && this.flightDuration == 0){
-                    epxzzySabers.LOGGER.info("you cant seem to fly, flightcooldown: "+this.flyCooldown+ " and flightduration: " + this.flightDuration);
+                if(MixinPlayer.getFlyCooldown() >= 1 && MixinPlayer.getFlightDuration() == 0){
+                    epxzzySabers.LOGGER.info(
+                            "you cant seem to fly, flightcooldown: " +
+                            MixinPlayer.getFlyCooldown()+
+                            " and flightduration: " +
+                            MixinPlayer.getFlightDuration());
                 }
 
             }
@@ -152,7 +171,7 @@ public class RotarySaber extends Protosaber {
             pPlayer.stopUsingItem();
             return InteractionResultHolder.fail(pPlayer.getItemInHand(pHand));
         }
-        return InteractionResultHolder.fail(itemstack);
+        return super.use(pLevel, pPlayer, pHand);
     }
 
     @Override
@@ -162,10 +181,11 @@ public class RotarySaber extends Protosaber {
 
         nbeetea.putBoolean("FlyBoiii", false);
         if (entity instanceof Player pPlayer && pPlayer.getAbilities().flying){
+            PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) pPlayer;
             ((Player) entity).getAbilities().flying = false;
             ((Player) entity).onUpdateAbilities();
             epxzzySabers.LOGGER.info("flying deactivated");
-            this.flyCooldown = 40;
+            MixinPlayer.setFlyCooldown(40);
         }
 
         pStack.setTag(nbeetea);

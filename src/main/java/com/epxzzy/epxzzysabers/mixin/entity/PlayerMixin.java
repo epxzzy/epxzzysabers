@@ -25,6 +25,7 @@ import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -50,6 +51,14 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
     public float SaberdefAnim = 0;
     public float oSaberdefAnim = 0;
+
+    public int flyCooldownVar = 40;
+    //160 == cant fly, 0 == can fly
+    public int flightDurationVar = 200;
+    //0 == no more fly, 300 == flyyy
+
+
+
 
     public void LogFlightDetails() {
         //epxzzysabers.LOGGER.debug("PROG: {} ATTK: {}, BLKPROG: {}, DEF: {}", this.attackProgress, this.attacking, this.defendProgress, this.defending);
@@ -291,5 +300,21 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         }
     }
 
+
+    public int getFlyCooldown(){
+        return flyCooldownVar;
+    }
+    @Unique
+    public int getFlightDuration(){
+        return flightDurationVar;
+    }
+    @Unique
+    public void setFlyCooldown(int val){
+        flyCooldownVar = val;
+    }
+    @Unique
+    public void setFlightDuration(int val){
+        flightDurationVar = val;
+    }
 
 }
