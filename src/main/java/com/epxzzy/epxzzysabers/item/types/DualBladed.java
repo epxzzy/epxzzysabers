@@ -21,7 +21,7 @@ public class DualBladed extends Protosaber {
     public boolean SWANG;
 
 
-    public DualBladed(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
+    public DualBladed(Properties pProperties, float pRANGE, int pDamage, int pSpeed) {
         super(pProperties, pRANGE , pDamage, pSpeed);
     }
 

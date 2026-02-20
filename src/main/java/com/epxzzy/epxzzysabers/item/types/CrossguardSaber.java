@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 
 public class CrossguardSaber extends Protosaber {
 
-    public CrossguardSaber(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
+    public CrossguardSaber(Properties pProperties, float pRANGE, int pDamage, int pSpeed) {
         super(pProperties, pRANGE , pDamage, pSpeed);
     }
     @Override @OnlyIn(Dist.CLIENT)

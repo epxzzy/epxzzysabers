@@ -32,7 +32,7 @@ public class RotarySaber extends Protosaber {
     public static int MAX_FLIGHT_DURATION = 200;
     public static int MAX_FLIGHT_COOLDOWN = 40;
 
-    public RotarySaber(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
+    public RotarySaber(Properties pProperties, float pRANGE, int pDamage, int pSpeed) {
         super(pProperties, pRANGE , pDamage, pSpeed);
     }
     @Override @OnlyIn(Dist.CLIENT)

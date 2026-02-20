@@ -59,7 +59,7 @@ public class SaberGauntlet extends Protosaber {
 
     public static final String EXTENDO_MARKER = "gauntletMarker";
 
-    public SaberGauntlet(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
+    public SaberGauntlet(Properties pProperties, float pRANGE, int pDamage, int pSpeed) {
         super(pProperties, pRANGE, pDamage, pSpeed);
     }
 

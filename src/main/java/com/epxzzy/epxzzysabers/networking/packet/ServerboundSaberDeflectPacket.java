@@ -45,7 +45,7 @@ public class ServerboundSaberDeflectPacket {
                 ServerPlayer entity = contextt.getSender();
                 Level pLevel = entity.level();
                 ItemStack pStack = entity.getItemInHand(InteractionHand.MAIN_HAND);
-                int PARRY_RANGE = Protosaber.getSaberParryRange(pStack);
+                float PARRY_RANGE = Protosaber.getSaberParryRange(pStack);
                 //epxzzySabers.LOGGER.info("parry range for this deflection packet {}", PARRY_RANGE);
 
 

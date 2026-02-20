@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 
 public class BlasterHybrid extends Protosaber {
 
-    public BlasterHybrid(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
+    public BlasterHybrid(Properties pProperties, float pRANGE, int pDamage, int pSpeed) {
         super(pProperties, pRANGE , pDamage, pSpeed);
     }
     @Override @OnlyIn(Dist.CLIENT)

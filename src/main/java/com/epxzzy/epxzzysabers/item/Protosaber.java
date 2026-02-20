@@ -47,7 +47,7 @@ import java.util.function.Consumer;
 
 public class Protosaber extends Item {
     private ArrayListMultimap<Attribute, AttributeModifier> defaultModifiers;
-    public final int PARRY_RANGE;
+    public final float PARRY_RANGE;
     public final int ATTACK_DAMAGE;
     public final int ATTACK_SPEED;
     //public static com.simibubi.create.foundation.item.renderMid.CustomRenderedItemModelRenderer THE_RENDURR;
@@ -56,7 +56,7 @@ public class Protosaber extends Item {
     public static int BASE_COLOUR = 65280;
     public boolean isActive;
 
-    public Protosaber(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
+    public Protosaber(Properties pProperties, float pRANGE, int pDamage, int pSpeed) {
         super(pProperties);
         float attackDamage = (float) 5f;
         ArrayListMultimap<Attribute, AttributeModifier> builder = ArrayListMultimap.create();
@@ -305,7 +305,7 @@ public class Protosaber extends Item {
         return true;
     }
 
-    public static int getSaberParryRange(ItemStack pStack) {
+    public static float getSaberParryRange(ItemStack pStack) {
         return ((Protosaber) pStack.getItem().asItem()).PARRY_RANGE;
         //return false;
     }

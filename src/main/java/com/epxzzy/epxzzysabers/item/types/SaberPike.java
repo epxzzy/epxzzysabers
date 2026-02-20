@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 
 public class SaberPike extends Protosaber {
 
-    public SaberPike(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
+    public SaberPike(Properties pProperties, float pRANGE, int pDamage, int pSpeed) {
         super(pProperties, pRANGE , pDamage, pSpeed);
     }
     @Override @OnlyIn(Dist.CLIENT)

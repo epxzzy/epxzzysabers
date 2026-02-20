@@ -38,7 +38,7 @@ public class LevelHelper {
 
     public static void AnimateDefelctionClient(ItemStack pStack, Player entity) {
         Level pLevel = entity.level();
-        int PARRY_RANGE = Protosaber.getSaberParryRange(pStack);
+        float PARRY_RANGE = Protosaber.getSaberParryRange(pStack);
         //epxzzySabers.LOGGER.info("parry range for this deflection packet {}", PARRY_RANGE);
 
         if (pLevel.isClientSide) {

@@ -21,7 +21,7 @@ public class SingleBladed extends Protosaber {
     public boolean SWANG;
 
 
-    public SingleBladed(Properties pProperties, int pRANGE, int pDamage, int pSpeed) {
+    public SingleBladed(Properties pProperties, float pRANGE, int pDamage, int pSpeed) {
         super(pProperties, pRANGE , pDamage, pSpeed);
     }
 
