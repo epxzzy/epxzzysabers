@@ -82,7 +82,7 @@ public class RotaryItemRenderer {
 
         ms.pushPose();
         renderer.renderGlowing(SMEAR_BIT.get(), LightTexture.FULL_BRIGHT, buffer);
-        ms.mulPose(Axis.ZN.rotation(ScrollValueHandler.getScroll(new Random().nextInt() * 15)));
+        //ms.mulPose(Axis.ZN.rotation(ScrollValueHandler.getScroll(new Random().nextInt() * 15)));
         //bit of enhancement
 
         ms.popPose();

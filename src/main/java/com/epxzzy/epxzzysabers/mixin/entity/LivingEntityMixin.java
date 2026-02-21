@@ -1,6 +1,7 @@
 package com.epxzzy.epxzzysabers.mixin.entity;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
+import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.item.SaberItems;
 import com.epxzzy.epxzzysabers.sound.SaberSounds;
 import com.epxzzy.epxzzysabers.util.SaberTags;
@@ -73,7 +74,7 @@ public abstract class LivingEntityMixin {
 
             if (blocking_with_sabur && Projectile.class.isAssignableFrom(Objects.requireNonNull(pSource.getDirectEntity()).getClass())) {
                 if(Player.class.isAssignableFrom(Objects.requireNonNull(that.getClass()))&&!(((Player) that).getAbilities().flying)){
-                    if(((Player) that).getTicksUsingItem() > 50) return; // GH1-#1
+                    if(((Player) that).getTicksUsingItem() > Protosaber.SOFT_PARRY) return; // GH1-#1
 
                     //epxzzySabers.LOGGER.debug("blocked a projectile");
                     cir.cancel();

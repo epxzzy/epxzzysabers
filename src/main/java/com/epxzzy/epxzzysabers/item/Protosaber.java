@@ -4,6 +4,7 @@ import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.misc.KewlFightsOrchestrator;
 import com.epxzzy.epxzzysabers.networking.ModMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberDeflectPacket;
+import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.epxzzysabers.util.ColourConverter;
 import com.epxzzy.epxzzysabers.rendering.item.ProtosaberItemRenderer;
@@ -50,8 +51,8 @@ public class Protosaber extends Item {
     public final float PARRY_RANGE;
     public final int ATTACK_DAMAGE;
     public final int ATTACK_SPEED;
-    //public static com.simibubi.create.foundation.item.renderMid.CustomRenderedItemModelRenderer THE_RENDURR;
-    public static com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRenderer THE_BETTER_RENDERER;
+    public static int SOFT_PARRY = 25;
+    public static CustomRenderedItemModelRenderer THE_BETTER_RENDERER;
 
     public static int BASE_COLOUR = 65280;
     public boolean isActive;
