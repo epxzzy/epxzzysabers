@@ -10,7 +10,9 @@ import com.epxzzy.epxzzysabers.util.LevelHelper;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerPlayerGameMode;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -58,6 +60,13 @@ public class RotarySaber extends Protosaber {
         }
 
          */
+        if(pLivingEntity instanceof ServerPlayer pPlayer){
+            if(!(pPlayer.gameMode.isSurvival())){
+                pPlayer.displayClientMessage(Component.literal("flight is only available in survival mode"), true);
+            }
+
+        }
+
         if (pRemainingUseDuration % 2 == 0 && pStack.getOrCreateTag().getBoolean("FlyBoiii")) {
             if (pLivingEntity instanceof Player pPlayer && (pPlayer.getAbilities().flying)) {
                 pLivingEntity.level().playSound((Player) null,
@@ -86,8 +95,11 @@ public class RotarySaber extends Protosaber {
             }
 
             */
+
+
             if(pLiving instanceof ServerPlayer pPlayer) {
                 PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) pPlayer;
+
 
                 if(pPlayer.isCreative()){
                     //forcefully stop flight and put on cooldown
@@ -171,6 +183,7 @@ public class RotarySaber extends Protosaber {
             pPlayer.stopUsingItem();
             return InteractionResultHolder.fail(pPlayer.getItemInHand(pHand));
         }
+
         return super.use(pLevel, pPlayer, pHand);
     }
 
