@@ -6,7 +6,7 @@ import com.epxzzy.epxzzysabers.entity.client.bolt.PlasmaBoltModel;
 import com.epxzzy.epxzzysabers.entity.client.rotary.ThrownRotarySaberBladeModel;
 import com.epxzzy.epxzzysabers.entity.client.rotary.ThrownRotarySaberGuardModel;
 import com.epxzzy.epxzzysabers.misc.KeyBinding;
-import com.epxzzy.epxzzysabers.networking.ModMessages;
+import com.epxzzy.epxzzysabers.networking.SaberMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberAbilityPacket;
 import com.epxzzy.epxzzysabers.util.AnimationTickHolder;
 import com.epxzzy.epxzzysabers.util.ScrollValueHandler;
@@ -42,7 +42,7 @@ public class ClientEvents {
             if (KeyBinding.SABER_ABILITY_KEY.consumeClick()) {
                 //throw the saber the actually
                 //Minecraft.getInstance().player.connection.send(new ServerboundRotarySaberAbilityPacket());
-                ModMessages.sendToServer(new ServerboundSaberAbilityPacket());
+                SaberMessages.sendToServer(new ServerboundSaberAbilityPacket());
             }
             /*
             if (KeyBinding.SABER_ABILITY_KEY.isDown()) {

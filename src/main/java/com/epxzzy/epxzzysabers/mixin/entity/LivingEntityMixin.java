@@ -112,7 +112,8 @@ public abstract class LivingEntityMixin {
         ItemStack stacc = that.getMainHandItem();
         if (stacc.is(SaberTags.Items.LIGHTSABER) && stacc.getOrCreateTag().getBoolean("ActiveBoiii")) {
             //ci.cancel();
-            that.playSound(SaberSounds.SWING.get(), 0.1F, 0.8F + that.level().random.nextFloat() * 0.4F);
+
+            //that.playSound(SaberSounds.SWING.get(), 0.1F, 0.8F + that.level().random.nextFloat() * 0.4F);
             return;
         }
     }

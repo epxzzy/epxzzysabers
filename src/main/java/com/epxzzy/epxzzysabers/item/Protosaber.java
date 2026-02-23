@@ -2,7 +2,7 @@ package com.epxzzy.epxzzysabers.item;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.misc.KewlFightsOrchestrator;
-import com.epxzzy.epxzzysabers.networking.ModMessages;
+import com.epxzzy.epxzzysabers.networking.SaberMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberDeflectPacket;
 import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
@@ -318,8 +318,10 @@ public class Protosaber extends Item {
             addFlourishTag(entity, stack);
         }
 
-        ModMessages.sendToServer(new ServerboundSaberDeflectPacket());
-        LevelHelper.AnimateDefelctionClient(stack, (Player) entity);
+        if(entity.level().isClientSide){
+            SaberMessages.sendToServer(new ServerboundSaberDeflectPacket());
+            LevelHelper.AnimateDefelctionClient(stack, (Player) entity);
+        }
         return false;
         //}
         //return false;

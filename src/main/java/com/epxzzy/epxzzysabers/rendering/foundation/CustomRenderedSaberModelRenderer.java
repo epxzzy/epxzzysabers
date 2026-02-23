@@ -36,6 +36,10 @@ public abstract class CustomRenderedSaberModelRenderer extends CustomRenderedIte
 
         for (LivingEntity entity : allEntities) {
             if (transformType.firstPerson() && entity.isUsingItem()){
+                renderFirstPersonBlock(stack, mainModel, renderer, transformType, ms, buffer, light, overlay);
+                ms.pushPose();
+                ms.popPose();
+
                 if(entity.getTicksUsingItem() > Protosaber.SOFT_PARRY) {
                     float newdur = entity.getUseItemRemainingTicks() - Protosaber.SOFT_PARRY;
                     float dur = (float) stack.getUseDuration() - newdur;
@@ -43,10 +47,6 @@ public abstract class CustomRenderedSaberModelRenderer extends CustomRenderedIte
                     ms.mulPose(Axis.ZN.rotationDegrees(sinn-15));
                     //ms.translate(f12 * 0.0F, f12 * 0.0F, f12 * 0.04F);
                 }
-
-                renderFirstPersonBlock(stack, mainModel, renderer, transformType, ms, buffer, light, overlay);
-                ms.pushPose();
-                ms.popPose();
             }
         }
 

@@ -67,9 +67,9 @@ public class StackHelper {
     }
 
 
-    public static int random1to8(int old){
-        int random = (int) new Random().nextInt(8) + 1;
-        return old != random? random: random1to8(old);
+    public static int random1to8(int old, Player pPlayer){
+        int random = pPlayer.getRandom().nextInt(8) + 1;
+        return old != random? random: random+1;
     };
 
     public static List<LivingEntity> getEntitiesHoldingItemAnyHand(ItemStack stack) {

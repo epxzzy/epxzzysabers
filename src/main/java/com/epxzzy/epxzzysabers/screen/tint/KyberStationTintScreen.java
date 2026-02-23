@@ -7,7 +7,7 @@ import com.epxzzy.epxzzysabers.util.ColourConverter;
 import com.epxzzy.epxzzysabers.screen.components.KyberModes;
 import com.epxzzy.epxzzysabers.screen.components.KyberTabButton;
 import com.epxzzy.epxzzysabers.screen.components.SliderWidget;
-import com.epxzzy.epxzzysabers.networking.ModMessages;
+import com.epxzzy.epxzzysabers.networking.SaberMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundRecolourItemPacket;
 import com.epxzzy.epxzzysabers.util.SaberTags;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -247,7 +247,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
             if (this.menu.setItemColour(regbee, GAY_MODE)) {
                 //this.minecraft.player.connection.send(new HonkPacket.Serverbound)
                 //Color.HSBtoRGB(this.menu.getInputColour())
-                ModMessages.sendToServer(new ServerboundRecolourItemPacket(regbee, GAY_MODE));
+                SaberMessages.sendToServer(new ServerboundRecolourItemPacket(regbee, GAY_MODE));
             }
         }
     }
@@ -559,13 +559,13 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         }
         if (index == 1) {
 
-            //ModMessages.sendToServer(new ServerboundKyberMenuSlotPosToggle(false));
-            ModMessages.sendToServer(new ServerboundKyberMenuTabChange(1));
+            //SaberMessages.sendToServer(new ServerboundKyberMenuSlotPosToggle(false));
+            SaberMessages.sendToServer(new ServerboundKyberMenuTabChange(1));
 
         }
         if (index == 2) {
 
-            ModMessages.sendToServer(new ServerboundKyberMenuTabChange(2));
+            SaberMessages.sendToServer(new ServerboundKyberMenuTabChange(2));
 
             //this.menu.resetSlotPose();
         }

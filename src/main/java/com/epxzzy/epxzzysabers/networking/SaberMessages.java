@@ -11,7 +11,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 //import net.minecraft.util.
-public class ModMessages {
+public class SaberMessages {
     private static final String PROTOCOL_VER = "1";
     private static int packetId = 0;
     private static int id(){

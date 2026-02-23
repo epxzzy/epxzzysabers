@@ -2,6 +2,7 @@ package com.epxzzy.epxzzysabers.misc;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.util.StackHelper;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -11,7 +12,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.Optional;
 
 public class KewlFightsOrchestrator {
-    public static int DetermineNextPossibleAttack(int old, Player pPlayer){
+    public static int DetermineNextPossibleAttack(int old, ServerPlayer pPlayer){
         /*
         float headrotted = AngleHelper.normalizeAngle(pPlayer.getYRot());
         float bodyrotted = AngleHelper.normalizeAngle(pPlayer.rot);
@@ -22,10 +23,12 @@ public class KewlFightsOrchestrator {
          */
 
 
-
-        if(pPlayer.fallDistance > 1)
+        if(pPlayer.fallDistance > 0)
             return 8;
-        return StackHelper.random1to8(old);
+
+        int random = pPlayer.getRandom().nextInt(8) + 1;
+        return old != random? random: random+1;
+
     };
 
     //this method was written by grok, im not that good at math obviously

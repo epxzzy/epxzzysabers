@@ -2,7 +2,7 @@ package com.epxzzy.epxzzysabers.screen.stance;
 
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.networking.ModMessages;
+import com.epxzzy.epxzzysabers.networking.SaberMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundKyberMenuTabChange;
 import com.epxzzy.epxzzysabers.rendering.playerposerenderers.BladeStance;
 import com.epxzzy.epxzzysabers.screen.components.KyberModes;
@@ -297,10 +297,10 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
     void SelectTab(int index) {
         if (index == 0) {
 
-            ModMessages.sendToServer(new ServerboundKyberMenuTabChange(0));
+            SaberMessages.sendToServer(new ServerboundKyberMenuTabChange(0));
         }
         if (index == 2) {
-            ModMessages.sendToServer(new ServerboundKyberMenuTabChange(2));
+            SaberMessages.sendToServer(new ServerboundKyberMenuTabChange(2));
         }
 
     }

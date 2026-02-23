@@ -6,7 +6,7 @@ import com.epxzzy.epxzzysabers.entity.client.bolt.PlasmaBoltRenderer;
 import com.epxzzy.epxzzysabers.entity.client.rotary.ThrownRotarySaberRenderer;
 import com.epxzzy.epxzzysabers.item.SaberCreativeModTabs;
 import com.epxzzy.epxzzysabers.item.SaberItems;
-import com.epxzzy.epxzzysabers.networking.ModMessages;
+import com.epxzzy.epxzzysabers.networking.SaberMessages;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialModelEventHandler;
 import com.epxzzy.epxzzysabers.screen.stance.KyberStationStanceScreen;
 import com.epxzzy.epxzzysabers.screen.tint.KyberStationTintScreen;
@@ -70,7 +70,7 @@ public class epxzzySabers{
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(()->{
-            ModMessages.register();
+            SaberMessages.register();
             //
         });
 

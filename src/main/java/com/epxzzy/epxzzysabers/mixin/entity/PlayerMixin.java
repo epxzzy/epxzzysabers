@@ -4,7 +4,7 @@ import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.item.types.SaberGauntlet;
 import com.epxzzy.epxzzysabers.misc.KewlFightsOrchestrator;
-import com.epxzzy.epxzzysabers.networking.ModMessages;
+import com.epxzzy.epxzzysabers.networking.SaberMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerAttackPacket;
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerDefendPacket;
 import com.epxzzy.epxzzysabers.util.SaberTags;
@@ -12,6 +12,7 @@ import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import com.epxzzy.epxzzysabers.util.StackHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
@@ -30,6 +31,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Random;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin implements PlayerHelperLmao {
@@ -197,7 +200,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
             }
 
-            ModMessages.fuckingAnnounce(new ClientboundPlayerDefendPacket(that.getId(), this.defending, this.defendProgress), that);
+            SaberMessages.fuckingAnnounce(new ClientboundPlayerDefendPacket(that.getId(), this.defending, this.defendProgress), that);
 
         }
     }
@@ -212,12 +215,29 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         Player that = ((Player) (Object) this);
         Entity notThat = pTarget;
 
+        epxzzySabers.LOGGER.info("server level: " +  !that.level().isClientSide);
+
         if(SaberGauntlet.checkForSaberCharge(that, true)){
 
-            for(LivingEntity livingentity : that.level().getEntitiesOfClass(LivingEntity.class, Items.STONE_SWORD.getSweepHitBox(that.getMainHandItem(), that, pTarget))) {
-                double entityReachSq = Mth.square(that.getEntityReach()); // Use entity reach instead of constant 9.0. Vanilla uses bottom center-to-center checks here, so don't update this to use canReach, since it uses closest-corner checks.
-                if (livingentity != that && livingentity != pTarget && !that.isAlliedTo(livingentity) && (!(livingentity instanceof ArmorStand) || !((ArmorStand)livingentity).isMarker()) && that.distanceToSqr(livingentity) < entityReachSq) {
-                    livingentity.knockback((double)0.4F, (double)Mth.sin(that.getYRot() * ((float)Math.PI / 180F)), (double)(-Mth.cos(that.getYRot() * ((float)Math.PI / 180F))));
+            for(LivingEntity livingentity : that.level().getEntitiesOfClass(
+                    LivingEntity.class,
+                    pTarget.getBoundingBox().inflate(1.0D, 0.25D, 1.0D)
+            )) {
+                double entityReachSq = Mth.square(that.getEntityReach());
+                if (
+                        livingentity != that &&
+                        livingentity != pTarget &&
+                        !that.isAlliedTo(livingentity) &&
+                        (
+                                !(livingentity instanceof ArmorStand) || !( (ArmorStand) livingentity).isMarker()
+                        ) &&
+                        that.distanceToSqr(livingentity) < entityReachSq
+                ) {
+                    livingentity.knockback(
+                            0.4F,
+                            Mth.sin(that.getYRot() * ((float)Math.PI / 180F)),
+                            (-Mth.cos(that.getYRot() * ((float)Math.PI / 180F)))
+                    );
                     for (int b = 0; b != 3; b++ ){
                         livingentity.invulnerableTime = 0;
                         livingentity.hurt(that.damageSources().playerAttack(that), 1);
@@ -229,6 +249,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             }
 
             that.sweepAttack();
+            epxzzySabers.LOGGER.debug("");
         }
 
         if (!that.level().isClientSide() && that.getMainHandItem().is(SaberTags.Items.LIGHTSABER)) {
@@ -237,13 +258,12 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
                 this.attacking = true;
                 this.attackingHand = that.swingingArm;
             }
-            this.attacking = true;
 
             CompoundTag tagger = that.getMainHandItem().getOrCreateTag();
             int old = tagger.getCompound("display").getInt("atk");
-            int sequential = old > 0 && old < 8 ? old + 1 : 1;
-            int random = StackHelper.random1to8(old);
-            int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(old, that);
+            //int sequential = old > 0 && old < 8 ? old + 1 : 1;
+            //problematic method call removed
+            int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(old, (ServerPlayer) that);
             tagger.getCompound("display").putInt("atk", methodic);
 
             //epxzzysabers.LOGGER.debug("next possible attack value  {}", baller);
@@ -251,10 +271,10 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             that.getMainHandItem().setTag(tagger);
 
 
-            //ModMessages.sendToServer(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress));
+            //SaberMessages.sendToServer(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress));
             epxzzySabers.LOGGER.debug("attacking {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
 
-            ModMessages.fuckingAnnounce(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress), that);
+            SaberMessages.fuckingAnnounce(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress), that);
 
         }
     }
