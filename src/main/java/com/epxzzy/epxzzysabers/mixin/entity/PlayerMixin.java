@@ -148,7 +148,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         this.defendProgress = packet.defendProgress;
         this.defending = packet.defending;
 
-        epxzzySabers.LOGGER.debug("successfully synced DEF for {}", that);
+        //epxzzySabers.LOGGER.debug("successfully synced DEF for {}", that);
     }
 
     public void SyncATKtoPacket(ClientboundPlayerAttackPacket packet) {
@@ -157,7 +157,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         this.attackProgress = packet.attackProgress;
         this.attacking = packet.attacking;
 
-        epxzzySabers.LOGGER.debug("successfully synced ATK for {}", that);
+        //epxzzySabers.LOGGER.debug("successfully synced ATK for {}", that);
     }
 
 

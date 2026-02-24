@@ -7,7 +7,8 @@ import com.epxzzy.epxzzysabers.item.SaberItems;
         import com.epxzzy.epxzzysabers.sound.SaberSounds;
 import com.epxzzy.epxzzysabers.util.LevelHelper;
 import com.epxzzy.epxzzysabers.util.SaberTags;
-        import net.minecraft.network.FriendlyByteBuf;
+import com.epxzzy.epxzzysabers.util.StackHelper;
+import net.minecraft.network.FriendlyByteBuf;
         import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -47,7 +48,7 @@ public class ServerboundSaberAbilityPacket {
                 Level pLevel = player.level();
                 ItemStack pStack = player.getItemInHand(InteractionHand.MAIN_HAND);
 
-                if (pStack.is(SaberItems.ROTARY_SABER.get())) {
+                if (pStack.is(SaberItems.ROTARY_SABER.get()) && StackHelper.isActive(pStack)) {
                     if (!(player.getCooldowns().isOnCooldown(pStack.getItem()))) {
                         player.getCooldowns().addCooldown(pStack.getItem(), 80);
                         player.stopUsingItem();
@@ -83,7 +84,7 @@ public class ServerboundSaberAbilityPacket {
                     }
                 }
 
-                if (pStack.is(SaberItems.SABER_GAUNTLET.get())) {
+                if (pStack.is(SaberItems.SABER_GAUNTLET.get()) && StackHelper.isActive(pStack)) {
                     if (!(player.getCooldowns().isOnCooldown(pStack.getItem()))) {
                         player.getCooldowns().addCooldown(pStack.getItem(), 60);
 

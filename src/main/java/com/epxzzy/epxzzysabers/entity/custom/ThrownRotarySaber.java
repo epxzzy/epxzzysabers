@@ -63,7 +63,7 @@ public class ThrownRotarySaber extends AbstractArrow {
         //int[] colour = ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour));
         //epxzzySabers.LOGGER.debug("colours have been set as: " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[0] + " " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[1] + " " +  ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour))[2]);
         if (this.entityData.get(Gay)) {
-            return ColourConverter.rainbowColor((int) System.currentTimeMillis() * 2);
+            return ColourConverter.rainbowColor((int) System.currentTimeMillis());
         }
 
         return ColourConverter.PortedDecimaltoRGB(this.entityData.get(Decimal_Colour));

@@ -25,6 +25,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
@@ -140,8 +141,12 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         this.addWidget(STANCE_TAB_BUTTON);
         //this.addWidget(FLOURISH_TAB_BUTTON);
         STANCE_TAB_BUTTON.setStateTriggered(true);
+
         PLAYERpreview = new LocalPlayer(this.getMinecraft(), this.minecraft.level, this.minecraft.getConnection(), null, null, false, false);
         PLAYERpreview.setCustomNameVisible(true);
+        PLAYERpreview.getEntityData().set(Player.DATA_PLAYER_MODE_CUSTOMISATION, minecraft.player.getEntityData().get(Player.DATA_PLAYER_MODE_CUSTOMISATION));
+
+
         //PLAYERpreview.setShiftKeyDown(true);
 
         UpdateServerRecipe();

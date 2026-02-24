@@ -95,6 +95,7 @@ public class ColourConverter {
     }
 
     public static int[] rainbowColor(int timeStep) {
+        timeStep = (int) (timeStep * 0.5);
         int localTimeStep = Math.abs(timeStep) % 1536;
         int timeStepInPhase = localTimeStep % 256;
         int phaseBlue = localTimeStep / 256;

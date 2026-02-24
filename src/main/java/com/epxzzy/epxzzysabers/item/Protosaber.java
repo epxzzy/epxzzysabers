@@ -221,7 +221,7 @@ public class Protosaber extends Item {
     public static int getColor(ItemStack pStack) {
         CompoundTag compoundtag = pStack.getOrCreateTagElement("display");
         if (compoundtag.getBoolean("gay")) {
-            return ColourConverter.portedRGBtoDecimal(ColourConverter.rainbowColor((int) System.currentTimeMillis() * 2));
+            return ColourConverter.portedRGBtoDecimal(ColourConverter.rainbowColor((int) System.currentTimeMillis()));
         }
 
         if (compoundtag.getInt("colour") == 0) {
