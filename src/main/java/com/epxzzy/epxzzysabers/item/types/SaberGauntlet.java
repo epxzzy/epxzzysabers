@@ -6,6 +6,7 @@ import com.epxzzy.epxzzysabers.rendering.item.SaberGauntletItemRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.epxzzysabers.util.AnimationTickHolder;
 import com.epxzzy.epxzzysabers.util.LevelHelper;
+import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -14,6 +15,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -45,8 +47,8 @@ import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber
 public class SaberGauntlet extends Protosaber {
-    int supercharredTime = 0;
     int CHARGEDDAMAGE = 8;
+    int MAXCHARGEDUR = 160;
 
     //0 == natty/normal, 300 == goddamn this thing is hot
     public static final AttributeModifier singleRangeAttributeModifier =
@@ -57,7 +59,7 @@ public class SaberGauntlet extends Protosaber {
             ImmutableMultimap.of(ForgeMod.BLOCK_REACH.get(), singleRangeAttributeModifier));
 
 
-    public static final String EXTENDO_MARKER = "gauntletMarker";
+    public static final String GAUNTLET_MARKER = "gauntletMarker";
 
     public SaberGauntlet(Properties pProperties, float pRANGE, int pDamage, int pSpeed) {
         super(pProperties, pRANGE, pDamage, pSpeed);
@@ -72,57 +74,66 @@ public class SaberGauntlet extends Protosaber {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if(pLevel.isClientSide()) return;
+        if(pEntity instanceof LivingEntity pLiving && !(pLevel.isClientSide())) {
+            if (pLiving instanceof ServerPlayer pPlayer) {
+                PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) pPlayer;
 
-        if (supercharredTime > 1) {
-            supercharredTime--;
-        }
+                if (MixinPlayer.getChargeDuration() > 1) {
+                    MixinPlayer.setChargeDuration(MixinPlayer.getChargeDuration()-1);
+                }
 
-        if (supercharredTime == 1) {
-            pStack.getOrCreateTag().putBoolean("ChargedBoiii", false);
-            pLevel.playSound(null, pEntity.blockPosition(), SoundEvents.AXE_STRIP, SoundSource.PLAYERS);
-            supercharredTime--;
+                if (MixinPlayer.getChargeDuration() == 1) {
+                    pStack.getOrCreateTag().putBoolean("ChargedBoiii", false);
+                    pLevel.playSound(null, pEntity.blockPosition(), SoundEvents.AXE_STRIP, SoundSource.PLAYERS);
+                    MixinPlayer.setChargeDuration(MixinPlayer.getChargeDuration()-1);
 
-            CompoundTag tagsToApply = pStack.getOrCreateTag().copy();
-            tagsToApply.put("AttributeModifiers", new ListTag());
-            ListTag listtag = tagsToApply.getList("AttributeModifiers", 10);
+                    CompoundTag tagsToApply = pStack.getOrCreateTag().copy();
+                    tagsToApply.put("AttributeModifiers", new ListTag());
+                    ListTag listtag = tagsToApply.getList("AttributeModifiers", 10);
 
 
-            CompoundTag baseAttackAttribute = (new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", ATTACK_DAMAGE, AttributeModifier.Operation.ADDITION)).save();
+                    CompoundTag baseAttackAttribute = (new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", ATTACK_DAMAGE, AttributeModifier.Operation.ADDITION)).save();
 
-            baseAttackAttribute.putString("AttributeName", BuiltInRegistries.ATTRIBUTE.getKey(Attributes.ATTACK_DAMAGE).toString());
-            baseAttackAttribute.putString("Slot", EquipmentSlot.MAINHAND.getName());
+                    baseAttackAttribute.putString("AttributeName", BuiltInRegistries.ATTRIBUTE.getKey(Attributes.ATTACK_DAMAGE).toString());
+                    baseAttackAttribute.putString("Slot", EquipmentSlot.MAINHAND.getName());
 
-            listtag.add(baseAttackAttribute);
-            pStack.setTag(tagsToApply);
+                    listtag.add(baseAttackAttribute);
+                    pStack.setTag(tagsToApply);
 
+                }
+            }
         }
 
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
     @Override
-    public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
-        if(pLevel.isClientSide()) return;
-        if (pRemainingUseDuration == 1) {
-            pStack.getOrCreateTag().putBoolean("ChargedBoiii", true);
-            supercharredTime = 160;
+    public void onUseTick(Level pLevel, LivingEntity pLiving, ItemStack pStack, int pRemainingUseDuration) {
+        if(!(pLevel.isClientSide())) {
+            if (pLiving instanceof ServerPlayer pPlayer) {
+                PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) pPlayer;
 
-            CompoundTag tagsToApply = pStack.getOrCreateTag().copy();
-            tagsToApply.put("AttributeModifiers", new ListTag());
-            ListTag listtag = tagsToApply.getList("AttributeModifiers", 10);
+                if (pRemainingUseDuration == 1) {
+                    pStack.getOrCreateTag().putBoolean("ChargedBoiii", true);
+                    MixinPlayer.setChargeDuration(MAXCHARGEDUR);
+
+                    CompoundTag tagsToApply = pStack.getOrCreateTag().copy();
+                    tagsToApply.put("AttributeModifiers", new ListTag());
+                    ListTag listtag = tagsToApply.getList("AttributeModifiers", 10);
 
 
-            CompoundTag baseAttackAttribute = (new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", ATTACK_DAMAGE + CHARGEDDAMAGE, AttributeModifier.Operation.ADDITION)).save();
+                    CompoundTag baseAttackAttribute = (new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", ATTACK_DAMAGE + CHARGEDDAMAGE, AttributeModifier.Operation.ADDITION)).save();
 
-            baseAttackAttribute.putString("AttributeName", BuiltInRegistries.ATTRIBUTE.getKey(Attributes.ATTACK_DAMAGE).toString());
-            baseAttackAttribute.putString("Slot", EquipmentSlot.MAINHAND.getName());
+                    baseAttackAttribute.putString("AttributeName", BuiltInRegistries.ATTRIBUTE.getKey(Attributes.ATTACK_DAMAGE).toString());
+                    baseAttackAttribute.putString("Slot", EquipmentSlot.MAINHAND.getName());
 
-            listtag.add(baseAttackAttribute);
-            pStack.setTag(tagsToApply);
+                    listtag.add(baseAttackAttribute);
+                    pStack.setTag(tagsToApply);
 
-            pLevel.playSound(null, pLivingEntity.blockPosition(), SoundEvents.AXE_SCRAPE, SoundSource.PLAYERS);
-            pLivingEntity.stopUsingItem();
+                    pLevel.playSound(null, pLiving.blockPosition(), SoundEvents.AXE_SCRAPE, SoundSource.PLAYERS);
+                    pLiving.stopUsingItem();
+                }
+            }
         }
     }
 
@@ -143,17 +154,17 @@ public class SaberGauntlet extends Protosaber {
         boolean inMain = checkForSaberCharge((Entity) player, true);
 
         boolean holdingExtendo = inOff ^ inMain;
-        boolean wasHoldingExtendo = persistentData.contains(EXTENDO_MARKER);
+        boolean wasHoldingExtendo = persistentData.contains(GAUNTLET_MARKER);
 
         if (holdingExtendo != wasHoldingExtendo) {
             if (!holdingExtendo) {
                 player.getAttributes()
                         .removeAttributeModifiers(rangeModifier.get());
-                persistentData.remove(EXTENDO_MARKER);
+                persistentData.remove(GAUNTLET_MARKER);
             } else {
                 player.getAttributes()
                         .addTransientAttributeModifiers(rangeModifier.get());
-                persistentData.putBoolean(EXTENDO_MARKER, true);
+                persistentData.putBoolean(GAUNTLET_MARKER, true);
             }
         }
     }
@@ -163,7 +174,7 @@ public class SaberGauntlet extends Protosaber {
         Player player = event.getEntity();
         CompoundTag persistentData = player.getPersistentData();
 
-        if (persistentData.contains(EXTENDO_MARKER))
+        if (persistentData.contains(GAUNTLET_MARKER))
             player.getAttributes()
                     .addTransientAttributeModifiers(rangeModifier.get());
     }

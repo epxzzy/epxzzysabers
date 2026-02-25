@@ -8,6 +8,9 @@ public interface PlayerHelperLmao {
     int getFlightDuration();
     void setFlyCooldown(int i);
     void setFlightDuration(int val);
+    int getChargeDuration();
+    void setChargeDuration(int val);
+
 
 
     public void LogFlightDetails();

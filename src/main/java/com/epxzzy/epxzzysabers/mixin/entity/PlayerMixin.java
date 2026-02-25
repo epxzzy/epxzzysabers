@@ -59,6 +59,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     //160 == cant fly, 0 == can fly
     public int flightDurationVar = 200;
     //0 == no more fly, 300 == flyyy
+    int supercharredTime = 0;
 
 
 
@@ -336,5 +337,12 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     public void setFlightDuration(int val){
         flightDurationVar = val;
     }
-
+    @Unique
+    public int getChargeDuration() {
+        return supercharredTime;
+    }
+    @Unique
+    public void setChargeDuration(int val){
+        supercharredTime= val;
+    }
 }
