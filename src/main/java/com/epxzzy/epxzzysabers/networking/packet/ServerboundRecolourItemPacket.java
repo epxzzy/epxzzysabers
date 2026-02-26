@@ -1,5 +1,6 @@
 package com.epxzzy.epxzzysabers.networking.packet;
 
+import com.epxzzy.epxzzysabers.networking.ServerPacketHandler;
 import com.epxzzy.epxzzysabers.screen.tint.KyberStationTintMenu;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -28,7 +29,9 @@ public class ServerboundRecolourItemPacket {
        return COLOURS;
     }
 
-
+    public boolean GAY(){
+        return this.GAY;
+    }
 
     public void toBytes(FriendlyByteBuf buf) {
         buf.writeVarIntArray(COLOURS);
@@ -38,20 +41,7 @@ public class ServerboundRecolourItemPacket {
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context contextt = supplier.get();
         contextt.enqueueWork(() -> {
-
-            AbstractContainerMenu menuu = contextt.getSender().containerMenu;
-            if (menuu instanceof KyberStationTintMenu stationMenu) {
-                if (!stationMenu.stillValid(contextt.getSender())) {
-                    return;
-
-                }
-                stationMenu.setItemColour(this.getColourIndexes(), GAY);
-            }
-
-
-            //contextt.getSender().sendSystemMessage(Component.literal("blow me sucka"+COLOURS[0]+""+COLOURS[1]+""+COLOURS[2]+""));
-
-
+            ServerPacketHandler.handleRecolour(this, supplier);
         });
         return true;
     }

@@ -62,6 +62,7 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onKeyRegister(RegisterKeyMappingsEvent event) {
             event.register(KeyBinding.SABER_ABILITY_KEY);
+            event.register(KeyBinding.SABER_STANCE_KEY);
         }
 
         @SubscribeEvent

@@ -36,11 +36,6 @@ public class SaberMessages {
                 .encoder(ServerboundRecolourItemPacket::toBytes)
                 .consumerMainThread(ServerboundRecolourItemPacket::handle)
                 .add();
-        net.messageBuilder(ServerboundKyberMenuSlotPosToggle.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(ServerboundKyberMenuSlotPosToggle::new)
-                .encoder(ServerboundKyberMenuSlotPosToggle::toBytes)
-                .consumerMainThread(ServerboundKyberMenuSlotPosToggle::handle)
-                .add();
         net.messageBuilder(ServerboundKyberMenuTabChange.class, id(), NetworkDirection.PLAY_TO_SERVER)
                 .decoder(ServerboundKyberMenuTabChange::new)
                 .encoder(ServerboundKyberMenuTabChange::toBytes)
@@ -57,6 +52,7 @@ public class SaberMessages {
                 .encoder(ServerboundSaberDeflectPacket::toBytes)
                 .consumerMainThread(ServerboundSaberDeflectPacket::handle)
                 .add();
+
         net.messageBuilder(ClientboundPlayerAttackPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(ClientboundPlayerAttackPacket::new)
                 .encoder(ClientboundPlayerAttackPacket::toBytes)
@@ -68,17 +64,16 @@ public class SaberMessages {
                 .consumerMainThread(ClientboundPlayerDefendPacket::handle)
                 .add();
 
-
     }
 
     public static <MSG> void sendToServer(MSG message){
         INSTANCE.sendToServer(message);
     }
 
-
     public static <MSG> void sendToPlayer(MSG message, ServerPlayer player){
         INSTANCE.send(PacketDistributor.PLAYER.with(()->player),message );
     }
+
     public static <MSG> void fuckingAnnounce(MSG message, Player player){
         INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player),message);
     }
