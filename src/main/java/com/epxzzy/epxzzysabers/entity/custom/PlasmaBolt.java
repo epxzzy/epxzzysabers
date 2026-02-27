@@ -19,6 +19,9 @@ import net.minecraft.world.phys.HitResult;
 
 
 public class PlasmaBolt extends AbstractHurtingProjectile implements ItemSupplier {
+    private int DecayTickCount;
+    private static int DECAYDURATION = 10;
+
     public PlasmaBolt(EntityType<PlasmaBolt> entityType, Level level) {
         super(entityType, level);
     }
@@ -27,6 +30,23 @@ public class PlasmaBolt extends AbstractHurtingProjectile implements ItemSupplie
         this.setPos(owner.getX(),owner.getEyeY()-0.1,owner.getZ());
         this.setOwner(owner);
     }
+
+    @Override
+    public void tick() {
+
+        if(DecayTickCount >= DECAYDURATION){
+            goPoof();
+        }
+        DecayTickCount++;
+
+        super.tick();
+    }
+
+    public void goPoof(){
+        this.level().addParticle(ParticleTypes.SWEEP_ATTACK, this.position().x, this.position().y ,this.position().z, 0.0D, 0.0D, 0.0D);
+        this.discard();
+    }
+
     @Override
     protected AABB makeBoundingBox() {
         float var1 = this.getType().getDimensions().width / 2.0F;
@@ -49,6 +69,7 @@ public class PlasmaBolt extends AbstractHurtingProjectile implements ItemSupplie
     protected boolean canHitEntity(Entity target) {
         return !(target instanceof PlasmaBolt) && super.canHitEntity(target);
     }
+
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
@@ -61,48 +82,38 @@ public class PlasmaBolt extends AbstractHurtingProjectile implements ItemSupplie
             }
         }
     }
+
     @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
-        this.discard();
+        goPoof();
     }
+
     @Override
     protected void onHit(HitResult result) {
         super.onHit(result);
         if (!this.level().isClientSide) {
-            this.discard();
+            goPoof();
         }
     }
+
     @Override
     protected boolean shouldBurn() {
         return false;
     }
+
     @Override
     public ItemStack getItem() {
         return ItemStack.EMPTY;
     }
+
     @Override
     protected float getInertia() {
         return 1.0F;
     }
-
     @Override
     protected ParticleOptions getTrailParticle() {
-        return ParticleTypes.ELECTRIC_SPARK;
-    }
-
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-
-
-    public void readAdditionalSaveData(CompoundTag pCompound) {
-        super.readAdditionalSaveData(pCompound);
-        ItemStack itemstack = ItemStack.of(pCompound.getCompound("Item"));
-        this.setItem(itemstack);
-    }
-
-    private void setItem(ItemStack itemstack) {
+        return ParticleTypes.END_ROD;
     }
 }
 

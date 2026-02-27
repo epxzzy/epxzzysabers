@@ -35,8 +35,10 @@ public class ThrownRotarySaber extends AbstractArrow {
     private static final EntityDataAccessor<Integer> Decimal_Colour = SynchedEntityData.defineId(ThrownRotarySaber.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> Gay = SynchedEntityData.defineId(ThrownRotarySaber.class, EntityDataSerializers.BOOLEAN);
 
-    private boolean dealtDamage;
+    private boolean returning;
     public int clientSideReturnSaberTickCount;
+    public int PathTickCount;
+    public static int PATHDECAYDURATION = 10;
 
     public ThrownRotarySaber(EntityType<ThrownRotarySaber> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -76,8 +78,8 @@ public class ThrownRotarySaber extends AbstractArrow {
      * Called to update the entity's position/logic.
      */
     public void tick() {
-        if (this.inGroundTime > 1) {
-            this.dealtDamage = true;
+        if (this.inGroundTime > 1 || this.PathTickCount >= PATHDECAYDURATION) {
+            this.returning = true;
         }
 
         List<LivingEntity> titesInRegion = LevelHelper.getEntitiesInRadius(this.position(), this.level(), 2.5);
@@ -91,13 +93,17 @@ public class ThrownRotarySaber extends AbstractArrow {
 
         this.playSound(SaberSounds.SWING.get(), 0.05f, 1.0f);
         Entity entity = this.getOwner();
-        if ((this.dealtDamage || this.isNoPhysics()) && entity != null) {
+        if(!this.returning){
+            this.PathTickCount++;
+        }
+        if ((this.returning || this.isNoPhysics()) && entity != null) {
             if (!this.isAcceptibleReturnOwner()) {
 
                 if (!this.level().isClientSide && this.pickup == Pickup.ALLOWED) {
                     //this.spawnAtLocation(this.getPickupItem(), 0.1F);
                     //this.saberitem.get
                 }
+
 
                 //this.discard();
             } else {
@@ -115,12 +121,14 @@ public class ThrownRotarySaber extends AbstractArrow {
                 }
 
                 ++this.clientSideReturnSaberTickCount;
+                this.PathTickCount = 0;
             }
         }
         if (entity == null) {
             this.spawnAtLocation(this.getPickupItem(), 0.1F);
             this.discard();
         }
+
 
         super.tick();
     }
@@ -147,16 +155,12 @@ public class ThrownRotarySaber extends AbstractArrow {
         return this.saberitem.copy();
     }
 
-    public boolean isFoil() {
-        return false;
-    }
-
-    /**
+       /**
      * Gets the EntityHitResult representing the entity hit
      */
     @Nullable
     protected EntityHitResult findHitEntity(@NotNull Vec3 pStartVec, @NotNull Vec3 pEndVec) {
-        return this.dealtDamage ? null : super.findHitEntity(pStartVec, pEndVec);
+        return this.returning ? null : super.findHitEntity(pStartVec, pEndVec);
     }
 
     /**
@@ -169,7 +173,7 @@ public class ThrownRotarySaber extends AbstractArrow {
         Entity entity1 = this.getOwner();
         DamageSource dmgsrc = this.damageSources().generic();
 
-        this.dealtDamage = true;
+        this.returning = true;
         SoundEvent soundevent = SaberSounds.CLASH.get();
         if (entity.hurt(dmgsrc, f)) {
             if (entity.getType() == EntityType.ENDERMAN) {
@@ -230,13 +234,13 @@ public class ThrownRotarySaber extends AbstractArrow {
             this.saberitem = ItemStack.of(pCompound.getCompound("RotarySaber"));
         }
 
-        this.dealtDamage = pCompound.getBoolean("DealtDamage");
+        this.returning = pCompound.getBoolean("Returning");
     }
 
     public void addAdditionalSaveData(@NotNull CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.put("RotarySaber", this.saberitem.save(new CompoundTag()));
-        pCompound.putBoolean("DealtDamage", this.dealtDamage);
+        pCompound.putBoolean("Returning", this.returning);
     }
 
     public void tickDespawn() {

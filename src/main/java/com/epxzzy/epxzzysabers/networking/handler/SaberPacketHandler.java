@@ -125,7 +125,7 @@ public class SaberPacketHandler {
 
                     ThrownRotarySaber thrownsaber = new ThrownRotarySaber(pLevel, player, pStack);
                     //epxzzySabers.LOGGER.debug("colour given is:" + RotarySaber.getColor(pStack));
-                    thrownsaber.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 8 * 0.5F, 1.0F);
+                    thrownsaber.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 4 * 0.5F, 1.0F);
                     if (player.getAbilities().instabuild) {
                         thrownsaber.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                     }
@@ -146,7 +146,7 @@ public class SaberPacketHandler {
 
                     PlasmaBolt blasterbolt = new PlasmaBolt(player, pLevel);
 
-                    blasterbolt.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 1 * 0.5F, 1.0F);
+                    blasterbolt.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F + 0.5F, 1.0F);
                     pLevel.addFreshEntity(blasterbolt);
                     pLevel.playSound((Player) null, blasterbolt, SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.PLAYERS, 0.05F, 1.0F);
                 }
