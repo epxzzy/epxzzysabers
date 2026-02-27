@@ -63,9 +63,9 @@ public class LevelHelper {
 
                                 continue;
                             }
-                            if (ThrownRotarySaber.class.isAssignableFrom(entity1.getClass())) {
+                            if (entity1 instanceof ThrownRotarySaber saber) {
                                 //epxzzySabers.LOGGER.debug("deflected a thrown lightsaber");
-                                ((AbstractArrow) entity1).shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0.0F, 2.0F, 1.0F);
+                                saber.shootFromRotationSaber(entity, entity.getXRot(), entity.getYRot(), 0.0F, 2.0F, 1.0F);
                                 entity.level().playSound((Player) null, entity.blockPosition(), SaberSounds.CLASH.get(), SoundSource.PLAYERS, 0.5f, 1f);
 
                                 continue;
