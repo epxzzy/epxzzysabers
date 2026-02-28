@@ -7,6 +7,7 @@ import com.epxzzy.epxzzysabers.misc.KewlFightsOrchestrator;
 import com.epxzzy.epxzzysabers.networking.SaberMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerAttackPacket;
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerDefendPacket;
+import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerStancePacket;
 import com.epxzzy.epxzzysabers.util.SaberTags;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import com.epxzzy.epxzzysabers.util.StackHelper;
@@ -36,9 +37,9 @@ import java.util.Random;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin implements PlayerHelperLmao {
-    @Shadow
-    @Final
-    private Inventory inventory;
+    public boolean stancing = false;
+    public int stanceform = 0;
+
     public boolean attacking = false;
     public InteractionHand attackingHand;
     public int attackProgress = 0;
@@ -67,8 +68,6 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     public void LogFlightDetails() {
         //epxzzysabers.LOGGER.debug("PROG: {} ATTK: {}, BLKPROG: {}, DEF: {}", this.attackProgress, this.attacking, this.defendProgress, this.defending);
     }
-
-    ;
 
 
     @Inject(
@@ -124,6 +123,13 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     }
 
 
+    public boolean getSaberStanceDown() {
+        return this.stancing;
+    }
+    public int getSaberStanceForm() {
+        return this.stanceform;
+    }
+
     public float getSaberAttackAnim() {
         float f = this.SaberAnim - this.oSaberAnim;
         if (f < 0.0F) {
@@ -142,6 +148,14 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         return this.oSaberdefAnim + f;
     }
 
+    public void SyncSTCtoPacket(ClientboundPlayerStancePacket packet) {
+        Player that = ((Player) (Object) this);
+
+        this.stancing = packet.stancing;
+        this.stanceform = packet.stancing?packet.stanceform:0;
+
+        epxzzySabers.LOGGER.debug("successfully synced STC for {}", that);
+    }
 
     public void SyncDEFtoPacket(ClientboundPlayerDefendPacket packet) {
         Player that = ((Player) (Object) this);

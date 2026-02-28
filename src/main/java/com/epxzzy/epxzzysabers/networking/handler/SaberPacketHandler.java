@@ -5,6 +5,9 @@ import com.epxzzy.epxzzysabers.entity.custom.ThrownRotarySaber;
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.item.SaberItems;
+import com.epxzzy.epxzzysabers.networking.SaberMessages;
+import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerAttackPacket;
+import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerStancePacket;
 import com.epxzzy.epxzzysabers.sound.SaberSounds;
 import com.epxzzy.epxzzysabers.util.LevelHelper;
 import com.epxzzy.epxzzysabers.util.SaberTags;
@@ -187,4 +190,14 @@ public class SaberPacketHandler {
             }
         }
     }
+    public static void handleStancePacket(Supplier<NetworkEvent.Context> supplier, boolean keydown){
+        NetworkEvent.Context contextt = supplier.get();
+
+        if (contextt.getSender() != null) {
+            ServerPlayer player = contextt.getSender();
+
+            SaberMessages.fuckingAnnounce(new ClientboundPlayerStancePacket(player.getId(), keydown, Protosaber.getStance(player).ordinal()), player);
+        }
+    }
+
 }

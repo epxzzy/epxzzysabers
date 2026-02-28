@@ -22,6 +22,25 @@ public class PlayerStanceRenderer {
             //juyo
         }
     }
+    public static void setStance(int stance, boolean Lefty, HumanoidModel<?> model) {
+        switch (stance) {
+            case 1 -> SetStanceForm1(Lefty, model);
+            //shii-cho
+            case 2 -> SetStanceForm2(Lefty, model);
+            //makashi
+            case 3 -> SetStanceForm3(Lefty, model);
+            //soresu
+            case 4 -> SetStanceForm4(Lefty, model);
+            //ataru
+            case 5 -> SetStanceForm5(Lefty, model);
+            //shien
+            case 6 -> SetStanceForm6(Lefty, model);
+            //niman
+            case 7 -> SetStanceForm7(Lefty, model);
+            //juyo
+        }
+    }
+
 
     public static void SetStanceForm1(Boolean lefty, HumanoidModel<?> model) {
         model.head.setPos(0, 2, -3);

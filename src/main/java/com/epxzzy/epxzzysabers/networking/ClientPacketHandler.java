@@ -2,6 +2,7 @@ package com.epxzzy.epxzzysabers.networking;
 
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerAttackPacket;
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerDefendPacket;
+import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerStancePacket;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -11,6 +12,22 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class ClientPacketHandler {
+    public static void handlePacket(ClientboundPlayerStancePacket packet, Supplier<NetworkEvent.Context> supplier) {
+        NetworkEvent.Context contextt = supplier.get();
+        contextt.enqueueWork(() -> {
+            Level level = contextt.getSender() != null ? contextt.getSender().level() : null;
+            if (level == null) {
+                level = net.minecraft.client.Minecraft.getInstance().level;
+            }
+            if (level != null) {
+                Entity entity = level.getEntity(packet.entityId);
+                if (entity instanceof Player player && player instanceof PlayerHelperLmao mixin) {
+                    mixin.SyncSTCtoPacket(packet);
+                }
+            }
+        });
+    }
+
     public static void handlePacket(ClientboundPlayerDefendPacket packet, Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context contextt = supplier.get();
         contextt.enqueueWork(() -> {

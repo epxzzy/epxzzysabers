@@ -52,7 +52,18 @@ public class SaberMessages {
                 .encoder(ServerboundSaberDeflectPacket::toBytes)
                 .consumerMainThread(ServerboundSaberDeflectPacket::handle)
                 .add();
+        net.messageBuilder(ServerboundSaberStancePacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(ServerboundSaberStancePacket::new)
+                .encoder(ServerboundSaberStancePacket::toBytes)
+                .consumerMainThread(ServerboundSaberStancePacket::handle)
+                .add();
 
+
+        net.messageBuilder(ClientboundPlayerStancePacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(ClientboundPlayerStancePacket::new)
+                .encoder(ClientboundPlayerStancePacket::toBytes)
+                .consumerMainThread(ClientboundPlayerStancePacket::handle)
+                .add();
         net.messageBuilder(ClientboundPlayerAttackPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(ClientboundPlayerAttackPacket::new)
                 .encoder(ClientboundPlayerAttackPacket::toBytes)

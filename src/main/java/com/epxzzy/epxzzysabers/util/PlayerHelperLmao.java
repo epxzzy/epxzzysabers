@@ -2,6 +2,7 @@ package com.epxzzy.epxzzysabers.util;
 
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerAttackPacket;
 import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerDefendPacket;
+import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerStancePacket;
 
 public interface PlayerHelperLmao {
     int getFlyCooldown();
@@ -11,6 +12,11 @@ public interface PlayerHelperLmao {
     int getChargeDuration();
     void setChargeDuration(int val);
 
+
+
+    public void SyncSTCtoPacket(ClientboundPlayerStancePacket packet);
+    public boolean getSaberStanceDown();
+    public int getSaberStanceForm();
 
 
     public void LogFlightDetails();

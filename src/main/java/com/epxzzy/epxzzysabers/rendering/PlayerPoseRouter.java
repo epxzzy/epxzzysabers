@@ -70,6 +70,9 @@ public class PlayerPoseRouter {
         int attack = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk");
         float SaberSwingAnim = ((PlayerHelperLmao) player).getSaberAttackAnim();
         float SaberDefAnim = ((PlayerHelperLmao) player).getSaberDefendAnim();
+        boolean stancing = ((PlayerHelperLmao) player).getSaberStanceDown();
+        int stanceform = ((PlayerHelperLmao) player).getSaberStanceForm();
+
         //[ flight, mainhand ]
         boolean[] isInFlight = RotarySaber.checkForSaberFly(player);
 
@@ -99,6 +102,11 @@ public class PlayerPoseRouter {
         //stance pose
         if ((TagHelper.checkMainhandPoseableWeapon(player) && player.isShiftKeyDown())) {
             setBladedStance(player, model);
+            return;
+        }
+        //held stance pose
+        if (stancing) {
+            setBladedStance(player, model, stanceform);
             return;
         }
 
@@ -156,6 +164,9 @@ public class PlayerPoseRouter {
 
     private static void setBladedStance(Player player, HumanoidModel<?> model) {
         PlayerStanceRenderer.setPose(Protosaber.getStance(player), false, model);
+    }
+    private static void setBladedStance(Player player, HumanoidModel<?> model, int form) {
+        PlayerStanceRenderer.setStance(form, false, model);
     }
 
     private static void setBladedAttack(int attack, HumanoidModel<?> model, float lerper) {

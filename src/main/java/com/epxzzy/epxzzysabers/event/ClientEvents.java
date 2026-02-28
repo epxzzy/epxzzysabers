@@ -8,6 +8,7 @@ import com.epxzzy.epxzzysabers.entity.client.rotary.ThrownRotarySaberGuardModel;
 import com.epxzzy.epxzzysabers.misc.KeyBinding;
 import com.epxzzy.epxzzysabers.networking.SaberMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberAbilityPacket;
+import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberStancePacket;
 import com.epxzzy.epxzzysabers.util.AnimationTickHolder;
 import com.epxzzy.epxzzysabers.util.ScrollValueHandler;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
@@ -35,7 +36,7 @@ public class ClientEvents {
     @Mod.EventBusSubscriber(modid = epxzzySabers.MOD_ID, value = Dist.CLIENT)
     public static class ClientForgeEvents {
         //private static long bengignhold = 0;
-        //private static boolean held = false;
+        private static boolean wasUp = false;
 
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event) {
@@ -44,6 +45,17 @@ public class ClientEvents {
                 //Minecraft.getInstance().player.connection.send(new ServerboundRotarySaberAbilityPacket());
                 SaberMessages.sendToServer(new ServerboundSaberAbilityPacket());
             }
+
+            if (KeyBinding.SABER_STANCE_KEY.isDown()) {
+                wasUp = true;
+                SaberMessages.sendToServer(new ServerboundSaberStancePacket(KeyBinding.SABER_STANCE_KEY.isDown()));
+            }
+            if (wasUp && !KeyBinding.SABER_STANCE_KEY.isDown()) {
+                wasUp = false;
+                SaberMessages.sendToServer(new ServerboundSaberStancePacket(KeyBinding.SABER_STANCE_KEY.isDown()));
+
+            }
+
             /*
             if (KeyBinding.SABER_ABILITY_KEY.isDown()) {
                 if(!held){
