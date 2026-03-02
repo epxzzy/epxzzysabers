@@ -54,10 +54,6 @@ public abstract class CustomRenderedSaberModelRenderer extends CustomRenderedIte
         if (transformType != ItemDisplayContext.GUI && transformType != ItemDisplayContext.FIXED) {
             for (LivingEntity entity : allEntities) {
                 renderTransforms(stack, mainModel, renderer, transformType, ms, buffer, light, overlay, entity);
-
-                if ((entity.swinging) && StackHelper.isActive(stack) && !(((PlayerHelperLmao) entity).getSaberAttackAnim() > 0)){
-                    ItemTransformRouter.transform(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
-                }
             }
         }
 
