@@ -16,7 +16,8 @@ ideas n stuff:
  - [DONE] Saber gauntlet (high attack speed, low attack damage, low parry range)
  - Saber Whip (fishing rod like functionality, cant block but can be blocked)
  - Saber Trident (probably do something fun)
-
+ - Saber Chucks (nun-chucks, no special ability considered so far besides)
+ 
 //above stats are bs, update them too
 //also add more exotic saber types
 
