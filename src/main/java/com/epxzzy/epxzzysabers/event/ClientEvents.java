@@ -11,13 +11,16 @@ import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberAbilityPacket;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberStancePacket;
 import com.epxzzy.epxzzysabers.util.AnimationTickHolder;
 import com.epxzzy.epxzzysabers.util.ScrollValueHandler;
+import com.epxzzy.epxzzysabers.util.TagHelper;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 
 
 //import net.createmod.catnip.levelWrappers.WrappedClientLevel;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.server.packs.resources.ResourceProvider;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
@@ -45,15 +48,16 @@ public class ClientEvents {
                 //Minecraft.getInstance().player.connection.send(new ServerboundRotarySaberAbilityPacket());
                 SaberMessages.sendToServer(new ServerboundSaberAbilityPacket());
             }
-
-            if (!wasUp && KeyBinding.SABER_STANCE_KEY.isDown()) {
-                wasUp = true;
-                SaberMessages.sendToServer(new ServerboundSaberStancePacket(KeyBinding.SABER_STANCE_KEY.isDown()));
-            }
-            if (wasUp && !KeyBinding.SABER_STANCE_KEY.isDown()) {
-                wasUp = false;
-                SaberMessages.sendToServer(new ServerboundSaberStancePacket(KeyBinding.SABER_STANCE_KEY.isDown()));
-
+            Player player = Minecraft.getInstance().player;
+            if(TagHelper.checkMainhandPoseableWeapon(player)) {
+                if (!wasUp && KeyBinding.SABER_STANCE_KEY.isDown()) {
+                    wasUp = true;
+                    SaberMessages.sendToServer(new ServerboundSaberStancePacket(KeyBinding.SABER_STANCE_KEY.isDown()));
+                }
+                if (wasUp && !KeyBinding.SABER_STANCE_KEY.isDown()) {
+                    wasUp = false;
+                    SaberMessages.sendToServer(new ServerboundSaberStancePacket(KeyBinding.SABER_STANCE_KEY.isDown()));
+                }
             }
 
             /*

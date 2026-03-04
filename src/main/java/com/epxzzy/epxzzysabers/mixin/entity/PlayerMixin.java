@@ -123,12 +123,6 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     }
 
 
-    public boolean getSaberStanceDown() {
-        return this.stancing;
-    }
-    public int getSaberStanceForm() {
-        return this.stanceform;
-    }
 
     public float getSaberAttackAnim() {
         float f = this.SaberAnim - this.oSaberAnim;
@@ -359,4 +353,23 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     public void setChargeDuration(int val){
         supercharredTime= val;
     }
+    @Unique
+    public void setSaberStanceDown(boolean val) {
+        this.stancing = val;
+    }
+    @Unique
+    public boolean getSaberStanceDown() {
+        return this.stancing;
+    }
+    @Unique
+    public int getSaberStanceForm() {
+        return this.stanceform;
+    }
+    @Unique
+    public void setSaberStanceForm(int value) {
+        this.stanceform = value;
+    }
+
+
+
 }

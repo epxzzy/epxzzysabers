@@ -2,11 +2,13 @@ package com.epxzzy.epxzzysabers.screen.stance;
 
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
+import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.networking.SaberMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundKyberMenuTabChange;
 import com.epxzzy.epxzzysabers.rendering.playerposerenderers.BladeStance;
 import com.epxzzy.epxzzysabers.screen.components.KyberModes;
 import com.epxzzy.epxzzysabers.screen.components.KyberTabButton;
+import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -145,7 +147,7 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         PLAYERpreview = new LocalPlayer(this.getMinecraft(), this.minecraft.level, this.minecraft.getConnection(), null, null, false, false);
         PLAYERpreview.setCustomNameVisible(true);
         PLAYERpreview.getEntityData().set(Player.DATA_PLAYER_MODE_CUSTOMISATION, minecraft.player.getEntityData().get(Player.DATA_PLAYER_MODE_CUSTOMISATION));
-
+        setFakeStanceKeybind(PLAYERpreview, true, 0);
 
         //PLAYERpreview.setShiftKeyDown(true);
 
@@ -156,19 +158,16 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         //send packet to craft
         PLAYERpreview.setItemInHand(InteractionHand.MAIN_HAND, this.menu.resultSlot.getItem());
 
-        //PLAYERpreview.setShiftKeyDown(this.menu.resultSlot.hasItem());
-        //PLAYERpreview.setShiftKeyDown(true);
+        BladeStance stance = Protosaber.getStance(this.menu.resultSlot.getItem());
+        setFakeStanceKeybind(PLAYERpreview, true, stance.ordinal());
 
-        setShiftForThyPlayer(PLAYERpreview, true);
-        //PLAYERpreview.setShiftKeyDown(false);
-
-        PLAYERpreview.startUsingItem(InteractionHand.MAIN_HAND);
+        //PLAYERpreview.startUsingItem(InteractionHand.MAIN_HAND);
         //epxzzySabers.LOGGER.debug("is shifty downy {}", PLAYERpreview.isShiftKeyDown());
     }
-    public static void setShiftForThyPlayer(LocalPlayer pPlayer, boolean value){
-        Input inpoo = new Input();
-        inpoo.shiftKeyDown = true;
-        pPlayer.input = inpoo;
+    public static void setFakeStanceKeybind(LocalPlayer pPlayer, boolean value, int num){
+        ((PlayerHelperLmao)pPlayer).setSaberStanceDown(value);
+        ((PlayerHelperLmao)pPlayer).setSaberStanceForm(num);
+
     }
     @Override
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
@@ -333,7 +332,8 @@ public class KyberStationStanceScreen extends AbstractContainerScreen<KyberStati
         pEntity.setXRot(-f1 * 20.0F);
         pEntity.yHeadRot = pEntity.getYRot();
         pEntity.yHeadRotO = pEntity.getYRot();
-        pEntity.setShiftKeyDown(true);
+        //pEntity.setShiftKeyDown(true);
+        //epxzzySabers.LOGGER.info("player has " + ((PlayerHelperLmao)pEntity).getSaberStanceDown() + " for stance");
         renderEntityInInventory(pGuiGraphics, pX, pY, pScale, quaternionf, quaternionf1, pEntity);
         pEntity.yBodyRot = f2;
         pEntity.setYRot(f3);

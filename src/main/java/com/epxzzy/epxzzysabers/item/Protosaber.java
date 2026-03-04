@@ -358,10 +358,16 @@ public class Protosaber extends Item {
     }
 
     public static BladeStance getStance(Entity Entityy) {
-        int tagid = 0;
         if (Entityy instanceof LivingEntity) {
-            tagid = ((LivingEntity) Entityy).getMainHandItem().getOrCreateTag().getCompound("display").getInt("stance");
+            return getStance(((LivingEntity) Entityy).getMainHandItem());
         }
+        return BladeStance.FORM0;
+    }
+    public static BladeStance getStance(ItemStack stacc) {
+        int tagid = 0;
+
+        tagid = stacc.getOrCreateTag().getCompound("display").getInt("stance");
+
         BladeStance returnee;
         switch (tagid) {
             case 1 -> returnee = BladeStance.FORM1;

@@ -23,6 +23,7 @@ public class PlayerPoseRouter {
 
     public static void beforeSetupAnim(Player player, HumanoidModel<?> model) {
         boolean[] bbc = RotarySaber.checkForSaberFly(player);
+        boolean stancing = ((PlayerHelperLmao) player).getSaberStanceDown();
 
         //if(player.getMainHandItem().is(SaberTags.Items.LIGHTSABER)) {
         model.head.resetPose();
@@ -44,7 +45,7 @@ public class PlayerPoseRouter {
             model.rightArm.resetPose();
         }
 
-        if ((Protosaber.checkForSaberBlock(player) || SingleBladed.checkForSaberBlock(player)) && player.isShiftKeyDown()) {
+        if (stancing) {
             model.rightArm.resetPose();
             model.leftArm.resetPose();
             model.head.resetPose();
@@ -99,11 +100,6 @@ public class PlayerPoseRouter {
             return;
         }
 
-        //stance pose
-        if ((TagHelper.checkMainhandPoseableWeapon(player) && player.isShiftKeyDown())) {
-            setBladedStance(player, model);
-            return;
-        }
         //held stance pose
         if (stancing) {
             setBladedStance(player, model, stanceform);

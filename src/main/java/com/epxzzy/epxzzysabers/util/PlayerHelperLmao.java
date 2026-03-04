@@ -15,8 +15,10 @@ public interface PlayerHelperLmao {
 
 
     public void SyncSTCtoPacket(ClientboundPlayerStancePacket packet);
+    public void setSaberStanceDown(boolean value);
     public boolean getSaberStanceDown();
     public int getSaberStanceForm();
+    public void setSaberStanceForm(int value);
 
 
     public void LogFlightDetails();
