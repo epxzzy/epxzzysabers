@@ -13,6 +13,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
@@ -35,6 +36,11 @@ public abstract class CustomRenderedSaberModelRenderer extends CustomRenderedIte
         List<LivingEntity> allEntities = getPlayersHoldingItemRightOrBoth(stack);
 
         for (LivingEntity entity : allEntities) {
+            if(entity instanceof Player player){
+                if(((PlayerHelperLmao) player).getSaberStanceDown() && transformType.firstPerson()) return;
+                //pause rendering pipeline cause some stance is being commited
+            }
+
             if (transformType.firstPerson() && entity.isUsingItem()){
                 renderFirstPersonBlock(stack, mainModel, renderer, transformType, ms, buffer, light, overlay);
                 ms.pushPose();

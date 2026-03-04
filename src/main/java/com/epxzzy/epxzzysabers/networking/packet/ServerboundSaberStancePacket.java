@@ -23,7 +23,6 @@ public class ServerboundSaberStancePacket {
     }
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
-        epxzzySabers.LOGGER.info("stance packet with the key " + this.down);
         NetworkEvent.Context contextt = supplier.get();
         contextt.enqueueWork(() -> {
             ServerPacketHandler.handleStancePacket(supplier, this.down);

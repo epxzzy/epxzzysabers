@@ -46,7 +46,7 @@ public class ClientEvents {
                 SaberMessages.sendToServer(new ServerboundSaberAbilityPacket());
             }
 
-            if (KeyBinding.SABER_STANCE_KEY.isDown()) {
+            if (!wasUp && KeyBinding.SABER_STANCE_KEY.isDown()) {
                 wasUp = true;
                 SaberMessages.sendToServer(new ServerboundSaberStancePacket(KeyBinding.SABER_STANCE_KEY.isDown()));
             }
