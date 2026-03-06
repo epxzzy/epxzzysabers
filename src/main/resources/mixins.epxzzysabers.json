@@ -13,6 +13,7 @@
     "defaultRequire": 1
   },
   "client": [
+    "client.HudGuiMixin",
     "client.HumanoidModelMixin",
     "client.LocalPlayerMixin"
   ]

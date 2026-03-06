@@ -2,6 +2,7 @@ package com.epxzzy.epxzzysabers.mixin.client;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.screen.HudStuffRenderer;
+import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -13,6 +14,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static com.epxzzy.epxzzysabers.screen.HudStuffRenderer.ATTACK;
+
 @Mixin(Gui.class)
 public class HudGuiMixin {
 
@@ -22,7 +25,7 @@ public class HudGuiMixin {
             cancellable = true)
     public void renderSaberStatusCrosshair(GuiGraphics pGuiGraphics, CallbackInfo ci) {
         Gui that = ((Gui) (Object) this);
-        HudStuffRenderer.renderThings(pGuiGraphics, that);
+        HudStuffRenderer.renderStuff(pGuiGraphics, that);
     }
 
 

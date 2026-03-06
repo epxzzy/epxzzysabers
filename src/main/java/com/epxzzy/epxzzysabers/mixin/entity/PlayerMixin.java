@@ -11,6 +11,7 @@ import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerStancePacket;
 import com.epxzzy.epxzzysabers.util.SaberTags;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import com.epxzzy.epxzzysabers.util.StackHelper;
+import com.epxzzy.epxzzysabers.util.TagHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -194,7 +195,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
 
                 if (blocking_with_sabur && attacking_with_sabur) {
-                    epxzzySabers.LOGGER.debug("blocked {}", notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
+                    //epxzzySabers.LOGGER.debug("blocked {}", notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
                     int block_value = notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk");
 
                     CompoundTag tagger = that.getUseItem().getOrCreateTag();
@@ -223,8 +224,6 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         //epxzzySabers.LOGGER.debug("player hurt");
         Player that = ((Player) (Object) this);
         Entity notThat = pTarget;
-
-        epxzzySabers.LOGGER.info("server level: " +  !that.level().isClientSide);
 
         if(SaberGauntlet.checkForSaberCharge(that, true)){
 
@@ -261,7 +260,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             epxzzySabers.LOGGER.debug("");
         }
 
-        if (!that.level().isClientSide() && that.getMainHandItem().is(SaberTags.Items.LIGHTSABER)) {
+        if (!that.level().isClientSide() && TagHelper.checkActivePoseableWeapon(that, true)){
             if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {
                 this.attackProgress = -1;
                 this.attacking = true;
@@ -281,7 +280,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
 
             //SaberMessages.sendToServer(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress));
-            epxzzySabers.LOGGER.debug("attacking {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
+            //epxzzySabers.LOGGER.debug("attacking {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
 
             SaberMessages.fuckingAnnounce(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress), that);
 
@@ -369,7 +368,5 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     public void setSaberStanceForm(int value) {
         this.stanceform = value;
     }
-
-
 
 }
