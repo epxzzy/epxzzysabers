@@ -38,8 +38,9 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ThrownRotarySaber extends Projectile {
-    private ItemStack saberitem = new ItemStack(SaberItems.ROTARY_SABER.get());
+    //private ItemStack saberitem;
     private static final EntityDataAccessor<Integer> Decimal_Colour = SynchedEntityData.defineId(ThrownRotarySaber.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<ItemStack> Item = SynchedEntityData.defineId(ThrownRotarySaber.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Boolean> Gay = SynchedEntityData.defineId(ThrownRotarySaber.class, EntityDataSerializers.BOOLEAN);
 
     public boolean returning;
@@ -62,8 +63,9 @@ public class ThrownRotarySaber extends Projectile {
         double d1 = (double)blockpos.getY() + 0.5D;
         double d2 = (double)blockpos.getZ() + 0.5D;
         this.moveTo(d0, d1, d2, this.getYRot(), this.getXRot());
-        this.saberitem = pStack;
+        //this.saberitem = pStack;
         this.entityData.set(Decimal_Colour, RotarySaber.getColor(pStack));
+        this.entityData.set(Item, pStack);
         this.entityData.set(Gay, Protosaber.isGay(pStack));
 
         epxzzySabers.LOGGER.debug("colour given to thrown saber is:" + RotarySaber.getColor(pStack));
@@ -74,6 +76,7 @@ public class ThrownRotarySaber extends Projectile {
         //super.defineSynchedData();
         this.entityData.define(Decimal_Colour, 0);
         this.entityData.define(Gay, false);
+        this.entityData.define(Item, ItemStack.EMPTY);
     }
 
     public int[] getColour() {
@@ -233,7 +236,7 @@ public class ThrownRotarySaber extends Projectile {
     }
 
     protected @NotNull ItemStack getPickupItem() {
-        return this.saberitem.copy();
+        return this.entityData.get(Item);
     }
 
     /**
@@ -312,21 +315,23 @@ public class ThrownRotarySaber extends Projectile {
     @Override
     public void readAdditionalSaveData(@NotNull CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
-        if (pCompound.contains("saber", 10)) {
-            this.saberitem = ItemStack.of(pCompound.getCompound("RotarySaber"));
-            this.entityData.set(Decimal_Colour, RotarySaber.getColor(this.saberitem));
-            this.entityData.set(Gay, RotarySaber.isGay(this.saberitem));
+        if (pCompound.contains("Saber", 10)) {
+            ItemStack stacc = ItemStack.of(pCompound.getCompound("Saber"));
 
+            this.entityData.set(Decimal_Colour, RotarySaber.getColor(stacc));
+            this.entityData.set(Gay, RotarySaber.isGay(stacc));
+            this.entityData.set(Item, stacc);
+            this.returning = pCompound.getBoolean("Returning");
         }
 
-        this.returning = pCompound.getBoolean("Returning");
     }
 
     @Override
     public void addAdditionalSaveData(@NotNull CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
-        pCompound.put("RotarySaber", this.saberitem.save(new CompoundTag()));
-
+        ItemStack stacc = this.entityData.get(Item);
+        CompoundTag e = stacc.save(new CompoundTag());
+        pCompound.put("Saber", e );
         pCompound.putBoolean("Returning", this.returning);
     }
 }
