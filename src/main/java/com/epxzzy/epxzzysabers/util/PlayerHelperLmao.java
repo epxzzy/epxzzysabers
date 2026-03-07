@@ -18,6 +18,11 @@ public interface PlayerHelperLmao {
     public void setSaberStanceDown(boolean value);
     public boolean getSaberStanceDown();
     public int getSaberStanceForm();
+    public int getSaberAttackForm();
+    public int getSaberBlockForm();
+    public void setSaberAttackForm(int val);
+    public void setSaberBlockForm(int val);
+
     public void setSaberStanceForm(int value);
 
 

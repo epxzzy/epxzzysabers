@@ -45,6 +45,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     public InteractionHand attackingHand;
     public int attackProgress = 0;
     //^^^^^^ max should be 6 ticks
+    public int attackPose = 0;
 
     public float SaberAnim = 0;
     public float oSaberAnim = 0;
@@ -53,6 +54,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     public InteractionHand defendingHand;
     public int defendProgress = 0;
     //^^^^^^ max should be 6 ticks
+    public int defendPose = 0;
 
     public float SaberdefAnim = 0;
     public float oSaberdefAnim = 0;
@@ -88,9 +90,10 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             if (this.attackProgress >= 6) {
                 this.attackProgress = 0;
                 this.attacking = false;
+                this.attackPose = 0;
                 if (!that.level().isClientSide()) {
                     CompoundTag temptag = that.getMainHandItem().getOrCreateTag().getCompound("display");
-                    temptag.remove("atk");
+                    //temptag.remove("atk");
                     that.displayClientMessage(Component.literal(""), true);
                 }
             }
@@ -109,9 +112,10 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             if (this.defendProgress >= 6) {
                 this.defendProgress = 0;
                 this.defending = false;
+                this.defendPose = 0;
                 if (!that.level().isClientSide()) {
                     CompoundTag temptag = that.getMainHandItem().getOrCreateTag().getCompound("display");
-                    temptag.remove("blk");
+                    //temptag.remove("blk");
                     that.displayClientMessage(Component.literal(""), true);
                 }
             }
@@ -157,6 +161,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
         this.defendProgress = packet.defendProgress;
         this.defending = packet.defending;
+        this.defendPose = packet.defendPose;
 
         //epxzzySabers.LOGGER.debug("successfully synced DEF for {}", that);
     }
@@ -166,6 +171,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
         this.attackProgress = packet.attackProgress;
         this.attacking = packet.attacking;
+        this.attackPose = packet.attackPose;
 
         //epxzzySabers.LOGGER.debug("successfully synced ATK for {}", that);
     }
@@ -188,7 +194,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
                 this.defending = true;
             }
             defending = true;
-
+            int tempatk = 0;
 
             if (notThat != null) {
                 boolean attacking_with_sabur = notThat.getMainHandItem().is(SaberTags.Items.LIGHTSABER);
@@ -196,12 +202,13 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
                 if (blocking_with_sabur && attacking_with_sabur) {
                     //epxzzySabers.LOGGER.debug("blocked {}", notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
-                    int block_value = notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk");
+                    //int block_value = notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk");
+                    tempatk = ((PlayerHelperLmao) notThat).getSaberAttackForm();
 
-                    CompoundTag tagger = that.getUseItem().getOrCreateTag();
-                    tagger.getCompound("display").putInt("blk", block_value);
-                    that.displayClientMessage(Component.literal("blocking " + block_value), true);
-                    that.getMainHandItem().setTag(tagger);
+                    //CompoundTag tagger = that.getUseItem().getOrCreateTag();
+                    //tagger.getCompound("display").putInt("blk", block_value);
+                    that.displayClientMessage(Component.literal("blocking " +  tempatk), true);
+                    //that.getMainHandItem().setTag(tagger);
 
                     //remove the custom block animation
                     //cir.cancel();
@@ -210,7 +217,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
             }
 
-            SaberMessages.fuckingAnnounce(new ClientboundPlayerDefendPacket(that.getId(), this.defending, this.defendProgress), that);
+            SaberMessages.fuckingAnnounce(new ClientboundPlayerDefendPacket(that.getId(), this.defending, this.defendProgress, tempatk), that);
 
         }
     }
@@ -257,7 +264,6 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             }
 
             that.sweepAttack();
-            epxzzySabers.LOGGER.debug("");
         }
 
         if (!that.level().isClientSide() && TagHelper.checkActivePoseableWeapon(that, true)){
@@ -267,22 +273,24 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
                 this.attackingHand = that.swingingArm;
             }
 
-            CompoundTag tagger = that.getMainHandItem().getOrCreateTag();
-            int old = tagger.getCompound("display").getInt("atk");
+            //CompoundTag tagger = that.getMainHandItem().getOrCreateTag();
+            //int old = tagger.getCompound("display").getInt("atk");
+
             //int sequential = old > 0 && old < 8 ? old + 1 : 1;
             //problematic method call removed
-            int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(old, (ServerPlayer) that);
-            tagger.getCompound("display").putInt("atk", methodic);
+            int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(7, (ServerPlayer) that);
+            //tagger.getCompound("display").putInt("atk", methodic);
 
             //epxzzysabers.LOGGER.debug("next possible attack value  {}", baller);
             that.displayClientMessage(Component.literal("attacking " + methodic), true);
-            that.getMainHandItem().setTag(tagger);
+            ((PlayerHelperLmao) that).setSaberAttackForm(methodic);
+            //that.getMainHandItem().setTag(tagger);
 
 
             //SaberMessages.sendToServer(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress));
             //epxzzySabers.LOGGER.debug("attacking {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
 
-            SaberMessages.fuckingAnnounce(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress), that);
+            SaberMessages.fuckingAnnounce(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress, methodic), that);
 
         }
     }
@@ -367,6 +375,22 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     @Unique
     public void setSaberStanceForm(int value) {
         this.stanceform = value;
+    }
+    @Unique
+    public int getSaberAttackForm() {
+        return this.attackPose;
+    }
+    @Unique
+    public int getSaberBlockForm() {
+        return this.defendPose;
+    }
+    @Unique
+    public void setSaberAttackForm(int val) {
+        this.attackPose = val;
+    }
+    @Unique
+    public void setSaberBlockForm(int val) {
+        this.defendPose = val;
     }
 
 }

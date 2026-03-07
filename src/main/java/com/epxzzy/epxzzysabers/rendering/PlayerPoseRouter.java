@@ -67,8 +67,13 @@ public class PlayerPoseRouter {
 
     public static void afterSetupAnim(Player player, HumanoidModel<?> model) {
         int flourish = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("flourish");
+        /*
         int block = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("blk");
         int attack = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk");
+         */
+        int block = ((PlayerHelperLmao)player).getSaberBlockForm();
+        int attack = ((PlayerHelperLmao)player).getSaberAttackForm();
+
         float SaberSwingAnim = ((PlayerHelperLmao) player).getSaberAttackAnim();
         float SaberDefAnim = ((PlayerHelperLmao) player).getSaberDefendAnim();
         boolean stancing = ((PlayerHelperLmao) player).getSaberStanceDown();

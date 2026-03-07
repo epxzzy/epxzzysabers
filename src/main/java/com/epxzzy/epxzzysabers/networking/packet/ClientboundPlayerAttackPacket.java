@@ -12,13 +12,15 @@ public class ClientboundPlayerAttackPacket {
     public int entityId;
     public boolean attacking;
     public int attackProgress;
+    public int attackPose;
     //public boolean mainattackingHand;
 
 
-    public ClientboundPlayerAttackPacket(int entityId, boolean attacking, int attackProgress) {
+    public ClientboundPlayerAttackPacket(int entityId, boolean attacking, int attackProgress, int attackPose) {
         this.entityId = entityId;
         this.attacking = attacking;
         this.attackProgress = attackProgress;
+        this.attackPose = attackPose;
         //this.mainattackingHand = mainhand;
     }
 
@@ -26,6 +28,7 @@ public class ClientboundPlayerAttackPacket {
         this.entityId = buf.readInt();
         this.attacking = buf.readBoolean();
         this.attackProgress = buf.readInt();
+        this.attackPose = buf.readInt();
         //this.mainattackingHand = buf.readBoolean();
 
     }
@@ -34,6 +37,7 @@ public class ClientboundPlayerAttackPacket {
         buf.writeInt(entityId);
         buf.writeBoolean(attacking);
         buf.writeInt(attackProgress);
+        buf.writeInt(attackPose);
         //buf.writeBoolean(mainattackingHand);
     }
 
