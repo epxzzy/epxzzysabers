@@ -19,12 +19,11 @@ public class KewlFightsOrchestrator {
 
         float rot = AngleHelper.calculateHeadOffset(bodyrotted,headrotted);
         epxzzySabers.LOGGER.debug("rot diff {} = {} - {}", rot, headrotted, bodyrotted);
-
          */
 
 
-        if(pPlayer.fallDistance > 0)
-            return 8;
+        //if(pPlayer.fallDistance > 0)
+            //return 8;
 
         int random = pPlayer.getRandom().nextInt(8) + 1;
         return old != random? random: random+1;
@@ -94,26 +93,13 @@ public class KewlFightsOrchestrator {
 
 
     public static int DetermineParryAnimation(Player pPlayer){
-        if(pPlayer.getXRot() >= 40){
-            //epxzzySabers.LOGGER.debug("behind the bacc lol");
+        //behind the back flourish
+        if(pPlayer.getXRot() >= 25)
             return 2;
-
-        }
-
-        else if(!pPlayer.isSprinting()) {
-            //epxzzySabers.LOGGER.debug("yoda move");
+        //x cross front
+        else if(!pPlayer.isSprinting())
             return 1;
-        }
-
-        //epxzzySabers.LOGGER.debug("evil spin");
+        //simple twirl skip-catch
         return 3;
     };
-
-
-
-
-    public static boolean IsPlayerStationary(Player player){
-        epxzzySabers.LOGGER.debug("len {}, normal len {}", player.getDeltaMovement().scale(2).length(), player.getDeltaMovement().normalize().length());
-        return !(player.getDeltaMovement().lengthSqr() > 0.0784);
-    }
 }

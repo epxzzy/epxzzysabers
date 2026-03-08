@@ -1,4 +1,4 @@
-package com.epxzzy.epxzzysabers.networking.packet;
+package com.epxzzy.epxzzysabers.networking.packet.saber;
 
 import com.epxzzy.epxzzysabers.networking.ServerPacketHandler;
 import net.minecraft.network.FriendlyByteBuf;

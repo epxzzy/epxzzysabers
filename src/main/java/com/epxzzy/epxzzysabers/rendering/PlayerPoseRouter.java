@@ -1,5 +1,6 @@
 package com.epxzzy.epxzzysabers.rendering;
 
+import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.item.types.RotarySaber;
 import com.epxzzy.epxzzysabers.item.types.SingleBladed;
@@ -11,50 +12,32 @@ import com.epxzzy.epxzzysabers.rendering.parry.light.LightArmRenderer;
 import com.epxzzy.epxzzysabers.util.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 
-import static com.epxzzy.epxzzysabers.rendering.parry.rotary.RotaryPoseRenderer.setRotaryFlyPose;
+import static com.epxzzy.epxzzysabers.rendering.playerposerenderers.PlayerMiscRenderer.setRotaryFlyPose;
 
 
 public class PlayerPoseRouter {
-
+    public static int tempDebugVar = 0;
 
     public static void beforeSetupAnim(Player player, HumanoidModel<?> model) {
-        boolean[] bbc = RotarySaber.checkForSaberFly(player);
+        if (Minecraft.getInstance().isPaused())
+            return;
+
+        boolean flight = RotarySaber.checkForSaberFly(player);
+        boolean flightReset = RotarySaber.checkForSaberCooldown(player);
+
         boolean stancing = ((PlayerHelperLmao) player).getSaberStanceDown();
 
-        //if(player.getMainHandItem().is(SaberTags.Items.LIGHTSABER)) {
-        model.head.resetPose();
-        model.hat.resetPose();
-        model.body.resetPose();
-        model.leftArm.resetPose();
-        model.rightArm.resetPose();
-        model.leftLeg.resetPose();
-        model.rightLeg.resetPose();
-        //}
 
-        if (Protosaber.checkForSaberEquipment(player, true) && player.swingTime > 0) {
+        if ((TagHelper.checkActiveHeavyWeapon(player, true) || TagHelper.checkActiveLightWeapon(player, true)) && player.swingTime > 0) {
             model.leftArm.resetPose();
             model.rightArm.resetPose();
         }
 
-        if (SingleBladed.checkForSaberEquipment(player, true) && player.swingTime > 0) {
-            model.rightArm.resetPose();
-            model.rightArm.resetPose();
-        }
-
-        if (stancing) {
-            model.rightArm.resetPose();
-            model.leftArm.resetPose();
-            model.head.resetPose();
-            model.body.resetPose();
-            model.leftLeg.resetPose();
-            model.rightLeg.resetPose();
-        }
-
-        if (bbc[0]) {
+        //fix rotation bug #3, uses magic number cooldown
+        if (stancing || (flight || flightReset)) {
             model.head.resetPose();
             model.hat.resetPose();
             model.body.resetPose();
@@ -66,25 +49,25 @@ public class PlayerPoseRouter {
     }
 
     public static void afterSetupAnim(Player player, HumanoidModel<?> model) {
-        int flourish = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("flourish");
         /*
+        int flourish = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("flourish");
         int block = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("blk");
         int attack = player.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk");
-         */
-        int block = ((PlayerHelperLmao)player).getSaberBlockForm();
-        int attack = ((PlayerHelperLmao)player).getSaberAttackForm();
+        */
+        int flourish = ((PlayerHelperLmao) player).getSaberFlourishId();
+        int block = ((PlayerHelperLmao) player).getSaberBlockForm();
+        int attack = ((PlayerHelperLmao) player).getSaberAttackForm();
+
 
         float SaberSwingAnim = ((PlayerHelperLmao) player).getSaberAttackAnim();
         float SaberDefAnim = ((PlayerHelperLmao) player).getSaberDefendAnim();
         boolean stancing = ((PlayerHelperLmao) player).getSaberStanceDown();
         int stanceform = ((PlayerHelperLmao) player).getSaberStanceForm();
 
-        //[ flight, mainhand ]
-        boolean[] isInFlight = RotarySaber.checkForSaberFly(player);
+        boolean isInFlight = RotarySaber.checkForSaberFly(player);
 
         //((PlayerHelperLmao) player).LogFlightDetails();
         //epxzzySabers.LOGGER.debug("");
-
 
         //debug purposes
         /*
@@ -112,20 +95,20 @@ public class PlayerPoseRouter {
         }
 
         //flight pose
-        if (isInFlight[0]) {
-            setRotaryFlyPose(player, model, isInFlight[1]);
+        if (isInFlight) {
+            setRotaryFlyPose(player, model);
             return;
         }
 
         //attack miss//empty swing
-        if(player.swingTime > 0){
+        if (player.swingTime > 0) {
             //heavy weapon mainhand
             if (TagHelper.checkMainhandActiveHeavyWeapon(player)) {
                 setDualSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model, flourish);
                 return;
             }
 
-            //heavy weapon jarr kai type shit
+            //heavy weapon offhand todo- check mainhand
             if (TagHelper.checkActiveHeavyWeapon(player, false)) {
                 setDualSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
                 return;
@@ -137,35 +120,36 @@ public class PlayerPoseRouter {
                 return;
             }
 
-            //light weapon jarr jai type shit
+            //light weapon offhand todo- check mainhand
             if (TagHelper.checkActiveLightWeapon(player, false)) {
                 setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
             }
-
         }
     }
 
     private static void setDualSaberPose(boolean Lefty, boolean both, HumanoidModel<?> model, int flourish) {
-        if (Minecraft.getInstance().isPaused())
-            return;
-
-        ModelPart MainArm = Lefty ? model.leftArm : model.rightArm;
-        ModelPart otherArm = Lefty ? model.rightArm : model.leftArm;
-
         HeavyArmRenderer.setArmPose(flourish, Lefty, both, model);
+
+        if(tempDebugVar != flourish){
+            //epxzzySabers.LOGGER.info("heavy flourish given: " + flourish);
+        }
+        tempDebugVar = flourish == tempDebugVar?tempDebugVar:flourish;
 
     }
 
     private static void setSingleBladedSaberPose(boolean Lefty, boolean both, HumanoidModel<?> model, int flourish) {
-        if (Minecraft.getInstance().isPaused())
-            return;
-
         LightArmRenderer.setArmPose(flourish, Lefty, both, model);
+
+        if(tempDebugVar != flourish){
+            //epxzzySabers.LOGGER.info("light flourish given: " + flourish);
+        }
+        tempDebugVar = flourish == tempDebugVar?tempDebugVar:flourish;
     }
 
     private static void setBladedStance(Player player, HumanoidModel<?> model) {
         PlayerStanceRenderer.setPose(Protosaber.getStance(player), false, model);
     }
+
     private static void setBladedStance(Player player, HumanoidModel<?> model, int form) {
         PlayerStanceRenderer.setStance(form, false, model);
     }

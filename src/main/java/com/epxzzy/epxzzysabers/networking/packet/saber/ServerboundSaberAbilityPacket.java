@@ -1,4 +1,4 @@
-package com.epxzzy.epxzzysabers.networking.packet;
+package com.epxzzy.epxzzysabers.networking.packet.saber;
 
 //import com.epxzzy.epxzzysabers.entity.custom.PlasmaBolt;
 import com.epxzzy.epxzzysabers.networking.ServerPacketHandler;

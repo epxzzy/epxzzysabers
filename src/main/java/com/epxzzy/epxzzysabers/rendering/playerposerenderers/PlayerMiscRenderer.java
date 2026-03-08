@@ -1,4 +1,4 @@
-package com.epxzzy.epxzzysabers.rendering.parry.rotary;
+package com.epxzzy.epxzzysabers.rendering.playerposerenderers;
 
 import com.epxzzy.epxzzysabers.util.AngleHelper;
 import com.epxzzy.epxzzysabers.util.AnimationTickHolder;
@@ -8,9 +8,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 
-public class RotaryPoseRenderer {
+public class PlayerMiscRenderer {
 
-    public static void setRotaryFlyPose(Player player, HumanoidModel<?> model, boolean offhand){
+    public static void setRotaryFlyPose(Player player, HumanoidModel<?> model){
         model.head.x = 0;
         model.hat.x = 0;
         model.body.resetPose();
@@ -19,7 +19,6 @@ public class RotaryPoseRenderer {
         model.leftLeg.resetPose();
         model.rightLeg.resetPose();
         boolean isLeftArmMain = (player.getMainArm() == HumanoidArm.LEFT);
-        isLeftArmMain = offhand?!isLeftArmMain: isLeftArmMain;
 
         float time = (AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks())/2;
         float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));

@@ -1,4 +1,4 @@
-package com.epxzzy.epxzzysabers.networking.packet;
+package com.epxzzy.epxzzysabers.networking.packet.player;
 
 import com.epxzzy.epxzzysabers.networking.ClientPacketHandler;
 import net.minecraft.network.FriendlyByteBuf;
@@ -8,40 +8,32 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class ClientboundPlayerAttackPacket {
+public class ClientboundPlayerFlourishPacket {
     public int entityId;
-    public boolean attacking;
-    public int attackProgress;
-    public int attackPose;
+    public int flourishId;
     //public boolean mainattackingHand;
 
 
-    public ClientboundPlayerAttackPacket(int entityId, boolean attacking, int attackProgress, int attackPose) {
+    public ClientboundPlayerFlourishPacket(int entityId, int floruishdi) {
         this.entityId = entityId;
-        this.attacking = attacking;
-        this.attackProgress = attackProgress;
-        this.attackPose = attackPose;
+        this.flourishId = floruishdi;
         //this.mainattackingHand = mainhand;
     }
 
-    public ClientboundPlayerAttackPacket(FriendlyByteBuf buf) {
+    public ClientboundPlayerFlourishPacket(FriendlyByteBuf buf) {
         this.entityId = buf.readInt();
-        this.attacking = buf.readBoolean();
-        this.attackProgress = buf.readInt();
-        this.attackPose = buf.readInt();
+        this.flourishId = buf.readInt();
         //this.mainattackingHand = buf.readBoolean();
 
     }
 
     public void toBytes(FriendlyByteBuf buf) {
         buf.writeInt(entityId);
-        buf.writeBoolean(attacking);
-        buf.writeInt(attackProgress);
-        buf.writeInt(attackPose);
+        buf.writeInt(flourishId);
         //buf.writeBoolean(mainattackingHand);
     }
 
-    public static void handle(ClientboundPlayerAttackPacket packet, Supplier<NetworkEvent.Context> supplier) {
+    public static void handle(ClientboundPlayerFlourishPacket packet, Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> {
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
                     ClientPacketHandler.handlePacket(packet, supplier));

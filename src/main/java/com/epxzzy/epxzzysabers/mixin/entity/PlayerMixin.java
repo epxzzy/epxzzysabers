@@ -1,16 +1,15 @@
 package com.epxzzy.epxzzysabers.mixin.entity;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.item.types.SaberGauntlet;
 import com.epxzzy.epxzzysabers.misc.KewlFightsOrchestrator;
 import com.epxzzy.epxzzysabers.networking.SaberMessages;
-import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerAttackPacket;
-import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerDefendPacket;
-import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerStancePacket;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerAttackPacket;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerDefendPacket;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerFlourishPacket;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerStancePacket;
 import com.epxzzy.epxzzysabers.util.SaberTags;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
-import com.epxzzy.epxzzysabers.util.StackHelper;
 import com.epxzzy.epxzzysabers.util.TagHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -21,20 +20,14 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.Random;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin implements PlayerHelperLmao {
@@ -58,6 +51,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
     public float SaberdefAnim = 0;
     public float oSaberdefAnim = 0;
+    public int flourishId  = 0;
 
     public int flyCooldownVar = 40;
     //160 == cant fly, 0 == can fly
@@ -125,6 +119,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         }
 
         this.SaberdefAnim = (float) this.defendProgress / (float) 6;
+
     }
 
 
@@ -174,6 +169,14 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         this.attackPose = packet.attackPose;
 
         //epxzzySabers.LOGGER.debug("successfully synced ATK for {}", that);
+    }
+
+    public void SyncFRStoPacket(ClientboundPlayerFlourishPacket packet) {
+        Player that = ((Player) (Object) this);
+
+        this.flourishId = packet.flourishId;
+
+        //epxzzySabers.LOGGER.debug("successfully synced FRS for {}", that);
     }
 
 
@@ -331,8 +334,10 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     private void epxzzySabers$customattacknoise(CallbackInfo ci) {
         LivingEntity that = ((LivingEntity) (Object) this);
         ItemStack pStack = that.getMainHandItem();
-        if(that.swingTime == 0 && pStack.is(SaberTags.Items.LIGHTSABER)){
-            Protosaber.removeFlourishTag(that, pStack);
+        if(that.swingTime == 0 && TagHelper.checkActivePoseableWeapon(that, true)){
+            //Protosaber.removeFlourishTag(that, pStack);
+            //this.flourishId = 0;
+
         }
     }
 
@@ -391,6 +396,10 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     @Unique
     public void setSaberBlockForm(int val) {
         this.defendPose = val;
+    }
+    @Unique
+    public int getSaberFlourishId(){
+        return this.flourishId;
     }
 
 }

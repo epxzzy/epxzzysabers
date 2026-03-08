@@ -3,7 +3,9 @@ package com.epxzzy.epxzzysabers.item;
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.misc.KewlFightsOrchestrator;
 import com.epxzzy.epxzzysabers.networking.SaberMessages;
-import com.epxzzy.epxzzysabers.networking.packet.ServerboundSaberDeflectPacket;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerAttackPacket;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerFlourishPacket;
+import com.epxzzy.epxzzysabers.networking.packet.saber.ServerboundSaberDeflectPacket;
 import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.epxzzysabers.util.ColourConverter;
@@ -142,20 +144,22 @@ public class Protosaber extends Item {
         );
     }
 
-    public void addFlourishTag(LivingEntity pPlayer, ItemStack pStack) {
-        if (!pPlayer.level().isClientSide() && pPlayer instanceof Player) {
+    public static void addFlourishTag(LivingEntity pEntity, ItemStack pStack) {
+        if (!pEntity.level().isClientSide() && pEntity instanceof Player pPlayer) {
             int random = (int) ((Math.random() * 3) + 1);
 
             int methodic = KewlFightsOrchestrator.DetermineParryAnimation((Player) pPlayer);
+            //epxzzySabers.LOGGER.info("FLOURRRISHHH " + methodic);
+            SaberMessages.fuckingAnnounce(new ClientboundPlayerFlourishPacket(pPlayer.getId(), methodic), pPlayer);
 
-            pStack.getOrCreateTag().getCompound("display").putInt("flourish", methodic);
+            //pStack.getOrCreateTag().getCompound("display").putInt("flourish", methodic);
         }
     }
 
     public static void removeFlourishTag(Entity pEntity, ItemStack pStack) {
         if (pEntity instanceof Player player && !player.swinging) {
             if (!pEntity.level().isClientSide()) {
-                pStack.getOrCreateTag().getCompound("display").remove("flourish");
+                // pStack.getOrCreateTag().getCompound("display").remove("flourish");
             }
         }
     }
@@ -202,22 +206,6 @@ public class Protosaber extends Item {
         return InteractionResultHolder.fail(itemstack);
     }
 
-    @Override
-    public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged) {
-        //epxzzySabers.LOGGER.info("stopped blocking, changing custom model data");
-        CompoundTag nbeetea = pStack.getOrCreateTag();
-        nbeetea.putBoolean("BlockBoiii", false);
-        pStack.setTag(nbeetea);
-    }
-
-    @Override
-    public void onStopUsing(ItemStack pStack, LivingEntity entity, int count) {
-        CompoundTag nbeetea = pStack.getOrCreateTag();
-        nbeetea.putBoolean("BlockBoiii", false);
-        pStack.setTag(nbeetea);
-        super.onStopUsing(pStack, entity, count);
-    }
-
     public static int getColor(ItemStack pStack) {
         CompoundTag compoundtag = pStack.getOrCreateTagElement("display");
         if (compoundtag.getBoolean("gay")) {
@@ -242,7 +230,6 @@ public class Protosaber extends Item {
             compoundtag.remove("colour");
         }
         pStack.setTag(compoundtag);
-
     }
 
     public static void setColor(ItemStack pStack, int pColor) {
@@ -313,8 +300,8 @@ public class Protosaber extends Item {
 
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-        if(!(entity instanceof Player)) return false;
-        if (entity.swingTime >= 3) {
+        if(!(entity instanceof Player pPlayer)) return false;
+        if ((!pPlayer.level().isClientSide) && pPlayer.swingTime >= 3) {
             addFlourishTag(entity, stack);
         }
 

@@ -2,6 +2,13 @@ package com.epxzzy.epxzzysabers.networking;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.networking.packet.*;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerAttackPacket;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerDefendPacket;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerFlourishPacket;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerStancePacket;
+import com.epxzzy.epxzzysabers.networking.packet.saber.ServerboundSaberAbilityPacket;
+import com.epxzzy.epxzzysabers.networking.packet.saber.ServerboundSaberDeflectPacket;
+import com.epxzzy.epxzzysabers.networking.packet.saber.ServerboundSaberStancePacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -73,6 +80,11 @@ public class SaberMessages {
                 .decoder(ClientboundPlayerDefendPacket::new)
                 .encoder(ClientboundPlayerDefendPacket::toBytes)
                 .consumerMainThread(ClientboundPlayerDefendPacket::handle)
+                .add();
+        net.messageBuilder(ClientboundPlayerFlourishPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(ClientboundPlayerFlourishPacket::new)
+                .encoder(ClientboundPlayerFlourishPacket::toBytes)
+                .consumerMainThread(ClientboundPlayerFlourishPacket::handle)
                 .add();
 
     }

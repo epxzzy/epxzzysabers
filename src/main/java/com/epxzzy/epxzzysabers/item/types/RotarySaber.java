@@ -3,6 +3,8 @@ package com.epxzzy.epxzzysabers.item.types;
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.SaberItems;
 import com.epxzzy.epxzzysabers.item.Protosaber;
+import com.epxzzy.epxzzysabers.networking.SaberMessages;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerStancePacket;
 import com.epxzzy.epxzzysabers.rendering.item.RotarySaberItemRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.epxzzysabers.sound.SaberSounds;
@@ -199,6 +201,7 @@ public class RotarySaber extends Protosaber {
             ((Player) entity).onUpdateAbilities();
             epxzzySabers.LOGGER.info("flying deactivated");
             MixinPlayer.setFlyCooldown(40);
+
         }
 
         pStack.setTag(nbeetea);
@@ -209,21 +212,19 @@ public class RotarySaber extends Protosaber {
         return LevelHelper.EntityBlockingWithActiveItem(Entityy, SaberItems.ROTARY_SABER.get());
     }
 
-    public static boolean[] checkForSaberFly(Entity Entityy) {
-
+    public static boolean checkForSaberFly(Entity Entityy) {
         if (Entityy instanceof Player) {
-            //((Player) Entityy).getMainHandItem().getOrCreateTag().getBoolean("FlyBoiii");
-
-            boolean mainhand = (((Player) Entityy).getMainHandItem().is(SaberItems.ROTARY_SABER.get()) && ((Player) Entityy).getMainHandItem().getOrCreateTag().getBoolean("FlyBoiii"));
-            boolean offhand = (((Player) Entityy).getOffhandItem().is(SaberItems.ROTARY_SABER.get()) && ((Player) Entityy).getOffhandItem().getOrCreateTag().getBoolean("FlyBoiii"));
-            //checking for entity fly ability here makes flight animation fine in singleplayer, but broken in multiplayer
-
-            //first one meaning flight is true, second specifies the hand, third is both hands have one
-            //TODO: drop offhand item use support
-            return new boolean[]{(mainhand || offhand), offhand, mainhand && offhand};
+            return (((Player) Entityy).getMainHandItem().is(SaberItems.ROTARY_SABER.get()) && ((Player) Entityy).getMainHandItem().getOrCreateTag().getBoolean("FlyBoiii"));
         }
-        return new boolean[]{false, false, false};
+        return false;
     }
-
+    public static boolean checkForSaberCooldown(Entity Entityy) {
+        if (Entityy instanceof Player pPlayer) {
+            PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) pPlayer;
+            //MixinPlayer.getFlyCooldown() > 30;
+            return MixinPlayer.getFlyCooldown() > 30;
+        }
+        return false;
+    }
 
 }

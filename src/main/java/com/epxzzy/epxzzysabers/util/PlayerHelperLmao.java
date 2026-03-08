@@ -1,8 +1,9 @@
 package com.epxzzy.epxzzysabers.util;
 
-import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerAttackPacket;
-import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerDefendPacket;
-import com.epxzzy.epxzzysabers.networking.packet.ClientboundPlayerStancePacket;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerAttackPacket;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerDefendPacket;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerFlourishPacket;
+import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerStancePacket;
 
 public interface PlayerHelperLmao {
     int getFlyCooldown();
@@ -14,9 +15,9 @@ public interface PlayerHelperLmao {
 
 
 
-    public void SyncSTCtoPacket(ClientboundPlayerStancePacket packet);
     public void setSaberStanceDown(boolean value);
     public boolean getSaberStanceDown();
+    public int getSaberFlourishId();
     public int getSaberStanceForm();
     public int getSaberAttackForm();
     public int getSaberBlockForm();
@@ -31,6 +32,8 @@ public interface PlayerHelperLmao {
     public float getSaberDefendAnim();
     public void SyncDEFtoPacket(ClientboundPlayerDefendPacket packet);
     public void SyncATKtoPacket(ClientboundPlayerAttackPacket packet);
+    public void SyncSTCtoPacket(ClientboundPlayerStancePacket packet);
+    public void SyncFRStoPacket(ClientboundPlayerFlourishPacket packet);
 
     public int getAttackTime();
 

@@ -27,7 +27,8 @@ public class HumanoidModelMixin<T extends LivingEntity> {
 
         PlayerPoseRouter.afterSetupAnim(player, (HumanoidModel<?>) (Object) this);
     }
- @Inject(method = "setupAnim*", at = @At("HEAD"))
+
+    @Inject(method = "setupAnim*", at = @At("HEAD"))
     private void create$beforeSetupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch, CallbackInfo callbackInfo) {
         if (!(pEntity instanceof AbstractClientPlayer player))
             return;
