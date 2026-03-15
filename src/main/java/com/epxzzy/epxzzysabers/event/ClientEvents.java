@@ -18,7 +18,9 @@ import com.epxzzy.epxzzysabers.util.TagHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
@@ -63,9 +65,7 @@ public class ClientEvents {
                    held = true;
                 }
             }
-
              */
-
         }
     }
 

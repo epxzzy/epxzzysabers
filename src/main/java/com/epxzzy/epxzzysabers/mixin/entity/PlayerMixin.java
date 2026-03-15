@@ -13,6 +13,9 @@ import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import com.epxzzy.epxzzysabers.util.TagHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -29,10 +32,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static com.epxzzy.epxzzysabers.screen.stance.StancePreferenceScreen.STANCE_PREFERENCE;
+
 @Mixin(Player.class)
 public abstract class PlayerMixin implements PlayerHelperLmao {
     public boolean stancing = false;
-    public int stanceform = 0;
 
     public boolean attacking = false;
     public InteractionHand attackingHand;
@@ -51,7 +55,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
     public float SaberdefAnim = 0;
     public float oSaberdefAnim = 0;
-    public int flourishId  = 0;
+    public int flourishId = 0;
 
     public int flyCooldownVar = 40;
     //160 == cant fly, 0 == can fly
@@ -61,11 +65,15 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
 
 
+    @Inject(
+            method = "defineSynchedData",
+            at = @At(value = "TAIL"),
+            cancellable = true)
 
-    public void LogFlightDetails() {
-        //epxzzysabers.LOGGER.debug("PROG: {} ATTK: {}, BLKPROG: {}, DEF: {}", this.attackProgress, this.attacking, this.defendProgress, this.defending);
+    private void defineSynchedData(CallbackInfo ci) {
+        Player that = ((Player) (Object) this);
+        that.getEntityData().define(STANCE_PREFERENCE, 1);
     }
-
 
     @Inject(
             method = "tick",
@@ -75,7 +83,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             ),
             cancellable = true)
 
-    private void epxzzysabers$customTick(CallbackInfo ci) {
+    private void UpdateAttackDefendTick(CallbackInfo ci) {
         Player that = ((Player) (Object) this);
         this.oSaberAnim = this.SaberAnim;
 
@@ -84,17 +92,13 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             if (this.attackProgress >= 6) {
                 this.attackProgress = 0;
                 this.attacking = false;
-                this.attackPose = 0;
+                //this.attackPose = 0;
                 if (!that.level().isClientSide()) {
-                    CompoundTag temptag = that.getMainHandItem().getOrCreateTag().getCompound("display");
-                    //temptag.remove("atk");
                     that.displayClientMessage(Component.literal(""), true);
                 }
             }
         } else {
             this.attackProgress = 0;
-            //that.displayClientMessage(Component.literal(""), true);
-
         }
 
         this.SaberAnim = (float) this.attackProgress / (float) 6;
@@ -106,23 +110,17 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             if (this.defendProgress >= 6) {
                 this.defendProgress = 0;
                 this.defending = false;
-                this.defendPose = 0;
+                //this.defendPose = 0;
                 if (!that.level().isClientSide()) {
-                    CompoundTag temptag = that.getMainHandItem().getOrCreateTag().getCompound("display");
-                    //temptag.remove("blk");
                     that.displayClientMessage(Component.literal(""), true);
                 }
             }
         } else {
             this.defendProgress = 0;
-
         }
 
         this.SaberdefAnim = (float) this.defendProgress / (float) 6;
-
     }
-
-
 
     public float getSaberAttackAnim() {
         float f = this.SaberAnim - this.oSaberAnim;
@@ -142,11 +140,116 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         return this.oSaberdefAnim + f;
     }
 
+    @Inject(
+            method = "hurt",
+            at = @At(value = "HEAD"),
+            cancellable = true)
+
+    private void BlockSaberAttack(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
+        //epxzzySabers.LOGGER.debug("player hurt");
+        Player that = ((Player) (Object) this);
+        LivingEntity attacker = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
+        boolean gotBlocked = TagHelper.checkActiveSaber(that, that.getUsedItemHand() == InteractionHand.MAIN_HAND);
+
+        if (!that.level().isClientSide() && gotBlocked) {
+            if (!this.defending || this.defendProgress >= 6 / 2 || this.defendProgress < 0) {
+                this.defendProgress = -1;
+            }
+            defending = true;
+            int tempatk = 0;
+
+            if (attacker != null) {
+                boolean posedAttack = TagHelper.checkActivePoseableWeapon(attacker, true);
+
+                if (gotBlocked && posedAttack) {
+                    //epxzzySabers.LOGGER.debug("blocked {}", notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
+
+                    if (attacker instanceof Player) {
+                        tempatk = ((PlayerHelperLmao) attacker).getSaberAttackForm();
+                    } else {
+                        tempatk = KewlFightsOrchestrator.DetermineNextPossibleAttack(8, (ServerPlayer) that);
+                    }
+                    that.displayClientMessage(Component.literal("blocking " + tempatk), true);
+
+                    //that.playSound(SaberSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
+                }
+
+            }
+
+            SaberMessages.fuckingAnnounce(new ClientboundPlayerDefendPacket(that.getId(), this.defending, this.defendProgress, tempatk), that);
+        }
+    }
+
+    @Inject(
+            method = "attack",
+            at = @At(value = "HEAD"),
+            cancellable = true)
+
+    private void AttackWithSaber(Entity pTarget, CallbackInfo ci) {
+        //epxzzySabers.LOGGER.debug("player hurt");
+        Player that = ((Player) (Object) this);
+        //Entity notThat = pTarget;
+
+        if (SaberGauntlet.checkForSaberCharge(that, true)) {
+            for (LivingEntity livingentity : that.level().getEntitiesOfClass(
+                    LivingEntity.class,
+                    pTarget.getBoundingBox().inflate(1.0D, 0.25D, 1.0D)
+            )) {
+                double entityReachSq = Mth.square(that.getEntityReach());
+                if (
+                        livingentity != that &&
+                                livingentity != pTarget &&
+                                !that.isAlliedTo(livingentity) &&
+                                (
+                                        !(livingentity instanceof ArmorStand) || !((ArmorStand) livingentity).isMarker()
+                                ) &&
+                                that.distanceToSqr(livingentity) < entityReachSq
+                ) {
+                    livingentity.knockback(
+                            0.4F,
+                            Mth.sin(that.getYRot() * ((float) Math.PI / 180F)),
+                            (-Mth.cos(that.getYRot() * ((float) Math.PI / 180F)))
+                    );
+                    for (int b = 0; b != 3; b++) {
+                        livingentity.invulnerableTime = 0;
+                        livingentity.hurt(that.damageSources().playerAttack(that), 1);
+                        livingentity.hurtTime = 3;
+
+                    }
+
+                }
+            }
+
+            that.sweepAttack();
+        }
+
+        if (!that.level().isClientSide() && TagHelper.checkActivePoseableWeapon(that, true)) {
+            if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {
+                this.attackProgress = -1;
+                this.attacking = true;
+                this.attackingHand = that.swingingArm;
+            }
+
+            //int old = tagger.getCompound("display").getInt("atk");
+
+            //int sequential = old > 0 && old < 8 ? old + 1 : 1;
+            //problematic method call removed
+            int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(7, (ServerPlayer) that);
+
+            //epxzzysabers.LOGGER.debug("next possible attack value  {}", baller);
+            that.displayClientMessage(Component.literal("attacking " + methodic), true);
+            ((PlayerHelperLmao) that).setSaberAttackForm(methodic);
+
+            SaberMessages.fuckingAnnounce(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress, methodic), that);
+            //epxzzySabers.LOGGER.debug("attacking {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
+        }
+    }
+
     public void SyncSTCtoPacket(ClientboundPlayerStancePacket packet) {
         Player that = ((Player) (Object) this);
 
         this.stancing = packet.stancing;
-        this.stanceform = packet.stancing?packet.stanceform:0;
+        that.getEntityData().set(STANCE_PREFERENCE, packet.stanceform);
 
         epxzzySabers.LOGGER.debug("successfully synced STC for {}", that);
     }
@@ -179,227 +282,85 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         //epxzzySabers.LOGGER.debug("successfully synced FRS for {}", that);
     }
 
-
-    @Inject(
-            method = "hurt",
-            at = @At(value = "HEAD"),
-            cancellable = true)
-
-    private void epxzzySabers$customPlayerhurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
-        //epxzzySabers.LOGGER.debug("player hurt");
-        Player that = ((Player) (Object) this);
-        LivingEntity notThat = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
-        boolean blocking_with_sabur = that.getUseItem().is(SaberTags.Items.LIGHTSABER);
-
-        if (!that.level().isClientSide() && blocking_with_sabur) {
-            if (!this.defending || this.defendProgress >= 6 / 2 || this.defendProgress < 0) {
-                this.defendProgress = -1;
-                this.defending = true;
-            }
-            defending = true;
-            int tempatk = 0;
-
-            if (notThat != null) {
-                boolean attacking_with_sabur = notThat.getMainHandItem().is(SaberTags.Items.LIGHTSABER);
-
-
-                if (blocking_with_sabur && attacking_with_sabur) {
-                    //epxzzySabers.LOGGER.debug("blocked {}", notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
-                    //int block_value = notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk");
-                    tempatk = ((PlayerHelperLmao) notThat).getSaberAttackForm();
-
-                    //CompoundTag tagger = that.getUseItem().getOrCreateTag();
-                    //tagger.getCompound("display").putInt("blk", block_value);
-                    that.displayClientMessage(Component.literal("blocking " +  tempatk), true);
-                    //that.getMainHandItem().setTag(tagger);
-
-                    //remove the custom block animation
-                    //cir.cancel();
-                    //that.playSound(SaberSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
-                }
-
-            }
-
-            SaberMessages.fuckingAnnounce(new ClientboundPlayerDefendPacket(that.getId(), this.defending, this.defendProgress, tempatk), that);
-
-        }
-    }
-
-    @Inject(
-            method = "attack",
-            at = @At(value = "HEAD"),
-            cancellable = true)
-
-    private void epxzzySabers$customAttack(Entity pTarget, CallbackInfo ci) {
-        //epxzzySabers.LOGGER.debug("player hurt");
-        Player that = ((Player) (Object) this);
-        Entity notThat = pTarget;
-
-        if(SaberGauntlet.checkForSaberCharge(that, true)){
-
-            for(LivingEntity livingentity : that.level().getEntitiesOfClass(
-                    LivingEntity.class,
-                    pTarget.getBoundingBox().inflate(1.0D, 0.25D, 1.0D)
-            )) {
-                double entityReachSq = Mth.square(that.getEntityReach());
-                if (
-                        livingentity != that &&
-                        livingentity != pTarget &&
-                        !that.isAlliedTo(livingentity) &&
-                        (
-                                !(livingentity instanceof ArmorStand) || !( (ArmorStand) livingentity).isMarker()
-                        ) &&
-                        that.distanceToSqr(livingentity) < entityReachSq
-                ) {
-                    livingentity.knockback(
-                            0.4F,
-                            Mth.sin(that.getYRot() * ((float)Math.PI / 180F)),
-                            (-Mth.cos(that.getYRot() * ((float)Math.PI / 180F)))
-                    );
-                    for (int b = 0; b != 3; b++ ){
-                        livingentity.invulnerableTime = 0;
-                        livingentity.hurt(that.damageSources().playerAttack(that), 1);
-                        livingentity.hurtTime = 3;
-
-                    }
-
-                }
-            }
-
-            that.sweepAttack();
-        }
-
-        if (!that.level().isClientSide() && TagHelper.checkActivePoseableWeapon(that, true)){
-            if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {
-                this.attackProgress = -1;
-                this.attacking = true;
-                this.attackingHand = that.swingingArm;
-            }
-
-            //CompoundTag tagger = that.getMainHandItem().getOrCreateTag();
-            //int old = tagger.getCompound("display").getInt("atk");
-
-            //int sequential = old > 0 && old < 8 ? old + 1 : 1;
-            //problematic method call removed
-            int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(7, (ServerPlayer) that);
-            //tagger.getCompound("display").putInt("atk", methodic);
-
-            //epxzzysabers.LOGGER.debug("next possible attack value  {}", baller);
-            that.displayClientMessage(Component.literal("attacking " + methodic), true);
-            ((PlayerHelperLmao) that).setSaberAttackForm(methodic);
-            //that.getMainHandItem().setTag(tagger);
-
-
-            //SaberMessages.sendToServer(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress));
-            //epxzzySabers.LOGGER.debug("attacking {}", that.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
-
-            SaberMessages.fuckingAnnounce(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress, methodic), that);
-
-        }
-    }
-
-
-    /*
-        @Inject(
-                method = "isInvulnerableTo",
-                at = @At(value = "HEAD"),
-                cancellable = true
-        )
-
-        private void epxzzySabers$customIsInvulnerableTo(DamageSource pSource, CallbackInfoReturnable<Boolean> cir){
-            Player that = ((Player) (Object) this);
-            if(pSource.is(DamageTypeTags.IS_PROJECTILE)&&!(that.getAbilities().flying)){
-               cir.setReturnValue(Protosaber.checkForSaberBlock(that)||SingleBladed.checkForSaberBlock(that));
-               cir.cancel();
-            }
-        }
-
-     */
-    @Inject(
-            method = "attack",
-            at = @At(value = "HEAD")
-    )
-    private void epxzzySabers$customattacknoise(Entity pTarget, CallbackInfo ci) {
-        Player that = ((Player) (Object) this);
-        if (that.getMainHandItem().is(SaberTags.Items.LIGHTSABER) && that.getMainHandItem().getOrCreateTag().getBoolean("ActiveBoiii")) {
-            //that.level().playSound((Player) null, that.getX(), that.getY(), that.getZ(), SaberSounds.SWING.get(), that.getSoundSource(), 1.0F, 1.0F);
-        }
-
-    }
-
-    @Inject(
-            method = "serverAiStep",
-            at = @At(value = "HEAD")
-    )
-    private void epxzzySabers$customattacknoise(CallbackInfo ci) {
-        LivingEntity that = ((LivingEntity) (Object) this);
-        ItemStack pStack = that.getMainHandItem();
-        if(that.swingTime == 0 && TagHelper.checkActivePoseableWeapon(that, true)){
-            //Protosaber.removeFlourishTag(that, pStack);
-            //this.flourishId = 0;
-
-        }
-    }
-
-
-    public int getFlyCooldown(){
+    public int getFlyCooldown() {
         return flyCooldownVar;
     }
+
     @Unique
-    public int getFlightDuration(){
+    public int getFlightDuration() {
         return flightDurationVar;
     }
+
     @Unique
-    public void setFlyCooldown(int val){
+    public void setFlyCooldown(int val) {
         flyCooldownVar = val;
     }
+
     @Unique
-    public void setFlightDuration(int val){
+    public void setFlightDuration(int val) {
         flightDurationVar = val;
     }
+
     @Unique
     public int getChargeDuration() {
         return supercharredTime;
     }
+
     @Unique
-    public void setChargeDuration(int val){
-        supercharredTime= val;
+    public void setChargeDuration(int val) {
+        supercharredTime = val;
     }
+
     @Unique
     public void setSaberStanceDown(boolean val) {
         this.stancing = val;
     }
+
     @Unique
     public boolean getSaberStanceDown() {
         return this.stancing;
     }
+
     @Unique
     public int getSaberStanceForm() {
-        return this.stanceform;
+        Player that = ((Player) (Object) this);
+        return that.getEntityData().get(STANCE_PREFERENCE);
     }
+
     @Unique
     public void setSaberStanceForm(int value) {
-        this.stanceform = value;
+        Player that = ((Player) (Object) this);
+        that.getEntityData().set(STANCE_PREFERENCE, value);
+
     }
+
     @Unique
     public int getSaberAttackForm() {
         return this.attackPose;
     }
+
     @Unique
     public int getSaberBlockForm() {
         return this.defendPose;
     }
+
     @Unique
     public void setSaberAttackForm(int val) {
         this.attackPose = val;
     }
+
     @Unique
     public void setSaberBlockForm(int val) {
         this.defendPose = val;
     }
+
     @Unique
-    public int getSaberFlourishId(){
+    public int getSaberFlourishId() {
         return this.flourishId;
     }
 
+
+    public void LogFlightDetails() {
+        //epxzzysabers.LOGGER.debug("PROG: {} ATTK: {}, BLKPROG: {}, DEF: {}", this.attackProgress, this.attacking, this.defendProgress, this.defending);
+    }
 }

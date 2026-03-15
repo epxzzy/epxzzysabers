@@ -26,6 +26,8 @@ public interface PlayerHelperLmao {
 
     public void setSaberStanceForm(int value);
 
+    public void setStancePreference(int value);
+    public int getStancePreference();
 
     public void LogFlightDetails();
     public float getSaberAttackAnim();

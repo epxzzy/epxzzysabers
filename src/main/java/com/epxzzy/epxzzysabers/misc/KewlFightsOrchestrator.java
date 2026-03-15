@@ -12,7 +12,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.Optional;
 
 public class KewlFightsOrchestrator {
-    public static int DetermineNextPossibleAttack(int old, ServerPlayer pPlayer){
+    public static int DetermineNextPossibleAttack(int old, LivingEntity pPlayer){
         /*
         float headrotted = AngleHelper.normalizeAngle(pPlayer.getYRot());
         float bodyrotted = AngleHelper.normalizeAngle(pPlayer.rot);

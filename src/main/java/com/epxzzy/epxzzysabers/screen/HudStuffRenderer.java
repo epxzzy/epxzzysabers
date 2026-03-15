@@ -11,7 +11,9 @@ import net.minecraft.world.level.GameType;
 
 public class HudStuffRenderer {
     public static final ResourceLocation ATTACK = epxzzySabers.asResource("textures/gui/attack.png");
+    public static final ResourceLocation ATTACKS = epxzzySabers.asResource("textures/gui/attacks.png");
     public static final ResourceLocation BLOCK = epxzzySabers.asResource("textures/gui/block.png");
+    public static final ResourceLocation BLOCKS = epxzzySabers.asResource("textures/gui/blocks.png");
 
     public static void renderStuff(GuiGraphics pGuiGraphics, Gui that) {
         Options options = that.minecraft.options;
@@ -31,13 +33,16 @@ public class HudStuffRenderer {
         int j = that.screenHeight / 2 - 15;
         int k = that.screenWidth / 2 - 14;
         PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) that.minecraft.player;
+        int atk = MixinPlayer.getSaberAttackForm();
+        int blk = MixinPlayer.getSaberBlockForm();
 
         if (MixinPlayer.getSaberAttackAnim() > 0) {
-            pGuiGraphics.blit(ATTACK, k, j, 0, 0, 29, 29, 29, 29);
-
+            //pGuiGraphics.blit(ATTACK, k, j, 0, 0, 29, 29, 29, 29);
+            pGuiGraphics.blit(ATTACKS, k, j, 0, ((atk)*29), 29, 29, 29, 29*9);
         }
         if (MixinPlayer.getSaberDefendAnim() > 0) {
-            pGuiGraphics.blit(BLOCK, k, j, 0, 0, 29, 29, 29, 29);
+            //pGuiGraphics.blit(BLOCK, k, j, 0, 0, 29, 29, 29, 29);
+            pGuiGraphics.blit(BLOCKS, k, j, 0, ((blk)*29), 29, 29, 29, 29*9);
         }
 
     }

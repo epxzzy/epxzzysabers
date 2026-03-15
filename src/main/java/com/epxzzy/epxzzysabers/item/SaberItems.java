@@ -14,7 +14,7 @@ import java.awt.*;
 
 public class SaberItems {
     public static final DeferredRegister<Item> items = DeferredRegister.create(ForgeRegistries.ITEMS, epxzzySabers.MOD_ID);
-    public static final Rarity RARITY_KYBER = Rarity.create("epxzzysabers:fire",
+    public static final Rarity RARITY_KYBER = Rarity.create("epxzzysabers:glow",
             style -> {
                 float hue = 0.5f + (float)(0.1 * Math.sin(System.currentTimeMillis() / 300.0));
                 return style.withColor(Color.HSBtoRGB(hue, 1f, 1f));
