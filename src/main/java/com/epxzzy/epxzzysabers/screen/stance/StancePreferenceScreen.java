@@ -1,13 +1,16 @@
 package com.epxzzy.epxzzysabers.screen.stance;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
+import com.epxzzy.epxzzysabers.misc.KeyBinding;
 import com.epxzzy.epxzzysabers.rendering.playerposerenderers.BladeStance;
+import com.epxzzy.epxzzysabers.screen.components.PentagonButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -31,6 +34,8 @@ public class StancePreferenceScreen extends Screen {
     @Override
     public void init(){
         List<BladeStance> iteratur = BladeStance.getStances();
+        //addRenderableWidget(new PentagonButton())
+        this.addRenderableWidget(new PentagonButton.Builder(CommonComponents.GUI_CANCEL).bounds(this.width/2,this.height/2, 50, 50).rot(180).build());
     }
 
     @Override
@@ -38,10 +43,11 @@ public class StancePreferenceScreen extends Screen {
         List<BladeStance> iteratur = BladeStance.getStances();
         int h = gui.guiHeight() / 2 + 35;
         int w = gui.guiWidth() / 2 - 85;
-        for (int i = 0; i < iteratur.size(); i++) {
-            int tsw = w+(20*i)+15;
-            //todo make buttons and shi
-        }
+        //for (int i = 0; i < iteratur.size(); i++) {
+        //    int tsw = w+(20*i)+15;
+        //todo make buttons and shi
+        //}
+        super.render(gui, mouseX, mouseY, partialTicks);
     }
 
     @Override
@@ -65,16 +71,14 @@ public class StancePreferenceScreen extends Screen {
         return false;
     }
 
+
     @Override
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
-
+        if (pKeyCode == KeyBinding.SABER_STANCEPREF_KEY.getKey().getValue()) {
+            this.onClose();
+            return true;
+        }
         return super.keyPressed(pKeyCode, pScanCode, pModifiers);
-    }
-
-    @Override
-    public void onClose() {
-
-        super.onClose();
     }
 }
 

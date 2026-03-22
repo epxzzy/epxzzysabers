@@ -9,6 +9,7 @@ import com.epxzzy.epxzzysabers.misc.KeyBinding;
 import com.epxzzy.epxzzysabers.networking.SaberMessages;
 import com.epxzzy.epxzzysabers.networking.packet.saber.ServerboundSaberAbilityPacket;
 import com.epxzzy.epxzzysabers.networking.packet.saber.ServerboundSaberStancePacket;
+import com.epxzzy.epxzzysabers.screen.stance.StancePreferenceScreen;
 import com.epxzzy.epxzzysabers.util.AnimationTickHolder;
 import com.epxzzy.epxzzysabers.util.ScrollValueHandler;
 import com.epxzzy.epxzzysabers.util.TagHelper;
@@ -58,14 +59,11 @@ public class ClientEvents {
                 }
             }
 
-            /*
-            if (KeyBinding.SABER_ABILITY_KEY.isDown()) {
-                if(!held){
-                   bengignhold = System.currentTimeMillis();
-                   held = true;
-                }
+
+            if (KeyBinding.SABER_STANCEPREF_KEY.isDown()){
+                Minecraft.getInstance().setScreen(new StancePreferenceScreen(player));
             }
-             */
+
         }
     }
 
