@@ -20,13 +20,16 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.PacketDistributor;
+import org.lwjgl.glfw.GLFW;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class StancePreferenceScreen extends Screen {
     int Selection;
     public static final EntityDataAccessor<Integer> STANCE_PREFERENCE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
+    public List<PentagonButton> Choices = new ArrayList<>();
 
     public StancePreferenceScreen(Player player) {
         super(Component.empty());
@@ -36,7 +39,6 @@ public class StancePreferenceScreen extends Screen {
     @Override
     public void init(){
         List<BladeStance> iteratur = BladeStance.getStances();
-        //addRenderableWidget(new PentagonButton())
         int centerX = this.width / 2,
                 centerY = this.height / 2,
                 radius = 60;
@@ -48,44 +50,57 @@ public class StancePreferenceScreen extends Screen {
             int vertX = (int) (centerX + radius * Math.cos(angle));
             int vertY = (int) (centerY+ radius * Math.sin(angle));
 
-            this.addRenderableWidget(
-                    new PentagonButton.Builder(CommonComponents.GUI_CANCEL)
-                            .bounds(vertX, vertY, 44)
-                            .rot(flipped?180:0)
-                            .build());
+            PentagonButton button = new PentagonButton.Builder(CommonComponents.GUI_CANCEL)
+                    .bounds(vertX, vertY, 44)
+                    .rot(flipped?180:0)
+                    .build();
 
+            this.Choices.add(i, button);
+            this.addRenderableWidget(button);
         }
-        /*
-        this.addRenderableWidget(
-                new PentagonButton
-                        .Builder(CommonComponents.GUI_CANCEL)
-                        .bounds(this.width/2,this.height/2, 50, 50)
-                        .rot(180)
-                        .build()
-        );
-        */
+        setSelection(Selection);
     }
 
     @Override
+    public void mouseMoved(double pMouseX, double pMouseY) {
+        for (int i = 0; i < Choices.size(); i++) {
+            if (Choices.get(i).isMouseOver(pMouseX, pMouseY)){
+                Selection = i;
+                Choices.get(i).selected = true;
+            }
+            else {
+                Choices.get(i).selected = false;
+            }
+        }
+
+        super.mouseMoved(pMouseX, pMouseY);
+    }
+
+    public void setSelection(int i){
+        for (int j = 0; j < Choices.size(); j++) {
+            Choices.get(j).selected = i==j;
+        }
+    }
+
+    public void rollSelection(int p) {
+        int next = p > 0 ? Selection + 1 : Selection - 1;
+
+        if (next >= Choices.size()) next = 0;
+        if (next < 0) next = Choices.size() - 1;
+
+        Selection = next;
+        setSelection(next);
+    }
+
+
+    @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTicks) {
-        List<BladeStance> iteratur = BladeStance.getStances();
-        int h = gui.guiHeight() / 2 + 35;
-        int w = gui.guiWidth() / 2 - 85;
-        //for (int i = 0; i < iteratur.size(); i++) {
-        //    int tsw = w+(20*i)+15;
-        //todo make buttons and shi
-        //}
         super.render(gui, mouseX, mouseY, partialTicks);
     }
 
     @Override
     public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
-        int next = pDelta > 0 ? Selection + 1 : Selection - 1;
-
-        if (next > 8) next = 1;
-        if (next < 1) next = 8;
-
-        Selection = next;
+        rollSelection((int)pDelta);
         return super.mouseScrolled(pMouseX, pMouseY, pDelta);
     }
 
@@ -106,6 +121,13 @@ public class StancePreferenceScreen extends Screen {
             this.onClose();
             return true;
         }
+        if(pKeyCode == GLFW.GLFW_KEY_UP || pKeyCode == GLFW.GLFW_KEY_RIGHT){
+            rollSelection(1);
+        }
+        if(pKeyCode == GLFW.GLFW_KEY_DOWN || pKeyCode == GLFW.GLFW_KEY_LEFT){
+            rollSelection(-1);
+        }
+
         return super.keyPressed(pKeyCode, pScanCode, pModifiers);
     }
 }

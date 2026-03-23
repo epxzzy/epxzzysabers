@@ -24,6 +24,7 @@ import java.util.List;
 
 public class PentagonButton extends AbstractButton {
     public List<Pair<Integer, Integer>> vertices = new ArrayList<>();
+    public boolean selected;
 
     public PentagonButton(int pX, int pY, int pWidth, int pHeight,int pRotation, Component pMessage) {
         super(pX, pY, pWidth, pHeight, pMessage);
@@ -62,16 +63,16 @@ public class PentagonButton extends AbstractButton {
 
         // --- OUTLINE ---
         buffer.begin(VertexFormat.Mode.DEBUG_LINE_STRIP, DefaultVertexFormat.POSITION_COLOR);
-
+        float mono = this.selected ? 1.0f: 0f;
         for (Pair<Integer, Integer> vertex : this.vertices) {
             buffer.vertex(vertex.getFirst(), vertex.getSecond(), 0)
-                    .color(1.0f, 1.0f, 1.0f, 1.0f)
+                    .color(mono, mono, mono, 1.0f)
                     .endVertex();
         }
 
         // close the loop back to vertex 0
         buffer.vertex(this.vertices.get(0).getFirst(), this.vertices.get(0).getSecond(), 0)
-                .color(1.0f, 1.0f, 1.0f, 1.0f)
+                .color(mono, mono, mono, 1.0f)
                 .endVertex();
 
         tesselator.end();
@@ -84,7 +85,7 @@ public class PentagonButton extends AbstractButton {
         return this.active && this.visible && pnpoly(pMouseX, pMouseY);
     }
 
-    @Override
+        @Override
     public boolean clicked(double pMouseX, double pMouseY) {
         return this.active && this.visible && pnpoly(pMouseX, pMouseY);
     }
