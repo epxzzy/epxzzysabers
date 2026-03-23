@@ -4,6 +4,8 @@ import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.misc.KeyBinding;
 import com.epxzzy.epxzzysabers.rendering.playerposerenderers.BladeStance;
 import com.epxzzy.epxzzysabers.screen.components.PentagonButton;
+import com.epxzzy.epxzzysabers.util.AngleHelper;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -35,7 +37,33 @@ public class StancePreferenceScreen extends Screen {
     public void init(){
         List<BladeStance> iteratur = BladeStance.getStances();
         //addRenderableWidget(new PentagonButton())
-        this.addRenderableWidget(new PentagonButton.Builder(CommonComponents.GUI_CANCEL).bounds(this.width/2,this.height/2, 50, 50).rot(180).build());
+        int centerX = this.width / 2,
+                centerY = this.height / 2,
+                radius = 60;
+        float offset4Fancy = AngleHelper.rad(180);
+        for (int i = 0; i < iteratur.size(); i++) {
+            boolean flipped = i%2 == 0;
+            double angle = ((2 * Math.PI / 10) * i - Math.PI / 2)+(offset4Fancy);
+
+            int vertX = (int) (centerX + radius * Math.cos(angle));
+            int vertY = (int) (centerY+ radius * Math.sin(angle));
+
+            this.addRenderableWidget(
+                    new PentagonButton.Builder(CommonComponents.GUI_CANCEL)
+                            .bounds(vertX, vertY, 44)
+                            .rot(flipped?180:0)
+                            .build());
+
+        }
+        /*
+        this.addRenderableWidget(
+                new PentagonButton
+                        .Builder(CommonComponents.GUI_CANCEL)
+                        .bounds(this.width/2,this.height/2, 50, 50)
+                        .rot(180)
+                        .build()
+        );
+        */
     }
 
     @Override

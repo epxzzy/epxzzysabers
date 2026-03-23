@@ -1,6 +1,7 @@
 package com.epxzzy.epxzzysabers.screen.components;
 
 import com.epxzzy.epxzzysabers.misc.KeyBinding;
+import com.epxzzy.epxzzysabers.util.AngleHelper;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
@@ -27,17 +28,14 @@ public class PentagonButton extends AbstractButton {
     public PentagonButton(int pX, int pY, int pWidth, int pHeight,int pRotation, Component pMessage) {
         super(pX, pY, pWidth, pHeight, pMessage);
 
-        int cX = pX + pWidth / 2,
-                cY = pY + pHeight / 2,
-                rX = pWidth / 2,
-                rY= pHeight / 2;
+        int rad = pWidth/2;
 
         for (int i = 0; i < 6; i++) {
-            double rot = Math.toRadians(pRotation);
+            double rot = AngleHelper.rad(pRotation);
             double angle = (2 * Math.PI / 5) * i - Math.PI / 2 + rot;
 
-            int vertX = (int) (cX + rX * Math.cos(angle));
-            int vertY = (int) (cY + rY * Math.sin(angle));
+            int vertX = (int) (pX + rad * Math.cos(angle));
+            int vertY = (int) (pY + rad * Math.sin(angle));
 
             this.vertices.add(i, Pair.of(vertX, vertY));
         }
@@ -45,7 +43,7 @@ public class PentagonButton extends AbstractButton {
 
 
     protected PentagonButton(Builder builder) {
-        this(builder.x, builder.y, builder.width, builder.height, builder.rot, builder.message);
+        this(builder.x, builder.y, builder.radius, builder.radius, builder.rot, builder.message);
         setTooltip(builder.tooltip); // Forge: Make use of the Builder tooltip
     }
     @Override
@@ -128,8 +126,7 @@ public class PentagonButton extends AbstractButton {
         private Tooltip tooltip;
         private int x;
         private int y;
-        private int width = 150;
-        private int height = 20;
+        private int radius;
         private int rot = 0;
 
         public Builder(Component pMessage
@@ -149,19 +146,13 @@ public class PentagonButton extends AbstractButton {
             return this;
         }
 
-        public Builder width(int pWidth) {
-            this.width = pWidth;
+        public Builder rad(int radius) {
+            this.radius = radius;
             return this;
         }
 
-        public Builder size(int pWidth, int pHeight) {
-            this.width = pWidth;
-            this.height = pHeight;
-            return this;
-        }
-
-        public Builder bounds(int pX, int pY, int pWidth, int pHeight) {
-            return this.pos(pX, pY).size(pWidth, pHeight);
+        public Builder bounds(int pX, int pY, int rad) {
+            return this.pos(pX, pY).rad(rad);
         }
 
         public Builder tooltip(@Nullable Tooltip pTooltip) {
