@@ -189,14 +189,14 @@ public class SaberPacketHandler {
             }
         }
     }
-    public static void handleStancePacket(Supplier<NetworkEvent.Context> supplier, boolean keydown){
+    public static void handleStancePacket(Supplier<NetworkEvent.Context> supplier, boolean keydown, int preference){
         NetworkEvent.Context contextt = supplier.get();
 
         if (contextt.getSender() != null) {
             ServerPlayer player = contextt.getSender();
             //weird netherportal-autoblock bug
             player.stopUsingItem();
-            SaberMessages.fuckingAnnounce(new ClientboundPlayerStancePacket(player.getId(), keydown, Protosaber.getStance(player).ordinal()), player);
+            SaberMessages.fuckingAnnounce(new ClientboundPlayerStancePacket(player.getId(), keydown, preference), player);
         }
     }
 

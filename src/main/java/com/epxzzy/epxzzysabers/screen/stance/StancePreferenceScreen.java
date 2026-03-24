@@ -2,9 +2,12 @@ package com.epxzzy.epxzzysabers.screen.stance;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.misc.KeyBinding;
+import com.epxzzy.epxzzysabers.networking.SaberMessages;
+import com.epxzzy.epxzzysabers.networking.packet.saber.ServerboundSaberStancePacket;
 import com.epxzzy.epxzzysabers.rendering.playerposerenderers.BladeStance;
 import com.epxzzy.epxzzysabers.screen.components.PentagonButton;
 import com.epxzzy.epxzzysabers.util.AngleHelper;
+import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -45,7 +48,7 @@ public class StancePreferenceScreen extends Screen {
         float offset4Fancy = AngleHelper.rad(180);
         for (int i = 0; i < iteratur.size(); i++) {
             boolean flipped = i%2 == 0;
-            double angle = ((2 * Math.PI / 10) * i - Math.PI / 2)+(offset4Fancy);
+            double angle = -((2 * Math.PI / 10) * i - Math.PI / 2)-(offset4Fancy)+AngleHelper.rad(36);
 
             int vertX = (int) (centerX + radius * Math.cos(angle));
             int vertY = (int) (centerY+ radius * Math.sin(angle));
@@ -65,7 +68,7 @@ public class StancePreferenceScreen extends Screen {
     public void mouseMoved(double pMouseX, double pMouseY) {
         for (int i = 0; i < Choices.size(); i++) {
             if (Choices.get(i).isMouseOver(pMouseX, pMouseY)){
-                Selection = i;
+                Selection = i+1;
                 Choices.get(i).selected = true;
             }
             else {
@@ -78,15 +81,15 @@ public class StancePreferenceScreen extends Screen {
 
     public void setSelection(int i){
         for (int j = 0; j < Choices.size(); j++) {
-            Choices.get(j).selected = i==j;
+            Choices.get(j).selected = (i-1)==j;
         }
     }
 
     public void rollSelection(int p) {
         int next = p > 0 ? Selection + 1 : Selection - 1;
 
-        if (next >= Choices.size()) next = 0;
-        if (next < 0) next = Choices.size() - 1;
+        if (next > Choices.size()) next = 1;
+        if (next <= 0) next = Choices.size();
 
         Selection = next;
         setSelection(next);
@@ -106,7 +109,18 @@ public class StancePreferenceScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (button == 0) {
+            confirm();
+        }
         return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    public void confirm(){
+        if (Selection >= 1 && Selection <= BladeStance.getStances().size()) {
+            PlayerHelperLmao mixinplayer = (PlayerHelperLmao) minecraft.player;
+            mixinplayer.setSaberStanceForm(Selection);
+        }
+        this.onClose();
     }
 
     @Override
@@ -122,10 +136,13 @@ public class StancePreferenceScreen extends Screen {
             return true;
         }
         if(pKeyCode == GLFW.GLFW_KEY_UP || pKeyCode == GLFW.GLFW_KEY_RIGHT){
-            rollSelection(1);
+            rollSelection(-1);
         }
         if(pKeyCode == GLFW.GLFW_KEY_DOWN || pKeyCode == GLFW.GLFW_KEY_LEFT){
-            rollSelection(-1);
+            rollSelection(1);
+        }
+        if(pKeyCode == GLFW.GLFW_KEY_ENTER || pKeyCode == GLFW.GLFW_KEY_SPACE){
+            confirm();
         }
 
         return super.keyPressed(pKeyCode, pScanCode, pModifiers);

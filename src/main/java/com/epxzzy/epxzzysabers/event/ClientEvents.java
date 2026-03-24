@@ -11,6 +11,7 @@ import com.epxzzy.epxzzysabers.networking.packet.saber.ServerboundSaberAbilityPa
 import com.epxzzy.epxzzysabers.networking.packet.saber.ServerboundSaberStancePacket;
 import com.epxzzy.epxzzysabers.screen.stance.StancePreferenceScreen;
 import com.epxzzy.epxzzysabers.util.AnimationTickHolder;
+import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import com.epxzzy.epxzzysabers.util.ScrollValueHandler;
 import com.epxzzy.epxzzysabers.util.TagHelper;
 
@@ -48,14 +49,15 @@ public class ClientEvents {
                 SaberMessages.sendToServer(new ServerboundSaberAbilityPacket());
             }
             Player player = Minecraft.getInstance().player;
+            PlayerHelperLmao MixinPlayer = (PlayerHelperLmao)((Player) player);
             if(TagHelper.checkMainhandPoseableWeapon(player)) {
                 if (!wasUp && KeyBinding.SABER_STANCE_KEY.isDown()) {
                     wasUp = true;
-                    SaberMessages.sendToServer(new ServerboundSaberStancePacket(KeyBinding.SABER_STANCE_KEY.isDown()));
+                    SaberMessages.sendToServer(new ServerboundSaberStancePacket(KeyBinding.SABER_STANCE_KEY.isDown(), MixinPlayer.getStancePreference()));
                 }
                 if (wasUp && !KeyBinding.SABER_STANCE_KEY.isDown()) {
                     wasUp = false;
-                    SaberMessages.sendToServer(new ServerboundSaberStancePacket(KeyBinding.SABER_STANCE_KEY.isDown()));
+                    SaberMessages.sendToServer(new ServerboundSaberStancePacket(KeyBinding.SABER_STANCE_KEY.isDown(), MixinPlayer.getStancePreference()));
                 }
             }
 

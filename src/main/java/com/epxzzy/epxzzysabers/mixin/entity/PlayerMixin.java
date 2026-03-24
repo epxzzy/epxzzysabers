@@ -251,7 +251,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         this.stancing = packet.stancing;
         that.getEntityData().set(STANCE_PREFERENCE, packet.stanceform);
 
-        epxzzySabers.LOGGER.debug("successfully synced STC for {}", that);
+        epxzzySabers.LOGGER.debug("successfully synced STC for {} w/ pref {}", that, packet.stanceform);
     }
 
     public void SyncDEFtoPacket(ClientboundPlayerDefendPacket packet) {
@@ -322,7 +322,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     }
 
     @Unique
-    public int getSaberStanceForm() {
+    public int getStancePreference() {
         Player that = ((Player) (Object) this);
         return that.getEntityData().get(STANCE_PREFERENCE);
     }

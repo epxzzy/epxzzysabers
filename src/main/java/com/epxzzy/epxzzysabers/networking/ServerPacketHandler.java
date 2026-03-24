@@ -17,8 +17,8 @@ public class ServerPacketHandler {
         SaberPacketHandler.handleAbilityPacket(supplier);
     }
 
-    public static void handleStancePacket(Supplier<NetworkEvent.Context> supplier, boolean keydown) {
-        SaberPacketHandler.handleStancePacket(supplier, keydown);
+    public static void handleStancePacket(Supplier<NetworkEvent.Context> supplier, boolean keydown, int preference) {
+        SaberPacketHandler.handleStancePacket(supplier, keydown, preference);
     }
 
     public static void handleTabChange(ServerboundKyberMenuTabChange packet, Supplier<NetworkEvent.Context> supplier) {

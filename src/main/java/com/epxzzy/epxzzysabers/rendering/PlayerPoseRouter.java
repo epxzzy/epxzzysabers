@@ -62,7 +62,7 @@ public class PlayerPoseRouter {
         float SaberSwingAnim = ((PlayerHelperLmao) player).getSaberAttackAnim();
         float SaberDefAnim = ((PlayerHelperLmao) player).getSaberDefendAnim();
         boolean stancing = ((PlayerHelperLmao) player).getSaberStanceDown();
-        int stanceform = ((PlayerHelperLmao) player).getSaberStanceForm();
+        int stanceform = ((PlayerHelperLmao) player).getStancePreference();
 
         boolean isInFlight = RotarySaber.checkForSaberFly(player);
 
