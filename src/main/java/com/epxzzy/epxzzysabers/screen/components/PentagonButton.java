@@ -24,12 +24,30 @@ import java.util.List;
 
 public class PentagonButton extends AbstractButton {
     public List<Pair<Integer, Integer>> vertices = new ArrayList<>();
+    public int rot;
     public boolean selected;
 
     public PentagonButton(int pX, int pY, int pWidth, int pHeight,int pRotation, Component pMessage) {
         super(pX, pY, pWidth, pHeight, pMessage);
+        this.rot = pRotation;
+        vertices = computeCoords(pX, pY, pWidth, pRotation);
+    }
 
-        int rad = pWidth/2;
+
+    protected PentagonButton(Builder builder) {
+        this(builder.x, builder.y, builder.radius, builder.radius, builder.rot, builder.message);
+        setTooltip(builder.tooltip); // Forge: Make use of the Builder tooltip
+    }
+
+    @Override
+    public void onPress() {
+
+    }
+
+    public List<Pair<Integer, Integer>> computeCoords(int pX, int pY, int pSize,int pRotation){
+        List<Pair<Integer, Integer>> returnval = new ArrayList<>();
+
+        int rad = pSize/2;
 
         for (int i = 0; i < 6; i++) {
             double rot = AngleHelper.rad(pRotation);
@@ -38,18 +56,10 @@ public class PentagonButton extends AbstractButton {
             int vertX = (int) (pX + rad * Math.cos(angle));
             int vertY = (int) (pY + rad * Math.sin(angle));
 
-            this.vertices.add(i, Pair.of(vertX, vertY));
+            returnval.add(i, Pair.of(vertX, vertY));
         }
-    }
 
-
-    protected PentagonButton(Builder builder) {
-        this(builder.x, builder.y, builder.radius, builder.radius, builder.rot, builder.message);
-        setTooltip(builder.tooltip); // Forge: Make use of the Builder tooltip
-    }
-    @Override
-    public void onPress() {
-
+        return returnval;
     }
 
     @Override
@@ -64,14 +74,17 @@ public class PentagonButton extends AbstractButton {
         // --- OUTLINE ---
         buffer.begin(VertexFormat.Mode.DEBUG_LINE_STRIP, DefaultVertexFormat.POSITION_COLOR);
         float mono = this.selected ? 1.0f: 0f;
-        for (Pair<Integer, Integer> vertex : this.vertices) {
+
+        List<Pair<Integer, Integer>> coords = this.selected?computeCoords(this.getX(),this.getY(),(int)(this.width * 1.2), this.rot):this.vertices;
+
+        for (Pair<Integer, Integer> vertex : coords) {
             buffer.vertex(vertex.getFirst(), vertex.getSecond(), 0)
                     .color(mono, mono, mono, 1.0f)
                     .endVertex();
         }
 
         // close the loop back to vertex 0
-        buffer.vertex(this.vertices.get(0).getFirst(), this.vertices.get(0).getSecond(), 0)
+        buffer.vertex(coords.get(0).getFirst(), coords.get(0).getSecond(), 0)
                 .color(mono, mono, mono, 1.0f)
                 .endVertex();
 
