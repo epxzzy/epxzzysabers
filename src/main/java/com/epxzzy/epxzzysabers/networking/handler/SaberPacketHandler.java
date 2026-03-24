@@ -194,7 +194,8 @@ public class SaberPacketHandler {
 
         if (contextt.getSender() != null) {
             ServerPlayer player = contextt.getSender();
-
+            //weird netherportal-autoblock bug
+            player.stopUsingItem();
             SaberMessages.fuckingAnnounce(new ClientboundPlayerStancePacket(player.getId(), keydown, Protosaber.getStance(player).ordinal()), player);
         }
     }
