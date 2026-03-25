@@ -198,7 +198,7 @@ public class KyberStationStanceMenu extends KyberMenuBase {
 
         this.broadcastChanges();
 
-        this.resultSlot.set(base);
+        //this.resultSlot.set(base);
     }
 
     public int[] getInputColour() {
