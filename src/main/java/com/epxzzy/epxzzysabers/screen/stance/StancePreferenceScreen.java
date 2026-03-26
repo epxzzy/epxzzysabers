@@ -56,6 +56,7 @@ public class StancePreferenceScreen extends Screen {
             PentagonButton button = new PentagonButton.Builder(CommonComponents.GUI_CANCEL)
                     .bounds(vertX, vertY, 44)
                     .rot(flipped?180:0)
+                    .texture(epxzzySabers.asResource("textures/gui/stance_"+iteratur.get(i).ordinal()+".png"))
                     .build();
 
             this.Choices.add(i, button);
