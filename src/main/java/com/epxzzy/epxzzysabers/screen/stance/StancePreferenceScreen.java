@@ -8,11 +8,13 @@ import com.epxzzy.epxzzysabers.rendering.playerposerenderers.BladeStance;
 import com.epxzzy.epxzzysabers.screen.components.PentagonButton;
 import com.epxzzy.epxzzysabers.util.AngleHelper;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.CommonComponents;
@@ -28,12 +30,12 @@ import org.lwjgl.glfw.GLFW;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class StancePreferenceScreen extends Screen {
     int Selection;
     public static final EntityDataAccessor<Integer> STANCE_PREFERENCE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
-    public List<PentagonButton> Choices = new ArrayList<>();
+    private static final ResourceLocation TEMP = new ResourceLocation("textures/gui/container/loom.png");
 
+    public List<PentagonButton> Choices = new ArrayList<>();
     public StancePreferenceScreen(Player player) {
         super(Component.empty());
         this.Selection = player.getEntityData().get(STANCE_PREFERENCE);
@@ -99,6 +101,7 @@ public class StancePreferenceScreen extends Screen {
 
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTicks) {
+        renderBackground(gui);
         super.render(gui, mouseX, mouseY, partialTicks);
     }
 
