@@ -139,13 +139,13 @@ public class StancePreferenceScreen extends Screen {
             this.onClose();
             return true;
         }
-        if(pKeyCode == GLFW.GLFW_KEY_UP || pKeyCode == GLFW.GLFW_KEY_RIGHT){
+        if(pKeyCode == GLFW.GLFW_KEY_UP || pKeyCode == GLFW.GLFW_KEY_RIGHT || pKeyCode == GLFW.GLFW_KEY_D || pKeyCode == GLFW.GLFW_KEY_W ){
             rollSelection(-1);
         }
-        if(pKeyCode == GLFW.GLFW_KEY_DOWN || pKeyCode == GLFW.GLFW_KEY_LEFT){
+        if(pKeyCode == GLFW.GLFW_KEY_DOWN || pKeyCode == GLFW.GLFW_KEY_LEFT || pKeyCode == GLFW.GLFW_KEY_A || pKeyCode == GLFW.GLFW_KEY_S ){
             rollSelection(1);
         }
-        if(pKeyCode == GLFW.GLFW_KEY_ENTER || pKeyCode == GLFW.GLFW_KEY_SPACE){
+        if(pKeyCode == GLFW.GLFW_KEY_ENTER || pKeyCode == GLFW.GLFW_KEY_SPACE ){
             confirm();
         }
 

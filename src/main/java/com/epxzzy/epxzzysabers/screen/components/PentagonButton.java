@@ -90,8 +90,13 @@ public class PentagonButton extends AbstractButton {
                 computeCoords(this.getX(), this.getY(), (int)(this.width * 1.2), this.rot) :
                 this.vertices;
 
-        float mono = this.selected ? 0.0f : 1.0f;
-        float mono2 = this.selected ? 1.0f : 0.0f;
+        List<Pair<Integer, Integer>> inner = this.selected ?
+                computeCoords(this.getX(), this.getY(), (int)(this.width * 1.1), this.rot):
+                computeCoords(this.getX(), this.getY(), (int)(this.width * 0.9), this.rot);
+
+
+        float mono2 = this.selected ? 0.0f : 1.0f;
+        float mono = this.selected ? 1.0f : 0.0f;
 
         for (Pair<Integer, Integer> vertex : coords) {
             buffer.vertex(vertex.getFirst(), vertex.getSecond(), 0)
@@ -108,27 +113,25 @@ public class PentagonButton extends AbstractButton {
 
         tesselator.end();
 
-        RenderSystem.lineWidth(5.0f);
-        buffer.begin(VertexFormat.Mode.DEBUG_LINE_STRIP, DefaultVertexFormat.POSITION_COLOR);
+        buffer.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
 
-        for (Pair<Integer, Integer> vertex : coords) {
+        for (Pair<Integer, Integer> vertex : inner) {
             buffer.vertex(vertex.getFirst(), vertex.getSecond(), 0)
                     .color(mono2, mono2, mono2, 1.0f)
                     .endVertex();
         }
 
         // close the loop back to vertex 0
-        buffer.vertex(coords.get(0).getFirst(), coords.get(0).getSecond(), 0)
+        buffer.vertex(inner.get(0).getFirst(), inner.get(0).getSecond(), 0)
                 .color(mono2, mono2, mono2, 1.0f)
                 .endVertex();
-        RenderSystem.lineWidth(1.0f);
 
         tesselator.end();
 
         RenderSystem.disableBlend();
         RenderSystem.enableDepthTest();
         if(this.icon != NO_TEXTURE){
-            guiGraphics.blit(this.icon, x, y, (this.selected?0:size), 0, size, size, size*2, size);
+            guiGraphics.blit(this.icon, x, y, ((this.selected)?0:size), 0, size, size, size*2, size);
         }
 
     }
