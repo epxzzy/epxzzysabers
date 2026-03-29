@@ -2,7 +2,6 @@ package com.epxzzy.epxzzysabers.screen;
 
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.screen.stance.KyberStationStanceMenu;
 import com.epxzzy.epxzzysabers.screen.tint.KyberStationTintMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -19,9 +18,12 @@ public class SaberMenuTypes {
 
     public static final RegistryObject<MenuType<KyberStationTintMenu>> SKREEN_TINT=
             registerMenuType("kyber_station_menu_tint", KyberStationTintMenu::new);
+    /*
     public static final RegistryObject<MenuType<KyberStationStanceMenu>> SKREEN_STANCE=
             registerMenuType("kyber_station_menu_stance", KyberStationStanceMenu::new);
 
+
+     */
 
 
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {

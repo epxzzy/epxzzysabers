@@ -1,6 +1,5 @@
 package com.epxzzy.epxzzysabers.screen.components;
 
-import com.epxzzy.epxzzysabers.epxzzySabers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
@@ -20,8 +19,14 @@ public class SliderWidget extends AbstractSliderButton {
 
     protected double minValue;
     protected double maxValue;
-    public boolean kys;
+    public boolean disabled;
 
+    public void disable(boolean dissa){
+        this.setFocused(false);
+        this.disabled = dissa;
+        this.visible = !dissa;
+        this.active = !dissa;
+    };
     /**
      * Allows input of discontinuous values with a certain step
      */
@@ -132,19 +137,19 @@ public class SliderWidget extends AbstractSliderButton {
 
     @Override
     public void onClick(double mouseX, double mouseY) {
-        if(!kys) this.setValueFromMouse(mouseX);
+        if(!disabled) this.setValueFromMouse(mouseX);
     }
 
     @Override
     protected void onDrag(double mouseX, double mouseY, double dragX, double dragY) {
-        if(kys) return;
+        if(disabled) return;
         super.onDrag(mouseX, mouseY, dragX, dragY);
         this.setValueFromMouse(mouseX);
     }
 
     @Override
     public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
-        if(kys) return false;
+        if(disabled) return false;
         if (pDelta > 0) {
             this.setValue(this.getValue() + 1);
         } else {
@@ -156,7 +161,7 @@ public class SliderWidget extends AbstractSliderButton {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if(kys) return false;
+        if(disabled) return false;
         boolean flag = keyCode == GLFW.GLFW_KEY_LEFT;
         if (flag || keyCode == GLFW.GLFW_KEY_RIGHT) {
             if (this.minValue > this.maxValue)

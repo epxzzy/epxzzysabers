@@ -8,7 +8,6 @@ import com.epxzzy.epxzzysabers.item.SaberCreativeModTabs;
 import com.epxzzy.epxzzysabers.item.SaberItems;
 import com.epxzzy.epxzzysabers.networking.SaberMessages;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialModelEventHandler;
-import com.epxzzy.epxzzysabers.screen.stance.KyberStationStanceScreen;
 import com.epxzzy.epxzzysabers.screen.tint.KyberStationTintScreen;
 import com.epxzzy.epxzzysabers.screen.SaberMenuTypes;
 import com.epxzzy.epxzzysabers.sound.SaberSounds;
@@ -102,7 +101,7 @@ public class epxzzySabers{
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(SaberMenuTypes.SKREEN_TINT.get(), KyberStationTintScreen::new);
-            MenuScreens.register(SaberMenuTypes.SKREEN_STANCE.get(), KyberStationStanceScreen::new);
+            //MenuScreens.register(SaberMenuTypes.SKREEN_STANCE.get(), KyberStationStanceScreen::new);
 
 
             EntityRenderers.register(SaberEntities.ROTARY_SABER_ENTITY.get(), ThrownRotarySaberRenderer::new);

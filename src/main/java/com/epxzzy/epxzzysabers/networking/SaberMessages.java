@@ -43,11 +43,6 @@ public class SaberMessages {
                 .encoder(ServerboundRecolourItemPacket::toBytes)
                 .consumerMainThread(ServerboundRecolourItemPacket::handle)
                 .add();
-        net.messageBuilder(ServerboundKyberMenuTabChange.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(ServerboundKyberMenuTabChange::new)
-                .encoder(ServerboundKyberMenuTabChange::toBytes)
-                .consumerMainThread(ServerboundKyberMenuTabChange::handle)
-                .add();
 
         net.messageBuilder(ServerboundSaberAbilityPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
                 .decoder(ServerboundSaberAbilityPacket::new)

@@ -2,17 +2,15 @@ package com.epxzzy.epxzzysabers.screen.tint;
 
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.networking.packet.ServerboundKyberMenuTabChange;
 import com.epxzzy.epxzzysabers.util.ColourConverter;
-import com.epxzzy.epxzzysabers.screen.components.KyberModes;
-import com.epxzzy.epxzzysabers.screen.components.KyberTabButton;
 import com.epxzzy.epxzzysabers.screen.components.SliderWidget;
 import com.epxzzy.epxzzysabers.networking.SaberMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundRecolourItemPacket;
 import com.epxzzy.epxzzysabers.util.SaberTags;
+import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractButton;
+import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -24,43 +22,15 @@ import net.minecraft.world.inventory.Slot;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.List;
+
 public class KyberStationTintScreen extends AbstractContainerScreen<KyberStationTintMenu> {
     private static final ResourceLocation RECOLOUR_TEXTURE =
             new ResourceLocation(epxzzySabers.MOD_ID, "textures/gui/kyber_recolour.png");
 
-
-    private static final ResourceLocation OFF_TOGGLE =
-            new ResourceLocation(epxzzySabers.MOD_ID, "textures/gui/toggle_off.png");
-    private static final ResourceLocation ON_TOGGLE =
-            new ResourceLocation(epxzzySabers.MOD_ID, "textures/gui/toggle_on.png");
-
-
-    private KyberTabButton RECOLOUR_TAB_BUTTON;
-    private KyberTabButton STANCE_TAB_BUTTON;
-    //private KyberTabButton FLOURISH_TAB_BUTTON;
-
-            /*
-
-    private List<KyberTabButton> tabButtons = new ArrayList<>().add(
-            new KyberTabButton(KyberModes.RECOLOUR, 0,this.topPos+50, this.leftPos+150){
-                @Override
-                public void onPress() {
-                    SelectTab(tabID);
-                    super.onPress();
-                }
-            }
-    );
-
-    };
-
-             */
-
-    private int selectedTab = 0;
-
     private SliderWidget HUE_SLIDER;
     private SliderWidget SAT_SLIDER;
     private SliderWidget LIT_SLIDER;
-    private AbstractButton RGB_TOGGLE;
     private SliderWidget RED_SLIDER;
     private SliderWidget GREEN_SLIDER;
     private SliderWidget BLUE_SLIDER;
@@ -68,10 +38,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
     private boolean RGB_MODE = false;
     public boolean GAY_MODE = false;
     public boolean GAY_INPUT = false;
-    private boolean widthTooNarrow = this.width < 379;
-    private int TABLE_MODE = 0;
-    //0 = recolour
-    //1 = stance
 
     private float xMouse;
     private float yMouse;
@@ -88,6 +54,11 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
     }
 
     private void containerChanged() {
+        if (menu.canCraft()) {
+            if (!this.RGB_MODE) {
+
+            }
+        }
 
 
         //menu.craftSabur(HUE_SLIDER.getValueInt(), SAT_SLIDER.getValueInt(),LIT_SLIDER.getValueInt());
@@ -127,51 +98,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
         initSliderStuff();
 
-        RECOLOUR_TAB_BUTTON = new KyberTabButton(KyberModes.RECOLOUR, 0, this.topPos + 10, this.leftPos - 45) {
-            @Override
-            public void onPress() {
-                SelectTab(0);
-                super.onPress();
-            }
-        };
-        STANCE_TAB_BUTTON = new KyberTabButton(KyberModes.STANCE, 1, this.topPos + 40, this.leftPos - 45) {
-            @Override
-            public void onPress() {
-                SelectTab(1);
-                super.onPress();
-            }
-        };
-        /*
-        FLOURISH_TAB_BUTTON = new KyberTabButton(KyberModes.FLOURISH, 2, this.topPos + 70, this.leftPos - 45) {
-            @Override
-            public void onPress() {
-                SelectTab(2);
-                super.onPress();
-            }
-        };
-
-         */
-
-        RECOLOUR_TAB_BUTTON.setStateTriggered(true);
-        this.addWidget(RECOLOUR_TAB_BUTTON);
-        this.addWidget(STANCE_TAB_BUTTON);
-        //this.addWidget(FLOURISH_TAB_BUTTON);
-
-
-
-            /*
-            {
-                @Override
-                public void onPress() {
-                    SelectTab(tabID);
-                    super.onPress();
-                }
-            });
-
-             */
-
-
-        //PLAYERpreview = this.minecraft.player;
     }
 
     public void UpdateServerRecipe() {
@@ -240,7 +166,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
             );
 
         }
-
+        //ToggleAllSlidersLoc(!this.menu.canCraft());
 
         Slot slot = this.menu.getSlot(0);
         if (slot.getItem().is(SaberTags.Items.DYEABLE_LIGHTSABER)) {
@@ -343,10 +269,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         this.xMouse = (float) mouseX;
         this.yMouse = (float) mouseY;
 
-        RECOLOUR_TAB_BUTTON.renderWidget(guiGraphics, mouseX, mouseY, delta);
-        STANCE_TAB_BUTTON.renderWidget(guiGraphics, mouseX, mouseY, delta);
-        //FLOURISH_TAB_BUTTON.renderWidget(guiGraphics, mouseX, mouseY, delta);
-
 
         guiGraphics.pose().popPose();
         renderTooltip(guiGraphics, mouseX, mouseY);
@@ -354,34 +276,9 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
     public void setRGBmode(){
         RGB_MODE = !RGB_MODE;
-        if (RGB_MODE) {
-            HUE_SLIDER.setFocused(false);
-            SAT_SLIDER.setFocused(false);
-            LIT_SLIDER.setFocused(false);
 
-            HUE_SLIDER.active = false;
-            SAT_SLIDER.active = false;
-            LIT_SLIDER.active = false;
+        ToggleSliderSection(!RGB_MODE);
 
-            HUE_SLIDER.visible = false;
-            SAT_SLIDER.visible = false;
-            LIT_SLIDER.visible = false;
-
-        }
-        if (!RGB_MODE) {
-            RED_SLIDER.setFocused(false);
-            GREEN_SLIDER.setFocused(false);
-            BLUE_SLIDER.setFocused(false);
-
-            RED_SLIDER.active = false;
-            GREEN_SLIDER.active = false;
-            BLUE_SLIDER.active = false;
-
-            RED_SLIDER.visible = false;
-            GREEN_SLIDER.visible = false;
-            BLUE_SLIDER.visible = false;
-
-        }
         int[] gur = !RGB_MODE ? ColourConverter.RGBtoHSL(
                 RED_SLIDER.getValueInt(),
                 GREEN_SLIDER.getValueInt(),
@@ -393,7 +290,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         );
 
         if (!RGB_MODE) {
-
             HUE_SLIDER.setValue(gur[0]);
             SAT_SLIDER.setValue(gur[1]);
             LIT_SLIDER.setValue(gur[2]);
@@ -410,32 +306,19 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
     }
 
     public void renderRecolourTab(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        if (this.RGB_TOGGLE != null) this.RGB_TOGGLE.render(guiGraphics, mouseX, mouseY, delta);
-        manShutYourBitchAssUp(!this.menu.canCraft());
+        //ToggleAllSliders(this.menu.canCraft());
 
 
         if (menu.canCraft()) {
             if (!this.RGB_MODE) {
-                this.HUE_SLIDER.active = true;
-                this.SAT_SLIDER.active = true;
-                this.LIT_SLIDER.active = true;
-
-                this.HUE_SLIDER.visible = true;
-                this.SAT_SLIDER.visible = true;
-                this.LIT_SLIDER.visible = true;
+                //ToggleSliderSection(true);
 
                 this.HUE_SLIDER.render(guiGraphics, mouseX, mouseY, delta);
                 this.SAT_SLIDER.render(guiGraphics, mouseX, mouseY, delta);
                 this.LIT_SLIDER.render(guiGraphics, mouseX, mouseY, delta);
             }
             if (this.RGB_MODE) {
-                this.RED_SLIDER.active = true;
-                this.GREEN_SLIDER.active = true;
-                this.BLUE_SLIDER.active = true;
-
-                this.RED_SLIDER.visible = true;
-                this.GREEN_SLIDER.visible = true;
-                this.BLUE_SLIDER.visible = true;
+                //ToggleSliderSection(false);
 
                 this.RED_SLIDER.render(guiGraphics, mouseX, mouseY, delta);
                 this.GREEN_SLIDER.render(guiGraphics, mouseX, mouseY, delta);
@@ -459,33 +342,10 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
                             regbee[1],
                             regbee[2])
             );
-
-
-        } else {
-            if (!this.RGB_MODE) {
-                this.HUE_SLIDER.active = true;
-                this.SAT_SLIDER.active = true;
-                this.LIT_SLIDER.active = true;
-
-                this.HUE_SLIDER.visible = true;
-                this.SAT_SLIDER.visible = true;
-                this.LIT_SLIDER.visible = true;
-            } else {
-                this.RED_SLIDER.active = true;
-                this.GREEN_SLIDER.active = true;
-                this.BLUE_SLIDER.active = true;
-
-                this.RED_SLIDER.visible = true;
-                this.GREEN_SLIDER.visible = true;
-                this.BLUE_SLIDER.visible = true;
-            }
-            //^ slider shit
         }
-
-
     }
 
-    void initSliderStuff() {
+    public void initSliderStuff() {
         this.HUE_SLIDER = getSliderForColour(0, 360, "hue ", 1);
         this.SAT_SLIDER = getSliderForColour(0, 100, "sat ", 2);
         this.LIT_SLIDER = getSliderForColour(0, 100, "light ", 3);
@@ -493,7 +353,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         this.RED_SLIDER = getSliderForColour(0, 255, "red ", 1);
         this.GREEN_SLIDER = getSliderForColour(0, 255, "green ", 2);
         this.BLUE_SLIDER = getSliderForColour(0, 255, "blue ", 3);
-
 
         this.addWidget(this.HUE_SLIDER);
         this.addWidget(this.SAT_SLIDER);
@@ -503,35 +362,50 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         this.addWidget(this.GREEN_SLIDER);
         this.addWidget(this.BLUE_SLIDER);
 
+        this.HUE_SLIDER.disable(false);
+        this.SAT_SLIDER.disable(false);
+        this.LIT_SLIDER.disable(false);
 
-        this.HUE_SLIDER.active = false;
-        this.SAT_SLIDER.active = false;
-        this.LIT_SLIDER.active = false;
-
-        this.HUE_SLIDER.visible = false;
-        this.SAT_SLIDER.visible = false;
-        this.LIT_SLIDER.visible = false;
-
-
-        this.RED_SLIDER.active = false;
-        this.GREEN_SLIDER.active = false;
-        this.BLUE_SLIDER.active = false;
-
-        this.RED_SLIDER.visible = false;
-        this.GREEN_SLIDER.visible = false;
-        this.BLUE_SLIDER.visible = false;
-
+        this.RED_SLIDER.disable(false);
+        this.GREEN_SLIDER.disable(false);
+        this.BLUE_SLIDER.disable(false);
+        epxzzySabers.LOGGER.info("tint screen: all sliders enabled cause init");
     }
 
-    void manShutYourBitchAssUp(boolean yesnt) {
-        this.HUE_SLIDER.kys = yesnt;
-        this.SAT_SLIDER.kys = yesnt;
-        this.LIT_SLIDER.kys = yesnt;
+    public void ToggleSliderSection(boolean hsl) {
+        if(hsl){
+            this.HUE_SLIDER.disable(false);
+            this.SAT_SLIDER.disable(false);
+            this.LIT_SLIDER.disable(false);
 
-        this.RED_SLIDER.kys = yesnt;
-        this.GREEN_SLIDER.kys = yesnt;
-        this.BLUE_SLIDER.kys = yesnt;
-        if (yesnt) {
+            this.RED_SLIDER.disable(true);
+            this.GREEN_SLIDER.disable(true);
+            this.BLUE_SLIDER.disable(true);
+            epxzzySabers.LOGGER.info("tint screen: only hsl sliders showing");
+        }
+        else {
+            this.RED_SLIDER.disable(false);
+            this.GREEN_SLIDER.disable(false);
+            this.BLUE_SLIDER.disable(false);
+
+            this.HUE_SLIDER.disable(true);
+            this.SAT_SLIDER.disable(true);
+            this.LIT_SLIDER.disable(true);
+            epxzzySabers.LOGGER.info("tint screen: only rgb slider showing");
+
+        }
+    }
+
+
+    public void ToggleAllSlidersLoc(boolean remove) {
+        //this.HUE_SLIDER.disable(remove);
+        //this.SAT_SLIDER.disable(remove);
+        //this.LIT_SLIDER.disable(remove);
+
+        //this.RED_SLIDER.disable(remove);
+        //this.GREEN_SLIDER.disable(remove);
+        //this.BLUE_SLIDER.disable(remove);
+        if (remove) {
             this.HUE_SLIDER.setPosition(0, -99999);
             this.SAT_SLIDER.setPosition(0, -99999);
             this.LIT_SLIDER.setPosition(0, -99999);
@@ -539,8 +413,9 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
             this.RED_SLIDER.setPosition(0, -99999);
             this.GREEN_SLIDER.setPosition(0, -99999);
             this.BLUE_SLIDER.setPosition(0, -99999);
+            //epxzzySabers.LOGGER.info("tint screen: all sliders in the void");
         }
-        if (!yesnt) {
+        if (!remove) {
             this.HUE_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12);
             this.SAT_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12 * 2);
             this.LIT_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12 * 3);
@@ -548,26 +423,8 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
             this.RED_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12);
             this.GREEN_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12 * 2);
             this.BLUE_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12 * 3);
+            //epxzzySabers.LOGGER.info("tint screen: all sliders in place");
         }
 
-    }
-
-    void SelectTab(int index) {
-
-        if (index == 0) {
-            //this.menu.resetSlotPose();
-        }
-        if (index == 1) {
-
-            //SaberMessages.sendToServer(new ServerboundKyberMenuSlotPosToggle(false));
-            SaberMessages.sendToServer(new ServerboundKyberMenuTabChange(1));
-
-        }
-        if (index == 2) {
-
-            SaberMessages.sendToServer(new ServerboundKyberMenuTabChange(2));
-
-            //this.menu.resetSlotPose();
-        }
     }
 }
