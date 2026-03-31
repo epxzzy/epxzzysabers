@@ -11,16 +11,15 @@ import net.minecraft.world.entity.player.Player;
 
 public interface PlayerHelperLmao {
     int getFlyCooldown();
-    int getFlightDuration();
     void setFlyCooldown(int i);
-    void setFlightDuration(int val);
     int getChargeDuration();
     void setChargeDuration(int val);
 
     public static final EntityDataAccessor<Integer> STANCE_PREFERENCE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> GAUNTLET_CHARGE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> ROTARY_FLIGHT_COOLDOWN = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> ROTARY_FLIGHT_DURATION = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> ROTARY_USEDUR = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
+    public int getFlyDur();
 
 
     public void setSaberStanceDown(boolean value);

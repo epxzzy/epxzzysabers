@@ -1,6 +1,7 @@
 package com.epxzzy.epxzzysabers.mixin.entity;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
+import com.epxzzy.epxzzysabers.item.SaberItems;
 import com.epxzzy.epxzzysabers.item.types.SaberGauntlet;
 import com.epxzzy.epxzzysabers.misc.KewlFightsOrchestrator;
 import com.epxzzy.epxzzysabers.networking.SaberMessages;
@@ -56,12 +57,6 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     public float oSaberdefAnim = 0;
     public int flourishId = 0;
 
-    public int flyCooldownVar = 40;
-    //160 == cant fly, 0 == can fly
-    public int flightDurationVar = 200;
-    //0 == no more fly, 300 == flyyy
-    public int supercharredTime = 0;
-
 
 
     @Inject(
@@ -72,9 +67,10 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     private void defineSynchedData(CallbackInfo ci) {
         Player that = ((Player) (Object) this);
         that.getEntityData().define(STANCE_PREFERENCE, 1);
-        //that.getEntityData().define(STANCE_PREFERENCE, 1);
-        //that.getEntityData().define(STANCE_PREFERENCE, 1);
-        //that.getEntityData().define(STANCE_PREFERENCE, 1);
+        that.getEntityData().define(ROTARY_FLIGHT_COOLDOWN, 0);
+        //40 == cant fly, 0 == can fly
+        that.getEntityData().define(GAUNTLET_CHARGE, 0);
+        that.getEntityData().define(ROTARY_USEDUR, 0);
 
     }
 
@@ -123,6 +119,12 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         }
 
         this.SaberdefAnim = (float) this.defendProgress / (float) 6;
+
+        if (!that.level().isClientSide()){
+            if(that.getUseItem().getItem() == SaberItems.ROTARY_SABER.get()&&that.getAbilities().flying) that.getEntityData().set(ROTARY_USEDUR, that.getUseItemRemainingTicks());
+            else that.getEntityData().set(ROTARY_USEDUR, 0);
+
+        }
     }
 
     public float getSaberAttackAnim() {
@@ -286,32 +288,31 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     }
 
     public int getFlyCooldown() {
-        return flyCooldownVar;
-    }
-
-    @Unique
-    public int getFlightDuration() {
-        return flightDurationVar;
+        Player that = ((Player) (Object) this);
+        return that.getEntityData().get(ROTARY_FLIGHT_COOLDOWN);
     }
 
     @Unique
     public void setFlyCooldown(int val) {
-        flyCooldownVar = val;
-    }
-
-    @Unique
-    public void setFlightDuration(int val) {
-        flightDurationVar = val;
+        Player that = ((Player) (Object) this);
+        that.getEntityData().set(ROTARY_FLIGHT_COOLDOWN, val);
     }
 
     @Unique
     public int getChargeDuration() {
-        return supercharredTime;
+        Player that = ((Player) (Object) this);
+        return that.getEntityData().get(GAUNTLET_CHARGE);
     }
 
     @Unique
     public void setChargeDuration(int val) {
-        supercharredTime = val;
+        Player that = ((Player) (Object) this);
+        that.getEntityData().set(GAUNTLET_CHARGE, val);
+    }
+    @Unique
+    public int getFlyDur() {
+        Player that = ((Player) (Object) this);
+        return that.getEntityData().get(ROTARY_USEDUR);
     }
 
     @Unique

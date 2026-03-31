@@ -25,9 +25,6 @@ public class PlayerPoseRouter {
         if (Minecraft.getInstance().isPaused())
             return;
 
-        boolean flight = RotarySaber.checkForSaberFly(player);
-        boolean flightReset = RotarySaber.checkForSaberCooldown(player);
-
         boolean stancing = ((PlayerHelperLmao) player).getSaberStanceDown();
 
 
@@ -37,7 +34,7 @@ public class PlayerPoseRouter {
         }
 
         //fix rotation bug #3, uses magic number cooldown
-        if (stancing || (flight || flightReset)) {
+        if (stancing) {
             model.head.resetPose();
             model.hat.resetPose();
             model.body.resetPose();
