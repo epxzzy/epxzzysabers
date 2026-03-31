@@ -4,6 +4,10 @@ import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerAttackP
 import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerDefendPacket;
 import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerFlourishPacket;
 import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerStancePacket;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.player.Player;
 
 public interface PlayerHelperLmao {
     int getFlyCooldown();
@@ -13,6 +17,10 @@ public interface PlayerHelperLmao {
     int getChargeDuration();
     void setChargeDuration(int val);
 
+    public static final EntityDataAccessor<Integer> STANCE_PREFERENCE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> GAUNTLET_CHARGE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> ROTARY_FLIGHT_COOLDOWN = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> ROTARY_FLIGHT_DURATION = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
 
 
     public void setSaberStanceDown(boolean value);

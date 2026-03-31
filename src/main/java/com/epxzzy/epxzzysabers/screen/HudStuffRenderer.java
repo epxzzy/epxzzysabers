@@ -43,19 +43,17 @@ public class HudStuffRenderer {
         int f = MixinPlayer.getFlyCooldown() / RotarySaber.MAX_FLIGHT_COOLDOWN;
 
         boolean canfly = MixinPlayer.getFlightDuration() == RotarySaber.MAX_FLIGHT_DURATION;
-
         //pGuiGraphics.blit(ROTARY, k, j+ 16, 32, 0, 16, 7,16*3,7);
 
-        /*
         if ( canfly) {
             pGuiGraphics.blit(ROTARY, k, j, 32, 0, 16, 7,16*3,7);
         }
         if (f > 1.0F) {
+            epxzzySabers.LOGGER.info("supposed bar movement; "+f);
             int l = (int)(f * 17.0F);
             pGuiGraphics.blit(ROTARY, k, j+16, 0, 0, 16, 7,16*3,7);
             pGuiGraphics.blit(ROTARY, k, j+16, 16, 0, l, 7,16*3,7);
         }
-         */
 
         if (MixinPlayer.getSaberAttackAnim() > 0) {
             //pGuiGraphics.blit(ATTACK, k, j, 0, 0, 29, 29, 29, 29);

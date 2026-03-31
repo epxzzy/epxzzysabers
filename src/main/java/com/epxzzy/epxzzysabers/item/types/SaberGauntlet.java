@@ -47,8 +47,9 @@ import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber
 public class SaberGauntlet extends Protosaber {
-    int CHARGEDDAMAGE = 8;
-    int MAXCHARGEDUR = 160;
+    int CHARGED_DAMAGE = 8;
+    int MAX_CHARGE_DUR = 160;
+    int CHARGEUP_DURATION = 40;
 
     //0 == natty/normal, 300 == goddamn this thing is hot
     public static final AttributeModifier singleRangeAttributeModifier =
@@ -115,14 +116,14 @@ public class SaberGauntlet extends Protosaber {
 
                 if (pRemainingUseDuration == 1) {
                     pStack.getOrCreateTag().putBoolean("ChargedBoiii", true);
-                    MixinPlayer.setChargeDuration(MAXCHARGEDUR);
+                    MixinPlayer.setChargeDuration(MAX_CHARGE_DUR);
 
                     CompoundTag tagsToApply = pStack.getOrCreateTag().copy();
                     tagsToApply.put("AttributeModifiers", new ListTag());
                     ListTag listtag = tagsToApply.getList("AttributeModifiers", 10);
 
 
-                    CompoundTag baseAttackAttribute = (new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", ATTACK_DAMAGE + CHARGEDDAMAGE, AttributeModifier.Operation.ADDITION)).save();
+                    CompoundTag baseAttackAttribute = (new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", ATTACK_DAMAGE + CHARGED_DAMAGE, AttributeModifier.Operation.ADDITION)).save();
 
                     baseAttackAttribute.putString("AttributeName", BuiltInRegistries.ATTRIBUTE.getKey(Attributes.ATTACK_DAMAGE).toString());
                     baseAttackAttribute.putString("Slot", EquipmentSlot.MAINHAND.getName());
@@ -139,7 +140,7 @@ public class SaberGauntlet extends Protosaber {
 
     @Override
     public int getUseDuration(@NotNull ItemStack pStack) {
-        if(pStack.getOrCreateTag().getBoolean("ActiveBoiii")) return 40;
+        if(pStack.getOrCreateTag().getBoolean("ActiveBoiii")) return CHARGEUP_DURATION;
         return super.getUseDuration(pStack);
     }
 

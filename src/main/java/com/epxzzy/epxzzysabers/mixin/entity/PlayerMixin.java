@@ -32,7 +32,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static com.epxzzy.epxzzysabers.screen.stance.StancePreferenceScreen.STANCE_PREFERENCE;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin implements PlayerHelperLmao {
@@ -61,7 +60,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     //160 == cant fly, 0 == can fly
     public int flightDurationVar = 200;
     //0 == no more fly, 300 == flyyy
-    int supercharredTime = 0;
+    public int supercharredTime = 0;
 
 
 
@@ -73,6 +72,10 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
     private void defineSynchedData(CallbackInfo ci) {
         Player that = ((Player) (Object) this);
         that.getEntityData().define(STANCE_PREFERENCE, 1);
+        //that.getEntityData().define(STANCE_PREFERENCE, 1);
+        //that.getEntityData().define(STANCE_PREFERENCE, 1);
+        //that.getEntityData().define(STANCE_PREFERENCE, 1);
+
     }
 
     @Inject(
