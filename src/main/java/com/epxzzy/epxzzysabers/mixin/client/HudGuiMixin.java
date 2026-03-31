@@ -27,6 +27,4 @@ public class HudGuiMixin {
         Gui that = ((Gui) (Object) this);
         HudStuffRenderer.renderStuff(pGuiGraphics, that);
     }
-
-
 }

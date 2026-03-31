@@ -49,7 +49,6 @@ public class RotarySaber extends Protosaber {
 
     @Override
     public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
-        epxzzySabers.LOGGER.info("flown for " + pRemainingUseDuration);
         if (pLivingEntity instanceof ServerPlayer pPlayer) {
             if (!(pPlayer.gameMode.isSurvival())) {
                 pPlayer.displayClientMessage(Component.literal("flight is only available in survival mode"), true);

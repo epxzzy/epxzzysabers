@@ -34,13 +34,6 @@ import static com.epxzzy.epxzzysabers.util.PlayerHelperLmao.STANCE_PREFERENCE;
 
 public class StancePreferenceScreen extends Screen {
     int Selection;
-    //public static final EntityDataAccessor<Integer> STANCE_PREFERENCE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
-    /*
-    public static final EntityDataAccessor<Integer> STANCE_PREFERENCE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> STANCE_PREFERENCE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> STANCE_PREFERENCE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
-
-     */
 
     private static final ResourceLocation TEMP = new ResourceLocation("textures/gui/container/loom.png");
 

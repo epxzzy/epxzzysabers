@@ -34,7 +34,8 @@ public class PlayerPoseRouter {
         }
 
         //fix rotation bug #3, uses magic number cooldown
-        if (stancing) {
+        //actaully listened to my own advice for once going against optimising the fuck out of it
+        if (true) {
             model.head.resetPose();
             model.hat.resetPose();
             model.body.resetPose();
