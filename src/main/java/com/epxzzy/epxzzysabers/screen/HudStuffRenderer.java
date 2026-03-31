@@ -3,6 +3,7 @@ package com.epxzzy.epxzzysabers.screen;
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.SaberItems;
 import com.epxzzy.epxzzysabers.item.types.RotarySaber;
+import com.epxzzy.epxzzysabers.item.types.SaberGauntlet;
 import com.epxzzy.epxzzysabers.util.LevelHelper;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import net.minecraft.Util;
@@ -20,6 +21,7 @@ public class HudStuffRenderer {
     public static final ResourceLocation BLOCK = epxzzySabers.asResource("textures/gui/block.png");
     public static final ResourceLocation BLOCKS = epxzzySabers.asResource("textures/gui/blocks.png");
     public static final ResourceLocation ROTARY = epxzzySabers.asResource("textures/gui/rotary_cooldown.png");
+    public static final ResourceLocation GAUNTLET = epxzzySabers.asResource("textures/gui/gauntlet_cooldown.png");
     public static final int[] OFFSETS = {0, 8, 16, 24, 32, 40};
     public static void renderStuff(GuiGraphics pGuiGraphics, Gui that) {
         Options options = that.minecraft.options;
@@ -50,26 +52,52 @@ public class HudStuffRenderer {
         int blk = MixinPlayer.getSaberBlockForm();
 
         boolean flying = play.getAbilities().flying;
-        boolean hasRightItem = LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.ROTARY_SABER.get());
-        boolean usingItem = play.isUsingItem()&&hasRightItem;
-        float cooldown = (float) (RotarySaber.MAX_FLIGHT_COOLDOWN - MixinPlayer.getFlyCooldown()) / RotarySaber.MAX_FLIGHT_COOLDOWN;
-        float duration = (float) MixinPlayer.getFlyDur() / RotarySaber.MAX_FLIGHT_DURATION;
-        boolean flyPossible = duration == 0.0F &&cooldown == 1.0F && !usingItem;
+        boolean RhasRightItem = LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.ROTARY_SABER.get());
+        boolean RusingItem = play.isUsingItem()&&RhasRightItem;
+        float Rcooldown = (float) (RotarySaber.MAX_FLIGHT_COOLDOWN - MixinPlayer.getFlyCooldown()) / RotarySaber.MAX_FLIGHT_COOLDOWN;
+        float Rduration = (float) MixinPlayer.getFlyDur() / RotarySaber.MAX_FLIGHT_DURATION;
+        boolean flyPossible = Rduration == 0.0F &&Rcooldown == 1.0F && !RusingItem;
         boolean flyHint = flyPossible && !flying && LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.ROTARY_SABER.get());
 
-        if (duration >= 0.0F && flying) {
-            int l = (int)(duration* 16.0F);
+        if (Rduration >= 0.0F && flying) {
+            int l = (int)(Rduration* 16.0F);
             pGuiGraphics.blit(ROTARY, rotx, roty, 0, frame, 16, 8, 64, 48);
             pGuiGraphics.blit(ROTARY, rotx, roty, 48, frame, l, 8, 64, 48);
         }
-        if (cooldown < 1.0F && !flying) {
-            int l = (int)(cooldown * 16.0F);
+        if (Rcooldown < 1.0F && !flying) {
+            int l = (int)(Rcooldown * 16.0F);
             pGuiGraphics.blit(ROTARY, rotx, roty, 0, frame, 16, 8, 64, 48);
             pGuiGraphics.blit(ROTARY, rotx, roty, 16, frame, l, 8, 64, 48);
         }
         if (flyHint) {
             pGuiGraphics.blit(ROTARY, rotx, roty, 32, frame, 16, 8, 64, 48);
         }
+
+        boolean surging = SaberGauntlet.checkForSaberCharge(play, true);
+        boolean ShasRightItem = LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.SABER_GAUNTLET.get());
+        boolean SusingItem = play.isUsingItem()&&ShasRightItem;
+        float Scooldown = (float) (SaberGauntlet.CHARGEUP_DURATION - play.getUseItemRemainingTicks()) / SaberGauntlet.CHARGEUP_DURATION;
+        float Sduration = (float) MixinPlayer.getChargeDuration() / SaberGauntlet.MAX_CHARGE_DUR;
+
+        boolean surgePossible =  Scooldown == 1.0F && !SusingItem;
+        boolean surgeHint = Sduration == 0.0F&&surgePossible && !surging && LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.SABER_GAUNTLET.get());
+
+        if (Sduration > 0.0F && !SusingItem) {
+            pGuiGraphics.blit(GAUNTLET, rotx, roty, 48, frame, 16, 8, 64, 48);
+        }
+
+        if (Scooldown < 1.0F && SusingItem) {
+            int l = (int)(Scooldown * 16.0F);
+            pGuiGraphics.blit(GAUNTLET, rotx, roty, 0, frame, 16, 8, 64, 48);
+            pGuiGraphics.blit(GAUNTLET, rotx, roty, 16, frame, l, 8, 64, 48);
+        }
+
+        if (surgeHint) {
+            pGuiGraphics.blit(GAUNTLET, rotx, roty, 32, frame, 16, 8, 64, 48);
+        }
+
+
+
 
         if (MixinPlayer.getSaberAttackAnim() > 0) {
             //pGuiGraphics.blit(ATTACK, k, j, 0, 0, 29, 29, 29, 29);

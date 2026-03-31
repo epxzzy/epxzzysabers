@@ -47,9 +47,9 @@ import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber
 public class SaberGauntlet extends Protosaber {
-    int CHARGED_DAMAGE = 8;
-    int MAX_CHARGE_DUR = 160;
-    int CHARGEUP_DURATION = 40;
+    public static int CHARGED_DAMAGE = 8;
+    public static int MAX_CHARGE_DUR = 160;
+    public static int CHARGEUP_DURATION = 40;
 
     //0 == natty/normal, 300 == goddamn this thing is hot
     public static final AttributeModifier singleRangeAttributeModifier =
