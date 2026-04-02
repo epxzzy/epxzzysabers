@@ -4,6 +4,8 @@ import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.SaberItems;
 import com.epxzzy.epxzzysabers.item.types.RotarySaber;
 import com.epxzzy.epxzzysabers.item.types.SaberGauntlet;
+import com.epxzzy.epxzzysabers.screen.hints.GauntletHint;
+import com.epxzzy.epxzzysabers.screen.hints.RotaryHint;
 import com.epxzzy.epxzzysabers.util.LevelHelper;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import net.minecraft.Util;
@@ -20,7 +22,6 @@ public class HudStuffRenderer {
     public static final ResourceLocation ATTACKS = epxzzySabers.asResource("textures/gui/attacks.png");
     public static final ResourceLocation BLOCK = epxzzySabers.asResource("textures/gui/block.png");
     public static final ResourceLocation BLOCKS = epxzzySabers.asResource("textures/gui/blocks.png");
-    public static final ResourceLocation ROTARY = epxzzySabers.asResource("textures/gui/rotary_cooldown.png");
     public static final ResourceLocation GAUNTLET = epxzzySabers.asResource("textures/gui/gauntlet_cooldown.png");
     public static final int[] OFFSETS = {0, 8, 16, 24, 32, 40};
     public static void renderStuff(GuiGraphics pGuiGraphics, Gui that) {
@@ -44,60 +45,15 @@ public class HudStuffRenderer {
         int cy = that.screenWidth / 2;
         int j = cx - 15;
         int k = cy + 14;
-        int rotx = cy - 8;
-        int roty = cx - 16;
         Player play = that.minecraft.player;
         PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) play;
+
         int atk = MixinPlayer.getSaberAttackForm();
         int blk = MixinPlayer.getSaberBlockForm();
 
-        boolean flying = play.getAbilities().flying;
-        boolean RhasRightItem = LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.ROTARY_SABER.get());
-        boolean RusingItem = play.isUsingItem()&&RhasRightItem;
-        float Rcooldown = (float) (RotarySaber.MAX_FLIGHT_COOLDOWN - MixinPlayer.getFlyCooldown()) / RotarySaber.MAX_FLIGHT_COOLDOWN;
-        float Rduration = (float) MixinPlayer.getFlyDur() / RotarySaber.MAX_FLIGHT_DURATION;
-        boolean flyPossible = Rduration == 0.0F &&Rcooldown == 1.0F && !RusingItem;
-        boolean flyHint = flyPossible && !flying && LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.ROTARY_SABER.get());
+        RotaryHint.renderOnCrosshair(pGuiGraphics, that, frame);
 
-        if (Rduration >= 0.0F && flying) {
-            int l = (int)(Rduration* 16.0F);
-            pGuiGraphics.blit(ROTARY, rotx, roty, 0, frame, 16, 8, 64, 48);
-            pGuiGraphics.blit(ROTARY, rotx, roty, 48, frame, l, 8, 64, 48);
-        }
-        if (Rcooldown < 1.0F && !flying) {
-            int l = (int)(Rcooldown * 16.0F);
-            pGuiGraphics.blit(ROTARY, rotx, roty, 0, frame, 16, 8, 64, 48);
-            pGuiGraphics.blit(ROTARY, rotx, roty, 16, frame, l, 8, 64, 48);
-        }
-        if (flyHint) {
-            pGuiGraphics.blit(ROTARY, rotx, roty, 32, frame, 16, 8, 64, 48);
-        }
-
-        boolean surging = SaberGauntlet.checkForSaberCharge(play, true);
-        boolean ShasRightItem = LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.SABER_GAUNTLET.get());
-        boolean SusingItem = play.isUsingItem()&&ShasRightItem;
-        float Scooldown = (float) (SaberGauntlet.CHARGEUP_DURATION - play.getUseItemRemainingTicks()) / SaberGauntlet.CHARGEUP_DURATION;
-        float Sduration = (float) MixinPlayer.getChargeDuration() / SaberGauntlet.MAX_CHARGE_DUR;
-
-        boolean surgePossible =  Scooldown == 1.0F && !SusingItem;
-        boolean surgeHint = Sduration == 0.0F&&surgePossible && !surging && LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.SABER_GAUNTLET.get());
-
-        if (Sduration > 0.0F && !SusingItem) {
-            pGuiGraphics.blit(GAUNTLET, rotx, roty, 48, frame, 16, 8, 64, 48);
-        }
-
-        if (Scooldown < 1.0F && SusingItem) {
-            int l = (int)(Scooldown * 16.0F);
-            pGuiGraphics.blit(GAUNTLET, rotx, roty, 0, frame, 16, 8, 64, 48);
-            pGuiGraphics.blit(GAUNTLET, rotx, roty, 16, frame, l, 8, 64, 48);
-        }
-
-        if (surgeHint) {
-            pGuiGraphics.blit(GAUNTLET, rotx, roty, 32, frame, 16, 8, 64, 48);
-        }
-
-
-
+        GauntletHint.renderOnCrosshair(pGuiGraphics, that, frame);
 
         if (MixinPlayer.getSaberAttackAnim() > 0) {
             //pGuiGraphics.blit(ATTACK, k, j, 0, 0, 29, 29, 29, 29);
@@ -115,6 +71,10 @@ public class HudStuffRenderer {
         int j = that.screenHeight / 2 - 15;
         int k = that.screenWidth / 2 - 14;
         PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) that.minecraft.player;
+
+        RotaryHint.renderOnHotbar(pGuiGraphics, that, frame);
+
+        GauntletHint.renderOnHotbar(pGuiGraphics, that, frame);
 
         if (MixinPlayer.getSaberAttackAnim() > 0) {
             pGuiGraphics.blit(ATTACK, k, j, 0, 0, 49, 49, 49, 49);
