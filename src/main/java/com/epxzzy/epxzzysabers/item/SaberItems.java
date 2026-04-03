@@ -25,10 +25,10 @@ public class SaberItems {
     public static final RegistryObject<Item> SINGLE_BLADED_SABER = items.register("single_bladed_saber", () -> new SingleBladed(new Item.Properties().rarity(RARITY_KYBER), 3, 18, -2));
     public static final RegistryObject<Item> DUAL_BLADED_SABER = items.register("dual_bladed_saber", () -> new DualBladed(new Item.Properties().rarity(RARITY_KYBER), 4.5F, 16, -1));
     public static final RegistryObject<Item> ROTARY_SABER = items.register("rotary_saber", () -> new RotarySaber(new Item.Properties().rarity(RARITY_KYBER), 3.5F, 12, -1));
-    public static final RegistryObject<Item> CROSSGUARD_SABER = items.register("crossguard_saber", () -> new CrossguardSaber(new Item.Properties().rarity(RARITY_KYBER), 3, 10, -1));
+    public static final RegistryObject<Item> CROSSGUARD_SABER = items.register("crossguard_saber", () -> new CrossguardSaber(new Item.Properties().rarity(RARITY_KYBER), 3, 10, -2));
     public static final RegistryObject<Item> BLASTER_SABER = items.register("blaster_saber", () -> new BlasterHybrid(new Item.Properties().rarity(RARITY_KYBER), 3, 14, -2));
     public static final RegistryObject<Item> SABER_PIKE = items.register("saber_pike", () -> new SaberPike(new Item.Properties().rarity(RARITY_KYBER), 4.5F, 16, -1));
-    public static final RegistryObject<Item> SABER_GAUNTLET = items.register("saber_gauntlet", () -> new SaberGauntlet(new Item.Properties().rarity(RARITY_KYBER), 3, 12, 0));
+    public static final RegistryObject<Item> SABER_GAUNTLET = items.register("saber_gauntlet", () -> new SaberGauntlet(new Item.Properties().rarity(RARITY_KYBER), 3, 12, -1));
 
     public static final RegistryObject<Item> KRYSTAL = items.register("krystal", () -> new SimpleFoiledItem(new Item.Properties().rarity(Rarity.RARE).fireResistant()));
 

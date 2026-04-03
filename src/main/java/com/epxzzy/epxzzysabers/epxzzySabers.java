@@ -23,6 +23,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolAction;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -87,34 +88,11 @@ public class epxzzySabers{
         //epxzzySabers.LOGGER.debug("FKCRT PartialModelEventHandler events registered");
     }
 
-        // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
 
     }
     public static ResourceLocation asResource(String path) {
         return new ResourceLocation(MOD_ID, path);
-    }
-        // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
-        MinecraftServer server = event.getServer();
-        ResourceManager resourceManager = server.getResourceManager();
-
-        try {
-            var resource = resourceManager.getResource(
-                    epxzzySabers.asResource("config.json")
-            );
-
-            if (resource.isPresent()) {
-                String json = new String(resource.get().open().readAllBytes());
-                JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
-                ConfigHolder.loadConfig(obj);
-                epxzzySabers.LOGGER.info("Successfully Loaded Saberooni Config from " + resource.toString());
-            }
-        } catch (Exception e) {
-            epxzzySabers.LOGGER.info("Failed To Load Saberooni Config");
-            e.printStackTrace();
-        }
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
