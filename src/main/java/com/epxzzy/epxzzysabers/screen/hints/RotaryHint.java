@@ -3,6 +3,7 @@ package com.epxzzy.epxzzysabers.screen.hints;
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.SaberItems;
 import com.epxzzy.epxzzysabers.item.types.RotarySaber;
+import com.epxzzy.epxzzysabers.util.ConfigHolder;
 import com.epxzzy.epxzzysabers.util.LevelHelper;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import net.minecraft.client.gui.Gui;
@@ -26,8 +27,8 @@ public class RotaryHint extends HudHint{
         boolean RotaryhasRightItem = LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.ROTARY_SABER.get());
         boolean RotusingItem = play.isUsingItem()&& RotaryhasRightItem;
 
-        float Rcooldown = (float) (RotarySaber.MAX_FLIGHT_COOLDOWN - MixinPlayer.getFlyCooldown()) / RotarySaber.MAX_FLIGHT_COOLDOWN;
-        float Rduration = (float) MixinPlayer.getFlyDur() / RotarySaber.MAX_FLIGHT_DURATION;
+        float Rcooldown = (float) (ConfigHolder.ROTARY_FLIGHT_COOLDOWN - MixinPlayer.getFlyCooldown()) / ConfigHolder.ROTARY_FLIGHT_COOLDOWN;
+        float Rduration = (float) MixinPlayer.getFlyDur() / ConfigHolder.ROTARY_FLIGHT_DURATION;
 
         boolean flyPossible = Rduration == 0.0F &&Rcooldown == 1.0F && !RotusingItem;
 
@@ -61,8 +62,8 @@ public class RotaryHint extends HudHint{
         boolean RotaryhasRightItem = LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.ROTARY_SABER.get());
         boolean RotusingItem = play.isUsingItem()&& RotaryhasRightItem;
 
-        float Rcooldown = (float) (RotarySaber.MAX_FLIGHT_COOLDOWN - MixinPlayer.getFlyCooldown()) / RotarySaber.MAX_FLIGHT_COOLDOWN;
-        float Rduration = (float) MixinPlayer.getFlyDur() / RotarySaber.MAX_FLIGHT_DURATION;
+        float Rcooldown = (float) (ConfigHolder.ROTARY_FLIGHT_COOLDOWN - MixinPlayer.getFlyCooldown()) / ConfigHolder.ROTARY_FLIGHT_COOLDOWN;
+        float Rduration = (float) MixinPlayer.getFlyDur() / ConfigHolder.ROTARY_FLIGHT_DURATION;
 
         boolean flyPossible = Rduration == 0.0F &&Rcooldown == 1.0F && !RotusingItem;
 

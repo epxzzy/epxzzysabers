@@ -8,6 +8,7 @@ import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerStanceP
 import com.epxzzy.epxzzysabers.rendering.item.RotarySaberItemRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.epxzzysabers.sound.SaberSounds;
+import com.epxzzy.epxzzysabers.util.ConfigHolder;
 import com.epxzzy.epxzzysabers.util.LevelHelper;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import net.minecraft.core.BlockPos;
@@ -33,9 +34,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class RotarySaber extends Protosaber {
-    public static int MAX_FLIGHT_DURATION = 200;
-    public static int MAX_FLIGHT_COOLDOWN = 40;
-
     public RotarySaber(Properties pProperties, float pRANGE, int pDamage, int pSpeed) {
         super(pProperties, pRANGE, pDamage, pSpeed);
     }
@@ -77,7 +75,7 @@ public class RotarySaber extends Protosaber {
 
             //forcefully stop flight and put on cooldown
             if (pPlayer.isCreative()) {
-                MixinPlayer.setFlyCooldown(MAX_FLIGHT_COOLDOWN);
+                MixinPlayer.setFlyCooldown(ConfigHolder.ROTARY_FLIGHT_COOLDOWN);
             }
 
             //flight cooldown tick
@@ -104,7 +102,7 @@ public class RotarySaber extends Protosaber {
 
     @Override
     public int getUseDuration(@NotNull ItemStack pStack) {
-        if(pStack.getOrCreateTag().getBoolean("FlyBoiii")) return MAX_FLIGHT_DURATION;
+        if(pStack.getOrCreateTag().getBoolean("FlyBoiii")) return ConfigHolder.ROTARY_FLIGHT_DURATION;
         return super.getUseDuration(pStack);
     }
 
@@ -163,7 +161,7 @@ public class RotarySaber extends Protosaber {
             ((Player) entity).getAbilities().flying = false;
             ((Player) entity).onUpdateAbilities();
             epxzzySabers.LOGGER.info("flying deactivated");
-            MixinPlayer.setFlyCooldown(MAX_FLIGHT_COOLDOWN);
+            MixinPlayer.setFlyCooldown(ConfigHolder.ROTARY_FLIGHT_COOLDOWN);
 
         }
 

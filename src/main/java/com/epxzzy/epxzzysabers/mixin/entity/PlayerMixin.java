@@ -9,6 +9,7 @@ import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerAttackP
 import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerDefendPacket;
 import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerFlourishPacket;
 import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerStancePacket;
+import com.epxzzy.epxzzysabers.util.ConfigHolder;
 import com.epxzzy.epxzzysabers.util.SaberTags;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import com.epxzzy.epxzzysabers.util.TagHelper;
@@ -166,7 +167,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             if (attacker != null) {
                 boolean posedAttack = TagHelper.checkActivePoseableWeapon(attacker, true);
 
-                if (gotBlocked && posedAttack) {
+                if (gotBlocked && posedAttack && ConfigHolder.KEWL_FIGHTS) {
                     //epxzzySabers.LOGGER.debug("blocked {}", notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
 
                     if (attacker instanceof Player) {
@@ -228,7 +229,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             that.sweepAttack();
         }
 
-        if (!that.level().isClientSide() && TagHelper.checkActivePoseableWeapon(that, true)) {
+        if (!that.level().isClientSide() && TagHelper.checkActivePoseableWeapon(that, true) && ConfigHolder.KEWL_FIGHTS) {
             if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {
                 this.attackProgress = -1;
                 this.attacking = true;

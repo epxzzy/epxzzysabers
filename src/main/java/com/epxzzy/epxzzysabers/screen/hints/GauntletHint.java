@@ -4,6 +4,7 @@ import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.SaberItems;
 import com.epxzzy.epxzzysabers.item.types.RotarySaber;
 import com.epxzzy.epxzzysabers.item.types.SaberGauntlet;
+import com.epxzzy.epxzzysabers.util.ConfigHolder;
 import com.epxzzy.epxzzysabers.util.LevelHelper;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import net.minecraft.client.gui.Gui;
@@ -27,8 +28,8 @@ public class GauntletHint extends HudHint{
         boolean ShasRightItem = LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.SABER_GAUNTLET.get());
         boolean SusingItem = play.isUsingItem()&&ShasRightItem;
 
-        float Scooldown = (float) (SaberGauntlet.CHARGEUP_DURATION - play.getUseItemRemainingTicks()) / SaberGauntlet.CHARGEUP_DURATION;
-        float Sduration = (float) MixinPlayer.getChargeDuration() / SaberGauntlet.MAX_CHARGE_DUR;
+        float Scooldown = (float) (ConfigHolder.GAUNTLET_SURGE_CHARGEUP - play.getUseItemRemainingTicks()) / ConfigHolder.GAUNTLET_SURGE_CHARGEUP;
+        float Sduration = (float) MixinPlayer.getChargeDuration() / ConfigHolder.GAUNTLET_SURGE_CHARGEUP;
 
         boolean surgePossible =  Scooldown == 1.0F && !SusingItem;
         boolean surgeHint = Sduration == 0.0F&&surgePossible && !surging && LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.SABER_GAUNTLET.get());
@@ -62,8 +63,8 @@ public class GauntletHint extends HudHint{
         boolean ShasRightItem = LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.SABER_GAUNTLET.get());
         boolean SusingItem = play.isUsingItem()&&ShasRightItem;
 
-        float Scooldown = (float) (SaberGauntlet.CHARGEUP_DURATION - play.getUseItemRemainingTicks()) / SaberGauntlet.CHARGEUP_DURATION;
-        float Sduration = (float) MixinPlayer.getChargeDuration() / SaberGauntlet.MAX_CHARGE_DUR;
+        float Scooldown = (float) (ConfigHolder.GAUNTLET_SURGE_CHARGEUP - play.getUseItemRemainingTicks()) / ConfigHolder.GAUNTLET_SURGE_CHARGEUP;
+        float Sduration = (float) MixinPlayer.getChargeDuration() / ConfigHolder.GAUNTLET_SURGE_DURATION;
 
         boolean surgePossible =  Scooldown == 1.0F && !SusingItem;
         boolean surgeHint = Sduration == 0.0F&&surgePossible && !surging && LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.SABER_GAUNTLET.get());

@@ -5,6 +5,7 @@ import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.rendering.item.SaberGauntletItemRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.epxzzysabers.util.AnimationTickHolder;
+import com.epxzzy.epxzzysabers.util.ConfigHolder;
 import com.epxzzy.epxzzysabers.util.LevelHelper;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import com.google.common.base.Suppliers;
@@ -48,8 +49,6 @@ import java.util.function.Supplier;
 @Mod.EventBusSubscriber
 public class SaberGauntlet extends Protosaber {
     public static int CHARGED_DAMAGE = 8;
-    public static int MAX_CHARGE_DUR = 160;
-    public static int CHARGEUP_DURATION = 40;
 
     //0 == natty/normal, 300 == goddamn this thing is hot
     public static final AttributeModifier singleRangeAttributeModifier =
@@ -116,7 +115,7 @@ public class SaberGauntlet extends Protosaber {
 
                 if (pRemainingUseDuration == 1) {
                     pStack.getOrCreateTag().putBoolean("ChargedBoiii", true);
-                    MixinPlayer.setChargeDuration(MAX_CHARGE_DUR);
+                    MixinPlayer.setChargeDuration(ConfigHolder.GAUNTLET_SURGE_DURATION);
 
                     CompoundTag tagsToApply = pStack.getOrCreateTag().copy();
                     tagsToApply.put("AttributeModifiers", new ListTag());
@@ -140,7 +139,7 @@ public class SaberGauntlet extends Protosaber {
 
     @Override
     public int getUseDuration(@NotNull ItemStack pStack) {
-        if(pStack.getOrCreateTag().getBoolean("ActiveBoiii")) return CHARGEUP_DURATION;
+        if(pStack.getOrCreateTag().getBoolean("ActiveBoiii")) return ConfigHolder.GAUNTLET_SURGE_CHARGEUP;
         return super.getUseDuration(pStack);
     }
 

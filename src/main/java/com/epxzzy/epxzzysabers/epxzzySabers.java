@@ -11,10 +11,15 @@ import com.epxzzy.epxzzysabers.rendering.foundation.PartialModelEventHandler;
 import com.epxzzy.epxzzysabers.screen.tint.KyberStationTintScreen;
 import com.epxzzy.epxzzysabers.screen.SaberMenuTypes;
 import com.epxzzy.epxzzysabers.sound.SaberSounds;
+import com.epxzzy.epxzzysabers.util.ConfigHolder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolAction;
@@ -92,7 +97,24 @@ public class epxzzySabers{
         // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+        MinecraftServer server = event.getServer();
+        ResourceManager resourceManager = server.getResourceManager();
 
+        try {
+            var resource = resourceManager.getResource(
+                    epxzzySabers.asResource("config.json")
+            );
+
+            if (resource.isPresent()) {
+                String json = new String(resource.get().open().readAllBytes());
+                JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
+                ConfigHolder.loadConfig(obj);
+                epxzzySabers.LOGGER.info("Successfully Loaded Saberooni Config from " + resource.toString());
+            }
+        } catch (Exception e) {
+            epxzzySabers.LOGGER.info("Failed To Load Saberooni Config");
+            e.printStackTrace();
+        }
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
