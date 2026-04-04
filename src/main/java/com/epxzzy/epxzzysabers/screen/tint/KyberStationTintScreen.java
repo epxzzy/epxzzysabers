@@ -26,7 +26,7 @@ import java.util.List;
 
 public class KyberStationTintScreen extends AbstractContainerScreen<KyberStationTintMenu> {
     private static final ResourceLocation RECOLOUR_TEXTURE =
-            new ResourceLocation(epxzzySabers.MOD_ID, "textures/gui/kyber_recolour.png");
+            new ResourceLocation(epxzzySabers.MOD_ID, "textures/gui/bg/kyber_recolour.png");
 
     private SliderWidget HUE_SLIDER;
     private SliderWidget SAT_SLIDER;

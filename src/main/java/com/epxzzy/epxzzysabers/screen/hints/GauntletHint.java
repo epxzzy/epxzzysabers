@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
 public class GauntletHint extends HudHint{
-    public static final ResourceLocation GAUNTLET = epxzzySabers.asResource("textures/gui/gauntlet_cooldown.png");
+    public static final ResourceLocation GAUNTLET = epxzzySabers.asResource("textures/gui/hints/gauntlet_cooldown.png");
 
     public static void renderOnCrosshair(GuiGraphics pGuiGraphics, Gui that, int frame) {
         int cx = that.screenHeight / 2;

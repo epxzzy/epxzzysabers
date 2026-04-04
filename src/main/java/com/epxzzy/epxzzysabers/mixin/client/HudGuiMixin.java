@@ -14,8 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.epxzzy.epxzzysabers.screen.HudStuffRenderer.ATTACK;
-
 @Mixin(Gui.class)
 public class HudGuiMixin {
 

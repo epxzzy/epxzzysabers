@@ -35,8 +35,6 @@ import static com.epxzzy.epxzzysabers.util.PlayerHelperLmao.STANCE_PREFERENCE;
 public class StancePreferenceScreen extends Screen {
     int Selection;
 
-    private static final ResourceLocation TEMP = new ResourceLocation("textures/gui/container/loom.png");
-
     public List<PentagonButton> Choices = new ArrayList<>();
     public StancePreferenceScreen(Player player) {
         super(Component.empty());

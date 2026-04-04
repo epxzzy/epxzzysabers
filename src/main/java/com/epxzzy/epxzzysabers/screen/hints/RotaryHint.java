@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
 public class RotaryHint extends HudHint{
-    public static final ResourceLocation ROTARY = epxzzySabers.asResource("textures/gui/rotary_cooldown.png");
+    public static final ResourceLocation ROTARY = epxzzySabers.asResource("textures/gui/hints/rotary_cooldown.png");
 
     public static void renderOnCrosshair(GuiGraphics pGuiGraphics, Gui that, int frame) {
         int cx = that.screenHeight / 2;
