@@ -10,13 +10,9 @@ public class KeyBinding {
     public static final String KEY_CATEGORY_MISC = "key.categories.misc";
     public static final String SABER_ABILITY = "key.epxzzysabers.saber_ability";
     public static final String SABER_STANCE = "key.epxzzysabers.saber_stance";
-    public static final String SABER_STANCEPREF = "key.epxzzysabers.saber_stancepref";
 
     public static final KeyMapping SABER_ABILITY_KEY = new KeyMapping(SABER_ABILITY, KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_ALT, KEY_CATEGORY_MISC);
     public static final KeyMapping SABER_STANCE_KEY = new KeyMapping(SABER_STANCE, KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, KEY_CATEGORY_MISC);
-    public static final KeyMapping SABER_STANCEPREF_KEY = new KeyMapping(SABER_STANCEPREF, KeyConflictContext.IN_GAME,
-            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_ALT, KEY_CATEGORY_MISC);
-
 }

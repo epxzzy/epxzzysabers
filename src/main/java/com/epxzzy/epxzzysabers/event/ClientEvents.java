@@ -61,8 +61,7 @@ public class ClientEvents {
                 }
             }
 
-
-            if (KeyBinding.SABER_STANCEPREF_KEY.isDown()){
+            if (KeyBinding.SABER_STANCE_KEY.isDown()&&player.isShiftKeyDown()){
                 Minecraft.getInstance().setScreen(new StancePreferenceScreen(player));
             }
 

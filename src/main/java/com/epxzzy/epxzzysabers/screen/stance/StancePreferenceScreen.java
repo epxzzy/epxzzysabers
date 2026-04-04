@@ -135,7 +135,7 @@ public class StancePreferenceScreen extends Screen {
 
     @Override
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
-        if (pKeyCode == KeyBinding.SABER_STANCEPREF_KEY.getKey().getValue()) {
+        if (pKeyCode == KeyBinding.SABER_STANCE_KEY.getKey().getValue()) {
             this.onClose();
             return true;
         }
