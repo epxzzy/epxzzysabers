@@ -159,9 +159,7 @@ public class StackHelper {
         return !isLeftArmMain(entity) && transformType == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
     }
 
-    public static boolean isActive(ItemStack stacc) {
-        return stacc.getOrCreateTag().getBoolean("ActiveBoiii");
-    }
+
     public static boolean isFlying(ItemStack stacc) {
         return stacc.getOrCreateTag().getBoolean("FlyBoiii");
     }

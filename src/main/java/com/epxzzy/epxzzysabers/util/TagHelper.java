@@ -19,10 +19,13 @@ public class TagHelper {
     public static boolean checkHoldingActiveTag(Entity Entityy, boolean Mainhand, TagKey<Item> tagg) {
         if (Entityy instanceof LivingEntity) {
             if (Mainhand)
-                return ((LivingEntity) Entityy).getMainHandItem().is(tagg) && StackHelper.isActive(((LivingEntity) Entityy).getMainHandItem());
-            return ((LivingEntity) Entityy).getOffhandItem().is(tagg) && StackHelper.isActive(((LivingEntity) Entityy).getOffhandItem());
+                return ((LivingEntity) Entityy).getMainHandItem().is(tagg) && isActive(((LivingEntity) Entityy).getMainHandItem());
+            return ((LivingEntity) Entityy).getOffhandItem().is(tagg) && isActive(((LivingEntity) Entityy).getOffhandItem());
         }
         return false;
+    }
+    public static boolean isActive(ItemStack stacc) {
+        return stacc.getOrCreateTag().getBoolean("ActiveBoiii");
     }
 
     public static boolean checkMainhandActiveSaber(Entity Entityy) {

@@ -31,7 +31,7 @@ import net.minecraft.world.item.ItemStack;
 public class ItemTransformRouter {
 
     public static void transform(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity) {
-        if((entity.swinging) && StackHelper.isActive(stack)) {
+        if((entity.swinging) && TagHelper.isActive(stack)) {
             if ((((PlayerHelperLmao) entity).isSaberAttacking())) return;
             //do not override attack hit
 

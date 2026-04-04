@@ -115,7 +115,7 @@ public class RotarySaberItemRenderer extends CustomRenderedSaberModelRenderer {
          */
 
 
-        if (StackHelper.isActive(stack)) {
+        if (TagHelper.isActive(stack)) {
             if (StackHelper.isFlying(stack)) {
                 ms.mulPose(Axis.ZN.rotation(ScrollValueHandler.getScroll((float) ((float) (AnimationTickHolder.getPartialTicks()) * 5))));
                 RenderSmearBlade(stack, model, renderer, transformType, ms, buffer, light, overlay);

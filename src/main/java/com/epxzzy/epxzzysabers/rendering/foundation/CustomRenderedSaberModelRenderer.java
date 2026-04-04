@@ -67,7 +67,7 @@ public abstract class CustomRenderedSaberModelRenderer extends CustomRenderedIte
         renderHilt(stack, mainModel, renderer, transformType, ms, buffer, light, overlay);
         ms.popPose();
 
-        if (StackHelper.isActive(stack)) {
+        if (TagHelper.isActive(stack)) {
             ms.pushPose();
             renderBlade(stack, mainModel, renderer, transformType, ms, buffer, light, overlay);
             ms.popPose();
@@ -77,7 +77,7 @@ public abstract class CustomRenderedSaberModelRenderer extends CustomRenderedIte
 
     protected void renderTransforms(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
                                       PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity){
-        if ((entity.swinging) && StackHelper.isActive(stack)){
+        if ((entity.swinging) && TagHelper.isActive(stack)){
             ItemTransformRouter.transform(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
         }
     };
