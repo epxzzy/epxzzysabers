@@ -1,6 +1,8 @@
 package com.epxzzy.epxzzysabers.misc;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
+import com.epxzzy.epxzzysabers.util.ConfigHolder;
+import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import com.epxzzy.epxzzysabers.util.StackHelper;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -24,7 +26,9 @@ public class KewlFightsOrchestrator {
 
         //if(pPlayer.fallDistance > 0)
             //return 8;
-
+        if(!ConfigHolder.KEWL_FIGHTS){
+            return 0;
+        }
         int random = pPlayer.getRandom().nextInt(8) + 1;
         return old != random? random: random+1;
 
@@ -93,6 +97,10 @@ public class KewlFightsOrchestrator {
 
 
     public static int DetermineParryAnimation(Player pPlayer){
+        if((((PlayerHelperLmao)pPlayer).isSaberAttacking())){
+            return 0;
+        }
+
         //behind the back flourish
         if(pPlayer.getXRot() >= 25)
             return 2;

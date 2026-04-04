@@ -32,7 +32,7 @@ public class ItemTransformRouter {
 
     public static void transform(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity) {
         if((entity.swinging) && StackHelper.isActive(stack)) {
-            if ((((PlayerHelperLmao) entity).getSaberAttackAnim() > 0)) return;
+            if ((((PlayerHelperLmao) entity).isSaberAttacking())) return;
             //do not override attack hit
 
             if(TagHelper.isLightWeapon(stack)){

@@ -27,12 +27,6 @@ public class PlayerPoseRouter {
 
         boolean stancing = ((PlayerHelperLmao) player).getSaberStanceDown();
 
-
-        if ((TagHelper.checkActiveHeavyWeapon(player, true) || TagHelper.checkActiveLightWeapon(player, true)) && player.swingTime > 0) {
-            model.leftArm.resetPose();
-            model.rightArm.resetPose();
-        }
-
         //fix rotation bug #3, uses magic number cooldown
         //actaully listened to my own advice for once going against optimising the fuck out of it
         if (true) {
@@ -99,7 +93,7 @@ public class PlayerPoseRouter {
         }
 
         //attack miss//empty swing
-        if (player.swingTime > 0) {
+        if (player.swingTime > 0 && !(SaberSwingAnim > 0)) {
             //heavy weapon mainhand
             if (TagHelper.checkMainhandActiveHeavyWeapon(player)) {
                 setDualSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model, flourish);

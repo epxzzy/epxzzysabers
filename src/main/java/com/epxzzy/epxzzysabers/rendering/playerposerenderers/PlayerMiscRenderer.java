@@ -23,8 +23,8 @@ public class PlayerMiscRenderer {
         float time = (AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks())/2;
         float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
         float limbCycle = Mth.sin(((float) (time * 0.3f / Math.PI)));
-        float bodySwing = AngleHelper.rad(15 + (mainCycle * 10));
-        float limbSwing = AngleHelper.rad(limbCycle * 15);
+        float bodySwing = AngleHelper.rad(15 + (mainCycle * 5));
+        float limbSwing = AngleHelper.rad(limbCycle * 7);
         if (isLeftArmMain) bodySwing = -bodySwing;
         model.body.zRot = bodySwing;
         model.head.zRot = bodySwing;

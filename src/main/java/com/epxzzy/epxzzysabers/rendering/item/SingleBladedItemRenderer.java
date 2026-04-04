@@ -49,7 +49,7 @@ public class SingleBladedItemRenderer extends CustomRenderedSaberModelRenderer {
     @Override
     protected void renderTransforms(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
                              PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity) {
-        if ((entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii") && !(((PlayerHelperLmao) entity).getSaberAttackAnim() > 0)){
+        if ((entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")){
             ItemTransformRouter.transform(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
         }
     }

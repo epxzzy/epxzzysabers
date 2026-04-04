@@ -39,11 +39,12 @@ public interface PlayerHelperLmao {
     public void LogFlightDetails();
     public float getSaberAttackAnim();
     public float getSaberDefendAnim();
+    public boolean isSaberAttacking();
+    public boolean isSaberDefending();
     public void SyncDEFtoPacket(ClientboundPlayerDefendPacket packet);
     public void SyncATKtoPacket(ClientboundPlayerAttackPacket packet);
     public void SyncSTCtoPacket(ClientboundPlayerStancePacket packet);
     public void SyncFRStoPacket(ClientboundPlayerFlourishPacket packet);
 
-    public int getAttackTime();
 
 }

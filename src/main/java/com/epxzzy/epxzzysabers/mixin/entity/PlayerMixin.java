@@ -145,6 +145,13 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
         return this.oSaberdefAnim + f;
     }
+    public boolean isSaberAttacking() {
+        return this.attacking;
+    }
+
+    public boolean isSaberDefending() {
+        return this.defending;
+    }
 
     @Inject(
             method = "hurt",
@@ -167,7 +174,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             if (attacker != null) {
                 boolean posedAttack = TagHelper.checkActivePoseableWeapon(attacker, true);
 
-                if (gotBlocked && posedAttack && ConfigHolder.KEWL_FIGHTS) {
+                if (gotBlocked && posedAttack) {
                     //epxzzySabers.LOGGER.debug("blocked {}", notThat.getMainHandItem().getOrCreateTag().getCompound("display").getInt("atk"));
 
                     if (attacker instanceof Player) {
@@ -175,7 +182,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
                     } else {
                         tempatk = KewlFightsOrchestrator.DetermineNextPossibleAttack(8, (ServerPlayer) that);
                     }
-                    that.displayClientMessage(Component.literal("blocking " + tempatk), true);
+                    if (tempatk > 0) that.displayClientMessage(Component.literal("blocking " + tempatk), true);
 
                     //that.playSound(SaberSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
                 }
@@ -229,7 +236,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             that.sweepAttack();
         }
 
-        if (!that.level().isClientSide() && TagHelper.checkActivePoseableWeapon(that, true) && ConfigHolder.KEWL_FIGHTS) {
+        if (!that.level().isClientSide() && TagHelper.checkActivePoseableWeapon(that, true)) {
             if (!this.attacking || this.attackProgress >= 6 / 2 || this.attackProgress < 0) {
                 this.attackProgress = -1;
                 this.attacking = true;
@@ -243,7 +250,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(7, (ServerPlayer) that);
 
             //epxzzysabers.LOGGER.debug("next possible attack value  {}", baller);
-            that.displayClientMessage(Component.literal("attacking " + methodic), true);
+            if(methodic > 0) that.displayClientMessage(Component.literal("attacking " + methodic), true);
             ((PlayerHelperLmao) that).setSaberAttackForm(methodic);
 
             SaberMessages.fuckingAnnounce(new ClientboundPlayerAttackPacket(that.getId(), this.attacking, this.attackProgress, methodic), that);
