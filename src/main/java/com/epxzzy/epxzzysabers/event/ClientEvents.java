@@ -50,7 +50,6 @@ public class ClientEvents {
             }
             Player player = Minecraft.getInstance().player;
             PlayerHelperLmao MixinPlayer = (PlayerHelperLmao)((Player) player);
-            if(TagHelper.checkMainhandPoseableWeapon(player)) {
                 if (!wasUp && KeyBinding.SABER_STANCE_KEY.isDown()) {
                     wasUp = true;
                     SaberMessages.sendToServer(new ServerboundSaberStancePacket(KeyBinding.SABER_STANCE_KEY.isDown(), MixinPlayer.getStancePreference()));
@@ -59,7 +58,6 @@ public class ClientEvents {
                     wasUp = false;
                     SaberMessages.sendToServer(new ServerboundSaberStancePacket(KeyBinding.SABER_STANCE_KEY.isDown(), MixinPlayer.getStancePreference()));
                 }
-            }
 
             if (KeyBinding.SABER_STANCE_KEY.isDown()&&player.isShiftKeyDown()){
                 Minecraft.getInstance().setScreen(new StancePreferenceScreen(player));
