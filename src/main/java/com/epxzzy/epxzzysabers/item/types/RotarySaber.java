@@ -69,17 +69,17 @@ public class RotarySaber extends Protosaber {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
         if (pEntity instanceof ServerPlayer pPlayer && !(pLevel.isClientSide())) {
             PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) pPlayer;
 
             //forcefully stop flight and put on cooldown
             if (pPlayer.isCreative()) {
                 MixinPlayer.setFlyCooldown(ConfigHolder.ROTARY_FLIGHT_COOLDOWN);
+                return;
             }
 
             //flight cooldown tick
-            if (!(pPlayer.getAbilities().flying)) {
+            if (!(pPlayer.getAbilities().flying)&&!pPlayer.isCreative()) {
                 if (MixinPlayer.getFlyCooldown() >= 1) {
                     MixinPlayer.setFlyCooldown(MixinPlayer.getFlyCooldown() - 1);
 
@@ -89,6 +89,7 @@ public class RotarySaber extends Protosaber {
                 }
             }
         }
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
     public boolean isInAir(Player pPlayer) {
@@ -151,22 +152,21 @@ public class RotarySaber extends Protosaber {
     }
 
     @Override
-    public void onStopUsing(ItemStack pStack, LivingEntity entity, int count) {
+    public void onStopUsing(ItemStack pStack, LivingEntity pLivingEntity, int count) {
         CompoundTag nbeetea = pStack.getOrCreateTag();
         nbeetea.putBoolean("BlockBoiii", false);
 
         nbeetea.putBoolean("FlyBoiii", false);
-        if (entity instanceof Player pPlayer && pPlayer.getAbilities().flying) {
+        if (pLivingEntity instanceof Player pPlayer && pPlayer.getAbilities().flying && !pPlayer.level().isClientSide()) {
             PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) pPlayer;
-            ((Player) entity).getAbilities().flying = false;
-            ((Player) entity).onUpdateAbilities();
-            epxzzySabers.LOGGER.info("flying deactivated");
+            pPlayer.getAbilities().flying = false;
+            pPlayer.onUpdateAbilities();
             MixinPlayer.setFlyCooldown(ConfigHolder.ROTARY_FLIGHT_COOLDOWN);
-
+            epxzzySabers.LOGGER.info("flying deactivated");
         }
 
         pStack.setTag(nbeetea);
-        super.onStopUsing(pStack, entity, count);
+        super.onStopUsing(pStack, pLivingEntity, count);
     }
 
     public static boolean checkForSaberBlock(Player Entityy) {

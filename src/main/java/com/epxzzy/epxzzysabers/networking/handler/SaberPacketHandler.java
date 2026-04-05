@@ -12,6 +12,7 @@ import com.epxzzy.epxzzysabers.util.LevelHelper;
 import com.epxzzy.epxzzysabers.util.SaberTags;
 import com.epxzzy.epxzzysabers.util.StackHelper;
 import com.epxzzy.epxzzysabers.util.TagHelper;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -129,9 +131,7 @@ public class SaberPacketHandler {
                     ThrownRotarySaber thrownsaber = new ThrownRotarySaber(pLevel, player, pStack);
                     //epxzzySabers.LOGGER.debug("colour given is:" + RotarySaber.getColor(pStack));
                     thrownsaber.shootFromRotationSaber(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float) 4 * 0.5F, 1.0F);
-                    if (player.getAbilities().instabuild) {
-                        //thrownsaber.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
-                    }
+
                     player.swing(InteractionHand.MAIN_HAND, true);
                     pLevel.addFreshEntity(thrownsaber);
                     pLevel.playSound((Player) null, thrownsaber, SaberSounds.ACTIVATION.get(), SoundSource.PLAYERS, 0.05F, 1.0F);
@@ -155,26 +155,21 @@ public class SaberPacketHandler {
                 }
             }
 
-            if (pStack.is(SaberItems.SABER_GAUNTLET.get()) && TagHelper.isActive(pStack)) {
+            if (pStack.is(SaberItems.SABER_GAUNTLET.get()) && pStack.getOrCreateTag().getBoolean("ActiveBoiii")) {
                 if (!(player.getCooldowns().isOnCooldown(pStack.getItem()))) {
                     player.getCooldowns().addCooldown(pStack.getItem(), 60);
 
                     pLevel.playSound((Player) null, player.blockPosition(), SoundEvents.BELL_RESONATE, SoundSource.PLAYERS, 0.5F, 2);
 
-                    //set appropriate abilty
-
-                    List<LivingEntity> tities = LevelHelper.getEntitiesInRadius(player.position(), pLevel, 16);
-
-                    tities.removeIf(tit -> tit == player);
-                    tities.removeIf(tit -> tit.getMainHandItem().is(SaberTags.Items.LIGHTSABER) && !tit.getMainHandItem().is(SaberItems.SABER_GAUNTLET.get()));
-
-                    if (!tities.isEmpty() && pStack.getOrCreateTag().getBoolean("ActiveBoiii")) {
+                    List<LivingEntity> tities = getEntitiesInRadius(player.blockPosition(), pLevel, 16);
+                    tities.removeIf(tit -> tit == player||tit.getMainHandItem().is(SaberItems.SABER_GAUNTLET.get()));
+                    if (!tities.isEmpty()) {
                         for (LivingEntity thisSpecficTity : tities) {
                             if (thisSpecficTity instanceof Player playertity) {
-                                if (thisSpecficTity.getMainHandItem().is(SaberItems.ROTARY_SABER.get())) {
+                                if (thisSpecficTity.getMainHandItem().is(SaberItems.ROTARY_SABER.get())||thisSpecficTity.getOffhandItem().is(SaberItems.ROTARY_SABER.get())) {
 
                                     thisSpecficTity.stopUsingItem();
-                                    playertity.getCooldowns().addCooldown(playertity.getMainHandItem().getItem(), 80);
+                                    playertity.getCooldowns().addCooldown(SaberItems.ROTARY_SABER.get(), 80);
 
 
                                     playertity.level().playSound((Player) null, playertity.blockPosition(), SaberSounds.DEACTIVATION.get(), SoundSource.PLAYERS, 0.5F, 2);
@@ -200,5 +195,18 @@ public class SaberPacketHandler {
             SaberMessages.fuckingAnnounce(new ClientboundPlayerStancePacket(player.getId(), keydown, preference), player);
         }
     }
+    public static List<LivingEntity> getEntitiesInRadius(BlockPos poss, Level level, double radius) {
+        List<LivingEntity> entities = level.getEntitiesOfClass(
+                LivingEntity.class,
+                new AABB(
+                        poss.getX() - radius, poss.getY() - radius, poss.getZ() - radius,
+                        poss.getX() + radius, poss.getY() + radius, poss.getZ() + radius
+                )
+        );
 
+        // remove if not in radious
+        entities.removeIf(moron -> poss.distToCenterSqr(moron.position()) >= radius);
+
+        return entities;
+    }
 }
