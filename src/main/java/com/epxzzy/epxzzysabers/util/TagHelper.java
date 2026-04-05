@@ -24,6 +24,13 @@ public class TagHelper {
         }
         return false;
     }
+    public static boolean checkUsingActiveTag(Entity Entityy, TagKey<Item> tagg) {
+        if (Entityy instanceof LivingEntity) {
+                return ((LivingEntity) Entityy).getUseItem().is(tagg) && isActive(((LivingEntity) Entityy).getUseItem());
+        }
+        return false;
+    }
+
     public static boolean isActive(ItemStack stacc) {
         return stacc.getOrCreateTag().getBoolean("ActiveBoiii");
     }
@@ -64,6 +71,9 @@ public class TagHelper {
     }
     public static boolean checkActivePoseableWeapon(Entity Entityy, boolean Mainhand) {
         return checkHoldingActiveTag(Entityy, Mainhand, SaberTags.Items.POSEABLE_LIGHTSABER);
+    }
+    public static boolean checkUsingActivePoseableWeapon(Entity Entityy) {
+        return checkUsingActiveTag(Entityy, SaberTags.Items.POSEABLE_LIGHTSABER);
     }
 
     public static boolean isHeavyWeapon(ItemStack stacc){

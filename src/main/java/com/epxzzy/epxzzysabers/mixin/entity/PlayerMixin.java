@@ -162,7 +162,8 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         //epxzzySabers.LOGGER.debug("player hurt");
         Player that = ((Player) (Object) this);
         LivingEntity attacker = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
-        boolean gotBlocked = TagHelper.checkActiveSaber(that, that.getUsedItemHand() == InteractionHand.MAIN_HAND);
+        boolean gotBlocked = TagHelper.checkUsingActivePoseableWeapon(that);
+        //boolean gotBlocked = TagHelper.checkActiveSaber(that, that.getUsedItemHand() == InteractionHand.MAIN_HAND);
 
         if (!that.level().isClientSide() && gotBlocked) {
             if (!this.defending || this.defendProgress >= 6 / 2 || this.defendProgress < 0) {
@@ -247,7 +248,8 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
             //int sequential = old > 0 && old < 8 ? old + 1 : 1;
             //problematic method call removed
-            int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(7, (ServerPlayer) that);
+            //int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(7, (ServerPlayer) that);
+            int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(7, (ServerPlayer) that, pTarget);
 
             //epxzzysabers.LOGGER.debug("next possible attack value  {}", baller);
             if(methodic > 0) that.displayClientMessage(Component.literal("attacking " + methodic), true);

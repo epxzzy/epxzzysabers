@@ -3,10 +3,13 @@ package com.epxzzy.epxzzysabers.rendering.playerposerenderers;
 import com.epxzzy.epxzzysabers.util.AngleHelper;
 import com.epxzzy.epxzzysabers.util.AnimationHelper;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
 
 public class PlayerAttackRenderer {
     public static void setPose(int Attack, boolean Lefty, HumanoidModel<?> model, float lerper) {
         double smooth = AnimationHelper.easeOut(lerper);
+        ModelPart arm = Lefty? model.leftArm:model.rightArm;
+        arm.resetPose();
 
         switch (Attack) {
             //left shoulder
@@ -30,66 +33,83 @@ public class PlayerAttackRenderer {
     }
     //left shoulder   1
     public static void SetAttack1(Boolean lefty, HumanoidModel<?> model, double lerper){
-        double startX = 0,startY = 0,endX = 0,endY = 0, endZ =0, currX = 0, currY = 0, currZ =0;
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
+        double startRX = 0, startRY = 0, endRX = 0, endRY = 0, endRZ =0, currRX = 0, currRY = 0, currRZ =0;
+        float startPX = 0, startPY = 0, endPX = 0, endPY = 0, endPZ =0, currPX = 0, currPY = 0, currPZ =0;
+
         if(lefty) {
-            startX = 45;
-            startY = 30;
-            endX = 90;
-            endY = 50;
+            startRX = 40;
+            endRX = 330;
+            endPX = -2F;
+            endPZ = -0.5F;
         }
-
-
 
         if(!lefty) {
-            startX = -287;
-            startY = -15;
-            endX = -40;
-            endY = -15;
+            startRX = 35;
+            endPX = -5F;
+            endRX = 330;
         }
+        currRX = startRX + (endRX - startRX) * lerper;
+        currRY = startRY + (endRY - startRY) * lerper;
+        currRZ = -90;
 
-        currX = startX + (endX - startX) * lerper;
-        currY = startY + (endY - startY) * lerper;
+        currPX = (float) (startPX + (endPX - startPX) * lerper);
+        currPZ = (float) ((endPZ) * lerper);
 
-        model.rightArm.setRotation(
-                AngleHelper.rad(currX),
-                AngleHelper.rad(currY),
-                AngleHelper.rad(-90)
 
+        arm.setRotation(
+                AngleHelper.rad(currRX),
+//                AngleHelper.rad(currY)*(lefty?-1:1),
+                AngleHelper.rad(currRY),
+                AngleHelper.rad(currRZ)
         );
+        arm.setPos(
+                currPX,
+                currPY,
+                currPZ
+        );
+
     }
 
     //right shoulder   2
     public static void SetAttack2(Boolean lefty, HumanoidModel<?> model, double lerper){
-        double startX = 0,startY = 0,endX = 0,endY = 0, endZ =0, currX = 0, currY = 0, currZ =0;
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
+        double startRX = 0, startRY = 0, endRX = 0, endRY = 0, endRZ =0, currRX = 0, currRY = 0, currRZ =0;
+        float startPX = 0, startPY = -5F, endPX = 0, endPY = -5F, endPZ =0, currPX = 0, currPY = 0, currPZ =0;
+
         if(lefty) {
-            startX = 45;
-            startY = 30;
-            endX = 90;
-            endY = 50;
+            startRX = 40;
+            endRX = 330;
+            endPZ = -0.5F;
         }
 
         if(!lefty) {
-            startX = -330;
-            startY = 15;
-            endX = -115;
-            endY = 15;
-            endZ = 90;
+            startRX = 35;
+            endRX = 330;
         }
+        currRX = startRX + (endRX - startRX) * lerper;
+        currRY = startRY + (endRY - startRY) * lerper;
+        currRZ = 90;
 
-        currX = startX + (endX - startX) * lerper;
-        currY = startY + (endY - startY) * lerper;
-        currZ = 80 + (endZ - 80) * lerper;
+        currPX = (float) (startPX + (endPX - startPX) * lerper);
+        currPZ = (float) ((endPZ) * lerper);
 
 
-        model.rightArm.setRotation(
-                AngleHelper.rad(currX),
-                AngleHelper.rad(currY),
-                AngleHelper.rad(currZ)
-
+        arm.setRotation(
+                AngleHelper.rad(currRX),
+//                AngleHelper.rad(currY)*(lefty?-1:1),
+                AngleHelper.rad(currRY),
+                AngleHelper.rad(currRZ)
+        );
+        arm.setPos(
+                currPX,
+                currPY,
+                currPZ
         );
     }
     //left knee   3
     public static void SetAttack3(Boolean lefty, HumanoidModel<?> model, double lerper){
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
         double startX = 0,startY = 0,endX = 0,endY = 0, endZ =0, currX = 0, currY = 0, currZ =0;
         if(lefty) {
             startX = 45;
@@ -111,8 +131,9 @@ public class PlayerAttackRenderer {
         currX = startX + (endX - startX) * lerper;
         currY = startY + (endY - startY) * lerper;
 
-        model.rightArm.setRotation(
+        arm.setRotation(
                 AngleHelper.rad(currX),
+                //AngleHelper.rad(currY)*(lefty?-1:1),
                 AngleHelper.rad(currY),
                 AngleHelper.rad(-90)
 
@@ -120,6 +141,7 @@ public class PlayerAttackRenderer {
     }
     //right knee   4
     public static void SetAttack4(Boolean lefty, HumanoidModel<?> model, double lerper){
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
         double startX = 0,startY = 0,endX = 0,endY = 0, endZ =0, currX = 0, currY = 0, currZ =0;
         if(lefty) {
             startX = 45;
@@ -141,8 +163,9 @@ public class PlayerAttackRenderer {
         currZ = 80 + (endZ - 80) * lerper;
 
 
-        model.rightArm.setRotation(
+        arm.setRotation(
                 AngleHelper.rad(currX),
+                //AngleHelper.rad(currY)*(lefty?-1:1),
                 AngleHelper.rad(currY),
                 AngleHelper.rad(currZ)
 
@@ -150,6 +173,7 @@ public class PlayerAttackRenderer {
     }
     //left abdomen   5
     public static void SetAttack5(Boolean lefty, HumanoidModel<?> model, double lerper){
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
         double startX = 0,startY = 0,endX = 0,endY = 0, endZ =0, currX = 0, currY = 0, currZ =0;
         if(lefty) {
             startX = 45;
@@ -169,8 +193,9 @@ public class PlayerAttackRenderer {
         currX = startX + (endX - startX) * lerper;
         currY = startY + (endY - startY) * lerper;
 
-        model.rightArm.setRotation(
+        arm.setRotation(
                 AngleHelper.rad(currX),
+                //AngleHelper.rad(currY)*(lefty?-1:1),
                 AngleHelper.rad(currY),
                 AngleHelper.rad(-90)
 
@@ -179,6 +204,7 @@ public class PlayerAttackRenderer {
     }
     //right abdomen   6
     public static void SetAttack6(Boolean lefty, HumanoidModel<?> model, double lerper){
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
         double startX = 0,startY = 0,endX = 0,endY = 0, endZ =0, currX = 0, currY = 0, currZ =0;
         if(lefty) {
             startX = 45;
@@ -200,8 +226,9 @@ public class PlayerAttackRenderer {
         currZ = 80 + (endZ - 80) * lerper;
 
 
-        model.rightArm.setRotation(
+        arm.setRotation(
                 AngleHelper.rad(currX),
+                //AngleHelper.rad(currY)*(lefty?-1:1),
                 AngleHelper.rad(currY),
                 AngleHelper.rad(currZ)
 
@@ -209,6 +236,7 @@ public class PlayerAttackRenderer {
     }
     //balls  7
     public static void SetAttack7(Boolean lefty, HumanoidModel<?> model, double lerper){
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
         double startX = 0,startY = 0,endX = 0,endY = 0, endZ =0, currX = 0, currY = 0, currZ =0;
         if(lefty) {
             startX = 45;
@@ -229,15 +257,16 @@ public class PlayerAttackRenderer {
         currX = startX + (endX - startX) * lerper;
         currY = startY + (endY - startY) * lerper;
 
-        model.rightArm.setRotation(
+        arm.setRotation(
                 AngleHelper.rad(currX),
+                //AngleHelper.rad(currY)*(lefty?-1:1),
                 AngleHelper.rad(currY),
                 AngleHelper.rad(-180)
-
         );
     }
     //head   8
     public static void SetAttack8(Boolean lefty, HumanoidModel<?> model, double lerper){
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
         double startX = 0,startY = 0,endX = 0,endY = 0, endZ =0, currX = 0, currY = 0, currZ =0;
         if(lefty) {
             startX = 45;
@@ -258,8 +287,9 @@ public class PlayerAttackRenderer {
         currX = startX + (endX - startX) * lerper;
         currY = startY + (endY - startY) * lerper;
 
-        model.rightArm.setRotation(
+        arm.setRotation(
                 AngleHelper.rad(currX),
+                //AngleHelper.rad(currY)*(lefty?-1:1),
                 AngleHelper.rad(currY),
                 AngleHelper.rad(0)
 

@@ -3,6 +3,7 @@ package com.epxzzy.epxzzysabers.rendering.playerposerenderers;
 import com.epxzzy.epxzzysabers.util.AngleHelper;
 import com.epxzzy.epxzzysabers.util.AnimationHelper;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
 
 public class PlayerBlockRenderer {
     public static void setPose(int Block, boolean Lefty, HumanoidModel<?> model, double lerpusy) {
@@ -192,11 +193,12 @@ public class PlayerBlockRenderer {
 
 
     public static void ShieldPositionToPos(double x, double y, double z, boolean lefty, double lerper, HumanoidModel<?> model) {
+        ModelPart arm = lefty ? model.leftArm : model.rightArm;
         double startX = 1, startY = 1, startZ = 1,
                 currX = 0, currY = 0, currZ = 0;
         if (lefty) {
             startX = model.leftArm.xRot * 0.5F - 0.9424779F;
-            startY = (-(float)Math.PI / 6F);
+            startY = (-(float) Math.PI / 6F);
 
         }
 
@@ -211,24 +213,17 @@ public class PlayerBlockRenderer {
             */
         }
 
-        currX = startX + (x - startX) * lerper;
-        currY = startY + (y - startY) * lerper;
-        currZ = startZ + (z - startZ) * lerper;
+        currX = !lefty? startX + (x - startX) * lerper:startX - (x + startX) * lerper;//startX + (x - startX) * lerper;
+        currY = !lefty? startY + (y - startY) * lerper:startY - (y + startY) * lerper;
+        currZ = !lefty? startZ + (z - startZ) * lerper:startZ - (z + startZ) * lerper;
 
-        if (!lefty) {
-            model.rightArm.setRotation(
-                    AngleHelper.rad(currX),
-                    AngleHelper.rad(currY),
-                    AngleHelper.rad(currZ)
+        //currZ = startZ + (z - startZ) * lerper;
 
-            );
-        }
-        if (lefty) {
-            model.leftArm.setRotation(
-                    AngleHelper.rad(currX),
-                    AngleHelper.rad(currY),
-                    AngleHelper.rad(currZ)
-            );
-        }
+        arm.setRotation(
+                AngleHelper.rad(currX),
+                AngleHelper.rad(currY),
+                AngleHelper.rad(currZ)
+
+        );
     }
 }

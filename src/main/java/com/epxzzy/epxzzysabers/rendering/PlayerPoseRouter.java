@@ -70,13 +70,13 @@ public class PlayerPoseRouter {
 
         //attack hit
         if ((TagHelper.checkMainhandActiveLightWeapon(player) && attack > 0 && SaberSwingAnim > 0)) {
-            setBladedAttack(attack, model, SaberSwingAnim);
+            setBladedAttack(attack, model, SaberSwingAnim, player.getMainArm() == HumanoidArm.LEFT);
             return;
         }
 
         //block hit
         if (TagHelper.checkMainhandActiveLightWeapon(player) && block > 0 && SaberDefAnim > 0) {
-            setBladedBlock(block, model, SaberDefAnim);
+            setBladedBlock(block, model, SaberDefAnim,player.getMainArm() == HumanoidArm.LEFT);
             return;
         }
 
@@ -146,12 +146,12 @@ public class PlayerPoseRouter {
         PlayerStanceRenderer.setStance(form, false, model);
     }
 
-    private static void setBladedAttack(int attack, HumanoidModel<?> model, float lerper) {
-        PlayerAttackRenderer.setPose(attack, false, model, lerper);
+    private static void setBladedAttack(int attack, HumanoidModel<?> model, float lerper, boolean lefty) {
+        PlayerAttackRenderer.setPose(attack, lefty, model, lerper);
     }
 
-    private static void setBladedBlock(int block, HumanoidModel<?> model, float lerper) {
-        PlayerBlockRenderer.setPose(block, false, model, lerper);
+    private static void setBladedBlock(int block, HumanoidModel<?> model, float lerper, boolean lefty) {
+        PlayerBlockRenderer.setPose(block, lefty, model, lerper);
     }
 
 
