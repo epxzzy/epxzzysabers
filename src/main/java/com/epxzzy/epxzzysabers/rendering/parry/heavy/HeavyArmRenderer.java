@@ -22,8 +22,8 @@ public class HeavyArmRenderer {
 
 
     public static void SetArmFlourishSKIPCATCH(boolean Lefty, boolean both, HumanoidModel<?> model){
-        ModelPart MainArm = Lefty ? model.leftArm: model.rightArm;
-        ModelPart otherArm = Lefty ? model.rightArm: model.leftArm;
+        ModelPart MainArm = model.rightArm;
+        ModelPart otherArm = model.leftArm;
 
         //model.body.resetPose();
         model.leftArm.resetPose();
@@ -44,14 +44,13 @@ public class HeavyArmRenderer {
         model.leftArm.resetPose();
         model.rightArm.resetPose();
 
-
         float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
 
 
         float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));
 
-        float movement2 = Mth.sin(((float) ((time) * 3.3 / Math.PI)));
-        float movement3 = Mth.sin(((float) ((time+Mth.PI/-2) * 3.3 / Math.PI)));
+        float movement2 = !Lefty? Mth.sin(((float) ((time) * 3.3 / Math.PI))): Mth.cos(((float) ((time) * 3.3 / Math.PI)));
+        float movement3 = !Lefty? Mth.sin(((float) ((time+Mth.PI/-2) * 3.3 / Math.PI))): Mth.cos(((float) ((time+Mth.PI/-2) * 3.3 / Math.PI)));
 
 
         MainArm.xRot = AngleHelper.rad(-45.04 * movement2);
@@ -67,23 +66,22 @@ public class HeavyArmRenderer {
 
         float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
 
+        int handMultiplier = Lefty?1:-1;
 
         float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*2/Math.PI));
 
-        MainArm.xRot = (float) (Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +(-movement*1.1));
-        MainArm.yRot = AngleHelper.rad(-30);
-        otherArm.xRot = (float)(Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +(movement*1.1));
-        otherArm.yRot = AngleHelper.rad(30);
+        MainArm.xRot = (float) (Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +(-movement*1.1))*handMultiplier;
+        MainArm.yRot = AngleHelper.rad(-30)*handMultiplier;
+        otherArm.xRot = (float)(Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F +(movement*1.1))*handMultiplier;
+        otherArm.yRot = AngleHelper.rad(30)*handMultiplier;
 
     }
     public static void SetArmFlourishFIGUREEIGHT(boolean Lefty, boolean both, HumanoidModel<?> model){
-        ModelPart MainArm = Lefty ? model.leftArm: model.rightArm;
-        ModelPart otherArm = Lefty ? model.rightArm: model.leftArm;
-
+        ModelPart MainArm = model.rightArm;
+        ModelPart otherArm = model.leftArm;
+        //both arms remain the same even when left-ing
         model.leftArm.resetPose();
         model.rightArm.resetPose();
-
-
 
         //float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));
         float movement = 1;

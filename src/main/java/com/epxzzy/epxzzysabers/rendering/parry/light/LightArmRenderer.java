@@ -27,7 +27,7 @@ public class LightArmRenderer {
         ModelPart MainArm = Lefty ? model.rightArm : model.leftArm;
         ModelPart otherArm = Lefty ? model.leftArm : model.rightArm;
 
-        model.rightArm.resetPose();
+        MainArm.resetPose();
 
         //the x-cross
         float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
@@ -35,7 +35,7 @@ public class LightArmRenderer {
 
 
         MainArm.xRot = Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F;
-        MainArm.yRot = AngleHelper.rad(-20);
+        MainArm.yRot = AngleHelper.rad(Lefty?-20:20);
 
         if (both) {
             model.leftArm.resetPose();
@@ -50,14 +50,15 @@ public class LightArmRenderer {
         ModelPart MainArm = Lefty ? model.rightArm : model.leftArm;
         ModelPart otherArm = Lefty ? model.leftArm : model.rightArm;
 
-        model.rightArm.resetPose();
+        MainArm.resetPose();
 
+        int handMultiplier = Lefty?-1:1;
         //the circular
         float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
         float movement = Mth.sin(((float) ((time) * 3.3 / Math.PI)));
         float movement2 = Mth.sin(((float) ((time) * 4 / Math.PI)));
 
-        MainArm.xRot = AngleHelper.rad(-45.04 * movement - 10);
+        MainArm.xRot = AngleHelper.rad(-45.04 * movement - 10)*handMultiplier;
         MainArm.zRot = AngleHelper.rad(movement2 * -30);
 
         if (both) {
@@ -84,7 +85,7 @@ public class LightArmRenderer {
 
         //hangingArm.y -= 3;
         mainArm.xRot = Mth.cos(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
-        mainArm.yRot = AngleHelper.rad(20);
+        mainArm.yRot = AngleHelper.rad(Lefty?-20:20);
         //hangingArm.xRot = -AngleHelper.rad(bodySwing+150);
         //hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
         if (both) {
