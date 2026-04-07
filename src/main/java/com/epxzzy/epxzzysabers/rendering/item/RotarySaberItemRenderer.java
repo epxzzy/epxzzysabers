@@ -54,24 +54,25 @@ public class RotarySaberItemRenderer extends CustomRenderedSaberModelRenderer {
 
 
 
-        List<LivingEntity> allEntities = getPlayersHoldingItemRightOrBoth(stack);
+        List<LivingEntity> allEntities = getEntitiesHoldingItemAnyHand(stack);
 
 
         for (LivingEntity entity : allEntities) {
             if (transformType.firstPerson() && entity.isUsingItem()) {
+                ms.pushPose();
+                ms.popPose();
+
                 int modifier = leftHand ? -1 : 1;
+                ms.mulPose(Axis.ZP.rotationDegrees(modifier * 60));
+
                 if(entity.getTicksUsingItem() > Protosaber.SOFT_PARRY) {
                     float newdur = entity.getUseItemRemainingTicks() - Protosaber.SOFT_PARRY;
                     float dur = (float) stack.getUseDuration() - newdur;
                     float sinn = Mth.sin((10*dur - 0.1F) * 20F);
-                    ms.mulPose(Axis.ZN.rotationDegrees(sinn-15));
+                    ms.mulPose(Axis.ZN.rotationDegrees( transformType == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND ?sinn-15:sinn+15));
                      continue;
                     //ms.translate(f12 * 0.0F, f12 * 0.0F, f12 * 0.04F);
                 }
-                ms.pushPose();
-                ms.popPose();
-
-                ms.mulPose(Axis.ZP.rotationDegrees(modifier * 40));
                 ms.pushPose();
                 ms.popPose();
             }

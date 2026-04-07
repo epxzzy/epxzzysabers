@@ -42,7 +42,6 @@ public class PlayerAttackRenderer {
         roty = 10 * (t.lerper)
         rotz = -90
 
-        posx = left ? 5 * lerper : -1 * lerper
         posy = left ? -1 : 1
         posz = left ? -1 * lerper : 0
          */

@@ -27,10 +27,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.List;
-
-import static com.epxzzy.epxzzysabers.util.StackHelper.getPlayersHoldingItemRightOrBoth;
-
 
 public class SingleBladedItemRenderer extends CustomRenderedSaberModelRenderer {
     protected static final PartialModel HILTBIT = PartialModel.of(epxzzySabers.asResource("item/hilt/mono_hilt"));

@@ -19,11 +19,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.List;
-
-import static com.epxzzy.epxzzysabers.util.StackHelper.getPlayersHoldingItemRightOrBoth;
-
-
 public class CrossguardSaberItemRenderer extends CustomRenderedSaberModelRenderer {
     protected static final PartialModel HILT_BIT = PartialModel.of(epxzzySabers.asResource("item/hilt/crossguard_hilt"));
     protected static final PartialModel GLOWLY_BIT = PartialModel.of(epxzzySabers.asResource("item/additive/crossguard_blade"));

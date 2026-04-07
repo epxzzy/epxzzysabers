@@ -1,29 +1,17 @@
-package com.epxzzy.epxzzysabers.rendering.item;
+package com.epxzzy.epxzzysabers.misc;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
-import com.epxzzy.epxzzysabers.rendering.ItemTransformRouter;
-import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedSaberModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.PartialModel;
-import com.epxzzy.epxzzysabers.rendering.parry.heavy.HeavyItemRenderer;
-import com.epxzzy.epxzzysabers.rendering.parry.light.LightItemRenderer;
-import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
-import com.epxzzy.epxzzysabers.util.StackHelper;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.List;
-
-import static com.epxzzy.epxzzysabers.util.StackHelper.getPlayersHoldingItemRightOrBoth;
-
 
 public class ProtosaberItemRenderer extends CustomRenderedSaberModelRenderer {
     protected static final PartialModel HILT_BIT = PartialModel.of(epxzzySabers.asResource("item/hilt/dual_hilt"));

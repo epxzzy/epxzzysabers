@@ -1,6 +1,7 @@
 package com.epxzzy.epxzzysabers.rendering.item;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
+import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.rendering.ItemTransformRouter;
 import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedSaberModelRenderer;
@@ -14,13 +15,13 @@ import com.mojang.math.Axis;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-import static com.epxzzy.epxzzysabers.util.StackHelper.getPlayersHoldingItemRightOrBoth;
 
 
 public class SaberGauntletItemRenderer extends CustomRenderedSaberModelRenderer {
@@ -48,6 +49,17 @@ public class SaberGauntletItemRenderer extends CustomRenderedSaberModelRenderer 
 
     @Override
     protected void renderFirstPersonBlock(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+        ms.mulPose(Axis.XP.rotationDegrees(50));
+        ms.mulPose(Axis.ZP.rotationDegrees(10));
         return;
     }
+
+    @Override
+    protected void renderSoftParry(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
+                                   PoseStack ms, MultiBufferSource buffer, int light, int overlay,LivingEntity entity){
+        float newdur = entity.getUseItemRemainingTicks() - Protosaber.SOFT_PARRY;
+        float dur = (float) stack.getUseDuration() - newdur;
+        float sinn = Mth.sin((6*dur - 0.1F) * 20F) * 30;
+        ms.mulPose(Axis.ZP.rotationDegrees( transformType == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND ?sinn-40:sinn+40));
+    };
 }
