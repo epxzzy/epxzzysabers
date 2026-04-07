@@ -37,29 +37,40 @@ public class PlayerAttackRenderer {
         double startRX = 0, startRY = 0, endRX = 0, endRY = 0, endRZ =0, currRX = 0, currRY = 0, currRZ =0;
         float startPX = 0, startPY = 0, endPX = 0, endPY = 0, endPZ =0, currPX = 0, currPY = 0, currPZ =0;
 
-        if(lefty) {
-            startRX = 40;
-            endRX = 330;
-            endPX = -2F;
-            endPZ = -0.5F;
-        }
+        /*
+        rotx = 330 + (45 - 330) * (t.lerper)
+        roty = 10 * (t.lerper)
+        rotz = -90
+
+        posx = left ? 5 * lerper : -1 * lerper
+        posy = left ? -1 : 1
+        posz = left ? -1 * lerper : 0
+         */
+        startRX = 330;
+        endRX = 45;
+        endRY = -10;
+
+        endRZ = -90;
 
         if(!lefty) {
-            startRX = 35;
-            endPX = -5F;
-            endRX = 330;
+            endPY = 1F;
         }
-        currRX = startRX + (endRX - startRX) * lerper;
-        currRY = startRY + (endRY - startRY) * lerper;
-        currRZ = -90;
 
-        currPX = (float) (startPX + (endPX - startPX) * lerper);
+        if(lefty) {
+            endPY = 1F;
+            endPZ = -1F;
+        }
+
+        currRX = endRX + (startRX - endRX) * lerper;
+        currRY = endRY * lerper;
+        currRZ = endRZ;
+
+        currPX = (float) ((endPX) * lerper);
+        currPY = (float) ((endPY) * lerper);
         currPZ = (float) ((endPZ) * lerper);
-
 
         arm.setRotation(
                 AngleHelper.rad(currRX),
-//                AngleHelper.rad(currY)*(lefty?-1:1),
                 AngleHelper.rad(currRY),
                 AngleHelper.rad(currRZ)
         );

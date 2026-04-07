@@ -248,8 +248,8 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
 
             //int sequential = old > 0 && old < 8 ? old + 1 : 1;
             //problematic method call removed
-            int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(7, (ServerPlayer) that);
-            //int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(7, (ServerPlayer) that, pTarget);
+            //int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(7, (ServerPlayer) that);
+            int methodic = KewlFightsOrchestrator.DetermineNextPossibleAttack(7, (ServerPlayer) that, pTarget);
 
             //epxzzysabers.LOGGER.debug("next possible attack value  {}", baller);
             if(methodic > 0) that.displayClientMessage(Component.literal("attacking " + methodic), true);
