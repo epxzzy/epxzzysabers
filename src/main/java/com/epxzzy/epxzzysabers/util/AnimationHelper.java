@@ -6,7 +6,7 @@ public class AnimationHelper {
 
     //youre a square harry
     public static double squareInterpolation(double number) {
-        return (Mth.sin((float) (number * 5)) >= 0) ? 1 : -1;
+        return (Mth.sin((float) (number)) >= 0) ? 1 : -1;
     }
 
     // regular ease out

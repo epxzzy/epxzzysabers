@@ -43,14 +43,6 @@ public class SingleBladedItemRenderer extends CustomRenderedSaberModelRenderer {
     }
 
     @Override
-    protected void renderTransforms(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
-                             PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity) {
-        if ((entity.swinging) && stack.getOrCreateTag().getBoolean("ActiveBoiii")){
-            ItemTransformRouter.transform(stack, model, renderer, transformType, ms, buffer, light, overlay, entity);
-        }
-    }
-
-    @Override
     protected void renderFirstPersonBlock(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         boolean leftHand = transformType == ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
         int modifier = leftHand ? -1 : 1;

@@ -24,8 +24,8 @@ public class LightArmRenderer {
 
 
     public static void SetArmFlourishXCROSS(boolean Lefty, boolean both, HumanoidModel<?> model){
-        ModelPart MainArm = Lefty ? model.rightArm : model.leftArm;
-        ModelPart otherArm = Lefty ? model.leftArm : model.rightArm;
+        ModelPart MainArm = Lefty ? model.leftArm: model.rightArm;
+        ModelPart otherArm = !Lefty ? model.leftArm : model.rightArm;
 
         MainArm.resetPose();
 
@@ -35,20 +35,20 @@ public class LightArmRenderer {
 
 
         MainArm.xRot = Mth.clamp(0f, -1.2F, 1.2F) - 1.4835298F;
-        MainArm.yRot = AngleHelper.rad(Lefty?-20:20);
+        MainArm.yRot = AngleHelper.rad(Lefty?20:-20);
 
         if (both) {
-            model.leftArm.resetPose();
+            //model.leftArm.resetPose();
 
             //otherArm.xRot = -AngleHelper.rad(bodySwing + 150);
-            otherArm.xRot = Mth.clamp(model.head.xRot, -1.2F, 1.2F) - 1.4835298F;
-            MainArm.yRot = AngleHelper.rad(0);
+            //otherArm.xRot = Mth.clamp(model.head.xRot, -1.2F, 1.2F) - 1.4835298F;
+            //MainArm.yRot = AngleHelper.rad(0);
             //otherArm.zRot = (Lefty ? 1 : -1) * AngleHelper.rad(15);
         }
     }
     public static void SetArmFlourishCIRCULAR(boolean Lefty, boolean both, HumanoidModel<?> model){
-        ModelPart MainArm = Lefty ? model.rightArm : model.leftArm;
-        ModelPart otherArm = Lefty ? model.leftArm : model.rightArm;
+        ModelPart otherArm = Lefty ? model.rightArm : model.leftArm;
+        ModelPart MainArm = Lefty ? model.leftArm : model.rightArm;
 
         MainArm.resetPose();
 
@@ -62,10 +62,10 @@ public class LightArmRenderer {
         MainArm.zRot = AngleHelper.rad(movement2 * -30);
 
         if (both) {
-            model.leftArm.resetPose();
+            //otherArm.resetPose();
 
-            otherArm.xRot = Mth.cos(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
-            otherArm.zRot = -AngleHelper.rad(20);
+            //otherArm.xRot = Mth.cos(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
+            //otherArm.zRot = -AngleHelper.rad(20);
         }
 
         if (!both) {
@@ -79,8 +79,8 @@ public class LightArmRenderer {
         float time = AnimationTickHolder.getTicks(true) + AnimationTickHolder.getPartialTicks();
         float mainCycle = Mth.sin(((float) ((time + 10) * 0.3f / Math.PI)));
 
-        ModelPart otherArm = Lefty ? model.leftArm : model.rightArm;
-        ModelPart mainArm = Lefty ? model.rightArm : model.leftArm;
+        ModelPart mainArm = Lefty ? model.leftArm : model.rightArm;
+        ModelPart otherArm = Lefty ? model.rightArm : model.leftArm;
         mainArm.resetPose();
 
         //hangingArm.y -= 3;
@@ -89,9 +89,9 @@ public class LightArmRenderer {
         //hangingArm.xRot = -AngleHelper.rad(bodySwing+150);
         //hangingArm.zRot = (Lefty? -1 : 1) * AngleHelper.rad(15);
         if (both) {
-            otherArm.resetPose();
-            otherArm.xRot = Mth.sin(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
-            otherArm.yRot = AngleHelper.rad(20);
+            //otherArm.resetPose();
+            //otherArm.xRot = Mth.sin(0.6662F + (float) Math.PI) * 2.0F * 0.5F;
+            //otherArm.yRot = AngleHelper.rad(20);
 
             //otherArm.zRot = (Lefty ? 1 : -1) * AngleHelper.rad(15);
         }

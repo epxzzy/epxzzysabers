@@ -102,19 +102,19 @@ public class PlayerPoseRouter {
 
             //heavy weapon offhand todo- check mainhand
             if (TagHelper.checkActiveHeavyWeapon(player, false)) {
-                setDualSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
-                return;
+                //setDualSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model, flourish);
+                //return;
             }
 
             //light weapon mainhand
             if (TagHelper.checkMainhandActiveLightWeapon(player)) {
-                setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, false, model, flourish);
+                setSingleBladedSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model, flourish);
                 return;
             }
 
             //light weapon offhand todo- check mainhand
             if (TagHelper.checkActiveLightWeapon(player, false)) {
-                setSingleBladedSaberPose(player.getMainArm() != HumanoidArm.LEFT, true, model, flourish);
+                //setSingleBladedSaberPose(player.getMainArm() == HumanoidArm.LEFT, false, model, flourish);
             }
         }
     }

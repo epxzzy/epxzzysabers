@@ -37,7 +37,7 @@ public class HeavyItemRenderer {
 
         ms.translate(-0.1* (Lefty?1:-1),0,0);
 
-        ms.mulPose(Axis.ZP.rotation((float) (ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks())) * 2.5)));
+        ms.mulPose(Axis.ZP.rotation((float) (ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks())) * 3)));
 
     }
 
@@ -62,14 +62,14 @@ public class HeavyItemRenderer {
     public static void SetFlourishFIGUREEIGHT(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity, boolean Lefty){
         float time = AnimationTickHolder.getTicks(false);
 
-        float motion = Mth.sin((float) (time * 5F/Math.PI));
+        float motion = Mth.sin((float) (time*2/Math.PI));
         float motionsmooooooth = (float) AnimationHelper.squareInterpolation(motion);
 
-        ms.translate(Lefty?0.02:-0.02,0,!Lefty?0.1:-0.1);
+        ms.translate(Lefty?-0.02:0.02,0,0);
 
-        ms.mulPose(Axis.YN.rotationDegrees(((motionsmooooooth* -30) + (30* (Lefty?1:-1)))));
+        ms.mulPose(Axis.YN.rotationDegrees(5-((motionsmooooooth* 30) + (30* (Lefty?-1:1)))));
 
-        ms.mulPose(Axis.XN.rotation((float) (ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks())) * -4)));
+        ms.mulPose(Axis.XN.rotation((float) (ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks())) * 2)));
 
     }
 }

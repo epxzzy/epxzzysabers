@@ -50,7 +50,7 @@ public class HeavyArmRenderer {
         float movement = Mth.sin((float) ((AnimationTickHolder.getTicks(false))*4/Math.PI));
 
         float movement2 = !Lefty? Mth.sin(((float) ((time) * 3.3 / Math.PI))): Mth.cos(((float) ((time) * 3.3 / Math.PI)));
-        float movement3 = !Lefty? Mth.sin(((float) ((time+Mth.PI/-2) * 3.3 / Math.PI))): Mth.cos(((float) ((time+Mth.PI/-2) * 3.3 / Math.PI)));
+        float movement3 = !Lefty? Mth.cos(((float) ((time+Mth.PI/-2) * 3.3 / Math.PI))): Mth.sin(((float) ((time+Mth.PI/-2) * 3.3 / Math.PI)));
 
 
         MainArm.xRot = AngleHelper.rad(-45.04 * movement2);

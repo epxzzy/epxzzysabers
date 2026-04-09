@@ -28,20 +28,18 @@ public class LightItemRenderer {
                 //regular onehanded spin
             }
         }
-
         //((PlayerHelperLmao) entity).LogFlightDetails();
     }
 
     public static void SetFlourishXCROSS(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity, boolean Lefty) {
         float time = AnimationTickHolder.getTicks(false);
-        float motion = Mth.sin((float) (time * 5F / Math.PI));
-        float motionsmooooooth = (float) AnimationHelper.squareInterpolation(motion);
+        float squaremovment= (float) AnimationHelper.squareInterpolation(Mth.sin(time*2/Mth.PI));
 
         int handMultiplier = Lefty?1:-1;
 
-        ms.mulPose(Axis.YN.rotationDegrees(((motionsmooooooth * -30) + 30) * handMultiplier));
+        ms.mulPose(Axis.YN.rotationDegrees(-15 + ((squaremovment* 30) + 30) * handMultiplier));
 
-        ms.mulPose(Axis.XN.rotation((ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks())) * -5)));
+        ms.mulPose(Axis.XN.rotation((ScrollValueHandler.getScroll((AnimationTickHolder.getPartialTicks())) * 3)));
 
         ms.pushPose();
         ms.popPose();
@@ -54,7 +52,7 @@ public class LightItemRenderer {
 
         int handMultiplier = Lefty?1:-1;
 
-        ms.mulPose(Axis.XP.rotation((float) ((ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks())) * (10) - (45 * movement)) * handMultiplier));
+        ms.mulPose(Axis.XP.rotation((float) ((ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks())) * (4) - (45 * movement)) * handMultiplier));
         ms.mulPose(Axis.ZP.rotationDegrees((movement * 50)*handMultiplier));
 
         ms.pushPose();
@@ -66,11 +64,14 @@ public class LightItemRenderer {
         float movement = Mth.sin(((float) ((time + 10) * 5f / Math.PI)));
         int handMultiplier = Lefty?-1:1;
 
-        ms.mulPose(Axis.XP.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (5))));
+        ms.mulPose(Axis.XP.rotation((float) (ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks()) * (3))));
         ms.mulPose(Axis.ZN.rotation(AngleHelper.rad(movement)*handMultiplier));
 
         ms.pushPose();
         ms.popPose();
     }
 
+    public static float swong(Player pPlayer){
+        return -1.0F - (pPlayer.swingTime/ pPlayer.getCurrentItemAttackStrengthDelay());
+    }
 }
