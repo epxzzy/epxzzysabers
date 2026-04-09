@@ -63,86 +63,77 @@ public class PlayerStanceRenderer {
     }
 
     public static void SetStanceForm2(Boolean lefty, HumanoidModel<?> model) {
-        model.head.setPos(0, -1, 1);
-        model.hat.setPos(0, -1, 1);
+        model.head.setPos(0, 0, 1);
+        model.hat.setPos(0, 0, 1);
 
-        model.body.setPos(0, -1, 1);
+        model.body.setPos(0, 0, 1);
         model.body.setRotation(AngleHelper.rad(-5), AngleHelper.rad(0), AngleHelper.rad(0));
 
-        model.rightArm.setPos(-5, 1, 0);
+        model.rightArm.setPos(-5, 2, 0);
         model.rightArm.setRotation(AngleHelper.rad(0), AngleHelper.rad(20), AngleHelper.rad(25));
 
-        model.leftArm.setPos(5, 1, 0);
+        model.leftArm.setPos(5, 2, 0);
         model.leftArm.setRotation(AngleHelper.rad(0), AngleHelper.rad(-20), AngleHelper.rad(-25));
 
-        model.rightLeg.setPos(-2, 11, -1);
+        model.rightLeg.setPos(-2, 12, -1);
         model.rightLeg.setRotation(AngleHelper.rad(5), AngleHelper.rad(7.5), AngleHelper.rad(-1));
 
-        model.leftLeg.setPos(2, 11, 1);
+        model.leftLeg.setPos(2, 12, 1);
         model.leftLeg.setRotation(AngleHelper.rad(5), AngleHelper.rad(-7.5), AngleHelper.rad(1));
 
     }
 
     public static void SetStanceForm3(Boolean lefty, HumanoidModel<?> model) {
-        model.head.setPos(0, -1, 0);
-        model.hat.setPos(0, -1, 0);
-
         model.body.setRotation(AngleHelper.rad(0), AngleHelper.rad(57.5), AngleHelper.rad(0));
-        model.body.setPos(0, -1, 0);
 
-        model.rightArm.setPos(-5, -1, 4);
+        model.rightArm.setPos(-5, 0, 4);
         model.rightArm.setRotation(AngleHelper.rad(0), AngleHelper.rad(0), AngleHelper.rad(150));
 
-        model.leftArm.setPos(3, 2, -5);
+        model.leftArm.setPos(3, 3, -5);
         model.leftArm.setRotation(AngleHelper.rad(-90), AngleHelper.rad(0), AngleHelper.rad(-90));
 
-        model.rightLeg.setPos(-2, 11, 1);
+        model.rightLeg.setPos(-2, 12, 1);
         model.rightLeg.setRotation(AngleHelper.rad(0), AngleHelper.rad(57.5), AngleHelper.rad(2));
 
-        model.leftLeg.setPos(2, 11, -2);
+        model.leftLeg.setPos(2, 12, -2);
         model.leftLeg.setRotation(AngleHelper.rad(-7.5), AngleHelper.rad(0), AngleHelper.rad(0));
 
 
     }
 
     public static void SetStanceForm4(Boolean lefty, HumanoidModel<?> model) {
-        model.head.setPos(0, -1, 0);
-        model.hat.setPos(0, -1, 0);
-
         model.body.setRotation(AngleHelper.rad(0), AngleHelper.rad(57.5), AngleHelper.rad(0));
-        model.body.setPos(0, -1, 0);
 
-        model.rightArm.setPos(-3, 1, 6);
+        model.rightArm.setPos(-3, 2, 6);
         model.rightArm.setRotation(AngleHelper.rad(-74), AngleHelper.rad(26), AngleHelper.rad(0));
 
-        model.leftArm.setPos(0, 1, -5);
+        model.leftArm.setPos(0, 2, -5);
         model.leftArm.setRotation(AngleHelper.rad(26), AngleHelper.rad(4), AngleHelper.rad(76));
 
-        model.rightLeg.setPos(-2, 11, 1);
+        model.rightLeg.setPos(-2, 12, 1);
         model.rightLeg.setRotation(AngleHelper.rad(0), AngleHelper.rad(72.5), AngleHelper.rad(0));
 
-        model.leftLeg.setPos(2, 11, -2);
+        model.leftLeg.setPos(2, 12, -2);
         model.leftLeg.setRotation(AngleHelper.rad(-7.5), AngleHelper.rad(0), AngleHelper.rad(0));
 
     }
 
     public static void SetStanceForm5(Boolean lefty, HumanoidModel<?> model) {
-        model.head.y = 0;
-        model.hat.y = 0;
+        model.head.y = 1;
+        model.hat.y = 1;
 
-        model.body.setPos(0, -1, 0);
         model.body.setRotation(AngleHelper.rad(-2.5), 0, 0);
 
-        model.rightArm.setPos(-5, -3, 0);
+        model.rightArm.setPos(-5, -2, 0);
         model.rightArm.setRotation(AngleHelper.rad(-205), 0, AngleHelper.rad(30));
 
-        model.leftArm.setPos(5, -3, 0);
+        model.leftArm.setPos(5, -2, 0);
         model.leftArm.setRotation(AngleHelper.rad(-205), 0, AngleHelper.rad(-30));
 
-        model.rightLeg.setPos(-2, 11, -1);
+        model.rightLeg.setPos(-2, 12, -1);
         model.rightLeg.setRotation(AngleHelper.rad(5), AngleHelper.rad(7.5), AngleHelper.rad(-1));
 
-        model.leftLeg.setPos(2, 11, 0);
+        model.leftLeg.setPos(2, 12, 0);
         model.leftLeg.setRotation(AngleHelper.rad(5), AngleHelper.rad(-7.5), AngleHelper.rad(1));
 
     }
@@ -150,52 +141,45 @@ public class PlayerStanceRenderer {
     public static void SetStanceForm6(Boolean lefty, HumanoidModel<?> model) {
         //model.head.setPos(1,-1,0);
         model.head.x = 1;
-        model.head.y = 0;
+        model.head.y = 1;
         model.hat.x = 1;
-        model.hat.y = 0;
+        model.hat.y = 1;
 
 
-        model.body.setPos(0, -1, 0);
         model.body.setRotation(AngleHelper.rad(5), AngleHelper.rad(-57.6), 0);
 
-        model.rightArm.setPos(-2.5f, 1, -6.5f);
+        model.rightArm.setPos(-2.5f, 2, -6.5f);
         model.rightArm.setRotation(AngleHelper.rad(-90), 0, AngleHelper.rad(90));
 
-        model.leftArm.setPos(4.5f, 3, 6);
+        model.leftArm.setPos(4.5f, 4, 6);
         model.leftArm.setRotation(AngleHelper.rad(-72.5), AngleHelper.rad(-10), 0);
 
         //model.rightLeg.setPos((float) -1.5,0, (float) -3.5);
         model.rightLeg.x = (float) -1.5;
-        model.rightLeg.y = 11;
+        model.rightLeg.y = 12;
         model.rightLeg.z = (float) -3.5;
         model.rightLeg.setRotation(AngleHelper.rad(-10), AngleHelper.rad(5), 0);
 
         model.leftLeg.z = 3;
-        model.leftLeg.y = 11;
+        model.leftLeg.y = 12;
         model.leftLeg.setRotation(AngleHelper.rad(-2), (float) AngleHelper.rad(-67.5), AngleHelper.rad(-10));
     }
 
     public static void SetStanceForm7(Boolean lefty, HumanoidModel<?> model) {
-        model.head.y = -1;
-        model.hat.y = -1;
-
         model.body.setRotation(0, AngleHelper.rad(-57.5), 0);
-        model.body.setPos(0, -1, 0);
 
-
-
-        model.rightArm.setPos(-5, 3, -5);
+        model.rightArm.setPos(-5, 4, -5);
         model.rightArm.setRotation(0, 0, AngleHelper.rad(-125));
 
-        model.leftArm.setPos(5, 1, 6);
+        model.leftArm.setPos(5, 2, 6);
         model.leftArm.setRotation(AngleHelper.rad(-100), AngleHelper.rad(12), AngleHelper.rad(-3));
 
 
 
-        model.rightLeg.setPos(-2, 11, -2);
+        model.rightLeg.setPos(-2, 12, -2);
         model.rightLeg.setRotation(AngleHelper.rad(7.5), 0, 0);
 
-        model.leftLeg.setPos(2, 11, 2);
+        model.leftLeg.setPos(2, 12, 2);
         model.leftLeg.setRotation(AngleHelper.rad(-2), AngleHelper.rad(-67.5), 0);
 
     }
