@@ -1,22 +1,15 @@
 package com.epxzzy.epxzzysabers.mixin.client;
 
-import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.world.entity.player.Player;
-import org.spongepowered.asm.mixin.Final;
+import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import com.epxzzy.epxzzysabers.rendering.PlayerPoseRouter;
-
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.world.entity.LivingEntity;
 
 @Mixin(LocalPlayer.class)
 public class LocalPlayerMixin {

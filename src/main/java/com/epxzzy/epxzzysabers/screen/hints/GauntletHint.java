@@ -24,6 +24,7 @@ public class GauntletHint extends HudHint{
         PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) play;
 
         boolean surging = SaberGauntlet.checkForSaberCharge(play, true);
+        boolean creative = play.isCreative();
 
         boolean ShasRightItem = LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.SABER_GAUNTLET.get());
         boolean SusingItem = play.isUsingItem()&&ShasRightItem;
@@ -44,7 +45,7 @@ public class GauntletHint extends HudHint{
             pGuiGraphics.blit(GAUNTLET, rotx, roty, 16, frame, l, 8, 64, 48);
         }
 
-        if (surgeHint) {
+        if (surgeHint && !creative) {
             pGuiGraphics.blit(GAUNTLET, rotx, roty, 32, frame, 16, 8, 64, 48);
         }
     }

@@ -19,33 +19,27 @@ import com.epxzzy.epxzzysabers.util.TagHelper;
 //import net.createmod.catnip.levelWrappers.WrappedClientLevel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.level.LevelEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 
-@Mod.EventBusSubscriber(Dist.CLIENT)
-public class ClientEvents {
-    public static ShaderInstance glowingShader;
+public class Events {
 
     @Mod.EventBusSubscriber(modid = epxzzySabers.MOD_ID, value = Dist.CLIENT)
     public static class ClientForgeEvents {
-        //private static long bengignhold = 0;
         private static boolean wasUp = false;
 
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event) {
             if (KeyBinding.SABER_ABILITY_KEY.consumeClick()) {
-                //throw the saber the actually
-                //Minecraft.getInstance().player.connection.send(new ServerboundRotarySaberAbilityPacket());
                 SaberMessages.sendToServer(new ServerboundSaberAbilityPacket());
             }
             Player player = Minecraft.getInstance().player;
@@ -64,6 +58,46 @@ public class ClientEvents {
             }
 
         }
+
+        @SubscribeEvent
+        public static void MouseClicksWhileStancingSmh(InputEvent.InteractionKeyMappingTriggered event) {
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.player == null) return;
+            if (((PlayerHelperLmao) mc.player).getSaberStanceDown()) {
+                event.setCanceled(true);
+                event.setSwingHand(false); // arm swing
+            }
+        }
+
+        @SubscribeEvent
+        public static void onTick(TickEvent.ClientTickEvent event) {
+            AnimationTickHolder.tick();
+
+            if (!ScrollValueHandler.isGameActive())
+                return;
+
+            if (event.phase == TickEvent.Phase.START) {
+                return;
+            }
+            ScrollValueHandler.tick();
+        }
+
+        @SubscribeEvent
+        public static void onLoadWorld(LevelEvent.Load event) {
+            LevelAccessor world = event.getLevel();
+            if (world.isClientSide() && world instanceof ClientLevel){ //&& !(world instanceof WrappedClientLevel)) {
+                AnimationTickHolder.reset();
+            }
+        }
+
+        @SubscribeEvent
+        public static void onUnloadWorld(LevelEvent.Unload event) {
+            if (!event.getLevel()
+                    .isClientSide())
+                return;
+            AnimationTickHolder.reset();
+        }
+
     }
 
     @Mod.EventBusSubscriber(modid = epxzzySabers.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -80,38 +114,18 @@ public class ClientEvents {
             event.registerLayerDefinition(SaberModelLayers.THROWN_ROTART_SABER_BLADE, ThrownRotarySaberBladeModel::createBodyLayer);
             event.registerLayerDefinition(SaberModelLayers.PLASMA_BOLT_LAYER, PlasmaBoltModel::createBodyLayer);
 
-
-        }
-    }
-    @SubscribeEvent
-    public static void onTick(TickEvent.ClientTickEvent event) {
-        AnimationTickHolder.tick();
-
-        if (!ScrollValueHandler.isGameActive())
-            return;
-
-        if (event.phase == TickEvent.Phase.START) {
-            return;
-        }
-        ScrollValueHandler.tick();
-    }
-
-    @SubscribeEvent
-    public static void onLoadWorld(LevelEvent.Load event) {
-        LevelAccessor world = event.getLevel();
-        if (world.isClientSide() && world instanceof ClientLevel){ //&& !(world instanceof WrappedClientLevel)) {
-            AnimationTickHolder.reset();
         }
     }
 
-    @SubscribeEvent
-    public static void onUnloadWorld(LevelEvent.Unload event) {
-        if (!event.getLevel()
-                .isClientSide())
-            return;
-        AnimationTickHolder.reset();
+    @Mod.EventBusSubscriber(modid = epxzzySabers.MOD_ID)
+    public static class CommonForgeEvents {
+        @SubscribeEvent
+        public static void DisableSaberCrithits(CriticalHitEvent event) {
+            if (TagHelper.checkActiveSaber(event.getEntity(), true)) {
+                event.setResult(Event.Result.DENY);
+            }
+        }
     }
-
 }
 
 

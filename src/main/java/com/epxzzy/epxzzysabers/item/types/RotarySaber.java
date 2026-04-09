@@ -3,19 +3,15 @@ package com.epxzzy.epxzzysabers.item.types;
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.SaberItems;
 import com.epxzzy.epxzzysabers.item.Protosaber;
-import com.epxzzy.epxzzysabers.networking.SaberMessages;
-import com.epxzzy.epxzzysabers.networking.packet.player.ClientboundPlayerStancePacket;
 import com.epxzzy.epxzzysabers.rendering.item.RotarySaberItemRenderer;
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.epxzzysabers.sound.SaberSounds;
 import com.epxzzy.epxzzysabers.util.ConfigHolder;
-import com.epxzzy.epxzzysabers.util.LevelHelper;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.level.ServerPlayerGameMode;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -30,7 +26,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
 import java.util.function.Consumer;
 
 public class RotarySaber extends Protosaber {
@@ -169,9 +164,6 @@ public class RotarySaber extends Protosaber {
         super.onStopUsing(pStack, pLivingEntity, count);
     }
 
-    public static boolean checkForSaberBlock(Player Entityy) {
-        return LevelHelper.EntityBlockingWithActiveItem(Entityy, SaberItems.ROTARY_SABER.get());
-    }
 
     public static boolean checkForSaberFly(Entity Entityy) {
         if (Entityy instanceof Player) {

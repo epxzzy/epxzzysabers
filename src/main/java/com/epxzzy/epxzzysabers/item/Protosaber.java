@@ -9,9 +9,9 @@ import com.epxzzy.epxzzysabers.rendering.foundation.CustomRenderedItemModelRende
 import com.epxzzy.epxzzysabers.rendering.foundation.SimpleCustomRenderer;
 import com.epxzzy.epxzzysabers.util.ColourConverter;
 import com.epxzzy.epxzzysabers.misc.ProtosaberItemRenderer;
-import com.epxzzy.epxzzysabers.rendering.playerposerenderers.BladeStance;
 import com.epxzzy.epxzzysabers.sound.SaberSounds;
 import com.epxzzy.epxzzysabers.util.LevelHelper;
+import com.epxzzy.epxzzysabers.util.TagHelper;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
@@ -22,6 +22,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -43,6 +44,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -143,23 +145,11 @@ public class Protosaber extends Item {
         );
     }
 
-    public static void addFlourishTag(LivingEntity pEntity, ItemStack pStack) {
+    public static void getFlourishTag(LivingEntity pEntity, ItemStack pStack) {
         if (!pEntity.level().isClientSide() && pEntity instanceof Player pPlayer) {
-            int random = (int) ((Math.random() * 3) + 1);
-
             int methodic = KewlFightsOrchestrator.DetermineParryAnimation((Player) pPlayer);
             //epxzzySabers.LOGGER.info("FLOURRRISHHH " + methodic);
             SaberMessages.fuckingAnnounce(new ClientboundPlayerFlourishPacket(pPlayer.getId(), methodic), pPlayer);
-
-            //pStack.getOrCreateTag().getCompound("display").putInt("flourish", methodic);
-        }
-    }
-
-    public static void removeFlourishTag(Entity pEntity, ItemStack pStack) {
-        if (pEntity instanceof Player player && !player.swinging) {
-            if (!pEntity.level().isClientSide()) {
-                // pStack.getOrCreateTag().getCompound("display").remove("flourish");
-            }
         }
     }
 
@@ -212,8 +202,8 @@ public class Protosaber extends Item {
         }
 
         if (compoundtag.getInt("colour") == 0) {
-            //setColor(pStack, 65280);
-            return 65280;
+            //return 65280;
+            return 0;
         }
 
         return Objects.requireNonNull(pStack.getTagElement("display")).getInt("colour");
@@ -221,20 +211,6 @@ public class Protosaber extends Item {
 
     public static boolean isGay(ItemStack pStack) {
         return Objects.requireNonNull(pStack.getTagElement("display")).getBoolean("gay");
-    }
-
-    public void clearColor(ItemStack pStack) {
-        CompoundTag compoundtag = pStack.getTagElement("display");
-        if (compoundtag != null && compoundtag.contains("colour")) {
-            compoundtag.remove("colour");
-        }
-        pStack.setTag(compoundtag);
-    }
-
-    public static void setColor(ItemStack pStack, int pColor) {
-        CompoundTag asdf = pStack.getOrCreateTagElement("display");
-        asdf.putInt("colour", pColor);
-        pStack.setTag(asdf);
     }
 
     @Override
@@ -301,7 +277,7 @@ public class Protosaber extends Item {
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
         if(!(entity instanceof Player pPlayer)) return false;
         if ((!pPlayer.level().isClientSide) && pPlayer.swingTime >= 3) {
-            addFlourishTag(entity, stack);
+            getFlourishTag(entity, stack);
         }
 
         if(entity.level().isClientSide){
@@ -314,6 +290,23 @@ public class Protosaber extends Item {
     }
     //else return false;
     //}
+
+
+    @Override
+    public Component getName(ItemStack pStack) {
+        if(TagHelper.isActive(pStack)) {
+            int[] RGB = ColourConverter.PortedDecimaltoRGB(getColor(pStack));
+            int[] HSL = ColourConverter.RGBtoHSL(RGB[0], RGB[1], RGB[2]);
+            HSL[2] = HSL[2] > 30 ? HSL[2]: 30 ;
+            int L = (int) Mth.clamp((double) HSL[2] + (HSL[2]*0.25) * (float) (Math.sin((double) System.currentTimeMillis() / 1000)), 0, 100);
+            return super.getName(pStack)
+                    .copy()
+                    .withStyle(style ->
+                            style.withColor(ColourConverter.portedRGBtoDecimal(ColourConverter.HSLtoRGB(HSL[0], HSL[1], L)))
+                    );
+        }
+        return super.getName(pStack);
+    }
 
     @Override
     public boolean isFireResistant() {
@@ -341,41 +334,6 @@ public class Protosaber extends Item {
 
     public boolean isValidRepairItem(@NotNull ItemStack pToRepair, @NotNull ItemStack pRepair) {
         return false;
-    }
-
-    public static BladeStance getStance(Entity Entityy) {
-        if (Entityy instanceof LivingEntity) {
-            return getStance(((LivingEntity) Entityy).getMainHandItem());
-        }
-        return BladeStance.FORM0;
-    }
-    public static BladeStance getStance(ItemStack stacc) {
-        int tagid = 0;
-
-        tagid = stacc.getOrCreateTag().getCompound("display").getInt("stance");
-
-        BladeStance returnee;
-        switch (tagid) {
-            case 1 -> returnee = BladeStance.FORM1;
-            case 2 -> returnee = BladeStance.FORM2;
-            case 3 -> returnee = BladeStance.FORM3;
-            case 4 -> returnee = BladeStance.FORM4;
-            case 5 -> returnee = BladeStance.FORM5;
-            case 6 -> returnee = BladeStance.FORM6;
-            case 7 -> returnee = BladeStance.FORM7;
-
-            default -> returnee = BladeStance.FORM0;
-        }
-        return returnee;
-    }
-
-    public static boolean checkForSaberBlock(Entity Entityy) {
-        return LevelHelper.EntityBlockingWithActiveItem(Entityy, SaberItems.Protosaber.get());
-    }
-
-
-    public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand) {
-        return LevelHelper.EntityEquippedActiveItem(Entityy, Mainhand, SaberItems.Protosaber.get());
     }
 
     @Override

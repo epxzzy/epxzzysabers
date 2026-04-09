@@ -2,7 +2,6 @@ package com.epxzzy.epxzzysabers.util;
 
 public class ColourConverter {
 
-    // Convert decimal color to RGB
     public static int[] PortedDecimaltoRGB(int decimalColor) {
         int red = (decimalColor >> 16) & 0xFF;
         int green = (decimalColor >> 8) & 0xFF;
@@ -114,21 +113,5 @@ public class ColourConverter {
             return 255;
         else
             return 255 - progress;
-    }
-
-
-    public static void main(String[] args) {
-        /* Example usage
-        int decimalColor = 0xAABBCC;
-        int[] rgb = decimalToRGB(decimalColor);
-        System.out.println("RGB: " + rgb[0] + ", " + rgb[1] + ", " + rgb[2]);
-
-        float h = 120.0f; // Hue
-        float s = 0.5f;   // Saturation
-        float l = 0.5f;   // Lightness
-        int decimalColorFromHSL = hslToDecimal(h, s, l);
-        System.out.println("Decimal from HSL: " + Integer.toHexString(decimalColorFromHSL).toUpperCase());
-
-         */
     }
 }

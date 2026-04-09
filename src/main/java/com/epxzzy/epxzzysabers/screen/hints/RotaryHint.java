@@ -2,7 +2,6 @@ package com.epxzzy.epxzzysabers.screen.hints;
 
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.SaberItems;
-import com.epxzzy.epxzzysabers.item.types.RotarySaber;
 import com.epxzzy.epxzzysabers.util.ConfigHolder;
 import com.epxzzy.epxzzysabers.util.LevelHelper;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
@@ -22,8 +21,8 @@ public class RotaryHint extends HudHint{
         Player play = that.minecraft.player;
         PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) play;
 
-        boolean flying = play.getAbilities().flying && !play.isCreative();
-
+        boolean creative = play.isCreative();
+        boolean flyingNotCreative = play.getAbilities().flying && !creative;
         boolean RotaryhasRightItem = LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.ROTARY_SABER.get());
         boolean RotusingItem = play.isUsingItem()&& RotaryhasRightItem;
 
@@ -32,14 +31,15 @@ public class RotaryHint extends HudHint{
 
         boolean flyPossible = Rduration == 0.0F &&Rcooldown == 1.0F && !RotusingItem;
 
-        boolean flyHint = flyPossible && !flying && LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.ROTARY_SABER.get());
+        boolean flyHint = flyPossible && !flyingNotCreative && LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.ROTARY_SABER.get());
 
-        if (Rduration >= 0.0F && flying) {
+        if (Rduration >= 0.0F && flyingNotCreative) {
             int l = (int)(Rduration* 16.0F);
             pGuiGraphics.blit(ROTARY, rotx, roty, 0, frame, 16, 8, 64, 48);
             pGuiGraphics.blit(ROTARY, rotx, roty, 48, frame, l, 8, 64, 48);
         }
-        if (Rcooldown < 1.0F && !flying) {
+        if (Rcooldown < 1.0F && !flyingNotCreative) {
+            if(creative) return;
             int l = (int)(Rcooldown * 16.0F);
             pGuiGraphics.blit(ROTARY, rotx, roty, 0, frame, 16, 8, 64, 48);
             pGuiGraphics.blit(ROTARY, rotx, roty, 16, frame, l, 8, 64, 48);

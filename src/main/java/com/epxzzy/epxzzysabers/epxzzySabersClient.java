@@ -22,7 +22,7 @@ public class epxzzySabersClient {
     public static void onClientSetup(FMLClientSetupEvent event) {
     }
     public static void itemTints(RegisterColorHandlersEvent.Item event) {
-        event.register((stack, tint) -> tint > 0 ? -1 : Protosaber.getColor(stack), SaberItems.Protosaber.get());
+        //event.register((stack, tint) -> tint > 0 ? -1 : Protosaber.getColor(stack), SaberItems.Protosaber.get());
         //event.register((stack, tint) -> tint > 0 ? -1 : protosaber.getColor(stack), SaberItems.protosabur2.get());
         event.register((stack, tint) -> tint > 0 ? -1 : SingleBladed.getColor(stack), SaberItems.SINGLE_BLADED_SABER.get());
         event.register((stack, tint) -> tint > 0 ? -1 : Protosaber.getColor(stack), SaberItems.DUAL_BLADED_SABER.get());

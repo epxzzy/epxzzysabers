@@ -123,9 +123,7 @@ public class SliderWidget extends AbstractSliderButton {
 
         float pitch = (float) (this.getValue() / (float) maxValue);
         if (this.value != this.maxValue && this.value != this.minValue ) {
-
             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_HAT.get(), pitch, 0.25f));
-
         }
 
         this.updateMessage();

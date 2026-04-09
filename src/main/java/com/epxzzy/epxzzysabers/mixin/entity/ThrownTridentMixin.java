@@ -4,6 +4,7 @@ package com.epxzzy.epxzzysabers.mixin.entity;
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.item.types.SingleBladed;
+import com.epxzzy.epxzzysabers.util.LevelHelper;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.projectile.ThrownTrident;
@@ -23,9 +24,9 @@ public class ThrownTridentMixin {
     )
     private void CustomOnHitEntity(EntityHitResult pResult, CallbackInfo ci){
         ThrownTrident that = ((ThrownTrident) (Object) this);
-        if(Protosaber.checkForSaberBlock(pResult.getEntity())|| SingleBladed.checkForSaberBlock(pResult.getEntity())){
+        if(LevelHelper.EntityBlockingWithActiveItem(pResult.getEntity())){
             that.setDeltaMovement(that.getDeltaMovement().multiply(-0.01D, -0.1D, -0.01D));
-            epxzzySabers.LOGGER.info("trident understands player is blocking");
+            epxzzySabers.LOGGER.info("epxzzysabers: trident understands player is blocking");
             float f1 = 1.0F;
             SoundEvent soundevent = SoundEvents.TRIDENT_HIT;
             that.playSound(soundevent, 1.0f, 1.0F);

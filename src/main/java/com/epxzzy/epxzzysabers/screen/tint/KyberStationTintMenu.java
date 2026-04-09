@@ -2,6 +2,7 @@ package com.epxzzy.epxzzysabers.screen.tint;
 
 
 import com.epxzzy.epxzzysabers.block.SaberBlocks;
+import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.screen.SaberMenuTypes;
 import com.epxzzy.epxzzysabers.screen.components.KyberMenuBase;
 import com.epxzzy.epxzzysabers.sound.SaberSounds;
@@ -45,19 +46,15 @@ public class KyberStationTintMenu extends KyberMenuBase {
     private final Container outputContainer = new SimpleContainer(1) {
         public void setChanged() {
             super.setChanged();
-            //KyberStationTintMenu.this.slotUpdateListener.run();
         }
     };
+
     public KyberStationTintMenu(int pContainerId, Inventory inv, FriendlyByteBuf ffff) {
         this(pContainerId, inv, BlockPos.ZERO, ContainerLevelAccess.NULL);
     }
 
-    public KyberStationTintMenu(int pContainerId, Inventory inv,BlockPos pos, FriendlyByteBuf ffff) {
-        this(pContainerId, inv, pos, ContainerLevelAccess.NULL);
-    }
-
-    public KyberStationTintMenu(int pContainerId, Inventory playerinv, BlockPos pos , final ContainerLevelAccess pAccess) {
-        super(SaberMenuTypes.SKREEN_TINT.get(),pos, pContainerId);
+    public KyberStationTintMenu(int pContainerId, Inventory playerinv, BlockPos pos, final ContainerLevelAccess pAccess) {
+        super(SaberMenuTypes.SKREEN_TINT.get(), pos, pContainerId);
         checkContainerSize(playerinv, 2);
         playerinv.player.level();
         this.access = pAccess;
@@ -87,7 +84,6 @@ public class KyberStationTintMenu extends KyberMenuBase {
                 pAccess.execute((a, b) -> {
                     a.playSound((Player) null, b, SaberSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
-                //epxzzySabers.LOGGER.debug("taken??");
                 super.onTake(pPlayer, stacc);
             }
         });
@@ -106,136 +102,25 @@ public class KyberStationTintMenu extends KyberMenuBase {
         return !this.inputContainer.getItem(0).isEmpty() ^ !this.inputContainer.getItem(1).isEmpty();
     }
 
-    public void resetSlotPose() {
-        int InputIndex = this.slots.indexOf(this.input_slot);
-        int CostIndex = this.slots.indexOf(this.krystal_slot);
-        int resutlIndex = this.slots.indexOf(this.resultSlot);
-
-        ItemStack InputItem = this.input_slot.getItem();
-        ItemStack CostItem = this.krystal_slot.getItem();
-
-        this.input_slot = new Slot(this.inputContainer, 0, 8, 59) {
-            @Override
-            public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(SaberTags.Items.DYEABLE_LIGHTSABER);
-            }
-        };
-        this.krystal_slot = new Slot(this.inputContainer, 1, 44, 59) {
-            @Override
-            public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(SaberTags.Items.KYBER_CRYSTAL);
-            }
-
-        };
-        this.resultSlot = new Slot(this.outputContainer, 0, 152, 59) {
-            public boolean mayPlace(@NotNull ItemStack stacc) {
-                return false;
-            }
-
-            public void onTake(@NotNull Player pPlayer, @NotNull ItemStack stacc) {
-                KyberStationTintMenu.this.input_slot.remove(1);
-                KyberStationTintMenu.this.krystal_slot.remove(1);
-                access.execute((a, b) -> {
-                    a.playSound((Player) null, b, SaberSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
-                });
-                //epxzzySabers.LOGGER.debug("taken??");
-                super.onTake(pPlayer, stacc);
-            }
-        };
-
-        this.slots.set(InputIndex, this.input_slot);
-        this.slots.set(CostIndex, this.krystal_slot);
-
-        this.slots.get(InputIndex).set(InputItem);
-        this.slots.get(CostIndex).set(CostItem);
-
-        this.slots.set(resutlIndex, this.resultSlot);
-
-    }
-
-    public void stanceSlotPose() {
-        int InputIndex = this.slots.indexOf(this.input_slot);
-        int CostIndex = this.slots.indexOf(this.krystal_slot);
-        int resutlIndex = this.slots.indexOf(this.resultSlot);
-
-        ItemStack InputItem = this.input_slot.getItem();
-        ItemStack CostItem = this.krystal_slot.getItem();
-
-        this.input_slot = new Slot(this.inputContainer, 0, 7, 8) {
-            @Override
-            public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(SaberTags.Items.DYEABLE_LIGHTSABER);
-            }
-        };
-        this.krystal_slot = new Slot(this.inputContainer, 1, 7, 28) {
-            @Override
-            public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(SaberTags.Items.KYBER_CRYSTAL);
-            }
-
-        };
-        this.resultSlot = new Slot(this.outputContainer, 0, 153, 8) {
-            public boolean mayPlace(@NotNull ItemStack stacc) {
-                return false;
-            }
-
-            public void onTake(@NotNull Player pPlayer, @NotNull ItemStack stacc) {
-                KyberStationTintMenu.this.input_slot.remove(1);
-                KyberStationTintMenu.this.krystal_slot.remove(1);
-                access.execute((a, b) -> {
-                    a.playSound((Player) null, b, SaberSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
-                });
-                //epxzzySabers.LOGGER.debug("taken??");
-                super.onTake(pPlayer, stacc);
-            }
-        };
-
-        this.slots.set(InputIndex, this.input_slot);
-        this.slots.set(CostIndex, this.krystal_slot);
-
-        this.slots.get(InputIndex).set(InputItem);
-        this.slots.get(CostIndex).set(CostItem);
-
-        this.slots.set(resutlIndex, this.resultSlot);
-    }
-
-    public Slot slotsHelper(int indexprob, Slot pSlot) {
-        this.slots.add(indexprob, pSlot);
-        return pSlot;
-    }
-
-    ;
-
-
     public boolean setItemColour(int[] colour, boolean gay) {
-        if ((this.ColourValueIndexes[2].get() == colour[0] && this.ColourValueIndexes[1].get() == colour[1] && this.ColourValueIndexes[0].get() == colour[2]) && this.gay.get() == (gay?1:0)) {
-            //if(dd(gay ? 1 : 0)){}
-
+        if ((
+                this.ColourValueIndexes[2].get() == colour[0] &&
+                this.ColourValueIndexes[1].get() == colour[1] &&
+                this.ColourValueIndexes[0].get() == colour[2]
+           ) && this.gay.get() == (gay ? 1 : 0)
+        ) {
             return false;
-        /*} else if ((gay && isInputGay()) || (!gay && !isInputGay())) {
-            return false;
-
-         */
         } else {
             this.gay.set(gay ? 1 : 0);
             this.ColourValueIndexes[0].set(colour[0]);
             this.ColourValueIndexes[1].set(colour[1]);
             this.ColourValueIndexes[2].set(colour[2]);
 
-            //this.ColourValueIndexes[0].set(a);
-            //this.ColourValueIndexes[1].set(b);
-            //this.ColourValueIndexes[2].set(c);
-            //this.broadcastChanges();
             //epxzzySabers.LOGGER.debug("colours have been set as: " + colour[0] + " " + colour[1] + " " + colour[2]);
             this.setupResultSlot(colour[0], colour[1], colour[2], (this.gay.get() == 1));
             return true;
 
         }
-        /*
-        if(a==0 && b==0 && c==0){
-            //return;
-        }
-         */
     }
 
     @Override
@@ -300,23 +185,14 @@ public class KyberStationTintMenu extends KyberMenuBase {
         ItemStack krystal = this.krystal_slot.getItem();
         if (!saber.isEmpty()) {
             if (!krystal.isEmpty()) {
-                //epxzzySabers.LOGGER.debug("THE MERGE");
+                epxzzySabers.LOGGER.debug("tint menu: huh... the second slot is full? well too bad that doesnt do anything special");
                 return;
             } else {
-                //epxzzySabers.LOGGER.debug("THE FORGE");
-                /*
-                setupResultSlot(
-                        this.ColourValueIndexes[0].get(),
-                        this.ColourValueIndexes[1].get(),
-                        this.ColourValueIndexes[2].get()
-                );
-                 */
                 this.broadcastChanges();
-
                 return;
             }
         } else if (!krystal.isEmpty() && saber.isEmpty()) {
-            //epxzzySabers.LOGGER.debug("THE ZA ZA KRYSTALLL");
+            epxzzySabers.LOGGER.debug("tint menu: only the second slot is full? what are you trying to achieve her e?");
             return;
         }
         this.resultSlot.set(ItemStack.EMPTY);
@@ -324,32 +200,16 @@ public class KyberStationTintMenu extends KyberMenuBase {
     }
 
     public void setupResultSlot(int r, int g, int b, boolean gay) {
-        //int colour;
-        //if(isColourCached){
-        //    colour = this.CachedColour;
-        //this.resultSlot.set(this.lastCachedItemStacc);
-        //return;
-        //}
-        //else {
         int colour = ColourConverter.portedRGBtoDecimal(new int[]{r, g, b});
-        //    this.CachedColour = colour;
-        //    this.isColourCached = true;
-        //}
 
         ItemStack base = this.input_slot.getItem().copy();
         CompoundTag taggussy = base.getOrCreateTag();
-
-        //epxzzySabers.LOGGER.debug("crafting colours " + r + " " + g + " " + b);
 
         taggussy.getCompound("display").putInt("colour", colour);
         taggussy.getCompound("display").putBoolean("gay", gay);
         base.setTag(taggussy);
 
         this.broadcastChanges();
-        //if(this.lastCachedItemStacc == null){
-        //    lastCachedItemStacc = base;
-        //}
-        //this.outputContainer.setItem(base);
         this.resultSlot.set(base);
     }
 

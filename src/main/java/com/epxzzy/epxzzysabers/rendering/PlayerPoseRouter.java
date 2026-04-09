@@ -138,10 +138,6 @@ public class PlayerPoseRouter {
         tempDebugVar = flourish == tempDebugVar?tempDebugVar:flourish;
     }
 
-    private static void setBladedStance(Player player, HumanoidModel<?> model) {
-        PlayerStanceRenderer.setPose(Protosaber.getStance(player), false, model);
-    }
-
     private static void setBladedStance(Player player, HumanoidModel<?> model, int form) {
         PlayerStanceRenderer.setStance(form, false, model);
     }

@@ -190,6 +190,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
         if (pKeyCode == GLFW.GLFW_KEY_PERIOD) {
             GAY_MODE = !GAY_MODE;
+            epxzzySabers.LOGGER.info("tint screen: super secret colour set to" + RGB_MODE);
         }
         if (pKeyCode == GLFW.GLFW_KEY_SPACE) {
             setRGBmode();
@@ -300,7 +301,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
             BLUE_SLIDER.setValue(gur[2]);
         }
 
-        epxzzySabers.LOGGER.info("RGB MODE NOW " + RGB_MODE);
+        epxzzySabers.LOGGER.info("tint screen: rgb mode updated as " + RGB_MODE);
         UpdateServerRecipe();
 
     }

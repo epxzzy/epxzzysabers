@@ -226,10 +226,6 @@ public class SaberGauntlet extends Protosaber {
         return false;
     }
 
-    public static boolean checkForSaberBlock(Entity Entityy) {
-        return LevelHelper.EntityBlockingWithActiveItem(Entityy, SaberItems.SABER_GAUNTLET.get());
-    }
-
     public static boolean checkForSaberEquipment(Entity Entityy, boolean Mainhand) {
         return LevelHelper.EntityEquippedActiveItem(Entityy, Mainhand, SaberItems.SABER_GAUNTLET.get());
     }

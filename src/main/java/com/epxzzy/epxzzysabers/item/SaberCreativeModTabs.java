@@ -15,7 +15,7 @@ public class SaberCreativeModTabs {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, epxzzySabers.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> SABERS_TAB = CREATIVE_MODE_TABS.register("moditums",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(SaberItems.Protosaber.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(SaberItems.SABER_GAUNTLET.get()))
                     .title(Component.translatable("epxzzysabers.moditemsiglol"))
                     .displayItems((pParameters, pOutput) -> {
                         //pOutput.accept(SaberItems.Protosaber.get());
