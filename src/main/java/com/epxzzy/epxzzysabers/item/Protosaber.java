@@ -298,7 +298,7 @@ public class Protosaber extends Item {
             int[] RGB = ColourConverter.PortedDecimaltoRGB(getColor(pStack));
             int[] HSL = ColourConverter.RGBtoHSL(RGB[0], RGB[1], RGB[2]);
             HSL[2] = HSL[2] > 30 ? HSL[2]: 30 ;
-            int L = (int) Mth.clamp((double) HSL[2] + (HSL[2]*0.25) * (float) (Math.sin((double) System.currentTimeMillis() / 1000)), 0, 100);
+            int L = (int) Mth.clamp((double) HSL[2] + (HSL[2]*0.25) * (float) (Math.sin((double) System.currentTimeMillis() / 250)), 0, 100);
             return super.getName(pStack)
                     .copy()
                     .withStyle(style ->
