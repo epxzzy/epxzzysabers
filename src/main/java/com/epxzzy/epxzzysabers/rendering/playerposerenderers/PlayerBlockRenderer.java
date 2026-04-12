@@ -7,8 +7,7 @@ import net.minecraft.client.model.geom.ModelPart;
 
 public class PlayerBlockRenderer {
     public static void setPose(int Block, boolean Lefty, HumanoidModel<?> model, double lerpusy) {
-        double lerper = AnimationHelper.easeOutBack(lerpusy);
-        //double lerper = AnimationHelper.easeOutBack(lerpusy);
+        double lerper = 1;//AnimationHelper.easeOutBack(lerpusy);
 
         switch (Block) {
             //left shoulder
@@ -33,197 +32,329 @@ public class PlayerBlockRenderer {
 
     //left shoulder
     public static void SetBlock1(Boolean lefty, HumanoidModel<?> model, double lerper) {
-        double endX = 0, endY = 0, endZ = 0;
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
+        double currRX = 0, currRY = 0, currRZ =0;
+        float currPX = 0, currPY = 0, currPZ =0;
 
-        if (lefty) {
-            endX = 90;
-            endY = 50;
-            endZ = 0;
-        }
+        /*
+                  "rightrotx": "60",
+                  "rightroty": "56",
+                  "rightrotz": "-20"
+                  "rightposx": "-2",
+                  "rightposy": "0",
+                  "rightposz": "-3"
+                  "leftrotx": "72",
+                  "leftroty": "-1",
+                  "leftrotz": "6"
+                  "leftposx": "0",
+                  "leftposy": "0",
+                  "leftposz": "0"
+         */
+        currRX = (lefty?72:60) * lerper;
+        currRY = (lefty?-1:56) * lerper;
+        currRZ = (lefty?6:-20) * lerper;
 
-        if (!lefty) {
-            endX = -76;
-            endY = -50;
-            endZ = 18;
-        }
+        currPX = (lefty?arm.x:-2);
+        currPY = arm.y;
+        currPZ = (lefty?arm.z:-3);
 
-        ShieldPositionToPos(endX, endY, endZ, lefty, lerper, model);
-        //model.rightArm.setRotation(AngleHelper.rad(-76), AngleHelper.rad(-50), AngleHelper.rad(18));
+        arm.setRotation(
+                AngleHelper.rad(currRX),
+                AngleHelper.rad(currRY),
+                AngleHelper.rad(currRZ)
+        );
+        arm.setPos(
+                currPX,
+                currPY,
+                currPZ
+        );
     }
 
     //right shoulder
     public static void SetBlock2(Boolean lefty, HumanoidModel<?> model, double lerper) {
-        double endX = 0, endY = 0, endZ = 0;
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
+        double currRX = 0, currRY = 0, currRZ =0;
+        float currPX = 0, currPY = 0, currPZ =0;
 
-        if (lefty) {
-            endX = 90;
-            endY = 50;
-            endZ = 0;
-        }
+        /*
+                  "rightrotx": "72",
+                  "rightroty": "-1",
+                  "rightrotz": "-6"
+                  "rightposx": "0",
+                  "rightposy": "0",
+                  "rightposz": "0"
+                  "leftrotx": "60",
+                  "leftroty": "-56",
+                  "leftrotz": "20"
+                  "leftrotx": "2",
+                  "leftroty": "0",
+                  "leftrotz": "-3"
+         */
+        currRX = (!lefty?72:60) * lerper;
+        currRY = (!lefty?-1:-56) * lerper;
+        currRZ = (!lefty?-6:20) * lerper;
 
-        if (!lefty) {
-            endX = -54;
-            endY = -20;
-            endZ = -32;
-        }
+        currPX = (!lefty?arm.x:2);
+        currPY = arm.y;
+        currPZ = (!lefty?arm.z:-3);
 
-        ShieldPositionToPos(endX, endY, endZ, lefty, lerper, model);
-        //model.rightArm.setRotation(AngleHelper.rad(-54), AngleHelper.rad(-20), AngleHelper.rad(-32));
+        arm.setRotation(
+                AngleHelper.rad(currRX),
+                AngleHelper.rad(currRY),
+                AngleHelper.rad(currRZ)
+        );
+        arm.setPos(
+                currPX,
+                currPY,
+                currPZ
+        );
     }
 
     //left knee
     public static void SetBlock3(Boolean lefty, HumanoidModel<?> model, double lerper) {
-        double endX = 0, endY = 0, endZ = 0;
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
+        double currRX = 0, currRY = 0, currRZ =0;
+        float currPX = 0, currPY = 0, currPZ =0;
 
-        if (lefty) {
-            endX = 90;
-            endY = 50;
-            endZ = 0;
-        }
+        /*
+                  "rightrotx": "94",
+                  "rightroty": "-56",
+                  "rightrotz": "-190"
+                  "rightposx": "-2",
+                  "rightposy": "0",
+                  "rightposz": "-3"
+                  "leftrotx": "100",
+                  "leftroty": "-1",
+                  "leftrotz": "174"
+                  "leftposx": "0",
+                  "leftposy": "0",
+                  "leftposz": "0"
+         */
 
-        if (!lefty) {
-            endX = -70;
-            endY = -52;
-            endZ = 90;
-        }
+        currRX = (94) * lerper;
+        currRY = (lefty?-1:-56) * lerper;
+        currRZ = (-190) * lerper;
 
-        ShieldPositionToPos(endX, endY, endZ, lefty, lerper, model);
-        //model.rightArm.setRotation(AngleHelper.rad(-70), AngleHelper.rad(-52), AngleHelper.rad(90));
+        currPX = (!lefty?arm.x:-2);
+        currPY = arm.y;
+        currPZ = (lefty?arm.z:-3);
+
+        arm.setRotation(
+                AngleHelper.rad(currRX),
+                AngleHelper.rad(currRY),
+                AngleHelper.rad(currRZ)
+        );
+        arm.setPos(
+                currPX,
+                currPY,
+                currPZ
+        );
     }
 
     //right knee
     public static void SetBlock4(Boolean lefty, HumanoidModel<?> model, double lerper) {
-        double endX = 0, endY = 0, endZ = 0;
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
+        double currRX = 0, currRY = 0, currRZ =0;
+        float currPX = 0, currPY = 0, currPZ =0;
 
-        if (lefty) {
-            endX = 90;
-            endY = 50;
-            endZ = 0;
-        }
+        /*
+                  "rightrotx": "94",
+                  "rightroty": "-1",
+                  "rightrotz": "190"
+                  "rightposx": "0",
+                  "rightposy": "0",
+                  "rightposz": "0"
+                  "leftrotx": "94",
+                  "leftroty": "56",
+                  "leftrotz": "190"
+                  "leftposx": "2",
+                  "leftposy": "0",
+                  "leftposz": "-3"
+         */
+        currRX = (94) * lerper;
+        currRY = (!lefty?-1:-56) * lerper;
+        currRZ = (190) * lerper;
 
-        if (!lefty) {
-            endX = -42;
-            endY = 50;
-            endZ = -80;
-        }
+        currPX = (!lefty?arm.x:2);
+        currPY = arm.y;
+        currPZ = (!lefty?arm.z:-3);
 
-        ShieldPositionToPos(endX, endY, endZ, lefty, lerper, model);
-        //model.rightArm.setRotation(AngleHelper.rad(-42), AngleHelper.rad(50), AngleHelper.rad(-80));
+        arm.setRotation(
+                AngleHelper.rad(currRX),
+                AngleHelper.rad(currRY),
+                AngleHelper.rad(currRZ)
+        );
+        arm.setPos(
+                currPX,
+                currPY,
+                currPZ
+        );
     }
 
     //left abdomen
     public static void SetBlock5(Boolean lefty, HumanoidModel<?> model, double lerper) {
-        double endX = 0, endY = 0, endZ = 0;
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
+        double currRX = 0, currRY = 0, currRZ =0;
+        float currPX = 0, currPY = 0, currPZ =0;
 
-        if (lefty) {
-            endX = 90;
-            endY = 50;
-            endZ = 0;
-        }
+        /*
+                  "rightrotx": "70",
+                  "rightroty": "-56",
+                  "rightrotz": "-190"
+                  "rightposx": "-2",
+                  "rightposy": "0",
+                  "rightposz": "-3"
+                  "leftrotx": "70",
+                  "leftroty": "-1",
+                  "leftrotz": "150"
+                  "leftposx": "0",
+                  "leftposy": "0",
+                  "leftposz": "0"
+         */
+        currRX = (70) * lerper;
+        currRY = (lefty?-1:-56) * lerper;
+        currRZ = (lefty?150:-190) * lerper;
 
-        if (!lefty) {
-            endX = -100;
-            endY = -65;
-            endZ = 64;
-        }
+        currPX = (lefty?arm.x:-2);
+        currPY = arm.y;
+        currPZ = (lefty?arm.z:-3);
 
-        ShieldPositionToPos(endX, endY, endZ, lefty, lerper, model);
-        //model.rightArm.setRotation(AngleHelper.rad(-100), AngleHelper.rad(-65), AngleHelper.rad(64));
+        arm.setRotation(
+                AngleHelper.rad(currRX),
+                AngleHelper.rad(currRY),
+                AngleHelper.rad(currRZ)
+
+        );
+
+        arm.setPos(
+                currPX,
+                currPY,
+                currPZ
+        );
     }
 
     //right abdomen
     public static void SetBlock6(Boolean lefty, HumanoidModel<?> model, double lerper) {
-        double endX = 0, endY = 0, endZ = 0;
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
+        double currRX = 0, currRY = 0, currRZ =0;
+        float currPX = 0, currPY = 0, currPZ =0;
 
-        if (lefty) {
-            endX = 90;
-            endY = 50;
-            endZ = 0;
-        }
+        /*
+                  "rightrotx": "70",
+                  "rightroty": "-1",
+                  "rightrotz": "-150"
+                  "rightposx": "0",
+                  "rightposy": "0",
+                  "rightposz": "0"
+                  "leftrotx": "70",
+                  "leftroty": "56",
+                  "leftrotz": "190"
+                  "leftposx": "2",
+                  "leftposy": "0",
+                  "leftposz": "-3"
+         */
+        currRX = (70) * lerper;
+        currRY = (!lefty?-1:56) * lerper;
+        currRZ = (!lefty?-150:190) * lerper;
 
-        if (!lefty) {
-            endX = -65;
-            endY = -22;
-            endZ = -172;
-        }
+        currPX = (!lefty?arm.x:2);
+        currPY = arm.y;
+        currPZ = (!lefty?arm.z:-3);
 
-        ShieldPositionToPos(endX, endY, endZ, lefty, lerper, model);
-        //model.rightArm.setRotation(AngleHelper.rad(-65), AngleHelper.rad(-22), AngleHelper.rad(-172));
+        arm.setRotation(
+                AngleHelper.rad(currRX),
+                AngleHelper.rad(currRY),
+                AngleHelper.rad(currRZ)
+
+        );
+
+        arm.setPos(
+                currPX,
+                currPY,
+                currPZ
+        );
     }
 
     //balls
     public static void SetBlock7(Boolean lefty, HumanoidModel<?> model, double lerper) {
-        double endX = 0, endY = 0, endZ = 0;
+        ModelPart arm = lefty? model.leftArm:model.rightArm;
+        double currRX = 0, currRY = 0, currRZ =0;
+        float currPX = 0, currPY = 0, currPZ =0;
 
-        if (lefty) {
-            endX = 90;
-            endY = 50;
-            endZ = 0;
-        }
+        /*
+                  "rightrotx": "74",
+                  "rightroty": "66",
+                  "rightrotz": "104"
+                  "rightposx": "0",
+                  "rightposy": "-2",
+                  "rightposz": "0"
+                  "leftrotx": "74",
+                  "leftroty": "-66",
+                  "leftrotz": "-104"
+                  "leftposx": "0\n",
+                  "leftposy": "-2",
+                  "leftposz": "0"
+         */
+        currRX = (74) * lerper;
+        currRY = (lefty?-66:66) * lerper;
+        currRZ = (lefty?-104:104) * lerper;
 
-        if (!lefty) {
-            endX = -70;
-            endY = -65;
-            endZ = 85;
-        }
+        currPX = (arm.x);
+        currPY = (2);
+        currPZ = (arm.z);
 
-        ShieldPositionToPos(endX, endY, endZ, lefty, lerper, model);
-        //model.rightArm.setRotation(AngleHelper.rad(-70), AngleHelper.rad(-65), AngleHelper.rad(85));
+        arm.setRotation(
+                AngleHelper.rad(currRX),
+                AngleHelper.rad(currRY),
+                AngleHelper.rad(currRZ)
+
+        );
+
+        arm.setPos(
+                currPX,
+                currPY,
+                currPZ
+        );
     }
 
     //head
     public static void SetBlock8(Boolean lefty, HumanoidModel<?> model, double lerper) {
-        double endX = 0, endY = 0, endZ = 0;
-
-        if (lefty) {
-            endX = 90;
-            endY = 50;
-            endZ = 0;
-        }
-
-        if (!lefty) {
-            endX = -80;
-            endY = 42;
-            endZ = 85;
-        }
-
-        ShieldPositionToPos(endX, endY, endZ, lefty, lerper, model);
-        //model.rightArm.setRotation(AngleHelper.rad(-80), AngleHelper.rad(42.5), AngleHelper.rad(85));
-    }
-
-
-    public static void ShieldPositionToPos(double x, double y, double z, boolean lefty, double lerper, HumanoidModel<?> model) {
         ModelPart arm = lefty ? model.leftArm : model.rightArm;
-        double startX = 1, startY = 1, startZ = 1,
-                currX = 0, currY = 0, currZ = 0;
-        if (lefty) {
-            startX = model.leftArm.xRot * 0.5F - 0.9424779F;
-            startY = (-(float) Math.PI / 6F);
+        double currRX = 0, currRY = 0, currRZ = 0;
+        float currPX = 0, currPY = 0, currPZ = 0;
 
-        }
+        /*
+                  "rightrotx": "72",
+                  "rightroty": "-36",
+                  "rightrotz": "72"
+                  "rightposx": "0",
+                  "rightposy": "2",
+                  "rightposz": "0"
+                  "leftrotx": "72",
+                  "leftroty": "36",
+                  "leftrotz": "-72"
+                  "leftposx": "0\n",
+                  "leftposy": "2",
+                  "leftposz": "0"
+         */
+        currRX = (72) * lerper;
+        currRY = (lefty?36:-36) * lerper;
+        currRZ = (lefty?-72:72) * lerper;
 
-
-        if (!lefty) {
-            /*
-
-            startX = model.rightArm.xRot;
-            startY = model.rightArm.yRot;
-            startZ = model.rightArm.zRot;
-
-            */
-        }
-
-        currX = !lefty? startX + (x - startX) * lerper:startX - (x + startX) * lerper;//startX + (x - startX) * lerper;
-        currY = !lefty? startY + (y - startY) * lerper:startY - (y + startY) * lerper;
-        currZ = !lefty? startZ + (z - startZ) * lerper:startZ - (z + startZ) * lerper;
-
-        //currZ = startZ + (z - startZ) * lerper;
+        currPX = (arm.x);
+        currPY = (-2);
+        currPZ = (arm.z);
 
         arm.setRotation(
-                AngleHelper.rad(currX),
-                AngleHelper.rad(currY),
-                AngleHelper.rad(currZ)
+                AngleHelper.rad(currRX),
+                AngleHelper.rad(currRY),
+                AngleHelper.rad(currRZ)
+        );
 
+        arm.setPos(
+                currPX,
+                currPY,
+                currPZ
         );
     }
 }

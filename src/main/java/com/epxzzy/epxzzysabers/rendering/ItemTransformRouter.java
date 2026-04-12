@@ -32,7 +32,7 @@ public class ItemTransformRouter {
 
     public static void transform(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay, LivingEntity entity) {
         if((entity.swinging) && TagHelper.checkMainhandActiveSaber(entity) ) {
-            if ((((PlayerHelperLmao) entity).isSaberAttacking())) return;
+            if (entity instanceof Player mypp && (((PlayerHelperLmao) mypp).isSaberAttacking())) return;
             int lerper = entity.swingTime;
             //do not override attack hit
 

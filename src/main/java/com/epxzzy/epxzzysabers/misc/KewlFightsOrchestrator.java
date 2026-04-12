@@ -29,7 +29,7 @@ public class KewlFightsOrchestrator {
         if(!ConfigHolder.KEWL_FIGHTS){
             return 0;
         }
-        int random = pPlayer.getRandom().nextInt(9) + 1;
+        int random = pPlayer.getRandom().nextInt(8) + 1;
         return old != random? random: random+1;
 
     };
