@@ -49,17 +49,19 @@ public class SaberGauntletItemRenderer extends CustomRenderedSaberModelRenderer 
 
     @Override
     protected void renderFirstPersonBlock(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        ms.mulPose(Axis.XP.rotationDegrees(50));
-        ms.mulPose(Axis.ZP.rotationDegrees(10));
+        int offhandmultip = transformType == ItemDisplayContext.FIRST_PERSON_LEFT_HAND? -1:1;
+        ms.mulPose(Axis.XP.rotationDegrees(50*offhandmultip));
+        ms.mulPose(Axis.ZP.rotationDegrees(10*offhandmultip));
         return;
     }
 
     @Override
     protected void renderSoftParry(ItemStack stack, BakedModel model, PartialItemModelRenderer renderer, ItemDisplayContext transformType,
                                    PoseStack ms, MultiBufferSource buffer, int light, int overlay,LivingEntity entity){
+        int offhandmultip = transformType == ItemDisplayContext.FIRST_PERSON_LEFT_HAND? -1:1;
         float newdur = entity.getUseItemRemainingTicks() - Protosaber.SOFT_PARRY;
         float dur = (float) stack.getUseDuration() - newdur;
-        float sinn = Mth.sin((6*dur - 0.1F) * 20F) * 30;
-        ms.mulPose(Axis.ZP.rotationDegrees( transformType == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND ?sinn-40:sinn+40));
+        float sinn = Mth.sin((6*dur - 0.1F) * 20F) * 30 * offhandmultip;
+        ms.mulPose(Axis.ZP.rotationDegrees(sinn + (40*offhandmultip)));
     };
 }

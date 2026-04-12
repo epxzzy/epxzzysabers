@@ -1,5 +1,7 @@
 package com.epxzzy.epxzzysabers.util;
 
+import java.awt.*;
+
 public class ColourConverter {
 
     public static int[] PortedDecimaltoRGB(int decimalColor) {
@@ -28,7 +30,6 @@ public class ColourConverter {
         float rPercent = r / 255f;
         float gPercent = g / 255f;
         float bPercent = b / 255f;
-
         float max = Math.max(rPercent, Math.max(gPercent, bPercent));
         float min = Math.min(rPercent, Math.min(gPercent, bPercent));
         float delta = max - min;
@@ -89,6 +90,11 @@ public class ColourConverter {
         int r = (int) Math.floor((rPrime + m) * 255);
         int g = (int) Math.floor((gPrime + m) * 255);
         int b = (int) Math.floor((bPrime + m) * 255);
+
+        //these mfs tend to go below 0 making the decimal number freaky
+        r = r<0?0:r;
+        g = g<0?0:g;
+        b = b<0?0:b;
 
         return new int[]{r, g, b};
     }

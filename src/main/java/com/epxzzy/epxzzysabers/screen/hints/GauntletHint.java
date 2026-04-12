@@ -24,7 +24,7 @@ public class GauntletHint extends HudHint{
         PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) play;
 
         boolean surging = SaberGauntlet.checkForSaberCharge(play, true);
-        boolean creative = play.isCreative();
+        boolean incorrectGamemode = play.isCreative() || play.isSpectator();
 
         boolean ShasRightItem = LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.SABER_GAUNTLET.get());
         boolean SusingItem = play.isUsingItem()&&ShasRightItem;
@@ -45,7 +45,7 @@ public class GauntletHint extends HudHint{
             pGuiGraphics.blit(GAUNTLET, rotx, roty, 16, frame, l, 8, 64, 48);
         }
 
-        if (surgeHint && !creative) {
+        if (surgeHint && !incorrectGamemode) {
             pGuiGraphics.blit(GAUNTLET, rotx, roty, 32, frame, 16, 8, 64, 48);
         }
     }
@@ -58,14 +58,14 @@ public class GauntletHint extends HudHint{
 
         Player play = that.minecraft.player;
         PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) play;
-
         boolean surging = SaberGauntlet.checkForSaberCharge(play, true);
+        boolean incorrectGamemode = play.isCreative() || play.isSpectator();
 
         boolean ShasRightItem = LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.SABER_GAUNTLET.get());
         boolean SusingItem = play.isUsingItem()&&ShasRightItem;
 
         float Scooldown = (float) (ConfigHolder.GAUNTLET_SURGE_CHARGEUP - play.getUseItemRemainingTicks()) / ConfigHolder.GAUNTLET_SURGE_CHARGEUP;
-        float Sduration = (float) MixinPlayer.getChargeDuration() / ConfigHolder.GAUNTLET_SURGE_DURATION;
+        float Sduration = (float) MixinPlayer.getChargeDuration() / ConfigHolder.GAUNTLET_SURGE_CHARGEUP;
 
         boolean surgePossible =  Scooldown == 1.0F && !SusingItem;
         boolean surgeHint = Sduration == 0.0F&&surgePossible && !surging && LevelHelper.EntityEquippedActiveItem(play, true, SaberItems.SABER_GAUNTLET.get());
@@ -80,7 +80,7 @@ public class GauntletHint extends HudHint{
             pGuiGraphics.blit(GAUNTLET, rotx, roty, 16, frame, l, 8, 64, 48);
         }
 
-        if (surgeHint) {
+        if (surgeHint && !incorrectGamemode) {
             pGuiGraphics.blit(GAUNTLET, rotx, roty, 32, frame, 16, 8, 64, 48);
         }
     }
