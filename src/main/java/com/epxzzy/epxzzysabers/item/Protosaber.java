@@ -227,16 +227,28 @@ public class Protosaber extends Item {
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
 
-        MutableComponent ActiveDetail = Component.literal(readActivetag(stack) ? "Active" : "Inactive")
-                .withStyle(readActivetag(stack) ? ChatFormatting.WHITE : ChatFormatting.GRAY);
-        tooltip.add(ActiveDetail);
-        MutableComponent ColourDetail = Component.literal(ColourConverter.getHexString(getColor(stack)))
-                .withStyle(ChatFormatting.GRAY);
-        tooltip.add(ColourDetail);
+        MutableComponent HintDetail = Component.literal("[SHIFT]")
+                .withStyle(Screen.hasShiftDown() ? ChatFormatting.YELLOW: ChatFormatting.GOLD).append(" to show additional details");
+        tooltip.add(HintDetail);
 
-        if (Screen.hasControlDown()) {
+        if (Screen.hasShiftDown()) {
             tooltip.add(Component.literal("this item will not do anything when saberability is key down"));
+            MutableComponent ActiveDetail = Component.literal(readActivetag(stack) ? "Active" : "Inactive")
+                    .withStyle(readActivetag(stack) ? ChatFormatting.WHITE : ChatFormatting.GRAY);
+            tooltip.add(ActiveDetail);
+            MutableComponent ColourDetail = Component.literal(ColourConverter.getHexString(getColor(stack)))
+                    .withStyle(ChatFormatting.GRAY);
+            tooltip.add(ColourDetail);
+            MutableComponent AbilityDetail = Component.literal("SaberAbilities:")
+                    .withStyle(ChatFormatting.WHITE);
+            AbilityDetail.append(this.getAbilityTooltipDetail());
+            tooltip.add(AbilityDetail);
         }
+    }
+
+    public MutableComponent getAbilityTooltipDetail(){
+        MutableComponent detail = Component.literal("         None: this item does not react to saberability key nor does it posses any inherent special abilities");
+        return detail;
     }
 
     @Override

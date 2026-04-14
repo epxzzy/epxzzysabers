@@ -7,10 +7,8 @@ import com.epxzzy.epxzzysabers.screen.components.SliderWidget;
 import com.epxzzy.epxzzysabers.networking.SaberMessages;
 import com.epxzzy.epxzzysabers.networking.packet.ServerboundRecolourItemPacket;
 import com.epxzzy.epxzzysabers.util.SaberTags;
-import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -21,8 +19,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
-
-import java.util.List;
 
 public class KyberStationTintScreen extends AbstractContainerScreen<KyberStationTintMenu> {
     private static final ResourceLocation RECOLOUR_TEXTURE =
@@ -49,7 +45,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
     public KyberStationTintScreen(KyberStationTintMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
         pMenu.registerUpdateListener(this::containerChanged);
-        pMenu.registerInputUpdateListener(this::TakeInput);
+        pMenu.registerInputUpdateListener(this::InputUpdate);
 
     }
 
@@ -67,24 +63,29 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         return;
     }
 
-    public void TakeInput() {
-        int[] gur = menu.getInputColour();
+    public void InputUpdate() {
         GAY_INPUT = menu.isInputGay();
-        if (GAY_INPUT) return;
-        if (!RGB_MODE) {
-            int[] inputColour = ColourConverter.RGBtoHSL(gur[0], gur[1], gur[2]);
+        boolean rendering = !menu.isInputEmpty();
 
-            this.HUE_SLIDER.setValue(inputColour[0]);
-            this.SAT_SLIDER.setValue(inputColour[1]);
-            this.LIT_SLIDER.setValue(inputColour[2]);
-        }
-        if (RGB_MODE) {
-            this.RED_SLIDER.setValue(gur[0]);
-            this.GREEN_SLIDER.setValue(gur[1]);
-            this.BLUE_SLIDER.setValue(gur[2]);
-        }
+        if(rendering && !GAY_INPUT){
+            ToggleSliderSection(!RGB_MODE);
+            int[] rawcol = menu.getInputColour();
+            if (!RGB_MODE) {
+                int[] inputColour = ColourConverter.RGBtoHSL(rawcol[0], rawcol[1], rawcol[2]);
 
-        UpdateServerRecipe();
+                this.HUE_SLIDER.setValue(inputColour[0]);
+                this.SAT_SLIDER.setValue(inputColour[1]);
+                this.LIT_SLIDER.setValue(inputColour[2]);
+            }
+            if (RGB_MODE) {
+                this.RED_SLIDER.setValue(rawcol[0]);
+                this.GREEN_SLIDER.setValue(rawcol[1]);
+                this.BLUE_SLIDER.setValue(rawcol[2]);
+            }
+        }
+        else {
+            SlidersBegone(true);
+        }
     }
 
     @Override
@@ -97,7 +98,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
 
         initSliderStuff();
-
+        ToggleSliderSection(!RGB_MODE);
     }
 
     public void UpdateServerRecipe() {
@@ -113,66 +114,21 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
                         LIT_SLIDER.getValueInt()
                 );
 
+        regbee = this.GAY_MODE?menu.getInputColour():regbee;
+        //do not become BLACK if table wants the item to be GAY
+
         int regbeedecimal = ColourConverter.portedRGBtoDecimal(regbee);
 
         //Color.HSBtoRGB((float) HUE_SLIDER.getValueInt() / 60, (float) SAT_SLIDER.getValueInt() /100, (float) LIT_SLIDER.getValueInt() /100);
 
         // String asd = Integer.toString("")
 
-        if (!this.RGB_MODE) {
-            this.HUE_SLIDER.setTooltip(
-                    Tooltip.create(
-                            Component.literal(
-                                    String.format("#%06X", regbeedecimal & 0xFFFFFF)
-                            )
-                    )
-            );
-            this.SAT_SLIDER.setTooltip(
-                    Tooltip.create(
-                            Component.literal(
-                                    String.format("#%06X", regbeedecimal & 0xFFFFFF)
-                            )
-                    )
-            );
-            this.LIT_SLIDER.setTooltip(
-                    Tooltip.create(
-                            Component.literal(
-                                    String.format("#%06X", regbeedecimal & 0xFFFFFF)
-                            )
-                    )
-            );
-        }
-        if (this.RGB_MODE) {
-            this.RED_SLIDER.setTooltip(
-                    Tooltip.create(
-                            Component.literal(
-                                    String.format("#%06X", regbeedecimal & 0xFFFFFF)
-                            )
-                    )
-            );
-            this.GREEN_SLIDER.setTooltip(
-                    Tooltip.create(
-                            Component.literal(
-                                    String.format("#%06X", regbeedecimal & 0xFFFFFF)
-                            )
-                    )
-            );
-            this.BLUE_SLIDER.setTooltip(
-                    Tooltip.create(
-                            Component.literal(
-                                    String.format("#%06X", regbeedecimal & 0xFFFFFF)
-                            )
-                    )
-            );
-
-        }
+        UpdateTooltip(regbeedecimal);
         //ToggleAllSlidersLoc(!this.menu.canCraft());
 
         Slot slot = this.menu.getSlot(0);
         if (slot.getItem().is(SaberTags.Items.DYEABLE_LIGHTSABER)) {
             if (this.menu.setItemColour(regbee, GAY_MODE)) {
-                //this.minecraft.player.connection.send(new HonkPacket.Serverbound)
-                //Color.HSBtoRGB(this.menu.getInputColour())
                 SaberMessages.sendToServer(new ServerboundRecolourItemPacket(regbee, GAY_MODE));
             }
         }
@@ -397,15 +353,68 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         }
     }
 
+    public void SlidersBegone(boolean fr){
+        this.HUE_SLIDER.disable(fr);
+        this.SAT_SLIDER.disable(fr);
+        this.LIT_SLIDER.disable(fr);
+
+        this.RED_SLIDER.disable(fr);
+        this.GREEN_SLIDER.disable(fr);
+        this.BLUE_SLIDER.disable(fr);
+    }
+
+    public void UpdateTooltip(int decimalColour){
+        if (!this.RGB_MODE) {
+            this.HUE_SLIDER.setTooltip(
+                    Tooltip.create(
+                            Component.literal(
+                                    String.format("#%06X", decimalColour & 0xFFFFFF)
+                            )
+                    )
+            );
+            this.SAT_SLIDER.setTooltip(
+                    Tooltip.create(
+                            Component.literal(
+                                    String.format("#%06X", decimalColour & 0xFFFFFF)
+                            )
+                    )
+            );
+            this.LIT_SLIDER.setTooltip(
+                    Tooltip.create(
+                            Component.literal(
+                                    String.format("#%06X", decimalColour & 0xFFFFFF)
+                            )
+                    )
+            );
+        }
+        if (this.RGB_MODE) {
+            this.RED_SLIDER.setTooltip(
+                    Tooltip.create(
+                            Component.literal(
+                                    String.format("#%06X", decimalColour & 0xFFFFFF)
+                            )
+                    )
+            );
+            this.GREEN_SLIDER.setTooltip(
+                    Tooltip.create(
+                            Component.literal(
+                                    String.format("#%06X", decimalColour & 0xFFFFFF)
+                            )
+                    )
+            );
+            this.BLUE_SLIDER.setTooltip(
+                    Tooltip.create(
+                            Component.literal(
+                                    String.format("#%06X", decimalColour & 0xFFFFFF)
+                            )
+                    )
+            );
+
+        }
+
+    }
 
     public void ToggleAllSlidersLoc(boolean remove) {
-        //this.HUE_SLIDER.disable(remove);
-        //this.SAT_SLIDER.disable(remove);
-        //this.LIT_SLIDER.disable(remove);
-
-        //this.RED_SLIDER.disable(remove);
-        //this.GREEN_SLIDER.disable(remove);
-        //this.BLUE_SLIDER.disable(remove);
         if (remove) {
             this.HUE_SLIDER.setPosition(0, -99999);
             this.SAT_SLIDER.setPosition(0, -99999);
@@ -414,7 +423,7 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
             this.RED_SLIDER.setPosition(0, -99999);
             this.GREEN_SLIDER.setPosition(0, -99999);
             this.BLUE_SLIDER.setPosition(0, -99999);
-            //epxzzySabers.LOGGER.info("tint screen: all sliders in the void");
+            epxzzySabers.LOGGER.info("tint screen: all sliders in the void");
         }
         if (!remove) {
             this.HUE_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12);
@@ -424,8 +433,9 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
             this.RED_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12);
             this.GREEN_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12 * 2);
             this.BLUE_SLIDER.setPosition(this.leftPos + 12, this.topPos + 12 * 3);
-            //epxzzySabers.LOGGER.info("tint screen: all sliders in place");
+            epxzzySabers.LOGGER.info("tint screen: all sliders in place");
         }
 
     }
+
 }

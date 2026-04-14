@@ -109,6 +109,7 @@ public class KyberStationTintMenu extends KyberMenuBase {
                 this.ColourValueIndexes[0].get() == colour[2]
            ) && this.gay.get() == (gay ? 1 : 0)
         ) {
+            epxzzySabers.LOGGER.debug("Tint menu: colours getting ignored rn are " + colour[0] + " " + colour[1] + " " + colour[2]);
             return false;
         } else {
             this.gay.set(gay ? 1 : 0);
@@ -116,7 +117,7 @@ public class KyberStationTintMenu extends KyberMenuBase {
             this.ColourValueIndexes[1].set(colour[1]);
             this.ColourValueIndexes[2].set(colour[2]);
 
-            //epxzzySabers.LOGGER.debug("colours have been set as: " + colour[0] + " " + colour[1] + " " + colour[2]);
+            epxzzySabers.LOGGER.debug("Tint menu: colours have been set as: " + colour[0] + " " + colour[1] + " " + colour[2]);
             this.setupResultSlot(colour[0], colour[1], colour[2], (this.gay.get() == 1));
             return true;
 
@@ -219,6 +220,10 @@ public class KyberStationTintMenu extends KyberMenuBase {
 
     public boolean isInputGay() {
         return this.input_slot.getItem().getOrCreateTag().getCompound("display").getBoolean("gay");
+    }
+
+    public boolean isInputEmpty() {
+        return this.input_slot.container.isEmpty();
     }
 
     public boolean stillValid(@NotNull Player pPlayer) {

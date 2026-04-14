@@ -11,6 +11,7 @@ import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -38,6 +39,13 @@ public class RotarySaber extends Protosaber {
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         THE_BETTER_RENDERER = new RotarySaberItemRenderer();
         consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));
+    }
+
+    @Override
+    public MutableComponent getAbilityTooltipDetail(){
+        MutableComponent detail = Component.literal("         SaberFlight (inherent): Holding down this item when looking towards the sky or being present in air can trigger SaberFlight, a timed Creative-Mode-esque flying that allows quick escapes.");
+        detail.append(Component.literal("         SaberThrow (peripheral): Pressing [Saber Ability] key makes this item behave like ranged weapon towards where you are aimed at. Upon hitting something or going too far it will return back towards you harmlessly"));
+        return detail;
     }
 
     @Override

@@ -16,6 +16,8 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -70,6 +72,13 @@ public class SaberGauntlet extends Protosaber {
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         THE_BETTER_RENDERER = new SaberGauntletItemRenderer();
         consumer.accept(SimpleCustomRenderer.create(this, THE_BETTER_RENDERER));
+    }
+
+    @Override
+    public MutableComponent getAbilityTooltipDetail(){
+        MutableComponent detail = Component.literal("         SuperCharge (inherent): Holding down this item charges it up to SuperCharge, during that state it give player extra melee damage and reach.");
+        detail.append(Component.literal("         Disruption (peripheral): Pressing [Saber Ability] key causes all nearby entity's lightsabers to malfunction, making it so they cannot block attacks or continue flying"));
+        return detail;
     }
 
     @Override
