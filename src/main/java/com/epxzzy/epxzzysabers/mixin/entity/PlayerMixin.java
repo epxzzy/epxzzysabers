@@ -26,6 +26,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -33,6 +34,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Objects;
 
 
 @Mixin(Player.class)
@@ -162,6 +165,7 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
         //epxzzySabers.LOGGER.debug("player hurt");
         Player that = ((Player) (Object) this);
         LivingEntity attacker = (LivingEntity) (pSource.getEntity() instanceof LivingEntity ? pSource.getEntity() : null);
+        Entity contact = (pSource.getDirectEntity());
         boolean gotBlocked = TagHelper.checkUsingActivePoseableWeapon(that);
         //boolean gotBlocked = TagHelper.checkActiveSaber(that, that.getUsedItemHand() == InteractionHand.MAIN_HAND);
 
@@ -171,7 +175,6 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
             }
             defending = true;
             int tempatk = 0;
-
             if (attacker != null) {
                 boolean posedAttack = TagHelper.checkActivePoseableWeapon(attacker, true);
 
@@ -181,15 +184,17 @@ public abstract class PlayerMixin implements PlayerHelperLmao {
                     if (attacker instanceof Player) {
                         tempatk = ((PlayerHelperLmao) attacker).getSaberAttackForm();
                     } else {
-                        tempatk = KewlFightsOrchestrator.DetermineNextPossibleAttack(8, (ServerPlayer) that);
+                        tempatk = KewlFightsOrchestrator.DetermineNextPossibleAttack(0, (ServerPlayer) that);
                     }
-                    if (tempatk > 0) that.displayClientMessage(Component.literal("blocking " + tempatk), true);
-
                     //that.playSound(SaberSounds.CLASH.get(), 0.2F, 0.8F + that.level().random.nextFloat() * 0.4F);
                 }
-
+                if(Projectile.class.isAssignableFrom(Objects.requireNonNull(contact).getClass())){
+                    epxzzySabers.LOGGER.debug("attacker is projectile");
+                    tempatk = KewlFightsOrchestrator.DetermineNextPossibleAttack(0, (ServerPlayer) that);
+                }
             }
 
+            if (tempatk > 0) that.displayClientMessage(Component.literal("blocking " + tempatk), true);
             SaberMessages.fuckingAnnounce(new ClientboundPlayerDefendPacket(that.getId(), this.defending, this.defendProgress, tempatk), that);
         }
     }

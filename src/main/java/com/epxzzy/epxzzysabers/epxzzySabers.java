@@ -40,9 +40,6 @@ import org.slf4j.Logger;
 public class epxzzySabers{
     public static final String MOD_ID = "epxzzysabers";
     public static final Logger LOGGER = LogUtils.getLogger();
-    public static ToolAction SABER_SWING = null;
-    public static ToolAction SABER_BLOCK = null;
-
 
     public epxzzySabers() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -59,9 +56,6 @@ public class epxzzySabers{
         SaberCreativeModTabs.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
-
-        SABER_SWING = ToolAction.get("saber_swing");
-        SABER_BLOCK = ToolAction.get("saber_block");
 
         modEventBus.addListener(this::addCreative);
 

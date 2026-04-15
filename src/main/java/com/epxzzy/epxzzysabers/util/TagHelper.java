@@ -72,6 +72,9 @@ public class TagHelper {
     public static boolean checkActivePoseableWeapon(Entity Entityy, boolean Mainhand) {
         return checkHoldingActiveTag(Entityy, Mainhand, SaberTags.Items.POSEABLE_LIGHTSABER);
     }
+    public static boolean checkUsingActiveLightsaberWeapon(Entity Entityy) {
+        return checkUsingActiveTag(Entityy, SaberTags.Items.LIGHTSABER);
+    }
     public static boolean checkUsingActivePoseableWeapon(Entity Entityy) {
         return checkUsingActiveTag(Entityy, SaberTags.Items.POSEABLE_LIGHTSABER);
     }

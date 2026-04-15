@@ -43,8 +43,8 @@ public class RotarySaber extends Protosaber {
 
     @Override
     public MutableComponent getAbilityTooltipDetail(){
-        MutableComponent detail = Component.literal("         SaberFlight (inherent): Holding down this item when looking towards the sky or being present in air can trigger SaberFlight, a timed Creative-Mode-esque flying that allows quick escapes.");
-        detail.append(Component.literal("         SaberThrow (peripheral): Pressing [Saber Ability] key makes this item behave like ranged weapon towards where you are aimed at. Upon hitting something or going too far it will return back towards you harmlessly"));
+        MutableComponent detail = Component.literal("         SaberFlight (inherent): Holding down this item when looking towards the sky or being present in air can trigger SaberFlight, a timed Creative-Mode-esque flying that allows quick escapes.\n");
+        detail.append(Component.literal("         SaberThrow (peripheral): Pressing [Saber Ability] key makes this item behave like ranged weapon towards where you are aimed at. Upon hitting something or going too far it will return back towards you harmlessly\n"));
         return detail;
     }
 

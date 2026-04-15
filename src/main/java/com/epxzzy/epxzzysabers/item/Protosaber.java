@@ -228,35 +228,26 @@ public class Protosaber extends Item {
         super.appendHoverText(stack, level, tooltip, flag);
 
         MutableComponent HintDetail = Component.literal("[SHIFT]")
-                .withStyle(Screen.hasShiftDown() ? ChatFormatting.YELLOW: ChatFormatting.GOLD).append(" to show additional details");
+                .withStyle(Screen.hasShiftDown() ? ChatFormatting.YELLOW: ChatFormatting.GOLD).append(Component.literal( " to show additional details").withStyle(ChatFormatting.GRAY));
         tooltip.add(HintDetail);
 
         if (Screen.hasShiftDown()) {
-            tooltip.add(Component.literal("this item will not do anything when saberability is key down"));
             MutableComponent ActiveDetail = Component.literal(readActivetag(stack) ? "Active" : "Inactive")
                     .withStyle(readActivetag(stack) ? ChatFormatting.WHITE : ChatFormatting.GRAY);
             tooltip.add(ActiveDetail);
             MutableComponent ColourDetail = Component.literal(ColourConverter.getHexString(getColor(stack)))
                     .withStyle(ChatFormatting.GRAY);
             tooltip.add(ColourDetail);
-            MutableComponent AbilityDetail = Component.literal("SaberAbilities:")
+            MutableComponent AbilityDetail = Component.literal("SaberAbilities:\n")
                     .withStyle(ChatFormatting.WHITE);
-            AbilityDetail.append(this.getAbilityTooltipDetail());
+            AbilityDetail.append(getAbilityTooltipDetail());
             tooltip.add(AbilityDetail);
         }
     }
 
     public MutableComponent getAbilityTooltipDetail(){
-        MutableComponent detail = Component.literal("         None: this item does not react to saberability key nor does it posses any inherent special abilities");
+        MutableComponent detail = Component.literal("         None: this item does not react to saberability key nor does it posses any inherent special abilities\n");
         return detail;
-    }
-
-    @Override
-    public boolean canPerformAction(ItemStack stack, net.minecraftforge.common.ToolAction toolAction) {
-        if (toolAction == epxzzySabers.SABER_BLOCK && this.readActivetag(stack)) return true;
-        return toolAction == epxzzySabers.SABER_SWING;
-
-        //return net.minecraftforge.common.ToolActions.DEFAULT_SHIELD_ACTIONS.contains(toolAction);
     }
 
     public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(@NotNull EquipmentSlot pEquipmentSlot) {

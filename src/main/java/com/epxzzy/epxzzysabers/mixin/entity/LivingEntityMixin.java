@@ -5,10 +5,12 @@ import com.epxzzy.epxzzysabers.item.Protosaber;
 import com.epxzzy.epxzzysabers.item.SaberItems;
 import com.epxzzy.epxzzysabers.sound.SaberSounds;
 import com.epxzzy.epxzzysabers.util.SaberTags;
+import com.epxzzy.epxzzysabers.util.TagHelper;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -39,9 +41,9 @@ public abstract class LivingEntityMixin {
 
         if (notThat != null) {
 
-            boolean blocking_with_sabur = that.getUseItem().canPerformAction(epxzzySabers.SABER_BLOCK);
+            boolean blocking_with_sabur = TagHelper.checkUsingActiveLightsaberWeapon(that);
 
-            boolean attacking_with_sabur = LivingEntity.class.isAssignableFrom(notThat.getClass()) ? ((LivingEntity) notThat).getMainHandItem().is(SaberTags.Items.LIGHTSABER) : false;
+            boolean attacking_with_sabur = LivingEntity.class.isAssignableFrom(notThat.getClass()) ? TagHelper.checkActiveSaber(((LivingEntity) notThat),((LivingEntity) notThat).getMainArm() == HumanoidArm.RIGHT) : false;
 
             //epxzzySabers.LOGGER.info("living entity custom hurt can be cancelled: " + cir.isCancellable());
             //epxzzySabers.LOGGER.debug("living entity hurt in mixin");

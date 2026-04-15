@@ -76,8 +76,8 @@ public class SaberGauntlet extends Protosaber {
 
     @Override
     public MutableComponent getAbilityTooltipDetail(){
-        MutableComponent detail = Component.literal("         SuperCharge (inherent): Holding down this item charges it up to SuperCharge, during that state it give player extra melee damage and reach.");
-        detail.append(Component.literal("         Disruption (peripheral): Pressing [Saber Ability] key causes all nearby entity's lightsabers to malfunction, making it so they cannot block attacks or continue flying"));
+        MutableComponent detail = Component.literal("         SuperCharge (inherent): Holding down this item charges it up to SuperCharge, during that state it give player extra melee damage and reach.\n");
+        detail.append(Component.literal("         Disruption (peripheral): Pressing [Saber Ability] key causes all nearby entity's lightsabers to malfunction, making it so they cannot block attacks or continue flying\n"));
         return detail;
     }
 
