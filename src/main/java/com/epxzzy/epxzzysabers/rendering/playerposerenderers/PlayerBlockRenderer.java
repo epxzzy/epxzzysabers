@@ -7,7 +7,7 @@ import net.minecraft.client.model.geom.ModelPart;
 
 public class PlayerBlockRenderer {
     public static void setPose(int Block, boolean Lefty, HumanoidModel<?> model, double lerpusy) {
-        double lerper = 1;//AnimationHelper.easeOutBack(lerpusy);
+        double lerper = AnimationHelper.easeOut(lerpusy);
 
         switch (Block) {
             //left shoulder
@@ -50,9 +50,9 @@ public class PlayerBlockRenderer {
                   "leftposy": "0",
                   "leftposz": "0"
          */
-        currRX = (lefty?72:60) * lerper;
-        currRY = (lefty?-1:56) * lerper;
-        currRZ = (lefty?6:-20) * lerper;
+        currRX = (lefty?-72:-60) * lerper;
+        currRY = (lefty?1:-56) * lerper;
+        currRZ = (lefty?-6:-20) * lerper;
 
         currPX = (lefty?arm.x:-2);
         currPY = arm.y;
@@ -90,8 +90,8 @@ public class PlayerBlockRenderer {
                   "leftroty": "0",
                   "leftrotz": "-3"
          */
-        currRX = (!lefty?72:60) * lerper;
-        currRY = (!lefty?-1:-56) * lerper;
+        currRX = (!lefty?-72:-60) * lerper;
+        currRY = (!lefty?1:56) * lerper;
         currRZ = (!lefty?-6:20) * lerper;
 
         currPX = (!lefty?arm.x:2);
@@ -131,11 +131,11 @@ public class PlayerBlockRenderer {
                   "leftposz": "0"
          */
 
-        currRX = (94) * lerper;
-        currRY = (lefty?-1:-56) * lerper;
+        currRX = (-94) * lerper;
+        currRY = (lefty?-1:56) * lerper;
         currRZ = (-190) * lerper;
 
-        currPX = (!lefty?arm.x:-2);
+        currPX = (lefty?arm.x:-2);
         currPY = arm.y;
         currPZ = (lefty?arm.z:-3);
 
@@ -171,8 +171,8 @@ public class PlayerBlockRenderer {
                   "leftposy": "0",
                   "leftposz": "-3"
          */
-        currRX = (94) * lerper;
-        currRY = (!lefty?-1:-56) * lerper;
+        currRX = (-94) * lerper;
+        currRY = (!lefty?1:-56) * lerper;
         currRZ = (190) * lerper;
 
         currPX = (!lefty?arm.x:2);
@@ -211,8 +211,8 @@ public class PlayerBlockRenderer {
                   "leftposy": "0",
                   "leftposz": "0"
          */
-        currRX = (70) * lerper;
-        currRY = (lefty?-1:-56) * lerper;
+        currRX = (-70) * lerper;
+        currRY = (lefty?1:56) * lerper;
         currRZ = (lefty?150:-190) * lerper;
 
         currPX = (lefty?arm.x:-2);
@@ -253,8 +253,8 @@ public class PlayerBlockRenderer {
                   "leftposy": "0",
                   "leftposz": "-3"
          */
-        currRX = (70) * lerper;
-        currRY = (!lefty?-1:56) * lerper;
+        currRX = (-70) * lerper;
+        currRY = (!lefty?-1:-56) * lerper;
         currRZ = (!lefty?-150:190) * lerper;
 
         currPX = (!lefty?arm.x:2);
@@ -295,8 +295,8 @@ public class PlayerBlockRenderer {
                   "leftposy": "-2",
                   "leftposz": "0"
          */
-        currRX = (74) * lerper;
-        currRY = (lefty?-66:66) * lerper;
+        currRX = (-74) * lerper;
+        currRY = (lefty?66:-66) * lerper;
         currRZ = (lefty?-104:104) * lerper;
 
         currPX = (arm.x);
@@ -337,8 +337,8 @@ public class PlayerBlockRenderer {
                   "leftposy": "2",
                   "leftposz": "0"
          */
-        currRX = (72) * lerper;
-        currRY = (lefty?36:-36) * lerper;
+        currRX = (-72) * lerper;
+        currRY = (lefty?-36:36) * lerper;
         currRZ = (lefty?-72:72) * lerper;
 
         currPX = (arm.x);

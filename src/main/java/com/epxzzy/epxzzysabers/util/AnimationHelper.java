@@ -13,7 +13,10 @@ public class AnimationHelper {
     public static double easeOut(double number) {
        return 1 - Math.pow(1 - number, 5);
     }
-
+    //slow start => soft movement => explosive end
+    public static double easeInExpo(double number) {
+        return number == 0 ? 0 : Math.pow(2, 5 * number - 5);
+    }
     //soft start => swift movement => soft end
     public static double easeInOutQuart(double number){
         return number < 0.5 ? 8 * number * number * number * number : 1 - Math.pow(-2 * number + 2, 4) / 2;

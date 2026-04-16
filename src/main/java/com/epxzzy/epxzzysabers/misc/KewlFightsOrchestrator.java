@@ -31,7 +31,6 @@ public class KewlFightsOrchestrator {
         }
         int random = pPlayer.getRandom().nextInt(8) + 1;
         return old != random? random: random+1;
-
     };
 
     //this method was written by grok, im not that good at math obviously
