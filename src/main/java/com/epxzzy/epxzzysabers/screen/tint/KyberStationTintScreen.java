@@ -9,6 +9,7 @@ import com.epxzzy.epxzzysabers.networking.packet.ServerboundRecolourItemPacket;
 import com.epxzzy.epxzzysabers.util.SaberTags;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -22,7 +23,7 @@ import org.lwjgl.glfw.GLFW;
 
 public class KyberStationTintScreen extends AbstractContainerScreen<KyberStationTintMenu> {
     private static final ResourceLocation RECOLOUR_TEXTURE =
-            new ResourceLocation(epxzzySabers.MOD_ID, "textures/gui/bg/kyber_recolour.png");
+            new ResourceLocation(epxzzySabers.MOD_ID, "textures/gui/bg/kyber_tint_new.png");
 
     private SliderWidget HUE_SLIDER;
     private SliderWidget SAT_SLIDER;
@@ -33,7 +34,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
     private boolean RGB_MODE = false;
     public boolean GAY_MODE = false;
-    public boolean GAY_INPUT = false;
 
     private float xMouse;
     private float yMouse;
@@ -44,48 +44,41 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
 
     public KyberStationTintScreen(KyberStationTintMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
-        pMenu.registerUpdateListener(this::containerChanged);
+        pMenu.registerDoneCraftingListener(this::resetAfterCrafting);
         pMenu.registerInputUpdateListener(this::InputUpdate);
 
     }
 
-    private void containerChanged() {
-        if (menu.canCraft()) {
-            if (!this.RGB_MODE) {
-
-            }
-        }
-
-
-        //menu.craftSabur(HUE_SLIDER.getValueInt(), SAT_SLIDER.getValueInt(),LIT_SLIDER.getValueInt());
-        //epxzzySabers.LOGGER.info("client kyber station change");
-
-        return;
+    private void resetAfterCrafting() {
+        GAY_MODE = false;
+        RGB_MODE = false;
     }
 
     public void InputUpdate() {
-        GAY_INPUT = menu.isInputGay();
+        GAY_MODE = menu.isInputGay();
         boolean rendering = !menu.isInputEmpty();
 
-        if(rendering && !GAY_INPUT){
+        if(rendering && !GAY_MODE){
             ToggleSliderSection(!RGB_MODE);
-            int[] rawcol = menu.getInputColour();
-            if (!RGB_MODE) {
-                int[] inputColour = ColourConverter.RGBtoHSL(rawcol[0], rawcol[1], rawcol[2]);
-
-                this.HUE_SLIDER.setValue(inputColour[0]);
-                this.SAT_SLIDER.setValue(inputColour[1]);
-                this.LIT_SLIDER.setValue(inputColour[2]);
-            }
-            if (RGB_MODE) {
-                this.RED_SLIDER.setValue(rawcol[0]);
-                this.GREEN_SLIDER.setValue(rawcol[1]);
-                this.BLUE_SLIDER.setValue(rawcol[2]);
-            }
         }
         else {
             SlidersBegone(true);
         }
+
+        int[] rawcol = menu.getInputColour();
+        if (!RGB_MODE) {
+            int[] inputColour = ColourConverter.RGBtoHSL(rawcol[0], rawcol[1], rawcol[2]);
+
+            this.HUE_SLIDER.setValue(inputColour[0]);
+            this.SAT_SLIDER.setValue(inputColour[1]);
+            this.LIT_SLIDER.setValue(inputColour[2]);
+        }
+        if (RGB_MODE) {
+            this.RED_SLIDER.setValue(rawcol[0]);
+            this.GREEN_SLIDER.setValue(rawcol[1]);
+            this.BLUE_SLIDER.setValue(rawcol[2]);
+        }
+
     }
 
     @Override
@@ -96,6 +89,17 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         this.inventoryLabelY = 10000;
         this.titleLabelY = 10000;
 
+        this.addRenderableWidget(new ImageButton(this.leftPos + 44, this.topPos + 59, 16, 16, 224, 0, 5, RECOLOUR_TEXTURE, (p_289628_) -> {
+            GAY_MODE = false;
+            setRGBmode();
+            UpdateServerRecipe();
+        }));
+
+        this.addRenderableWidget(new ImageButton(this.leftPos + 80, this.topPos + 59, 16, 16, 224, 0, 5, RECOLOUR_TEXTURE, (p_289628_) -> {
+            GAY_MODE = !GAY_MODE;
+            SlidersBegone(GAY_MODE);
+            UpdateServerRecipe();
+        }));
 
         initSliderStuff();
         ToggleSliderSection(!RGB_MODE);
@@ -146,9 +150,10 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
         if (pKeyCode == GLFW.GLFW_KEY_PERIOD) {
             GAY_MODE = !GAY_MODE;
-            epxzzySabers.LOGGER.info("tint screen: super secret colour set to" + RGB_MODE);
+            SlidersBegone(GAY_MODE);
         }
-        if (pKeyCode == GLFW.GLFW_KEY_SPACE) {
+        if (pKeyCode == GLFW.GLFW_KEY_COMMA) {
+            GAY_MODE = false;
             setRGBmode();
         }
         UpdateServerRecipe();
@@ -208,7 +213,23 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(RECOLOUR_TEXTURE, x - 15, y, 0, 0, 215, imageHeight);
+        guiGraphics.blit(RECOLOUR_TEXTURE, x, y, 0, 0, 175, imageHeight);
+        int COLOURMODEOFFSET = this.RGB_MODE?16:0;
+        int GAYOFFSET = this.GAY_MODE?16:0;
+        guiGraphics.blit(RECOLOUR_TEXTURE,
+                this.leftPos + 44,
+                this.topPos + 59,
+                176, COLOURMODEOFFSET, 16, 16);
+        guiGraphics.blit(RECOLOUR_TEXTURE,
+                this.leftPos + 80,
+                this.topPos + 59,
+                192, GAYOFFSET, 16, 16);
+        if(this.GAY_MODE){
+            guiGraphics.blit(RECOLOUR_TEXTURE,
+                    this.leftPos + 7,
+                    this.topPos + 7,
+                    0, imageHeight, 124, 45);
+        }
 
     }
 
@@ -257,7 +278,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
             BLUE_SLIDER.setValue(gur[2]);
         }
 
-        epxzzySabers.LOGGER.info("tint screen: rgb mode updated as " + RGB_MODE);
         UpdateServerRecipe();
 
     }
@@ -288,12 +308,13 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
                             SAT_SLIDER.getValueInt(),
                             LIT_SLIDER.getValueInt()
                     );
+            regbee = this.GAY_MODE?ColourConverter.rainbowColor((int) System.currentTimeMillis()):regbee;
 
             guiGraphics.fill(
                     this.leftPos + 137,
                     this.topPos + 10,
                     this.leftPos + 166,
-                    this.topPos + 40,
+                    this.topPos + 39,
                     FastColor.ARGB32.color(255,
                             regbee[0],
                             regbee[1],
@@ -303,13 +324,13 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
     }
 
     public void initSliderStuff() {
-        this.HUE_SLIDER = getSliderForColour(0, 360, "hue ", 1);
-        this.SAT_SLIDER = getSliderForColour(0, 100, "sat ", 2);
-        this.LIT_SLIDER = getSliderForColour(0, 100, "light ", 3);
+        this.HUE_SLIDER = getSliderForColour(0, 360, " ", 1);
+        this.SAT_SLIDER = getSliderForColour(0, 100, " ", 2);
+        this.LIT_SLIDER = getSliderForColour(0, 100, " ", 3);
 
-        this.RED_SLIDER = getSliderForColour(0, 255, "red ", 1);
-        this.GREEN_SLIDER = getSliderForColour(0, 255, "green ", 2);
-        this.BLUE_SLIDER = getSliderForColour(0, 255, "blue ", 3);
+        this.RED_SLIDER = getSliderForColour(0, 255, " ", 1);
+        this.GREEN_SLIDER = getSliderForColour(0, 255, " ", 2);
+        this.BLUE_SLIDER = getSliderForColour(0, 255, " ", 3);
 
         this.addWidget(this.HUE_SLIDER);
         this.addWidget(this.SAT_SLIDER);
@@ -326,7 +347,6 @@ public class KyberStationTintScreen extends AbstractContainerScreen<KyberStation
         this.RED_SLIDER.disable(false);
         this.GREEN_SLIDER.disable(false);
         this.BLUE_SLIDER.disable(false);
-        epxzzySabers.LOGGER.info("tint screen: all sliders enabled cause init");
     }
 
     public void ToggleSliderSection(boolean hsl) {

@@ -25,12 +25,11 @@ import org.jetbrains.annotations.NotNull;
 public class KyberStationTintMenu extends KyberMenuBase {
     public final ContainerLevelAccess access;
     public Slot input_slot;
-    public Slot krystal_slot;
     public Slot resultSlot;
 
     private final DataSlot[] ColourValueIndexes = {DataSlot.standalone(), DataSlot.standalone(), DataSlot.standalone()};
     public final DataSlot gay = DataSlot.standalone();
-    Runnable slotUpdateListener = () -> {
+    Runnable donecraftingListener = () -> {
     };
     Runnable inputUpdateListener = () -> {
     };
@@ -39,7 +38,6 @@ public class KyberStationTintMenu extends KyberMenuBase {
         public void setChanged() {
             super.setChanged();
             KyberStationTintMenu.this.slotsChanged(this);
-            KyberStationTintMenu.this.slotUpdateListener.run();
             KyberStationTintMenu.this.inputUpdateListener.run();
         }
     };
@@ -65,25 +63,17 @@ public class KyberStationTintMenu extends KyberMenuBase {
             }
         });
 
-        this.krystal_slot = this.addSlot(new Slot(this.inputContainer, 1, 44, 59) {
-            @Override
-            public boolean mayPlace(ItemStack pStack) {
-                return pStack.is(SaberTags.Items.KYBER_CRYSTAL);
-            }
-
-        });
-
-        this.resultSlot = this.addSlot(new Slot(this.outputContainer, 0, 152, 59) {
+        this.resultSlot = this.addSlot(new Slot(this.outputContainer, 0, 143, 57) {
             public boolean mayPlace(@NotNull ItemStack stacc) {
                 return false;
             }
 
             public void onTake(@NotNull Player pPlayer, @NotNull ItemStack stacc) {
                 KyberStationTintMenu.this.input_slot.remove(1);
-                KyberStationTintMenu.this.krystal_slot.remove(1);
                 pAccess.execute((a, b) -> {
                     a.playSound((Player) null, b, SaberSounds.CLASH.get(), SoundSource.PLAYERS, 1, 1);
                 });
+                KyberStationTintMenu.this.donecraftingListener.run();
                 super.onTake(pPlayer, stacc);
             }
         });
@@ -105,11 +95,10 @@ public class KyberStationTintMenu extends KyberMenuBase {
     public boolean setItemColour(int[] colour, boolean gay) {
         if ((
                 this.ColourValueIndexes[2].get() == colour[0] &&
-                this.ColourValueIndexes[1].get() == colour[1] &&
-                this.ColourValueIndexes[0].get() == colour[2]
-           ) && this.gay.get() == (gay ? 1 : 0)
+                        this.ColourValueIndexes[1].get() == colour[1] &&
+                        this.ColourValueIndexes[0].get() == colour[2]
+        ) && this.gay.get() == (gay ? 1 : 0)
         ) {
-            epxzzySabers.LOGGER.debug("Tint menu: colours getting ignored rn are " + colour[0] + " " + colour[1] + " " + colour[2]);
             return false;
         } else {
             this.gay.set(gay ? 1 : 0);
@@ -139,7 +128,7 @@ public class KyberStationTintMenu extends KyberMenuBase {
                 }
 
                 slot.onQuickCraft(itemstack1, itemstack);
-            } else if ((pIndex == this.input_slot.index || (pIndex == this.krystal_slot.index))) {
+            } else if ((pIndex == this.input_slot.index)) {
                 if (!this.moveItemStackTo(itemstack1, i, j, false)) {
                     return ItemStack.EMPTY;
                 }
@@ -183,20 +172,13 @@ public class KyberStationTintMenu extends KyberMenuBase {
     @Override
     public void slotsChanged(@NotNull Container pContainer) {
         ItemStack saber = this.input_slot.getItem();
-        ItemStack krystal = this.krystal_slot.getItem();
         if (!saber.isEmpty()) {
-            if (!krystal.isEmpty()) {
-                epxzzySabers.LOGGER.debug("tint menu: huh... the second slot is full? well too bad that doesnt do anything special");
-                return;
-            } else {
-                this.broadcastChanges();
-                return;
-            }
-        } else if (!krystal.isEmpty() && saber.isEmpty()) {
-            epxzzySabers.LOGGER.debug("tint menu: only the second slot is full? what are you trying to achieve her e?");
+            this.broadcastChanges();
+            return;
+        } else if (saber.isEmpty()) {
+            this.resultSlot.set(ItemStack.EMPTY);
             return;
         }
-        this.resultSlot.set(ItemStack.EMPTY);
         super.slotsChanged(pContainer);
     }
 
@@ -244,8 +226,8 @@ public class KyberStationTintMenu extends KyberMenuBase {
         }
     }
 
-    public void registerUpdateListener(Runnable pListener) {
-        this.slotUpdateListener = pListener;
+    public void registerDoneCraftingListener(Runnable pListener) {
+        this.donecraftingListener= pListener;
     }
 
     public void registerInputUpdateListener(Runnable pListener) {

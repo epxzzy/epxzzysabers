@@ -88,10 +88,8 @@ public class Protosaber extends Item {
             tag.remove("AttributeModifiers");
         }
 
-        if (tag.getCompound("display").getInt("colour") != 0) {
-            int flourishID = tag.getCompound("display").getInt("flourish");
+        if (tag.getCompound("display").contains("colour")) {
             displayTag.putInt("colour", tag.getCompound("display").getInt("colour"));
-            displayTag.putInt("flourish", flourishID);
 
         } else {
             displayTag.putInt("colour", BASE_COLOUR);
@@ -201,9 +199,8 @@ public class Protosaber extends Item {
             return ColourConverter.portedRGBtoDecimal(ColourConverter.rainbowColor((int) System.currentTimeMillis()));
         }
 
-        if (compoundtag.getInt("colour") == 0) {
-            //return 65280;
-            return 0;
+        if (!compoundtag.contains("colour")) {
+            return 65280;
         }
 
         return Objects.requireNonNull(pStack.getTagElement("display")).getInt("colour");
