@@ -1,5 +1,6 @@
 package com.epxzzy.epxzzysabers.event;
 
+import com.epxzzy.epxzzysabers.entity.client.bolt.PlasmaBoltNew;
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.entity.SaberModelLayers;
 import com.epxzzy.epxzzysabers.entity.client.bolt.PlasmaBoltModel;
@@ -112,7 +113,8 @@ public class Events {
         public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(SaberModelLayers.THROWN_ROTARY_SABER_GUARD, ThrownRotarySaberGuardModel::createBodyLayer);
             event.registerLayerDefinition(SaberModelLayers.THROWN_ROTART_SABER_BLADE, ThrownRotarySaberBladeModel::createBodyLayer);
-            event.registerLayerDefinition(SaberModelLayers.PLASMA_BOLT_LAYER, PlasmaBoltModel::createBodyLayer);
+            //event.registerLayerDefinition(SaberModelLayers.PLASMA_BOLT_LAYER, PlasmaBoltModel::createBodyLayer);
+            event.registerLayerDefinition(SaberModelLayers.PLASMA_BOLTNEW_LAYER, PlasmaBoltNew::createBodyLayer);
 
         }
     }

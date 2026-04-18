@@ -13,12 +13,14 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
 public class PlasmaBoltRenderer extends EntityRenderer<PlasmaBolt> {
-    private static final ResourceLocation TEXTURE_LOCATION = epxzzySabers.asResource("textures/entity/wind_charge.png");
-    private final PlasmaBoltModel model;
+    //private static final ResourceLocation TEXTURE_LOCATION = epxzzySabers.asResource("textures/entity/wind_charge.png");
+    private static final ResourceLocation TEXTURE_LOCATION = epxzzySabers.asResource("textures/entity/stunthing.png");
+
+    private final PlasmaBoltNew model;
 
     public PlasmaBoltRenderer(Context context) {
         super(context);
-        this.model = new PlasmaBoltModel(context.bakeLayer(SaberModelLayers.PLASMA_BOLT_LAYER));
+        this.model = new PlasmaBoltNew(context.bakeLayer(SaberModelLayers.PLASMA_BOLTNEW_LAYER));
     }
 
     public void render(PlasmaBolt entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {

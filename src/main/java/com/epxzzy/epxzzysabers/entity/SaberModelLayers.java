@@ -15,5 +15,7 @@ public class SaberModelLayers {
     public static final ModelLayerLocation PLASMA_BOLT_LAYER= new ModelLayerLocation(
             new ResourceLocation(epxzzySabers.MOD_ID, "plasmaboltlayer"), "main");
 
+    public static final ModelLayerLocation PLASMA_BOLTNEW_LAYER= new ModelLayerLocation(
+            new ResourceLocation(epxzzySabers.MOD_ID, "plasmaboltnewlayer"), "main");
 
 }

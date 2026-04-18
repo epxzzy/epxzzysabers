@@ -113,7 +113,7 @@ public class PlasmaBolt extends AbstractHurtingProjectile implements ItemSupplie
     }
     @Override
     protected ParticleOptions getTrailParticle() {
-        return ParticleTypes.END_ROD;
+        return ParticleTypes.ELECTRIC_SPARK;
     }
 }
 
