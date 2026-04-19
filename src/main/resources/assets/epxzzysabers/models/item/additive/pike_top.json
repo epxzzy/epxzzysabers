@@ -9,7 +9,7 @@
 	},
 	"elements": [
 		{
-			"from": [7, 20, 9],
+			"from": [7, 18, 9],
 			"to": [9, 32, 7],
 			"rotation": {"angle": 0, "axis": "y", "origin": [12, 18, 8]},
 			"faces": {
@@ -22,8 +22,8 @@
 			}
 		},
 		{
-			"from": [7.5, 19.5, 7.5],
-			"to": [8.5, 31.5, 8.5],
+			"from": [7.5, 17, 7.5],
+			"to": [8.5, 31, 8.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [6.5, 18, 8.5]},
 			"faces": {
 				"north": {"uv": [5.25, 0.25, 5.5, 5], "texture": "#0"},
@@ -72,11 +72,13 @@
 		{
 			"name": "root",
 			"origin": [8, 8, 8],
+			"scope": 0,
 			"color": 0,
 			"children": [
 				{
 					"name": "active",
 					"origin": [8, 8, 8],
+					"scope": 0,
 					"color": 0,
 					"children": [0, 1]
 				}
