@@ -179,6 +179,7 @@ public class RotarySaber extends Protosaber {
         if (pLivingEntity instanceof Player pPlayer && pPlayer.getAbilities().flying && !pPlayer.level().isClientSide()) {
             PlayerHelperLmao MixinPlayer = (PlayerHelperLmao) pPlayer;
             pPlayer.getAbilities().flying = false;
+            pPlayer.getAbilities().mayfly = false;
             pPlayer.onUpdateAbilities();
             MixinPlayer.setFlyCooldown(ConfigHolder.ROTARY_FLIGHT_COOLDOWN);
             epxzzySabers.LOGGER.info("flying deactivated");
