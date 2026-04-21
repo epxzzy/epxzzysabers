@@ -1,15 +1,17 @@
 {
-  "item.epxzzysabers.single_bladed_saber": "single bladed saber",
-  "item.epxzzysabers.dual_bladed_saber": "dual bladed saber",
-  "item.epxzzysabers.rotary_saber": "rotary saber",
-  "item.epxzzysabers.crossguard_saber": "crossguard saber",
-  "item.epxzzysabers.blaster_saber": "blaster saber",
-  "item.epxzzysabers.saber_pike": "saber pike",
-  "item.epxzzysabers.saber_gauntlet": "saber gauntlet",
+  "item.epxzzysabers.single_bladed_saber": "Single-Bladed Saber",
+  "item.epxzzysabers.dual_bladed_saber": "Dual-Bladed Saber",
+  "item.epxzzysabers.rotary_saber": "Rotary Saber",
+  "item.epxzzysabers.crossguard_saber": "Crossguard Saber",
+  "item.epxzzysabers.blaster_saber": "Blaster Saber",
+  "item.epxzzysabers.saber_pike": "Saber Pike",
+  "item.epxzzysabers.saber_gauntlet": "Saber Gauntlet",
 
-  "item.epxzzysabers.krystal": "krystal",
+  "item.epxzzysabers.krystal": "Krystal",
 
-  "key.epxzzysabers.saber_ability": "Saber ability (epxzzysabers)",
+  "key.epxzzysabers.saber_ability": "Saber Ability (epxzzysabers)",
+  "key.epxzzysabers.saber_stance": "Saber Stance (epxzzysabers)",
+
 
   "block.epxzzysabers.kyber_station": "Kyber Station",
   "epxzzysabers.moditemsiglol": "Sabers",

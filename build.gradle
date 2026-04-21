@@ -95,7 +95,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', mod_id
             args "--username=${usernamelmao}"
-            jvmArgs "-Xmx2G", "-Djava.net.preferIPv4Stack=true","-XX:+AllowEnhancedClassRedefinition"
+            jvmArgs "-Xmx2G", "-Djava.net.preferIPv4Stack=true"//,"-XX:+AllowEnhancedClassRedefinition"
 
             mods {
                 "${mod_id}" {
