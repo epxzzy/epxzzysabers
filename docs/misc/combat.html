@@ -51,6 +51,11 @@
               <span class="toc-number">5</span>Posing
             </a>
           </li>
+          <li class="toc-item">
+            <a href="#History" class="toc-link">
+              <span class="toc-number">6</span>History
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -59,7 +64,7 @@
         <h2>Attacking</h2>
         <p>every saber (any item with tag "epxzzysabers:lightsaber") will be given a randomised attack(1/8) upon hitting any entity, this includes armour stands, itemframes and all else. if any of these entities were to to be consuming saber item (tag "epxzzysabers:lightsaber"), the random attack(1/8) will be told to the consumed item, which then displays the appropriate animation. ofc these will only be animated if the item is applicable FOR NOW("heavy weapons" like pikes, dualbladed sabers are given this info but they are routed differently so they can be animated different, but as i am not done with the animations for the "heavy weapons", they dont do anything). attacking might cause an unintentional parry, as there is no clear intention of what player is trying to do. (more on parrying below)<br>
 
-        there will be a more deterministic/controlled way to perform attacks. i am experimenting with a bunch of ways to allow for more control, without it being overwhelming to the player.
+        there will be a more deterministic/controlled way to perform attacks. i am experimenting with a bunch of ways to allow for more control, without it being overwhelming to the player. Saber attack animations have been completely rebuilt with a new motion-plotting system for smoother, more natural movements. Left-handed (offhand) saber attacks are now fully mirrored and computed correctly for consistent defensive mechanics. Flourish attacks now properly use 'passthrough' mechanics - blocking no longer interrupts flourishes unnecessarily, allowing for more dynamic combat sequences. Projectile blocking animations are now properly displayed when parrying incoming projectiles.
         </p>
       </div>
 
@@ -77,9 +82,8 @@
         NOTE: you don't have to worry about blocking the correct attack as 
         the saber automatically syncs up with other players to block properly.
         just imagine you're fighting with a really deadly shield, only thing
-        you need to worry about is facing the source of damage.
+        you need to worry about is facing the source of damage. Critical hits are not applied to saber damage for balance purposes. A visual indicator now displays when holding a saber in hanging block stance. Hanging saber block duration has been fine-tuned for improved gameplay feel.
           </p>
-
       </div>
 
       <div id="Parrying">
@@ -116,9 +120,8 @@
         <br>
         <br>
 
-        the reason these are conditional is cause i wanted to allow some control over the visuals here, i know this isnt the best way to do this and i will be working on changing this.
-          </p>
-
+        the reason these are conditional is cause i wanted to allow some control over the visuals here, i know this isnt the best way to do this and i will be working on changing this. Trident parrying mechanics have been fixed for proper deflection behavior.
+        </p>
       </div>
 
 
@@ -138,7 +141,7 @@
         <br>
         <br>
 
-        a stance does literally nothing but look cool.
+        a stance does literally nothing but look cool. You can now enter a stance with ANY item in hand (not just sabers), providing more flexible gameplay options. Use Shift+Stance keybind to open the stance preference menu and select from 7 different saber stances. The stance preference menu uses a pentagon-based interface with rotatable star design for intuitive control via mouse wheel, keyboard, or mouse button input. Icons have been restyled with visual polish improvements and new background tints.
         <br>
         <br>
 
@@ -196,6 +199,18 @@
           </p>
 
       </div>
+
+      <section id="History">
+        <h2>History</h2>
+        <table class="wikitable info-table">
+          <tbody>
+            <tr>
+              <td><b>0.0.4</b></td>
+              <td>Completely rebuilt attack animations with motion-plotting system.<br> Added proper left-handed animations and flourish passthrough mechanics.<br> Removed critical hits from saber damage.<br> Added hanging block visual indicator.<br> Fine-tuned block duration.<br> Fixed trident parrying mechanics.<br> Added ability to stance with any item.<br> Redesigned stance menu with pentagon-based interface and Shift+Stance keybind.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </main>
   </div>
 </div>

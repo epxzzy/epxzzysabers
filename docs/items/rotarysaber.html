@@ -61,7 +61,7 @@
     <main class="main-content">
       <div id="Description">
         <p>
-        Melee AND ranged weapon. Also serves as temporary aeral escape.
+        Melee AND ranged weapon. Also serves as temporary aeral escape. The saber now supports external shaders for enhanced visuals (both item rendering and the rotary entity).
         </p>
       </div>
       <div class="toc-container">
@@ -119,6 +119,11 @@
               <li class="toc-item">
                 <a href="#SaberFlight" class="toc-link">
                   <span class="toc-number">4.5</span>Flight
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#HUD" class="toc-link">
+                  <span class="toc-number">4.6</span>HUD & Tooltips
                 </a>
               </li>
             </ul>
@@ -210,7 +215,7 @@
         <div id="Blocking">
           <h3>Blocking</h3>
           <p>
-            <strong>Rotary Saber</strong>, like any other saber item, when right-clicked, will block any damage coming from a saber item, and even projectiles if timed properly. Can be held down for about ~1.75 seconds which if exceeded will cause the projectile to do damage.
+            <strong>Rotary Saber</strong>, like any other saber item, when right-clicked, will block any damage coming from a saber item, and even projectiles if timed properly. Can be held down for about ~1.75 seconds which if exceeded will cause the projectile to do damage. A visual indicator is now shown when in a hanging block, and the duration has been fine-tuned. Critical hits have been removed for balance, the parry range has been fine-tuned to better suit the weapon, and trident parrying has been fixed.
           </p>
 
         </div>
@@ -233,12 +238,19 @@ Looking up and holding down right-click will toggle flight as long as the item i
 
         </div>
 
+        <div id="HUD">
+          <h3>HUD & Tooltips (v0.0.4)</h3>
+          <p>
+            Small sprites (HUD hints) are now displayed near the crosshair to indicate the saber's ability status, such as whether an ability is on cooldown, in use (duration), or ready to use. Furthermore, pressing [SHIFT] while hovering over the item in the inventory displays detailed ability tooltips.
+          </p>
+        </div>
+
       </section>
 
 
       <section id="History">
         <h2>History</h2>
-        <table class="wikitable">
+        <table class="wikitable info-table">
           <tbody>
             <tr>
               <td><b>0.0.1</b></td>
@@ -253,6 +265,11 @@ Looking up and holding down right-click will toggle flight as long as the item i
             <tr>
                 <td><b>0.0.3</b></td>
                 <td>Flight made easy to toggle
+                </td>
+            </tr>
+            <tr>
+                <td><b>0.0.4</b></td>
+                <td>Added shader support, HUD hints, and ability tooltips.<br> Fixed rotary flight cooldown/duration synchronization and entity issues after chunk reload.<br> Fine-tuned parry range.<br> Added hanging block indicator, removed critical hits, and fixed trident parrying.
                 </td>
             </tr>
 
