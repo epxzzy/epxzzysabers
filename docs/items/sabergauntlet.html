@@ -3,8 +3,8 @@
 <head>
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="../items.css">
-  <link rel="stylesheet" href="https://epxzzy.github.io/gui/itemhover.css">
-  <link rel="stylesheet" href="https://epxzzy.github.io/gui/itemdrag.css">
+  <link rel="stylesheet" href="/public/scripts/itemhover.css">
+  <link rel="stylesheet" href="/public/scripts/itemdrag.css">
 </head>
 
 <body>
@@ -17,16 +17,15 @@
 
     <nav class="navigation">
       <div class="breadcrumb">
-        <a href="../">root</a> > <a href="./">items</a> > <strong>sabergauntlet</strong>
+        <a href="../">home</a> > <a href="./">items</a> > <strong>sabergauntlet</strong>
       </div>
-      <br>
       <a href="https://github.com/epxzzy/epxzzysabers/blob/master/docs/items/sabergauntlet.html">source</a>
     </nav>
     <h1 class="wiki-title">Saber Gauntlet</h1>
     <hr>
     <div class="sidebar">
       <div class="block-image">
-        <img src="https://minecraft.wiki/images/Missing_Texture_JE4.png?71c27">
+        <span class="item-sprite-large GauntletSaberItem"></span>
       </div>
 
       <table class="info-table">
@@ -64,8 +63,7 @@
       <main class="main-content">
         <div id="Description">
           <p>
-            Hardcore melee weapon. cancelled concept from ROTS. The model and texture have been reworked by
-            <strong>Dead_Comedian</strong>. The saber now also supports external shaders for enhanced visuals.
+            Hardcore melee weapon with brutal disarming capabilities. cancelled concept from ROTS.
           </p>
         </div>
 
@@ -159,8 +157,8 @@
 
                 <div class="slot">
                   <a class="item" draggable="false"><span class="minetext item KrystalItem"
-                      onclick="location.href = 'https://epxzzy.github.io/epxzzysabers/docs/items/krystal';"
-                      data-mctitle="Krystal"></span></a>
+                      onclick="location.href = './krystal';"
+                      data-mctitle="Krystal&lt;br&gt;&lt;span class='mcTextGrey'&gt;Plasma exerting magical crystal.&lt;/span&gt;"></span></a>
                 </div>
 
                 <div class="slot"></div>
@@ -193,10 +191,8 @@
               <div class="craftingarrow"></div>
               <div class="slotbig">
                 <div class="item" draggable="false">
-                  <a class="item" draggable="false"><span class="minetext item"
-                      style="background-image: url(https://minecraft.wiki/images/Missing_Texture_JE4.png)"
-                      onclick="location.href = 'https://epxzzy.github.io/epxzzysabers/docs/items/sabergauntlet';"
-                      data-mctitle="Saber Gauntlet&lt;br&gt;&lt;span class='mcTextGrey'&gt;add shit here&lt;/span&gt;"></span></a>
+                  <a class="item" draggable="false"><span class="minetext item GauntletSaberItem" data-mctitle="Saber Gauntlet&lt;br&gt;&lt;span class='mcTextGrey'&gt;Hardcore melee weapon with brutal disarming capabilities. cancelled concept from ROTS.
+&lt;/span&gt;"></span></a>
 
                 </div>
               </div>
@@ -311,7 +307,7 @@
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://epxzzy.github.io/gui/itemhover.js"></script>
+  <script src="/public/scripts/itemhover.js"></script>
 </body>
 
 </html>

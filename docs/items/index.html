@@ -1,57 +1,105 @@
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="https://epxzzy.github.io/creations/creations.css">
-    <link rel="stylesheet" href="https://epxzzy.github.io/style.css">
-    <link rel="stylesheet" href="https://epxzzy.github.io/gui/itemhover.css">
-    <link rel="stylesheet" href="../style.css">
+<!DOCTYPE html>
+<html lang="en">
 
-    <meta property="og:type" content="epxzzy.github.io/epxzzysabers/docs/items">
-    <meta property="og:title" content="Items - epxzzy's sabers">
-    <meta property="og:description" content="Wiki page for items of epxzzysabers">
-    <meta property="og:url" content="https://epxzzy.github.io/epxzzysabers/docs/items">
-    <style>
-    </style>
-  </head>
-  <body>
-    <div id="minetip-tooltip" style="display: none; positiion: absolute; top: 0px; left: 0px;"><br><span class="mcTextGrey"></span></div>
-    <div class="main1" style="animation: none;">
-      <h1 class="menutitle" style="font-family: minefont;font-weight: lighter;">Mod items lmao</h1>
-      <div class="boxes">
-        <div class="box">
-<a class="item" draggable="false"><span class="minetext item" style="background-image: url(../media/krystal.png)" onclick="location.href = 'https://epxzzy.github.io/epxzzysabers/docs/items/krystal';" data-mctitle="Krystal&lt;br&gt;&lt;span class='mcTextGrey'&gt;crafting ingredient&lt;/span&gt;"></span></a>
-        </div>
-        <div class="box">
-<a class="item" draggable="false"><span class="minetext item" style="background-image: url(https://minecraft.wiki/images/Missing_Texture_JE4.png)" onclick="location.href = 'https://epxzzy.github.io/epxzzysabers/docs/items/singlebladed';" data-mctitle="Single Bladed Saber&lt;br&gt;&lt;span class='mcTextGrey'&gt;basic mono saber&lt;/span&gt;"></span></a>
-        </div>
-        <div class="box">
-<a class="item" draggable="false"><span class="minetext item" style="background-image: url(https://minecraft.wiki/images/Missing_Texture_JE4.png)" onclick="location.href = 'https://epxzzy.github.io/epxzzysabers/docs/items/dualbladed';" data-mctitle="Dual Bladed Saber&lt;br&gt;&lt;span class='mcTextGrey'&gt;basic dual bladed saber&lt;/span&gt;"></span></a>
-        </div>
-        <div class="box">
-<a class="item" draggable="false"><span class="minetext item" style="background-image: url(https://minecraft.wiki/images/Missing_Texture_JE4.png)" onclick="location.href = 'https://epxzzy.github.io/epxzzysabers/docs/items/rotarysaber';" data-mctitle="Rotary Saber&lt;br&gt;&lt;span class='mcTextGrey'&gt;special dual bladed saber&lt;/span&gt;"></span></a>
-        </div>
-        <div class="box">
-<a class="item" draggable="false"><span class="minetext item" style="background-image: url(https://minecraft.wiki/images/Missing_Texture_JE4.png)" onclick="location.href = 'https://epxzzy.github.io/epxzzysabers/docs/items/crossguardsaber';" data-mctitle="Crossguard Saber&lt;br&gt;&lt;span class='mcTextGrey'&gt;cosmetic mono saber&lt;/span&gt;"></span></a>
-        </div>
-        <div class="box">
-<a class="item" draggable="false"><span class="minetext item" style="background-image: url(https://minecraft.wiki/images/Missing_Texture_JE4.png)" onclick="location.href = 'https://epxzzy.github.io/epxzzysabers/docs/items/blastersaber';" data-mctitle="Blaster Saber&lt;br&gt;&lt;span class='mcTextGrey'&gt;special mono saber&lt;/span&gt;"></span></a>
-        </div>
-        <div class="box">
-<a class="item" draggable="false"><span class="minetext item" style="background-image: url(https://minecraft.wiki/images/Missing_Texture_JE4.png)" onclick="location.href = 'https://epxzzy.github.io/epxzzysabers/docs/items/saberpike';" data-mctitle="Saber Pike&lt;br&gt;&lt;span class='mcTextGrey'&gt;cosmetic dual bladed saber&lt;/span&gt;"></span></a>
-        </div>
-        <div class="box">
-<a class="item" draggable="false"><span class="minetext item" style="background-image: url(https://minecraft.wiki/images/Missing_Texture_JE4.png)" onclick="location.href = 'https://epxzzy.github.io/epxzzysabers/docs/items/sabergauntlet';" data-mctitle="Saber Gauntlet&lt;br&gt;&lt;span class='mcTextGrey'&gt;exotic saber&lt;/span&gt;"></span></a>
-        </div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Items - epxzzysabers</title>
 
-        <div class="box"></div>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../items.css">
+  <style>
+    body {
+      font-size: 0.8rem;
+    }
 
-      
+    h1 {
+      font-size: 2.2rem;
+    }
 
+    h2 {
+      font-size: 1.7rem;
+    }
+
+    ul {
+      padding-left: 2rem;
+    }
+
+    li {
+      margin-bottom: 20px;
+    }
+
+    .item-link {
+      font-weight: bold;
+      text-decoration: none;
+      color: #0645ad;
+    }
+
+    .item-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <nav class="navigation">
+      <div class="breadcrumb">
+        <a href="../">home</a> &gt; <strong>items</strong>
       </div>
-    </div>
+      <a href="https://github.com/epxzzy/epxzzysabers/blob/master/docs/items/index.html">source</a>
+    </nav>
+    <header>
+      <h1>Items</h1>
+      <hr>
+      <p>This is a list comprising of all items currently implemented in the mod.</p>
+    </header>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://epxzzy.github.io/gui/itemhover.js"></script>
+    <section id="Sabers">
+      <h3>Sabers</h3>
+      <ul>
+        <li>
+          <a href="./krystal"><span class="item-sprite-inline KrystalItem"></span></a>
+          <a href="./krystal" class="item-link">Krystal</a>: Plasma exterting magical crystal.
+        </li>
+        <li>
+          <a href="./singlebladed"><span class="item-sprite-inline SingleSaberItem"></span></a>
+          <a href="./singlebladed" class="item-link">Single Bladed Saber</a>: An elegant weapon for a more civilized
+          age.
+        </li>
+        <li>
+          <a href="./dualbladed"><span class="item-sprite-inline DualSaberItem"></span></a>
+          <a href="./dualbladed" class="item-link">Dual Bladed Saber</a>: Melee weapon, excellent at parrying.
+        </li>
+        <li>
+          <a href="./rotarysaber"><span class="item-sprite-inline RotarySaberItem"></span></a>
+          <a href="./rotarysaber" class="item-link">Rotary Saber</a>: Melee AND ranged weapon. Also serves as
+          temporary
+          aerial escape.
+        </li>
+        <li>
+          <a href="./crossguardsaber"><span class="item-sprite-inline CrossguardSaberItem"></span></a>
+          <a href="./crossguardsaber" class="item-link">Crossguard Saber</a>: Weapon based off of ancient sith designs.
+          Cracked krystal makes it blusterous.
+        </li>
+        <li>
+          <a href="./blastersaber"><span class="item-sprite-inline BlasterSaberItem"></span></a>
+          <a href="./blastersaber" class="item-link">Blaster Saber</a>: Saber with modified blaster at core, mildly
+          effective at ranged attacks.
+        </li>
+        <li>
+          <a href="./saberpike"><span class="item-sprite-inline PikeSaberItem"></span></a>
+          <a href="./saberpike" class="item-link">Saber Pike</a>: Another ancient sith weapon, later used by jedi
+          guardians.
+        </li>
+        <li>
+          <a href="./sabergauntlet"><span class="item-sprite-inline GauntletSaberItem"></span></a>
+          <a href="./sabergauntlet" class="item-link">Saber Gauntlet</a>: Hardcore melee weapon with brutal disarming
+          capabilities. cancelled concept from ROTS.
+        </li>
+      </ul>
+    </section>
+  </main>
+</body>
 
-  </body>
 </html>

@@ -1,25 +1,72 @@
 @font-face {
   font-family: "minefont";
-  src: url("https://epxzzy.github.io/mcfont.woff") format("woff");
+  src: url("/public/media/mcfont.woff") format("woff");
+}
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #202122;
+  --secondary-bg: #f8f9fa;
+  --border-color: #a2a9b1;
+  --subtle-border: #eaecf0;
+  --table-border: #ddd;
+  --link-color: #3366cc;
+  --toc-shadow: rgba(0, 0, 0, 0.1);
+
+  /* Minecraft UI Colors */
+  --mc-ui-bg: #c6c6c6;
+  --mc-slot-bg: #919191;
+  --mc-shadow-light: #e8e8e8;
+  --mc-shadow-dark: #555555;
+  --mc-shadow-mid: #8b8b8b;
+  --mc-border-main: #b5b4b5;
+  --mc-outline: #000000;
+  --mc-text: #292929;
+  --mc-count-shadow: #333333;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --secondary-bg: #1e1e1e;
+    --border-color: #444444;
+    --subtle-border: #333333;
+    --table-border: #333333;
+    --link-color: #6699ff;
+    --toc-shadow: rgba(0, 0, 0, 0.5);
+
+    /* Dark Minecraft UI Colors */
+    --mc-ui-bg: #3c3f41;
+    --mc-slot-bg: #2b2b2b;
+    --mc-shadow-light: #4a4d50;
+    --mc-shadow-dark: #1a1a1a;
+    --mc-shadow-mid: #3c3f41;
+    --mc-border-main: #2b2b2b;
+    --mc-outline: #000000;
+    --mc-text: #e0e0e0;
+    --mc-count-shadow: #000000;
+  }
 }
 
 .wikitable {
-  background-color:var(--background-color-neutral-subtle,#f8f9fa);
-  color:var(--color-base,#202122);
-  margin:1em 0;
-  border:1px solid var(--border-color-base,#a2a9b1);
-  border-collapse:collapse;
+  background-color: var(--secondary-bg);
+  color: var(--text-color);
+  margin: 1em 0;
+  border: 1px solid var(--border-color);
+  border-collapse: collapse;
   width: 300px;
 }
 
 
 .toc-container {
-  border: 1px solid #a2a9b1;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   padding: 15px;
   margin: 20px 0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  width: 30%
+  box-shadow: 0 1px 3px var(--toc-shadow);
+  width: 30%;
+  background-color: var(--secondary-bg);
 }
 
 .toc-title {
@@ -27,7 +74,7 @@
   font-size: 16px;
   margin-bottom: 10px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #eaecf0;
+  border-bottom: 1px solid var(--subtle-border);
 }
 
 .toc-list {
@@ -75,36 +122,44 @@
   left: 75%;
   z-index: 1;
 }
-p, a {
+
+p,
+a {
   z-index: 2;
   position: relative;
-  width: 75%;
   font-family: system-ui, sans-serif;
+  color: var(--link-color);
 }
+
+p {
+  color: var(--text-color);
+}
+
 .block-image {
   width: 100px;
   height: 100px;
   margin: 0 auto 1rem;
   image-rendering: pixelated;
-  border: 1px solid #a2a9b1;
+  border: 1px solid var(--border-color);
 }
 
-.wikititle{
+.wikititle {
   font-family: system-ui, sans-serif;
 }
 
-.block-image > img {
+.block-image>img {
   width: 100px;
   height: 100px;
 
 }
 
 .other-image {
-  border: 1px solid #a2a9b1;
+  border: 1px solid var(--border-color);
   width: 20vw;
   height: auto;
 }
-.other-image > img {
+
+.other-image>img {
   width: 20vw;
   height: auto;
 }
@@ -112,23 +167,22 @@ p, a {
 .info-table {
   width: 100%;
   border-collapse: collapse;
-  border-bottom: 1px solid #eaecf0;
-  border: 1px solid #a2a9b1;
+  border-bottom: 1px solid var(--subtle-border);
+  border: 1px solid var(--border-color);
   margin-bottom: 1rem;
 }
 
 .info-table th,
 .info-table td {
   padding: 0.5rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--table-border);
 }
 
 .info-table th {
   font-weight: bold;
 }
 
-.info-table tr:nth-child(even) {
-}
+.info-table tr:nth-child(even) {}
 
 
 .menutitle {
@@ -146,21 +200,21 @@ p, a {
 .item {
   background-size: cover;
   background-repeat: no-repeat;
-  height: 30px; 
-  width:30px; 
+  height: 30px;
+  width: 30px;
   display: block;
   cursor: default;
   margin: auto;
 }
 
-.item > .count {
+.item>.count {
   display: block;
   position: relative;
   bottom: 30px;
   left: 14px;
   font-family: minefont;
   font-size: 18px;
-  text-shadow: #333 1px 2px 1px;
+  text-shadow: var(--mc-count-shadow) 1px 2px 1px;
   color: white;
 }
 
@@ -177,9 +231,9 @@ p, a {
 }
 
 .craftingarrow {
-background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?a4894) no-repeat;
-    background-color: rgba(0, 0, 0, 0);
-    background-image: url("https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?a4894");
+  background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?a4894) no-repeat;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url("https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?a4894");
   width: 32px;
   height: 26px;
   padding-left: 4px;
@@ -189,34 +243,34 @@ background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?
 
 .craftingui {
   width: max-content;
-  background-color: #c6c6c6;
-  box-shadow: 4px 0 0 0 #555555,
-    0 4px 0 0 #555555,
-    2px 2px 0 0 #555555,
-    -4px 0 0 0 #e8e8e8,
-    0 -4px 0 0 #e8e8e8,
-    -2px -2px 0 0 #e8e8e8,
-    0 0 0 2px #b5b4b5,
-    2px 4px 0 0 #555,
-    4px 2px 0 0 #555,
-    -2px -4px 0 0 #e8e8e8,
-    -4px -2px 0 0 #e8e8e8,
-    4px -2px 0 0 #000,
-    2px -4px 0 0 #000,
-    -4px 2px 0 0 #000,
-    -2px 4px 0 0 #000,
-    -4px -4px 0 0 #000,
-    4px 4px 0 0 #000,
-    -6px 0 0 0 #000,
-    -6px -2px 0 0 #000,
-    6px 0 0 0 #000,
-    6px 2px 0 0 #000,
-    0 -6px 0 0 #000,
-    -2px -6px 0 0 #000,
-    0 6px 0 0 #000,
-    2px 6px 0 0 #000;
+  background-color: var(--mc-ui-bg);
+  box-shadow: 4px 0 0 0 var(--mc-shadow-dark),
+    0 4px 0 0 var(--mc-shadow-dark),
+    2px 2px 0 0 var(--mc-shadow-dark),
+    -4px 0 0 0 var(--mc-shadow-light),
+    0 -4px 0 0 var(--mc-shadow-light),
+    -2px -2px 0 0 var(--mc-shadow-light),
+    0 0 0 2px var(--mc-border-main),
+    2px 4px 0 0 var(--mc-shadow-dark),
+    4px 2px 0 0 var(--mc-shadow-dark),
+    -2px -4px 0 0 var(--mc-shadow-light),
+    -4px -2px 0 0 var(--mc-shadow-light),
+    4px -2px 0 0 var(--mc-outline),
+    2px -4px 0 0 var(--mc-outline),
+    -4px 2px 0 0 var(--mc-outline),
+    -2px 4px 0 0 var(--mc-outline),
+    -4px -4px 0 0 var(--mc-outline),
+    4px 4px 0 0 var(--mc-outline),
+    -6px 0 0 0 var(--mc-outline),
+    -6px -2px 0 0 var(--mc-outline),
+    6px 0 0 0 var(--mc-outline),
+    6px 2px 0 0 var(--mc-outline),
+    0 -6px 0 0 var(--mc-outline),
+    -2px -6px 0 0 var(--mc-outline),
+    0 6px 0 0 var(--mc-outline),
+    2px 6px 0 0 var(--mc-outline);
   margin-left: 8px;
-  display: inline-flex; 
+  display: inline-flex;
   align-items: center;
 
 }
@@ -225,13 +279,13 @@ background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?
   font-size: calc(30px - 6px);
   line-height: 30px;
   text-align: center;
-  color: #292929;
+  color: var(--mc-text);
   height: 30px;
-  width: 30px; 
-  background-color: #919191;
-  box-shadow: 1px 1px 0 1px #e8e8e8,
-    -1px -1px 0 1px #555,
-    0 0 0 2px #8b8b8b;
+  width: 30px;
+  background-color: var(--mc-slot-bg);
+  box-shadow: 1px 1px 0 1px var(--mc-shadow-light),
+    -1px -1px 0 1px var(--mc-shadow-dark),
+    0 0 0 2px var(--mc-shadow-mid);
   cursor: default;
 }
 
@@ -239,13 +293,13 @@ background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?
   font-size: calc(50px - 6px);
   line-height: 50px;
   text-align: center;
-  color: #292929;
+  color: var(--mc-text);
   height: 50px;
-  width: 50px; 
-  background-color: #919191;
-  box-shadow: 1px 1px 0 1px #e8e8e8,
-    -1px -1px 0 1px #555,
-    0 0 0 2px #8b8b8b;
+  width: 50px;
+  background-color: var(--mc-slot-bg);
+  box-shadow: 1px 1px 0 1px var(--mc-shadow-light),
+    -1px -1px 0 1px var(--mc-shadow-dark),
+    0 0 0 2px var(--mc-shadow-mid);
   cursor: default;
   margin-right: 10px;
   display: flex;
@@ -258,7 +312,9 @@ body {
   font-family: system-ui, sans-serif;
   line-height: 1.6;
   margin: 0;
-  padding: 2rem; 
+  padding: 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 main {
@@ -266,7 +322,11 @@ main {
   margin: 0 auto;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   line-height: 1.2;
   font-family: system-ui, sans-serif;
 }
@@ -285,10 +345,11 @@ section {
 }
 
 details {
-  border: 1px solid #ddd;
+  border: 1px solid var(--table-border);
   border-radius: 8px;
   padding: 0.75rem 1rem;
   margin-block: 0.5rem;
+  background-color: var(--secondary-bg);
 }
 
 summary {
@@ -296,6 +357,25 @@ summary {
   font-weight: 600;
 }
 
+.item-link {
+  color: var(--link-color) !important;
+}
+
 .textaligncenter {
-   text-align: center;
+  text-align: center;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-family: sans-serif;
+  font-size: 0.9rem;
+}
+
+.breadcrumb {
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }

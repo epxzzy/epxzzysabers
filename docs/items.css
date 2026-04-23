@@ -1,84 +1,130 @@
+.item-sprite-inline {
+  display: inline-block;
+  width: 4em;
+  height: 4em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.item-sprite-large {
+  display: inline-block;
+  width: 6.5em;
+  height: 6.5em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
 
 .KrystalItem {
-  background-image: url(./media/krystal.png);
- image-rendering: pixelated;
+  background-image: url(../public/media/krystal.png);
+  image-rendering: pixelated;
+}
+
+.SingleSaberItem {
+  background-image: url(../public/media/mono.png);
+}
+
+.DualSaberItem {
+  background-image: url(../public/media/dual.png);
+}
+
+.RotarySaberItem {
+  background-image: url(../public/media/rotary.png);
+}
+
+.CrossguardSaberItem {
+  background-image: url(../public/media/crossguard.png);
+}
+
+.BlasterSaberItem {
+  background-image: url(../public/media/blaster_hilt.png);
+}
+
+.PikeSaberItem {
+  background-image: url(../public/media/pike.png);
+}
+
+.GauntletSaberItem {
+  background-image: url(../public/media/gauntlet.png);
 }
 
 .DiamondItem {
   background-image: url(https://minecraft.wiki/images/Invicon_Diamond.png);
- image-rendering: pixelated;
-
+  image-rendering: pixelated;
 }
 
 .NetheriteItem {
   background-image: url(https://minecraft.wiki/images/Invicon_Netherite_Scrap.png);
- image-rendering: pixelated;
-
+  image-rendering: pixelated;
 }
 
 .GoldItem {
   background-image: url(https://minecraft.wiki/images/Invicon_Gold_Ingot.png);
- image-rendering: pixelated;
-
+  image-rendering: pixelated;
 }
 
 .EchoShardItem {
   background-image: url(https://minecraft.wiki/images/Invicon_Echo_Shard.png);
- image-rendering: pixelated;
-
+  image-rendering: pixelated;
 }
 
 .GlowstoneItem {
   background-image: url(https://minecraft.wiki/images/Invicon_Glowstone_Dust.png);
- image-rendering: pixelated;
-
+  image-rendering: pixelated;
 }
 
 .LapisItem {
- image-rendering: pixelated;
+  image-rendering: pixelated;
   background-image: url(https://minecraft.wiki/images/Invicon_Lapis_Lazuli.png);
-
 }
 
 .AmethystItem {
   background-image: url(https://minecraft.wiki/images/Invicon_Amethyst_Shard.png);
- image-rendering: pixelated;
-
+  image-rendering: pixelated;
 }
 
 .NetherStarItem {
   background-image: url(https://minecraft.wiki/images/Invicon_Nether_Star.gif);
- image-rendering: pixelated;
-
+  image-rendering: pixelated;
 }
 
 .IronNugItem {
   background-image: url(https://minecraft.wiki/images/Invicon_Iron_Nugget.png);
- image-rendering: pixelated;
-
+  image-rendering: pixelated;
 }
 
 .DiscItem {
   background-image: url(https://minecraft.wiki/images/Invicon_Music_Disc_13.png);
- image-rendering: pixelated;
-
+  image-rendering: pixelated;
 }
 
 .CrossbowItem {
   background-image: url(https://minecraft.wiki/images/Invicon_Crossbow.png);
- image-rendering: pixelated;
-
+  image-rendering: pixelated;
 }
 
 .SeaHeartItem {
   background-image: url(https://minecraft.wiki/images/Invicon_Heart_of_the_Sea.png);
- image-rendering: pixelated;
-
+  image-rendering: pixelated;
 }
 
 .RedstoneDustItem {
   background-image: url(https://minecraft.wiki/images/Invicon_Redstone.png);
- image-rendering: pixelated;
-
+  image-rendering: pixelated;
 }
 
+.QuartzItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Nether_Quartz.png);
+  image-rendering: pixelated;
+}
+
+.KyberStationItem {
+  background-image: url(../public/media/kyber_station.png);
+  image-rendering: pixelated;
+}

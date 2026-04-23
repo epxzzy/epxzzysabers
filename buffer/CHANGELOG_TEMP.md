@@ -32,9 +32,13 @@
 - Reworked Plasma Bolt projectile model and texture.
 - Fixed black colour (#000000) being overwritten with default colour (#00FF00) 
 - Added a visual indicator for hanging saber block. (link issue, #1 projectile blocking)
+- Added glowing, color-matching item names for sabers.
 
 ## Functionality
 - Added ability tooltip (Shift+hover in inventory) for Blaster Saber, Saber Gauntlet and Rotary Saber.
+- Added Saber Stance keybind (replaces Shift + Right-Click with saber).
+- Thrown rotary sabers now return automatically after a set distance.
+- Slowed down thrown rotary saber movement to allow easier parrying.
 - Fixed a server crash relating to Saber Gauntlet.
 - Fixed Rotary flight cooldown and duration synchronisation.
 - Fixed Gauntlet client/server synchronisation.
