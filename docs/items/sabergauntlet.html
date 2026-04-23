@@ -38,7 +38,7 @@
         </tr>
         <tr>
           <td><strong>Attack Speed</strong></td>
-          <td>0 (5 ticks / 0.25 seconds)</td>
+          <td>-1 (5 ticks / 0.25 seconds)</td>
         </tr>
         <tr>
           <td><strong>Parry Range</strong></td>
@@ -124,11 +124,6 @@
                     <span class="toc-number">4.5</span>SuperCharge
                   </a>
                 </li>
-                <li class="toc-item">
-                  <a href="#HUD" class="toc-link">
-                    <span class="toc-number">4.6</span>HUD & Tooltips
-                  </a>
-                </li>
               </ul>
             </li>
             <li class="toc-item">
@@ -211,41 +206,57 @@
             </p>
           </div>
 
+
           <div id="Attacking">
             <h3>Attacking</h3>
             <p>
-              When the item is active, it does 12hp of damage when left-clicked on an entity (or player). However like
-              any other saber item, this can be countered via <a href="#Blocking">Blocking</a>. A left-click can also
-              deflect any incoming (in parry range, or in 3 block radius for this specific item) projectiles (given that
-              the projectile is in a somewhat linear path, unlike shulkers for example), but timing would have to be
-              precise. The Saber Gauntlet can also perform sweep-style attacks in melee.
+              When the item is active, it does 12hp (+8hp if super charged) of damage when left-clicked on an entity (or
+              player). However like
+              any other saber item, this can be countered via <a href="#Blocking">Blocking</a>.<br>
+              Do note, you cannot perform critical hits using saber weapons.<br><br>
+
+              A left-click can also
+              deflect any incoming(in parry range, or in 3 block radius for this specific item) projectiles (given that
+              the projectile is in a somewhat linear path, unlike shulker bullets for example), but timing would have to
+              be precise. this is called a <strong>parry</strong>. <br><br>
+
+              A parry is when you redirect a projectile that was aimed at you.
             </p>
           </div>
 
           <div id="Blocking">
             <h3>Blocking</h3>
             <p>
+              Like any other saber item, when right-clicked, will always block any damage
+              coming from a saber item. However it also block projectiles if timed properly. <br><br>
 
-              <strong>Saber Gauntlet</strong>, like any other saber item, when right-clicked, will block any damage
-              coming from a saber item, and even projectiles if timed properly. Can be held down for about ~1.75 seconds
-              which if exceeded will cause the projectile to do damage. A visual indicator is now shown when in a
-              hanging block, and the duration has been fine-tuned. Critical hits have been removed for balance, and
-              trident parrying has been fixed.
+              To block a projctile the item shall be held down for less than ~1.75 seconds.
+              if that is exceeded it will cause the projectiles to do damage. A visual indicator is
+              shown in first person when you have reached this threshold. Failing to block a projectile is called a
+              <strong>hanging block</strong>.<br><br>
+
+              a hanging block is the failed attempt at blocking a projectile in time.(Note: direct melee attacks are
+              always
+              blocked)<br>
+              [show hanging block indicator gif]
             </p>
-
           </div>
+
 
           <div id="Disruption">
             <h3>Disruption</h3>
             <p>
-
-              Pressing [SABER-ABILITY] key lets out a superquick electromagneticalphaquazarradiation wave that causes
-              nearby saber items to missbehave, either turning them off or turning them off with cooldown. This ability
-              has a cooldown of 60 ticks (3 seconds). This affects every entity holding any non-gauntlet saber item in a
-              spherical radius of 16 blocks (roughly a chunk). If a flying Rotary Saber player enters the disruption
-              range, their flight is canceled and their flight cooldown is doubled to 80 ticks (4 seconds) instead of
-              the normal 40 ticks (2 seconds). Any affected player wielding a non-gauntlet saber also gets a blocking
+              Pressing [SABER-ABILITY] key [very complicated lore science stuff] putting
+              nearby equipped saber items on blocking cooldown (disables blocking entirely for some time) from a
+              distance after which gauntlet itself
+              goes on cooldown for 60 ticks (3 seconds). <br><br>
+              This affects every entity holding any non-gauntlet saber item in a
+              spherical radius of 16 blocks (roughly a chunk of radius).<br> If a flying Rotary Saber player enters the
+              disruption range, their flight is canceled and their flight cooldown is doubled to 80 ticks (4 seconds)
+              instead of
+              the normal 40 ticks (2 seconds). Any other player wielding a non-gauntlet saber also gets a blocking
               cooldown of 20 ticks (1 second), while a gauntlet wielded against another gauntlet is ignored.
+
             </p>
 
           </div>
@@ -254,21 +265,16 @@
             <h3>SuperCharge</h3>
             <p>
 
-              Holding down right-click for 40 ticks (2 seconds) on an active saber gauntlet will activate supercharge.
+              Holding down RMB for 40 ticks (2 seconds) on an active saber gauntlet will activate supercharge.
               While supercharged, the player is given +3 blocks of reach and +8 damage (for a total of 20hp of attack
               damage) while the saber is held in mainhand. However supercharge lasts for 160 ticks (8 seconds) after
               activation. This ability does not have a cooldown nor will it stack if activated in continuous manner.
+
+              <br><br>
+              <strong>Both Gauntlet Charge Duration and Gauntlet Chargeup Timecan be tweaked via a datapack.</strong>
+
             </p>
 
-          </div>
-
-          <div id="HUD">
-            <h3>HUD & Tooltips (v0.0.4)</h3>
-            <p>
-              Small sprites (HUD hints) are now displayed near the crosshair to indicate the saber's ability status,
-              such as whether an ability is on cooldown, in use (duration), or ready to use. Furthermore, pressing
-              [SHIFT] while hovering over the item in the inventory displays detailed ability tooltips.
-            </p>
           </div>
 
         </section>
@@ -292,9 +298,16 @@
 
               <tr>
                 <td><b>0.0.4</b></td>
-                <td>Model/texture rework by Dead_Comedian.<br> Added shader support, HUD hints, and ability
-                  tooltips.<br> Added visual indicator for hanging block, removed critical hits, and fixed trident
-                  parrying.<br> Fixed server crash, dedicated server bugs, and client/server synchronization issues.
+                <td>
+                  Added shader support.<br>
+                  Added visual indicator for hanging block.<br>
+                  Model and texture reworked by Dead_Comedian.<br>
+                  Fixed client/server synchronization issues.<br>
+                  Fixed server crash with disruption ability.<br>
+                  Fixed dedicated server only bugs.<br>
+                  Added Hud indicator for gauntlet charge duration and gauntlet charge progress.<br>
+                  Added datapack control for gauntlet charge duration and gauntlet charge progress.<br>
+                  Added ability tooltips.<br>
                 </td>
               </tr>
             </tbody>

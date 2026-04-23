@@ -42,7 +42,7 @@
         </tr>
         <tr>
           <td><strong>Parry Range</strong></td>
-          <td>3</td>
+          <td>3.5</td>
         </tr>
         <tr>
           <td><strong>Stackable</strong></td>
@@ -115,17 +115,12 @@
                 </li>
                 <li class="toc-item">
                   <a href="#SaberThrow" class="toc-link">
-                    <span class="toc-number">4.4</span>Boomrang
+                    <span class="toc-number">4.4</span>Boomerang
                   </a>
                 </li>
                 <li class="toc-item">
                   <a href="#SaberFlight" class="toc-link">
                     <span class="toc-number">4.5</span>Flight
-                  </a>
-                </li>
-                <li class="toc-item">
-                  <a href="#HUD" class="toc-link">
-                    <span class="toc-number">4.6</span>HUD & Tooltips
                   </a>
                 </li>
               </ul>
@@ -220,68 +215,77 @@
           <div id="Attacking">
             <h3>Attacking</h3>
             <p>
-
               When the item is active, it does 12hp of damage when left-clicked on an entity (or player). However like
-              any other saber item, this can be countered via <a href="#Blocking">Blocking</a>. A left-click can also
-              deflect any incoming(in parry range, or in 3 block radius for this specific item) projectiles (given that
-              the projectile is in a somewhat linear path, unlike shulkers for example), but timing would have to be
-              precise.
-            </p>
+              any other saber item, this can be countered via <a href="#Blocking">Blocking</a>.<br>
+              Do note, you cannot perform critical hits using saber weapons.<br><br>
 
+              A left-click can also
+              deflect any incoming(in parry range, or in 3.5 block radius for this specific item) projectiles (given
+              that
+              the projectile is in a somewhat linear path, unlike shulker bullets for example), but timing would have to
+              be precise. this is called a <strong>parry</strong>. <br><br>
+
+              A parry is when you redirect a projectile that was aimed at you.
+            </p>
           </div>
 
           <div id="Blocking">
             <h3>Blocking</h3>
             <p>
-              <strong>Rotary Saber</strong>, like any other saber item, when right-clicked, will block any damage coming
-              from a saber item, and even projectiles if timed properly. Can be held down for about ~1.75 seconds which
-              if exceeded will cause the projectile to do damage. A visual indicator is now shown when in a hanging
-              block, and the duration has been fine-tuned. Critical hits have been removed for balance, the parry range
-              has been fine-tuned to better suit the weapon, and trident parrying has been fixed.
-            </p>
+              Like any other saber item, when right-clicked, will always block any damage
+              coming from a saber item. However it also block projectiles if timed properly. <br><br>
 
+              To block a projctile the item shall be held down for less than ~1.75 seconds.
+              if that is exceeded it will cause the projectiles to do damage. A visual indicator is
+              shown in first person when you have reached this threshold. Failing to block a projectile is called a
+              <strong>hanging block</strong>.<br><br>
+
+              a hanging block is the failed attempt at blocking a projectile in time.(Note: direct melee attacks are
+              always
+              blocked)<br>
+              [show hanging block indicator gif]
+            </p>
           </div>
 
+
           <div id="SaberThrow">
-            <h3>Boomrang</h3>
+            <h3>Boomerang</h3>
             <p>
-
-              Pressing [SABER-ABILITY] key throws the rotary saber like a boomrang, once it hits an entity, a block, or
-              travels a set distance it will return back to you. The movement speed of the thrown rotary saber has been
-              slowed down to allow easier parrying. This will temporarily disable blocking after you pick it up. This
-              ability can be parried and blocked, and it is followed by a cooldown of 80 ticks (4 seconds) before the
-              next throw can be performed. If the player is not in range (for example, offline, in another dimension, or
-              the chunk is not loaded) the thrown rotary saber will crash into anything and drop as an item. Entities in
-              the way of the thrown rotary saber take repetitive 2hp damage, regardless of whether it returns, and a
-              proper hit does the same 12hp damage as a melee attack.
+              Pressing the <strong>[SABER-ABILITY]</strong> key throws the rotary saber forward like a boomerang.
+              The saber returns to its owner upon hitting a block or entity, or after 10 ticks (0.5 seconds) in air.
+              Retrieving the saber temporarily disables blocking while the item is on cooldown.
+              <br><br>
+              This ability can be both parried and blocked. It has a <strong>40-tick (2-second)</strong> cooldown before
+              either <strong>Boomerang</strong> or <a href="#SaberFlight">SaberFlight</a> can be used again.
+              <br><br>
+              If the owner becomes unreachable (e.g., moves to another dimension, goes offline, or leaves the loaded
+              chunk), the saber will collide with the environment and drop as an item. Entities caught in the saber's
+              path take <strong>2 HP</strong> of repetitive damage, while a direct melee hit deals <strong>12
+                HP</strong>.
             </p>
-
           </div>
 
           <div id="SaberFlight">
             <h3>Flight</h3>
             <p>
+              Holding down RMB while looking upward or having air blocks directly below you will toggle flight and
+              you will remain in flight as long as RMB is held. Flight is ideal for vertical
+              traversal, such as scaling mountains or from a fall into the void.
+              <br><br>
+              While flying, the player is extremely vulnerable to both melee and ranged attacks. If hit by even
+              the weakest arrow, flight is immediately halted, causing the player to fall.
+              Flight is limited to 200 ticks (10 seconds), after which flight halts without warning.
+              Once flight ends, is canceled, or is disabled, there is a 40-tick (2-second) cooldown
+              before it can be used again.
+              <br><br>
+              <a href="./sabergauntlet#Disruption">Disruption</a> is a very soild way to
+              counter a flying player.
 
-              Looking up and holding down right-click will toggle flight as long as the item is held down. Flight is
-              better suited for scaling vertically, like mountains for example, or if you just skill issue into the
-              void. Flying does mean the user is vulnerable to any melee and ranged attacks. If a player is shot while
-              flying they will stop flying. A flying player can only fly for 200 ticks (10 seconds) after which flight
-              disables and they start falling. It will take them about 40 ticks (2 seconds) to fly again if their flight
-              has ended, canceled or disabled. Another way to counter a flying player is to activate <a
-                href="./sabergauntlet.html/#Disruption">Disruption</a>.
-            </p>
+              <br><br>
+              <strong>Rotary Flight Duration and Rotary Item Cooldown can be tweaked via a datapack.</strong>
 
-          </div>
-
-          <div id="HUD">
-            <h3>HUD & Tooltips (v0.0.4)</h3>
-            <p>
-              Small sprites (HUD hints) are now displayed near the crosshair to indicate the saber's ability status,
-              such as whether an ability is on cooldown, in use (duration), or ready to use. Furthermore, pressing
-              [SHIFT] while hovering over the item in the inventory displays detailed ability tooltips.
             </p>
           </div>
-
         </section>
 
 
@@ -306,11 +310,17 @@
               </tr>
               <tr>
                 <td><b>0.0.4</b></td>
-                <td>Added shader support, HUD hints, and ability tooltips.<br> Fixed rotary flight cooldown/duration
-                  synchronization and entity issues after chunk reload.<br> Thrown rotary sabers now return
-                  automatically after a set distance, and movement has been slowed to allow easier parrying.<br>
-                  Fine-tuned parry range.<br> Added hanging block indicator, removed critical hits, and fixed trident
-                  parrying.
+                <td>
+                  Added shader support.<br>
+                  Added visual indicator for hanging block.<br>
+                  Increased parry range from 4 to 4.5.<br>
+                  Fixed rotary flight cooldown/duration synchronization issues.<br>
+                  Fixed rotary entity nbt wipe after chunk reload.<br>
+                  Thrown rotary saber now return automatically if they dont hit anything within 10 ticks.<br>
+                  Thrown rotary saber movement has been slowed to allow easier parrying.<br>
+                  Added Hud indicator for rotary flight duration and rotary saber cooldown.<br>
+                  Added datapack control for rotary flight duration and rotary saber cooldown.<br>
+                  Added ability tooltips.<br>
                 </td>
               </tr>
 
