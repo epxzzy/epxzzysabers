@@ -1,27 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Combat Mechanics</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark">
+  <title>Combat - epxzzysabers</title>
+  <link rel="stylesheet" href="../style.css">
 </head>
+
 <body>
-    <h1>Stancing</h1>
-    <div class="toc">
-        <ul>
-            <li><a href="#stancing">Stancing</a></li>
-        </ul>
-    </div>
+  <div class="container">
+    <nav class="navigation">
+      <div class="breadcrumb">
+        <a href="../">home</a> &gt; <a href="./">misc</a> &gt; <strong>combat</strong>
+      </div>
+      <a href="https://github.com/epxzzy/epxzzysabers/blob/master/docs/misc/combat.html">source</a>
+    </nav>
+    <h1 class="wiki-title">Combat Mechanics</h1>
+    <hr>
+
     <div class="content">
-        <h2 id="stancing">Assuming Stance</h2>
-        <p>Press [stance] key to assume a stance while crouching during blocking, and press Shift+[stance] to open the stance preference menu.
-        just imagine you're fighting with a really deadly shield, only thing
-        you need to worry about is facing the source of damage. Critical hits are not applied to saber damage for balance purposes. A visual indicator now displays when holding a saber in hanging block stance (<a href="https://github.com/epxzzy/epxzzysabers/issues/1">issue #1</a>). Hanging saber block duration has been fine-tuned for improved gameplay feel (<a href="https://github.com/epxzzy/epxzzysabers/issues/1">issue #1</a>).</p>
-        <p>... (Completed text about Shift+Stance keybind)</p>
-        <h3>History</h3>
-        <ul>
-            <li>0.0.4 - Added stance preference menu (Shift+Stance keybind) for configuring available stances.</li>
-        </ul>
+      <main class="main-content">
+        <div id="Description">
+          <p>This section documents the combat mechanics and systems of the mod.</p>
+        </div>
+
+        <div class="toc-container">
+          <div class="toc-title">Contents</div>
+          <ul class="toc-list">
+            <li class="toc-item"><a href="#Stancing" class="toc-link"><span class="toc-number">1</span>Stancing</a></li>
+            <li class="toc-item"><a href="#History" class="toc-link"><span class="toc-number">2</span>History</a></li>
+          </ul>
+        </div>
+
+        <section id="Stancing">
+          <h2>Stancing</h2>
+          <p>
+            Press the <strong>[STANCE]</strong> key to assume a stance while crouching during blocking. Pressing <strong>SHIFT + [STANCE]</strong> opens the stance preference menu.
+            Think of it as fighting with a highly specialized shield—your main concern is facing the source of damage.
+            <br><br>
+            Note: Critical hits are not applied to saber damage for balance purposes. A visual indicator displays when holding a saber in hanging block stance.
+          </p>
+        </section>
+
+        <section id="History">
+          <h2>History</h2>
+          <table class="wikitable info-table">
+            <tbody>
+              <tr>
+                <td><b>0.0.4</b></td>
+                <td>
+                  Added stance preference menu (Shift+Stance keybind).<br>
+                  Added visual indicator for hanging block (<a href="https://github.com/epxzzy/epxzzysabers/issues/1">issue #1</a>).<br>
+                  Fine-tuned hanging block duration (<a href="https://github.com/epxzzy/epxzzysabers/issues/1">issue #1</a>).
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
     </div>
+  </div>
 </body>
+
 </html>

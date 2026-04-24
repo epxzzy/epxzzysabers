@@ -10,39 +10,24 @@
   --border-color: #a2a9b1;
   --subtle-border: #eaecf0;
   --table-border: #ddd;
-  --link-color: #3366cc;
+  --link-color: #0645ad;
+  --link-hover-color: #3366cc;
   --toc-shadow: rgba(0, 0, 0, 0.1);
 
-  /* Minecraft UI Colors */
   --mc-ui-bg: #c6c6c6;
-  --mc-slot-bg: #919191;
-  --mc-shadow-light: #e8e8e8;
-  --mc-shadow-dark: #555555;
+  --mc-slot-bg: #8b8b8b;
+  --mc-shadow-light: #ffffff;
+  --mc-shadow-dark: #373737;
   --mc-shadow-mid: #8b8b8b;
   --mc-border-main: #b5b4b5;
   --mc-outline: #000000;
-  --mc-text: #292929;
-  --mc-count-shadow: #333333;
+  --mc-text: #373737;
+  --mc-count-shadow: #3f3f3f;
+
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-color: #121212;
-    --text-color: #e0e0e0;
-    --secondary-bg: #1e1e1e;
-    --border-color: #444444;
-    --subtle-border: #333333;
-    --table-border: #333333;
-    --link-color: #6699ff;
-    --toc-shadow: rgba(0, 0, 0, 0.5);
-
-    /* Dark Minecraft UI Colors */
-    --mc-ui-bg: #3c3f41;
-    --mc-slot-bg: #2b2b2b;
-    --mc-shadow-light: #4a4d50;
-    --mc-shadow-dark: #1a1a1a;
-    --mc-shadow-mid: #3c3f41;
-    --mc-border-main: #2b2b2b;
     --mc-outline: #000000;
     --mc-text: #e0e0e0;
     --mc-count-shadow: #000000;
@@ -123,12 +108,39 @@
   z-index: 1;
 }
 
+/* Flexbox Magic for Sidebars */
+.flex-row {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.flex-row .content {
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar-flex {
+  width: 300px;
+  flex-shrink: 0;
+  padding: 1rem;
+  background-color: var(--secondary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  height: fit-content;
+}
+
 p,
 a {
   z-index: 2;
   position: relative;
   font-family: system-ui, sans-serif;
   color: var(--link-color);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--link-hover-color);
 }
 
 p {
@@ -154,13 +166,12 @@ p {
 }
 
 .other-image {
-  border: 1px solid var(--border-color);
-  width: 20vw;
+  width: 99%;
   height: auto;
 }
 
 .other-image>img {
-  width: 20vw;
+  width: 100%;
   height: auto;
 }
 
@@ -329,6 +340,23 @@ h4,
 h5 {
   line-height: 1.2;
   font-family: system-ui, sans-serif;
+  color: var(--text-color);
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.2rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  border-bottom: 1px solid var(--header-border);
+  padding-bottom: 0.3rem;
+}
+
+h3 {
+  font-size: 1.5rem;
 }
 
 ul {
@@ -378,4 +406,40 @@ summary {
   display: flex;
   gap: 5px;
   align-items: center;
+  color: var(--text-color);
+}
+
+.breadcrumb a {
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+/* New Standardized Layout Classes */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.main-content {
+  padding: 1rem 0;
+}
+
+.item-link {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--link-color) !important;
+}
+
+.item-link:hover {
+  text-decoration: underline;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--subtle-border);
+  margin: 1.5rem 0;
 }

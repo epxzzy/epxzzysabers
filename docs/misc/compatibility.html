@@ -1,95 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark">
+  <title>Compatibility - epxzzysabers</title>
   <link rel="stylesheet" href="../style.css">
 </head>
+
 <body>
-<div class="container">
-  <header>
-  </header>
+  <div class="container">
+    <nav class="navigation">
+      <div class="breadcrumb">
+        <a href="../">home</a> &gt; <a href="./">misc</a> &gt; <strong>compatibility</strong>
+      </div>
+      <a href="https://github.com/epxzzy/epxzzysabers/blob/master/docs/misc/compatibility.html">source</a>
+    </nav>
+    <h1 class="wiki-title">Compatibility</h1>
+    <hr>
 
-  <nav class="navigation">
-    <div class="breadcrumb">
-      <a href="../">home</a> > <a href="./">misc</a> > <strong>compatibility</strong>
+    <div class="content">
+      <main class="main-content">
+        <div id="Description">
+          <p>Mod compatibility information and supported integrations.</p>
+        </div>
+
+        <div class="toc-container">
+          <div class="toc-title">Contents</div>
+          <ul class="toc-list">
+            <li class="toc-item"><a href="#BetterCombat" class="toc-link"><span class="toc-number">1</span>BetterCombat</a></li>
+            <li class="toc-item"><a href="#Config" class="toc-link"><span class="toc-number">2</span>Data-Driven Configuration</a></li>
+            <li class="toc-item"><a href="#Shaders" class="toc-link"><span class="toc-number">3</span>Shader Support</a></li>
+            <li class="toc-item"><a href="#History" class="toc-link"><span class="toc-number">4</span>History</a></li>
+          </ul>
+        </div>
+
+        <section id="BetterCombat">
+          <h2>BetterCombat Compatibility</h2>
+          <p>
+            epxzzysabers now includes full <strong>BetterCombat</strong> compatibility! The mod was previously tagged incorrectly by BetterCombat—this has been fixed in v0.0.4.
+            <br><br>
+            An additional extraneous compatibility datapack is available for enhanced integration. See GitHub releases for the link to the datapack.
+          </p>
+        </section>
+
+        <section id="Config">
+          <h2>Data-Driven Configuration</h2>
+          <p>
+            A new data-driven config system has been implemented, allowing weapon attributes to be customized through configuration files.
+            Live reload is supported for quick testing and iteration during development.
+            <br><br>
+            See the mod's GitHub documentation for config file structure and examples.
+          </p>
+        </section>
+
+        <section id="Shaders">
+          <h2>Shader Support</h2>
+          <p>
+            Saber renderers have been updated to support external shaders for enhanced visual effects. The Rotary Saber entity now also supports shader integration for more dynamic visuals.
+            <br><br>
+            Shader support has been tested with the <strong>Oculus</strong> mod and popular shaderpacks including: Photon, Complementary Unbound, Complementary Reimagined, Rethinking Voxels (Beta), and BSL.
+          </p>
+        </section>
+
+        <section id="History">
+          <h2>History</h2>
+          <table class="wikitable info-table">
+            <tbody>
+              <tr>
+                <td><b>0.0.4</b></td>
+                <td>
+                  Fixed BetterCombat compatibility.<br>
+                  Added extraneous BetterCombat datapack and data-driven config system.<br>
+                  Added external shader support for saber rendering and rotary saber entity.<br>
+                  Tested with Oculus and popular shaderpacks.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
     </div>
-  </nav>
-
-  <h1 class="wiki-title">Compatibility</h1>
-  <hr>
-  <div class="content">
-    <main class="main-content">
-      <div id="Description">
-        <p>Mod compatibility information and supported integrations.</p>
-      </div>
-
-      <div class="toc-container">
-        <div class="toc-title">Contents</div>
-        <ul class="toc-list">
-          <li class="toc-item">
-            <a href="#BetterCombat" class="toc-link">
-              <span class="toc-number">1</span>BetterCombat
-            </a>
-          </li>
-          <li class="toc-item">
-            <a href="#Config" class="toc-link">
-              <span class="toc-number">2</span>Data-Driven Configuration
-            </a>
-          </li>
-          <li class="toc-item">
-            <a href="#Shaders" class="toc-link">
-              <span class="toc-number">3</span>Shader Support
-            </a>
-          </li>
-          <li class="toc-item">
-            <a href="#History" class="toc-link">
-              <span class="toc-number">4</span>History
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <section id="BetterCombat">
-        <h2>BetterCombat Compatibility (v0.0.4)</h2>
-        <p>
-          epxzzysabers now includes full BetterCombat compatibility! 
-          The mod was previously tagged incorrectly by BetterCombat - this has been fixed in v0.0.4.
-          An additional extraneous compatibility datapack is available for enhanced integration.
-          See GitHub releases for link to datapack.
-        </p>
-      </section>
-
-      <section id="Config">
-        <h2>Data-Driven Configuration (v0.0.4)</h2>
-        <p>
-          A new data-driven config system has been implemented allowing weapon attributes to be customized through configuration files.
-          Live reload is supported for quick testing and iteration during development.
-          See the mod's GitHub documentation for config file structure and examples.
-        </p>
-      </section>
-
-      <section id="Shaders">
-        <h2>Shader Support (v0.0.4)</h2>
-        <p>
-          Saber renderers have been updated to support external shaders for enhanced visual effects.
-          The Rotary Saber entity now also supports shader integration for more dynamic visuals.
-          Shader support has been tested with the Oculus mod and the following popular shaderpacks: Photon, Complementary Unbound, Complementary Reimagined, Rethinking Voxels (Beta), and BSL.
-        </p>
-      </section>
-
-      <section id="History">
-        <h2>History</h2>
-        <table class="wikitable info-table">
-          <tbody>
-            <tr>
-              <td><b>0.0.4</b></td>
-              <td>Fixed BetterCombat compatibility.<br> Added extraneous BetterCombat datapack and data-driven config system.<br> Added external shader support for saber rendering and rotary saber entity.<br> Tested with Oculus and popular shaderpacks.</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-    </main>
   </div>
-</div>
 </body>
+
 </html>

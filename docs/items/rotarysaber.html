@@ -1,6 +1,12 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark">
+  <title>Rotary Saber - epxzzysabers</title>
+
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="../items.css">
   <link rel="stylesheet" href="/public/scripts/itemhover.css">
@@ -8,7 +14,7 @@
 </head>
 
 <body>
-  <div id="minetip-tooltip" style="display: none; positiion: absolute; top: 0px; left: 0px;"><br><span
+  <div id="minetip-tooltip" style="display: none; position: absolute; top: 0px; left: 0px;"><br><span
       class="mcTextGrey"></span></div>
 
   <div class="container">
@@ -17,7 +23,7 @@
 
     <nav class="navigation">
       <div class="breadcrumb">
-        <a href="../">home</a> > <a href="./">items</a> > <strong>rotarysaber</strong>
+        <a href="../">home</a> &gt; <a href="./">items</a> &gt; <strong>rotarysaber</strong>
       </div>
       <a href="https://github.com/epxzzy/epxzzysabers/blob/master/docs/items/rotarysaber.html">source</a>
     </nav>
@@ -75,19 +81,6 @@
               </a>
             </li>
             <li class="toc-item">
-              <a href="#Obtaining" class="toc-link">
-                <span class="toc-number">2</span>Obtaining
-              </a>
-              <ul class="toc-list toc-level-2">
-                <li class="toc-item">
-                  <a href="#CreativeInventory" class="toc-link">
-                    <span class="toc-number">2.1</span>Creative Inventory
-                  </a>
-                </li>
-              </ul>
-
-            </li>
-            <li class="toc-item">
               <a href="#Crafting" class="toc-link">
                 <span class="toc-number">3</span>Crafting
               </a>
@@ -134,12 +127,7 @@
         </div>
 
 
-        <section id="Obtaining">
-          <h2>Obtaining</h2>
-          <p>
-            The only way to obtain this item as of 0.0.2 is by crafting.
-          </p>
-        </section>
+
 
         <section id="Crafting">
           <div class="crafting">
@@ -250,19 +238,29 @@
 
           <div id="SaberThrow">
             <h3>Boomerang</h3>
-            <p>
-              Pressing the <strong>[SABER-ABILITY]</strong> key throws the rotary saber forward like a boomerang.
-              The saber returns to its owner upon hitting a block or entity, or after 10 ticks (0.5 seconds) in air.
-              Retrieving the saber temporarily disables blocking while the item is on cooldown.
-              <br><br>
-              This ability can be both parried and blocked. It has a <strong>40-tick (2-second)</strong> cooldown before
-              either <strong>Boomerang</strong> or <a href="#SaberFlight">SaberFlight</a> can be used again.
-              <br><br>
-              If the owner becomes unreachable (e.g., moves to another dimension, goes offline, or leaves the loaded
-              chunk), the saber will collide with the environment and drop as an item. Entities caught in the saber's
-              path take <strong>2 HP</strong> of repetitive damage, while a direct melee hit deals <strong>12
-                HP</strong>.
-            </p>
+            <div class="flex-row">
+              <p>
+                Pressing the <strong>[SABER-ABILITY]</strong> key throws the rotary saber forward like a boomerang.
+                The saber returns to its owner upon hitting a block or entity, or after 10 ticks (0.5 seconds) in air.
+                Retrieving the saber temporarily disables blocking while the item is on cooldown.
+                <br><br>
+                This ability can be both parried and blocked. It has a <strong>40-tick (2-second)</strong> cooldown
+                before
+                either <strong>Boomerang</strong> or <a href="#SaberFlight">SaberFlight</a> can be used again.
+                <br><br>
+                If the owner becomes unreachable (e.g., moves to another dimension, goes offline, or leaves the loaded
+                chunk), the saber will collide with the environment and drop as an item. Entities caught in the saber's
+                path take <strong>2 HP</strong> of repetitive damage, while a direct melee hit deals <strong>12
+                  HP</strong>.
+              </p>
+              <div class="sidebar-flex">
+                <div class="other-image">
+                  <strong>Rotary Saber (Boomerang and Flight)</strong>
+                  <img src="/public/media/rotarysaber_entity.gif">
+                </div>
+              </div>
+
+            </div>
           </div>
 
           <div id="SaberFlight">

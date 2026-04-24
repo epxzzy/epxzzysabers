@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <meta name="color-scheme" content="dark">
+  <meta name="color-scheme" content="light dark">
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="../items.css">
   <link rel="stylesheet" href="/public/scripts/itemhover.css">
@@ -27,7 +27,7 @@
     <hr>
     <div class="sidebar">
       <div class="block-image">
-        <img src="../media/kyber_station.png">
+        <span class="item-sprite-large KyberStationItem"></span>
       </div>
 
       <table class="info-table">
@@ -35,20 +35,24 @@
           <th colspan="2">KyberStation</th>
         </tr>
         <tr>
-          <td><strong>Type</strong></td>
-          <td>Solid Block</td>
-        </tr>
-        <tr>
-          <td><strong>Tool</strong></td>
+          <td><strong>Renewable</strong></td>
           <td>No</td>
         </tr>
         <tr>
+          <td><strong>Stackable</strong></td>
+          <td>Yes (64)</td>
+        </tr>
+        <tr>
+          <td><strong>Tool</strong></td>
+          <td>axe</td>
+        </tr>
+        <tr>
           <td><strong>Blast Resistance</strong></td>
-          <td>Infinite</td>
+          <td>2.5</td>
         </tr>
         <tr>
           <td><strong>Hardness</strong></td>
-          <td>Infinite</td>
+          <td>2.5</td>
         </tr>
         <tr>
           <td><strong>Luminous</strong></td>
@@ -63,24 +67,16 @@
           <td>No</td>
         </tr>
         <tr>
-          <td><strong>Renewable</strong></td>
-          <td>No</td>
+          <td>Catches fire from lava</td>
+          <td>Yes</td>
         </tr>
-        <tr>
-          <td><strong>Stackable</strong></td>
-          <td>Yes (64)</td>
-        </tr>
-        <tr>
-          <td><strong>Drops</strong></td>
-          <td>No</td>
-        </tr>
+
       </table>
     </div>
     <div class="content">
       <main class="main-content">
         <div id="Description">
-          <strong>KyberStation</strong> is a creative mode block and unobtainable in survival. It can be used to alter
-          visual qualites of a lightsaber.
+          Cosmetic weapon customisations block.
         </div>
 
         <div class="toc-container">
@@ -91,94 +87,217 @@
                 <span class="toc-number">1</span>Description
               </a>
             </li>
-            <li class="toc-item">
-              <a href="#Obtaining" class="toc-link">
-                <span class="toc-number">2</span>Obtaining
-              </a>
-              <ul class="toc-list toc-level-2">
-                <li class="toc-item">
-                  <a href="#CreativeInventory" class="toc-link">
-                    <span class="toc-number">2.1</span>Creative Inventory
-                  </a>
-                </li>
-              </ul>
 
-            </li>
             <li class="toc-item">
               <a href="#Crafting" class="toc-link">
-                <span class="toc-number">3</span>Crafting
+                <span class="toc-number">2</span>Crafting
               </a>
             </li>
 
             <li class="toc-item">
               <a href="#Usage" class="toc-link">
-                <span class="toc-number">4</span>Usage
+                <span class="toc-number">3</span>Usage
               </a>
               <ul class="toc-list toc-level-2">
                 <li class="toc-item">
                   <a href="#Tinting" class="toc-link">
-                    <span class="toc-number">4.1</span>Tinting
+                    <span class="toc-number">3.1</span>Tinting
                   </a>
                 </li>
               </ul>
             </li>
             <li class="toc-item">
               <a href="#History" class="toc-link">
-                <span class="toc-number">5</span>History
+                <span class="toc-number">4</span>History
               </a>
             </li>
           </ul>
         </div>
 
 
-        <div id="Obtaining">
-          <h2>Obtaining</h2>
-          <div id="CreativeInventory">
-            <h3>Creative Inventory Tab</h3>
-            <p><strong>KyberStation</strong> should be somewhere in the creative inventory tab for epxzzy's sabers</p>
-          </div>
 
-        </div>
 
-        <div id="Crafting">
+        <section id="Crafting">
           <div class="crafting">
             <h2>crafting</h2>
-            uncraftable
-          </div>
-        </div>
+            <div id="recipe1">
+              <h3>Semi-shapeless 1</h3>
+              <div class="craftingui">
+                <div class="craftinggrid">
+                  <div class="slot">
+                    <a class="item KrystalItem" draggable="false"><span class="minetext item" draggable="false"
+                        onclick="location.href = '../items/krystal'"
+                        data-mctitle="Krystal&lt;br&gt;&lt;span class='mcTextGrey'&gt;Plasma exerting magical crystal.&lt;/span&gt;"></span></a>
+                  </div>
+                  <div class="slot">
+                    <a class="item" draggable="false"><span class="minetext item GoldItem"
+                        onclick="location.href = 'https://minecraft.wiki/w/Gold_Ingot';"
+                        data-mctitle="Gold Ingot"></span></a>
+                  </div>
 
-        <div id="Usage">
-          <div class="sidebar">
-            <div class="other-image">
-              <strong>Tinting menu</strong>
-              <img src="../media/kyber_tint.png">
+                  <div class="slot"></div>
+
+                  <div class="slot">
+                    <a class="item" draggable="false"><span class="minetext item PlankItem"
+                        onclick="location.href = 'https://minecraft.wiki/w/Planks';"
+                        data-mctitle="any planks"></span></a>
+                  </div>
+                  <div class="slot">
+                    <a class="item" draggable="false"><span class="minetext item PlankItem"
+                        onclick="location.href = 'https://minecraft.wiki/w/Planks';"
+                        data-mctitle="any planks"></span></a>
+                  </div>
+
+                  <div class="slot"></div>
+
+                  <div class="slot">
+                    <a class="item" draggable="false"><span class="minetext item PlankItem"
+                        onclick="location.href = 'https://minecraft.wiki/w/Planks';"
+                        data-mctitle="any planks"></span></a>
+                  </div>
+                  <div class="slot">
+                    <a class="item" draggable="false"><span class="minetext item PlankItem"
+                        onclick="location.href = 'https://minecraft.wiki/w/Planks';"
+                        data-mctitle="any planks"></span></a>
+                  </div>
+
+                  <div class="slot"></div>
+
+
+                </div>
+                <div class="craftingarrow"></div>
+                <div class="slotbig">
+                  <div class="item" draggable="false">
+                    <a class="item KyberStationItem" draggable="false"><span class="minetext item" draggable="false"
+                        data-mctitle="KyberStation&lt;br&gt;&lt;span class='mcTextGrey'&gt;Cosmetic weapon customisations block.&lt;/span&gt;"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="recipe2">
+              <h3>Semi-shapeless 2</h3>
+              <div class="craftingui">
+                <div class="craftinggrid">
+                  <div class="slot">
+                    <a class="item" draggable="false"><span class="minetext item GoldItem"
+                        onclick="location.href = 'https://minecraft.wiki/w/Gold_Ingot';"
+                        data-mctitle="Gold Ingot"></span></a>
+                  </div>
+                  <div class="slot">
+                    <a class="item KrystalItem" draggable="false"><span class="minetext item" draggable="false"
+                        onclick="location.href = '../items/krystal'"
+                        data-mctitle="Krystal&lt;br&gt;&lt;span class='mcTextGrey'&gt;Plasma exerting magical crystal.&lt;/span&gt;"></span></a>
+                  </div>
+
+                  <div class="slot"></div>
+
+                  <div class="slot">
+                    <a class="item" draggable="false"><span class="minetext item PlankItem"
+                        onclick="location.href = 'https://minecraft.wiki/w/Planks';"
+                        data-mctitle="any planks"></span></a>
+                  </div>
+                  <div class="slot">
+                    <a class="item" draggable="false"><span class="minetext item PlankItem"
+                        onclick="location.href = 'https://minecraft.wiki/w/Planks';"
+                        data-mctitle="any planks"></span></a>
+                  </div>
+
+                  <div class="slot"></div>
+
+                  <div class="slot">
+                    <a class="item" draggable="false"><span class="minetext item PlankItem"
+                        onclick="location.href = 'https://minecraft.wiki/w/Planks';"
+                        data-mctitle="any planks"></span></a>
+                  </div>
+                  <div class="slot">
+                    <a class="item" draggable="false"><span class="minetext item PlankItem"
+                        onclick="location.href = 'https://minecraft.wiki/w/Planks';"
+                        data-mctitle="any planks"></span></a>
+                  </div>
+
+                  <div class="slot"></div>
+
+
+                </div>
+                <div class="craftingarrow"></div>
+                <div class="slotbig">
+                  <div class="item" draggable="false">
+                    <a class="item KyberStationItem" draggable="false"><span class="minetext item" draggable="false"
+                        data-mctitle="KyberStation&lt;br&gt;&lt;span class='mcTextGrey'&gt;Cosmetic weapon customisations block.&lt;/span&gt;"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
 
-          </div>
+        </section>
 
+        <div id="Usage">
           <h2>Usage</h2>
           <p>
-
-            <strong>KyberStation</strong> functions as a way to change the visual qualities of sabers. Right-Clicking on
-            a <strong>KyberStation</strong> should bring up the newly redesigned Tinting menu. NOTE: tab buttons may or
-            may not change inputting an item, special items will have access to special tabs.
+            <strong>KyberStation</strong> allows for cosmetic customisation of the saber weapons. Right now there is not
+            a lot you can change. Saber weapon skins are planned and are already half implemented but
+            until then you can only tint a saber weapon.
           </p>
 
 
           <div id="Tinting">
             <h3>Tinting Menu</h3>
-            <p>
-              <strong>KyberStation</strong> can change the colour of the given saber item. By Default 3 HSL sliders are
-              given. These can be toggled to RGB sliders upon pressing [SPACE]. if you press [PERIOD] an animated RGB
-              colour is toggled, this however does not override the previous colour, meaning when pressed [PERIOD]
-              again, the original colour of the item will be assigned.
-              <br><br>
-              <strong>(v0.0.4 Updates)</strong> The Tinting screen visuals have been redesigned. Additionally, HSL
-              colour calculations being broken in some cases have been fixed (<a
-                href="https://github.com/epxzzy/epxzzysabers/issues/31">issue #31</a>), including a bug where black
-              color (#000000) was overwritten with default color (#00FF00).
-            </p>
+            <div class="flex-row">
+              <div class="content">
+                <strong>HSL mode</strong>
+                <p>
+                  By Default 3 HSL sliders are given.<br>
+                  Hue slider is something like 359 max.<br>
+                  Saturation slider is 100 max.<br>
+                  Lightness slider is 100 max.<br>
+                  These can be toggled into RGB mode upon pressing [COMMA] OR pressing the "HSL" labelled button in the
+                  menu. <br><br>
+
+                </p>
+
+                <strong>RGB mode</strong>
+                <p>
+                  3 RGB sliders are given.<br>
+                  Red slider is 255 max.<br>
+                  Green slider is 255 max.<br>
+                  Blue slider is 255 max.<br>
+                  These can be toggled into HSL mode upon pressing [COMMA] OR pressing the now labelled "RGB" button in
+                  the
+                  menu. <br><br>
+
+                </p>
+                <strong>RAINBOW mode</strong>
+                <p>
+                  This mode has no sliders as there is nothing to configure. It only applies a looping rainbow colour
+                  effect to your weapon.<br>
+                  if you press [PERIOD] OR (the little pipeline looking thing) an animated RGB
+                  colour is toggled on the weapon, this however does not override the previous
+                  colour, meaning when pressed [PERIOD]
+                  again, the original colour of the item will be brought back, and you will be brought to HSL mode.
+
+                  <br><br>
+
+                </p>
+
+              </div>
+              <div class="sidebar-flex">
+                <div class="other-image">
+                  <strong>Tinting menu (HSL)</strong>
+                  <img src="/public/media/kyber_tint_hsl.png">
+                  <strong>Tinting menu (RGB)</strong>
+                  <img src="/public/media/kyber_tint_rgb.png">
+                  <strong>Tinting menu (ANIMATED)</strong>
+                  <img src="/public/media/kyber_tint_rainbow.png">
+
+
+                </div>
+              </div>
+            </div>
+
           </div>
+
         </div>
 
 
@@ -192,9 +311,14 @@
               </tr>
               <tr>
                 <td><b>0.0.4</b></td>
-                <td>Updated tinting visuals (UI redesign), removed stance menu, fixed HSL colour calculation being
-                  broken in some cases (<a href="https://github.com/epxzzy/epxzzysabers/issues/31">issue #31</a>), and
-                  fixed black color overwrite issue.</td>
+                <td>
+                  Updated tinting menu visuals (UI redesign).<br>
+                  Tinting menu redone internally.<br>
+                  Removed stance menu.<br>
+                  Fixed HSL colour calculation being
+                  broken in some cases (<a href="https://github.com/epxzzy/epxzzysabers/issues/31">issue #31</a>).<br>
+                  Fixed black color overwrite issue.<br>
+                </td>
               </tr>
             </tbody>
           </table>

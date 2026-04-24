@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark">
+  <title>Changelog - epxzzysabers</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navigation">
+      <div class="breadcrumb">
+        <a href="./">home</a> &gt; <strong>changelog</strong>
+      </div>
+      <a href="https://github.com/epxzzy/epxzzysabers/blob/master/docs/changelog.html">source</a>
+    </nav>
+    <h1 class="wiki-title">Changelog</h1>
+    <hr>
+
+    <div class="content">
+      <main class="main-content">
+        <section id="v0.0.4">
+          <h2>Changelog v0.0.4</h2>
+          <p><strong>September 17, 2025 - April 19, 2026</strong></p>
+          
+          <h3>Requested</h3>
+          <ul>
+            <li><strong>Shader Support:</strong> Updated saber renderers and rotary saber (entity) to use external shaders.</li>
+            <li><strong>BetterCombat Compatibility:</strong> Fixed BetterCombat falsely tagging sabers. Added extraneous BetterCombat compatibility via datapack and data-driven config system (live reload supported).</li>
+          </ul>
+
+          <h3>KyberTable & HUD</h3>
+          <ul>
+            <li>Updated Kyber Station Tinting screen visuals (UI redesign).</li>
+            <li>Removed Kyber Station Stance Menu & Screen.</li>
+            <li>Fixed HSL colour calculation being broken in some cases.</li>
+            <li>Fixed RGB toggle bug in tint menu.</li>
+            <li>Added stance preference menu (Shift+Stance keybind).</li>
+            <li>Added saber ability HUD hints for Gauntlet & Rotary sabers.</li>
+          </ul>
+
+          <h3>Visuals</h3>
+          <ul>
+            <li>Added proper left-handed animations (attack, block, flourish) for light weapons.</li>
+            <li>Fixed projectile block not getting animated for light weapons.</li>
+            <li>Reworked models and textures for Crossguard Saber, Saber Gauntlet, Blaster Saber, Saber Pike, and Plasma Bolt projectile.</li>
+            <li>Fixed black colour (#000000) being overwritten with default colour.</li>
+            <li>Added a visual indicator for hanging saber block.</li>
+            <li>Added glowing, color-matching item names for sabers.</li>
+          </ul>
+
+          <h3>Functionality</h3>
+          <ul>
+            <li>Added ability tooltips (Shift+hover in inventory) for Blaster Saber, Saber Gauntlet, and Rotary Saber.</li>
+            <li>Added Saber Stance keybind (replaces Shift + Right-Click with saber).</li>
+            <li>Thrown rotary sabers now return automatically after a set distance.</li>
+            <li>Slowed down thrown rotary saber movement to allow easier parrying.</li>
+            <li>Fixed a server crash relating to Saber Gauntlet.</li>
+            <li>Fixed Rotary flight cooldown and duration synchronisation.</li>
+            <li>Fixed Gauntlet client/server synchronisation.</li>
+            <li>Fixed trident parrying and gauntlet ability on dedicated servers.</li>
+            <li>Fine-tuned rotary parry range.</li>
+            <li>Removed critical hits for sabers.</li>
+            <li>Changed hanging saber block duration.</li>
+          </ul>
+
+          <h3>Miscellaneous</h3>
+          <ul>
+            <li>Fixed broken recipe unlocks.</li>
+            <li>Changed krystal recipe (lapis replaced with quartz).</li>
+            <li>Fixed sound files (converted from stereo to mono).</li>
+            <li>Fixed server-side packet synchronisation.</li>
+            <li>Added ability to stance with any item.</li>
+            <li>Fixed various bugs and crashes.</li>
+            <li>Fixed rotary saber (entity) issues after chunk reload.</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+
+</html>

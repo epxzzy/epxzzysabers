@@ -128,3 +128,50 @@
   background-image: url(../public/media/kyber_station.png);
   image-rendering: pixelated;
 }
+
+.PlankItem {
+  background-image: url(https://minecraft.wiki/images/Invicon_Oak_Planks.png);
+  image-rendering: pixelated;
+}
+
+.mcTextDarkred {
+  color: #AA0000;
+}
+
+.mcTextDarkblue {
+  color: #0000AA;
+}
+
+.mcTextDarkpurple {
+  color: #AA00AA;
+}
+
+.mcTextDarkgreen… .mcTextDarkgray,
+.mcTextDarkgrey {
+  color: #555555;
+}
+
+.mcTextRed {
+  color: #FF5555;
+}
+
+.mcTextGreen {
+  color: #55FF55;
+}
+
+.mcTextA… .mcTextYellow {
+  color: #FFFF55;
+}
+
+.mcTextGray,
+.mcTextGrey {
+  color: #AAAAAA;
+}
+
+.mcTextMineGold {
+  color: #DDD605;
+}
+
+.mcTextGold… .mcTextPurple {
+  color: #FF55FF;
+}
