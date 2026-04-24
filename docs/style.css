@@ -121,7 +121,7 @@
 }
 
 .sidebar-flex {
-  width: 300px;
+  width: fit-content;
   flex-shrink: 0;
   padding: 1rem;
   background-color: var(--secondary-bg);
@@ -166,12 +166,10 @@ p {
 }
 
 .other-image {
-  width: 99%;
   height: auto;
 }
 
 .other-image>img {
-  width: 100%;
   height: auto;
 }
 
