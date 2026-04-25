@@ -29,40 +29,87 @@
         <div class="toc-container">
           <div class="toc-title">Contents</div>
           <ul class="toc-list">
-            <li class="toc-item"><a href="#BetterCombat" class="toc-link"><span class="toc-number">1</span>BetterCombat</a></li>
-            <li class="toc-item"><a href="#Config" class="toc-link"><span class="toc-number">2</span>Data-Driven Configuration</a></li>
-            <li class="toc-item"><a href="#Shaders" class="toc-link"><span class="toc-number">3</span>Shader Support</a></li>
+            <li class="toc-item"><a href="#BetterCombat" class="toc-link"><span
+                  class="toc-number">1</span>BetterCombat</a></li>
+            <li class="toc-item"><a href="#Config" class="toc-link"><span class="toc-number">2</span>Data-Driven
+                Configuration</a></li>
+            <li class="toc-item"><a href="#Shaders" class="toc-link"><span class="toc-number">3</span>Shader Support</a>
+            </li>
             <li class="toc-item"><a href="#History" class="toc-link"><span class="toc-number">4</span>History</a></li>
           </ul>
         </div>
 
+        <section id="Shaders">
+          <h2>Shader Support</h2>
+          <p>
+            Saber renderers have been updated to support external shaders for compatibility. The Rotary Saber and Plasma
+            Bolt entities now also make use of this to be emissive like the warden or the enderman.
+            <br><br>
+            Shader support has been tested with the <strong>Oculus</strong> mod and popular shaderpacks listed below.
+            <br><br>
+            - Photon
+            <br>
+            - Complementary Unbound
+            <br>
+            - Complementary Reimagined
+            <br>
+            - Rethinking Voxels (Beta)
+            <br>
+            - BSL
+          </p>
+        </section>
+
         <section id="BetterCombat">
           <h2>BetterCombat Compatibility</h2>
           <p>
-            epxzzysabers now includes full <strong>BetterCombat</strong> compatibility! The mod was previously tagged incorrectly by BetterCombat—this has been fixed in v0.0.4.
+            epxzzysabers is now implicitly compatible with <strong>BetterCombat</strong>.
+            Saber weapons were previously tagged incorrectly by BetterCombat's janky item name system.
+            Now they are properly excluded from BetterCombat's combat system.
             <br><br>
-            An additional extraneous compatibility datapack is available for enhanced integration. See GitHub releases for the link to the datapack.
+            An additional extraneous datapack is available for explicit compatibility[which undos stated above (this
+            time properly properly tagging all items) and also turns off this mod's combat system],
+            download below.
+            <a
+              href="https://github.com/epxzzy/epxzzysabers/raw/refs/heads/master/buffer/datapacks/epxzzysabers_bettercombat_compat_v0.1.zip">epxzzysabers_bettercombat_compat_v0.1.zip</a>
           </p>
         </section>
 
         <section id="Config">
           <h2>Data-Driven Configuration</h2>
           <p>
-            A new data-driven config system has been implemented, allowing weapon attributes to be customized through configuration files.
-            Live reload is supported for quick testing and iteration during development.
+            A new simple data-driven config system has been implemented, allowing basic configuration using
+            a single config file. Live reload is supported meaning restarting the game is not necessary.
             <br><br>
-            See the mod's GitHub documentation for config file structure and examples.
+            To get started create a file at <code class="language-text">/data/epxzzysabers/config.json</code> in your
+            datapack.
+            <br> Below is an example config containing default values and explanations for each setting.
+          <pre><code class="language-json">{
+    "kewl_fights": true,
+    // toggles the internal combat animation system.
+    // keep this at false if you have mods like BetterCombat. 
+    // true by default.
+
+    "rotary_flight_duration": 200,
+    // duration of rotary flight ability in ticks. 
+    // 200 ticks (10 seconds) by default.
+    
+    "rotary_flight_cooldown": 40,
+    // cooldown for all rotary saber abilities in ticks. 
+    // 40 ticks (2 seconds) by default.
+    
+    "gauntlet_surge_duration": 160,
+    // how long gauntlet supercharge ability lasts in ticks.
+    // 160 ticks (8 seconds) by default.
+
+    "gauntlet_surge_chargeup": 40,
+    // duration to activate gauntlet supercharge ability in ticks.
+    // 40 ticks (2 seconds) by default.
+
+}</code></pre>
+
           </p>
         </section>
 
-        <section id="Shaders">
-          <h2>Shader Support</h2>
-          <p>
-            Saber renderers have been updated to support external shaders for enhanced visual effects. The Rotary Saber entity now also supports shader integration for more dynamic visuals.
-            <br><br>
-            Shader support has been tested with the <strong>Oculus</strong> mod and popular shaderpacks including: Photon, Complementary Unbound, Complementary Reimagined, Rethinking Voxels (Beta), and BSL.
-          </p>
-        </section>
 
         <section id="History">
           <h2>History</h2>
@@ -73,8 +120,7 @@
                 <td>
                   Fixed BetterCombat compatibility.<br>
                   Added extraneous BetterCombat datapack and data-driven config system.<br>
-                  Added external shader support for saber rendering and rotary saber entity.<br>
-                  Tested with Oculus and popular shaderpacks.
+                  Added external shader support for saber rendering and rotary saber and plasma bolt entities.<br>
                 </td>
               </tr>
             </tbody>

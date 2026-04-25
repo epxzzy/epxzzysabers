@@ -23,93 +23,210 @@
     <div class="content">
       <main class="main-content">
         <div id="Description">
-          <p>epxzzy's sabers adds a variety of laser and plasma weaponry to Minecraft, featuring advanced combat mechanics and animations.</p>
+          <p>epxzzy's sabers adds a variety of laser and plasma weaponry to Minecraft, featuring advanced combat
+            mechanics and animations.</p>
         </div>
 
         <div class="toc-container">
           <div class="toc-title">Contents</div>
           <ul class="toc-list">
-            <li class="toc-item"><a href="#Attacking" class="toc-link"><span class="toc-number">1</span>Attacking</a></li>
-            <li class="toc-item"><a href="#Blocking" class="toc-link"><span class="toc-number">2</span>Blocking</a></li>
-            <li class="toc-item"><a href="#Parrying" class="toc-link"><span class="toc-number">3</span>Parrying</a></li>
-            <li class="toc-item"><a href="#Posing" class="toc-link"><span class="toc-number">4</span>Posing</a></li>
-            <li class="toc-item"><a href="#Miscellaneous" class="toc-link"><span class="toc-number">5</span>Miscellaneous</a></li>
-            <li class="toc-item"><a href="#History" class="toc-link"><span class="toc-number">6</span>History</a></li>
+            <li class="toc-item"><a href="#Obtaining" class="toc-link"><span class="toc-number">1</span>Obtaining</a>
+            </li>
+            <li class="toc-item">
+              <a href="#Roleplay" class="toc-link"><span class="toc-number">2</span>Roleplay</a>
+              <ul class="toc-list toc-level-2">
+                <li class="toc-item"><a href="#Attacking" class="toc-link"><span
+                      class="toc-number">2.1</span>Attacking</a></li>
+                <li class="toc-item"><a href="#Blocking" class="toc-link"><span
+                      class="toc-number">2.2</span>Blocking</a></li>
+                <li class="toc-item"><a href="#Parrying" class="toc-link"><span
+                      class="toc-number">2.3</span>Parrying</a></li>
+                <li class="toc-item"><a href="#Posing" class="toc-link"><span class="toc-number">2.4</span>Assuming
+                    Stance</a></li>
+              </ul>
+            </li>
+            <li class="toc-item">
+              <a href="#Keybinds" class="toc-link"><span class="toc-number">3</span>Keybinds</a>
+              <ul class="toc-list toc-level-2">
+                <li class="toc-item"><a href="#AbilityKey" class="toc-link"><span
+                      class="toc-number">3.1</span>Ability</a></li>
+                <li class="toc-item"><a href="#StanceKey" class="toc-link"><span class="toc-number">3.2</span>Stance</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="toc-item"><a href="#History" class="toc-link"><span class="toc-number">4</span>History</a></li>
           </ul>
         </div>
 
-        <section id="Attacking">
-          <h2>Attacking</h2>
+        <section id="Obtaining">
+          <h1>Obtaining</h1>
           <p>
-            Every saber (items with the <code>epxzzysabers:lightsaber</code> tag) uses a randomized attack pool (1 of 8 animations) upon hitting an entity. This includes armor stands, item frames, and other interactable entities.
-            <br><br>
-            "Heavy weapons" like pikes and dual-bladed sabers are currently routed differently to allow for unique animation sets in future updates. Currently, attacking may cause an unintentional <strong>parry</strong> if a projectile is within range.
+            To attain the materials for a saber, you firstly need to have explored the nether, you'll first need to
+            <a href="https://minecraft.wiki/w/Tutorial:Defeating_the_wither">Defeat the
+              Wither</a>. Once slain, the Wither drops a Nether Star
+            which can be crafted into a <a href="../items/krystal">Krystal</a>. This Krystal can then be <a
+              href="../items/krystal#Duping">duplicated like smithing templates</a>. Craft it
+            once, then dupe it. <strong>Adding to your fine collection</strong>. Without having to defeat multiple
+            withers. It is also recommended to craft a <a href="../blocks/kyberstation">Kyber Station</a>, it only costs
+            one Krystal and you can use it as many times as you like without further cost.
           </p>
         </section>
 
-        <section id="Blocking">
-          <h2>Blocking</h2>
+        <section id="Roleplay">
+          <h1>Roleplay</h1>
           <p>
-            Saber attacks can be blocked by holding down <strong>Right-Click</strong>, similar to a shield. Blocking only defends against other sabers (<code>epxzzysabers:lightsaber</code> tag) and does not defend against standard melee attacks.
-            <br><br>
-            However, a saber can block <strong>ANY</strong> projectile if held for less than <strong>50 ticks (2.5 seconds)</strong>. If this duration is exceeded, the block fails.
-            <br><br>
-            <strong>Note:</strong> You don't need to manually match attack directions; the saber automatically syncs with other players to block properly. Focus on facing the source of damage.
+            Combat in epxzzysabers is more than just weaponry; it's about timing, positioning, and
+            style.
           </p>
-        </section>
 
-        <section id="Parrying">
-          <h2>Parrying</h2>
-          <p>
-            Any arm swing (attacking, mining, or punching air) with a saber will perform a <strong>parry</strong>. A parry deflects any projectile within a certain range (determined by the saber's specific <strong>Parry Range</strong>) back in the direction the player is facing.
-            <br><br>
-            <strong>Note:</strong> Certain projectiles like shulker bullets or tridents may process differently and might be harder to redirect.
-            <br><br>
-            Parries feature three conditional animations based on player movement and orientation:
-          </p>
-          <ul>
-            <li><strong>X-Cross Front:</strong> Default animation when standing still.</li>
-            <li><strong>Spinning:</strong> Played when looking down (X-rotation > 40).</li>
-            <li><strong>Grievous Move:</strong> Played while sprinting (Spinning has priority if looking down).</li>
-          </ul>
-        </section>
-
-        <section id="Posing">
-          <div class="sidebar">
-            <div class="other-image">
-              <strong>Stance menu</strong>
-              <img src="../media/stances.gif">
+          <div id="Attacking">
+            <h3>Attacking</h3>
+            <p>
+            <div id="Attacking">
+              <p>When an attack is triggered on an entity, one of eight positions are choosen at random (im working on a
+                targeting system but for now they have to be random). these positions are:
+              <ul>
+                <li>1. Left Shoulder</li>
+                <li>2. Right Shoulder</li>
+                <li>3. Left Knee</li>
+                <li>4. Right Knee</li>
+                <li>5. Left Torso</li>
+                <li>6. Right Torso</li>
+                <li>7. Crotch</li>
+                <li>8. Head</li>
+              </ul>
+              these when choosen is where the attacking saber item will aim for/swing towards, you can see this in third
+              person as well as the first person HUD indicator.
+              Note: Sabers cannot do Critical hit damage, so there is no point in jumping around. 
+              [insert random attack gif]
+              </p>
             </div>
+
+            <div id="Blocking">
+              <h3>Blocking</h3>
+              <p>If an incomming attack is blocked via a saber, the saber item will be used to cover that position where
+                the
+                attack was aimed at. this is also reflected in third person as well as the first person HUD indicator.
+                makes a clashing noise when a sucessful
+                block is has happened.
+                A visual indicator (wobby saber) is displayed in first person when the a saber is in hanging block.
+
+            </div>
+
+            <div id="Flourishes">
+              <h3>Flourishes</h3>
+              <p>Flourishes are when you spam LMB without hitting anything.
+                flourishes feature three conditional animations based on player movement, orientation and saber type:
+              </p>
+              <ul>Light Weapon Saber Type:
+                <li><strong>X-Cross Front:</strong> Default animation when standing still.</li>
+                <li><strong>Behind the back spin:</strong> Played when looking down (X-rotation > 40).</li>
+                <li><strong>Twirl:</strong> Played while sprinting (Spinning has priority if looking down).</li>
+              </ul>
+              <ul>Heavy Weapon Saber Type:
+                <li><strong>X-Cross Front:</strong> Default animation when standing still.</li>
+                <li><strong>Around the world spin:</strong> Played when looking down (X-rotation > 40).</li>
+                <li><strong>Skip-Catch:</strong> Played while sprinting (Spinning has priority if looking down).</li>
+              </ul>
+
+              </p>
+            </div>
+
+            <div id="Stancing">
+              <h3>Stancing</h3>
+              <p>
+                Press the <strong><a href="/misc/getting_started#StanceKey"></a>[STANCE]</a>.</strong> key to assume a stance while crouching during blocking. Pressing
+                <strong>SHIFT + <a href="#StanceKey">[STANCE]</a>.</strong> opens the stance preference menu.
+                There are eight total stances available,
+                which can be configured at a <strong>KyberStation</strong>. Stances are primarily cosmetic but provide
+                a
+                unique visual identity to your combat style.
+              </p>
+
+              <div class="flex-row">
+                <div class="content">
+                  <p>
+                    Available Stances:
+                  </p>
+                  <ol>
+                    <li><strong>Shi-Cho:</strong> (Used by Luke Skywalker, Kit Fisto)</li>
+                    <li><strong>Makashi:</strong> (Used by Count Dooku, Grand Inquisitor)</li>
+                    <li><strong>Soresu:</strong> (Used by Obi-Wan Kenobi)</li>
+                    <li><strong>Ataru:</strong> (Used by Qui-Gon Jinn, Master Yoda)</li>
+                    <li><strong>Shien / Djem So:</strong> (Used by Anakin Skywalker, Ahsoka Tano)</li>
+                    <li><strong>Niman:</strong> (Used by Darth Maul)</li>
+                    <li><strong>Juyo / Vaapad:</strong> (Used by Mace Windu, Darth Sidious)</li>
+                  </ol>
+                  <br><br>
+                </div>
+                <div class="sidebar-flex">
+                  <div class="other-image">
+                    <strong>Stance Preference menu (Shift + <a href="#StanceKey">[STANCE]</a>.)</strong>
+                    <br>
+                    <img style="width: 30vw;" src="/public/media/stance_preference_menu.png">
+                    <br>
+                    <!--
+                  <strong>Tinting menu (ANIMATED)</strong>
+                  <br>
+                  <img src="/public/media/kyber_tint_rainbow.png">
+                  -->
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            </p>
+
+            </p>
           </div>
-
-          <h2>Assuming Stance</h2>
-          <p>
-            Crouching during a block triggers a <strong>Stance</strong>. There are eight total stances available, which can be configured at a <strong>KyberStation</strong>. Stances are primarily cosmetic but provide a unique visual identity to your combat style.
-            <br><br>
-            Available Stances:
-          </p>
-          <ol>
-            <li><strong>Shi-Cho:</strong> (Used by Luke Skywalker, Kit Fisto)</li>
-            <li><strong>Makashi:</strong> (Used by Count Dooku, Grand Inquisitor)</li>
-            <li><strong>Soresu:</strong> (Used by Obi-Wan Kenobi)</li>
-            <li><strong>Ataru:</strong> (Used by Qui-Gon Jinn, Master Yoda)</li>
-            <li><strong>Shien / Djem So:</strong> (Used by Anakin Skywalker, Ahsoka Tano)</li>
-            <li><strong>Niman:</strong> (Used by Darth Maul)</li>
-            <li><strong>Juyo / Vaapad:</strong> (Used by Mace Windu, Darth Sidious)</li>
-          </ol>
         </section>
 
-        <section id="Miscellaneous">
-          <h2>Miscellaneous</h2>
-          <ul>
-            <li>Audio files converted from stereo to mono for better spatial positioning.</li>
-            <li>Added ability to stance with any item.</li>
-            <li>Fixed server-side packet synchronization.</li>
-            <li>Fixed broken recipe unlocks.</li>
-            <li>Added glowing, color-matching item names for sabers.</li>
-            <li>Fixed various bugs and crashes.</li>
-          </ul>
+        <section id="Keybinds">
+            <h1>Keybinds</h1>
+            <div id="AbilityKey" class="content">
+              <h3>Ability Key</h3>
+              <p>
+                The ability key is used to activate special abilities while wielding a saber.
+                This key is right now required by 3 different items. Located in Miscellaneous,
+                [V] by default.
+              </p>
+            </div>
+          <div class="flex-row">
+            <div class ="content">
+
+            <div id="StanceKey" class="content">
+              <h3>Stance Key</h3>
+              <p>
+                The Stance key is used to trigger stance. If held you will continue stancing.
+                Pressing the key with shift will open stance preference menu. Located in Miscellaneous,
+                [Left Alt] by default.
+              </p>
+            </div>
+
+            </div>
+
+            <div class="sidebar-flex">
+
+              <div class="other-image">
+                <strong>Keybinds highlighted</strong>
+                <br>
+                <img style="width: 30vw;" src="/public/media/keybinds_zoomed.png">
+                <br>
+                <!--
+                  <strong>Tinting menu (ANIMATED)</strong>
+                  <br>
+                  <img src="/public/media/kyber_tint_rainbow.png">
+                  -->
+              </div>
+            </div>
+
+
+          </div>
         </section>
+
 
         <section id="History">
           <h2>History</h2>

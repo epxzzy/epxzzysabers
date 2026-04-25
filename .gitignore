@@ -28,3 +28,5 @@ Gemfile
 Gemfile.lock
 _site/
 .jekyll-cache/
+.codex
+.ruby-lsp

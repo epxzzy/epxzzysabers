@@ -23,25 +23,102 @@
     <div class="content">
       <main class="main-content">
         <div id="Description">
-          <p>This section documents the combat mechanics and systems of the mod.</p>
+          <p>This page documents the core saber combat systems, including attacking, blocking, parrying, and stances.</p>
         </div>
 
         <div class="toc-container">
           <div class="toc-title">Contents</div>
           <ul class="toc-list">
-            <li class="toc-item"><a href="#Stancing" class="toc-link"><span class="toc-number">1</span>Stancing</a></li>
-            <li class="toc-item"><a href="#History" class="toc-link"><span class="toc-number">2</span>History</a></li>
+            <li class="toc-item"><a href="#Attacking" class="toc-link"><span class="toc-number">1</span>Attacking</a>
+            </li>
+            <li class="toc-item"><a href="#Blocking" class="toc-link"><span class="toc-number">2</span>Blocking</a>
+            </li>
+            <li class="toc-item"><a href="#Parrying" class="toc-link"><span class="toc-number">3</span>Parrying</a>
+            </li>
+            <li class="toc-item"><a href="#Stances" class="toc-link"><span class="toc-number">4</span>Stances</a>
+            </li>
+            <li class="toc-item"><a href="#Miscellaneous" class="toc-link"><span
+                  class="toc-number">5</span>Miscellaneous</a></li>
+            <li class="toc-item"><a href="#History" class="toc-link"><span class="toc-number">6</span>History</a></li>
           </ul>
         </div>
 
-        <section id="Stancing">
-          <h2>Stancing</h2>
+        <section id="Attacking">
+          <h2>Attacking</h2>
           <p>
-            Press the <strong>[STANCE]</strong> key to assume a stance while crouching during blocking. Pressing <strong>SHIFT + [STANCE]</strong> opens the stance preference menu.
-            Think of it as fighting with a highly specialized shield—your main concern is facing the source of damage.
-            <br><br>
-            Note: Critical hits are not applied to saber damage for balance purposes. A visual indicator displays when holding a saber in hanging block stance.
+            Every saber tagged as <code>epxzzysabers:lightsaber</code> uses a randomized attack pool when striking an
+            entity. Each hit selects one of eight animations. This behavior applies to normal targets such as mobs and
+            players, and also to interactable entities like armor stands and item frames.
           </p>
+          <p>
+            Heavy weapons, such as pikes and dual-bladed sabers, are routed through a separate handling path so they can
+            support distinct animation sets in future updates. In the current implementation, attacking can sometimes
+            trigger an unintended <strong>parry</strong> if a projectile is close enough to be caught by the saber.
+          </p>
+        </section>
+
+        <section id="Blocking">
+          <h2>Blocking</h2>
+          <p>
+            Saber attacks can be blocked by holding <strong>Right-Click</strong>, in a way similar to using a shield.
+            Saber blocking only protects against other weapons that are tagged as
+            <code>epxzzysabers:lightsaber</code>; it does not stop ordinary melee hits from non-saber weapons.
+          </p>
+          <p>
+            A saber can also block <strong>any projectile</strong>, but only if the block has been held for less than
+            <strong>50 ticks (2.5 seconds)</strong>. Once that duration is exceeded, projectile blocking fails.
+          </p>
+          <p>
+            You do not need to manually match the angle of an incoming strike. The saber automatically synchronizes with
+            other players so the correct blocking pose is used. The main requirement is facing the source of damage.
+          </p>
+        </section>
+
+        <section id="Parrying">
+          <h2>Parrying</h2>
+          <p>
+            Any arm swing with a saber, including attacking, mining, or even punching air, performs a
+            <strong>parry</strong>. A parry redirects projectiles that enter the saber's active range. The size of that
+            range depends on the weapon's specific <strong>Parry Range</strong> value, and redirected projectiles are
+            sent back in the direction the player is facing.
+          </p>
+          <p>
+            Some projectile types may behave differently from standard arrows or blaster shots. Projectiles such as
+            tridents and shulker bullets can be harder to redirect consistently.
+          </p>
+          <p>Parries use one of three conditional animations:</p>
+          <ul>
+            <li><strong>X-Cross Front:</strong> default animation while standing still.</li>
+            <li><strong>Spinning:</strong> played when looking downward (X-rotation greater than 40).</li>
+            <li><strong>Grievous Move:</strong> played while sprinting. Looking downward takes priority and uses
+              Spinning instead.</li>
+          </ul>
+        </section>
+
+        <section id="Stances">
+          <div class="sidebar">
+            <div class="other-image">
+              <strong>Stance menu</strong>
+              <img src="/public/media/OLD_kyber_station_stance_menu.gif" alt="Kyber Station stance menu">
+            </div>
+          </div>
+
+          <h2>Stances</h2>
+          <p>
+            Crouching while blocking triggers a <strong>stance</strong>. There are eight total stances, and they can be
+            configured at a <strong>Kyber Station</strong>. Stances are mainly cosmetic, but they give each fighting
+            style a distinct visual identity.
+          </p>
+          <p>The currently documented stance forms are:</p>
+          <ol>
+            <li><strong>Shi-Cho:</strong> used by Luke Skywalker and Kit Fisto.</li>
+            <li><strong>Makashi:</strong> used by Count Dooku and the Grand Inquisitor.</li>
+            <li><strong>Soresu:</strong> used by Obi-Wan Kenobi.</li>
+            <li><strong>Ataru:</strong> used by Qui-Gon Jinn and Master Yoda.</li>
+            <li><strong>Shien / Djem So:</strong> used by Anakin Skywalker and Ahsoka Tano.</li>
+            <li><strong>Niman:</strong> used by Darth Maul.</li>
+            <li><strong>Juyo / Vaapad:</strong> used by Mace Windu and Darth Sidious.</li>
+          </ol>
         </section>
 
         <section id="History">
@@ -51,9 +128,7 @@
               <tr>
                 <td><b>0.0.4</b></td>
                 <td>
-                  Added stance preference menu (Shift+Stance keybind).<br>
-                  Added visual indicator for hanging block (<a href="https://github.com/epxzzy/epxzzysabers/issues/1">issue #1</a>).<br>
-                  Fine-tuned hanging block duration (<a href="https://github.com/epxzzy/epxzzysabers/issues/1">issue #1</a>).
+                  Removed critical hits in saber weapons.
                 </td>
               </tr>
             </tbody>
