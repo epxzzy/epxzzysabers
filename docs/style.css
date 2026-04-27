@@ -4,15 +4,19 @@
 }
 
 :root {
+  color-scheme: light;
   --bg-color: #ffffff;
   --text-color: #202122;
   --secondary-bg: #f8f9fa;
   --border-color: #a2a9b1;
   --subtle-border: #eaecf0;
   --table-border: #ddd;
+  --header-border: #c8ccd1;
   --link-color: #0645ad;
   --link-hover-color: #3366cc;
   --toc-shadow: rgba(0, 0, 0, 0.1);
+  --code-bg: #f1f3f5;
+  --code-border: #d0d7de;
 
   --mc-ui-bg: #c6c6c6;
   --mc-slot-bg: #8b8b8b;
@@ -28,6 +32,26 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    color-scheme: dark;
+    --bg-color: #101317;
+    --text-color: #e6e8eb;
+    --secondary-bg: #191f26;
+    --border-color: #46515d;
+    --subtle-border: #2b333d;
+    --table-border: #36414c;
+    --header-border: #3a4450;
+    --link-color: #8ab4ff;
+    --link-hover-color: #b3ccff;
+    --toc-shadow: rgba(0, 0, 0, 0.35);
+    --code-bg: #151b22;
+    --code-border: #30363d;
+
+    --mc-ui-bg: #747474;
+    --mc-slot-bg: #565656;
+    --mc-shadow-light: #a0a0a0;
+    --mc-shadow-dark: #262626;
+    --mc-shadow-mid: #5d5d5d;
+    --mc-border-main: #8d8d8d;
     --mc-outline: #000000;
     --mc-text: #e0e0e0;
     --mc-count-shadow: #000000;
@@ -122,8 +146,10 @@
 
 .sidebar-flex {
   width: fit-content;
+  max-width: 100%;
   flex-shrink: 0;
   padding: 1rem;
+  box-sizing: border-box;
   background-color: var(--secondary-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
@@ -167,10 +193,68 @@ p {
 
 .other-image {
   height: auto;
+  max-width: 100%;
 }
 
 .other-image>img {
+  display: block;
+  max-width: 100%;
   height: auto;
+}
+
+code,
+pre {
+  background-color: var(--code-bg);
+  border: 1px solid var(--code-border);
+}
+
+code {
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+}
+
+pre {
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+@media (max-width: 720px) {
+  .sidebar {
+    position: static;
+    left: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 1rem 0 1.5rem;
+    box-sizing: border-box;
+  }
+
+  .sidebar .block-image {
+    margin: 0 auto;
+  }
+
+  .sidebar .info-table {
+    margin: 0;
+  }
+
+  .flex-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .sidebar-flex {
+    width: 100%;
+  }
 }
 
 .info-table {
@@ -206,7 +290,8 @@ p {
   padding-bottom: 2px;
 }
 
-.item {
+.item,
+.blockitem {
   background-size: cover;
   background-repeat: no-repeat;
   height: 30px;
@@ -216,7 +301,13 @@ p {
   margin: auto;
 }
 
-.item>.count {
+.blockitem {
+  height: 40px;
+  width: 40px;
+}
+
+.item>.count,
+.blockitem>.count {
   display: block;
   position: relative;
   bottom: 30px;
