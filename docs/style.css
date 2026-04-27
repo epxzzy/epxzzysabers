@@ -1,6 +1,6 @@
 @font-face {
   font-family: "minefont";
-  src: url("/public/media/mcfont.woff") format("woff");
+  src: url("../public/media/mcfont.woff") format("woff");
 }
 
 :root {
