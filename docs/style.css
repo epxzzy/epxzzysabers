@@ -74,7 +74,7 @@
   padding: 15px;
   margin: 20px 0;
   box-shadow: 0 1px 3px var(--toc-shadow);
-  width: 30%;
+  width: fit-content;
   background-color: var(--secondary-bg);
 }
 

@@ -7,13 +7,13 @@ High-speed duels. Stances. Abilities. Infinite colors.
 
 epxzzy's sabers adds in several new weapons, some with unique gimmicks. These weapons have:
 
-- **8 unique weapon variants** with more to come
+- **7 unique weapon variants** with more to come
 - **5 abilities** across **3 variants**
 - **True combat**: sabers function as shields when you block, and like swords when you strike
 - **God so many colors**: customisability down to individual RGB values
 - **Deflection**: parry projectiles back at their origin
 - **Togglable states**: ignite only when you want to
-- **Stances**: press `shift` + `[saber stance]` to assume one of 8 stances
+- **Stances**: press `shift` + `[saber stance]` to assume one of 7 stances
 - **True animations**: swings, strikes, blocks, stances, abilities, and exposed hitpoints, all visible in real time
 - and so much more
 
