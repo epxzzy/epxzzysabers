@@ -1,6 +1,9 @@
 package com.epxzzy.epxzzysabers.event;
 
+import com.epxzzy.epxzzysabers.entity.SaberEntities;
 import com.epxzzy.epxzzysabers.entity.client.bolt.PlasmaBoltNew;
+import com.epxzzy.epxzzysabers.entity.client.bolt.PlasmaBoltRenderer;
+import com.epxzzy.epxzzysabers.entity.client.rotary.ThrownRotarySaberRenderer;
 import com.epxzzy.epxzzysabers.epxzzySabers;
 import com.epxzzy.epxzzysabers.entity.SaberModelLayers;
 import com.epxzzy.epxzzysabers.entity.client.bolt.PlasmaBoltModel;
@@ -10,7 +13,9 @@ import com.epxzzy.epxzzysabers.misc.KeyBinding;
 import com.epxzzy.epxzzysabers.networking.SaberMessages;
 import com.epxzzy.epxzzysabers.networking.packet.saber.ServerboundSaberAbilityPacket;
 import com.epxzzy.epxzzysabers.networking.packet.saber.ServerboundSaberStancePacket;
+import com.epxzzy.epxzzysabers.screen.SaberMenuTypes;
 import com.epxzzy.epxzzysabers.screen.stance.StancePreferenceScreen;
+import com.epxzzy.epxzzysabers.screen.tint.KyberStationTintScreen;
 import com.epxzzy.epxzzysabers.util.AnimationTickHolder;
 import com.epxzzy.epxzzysabers.util.PlayerHelperLmao;
 import com.epxzzy.epxzzysabers.util.ScrollValueHandler;
@@ -19,17 +24,25 @@ import com.epxzzy.epxzzysabers.util.TagHelper;
 
 //import net.createmod.catnip.levelWrappers.WrappedClientLevel;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
+import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 
 public class Events {
@@ -117,6 +130,16 @@ public class Events {
             event.registerLayerDefinition(SaberModelLayers.PLASMA_BOLTNEW_LAYER, PlasmaBoltNew::createBodyLayer);
 
         }
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            MenuScreens.register(SaberMenuTypes.SKREEN_TINT.get(), KyberStationTintScreen::new);
+            //MenuScreens.register(SaberMenuTypes.SKREEN_STANCE.get(), KyberStationStanceScreen::new);
+
+
+            EntityRenderers.register(SaberEntities.ROTARY_SABER_ENTITY.get(), ThrownRotarySaberRenderer::new);
+            EntityRenderers.register(SaberEntities.PLASMA_BOLT.get(), PlasmaBoltRenderer::new);
+
+        }
     }
 
     @Mod.EventBusSubscriber(modid = epxzzySabers.MOD_ID)
@@ -127,6 +150,7 @@ public class Events {
                 event.setResult(Event.Result.DENY);
             }
         }
+
     }
 }
 
