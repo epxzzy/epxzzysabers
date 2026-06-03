@@ -1,65 +1,55 @@
-epxzzy's sabers.
 
-ideas n stuff:
+# epxzzy's sabers
 
-# Saber Types [DONE]
- - [DONE] Single blade (low attack speed, high attack damage, low parry range)
- - [DONE] Dual blade (high attack speed, mildly low attack damage, high parry range)
- - [DONE] Rotary Saber (dualblade but fly)
- - [DONE] Saber-blaster hybrid (singleblade but pew pew)
- - [DONE] Crossguard (high attack speed, randomised damage, low parry range)
- - [DONE] Saber Pike (high attack speed, mid attack damage, very high parry range)
- - [DONE] Saber gauntlet (high attack speed, low attack damage, low parry range)
- - Saber Whip (fishing rod like functionality, cant block but can be blocked)
- - Dark Saber (just do it bro somehow)
- - Saber Trident (probably do something fun)
- - Saber Chucks (nun-chucks, no special ability considered so far besides)
- 
-//above stats are bs, update them too
-//also add more exotic saber types
+High-speed duels. Stances. Abilities. Infinite colors.
 
-# Mechanics 
- - [DONE] Parry 
- - [DONE] Saber Flight
- - [DONE] Saber Throw
- - [DONE] Saber Shooting
- - [DONE] Saber Supercharge
- - [DONE] Saber Disruption
-   
-# Stances 
- 1. shi-cho [DONE]
- 2. makashi [DONE] 
- 3. soresu [DONE] 
- 4. atarua [DONE] 
- 5. shen/djem so [DONE]
- 6. niman [DONE] 
- 7. juyo/vapaad [DONE]
+## About
 
-each form will have a different block, attack animations
-//maybe, i have ideas for what makashi animations could look like, rest idk lmao
-//1 - as is
-//2 - offhand gets tucked back and some ballerina bs
-//3 - emphasis on blocking?? attacks look weak?
-//4 - energic movements?
-//5 - direct? percision?
-//6 - im lost?
-//7 - use both hands?
+epxzzy's sabers adds in several new weapons, some with unique gimmicks. These weapons have:
 
+- **7 unique weapon variants** with more to come
+- **5 abilities** across **3 variants**
+- **True combat**: sabers function as shields when you block, and like swords when you strike
+- **God so many colors**: customisability down to individual RGB values
+- **Deflection**: parry projectiles back at their origin
+- **Togglable states**: ignite only when you want to
+- **Stances**: press `shift` + `[saber stance]` to assume one of 7 stances
+- **True animations**: swings, strikes, blocks, stances, abilities, and exposed hitpoints, all visible in real time
+- and so much more
 
-## FOR NEXT UPDATE:
-- more possible saber types (whips etc)
-- armour for sabers
-- items planned (probably mentioned somewhere below)
+## Links
 
+- [Modrinth](https://modrinth.com/mod/epxzzysabers)
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/epxzzysabers)
+- [Discord](https://discord.gg/Mmakd5Qc9y)
 
-### Items
-- Proton bombs (cylindrical superpowered tnt)
-- Kyber crystals (Natural && Synthetic)
-- Thermal detonators (a grenade pretty much)
-- Laser Blaster (w/ variations)
-- Beskar alloy
-- Beskar armour (armour that is resistant to saber attacks)
-- [Ark pulse generator](https://starwars.fandom.com/wiki/Arc_Pulse_Generator)
-- grevious mobile
-- gungan shield and big booma????
-- disrupter block as redstone component
+## Wiki
+
+- [Wiki Home](https://epxzzy.github.io/epxzzysabers/docs/)
+- [Compatibility](https://epxzzy.github.io/epxzzysabers/docs/misc/compatibility.html)
+- [Getting Started](https://epxzzy.github.io/epxzzysabers/docs/misc/getting_started.html)
+
+## FAQ
+
+- Q: Can i put this in my modpack?  
+  A: Yeah, as long as you credit properly, you can.
+
+- Q: Are you going to add X feature? Or I wanted to suggest Y Idea.  
+  A: If you want to see any feature added to the mod you can suggest it on the server and I will be more than open to brainstorm upon the idea, keep in mind it may end up a bit different or not added at all depending on the context.
+
+- Q: When is minecraft version X is going to supported?  
+  A: With new versions probably soon. with old versions probably never. If you want to create/maintain this mod for certain version hit me up on Discord.
+
+- Q: Can i use X mod with this?  
+  A: Very likely not, this however is not intended. if you find any issues be sure to report them on the github repo or Discord. Consult [compatibility](https://epxzzy.github.io/epxzzysabers/docs/misc/compatibility.html) before anything.
+
+- Q: My question is not listed in here.  
+  A: Join the discord, it will either be already answered and if not then you get to ask it directly.
+
+## Credit
+
+gotta thank these fellas:
+
+- [**DeadComedian**](https://x.com/DeadComedianMc): majority of the art, models and textures
+- [**Marmitex**](https://x.com/Marmitex78/): Few of the art stuff
+
