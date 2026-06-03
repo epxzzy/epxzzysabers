@@ -532,3 +532,29 @@ hr {
   border-top: 1px solid var(--subtle-border);
   margin: 1.5rem 0;
 }
+
+.anchor-link {
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.anchor-link:hover {
+  text-decoration: underline;
+  color: var(--link-color);
+}
+
+.anchor-link::before {
+  content: "#";
+  position: absolute;
+  left: -1.2em;
+  opacity: 0;
+  color: var(--link-color);
+  font-weight: normal;
+  transition: opacity 0.15s ease;
+  text-decoration: none;
+}
+
+.anchor-link:hover::before {
+  opacity: 0.6;
+}
