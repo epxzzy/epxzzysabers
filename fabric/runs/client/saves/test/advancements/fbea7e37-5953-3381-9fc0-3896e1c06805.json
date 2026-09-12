@@ -1,0 +1,21 @@
+{
+  "create:root": {
+    "criteria": {
+      "0": "2025-08-14 01:29:36 +0530"
+    },
+    "done": true
+  },
+  "create:wrench_goggles": {
+    "criteria": {
+      "1": "2025-08-14 01:29:36 +0530"
+    },
+    "done": false
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2025-08-14 01:29:39 +0530"
+    },
+    "done": true
+  },
+  "DataVersion": 3465
+}

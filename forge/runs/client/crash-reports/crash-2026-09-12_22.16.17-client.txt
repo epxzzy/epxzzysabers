@@ -1,0 +1,311 @@
+---- Minecraft Crash Report ----
+// Sorry :(
+
+Time: 2026-09-12 22:16:17
+Description: Initializing game
+
+java.lang.RuntimeException: null
+	at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.GameData.postRegisterEvents(GameData.java:330) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+	at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.common.ForgeStatesProvider.lambda$new$3(ForgeStatesProvider.java:24) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.handleInlineTransition(ModLoader.java:241) ~[fmlcore-1.21.1-52.0.28.jar:1.0]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.dispatchAndHandleError(ModLoader.java:230) ~[fmlcore-1.21.1-52.0.28.jar:1.0]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:197) ~[fmlcore-1.21.1-52.0.28.jar:1.0]
+	at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.lambda$begin$1(ClientModLoader.java:52) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+	at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.lambda$createRunnableWithCatch$4(ClientModLoader.java:72) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+	at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.begin(ClientModLoader.java:52) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.<init>(Minecraft.java:478) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:212) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.1-52.0.28/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:85) ~[fmlloader-1.21.1-52.0.28.jar!/:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.1-52.0.28/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.lambda$makeService$0(CommonLaunchHandler.java:69) ~[fmlloader-1.21.1-52.0.28.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:77) [modlauncher-10.2.2.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:97) [modlauncher-10.2.2.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.Launcher.run(Launcher.java:116) [modlauncher-10.2.2.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.Launcher.main(Launcher.java:75) [modlauncher-10.2.2.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.BootstrapEntry.main(BootstrapEntry.java:17) [modlauncher-10.2.2.jar!/:?]
+	at net.minecraftforge.bootstrap@2.1.3/net.minecraftforge.bootstrap.Bootstrap.moduleMain(Bootstrap.java:188) [bootstrap-2.1.3.jar!/:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at net.minecraftforge.bootstrap.Bootstrap.bootstrapMain(Bootstrap.java:133) [bootstrap-2.1.3.jar:2.1.3]
+	at net.minecraftforge.bootstrap.Bootstrap.start(Bootstrap.java:53) [bootstrap-2.1.3.jar:2.1.3]
+	at net.minecraftforge.bootstrap.ForgeBootstrap.main(ForgeBootstrap.java:19) [bootstrap-2.1.3.jar:2.1.3]
+	Suppressed: java.lang.RuntimeException: Failed to apply some object holders, see suppressed exceptions for details
+		at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.ObjectHolderRegistry.applyObjectHolders(ObjectHolderRegistry.java:223) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+		at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.GameData.postRegisterEvents(GameData.java:349) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+		at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.common.ForgeStatesProvider.lambda$new$3(ForgeStatesProvider.java:24) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.handleInlineTransition(ModLoader.java:241) ~[fmlcore-1.21.1-52.0.28.jar:1.0]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.dispatchAndHandleError(ModLoader.java:230) ~[fmlcore-1.21.1-52.0.28.jar:1.0]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:197) ~[fmlcore-1.21.1-52.0.28.jar:1.0]
+		at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.lambda$begin$1(ClientModLoader.java:52) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+		at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.lambda$createRunnableWithCatch$4(ClientModLoader.java:72) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+		at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.begin(ClientModLoader.java:52) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+		at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.<init>(Minecraft.java:478) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+		at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:212) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+		at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+		at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+		at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.1-52.0.28/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:85) ~[fmlloader-1.21.1-52.0.28.jar!/:?]
+		at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.1-52.0.28/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.lambda$makeService$0(CommonLaunchHandler.java:69) ~[fmlloader-1.21.1-52.0.28.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:77) [modlauncher-10.2.2.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:97) [modlauncher-10.2.2.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.Launcher.run(Launcher.java:116) [modlauncher-10.2.2.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.Launcher.main(Launcher.java:75) [modlauncher-10.2.2.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.BootstrapEntry.main(BootstrapEntry.java:17) [modlauncher-10.2.2.jar!/:?]
+		at net.minecraftforge.bootstrap@2.1.3/net.minecraftforge.bootstrap.Bootstrap.moduleMain(Bootstrap.java:188) [bootstrap-2.1.3.jar!/:?]
+		at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+		at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+		at net.minecraftforge.bootstrap.Bootstrap.bootstrapMain(Bootstrap.java:133) [bootstrap-2.1.3.jar:2.1.3]
+		at net.minecraftforge.bootstrap.Bootstrap.start(Bootstrap.java:53) [bootstrap-2.1.3.jar:2.1.3]
+		at net.minecraftforge.bootstrap.ForgeBootstrap.main(ForgeBootstrap.java:19) [bootstrap-2.1.3.jar:2.1.3]
+		Suppressed: java.lang.IllegalStateException: Unable to find registry with key minecraft:air for mod "epxzzysabers". Check the 'caused by' to see further stack.
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.RegistryObject$1.accept(RegistryObject.java:166) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.RegistryObject$1.accept(RegistryObject.java:154) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.ObjectHolderRegistry.applyObjectHolders(ObjectHolderRegistry.java:226) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.GameData.postRegisterEvents(GameData.java:349) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.common.ForgeStatesProvider.lambda$new$3(ForgeStatesProvider.java:24) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.handleInlineTransition(ModLoader.java:241) ~[fmlcore-1.21.1-52.0.28.jar:1.0]
+			at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.dispatchAndHandleError(ModLoader.java:230) ~[fmlcore-1.21.1-52.0.28.jar:1.0]
+			at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:197) ~[fmlcore-1.21.1-52.0.28.jar:1.0]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.lambda$begin$1(ClientModLoader.java:52) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.lambda$createRunnableWithCatch$4(ClientModLoader.java:72) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.begin(ClientModLoader.java:52) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.<init>(Minecraft.java:478) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:212) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+			at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+			at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.1-52.0.28/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:85) ~[fmlloader-1.21.1-52.0.28.jar!/:?]
+			at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.1-52.0.28/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.lambda$makeService$0(CommonLaunchHandler.java:69) ~[fmlloader-1.21.1-52.0.28.jar!/:?]
+			at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:77) [modlauncher-10.2.2.jar!/:?]
+			at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:97) [modlauncher-10.2.2.jar!/:?]
+			at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.Launcher.run(Launcher.java:116) [modlauncher-10.2.2.jar!/:?]
+			at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.Launcher.main(Launcher.java:75) [modlauncher-10.2.2.jar!/:?]
+			at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.BootstrapEntry.main(BootstrapEntry.java:17) [modlauncher-10.2.2.jar!/:?]
+			at net.minecraftforge.bootstrap@2.1.3/net.minecraftforge.bootstrap.Bootstrap.moduleMain(Bootstrap.java:188) [bootstrap-2.1.3.jar!/:?]
+			at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+			at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+			at net.minecraftforge.bootstrap.Bootstrap.bootstrapMain(Bootstrap.java:133) [bootstrap-2.1.3.jar:2.1.3]
+			at net.minecraftforge.bootstrap.Bootstrap.start(Bootstrap.java:53) [bootstrap-2.1.3.jar:2.1.3]
+			at net.minecraftforge.bootstrap.ForgeBootstrap.main(ForgeBootstrap.java:19) [bootstrap-2.1.3.jar:2.1.3]
+		Caused by: java.lang.Throwable: Calling Site from mod: epxzzysabers
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.RegistryObject.<init>(RegistryObject.java:153) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.RegistryObject.create(RegistryObject.java:62) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.DeferredRegister.register(DeferredRegister.java:194) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at java.base/java.util.HashMap.forEach(HashMap.java:1429) ~[?:?]
+			at TRANSFORMER/epxzzysabers@0.0.1/dev.epxzzy.epxzzysabers.ExampleMod.<init>(ExampleMod.java:28) ~[main/:?]
+			at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) ~[?:?]
+			at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502) ~[?:?]
+			at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486) ~[?:?]
+			at LAYER PLUGIN/net.minecraftforge.javafmlmod@1.21.1-52.0.28/net.minecraftforge.fml.javafmlmod.FMLModContainer.constructMod(FMLModContainer.java:145) ~[javafmllanguage-1.21.1-52.0.28.jar!/:52.0.28]
+			at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModContainer.lambda$buildTransitionHandler$5(ModContainer.java:125) ~[fmlcore-1.21.1-52.0.28.jar!/:1.0]
+			at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804) ~[?:?]
+			at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796) ~[?:?]
+			at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+			at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+			at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+			at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+			at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+		Suppressed: java.lang.IllegalStateException: Unable to find registry with key minecraft:air for mod "epxzzysabers". Check the 'caused by' to see further stack.
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.RegistryObject$1.accept(RegistryObject.java:166) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.RegistryObject$1.accept(RegistryObject.java:154) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.ObjectHolderRegistry.applyObjectHolders(ObjectHolderRegistry.java:226) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.GameData.postRegisterEvents(GameData.java:349) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.common.ForgeStatesProvider.lambda$new$3(ForgeStatesProvider.java:24) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.handleInlineTransition(ModLoader.java:241) ~[fmlcore-1.21.1-52.0.28.jar:1.0]
+			at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.dispatchAndHandleError(ModLoader.java:230) ~[fmlcore-1.21.1-52.0.28.jar:1.0]
+			at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:197) ~[fmlcore-1.21.1-52.0.28.jar:1.0]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.lambda$begin$1(ClientModLoader.java:52) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.lambda$createRunnableWithCatch$4(ClientModLoader.java:72) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.begin(ClientModLoader.java:52) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.<init>(Minecraft.java:478) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:212) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+			at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+			at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.1-52.0.28/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:85) ~[fmlloader-1.21.1-52.0.28.jar!/:?]
+			at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.1-52.0.28/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.lambda$makeService$0(CommonLaunchHandler.java:69) ~[fmlloader-1.21.1-52.0.28.jar!/:?]
+			at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:77) [modlauncher-10.2.2.jar!/:?]
+			at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:97) [modlauncher-10.2.2.jar!/:?]
+			at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.Launcher.run(Launcher.java:116) [modlauncher-10.2.2.jar!/:?]
+			at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.Launcher.main(Launcher.java:75) [modlauncher-10.2.2.jar!/:?]
+			at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.BootstrapEntry.main(BootstrapEntry.java:17) [modlauncher-10.2.2.jar!/:?]
+			at net.minecraftforge.bootstrap@2.1.3/net.minecraftforge.bootstrap.Bootstrap.moduleMain(Bootstrap.java:188) [bootstrap-2.1.3.jar!/:?]
+			at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+			at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+			at net.minecraftforge.bootstrap.Bootstrap.bootstrapMain(Bootstrap.java:133) [bootstrap-2.1.3.jar:2.1.3]
+			at net.minecraftforge.bootstrap.Bootstrap.start(Bootstrap.java:53) [bootstrap-2.1.3.jar:2.1.3]
+			at net.minecraftforge.bootstrap.ForgeBootstrap.main(ForgeBootstrap.java:19) [bootstrap-2.1.3.jar:2.1.3]
+		Caused by: java.lang.Throwable: Calling Site from mod: epxzzysabers
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.RegistryObject.<init>(RegistryObject.java:153) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.RegistryObject.create(RegistryObject.java:62) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.DeferredRegister.register(DeferredRegister.java:194) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+			at java.base/java.util.HashMap.forEach(HashMap.java:1429) ~[?:?]
+			at TRANSFORMER/epxzzysabers@0.0.1/dev.epxzzy.epxzzysabers.ExampleMod.<init>(ExampleMod.java:28) ~[main/:?]
+			at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) ~[?:?]
+			at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502) ~[?:?]
+			at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486) ~[?:?]
+			at LAYER PLUGIN/net.minecraftforge.javafmlmod@1.21.1-52.0.28/net.minecraftforge.fml.javafmlmod.FMLModContainer.constructMod(FMLModContainer.java:145) ~[javafmllanguage-1.21.1-52.0.28.jar!/:52.0.28]
+			at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModContainer.lambda$buildTransitionHandler$5(ModContainer.java:125) ~[fmlcore-1.21.1-52.0.28.jar!/:1.0]
+			at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804) ~[?:?]
+			at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796) ~[?:?]
+			at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+			at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+			at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+			at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+			at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+Transformer Audit:
+  dev.epxzzy.epxzzysabers.ExampleMod
+    REASON: classloading
+  net.minecraft.client.Minecraft
+    REASON: mixin
+    PLUGIN: accesstransformer:BEFORE
+    PLUGIN: runtimedistcleaner:AFTER
+    REASON: classloading
+    PLUGIN: accesstransformer:BEFORE
+    PLUGIN: mixin:APP:epxzzysabers.mixins.json:MixinMinecraft
+    PLUGIN: mixin:AFTER
+    PLUGIN: runtimedistcleaner:AFTER
+  net.minecraft.client.main.Main
+    REASON: classloading
+  net.minecraftforge.client.loading.ClientModLoader
+    REASON: classloading
+  net.minecraftforge.common.ForgeStatesProvider
+    REASON: classloading
+  net.minecraftforge.registries.DeferredRegister
+    REASON: classloading
+  net.minecraftforge.registries.GameData
+    REASON: classloading
+  net.minecraftforge.registries.ObjectHolderRegistry
+    REASON: classloading
+  net.minecraftforge.registries.RegistryObject
+    REASON: classloading
+  net.minecraftforge.registries.RegistryObject$1
+    REASON: classloading
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Suspected Mods: NONE
+Stacktrace:
+	at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.registries.GameData.postRegisterEvents(GameData.java:330) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+	at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.common.ForgeStatesProvider.lambda$new$3(ForgeStatesProvider.java:24) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.handleInlineTransition(ModLoader.java:241) ~[fmlcore-1.21.1-52.0.28.jar!/:1.0]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.dispatchAndHandleError(ModLoader.java:230) ~[fmlcore-1.21.1-52.0.28.jar!/:1.0]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.1-52.0.28/net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:197) ~[fmlcore-1.21.1-52.0.28.jar!/:1.0]
+	at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.lambda$begin$1(ClientModLoader.java:52) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar%231!/:?]
+	at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.lambda$createRunnableWithCatch$4(ClientModLoader.java:72) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar%231!/:?]
+	at TRANSFORMER/net.minecraftforge.forge@52.0.28/net.minecraftforge.client.loading.ClientModLoader.begin(ClientModLoader.java:52) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar%231!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.<init>(Minecraft.java:478) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar%230!/:?]
+Transformer Audit:
+  net.minecraft.client.Minecraft
+    REASON: mixin
+    PLUGIN: accesstransformer:BEFORE
+    PLUGIN: runtimedistcleaner:AFTER
+    REASON: classloading
+    PLUGIN: accesstransformer:BEFORE
+    PLUGIN: mixin:APP:epxzzysabers.mixins.json:MixinMinecraft
+    PLUGIN: mixin:AFTER
+    PLUGIN: runtimedistcleaner:AFTER
+  net.minecraftforge.client.loading.ClientModLoader
+    REASON: classloading
+  net.minecraftforge.common.ForgeStatesProvider
+    REASON: classloading
+  net.minecraftforge.registries.GameData
+    REASON: classloading
+-- Initialization --
+Details:
+	Modules: 
+Stacktrace:
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:212) ~[forge-1.21.1-52.0.28_mapped_official_1.21.1-recomp.jar:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.1-52.0.28/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:85) ~[fmlloader-1.21.1-52.0.28.jar!/:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.1-52.0.28/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.lambda$makeService$0(CommonLaunchHandler.java:69) ~[fmlloader-1.21.1-52.0.28.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:77) [modlauncher-10.2.2.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:97) [modlauncher-10.2.2.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.Launcher.run(Launcher.java:116) [modlauncher-10.2.2.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.Launcher.main(Launcher.java:75) [modlauncher-10.2.2.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.2/cpw.mods.modlauncher.BootstrapEntry.main(BootstrapEntry.java:17) [modlauncher-10.2.2.jar!/:?]
+	at net.minecraftforge.bootstrap@2.1.3/net.minecraftforge.bootstrap.Bootstrap.moduleMain(Bootstrap.java:188) [bootstrap-2.1.3.jar!/:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at net.minecraftforge.bootstrap.Bootstrap.bootstrapMain(Bootstrap.java:133) [bootstrap-2.1.3.jar:2.1.3]
+	at net.minecraftforge.bootstrap.Bootstrap.start(Bootstrap.java:53) [bootstrap-2.1.3.jar:2.1.3]
+	at net.minecraftforge.bootstrap.ForgeBootstrap.main(ForgeBootstrap.java:19) [bootstrap-2.1.3.jar:2.1.3]
+Transformer Audit:
+  net.minecraft.client.main.Main
+    REASON: classloading
+
+
+-- System Details --
+Details:
+	Minecraft Version: 1.21.1
+	Minecraft Version ID: 1.21.1
+	Operating System: Linux (amd64) version 7.2.4-arch1-2
+	Java Version: 21.0.8, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 108418728 bytes (103 MiB) / 394264576 bytes (376 MiB) up to 3642753024 bytes (3474 MiB)
+	CPUs: 4
+	Processor Vendor: AuthenticAMD
+	Processor Name: AMD Ryzen 3 3200G with Radeon Vega Graphics
+	Identifier: AuthenticAMD Family 23 Model 24 Stepping 1
+	Microarchitecture: Zen / Zen+
+	Frequency (GHz): 4.00
+	Number of physical packages: 1
+	Number of physical CPUs: 4
+	Number of logical CPUs: 4
+	Graphics card #0 name: Picasso/Raven 2 [Radeon Vega Series / Radeon Vega Mobile Series]
+	Graphics card #0 vendor: Advanced Micro Devices, Inc. [AMD/ATI] (0x1002)
+	Graphics card #0 VRAM (MiB): 258.00
+	Graphics card #0 deviceId: 0x15d8
+	Graphics card #0 versionInfo: unknown
+	Virtual memory max (MiB): 11042.37
+	Virtual memory used (MiB): 10405.39
+	Swap memory total (MiB): 4096.00
+	Swap memory used (MiB): 1162.11
+	Space in storage for jna.tmpdir (MiB): <path not set>
+	Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB): <path not set>
+	Space in storage for io.netty.native.workdir (MiB): <path not set>
+	Space in storage for java.io.tmpdir (MiB): available: 6924.55, total: 6946.38
+	Space in storage for workdir (MiB): available: 370112.84, total: 468255.69
+	JVM Flags: 0 total; 
+	Launched Version: MOD_DEV
+	Backend library: LWJGL version 3.3.3+5
+	Backend API: AMD Radeon Vega 8 Graphics (radeonsi, raven, ACO, DRM 3.64, 7.2.4-arch1-2) GL version 4.6 (Core Profile) Mesa 26.2.2-arch1.1, AMD
+	Window size: <not initialized>
+	GFLW Platform: x11
+	GL Caps: Using framebuffer using OpenGL 3.2
+	GL debug messages: 
+	Is Modded: Definitely; Client brand changed to 'forge'
+	Universe: 404
+	Type: Client (map_client.txt)
+	Locale: en_GB
+	System encoding: UTF-8
+	File encoding: UTF-8
+	CPU: 4x AMD Ryzen 3 3200G with Radeon Vega Graphics
+	ModLauncher: 10.2.2
+	ModLauncher launch target: forge_userdev_client
+	ModLauncher naming: mcp
+	ModLauncher services: 
+		/ slf4jfixer PLUGINSERVICE 
+		/ runtimedistcleaner PLUGINSERVICE 
+		/ runtime_enum_extender PLUGINSERVICE 
+		/ object_holder_definalize PLUGINSERVICE 
+		/ capability_token_subclass PLUGINSERVICE 
+		/ accesstransformer PLUGINSERVICE 
+		/ eventbus PLUGINSERVICE 
+		/ mixin PLUGINSERVICE 
+		/ fml TRANSFORMATIONSERVICE 
+		/ mixin TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		lowcodefml@52
+		minecraft@1.0
+		javafml@52.0.28
+	Mod List: 
+		                                                  |Minecraft                     |minecraft                     |1.21.1              |COMMON_SET|Manifest: NOSIGNATURE
+		                                                  |Forge                         |forge                         |52.0.28             |COMMON_SET|Manifest: NOSIGNATURE
+		main                                              |epxzzy's sabers               |epxzzysabers                  |0.0.1               |COMMON_SET|Manifest: NOSIGNATURE
+	Crash Report UUID: bf81e4ea-334c-48c7-a77d-c915781601ee
+	FML: 0.0
+	Forge: net.minecraftforge:52.0.28

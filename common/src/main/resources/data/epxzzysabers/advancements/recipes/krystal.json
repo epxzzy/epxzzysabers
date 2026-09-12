@@ -1,0 +1,37 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "epxzzysabers:krystal"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_item"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "epxzzysabers:krystal_dupe",
+      "epxzzysabers:kyber_station",
+      "epxzzysabers:kyber_station_alt",
+      "epxzzysabers:single_bladed_saber",
+      "epxzzysabers:dual_bladed_saber",
+      "epxzzysabers:rotary_saber",
+      "epxzzysabers:crossguard_saber",
+      "epxzzysabers:blaster_saber",
+      "epxzzysabers:saber_pike",
+      "epxzzysabers:saber_gauntlet"
+
+    ]
+  }
+}

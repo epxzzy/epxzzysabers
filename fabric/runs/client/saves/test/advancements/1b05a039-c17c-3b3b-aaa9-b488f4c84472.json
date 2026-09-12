@@ -1,0 +1,268 @@
+{
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2025-08-08 05:29:30 +0530"
+    },
+    "done": true
+  },
+  "create:root": {
+    "criteria": {
+      "0": "2025-08-08 05:29:59 +0530"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/gray_bed": {
+    "criteria": {
+      "has_gray_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/lime_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/yellow_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/green_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/brown_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/combat/crafting/appliances/netherite_diving_helmet_from_netherite": {
+    "criteria": {
+      "has_item": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/magenta_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/gray_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/orange_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/painting": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/red_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/light_gray_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/blue_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/orange_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/magenta_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:wrench_goggles": {
+    "criteria": {
+      "0": "2025-08-08 06:00:02 +0530",
+      "1": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/blue_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/chest": {
+    "criteria": {
+      "has_lots_of_items": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/light_blue_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/gray_carpet": {
+    "criteria": {
+      "has_gray_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/light_gray_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/cyan_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/cyan_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/red_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/light_blue_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/white_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/gray_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/pink_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/black_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/black_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/flint_and_steel": {
+    "criteria": {
+      "has_obsidian": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/pink_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "minecraft:story/form_obsidian": {
+    "criteria": {
+      "obsidian": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/white_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/brown_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/gray_banner": {
+    "criteria": {
+      "has_gray_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/green_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/lime_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/purple_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/enchanting_table": {
+    "criteria": {
+      "has_obsidian": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/kinetics/yellow_seat": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "create:recipes/building_blocks/crafting/logistics/purple_table_cloth": {
+    "criteria": {
+      "has_wool": "2025-08-08 06:00:02 +0530"
+    },
+    "done": true
+  },
+  "DataVersion": 3465
+}

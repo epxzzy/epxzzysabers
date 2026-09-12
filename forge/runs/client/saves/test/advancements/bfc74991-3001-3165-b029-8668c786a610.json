@@ -1,0 +1,15 @@
+{
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2026-03-06 22:00:57 +0530"
+    },
+    "done": true
+  },
+  "minecraft:adventure/root": {
+    "criteria": {
+      "killed_something": "2026-03-06 22:05:35 +0530"
+    },
+    "done": true
+  },
+  "DataVersion": 3465
+}

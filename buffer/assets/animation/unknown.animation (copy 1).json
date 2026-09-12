@@ -1,0 +1,25 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.model.djemso": {
+			"loop": true,
+			"bones": {
+				"Body": {
+					"rotation": [-2.5, 0, 0]
+				},
+				"RightArm": {
+					"rotation": [-205, 0, 30],
+					"position": [0, 3, 0]
+				},
+				"LeftArm": {
+					"rotation": [-205, 0, -30],
+					"position": [0, 3, 0]
+				},
+				"LeftLeg": {
+					"rotation": [5, 0, 0],
+					"position": [0, 0, -1]
+				}
+			}
+		}
+	}
+}

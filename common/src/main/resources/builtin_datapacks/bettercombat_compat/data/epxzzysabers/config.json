@@ -1,0 +1,7 @@
+{
+  "rotary_flight_duration": 200,
+  "rotary_flight_cooldown": 40,
+  "gauntlet_surge_chargeup": 40,
+  "gauntlet_surge_duration": 160,
+  "kewl_fights": false
+}

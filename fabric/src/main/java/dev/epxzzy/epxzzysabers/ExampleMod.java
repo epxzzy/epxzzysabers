@@ -1,12 +1,18 @@
 package dev.epxzzy.epxzzysabers;
 
+import dev.epxzzy.epxzzysabers.registry.ItemRegistry;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+
+import static dev.epxzzy.epxzzysabers.Constants.MOD_ID;
 
 public class ExampleMod implements ModInitializer {
-    
+
     @Override
     public void onInitialize() {
-        
+
         // This method is invoked by the Fabric mod loader when it is ready
         // to load your mod. You can access Fabric and Common code in this
         // project.
@@ -14,5 +20,14 @@ public class ExampleMod implements ModInitializer {
         // Use Fabric to bootstrap the Common mod.
         Constants.LOG.info("Hello Fabric world!");
         CommonClass.init();
+
+        ItemRegistry.map.forEach((
+            (s, supplier) -> Registry.register(
+                BuiltInRegistries.ITEM,
+                ResourceLocation.fromNamespaceAndPath(MOD_ID, s),
+                supplier.get()
+            ))
+        );
+
     }
 }

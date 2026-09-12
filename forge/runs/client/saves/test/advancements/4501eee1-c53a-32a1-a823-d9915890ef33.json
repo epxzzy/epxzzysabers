@@ -1,0 +1,21 @@
+{
+  "create:root": {
+    "criteria": {
+      "0": "2025-08-14 01:32:24 +0530"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2025-08-14 01:31:53 +0530"
+    },
+    "done": true
+  },
+  "minecraft:adventure/root": {
+    "criteria": {
+      "killed_by_something": "2025-08-14 01:46:19 +0530"
+    },
+    "done": true
+  },
+  "DataVersion": 3465
+}

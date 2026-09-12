@@ -1,0 +1,26 @@
+{
+  "item.epxzzysabers.single_bladed_saber": "Single-Bladed Saber",
+  "item.epxzzysabers.dual_bladed_saber": "Dual-Bladed Saber",
+  "item.epxzzysabers.rotary_saber": "Rotary Saber",
+  "item.epxzzysabers.crossguard_saber": "Crossguard Saber",
+  "item.epxzzysabers.blaster_saber": "Blaster Saber",
+  "item.epxzzysabers.saber_pike": "Saber Pike",
+  "item.epxzzysabers.saber_gauntlet": "Saber Gauntlet",
+
+  "item.epxzzysabers.krystal": "Krystal",
+
+  "key.epxzzysabers.saber_ability": "Saber Ability (epxzzysabers)",
+  "key.epxzzysabers.saber_stance": "Saber Stance (epxzzysabers)",
+
+
+  "block.epxzzysabers.kyber_station": "Kyber Station",
+  "epxzzysabers.moditemsiglol": "Sabers",
+
+
+  "sounds.epxzzysabers.activation": "Saber Activates",
+  "sounds.epxzzysabers.deactivation": "Saber Deactivates",
+  "sounds.epxzzysabers.clash": "Sabers Clash",
+  "sounds.epxzzysabers.swing": "Saber Swings",
+  "sounds.epxzzysabers.swing_rapid": "Saber Swings Rapidly"
+
+}

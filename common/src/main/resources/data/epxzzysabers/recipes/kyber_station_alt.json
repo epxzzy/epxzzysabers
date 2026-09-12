@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "C": {
+      "tag": "forge:ingots/gold"
+    },
+    "S": {
+      "item": "epxzzysabers:krystal"
+    }
+  },
+  "pattern": [
+    "SC",
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 1,
+    "item": "epxzzysabers:kyber_station"
+  }
+}

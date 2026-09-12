@@ -2,7 +2,10 @@ package dev.epxzzy.epxzzysabers;
 
 import dev.epxzzy.epxzzysabers.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
+
+import static dev.epxzzy.epxzzysabers.Constants.MOD_ID;
 
 // This class is part of the common project meaning it is shared between all supported loaders. Code written here can only
 // import and access the vanilla codebase, libraries used by vanilla, and optionally third party libraries that provide
