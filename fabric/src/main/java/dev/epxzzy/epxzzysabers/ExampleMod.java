@@ -1,10 +1,14 @@
 package dev.epxzzy.epxzzysabers;
 
+import dev.epxzzy.epxzzysabers.core.foundation.PartialModelEventHandler;
 import dev.epxzzy.epxzzysabers.registry.ItemRegistry;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 
 import static dev.epxzzy.epxzzysabers.Constants.MOD_ID;
 
@@ -29,5 +33,14 @@ public class ExampleMod implements ModInitializer {
             ))
         );
 
+        setupLib();
     }
+
+    private static void setupLib() {
+        ModelLoadingPlugin.register(ctx -> {
+            ctx.addModels(PartialModelEventHandler.onRegisterAdditional());
+        });
+        ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(PartialModelEventHandler.ReloadListener.INSTANCE);
+    }
+
 }

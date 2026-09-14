@@ -31,4 +31,8 @@ public class CommonClass {
             Constants.LOG.info("Hello to examplemod");
         }
     }
+
+    public static ResourceLocation asResource(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    }
 }

@@ -1,13 +1,12 @@
 package dev.epxzzy.epxzzysabers;
 
 
+import dev.epxzzy.epxzzysabers.core.foundation.PartialModelEventHandler;
 import dev.epxzzy.epxzzysabers.registry.ItemRegistry;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import static dev.epxzzy.epxzzysabers.Constants.MOD_ID;
@@ -28,6 +27,11 @@ public class ExampleMod {
 
         ItemRegistry.map.forEach(Items::register);
         Items.register(eventBus);
+        registerLibEventListeners(NeoForge.EVENT_BUS, eventBus);
+    }
 
+    private static void registerLibEventListeners(IEventBus gameEventBus, IEventBus modEventBus) {
+        modEventBus.addListener(PartialModelEventHandler::onRegisterAdditional);
+        modEventBus.addListener(PartialModelEventHandler::onBakingCompleted);
     }
 }

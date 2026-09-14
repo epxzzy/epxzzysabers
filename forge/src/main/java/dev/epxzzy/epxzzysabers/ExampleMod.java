@@ -27,6 +27,11 @@ public class ExampleMod {
 
         ItemRegistry.map.forEach(Items::register);
         Items.register(eventBus);
+        registerLibEventListeners(eventBus);
+    }
 
+    private static void registerLibEventListeners(IEventBus modEventBus) {
+        modEventBus.addListener(PartialModelEventHandler::onRegisterAdditional);
+        modEventBus.addListener(PartialModelEventHandler::onBakingCompleted);
     }
 }
