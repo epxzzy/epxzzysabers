@@ -3,9 +3,11 @@
   "minVersion": "0.8",
   "package": "dev.epxzzy.epxzzysabers.mixin",
   "compatibilityLevel": "JAVA_18",
-  "mixins": [],
+  "mixins": [
+  ],
   "client": [
-    "MixinTitleScreen"
+    "MixinTitleScreen",
+    "ItemMixin"
   ],
   "server": [],
   "injectors": {

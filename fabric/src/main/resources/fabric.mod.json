@@ -14,9 +14,13 @@
     "license": "${license}",
     "icon": "${mod_id}.png",
     "environment": "*",
+    "accessWidener": "epxzzysabers.accesswidener",
     "entrypoints": {
         "main": [
-            "dev.epxzzy.epxzzysabers.ExampleMod"
+            "dev.epxzzy.epxzzysabers.Fabric"
+        ],
+        "client": [
+            "dev.epxzzy.epxzzysabers.FabricClient"
         ]
     },
     "mixins": [

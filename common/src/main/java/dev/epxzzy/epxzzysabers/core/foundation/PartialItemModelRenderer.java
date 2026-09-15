@@ -2,6 +2,8 @@ package dev.epxzzy.epxzzysabers.core.foundation;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import dev.epxzzy.epxzzysabers.Constants;
+import dev.epxzzy.epxzzysabers.platform.Services;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -27,7 +29,7 @@ public class PartialItemModelRenderer {
 
     public static PartialItemModelRenderer of(ItemStack stack, ItemDisplayContext transformType,
                                               PoseStack ms, MultiBufferSource buffer, int overlay) {
-        //epxzzySabers.LOGGER.debug("FKCRT PartialItemModelRenderer made for itemstacc {}", stack);
+        Constants.LOG.info("FKCRT PartialItemModelRenderer made for itemstacc {}", stack);
         PartialItemModelRenderer instance = INSTANCE;
         instance.stack = stack;
         instance.transformType = transformType;
@@ -69,19 +71,8 @@ public class PartialItemModelRenderer {
 
         ms.popPose();
     }
-
     private void renderBakedItemModel(BakedModel model, int light, PoseStack ms, VertexConsumer buffer) {
-        ItemRenderer ir = Minecraft.getInstance()
-            .getItemRenderer();
-
-            for (Direction direction : Direction.values()) {
-                random.setSeed(42L);
-                ir.renderQuadList(ms, buffer, model.getQuads(null, direction, random), stack, light,
-                    overlay);
-            }
-
-            random.setSeed(42L);
-            ir.renderQuadList(ms, buffer, model.getQuads(null, null, random), stack, light, overlay);
+        Services.PartialItemModelRenderer.renderBakedItemModel(stack, model, light, ms, buffer, random, overlay);
     }
 
 }

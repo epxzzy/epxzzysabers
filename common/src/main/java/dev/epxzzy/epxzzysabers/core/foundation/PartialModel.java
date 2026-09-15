@@ -1,6 +1,7 @@
 package dev.epxzzy.epxzzysabers.core.foundation;
 
 import com.google.common.collect.MapMaker;
+import dev.epxzzy.epxzzysabers.Constants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
@@ -24,7 +25,7 @@ public class PartialModel {
         if (populateOnInit) {
             bakedModel = getBakedModel(Minecraft.getInstance().getModelManager(), modelLocation);
         }
-        //epxzzySabers.LOGGER.debug("FKCRT PartialModel made for {}",modelLocation);
+        Constants.LOG.info("FKCRT PartialModel made for {}",modelLocation);
     }
 
     public BakedModel getBakedModel(ModelManager modelManager, ResourceLocation location) {

@@ -12,7 +12,7 @@ import net.minecraft.server.packs.PackType;
 
 import static dev.epxzzy.epxzzysabers.Constants.MOD_ID;
 
-public class ExampleMod implements ModInitializer {
+public class Fabric implements ModInitializer {
 
     @Override
     public void onInitialize() {

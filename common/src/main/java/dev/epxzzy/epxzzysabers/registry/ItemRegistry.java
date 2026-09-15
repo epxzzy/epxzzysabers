@@ -16,8 +16,10 @@ public class ItemRegistry {
 
 
     static {
+        /*
         map.put("asdf", asdf);
         map.put("protosaber", protosaber);
+         */
         map.put("single_bladed_saber", singlebladed);
     }
 }
