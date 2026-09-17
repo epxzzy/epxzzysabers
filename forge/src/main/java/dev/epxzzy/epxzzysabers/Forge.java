@@ -38,31 +38,10 @@ public class Forge {
         ItemRegistry.map.forEach(Items::register);
         Items.register(eventBus);
         registerLibEventListeners(eventBus);
-        eventBus.addListener(this::onClientSetup);
     }
 
     private static void registerLibEventListeners(IEventBus modEventBus) {
         modEventBus.addListener(PartialModelEventHandler::onRegisterAdditional);
         modEventBus.addListener(PartialModelEventHandler::onBakingCompleted);
-    }
-
-    private void onClientSetup(final FMLClientSetupEvent event) {
-        /*
-        Constants.LOG.info("FKCRT PartialModelEventHandler registerItemExtensions event");
-
-        ItemRendererRegistry.getRendererMap().forEach((item, renderer) -> {
-            item.initializeClient(extensions ->
-                new IClientItemExtensions() {
-                    @Override
-                    public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                        Constants.LOG.info("FKCRT getCustomRender set");
-                        return renderer;
-                    }
-                }
-            );
-            item.initClient();
-        });
-
-         */
     }
 }

@@ -16,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemRenderer.class)
 public class ItemRendererMixin {
-
     @Inject(
         method = "render",
         at = @At(
@@ -36,7 +35,7 @@ public class ItemRendererMixin {
         BakedModel model,
         CallbackInfo ci
     ) {
-        Constants.LOG.info("FKCRT ItemRendererMixin fabric");
+        Constants.LOG.info("FKCRT ItemRendererMixin common");
         BlockEntityWithoutLevelRenderer renderer =
             ItemRendererRegistry.getRendererMap().get(stack.getItem());
 

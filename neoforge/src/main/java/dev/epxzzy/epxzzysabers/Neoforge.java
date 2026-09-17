@@ -25,7 +25,6 @@ public class Neoforge {
     static final DeferredRegister<Item> Items = DeferredRegister.createItems(MOD_ID);
 
     public Neoforge(IEventBus eventBus) {
-        eventBus.addListener(this::registerItemExtensions);
         // This method is invoked by the NeoForge mod loader when it is ready
         // to load your mod. You can access NeoForge and Common code in this
         // project.
@@ -44,20 +43,5 @@ public class Neoforge {
         modEventBus.addListener(PartialModelEventHandler::onBakingCompleted);
         Constants.LOG.info("FKCRT PartialModelEventHandler events registered");
 
-    }
-
-    @SubscribeEvent
-    public void registerItemExtensions(RegisterClientExtensionsEvent event) {
-        Constants.LOG.info("FKCRT PartialModelEventHandler registerItemExtensions event");
-        ItemRendererRegistry.getRendererMap().forEach((item, renderer) -> {
-            event.registerItem(
-                new IClientItemExtensions(){
-                    @Override
-                    public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                        return renderer;
-                    }
-                },
-                item);
-        });
     }
 }
