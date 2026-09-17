@@ -1,22 +1,13 @@
 package dev.epxzzy.epxzzysabers;
 
 
-import com.mojang.logging.LogUtils;
-import dev.epxzzy.epxzzysabers.core.foundation.ItemRendererRegistry;
 import dev.epxzzy.epxzzysabers.core.foundation.PartialModelEventHandler;
-import dev.epxzzy.epxzzysabers.core.item.SingleBladedItemRenderer;
 import dev.epxzzy.epxzzysabers.registry.ItemRegistry;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.logging.Logger;
 
 import static dev.epxzzy.epxzzysabers.Constants.MOD_ID;
 

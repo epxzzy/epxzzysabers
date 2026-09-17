@@ -2,15 +2,10 @@ package dev.epxzzy.epxzzysabers.core.foundation;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import dev.epxzzy.epxzzysabers.content.sabers.protosaber.Protosaber;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.List;
 
 public abstract class CustomRenderedSaberModelRenderer extends CustomRenderedItemModelRenderer {
     private BakedModel mainModel;

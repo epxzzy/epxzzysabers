@@ -1,7 +1,7 @@
-package dev.epxzzy.epxzzysabers.content.sabers.protosaber;
+package dev.epxzzy.epxzzysabers.content.sabers.Proto;
 
 import dev.epxzzy.epxzzysabers.core.foundation.ItemRendererRegistry;
-import dev.epxzzy.epxzzysabers.core.item.SingleBladedItemRenderer;
+import dev.epxzzy.epxzzysabers.core.item.ISaberItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -10,10 +10,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class Protosaber extends Item {
+abstract public class Protosaber extends Item implements ISaberItem {
     public Protosaber(Properties properties) {
         super(properties);
-        ItemRendererRegistry.register(this, new SingleBladedItemRenderer());
+        ItemRendererRegistry.register(this, this.getRenderer());
     }
 
     @Override

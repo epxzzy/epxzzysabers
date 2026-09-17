@@ -1,4 +1,4 @@
-package dev.epxzzy.epxzzysabers.core.item;
+package dev.epxzzy.epxzzysabers.content.sabers.SingleBladed;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
