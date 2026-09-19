@@ -4,4 +4,5 @@ import dev.epxzzy.epxzzysabers.core.foundation.CustomRenderedSaberModelRenderer;
 
 public interface ISaberItem {
     public CustomRenderedSaberModelRenderer getRenderer();
+    public int getColour();
 }
