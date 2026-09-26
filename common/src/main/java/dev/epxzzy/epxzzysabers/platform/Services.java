@@ -1,6 +1,7 @@
 package dev.epxzzy.epxzzysabers.platform;
 
 import dev.epxzzy.epxzzysabers.Constants;
+import dev.epxzzy.epxzzysabers.platform.services.INetworkHelper;
 import dev.epxzzy.epxzzysabers.platform.services.IPartialItemModelRenderer;
 import dev.epxzzy.epxzzysabers.platform.services.IPlatformHelper;
 
@@ -16,6 +17,7 @@ public class Services {
     // mod is loaded.
     public static final IPlatformHelper PLATFORM = load(IPlatformHelper.class);
     public static final IPartialItemModelRenderer PartialItemModelRenderer = load(IPartialItemModelRenderer.class);
+    public static final INetworkHelper NetowrkHelper = load(INetworkHelper.class);
 
     // This code is used to load a service for the current environment. Your implementation of the service must be defined
     // manually by including a text file in META-INF/services named with the fully qualified class name of the service.

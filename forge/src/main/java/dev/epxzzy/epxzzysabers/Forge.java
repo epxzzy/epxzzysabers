@@ -1,22 +1,14 @@
 package dev.epxzzy.epxzzysabers;
 
-import dev.epxzzy.epxzzysabers.core.foundation.ItemRendererRegistry;
-import dev.epxzzy.epxzzysabers.core.foundation.Iterate;
 import dev.epxzzy.epxzzysabers.core.foundation.PartialModelEventHandler;
+import dev.epxzzy.epxzzysabers.core.net.simpleimple;
 import dev.epxzzy.epxzzysabers.registry.ItemRegistry;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
-import org.spongepowered.asm.util.IConsumer;
-
-import java.util.function.Consumer;
 
 import static dev.epxzzy.epxzzysabers.Constants.MOD_ID;
 
@@ -34,7 +26,7 @@ public class Forge {
         // Use Forge to bootstrap the Common mod.
         Constants.LOG.info("Hello Forge world!");
         CommonClass.init();
-
+        simpleimple.registerPackets();
         ItemRegistry.map.forEach(Items::register);
         Items.register(eventBus);
         registerLibEventListeners(eventBus);

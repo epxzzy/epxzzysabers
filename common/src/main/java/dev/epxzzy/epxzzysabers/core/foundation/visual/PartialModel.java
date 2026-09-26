@@ -1,4 +1,4 @@
-package dev.epxzzy.epxzzysabers.core.foundation;
+package dev.epxzzy.epxzzysabers.core.foundation.visual;
 
 import com.google.common.collect.MapMaker;
 import dev.epxzzy.epxzzysabers.Constants;

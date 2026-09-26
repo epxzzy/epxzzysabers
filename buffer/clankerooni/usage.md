@@ -17,4 +17,4 @@ Kyber Station (recolouring)
 - Place a `kyber_station` block and interact to open the recolour UI (`KyberStationTintScreen`). You can set HSL or RGB and apply to a dyeable lightsaber item.
 
 Notes
-- Many mechanics are gated by player-side cooldowns and mixin-provided persistent data (see `PlayerHelperLmao` in `util/`).
+- Many mechanics are gated by player-side cooldowns and mixin-provided persistent data (see `ISaberUserEntity` in `util/`).

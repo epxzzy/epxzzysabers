@@ -1,6 +1,6 @@
 package dev.epxzzy.epxzzysabers.content.sabers.Proto;
 
-import dev.epxzzy.epxzzysabers.core.foundation.ItemRendererRegistry;
+import dev.epxzzy.epxzzysabers.core.foundation.visual.ItemRendererRegistry;
 import dev.epxzzy.epxzzysabers.core.item.ISaberItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;

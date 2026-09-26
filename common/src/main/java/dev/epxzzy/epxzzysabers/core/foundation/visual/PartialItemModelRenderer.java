@@ -1,16 +1,14 @@
-package dev.epxzzy.epxzzysabers.core.foundation;
+package dev.epxzzy.epxzzysabers.core.foundation.visual;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.epxzzy.epxzzysabers.Constants;
 import dev.epxzzy.epxzzysabers.platform.Services;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -29,7 +27,7 @@ public class PartialItemModelRenderer {
 
     public static PartialItemModelRenderer of(ItemStack stack, ItemDisplayContext transformType,
                                               PoseStack ms, MultiBufferSource buffer, int overlay) {
-        Constants.LOG.info("FKCRT PartialItemModelRenderer made for itemstacc {}", stack);
+        //Constants.LOG.info("FKCRT PartialItemModelRenderer made for itemstacc {}", stack);
         PartialItemModelRenderer instance = INSTANCE;
         instance.stack = stack;
         instance.transformType = transformType;

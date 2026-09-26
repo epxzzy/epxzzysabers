@@ -27,7 +27,7 @@ Notes on behavior (see `Protosaber` for core mechanics):
 Special abilities by item (inherent or peripheral):
 
 - `RotarySaber` (see `RotarySaber`):
-	- SaberFlight (inherent): hold use while looking up / in air to enter a timed flight state for quick escapes. Flight is gated by cooldowns stored on the player via mixin (`PlayerHelperLmao`).
+	- SaberFlight (inherent): hold use while looking up / in air to enter a timed flight state for quick escapes. Flight is gated by cooldowns stored on the player via mixin (`ISaberUserEntity`).
 	- SaberThrow (peripheral): ability key spawns/throws the saber as a returning projectile.
 - `BlasterHybrid` (see `BlasterHybrid`):
 	- StunBolt (peripheral): ability key fires a weak stun projectile.

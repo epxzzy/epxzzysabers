@@ -1,10 +1,9 @@
-package dev.epxzzy.epxzzysabers.core.foundation;
+package dev.epxzzy.epxzzysabers.core.foundation.visual;
 
 import net.minecraft.world.item.Item;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class ItemRendererRegistry {
 

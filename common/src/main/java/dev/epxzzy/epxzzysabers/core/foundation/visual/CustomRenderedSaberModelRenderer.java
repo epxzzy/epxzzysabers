@@ -1,4 +1,4 @@
-package dev.epxzzy.epxzzysabers.core.foundation;
+package dev.epxzzy.epxzzysabers.core.foundation.visual;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;

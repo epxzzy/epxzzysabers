@@ -1,7 +1,6 @@
 package dev.epxzzy.epxzzysabers.mixin;
 
-import dev.epxzzy.epxzzysabers.core.foundation.ItemRendererRegistry;
-import dev.epxzzy.epxzzysabers.core.item.ISaberItem;
+import dev.epxzzy.epxzzysabers.core.foundation.visual.ItemRendererRegistry;
 import dev.epxzzy.epxzzysabers.core.util.colourUtils;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;

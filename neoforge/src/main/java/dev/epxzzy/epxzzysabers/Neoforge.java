@@ -2,6 +2,7 @@ package dev.epxzzy.epxzzysabers;
 
 
 import dev.epxzzy.epxzzysabers.core.foundation.PartialModelEventHandler;
+import dev.epxzzy.epxzzysabers.core.net.simpleimple;
 import dev.epxzzy.epxzzysabers.registry.ItemRegistry;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
@@ -33,6 +34,6 @@ public class Neoforge {
         modEventBus.addListener(PartialModelEventHandler::onRegisterAdditional);
         modEventBus.addListener(PartialModelEventHandler::onBakingCompleted);
         Constants.LOG.info("FKCRT PartialModelEventHandler events registered");
-
+        modEventBus.addListener(simpleimple::registorpucket);
     }
 }

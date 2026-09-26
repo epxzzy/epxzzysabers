@@ -2,7 +2,7 @@ package dev.epxzzy.epxzzysabers.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.epxzzy.epxzzysabers.Constants;
-import dev.epxzzy.epxzzysabers.core.foundation.ItemRendererRegistry;
+import dev.epxzzy.epxzzysabers.core.foundation.visual.ItemRendererRegistry;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -35,7 +35,7 @@ public class ItemRendererMixin {
         BakedModel model,
         CallbackInfo ci
     ) {
-        Constants.LOG.info("FKCRT ItemRendererMixin common");
+        //Constants.LOG.info("FKCRT ItemRendererMixin common");
         BlockEntityWithoutLevelRenderer renderer =
             ItemRendererRegistry.getRendererMap().get(stack.getItem());
 

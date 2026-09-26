@@ -1,4 +1,4 @@
-package dev.epxzzy.epxzzysabers.core.foundation;
+package dev.epxzzy.epxzzysabers.core.foundation.visual;
 
 import java.util.Arrays;
 import java.util.EnumSet;

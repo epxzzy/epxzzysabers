@@ -1,4 +1,4 @@
-package dev.epxzzy.epxzzysabers.core.foundation;
+package dev.epxzzy.epxzzysabers.core.foundation.visual;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.epxzzy.epxzzysabers.Constants;
@@ -19,7 +19,7 @@ public abstract class CustomRenderedItemModelRenderer extends BlockEntityWithout
 
     @Override
     public void renderByItem(ItemStack stack, ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        Constants.LOG.info("FKCRT renderbyitem");
+        //Constants.LOG.info("FKCRT renderbyitem");
         mainModel = Minecraft.getInstance()
                 .getItemRenderer()
                 .getModel(stack, null, null, 0);

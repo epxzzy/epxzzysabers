@@ -2,7 +2,7 @@ package dev.epxzzy.epxzzysabers.platform;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import dev.epxzzy.epxzzysabers.core.foundation.Iterate;
+import dev.epxzzy.epxzzysabers.core.foundation.visual.Iterate;
 import dev.epxzzy.epxzzysabers.platform.services.IPartialItemModelRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ItemRenderer;
