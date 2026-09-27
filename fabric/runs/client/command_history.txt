@@ -1,3 +1,0 @@
-/give @s epxzzysabers:single_bladed_saber
-/setblock ~ ~ ~ minecraft:jukebox
-/give @s minecraft:music_disc_11
