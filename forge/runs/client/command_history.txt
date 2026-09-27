@@ -1,3 +1,0 @@
-/give @s epxzzysabers:protosaber
-/give @s epxzzysabers:single_bladed_saber
-/gamemode creative
