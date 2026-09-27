@@ -3,7 +3,9 @@ package dev.epxzzy.epxzzysabers.platform;
 import dev.epxzzy.epxzzysabers.core.foundation.net.packets.ISaberPacket;
 import dev.epxzzy.epxzzysabers.core.net.simpleimple;
 import dev.epxzzy.epxzzysabers.platform.services.INetworkHelper;
+import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
 
 public class ForgeNetworkHelper implements INetworkHelper {
@@ -18,7 +20,7 @@ public class ForgeNetworkHelper implements INetworkHelper {
     }
 
     @Override
-    public void sendToClients(ISaberPacket packet) {
+    public void sendToClients(Level level, ISaberPacket packet) {
         simpleimple.CHANNEL.send(packet, PacketDistributor.ALL.noArg());
     }
 }

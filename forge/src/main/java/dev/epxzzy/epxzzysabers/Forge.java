@@ -7,6 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 
@@ -26,12 +27,18 @@ public class Forge {
         // Use Forge to bootstrap the Common mod.
         Constants.LOG.info("Hello Forge world!");
         CommonClass.init();
-        simpleimple.registerPackets();
+        eventBus.addListener(this::commonSetup);
+
         ItemRegistry.map.forEach(Items::register);
         Items.register(eventBus);
         registerLibEventListeners(eventBus);
     }
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(()->{
+            simpleimple.registerPackets();
+        });
 
+    }
     private static void registerLibEventListeners(IEventBus modEventBus) {
         modEventBus.addListener(PartialModelEventHandler::onRegisterAdditional);
         modEventBus.addListener(PartialModelEventHandler::onBakingCompleted);

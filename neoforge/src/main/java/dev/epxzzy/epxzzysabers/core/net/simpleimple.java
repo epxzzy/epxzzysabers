@@ -12,16 +12,12 @@ public class simpleimple {
         var registrar = event.registrar("1"); // version string
 
         for (SaberPacketsRegistry.packet entry : SaberPacketsRegistry.list) {
-            /*
-            if (entry.C2S() && entry.S2C()) {
-                registrar.playBidirectional(entry.type(), entry.codec(),
-                    (payload, ctx) -> Commonimpl.handlecommonorsomehting(payload, ctx));
-            } else*/ if (entry.S2C()) {
+            if (entry.S2C()) {
                 registrar.playToClient(entry.type(), entry.codec(),
                     (payload, ctx) -> ctx.enqueueWork(() -> ClientImpl.handleClient(payload)));
             } else if (entry.C2S()) {
                 registrar.playToServer(entry.type(), entry.codec(),
-                    (payload, ctx) -> ctx.enqueueWork(()-> ServerImpl.handleServer(payload, (ServerPlayer) ctx.player())));
+                    (payload, ctx) -> ctx.enqueueWork(() -> ServerImpl.handleServer(payload, (ServerPlayer) ctx.player())));
             }
         }
     }

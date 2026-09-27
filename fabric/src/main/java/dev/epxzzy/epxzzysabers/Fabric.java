@@ -58,15 +58,12 @@ public class Fabric implements ModInitializer {
 
     public static void registerloads() {
         for (SaberPacketsRegistry.packet<?> entry : SaberPacketsRegistry.list) {
-            /*if (entry.C2S() && entry.S2C()) {
-                registrar.playBidirectional(entry.type, entry.codec,
-                    (payload, ctx) -> CommonImpl.handleCommon(payload, ctx.player()));
-            } else*/ if (entry.S2C()) {
+             if (entry.S2C()) {
                 PayloadTypeRegistry.playS2C().register(entry.type(), (StreamCodec) entry.codec());
                 ClientPlayNetworking.registerGlobalReceiver(entry.type(), (payload, ctx) -> {
                     ctx.client().execute(() -> ClientImpl.handleClient(payload));
                 });
-            } if (entry.C2S()) {
+            } else {
                 PayloadTypeRegistry.playC2S().register(entry.type(), (StreamCodec) entry.codec());
                 ServerPlayNetworking.registerGlobalReceiver(entry.type(), (payload, ctx) -> {
                     ctx.server().execute(() -> ServerImpl.handleServer(payload, ctx.player()));
