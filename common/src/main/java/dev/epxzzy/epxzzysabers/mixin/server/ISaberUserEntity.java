@@ -1,4 +1,4 @@
-package dev.epxzzy.epxzzysabers.mixin;
+package dev.epxzzy.epxzzysabers.mixin.server;
 
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;

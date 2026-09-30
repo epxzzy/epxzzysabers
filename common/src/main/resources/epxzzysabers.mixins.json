@@ -6,9 +6,10 @@
   "compatibilityLevel": "JAVA_18",
   "mixins": [],
   "client": [
-    "ItemColorsMixin",
-    "ItemRendererMixin",
-    "MixinMinecraft"
+    "client.InterruptInputMixin",
+    "client.colour.ItemColorsMixin",
+    "client.renderer.entity.ItemRendererMixin",
+    "MixinMinecraft",
   ],
   "server": [],
   "injectors": {

@@ -9,6 +9,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.DeferredRegister;
 
 import static dev.epxzzy.epxzzysabers.Constants.MOD_ID;
@@ -28,6 +29,10 @@ public class Forge {
         Constants.LOG.info("Hello Forge world!");
         CommonClass.init();
         eventBus.addListener(this::commonSetup);
+
+        if (FMLEnvironment.dist.isClient()) {
+            eventBus.register(ForgeClient.class);
+        }
 
         ItemRegistry.map.forEach(Items::register);
         Items.register(eventBus);

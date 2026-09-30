@@ -7,6 +7,7 @@ import dev.epxzzy.epxzzysabers.registry.ItemRegistry;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -24,6 +25,10 @@ public class Neoforge {
         // Use NeoForge to bootstrap the Common mod.
         Constants.LOG.info("Hello NeoForge world!");
         CommonClass.init();
+
+        if (FMLEnvironment.dist.isClient()) {
+            eventBus.register(NeoforgeClient.class);
+        }
 
         ItemRegistry.map.forEach(Items::register);
         Items.register(eventBus);

@@ -1,4 +1,4 @@
-package dev.epxzzy.epxzzysabers.mixin;
+package dev.epxzzy.epxzzysabers.mixin.client.colour;
 
 import dev.epxzzy.epxzzysabers.core.foundation.visual.ItemRendererRegistry;
 import dev.epxzzy.epxzzysabers.core.util.colourUtils;

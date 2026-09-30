@@ -1,7 +1,6 @@
-package dev.epxzzy.epxzzysabers.mixin;
+package dev.epxzzy.epxzzysabers.mixin.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.epxzzy.epxzzysabers.Constants;
 import dev.epxzzy.epxzzysabers.core.foundation.visual.ItemRendererRegistry;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
