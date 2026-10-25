@@ -3,6 +3,10 @@ plugins {
     id 'net.neoforged.moddev'
 }
 
+dependencies {
+    implementation "mysticdrew:common-networking-neoforge:1.0.21-1.21.1"
+}
+
 neoForge {
     version = neoforge_version
     // Automatically enable neoforge AccessTransformers if the file exists

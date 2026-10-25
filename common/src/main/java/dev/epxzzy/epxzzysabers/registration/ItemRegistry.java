@@ -1,4 +1,4 @@
-package dev.epxzzy.epxzzysabers.registry;
+package dev.epxzzy.epxzzysabers.registration;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
@@ -18,7 +18,7 @@ public class ItemRegistry {
         /*
         map.put("asdf", asdf);
         map.put("protosaber", protosaber);
-         */
+        */
         map.put("single_bladed_saber", singlebladed);
     }
 }

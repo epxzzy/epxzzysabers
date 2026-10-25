@@ -2,20 +2,15 @@ package dev.epxzzy.epxzzysabers.core.net;
 
 import dev.epxzzy.epxzzysabers.core.foundation.net.ClientImpl;
 import dev.epxzzy.epxzzysabers.core.foundation.net.ServerImpl;
-import dev.epxzzy.epxzzysabers.registry.SaberPacketsRegistry;
+import dev.epxzzy.epxzzysabers.registration.SaberPacketsRegistry;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.network.CustomPayloadEvent;
 import net.minecraftforge.network.Channel;
 import net.minecraftforge.network.ChannelBuilder;
-import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.SimpleChannel;
-
-import dev.epxzzy.epxzzysabers.registry.SaberPacketsRegistry;
 
 import java.util.function.BiConsumer;
 

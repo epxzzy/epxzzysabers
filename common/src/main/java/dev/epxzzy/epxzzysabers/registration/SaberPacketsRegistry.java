@@ -1,4 +1,4 @@
-package dev.epxzzy.epxzzysabers.registry;
+package dev.epxzzy.epxzzysabers.registration;
 
 import dev.epxzzy.epxzzysabers.core.foundation.net.packets.ClientBoundballitchh;
 import dev.epxzzy.epxzzysabers.core.foundation.net.packets.ServerBoundballitchh;

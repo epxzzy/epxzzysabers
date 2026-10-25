@@ -2,9 +2,8 @@ package dev.epxzzy.epxzzysabers.core.net;
 
 import dev.epxzzy.epxzzysabers.core.foundation.net.ClientImpl;
 import dev.epxzzy.epxzzysabers.core.foundation.net.ServerImpl;
-import dev.epxzzy.epxzzysabers.registry.SaberPacketsRegistry;
+import dev.epxzzy.epxzzysabers.registration.SaberPacketsRegistry;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 public class simpleimple {

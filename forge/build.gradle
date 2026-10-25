@@ -77,6 +77,9 @@ dependencies {
 
     // Forge's hack fix
     implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
+
+    implementation "mysticdrew:common-networking-forge:1.0.21-1.21.1"
+
 }
 
 publishing {

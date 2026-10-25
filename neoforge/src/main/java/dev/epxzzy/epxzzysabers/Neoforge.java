@@ -3,7 +3,7 @@ package dev.epxzzy.epxzzysabers;
 
 import dev.epxzzy.epxzzysabers.core.foundation.PartialModelEventHandler;
 import dev.epxzzy.epxzzysabers.core.net.simpleimple;
-import dev.epxzzy.epxzzysabers.registry.ItemRegistry;
+import dev.epxzzy.epxzzysabers.registration.ItemRegistry;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
