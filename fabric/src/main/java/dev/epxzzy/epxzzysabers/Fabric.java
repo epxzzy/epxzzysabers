@@ -32,6 +32,7 @@ public class Fabric implements ModInitializer {
         Constants.LOG.info("Hello Fabric world!");
         CommonClass.init();
 
+    /*
         registerloads();
 
         ItemRegistry.map.forEach((
@@ -41,6 +42,7 @@ public class Fabric implements ModInitializer {
                 supplier.get()
             ))
         );
+    */
 
         setupLib();
     }

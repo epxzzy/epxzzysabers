@@ -15,7 +15,7 @@ import static dev.epxzzy.epxzzysabers.Constants.MOD_ID;
 
 @Mod(Constants.MOD_ID)
 public class Neoforge {
-    static final DeferredRegister<Item> Items = DeferredRegister.createItems(MOD_ID);
+    //static final DeferredRegister<Item> Items = DeferredRegister.createItems(MOD_ID);
 
     public Neoforge(IEventBus eventBus) {
         // This method is invoked by the NeoForge mod loader when it is ready
@@ -30,8 +30,8 @@ public class Neoforge {
             eventBus.register(NeoforgeClient.class);
         }
 
-        ItemRegistry.map.forEach(Items::register);
-        Items.register(eventBus);
+        //ItemRegistry.map.forEach(Items::register);
+        //Items.register(eventBus);
         registerLibEventListeners(NeoForge.EVENT_BUS, eventBus);
     }
 

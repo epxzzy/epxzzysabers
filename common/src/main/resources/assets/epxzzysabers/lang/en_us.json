@@ -14,8 +14,7 @@
 
 
   "block.epxzzysabers.kyber_station": "Kyber Station",
-  "epxzzysabers.moditemsiglol": "Sabers",
-
+  "itemGroup.epxzzysabers.tab": "Sabers",
 
   "sounds.epxzzysabers.activation": "Saber Activates",
   "sounds.epxzzysabers.deactivation": "Saber Deactivates",
